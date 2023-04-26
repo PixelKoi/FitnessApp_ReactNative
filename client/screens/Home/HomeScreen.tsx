@@ -8,7 +8,7 @@ const HomeScreen = ({ navigation }) => {
 		<View style={styles.container}>
 			<Text style={styles.title}> Fitness PR </Text>
 			<View style={styles.buttonContainer}>
-				<Button mode="contained" style={styles.button}>
+				<Button onPress={() => navigation.navigate('SignUp')} mode="contained" style={styles.button}>
 					<Text style={styles.text}>Sign Up</Text>
 				</Button>
 				<Button mode="contained" style={styles.button}>
