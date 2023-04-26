@@ -14,7 +14,9 @@ const LoginScreen = ({ navigation }) => {
 			<Button className="" mode="contained">
 				<Text>Login</Text>
 			</Button>
-			<Text>Forgot your password?</Text>
+			<Button onPress={() => navigation.navigate('ForgotPass')} mode="contained">
+				<Text>Forgot your password?</Text>
+			</Button>
 			<Text>or</Text>
 			<Button mode="contained">
 				<Text>Continue With Google</Text>
