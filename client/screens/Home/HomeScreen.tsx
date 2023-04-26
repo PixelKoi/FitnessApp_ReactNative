@@ -1,45 +1,45 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
 import { Button } from 'react-native-paper';
-
-export default class HomeScreen extends Component {
-	render() {
-		return (
-			<View style={styles.container}>
-				<Text style={styles.title}> Fitness PR </Text>
-				<View style={{ marginTop: 'auto' }}>
-					<Button mode="contained" style={styles.button}>
-						<Text style={styles.text}>Sign Up</Text>
-					</Button>
-					<Button mode="contained" style={styles.button}>
-						<Text style={styles.text}>Login</Text>
-					</Button>
-				</View>
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+const HomeScreen = ({ navigation }) => {
+	return (
+		<View style={styles.container}>
+			<Text style={styles.title}> Fitness PR </Text>
+			<View style={styles.buttonContainer}>
+				<Button mode="contained" style={styles.button}>
+					<Text style={styles.text}>Sign Up</Text>
+				</Button>
+				<Button mode="contained" style={styles.button}>
+					<Text onPress={() => navigation.navigate('Login')} style={styles.text}>
+						Login
+					</Text>
+				</Button>
 			</View>
-		);
-	}
-}
+		</View>
+	);
+};
 
 const styles = StyleSheet.create({
 	title: {
+		// marginTop: 200,
 		fontSize: 46
 	},
 	container: {
-		display: 'flex',
-		flexDirection: 'column',
+		flex: 1,
+		backgroundColor: '#fff',
 		alignItems: 'center',
+		justifyContent: 'center',
 		backgroundColor: 'red'
 	},
-	buttonContainer: {},
+	buttonContainer: { marginTop: 50 },
 	button: {
-		display: 'flex',
-		alignItemsc: 'center',
 		width: 400,
 		paddingTop: 5,
 		paddingBottom: 5,
 		margin: 4
-	},
-	text: {
-		marginTop: 'auto'
 	}
 });
+
+export default HomeScreen;
