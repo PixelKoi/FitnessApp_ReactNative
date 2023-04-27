@@ -1,34 +1,44 @@
 import React, { useState } from 'react';
-import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
-import { Button, TextInput } from 'react-native-paper';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import {
-    UserIcon,
-    MagnifyingGlassIcon,
-} from 'react-native-heroicons/outline'
+import { View, TextInput, Button, FlatList, Text } from 'react-native';
 
-const LogFood = ({ navigation }) => {
-    React.useLayoutEffect(() => {
-        navigation.setOptions({
-            title: 'Food Quick Log',
-            headerLeft: () => null, // this will hide the back button
-            headerRight: () => (
-                <TouchableOpacity onPress={() => console.log('Header profile button pressed')}>
-                    <UserIcon name="ios-add" size={30} color="black" style={{ marginRight: 10 }} />
-                </TouchableOpacity>
-            ),
-        });
-    }, [navigation]);
+const MyComponent = () => {
+    const [foodName, setFoodName] = useState('');
+    const [foodList, setFoodList] = useState([]);
+
+    const handleSearch = async () => {
+        try {
+            const foodApiKey = 'HiJgd0u4cvm1mRlNW8jizLfERifOUqcuNFFQPLWJ';
+            const response = await fetch(`https://api.nal.usda.gov/fdc/v1/foods/search?query=${foodName}&pageSize=10&pageNumber=1&api_key=${foodApiKey}`);
+            const data = await response.json();
+            setFoodList(data.foods);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    const renderFoodItem = ({ item }) => {
+        return (
+            <View>
+                <Text>{item.description}</Text>
+            </View>
+        );
+    };
+
     return (
-        <View style={{ flexDirection: 'row', alignItems: 'center', paddingHorizontal: 4 }}>
-            <MagnifyingGlassIcon size={20} color="#00CCBB" />
+        <View>
             <TextInput
-                style={{ flex: 1, backgroundColor: 'white', color: 'black' }}
-                label="Search Food"
+                value={foodName}
+                onChangeText={setFoodName}
+                placeholder="Search Food"
+            />
+            <Button title="Search" onPress={handleSearch} />
+            <FlatList
+                data={foodList}
+                renderItem={renderFoodItem}
+                keyExtractor={(item) => item.fdcId.toString()}
             />
         </View>
     );
 };
 
-export default LogFood;
+export default MyComponent;
