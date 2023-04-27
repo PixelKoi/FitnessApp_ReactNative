@@ -4,7 +4,18 @@ import { View, TextInput, Button, FlatList, Text, TouchableOpacity } from 'react
 const MyComponent = () => {
     const [foodName, setFoodName] = useState('');
     const [foodList, setFoodList] = useState([]);
-    const [quantity, setQuantity] = useState(1);
+
+
+    const [quantity, setQuantity] = useState(0);
+    const [foods, setFoods] = useState([]);
+    const foodLog = {
+        quantity: 0,
+        isSelected: false,
+        food: Object
+    }
+    const [logFood, setLogFood] = useState({});
+
+    const newFoodLog = [...foods, foodLog]; // goes through foodList and add another foodLog object to the end
 
     // Simple Query testing API: https://api.nal.usda.gov/fdc/v1/foods/search?api_key=DEMO_KEY&query=Cheddar%20Cheese
     const params = {
