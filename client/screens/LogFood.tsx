@@ -1,7 +1,24 @@
 import React, { useState } from 'react';
 import { View, TextInput, Button, FlatList, Text, TouchableOpacity } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import {
+    UserIcon,
+    MagnifyingGlassIcon,
+    CheckCircleIcon
+} from 'react-native-heroicons/outline'
+const MyComponent = ({navigation}) => {
 
-const MyComponent = () => {
+    React.useLayoutEffect(() => {
+        navigation.setOptions({
+            title: 'Food Quick Log',
+            headerLeft: () => null, // this will hide the back button
+            headerRight: () => (
+                <TouchableOpacity onPress={() => console.log('Header profile button pressed')}>
+                    <CheckCircleIcon name="ios-add" size={30} color="black" style={{ marginRight: 10 }} />
+                </TouchableOpacity>
+            ),
+        });
+    }, [navigation]);
     const [foodName, setFoodName] = useState('');
     const [foodList, setFoodList] = useState([]);
 
