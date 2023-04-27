@@ -4,6 +4,7 @@ import HomeScreen from './screens/HomeScreen';
 import LoginScreen from './screens/LoginScreen';
 import SignUpScreen from './screens/SignUpScreen';
 import ForgotPassScreen from './screens/ForgotPassScreen';
+import LogFood from "./screens/LogFood";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 const Stack = createNativeStackNavigator();
@@ -16,6 +17,7 @@ export default function App() {
 				<Stack.Screen name="Login" component={LoginScreen} />
 				<Stack.Screen name="SignUp" component={SignUpScreen} />
 				<Stack.Screen name="ForgotPass" component={ForgotPassScreen} />
+				<Stack.Screen name="LogFood" component={LogFood} />
 			</Stack.Navigator>
 		</NavigationContainer>
 	);

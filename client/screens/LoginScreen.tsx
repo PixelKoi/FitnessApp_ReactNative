@@ -11,7 +11,7 @@ const LoginScreen = ({ navigation }) => {
 				<TextInput label="Name" className="mb-5" />
 				<TextInput label="Password" secureTextEntry right={<TextInput.Icon icon="eye" />} />
 			</View>
-			<Button className="" mode="contained">
+			<Button className="" mode="contained" onPress={() => navigation.navigate('LogFood')}>
 				<Text>Login</Text>
 			</Button>
 			<Button onPress={() => navigation.navigate('ForgotPass')} mode="contained">
