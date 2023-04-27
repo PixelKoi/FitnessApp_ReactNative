@@ -18,7 +18,7 @@ const MyComponent = () => {
 
     const renderFoodItem = ({ item }) => {
         return (
-            <View>
+            <View className="border border-black p-8 m-2">
                 <Text>{item.description}</Text>
             </View>
         );
