@@ -13,7 +13,9 @@ const Stack = createNativeStackNavigator();
 export default function App() {
 	return (
 		<NavigationContainer>
-			<Stack.Navigator  screenOptions={{ headerShown: false }}>
+			<Stack.Navigator screenOptions={({ route }) => ({
+				headerShown: route.name !== 'ApplicationNavigator' && route.name !== 'UserBioInput',
+			})}>
 				<Stack.Screen name="Home" component={HomeScreen} />
 				<Stack.Screen name="Login" component={LoginScreen} />
 				<Stack.Screen name="SignUp" component={SignUpScreen} />
@@ -21,6 +23,7 @@ export default function App() {
 				<Stack.Screen name="ApplicationNavigator" component={ApplicationNavigator} />
 				<Stack.Screen name="UserBioInput" component={UserBioInput} />
 			</Stack.Navigator>
+
 		</NavigationContainer>
 	);
 }
