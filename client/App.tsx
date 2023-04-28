@@ -1,10 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import HomeScreen from './screens/HomeScreen';
-import LoginScreen from './screens/LoginScreen';
-import SignUpScreen from './screens/SignUpScreen';
-import ForgotPassScreen from './screens/ForgotPassScreen';
-import LogFood from "./screens/LogFood";
+import HomeScreen from './screens/authenticationScreens/HomeScreen';
+import LoginScreen from './screens/authenticationScreens/LoginScreen';
+import SignUpScreen from './screens/authenticationScreens/SignUpScreen';
+import ForgotPassScreen from './screens/authenticationScreens/ForgotPassScreen';
+import LogFood from "./screens/applicationTabs/LogFood";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 const Stack = createNativeStackNavigator();

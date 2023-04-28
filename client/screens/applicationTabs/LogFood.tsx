@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
 import { View, TextInput, Button, FlatList, Text, TouchableOpacity } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
 import {
     UserIcon,
     MagnifyingGlassIcon,
     CheckCircleIcon
 } from 'react-native-heroicons/outline'
+
+const Tab = createBottomTabNavigator();
+
 const MyComponent = ({navigation}) => {
 
     React.useLayoutEffect(() => {
@@ -23,14 +28,13 @@ const MyComponent = ({navigation}) => {
     const [foodList, setFoodList] = useState([]);
 
 
-    const [quantity, setQuantity] = useState(0);
+    const [quantity, setQuantity] = useState({});
     const [foods, setFoods] = useState([]);
     const foodLog = {
         quantity: 0,
         isSelected: false,
         food: Object
     }
-    const [logFood, setLogFood] = useState({});
 
     const newFoodLog = [...foods, foodLog]; // goes through foodList and add another foodLog object to the end
 
@@ -52,17 +56,25 @@ const MyComponent = ({navigation}) => {
             console.error(error);
         }
     };
-    const handleMinus = () => {
-        if (quantity > 1) {
-            setQuantity(quantity - 1);
+
+    const handleMinus = (fdcId) => {
+        if (quantity[fdcId] > 1) {
+            setQuantity({
+                ...quantity,
+                [fdcId]: quantity[fdcId] - 1,
+            });
         }
     };
 
-    const handlePlus = () => {
-        if (quantity < 20) {
-            setQuantity(quantity + 1);
+    const handlePlus = (fdcId) => {
+        if (quantity[fdcId] < 20) {
+            setQuantity({
+                ...quantity,
+                [fdcId]: quantity[fdcId] ? quantity[fdcId] + 1 : 1,
+            });
         }
     };
+
     const renderFoodItem = ({ item }) => {
         return (
             <View className="border border-black p-8 m-2">
@@ -75,13 +87,13 @@ const MyComponent = ({navigation}) => {
 
                 {/*<Text>{item.foodNutrients[0].nutrientName}</Text>*/}
                 <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 }}>
-                    <TouchableOpacity onPress={handleMinus} style={{ borderWidth: 1, borderColor: 'gray', borderRadius: 5, padding: 5 }}>
+                    <TouchableOpacity onPress={()=> handleMinus(item.fdcId)} style={{ borderWidth: 1, borderColor: 'gray', borderRadius: 5, padding: 5 }}>
                         <Text>-</Text>
                     </TouchableOpacity>
 
                     <TextInput value={quantity.toString()} onChangeText={(text) => setQuantity(parseInt(text))} keyboardType="numeric" style={{ marginHorizontal: 10, padding: 5, borderWidth: 1, borderColor: 'gray', borderRadius: 5, minWidth: 50, textAlign: 'center' }} />
 
-                    <TouchableOpacity onPress={handlePlus} style={{ borderWidth: 1, borderColor: 'gray', borderRadius: 5, padding: 5 }}>
+                    <TouchableOpacity onPress={() => handlePlus(item.fdcId)} style={{ borderWidth: 1, borderColor: 'gray', borderRadius: 5, padding: 5 }}>
                         <Text>+</Text>
                     </TouchableOpacity>
                 </View>
