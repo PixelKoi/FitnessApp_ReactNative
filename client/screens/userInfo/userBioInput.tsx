@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const UserBioInput = () => {
     const [name, setName] = useState('');
@@ -9,9 +10,19 @@ const UserBioInput = () => {
     const [weight, setWeight] = useState('');
     const [activityLevel, setActivityLevel] = useState('');
     const [goal, setGoal] = useState('');
+    const navigation = useNavigation();
 
+    React.useLayoutEffect(() => {
+        navigation.setOptions({
+            headerLeft: () => (
+                <TouchableOpacity onPress={() => navigation.goBack()}>
+                    <Text>Back</Text>
+                </TouchableOpacity>
+            ),
+        });
+    }, [navigation]);
     return (
-        <View>
+        <View className="flex-1 justify-center items-center">
             <Text>Name:</Text>
             <TextInput value={name} onChangeText={setName} />
 
