@@ -11,7 +11,7 @@ const UserBioInput = () => {
     const [activityLevel, setActivityLevel] = useState('');
     const [goal, setGoal] = useState('');
     const navigation = useNavigation();
-
+// TODO: Fix navigation back button not showing on userBioInput page.
     React.useLayoutEffect(() => {
         navigation.setOptions({
             headerLeft: () => (

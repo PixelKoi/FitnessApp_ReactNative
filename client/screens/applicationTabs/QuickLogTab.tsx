@@ -23,14 +23,12 @@ const QuickLogTab = ({navigation}) => {
 
 
     const [quantity, setQuantity] = useState({});
-    const [foods, setFoods] = useState([]);
-    const foodLog = {
-        quantity: 0,
-        isSelected: false,
-        food: Object
-    }
-
-    const newFoodLog = [...foods, foodLog]; // goes through foodList and add another foodLog object to the end
+    // const [foods, setFoods] = useState([]);
+    // const foodLog = {
+    //     quantity: 0,
+    //     isSelected: false,
+    //     food: Object
+    // }
 
     // Simple Query testing API: https://api.nal.usda.gov/fdc/v1/foods/search?api_key=DEMO_KEY&query=Cheddar%20Cheese
     const params = {
@@ -51,22 +49,50 @@ const QuickLogTab = ({navigation}) => {
         }
     };
 
-    const handleMinus = (fdcId) => {
-        if (quantity[fdcId] > 1) {
-            setQuantity({
-                ...quantity,
-                [fdcId]: quantity[fdcId] - 1,
-            });
+    const [foodLogs, setFoodLogs] = useState({});
+    const newFoodLog = {
+        quantity: 0,
+        isSelected: false,
+        food: null,
+        id: 0
+    };
+    const handleMinus = (item) => {
+        const fdcId = item.fdcId;
+
+        if (newFoodLog.id > 0) {
+            newFoodLog.quantity -= 1;
         }
+        setFoodLogs({
+            ...foodLogs,
+            [fdcId]: newFoodLog,
+        });
     };
 
-    const handlePlus = (fdcId) => {
-        if (quantity[fdcId] < 20) {
-            setQuantity({
-                ...quantity,
-                [fdcId]: quantity[fdcId] ? quantity[fdcId] + 1 : 1,
-            });
+    const handlePlus = (item) => {
+        const newFoodLog = {
+            quantity: 0,
+            isSelected: false,
+            id: 0,
+            food: {
+                description: item.description,
+                Protein: item.foodNutrients[0].value,
+                Fat: item.foodNutrients[1].value,
+                Carbs: item.foodNutrients[2].value,
+                Calories: item.foodNutrients[3].value,
+            },
+        };
+        const fdcId = item.fdcId;
+        if (newFoodLog.id < 20) {
+            newFoodLog.quantity += 1;
         }
+
+        setFoodLogs({
+            ...foodLogs,
+            [fdcId]: newFoodLog,
+        });
+        console.log(foodLogs)
+        console.log(foodLogs.quantity)
+
     };
 
     const renderFoodItem = ({ item }) => {
@@ -81,13 +107,13 @@ const QuickLogTab = ({navigation}) => {
 
                 {/*<Text>{item.foodNutrients[0].nutrientName}</Text>*/}
                 <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 }}>
-                    <TouchableOpacity onPress={()=> handleMinus(item.fdcId)} style={{ borderWidth: 1, borderColor: 'gray', borderRadius: 5, padding: 5 }}>
+                    <TouchableOpacity onPress={()=> handleMinus(item)} style={{ borderWidth: 1, borderColor: 'gray', borderRadius: 5, padding: 5 }}>
                         <Text>-</Text>
                     </TouchableOpacity>
 
-                    <TextInput value={quantity.toString()} onChangeText={(text) => setQuantity(parseInt(text))} keyboardType="numeric" style={{ marginHorizontal: 10, padding: 5, borderWidth: 1, borderColor: 'gray', borderRadius: 5, minWidth: 50, textAlign: 'center' }} />
+                    <TextInput value={item.quantity} onChangeText={(text) => setQuantity(parseInt(text))} keyboardType="numeric" style={{ marginHorizontal: 10, padding: 5, borderWidth: 1, borderColor: 'gray', borderRadius: 5, minWidth: 50, textAlign: 'center' }} />
 
-                    <TouchableOpacity onPress={() => handlePlus(item.fdcId)} style={{ borderWidth: 1, borderColor: 'gray', borderRadius: 5, padding: 5 }}>
+                    <TouchableOpacity onPress={() => handlePlus(item)} style={{ borderWidth: 1, borderColor: 'gray', borderRadius: 5, padding: 5 }}>
                         <Text>+</Text>
                     </TouchableOpacity>
                 </View>
