@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { View, TextInput, Button, FlatList, Text, TouchableOpacity } from 'react-native';
 
 import {
@@ -69,18 +69,6 @@ const QuickLogTab = ({navigation}) => {
     };
 
     const handlePlus = (item) => {
-        const newFoodLog = {
-            quantity: 0,
-            isSelected: false,
-            id: 0,
-            food: {
-                description: item.description,
-                Protein: item.foodNutrients[0].value,
-                Fat: item.foodNutrients[1].value,
-                Carbs: item.foodNutrients[2].value,
-                Calories: item.foodNutrients[3].value,
-            },
-        };
         const fdcId = item.fdcId;
         if (newFoodLog.id < 20) {
             newFoodLog.quantity += 1;
@@ -96,13 +84,26 @@ const QuickLogTab = ({navigation}) => {
     };
 
     const renderFoodItem = ({ item }) => {
+        // only create objects when the component renders
+        const foodLog = {
+            quantity: 0,
+            isSelected: false,
+            id: item.fdcId,
+            food: {
+                description: item.description,
+                Protein: item.foodNutrients[0].value,
+                Fat: item.foodNutrients[1].value,
+                Carbs: item.foodNutrients[2].value,
+                Calories: item.foodNutrients[3].value,
+            }
+        };
         return (
             <View className="border border-black p-8 m-2">
-                <Text>{item.description}</Text>
-                <Text>{item.foodNutrients[0].value}g Protein</Text>
-                <Text>{item.foodNutrients[1].value}g Fat</Text>
-                <Text>{item.foodNutrients[2].value}g Carbs</Text>
-                <Text>{item.foodNutrients[3].value} Calories</Text>
+                <Text>{foodLog.food.description}</Text>
+                <Text>{foodLog.food.Protein}g Protein</Text>
+                <Text>{foodLog.food.Fat}g Fat</Text>
+                <Text>{foodLog.food.Carbs}g Carbs</Text>
+                <Text>{foodLog.food.Calories} Calories</Text>
                 <Text>Service size: {item.servingSize} grams</Text>
 
                 {/*<Text>{item.foodNutrients[0].nutrientName}</Text>*/}
