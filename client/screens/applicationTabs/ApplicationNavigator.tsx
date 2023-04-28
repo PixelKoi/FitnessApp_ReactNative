@@ -13,6 +13,7 @@ import {
 } from 'react-native-heroicons/outline'
 function ApplicationNavigator() {
     return (
+
         <Tab.Navigator initialRouteName="QuickLogTab">
             <Tab.Screen name="QuickLogTab" component={QuickLogTab}
                         options={{
