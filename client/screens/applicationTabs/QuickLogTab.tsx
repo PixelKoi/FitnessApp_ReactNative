@@ -23,12 +23,6 @@ const QuickLogTab = ({navigation}) => {
 
 
     const [quantity, setQuantity] = useState({});
-    // const [foods, setFoods] = useState([]);
-    // const foodLog = {
-    //     quantity: 0,
-    //     isSelected: false,
-    //     food: Object
-    // }
 
     // Simple Query testing API: https://api.nal.usda.gov/fdc/v1/foods/search?api_key=DEMO_KEY&query=Cheddar%20Cheese
     const params = {
@@ -50,6 +44,8 @@ const QuickLogTab = ({navigation}) => {
     };
 
     const [foodLogs, setFoodLogs] = useState({});
+    let foodArray = []
+
     const newFoodLog = {
         quantity: 0,
         isSelected: false,
@@ -79,10 +75,10 @@ const QuickLogTab = ({navigation}) => {
             [fdcId]: newFoodLog,
         });
         console.log(foodLogs)
-        console.log(foodLogs.quantity)
+        console.log(foodArray)
+        // console.log(foodLogs.quantity)
 
     };
-
     const renderFoodItem = ({ item }) => {
         // only create objects when the component renders
         const foodLog = {
@@ -97,6 +93,7 @@ const QuickLogTab = ({navigation}) => {
                 Calories: item.foodNutrients[3].value,
             }
         };
+        foodArray.push(foodLog)
         return (
             <View className="border border-black p-8 m-2">
                 <Text>{foodLog.food.description}</Text>
