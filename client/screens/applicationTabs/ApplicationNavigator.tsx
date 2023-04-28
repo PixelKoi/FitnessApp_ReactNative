@@ -14,7 +14,7 @@ import {
 function ApplicationNavigator() {
     return (
 
-        <Tab.Navigator initialRouteName="QuickLogTab">
+        <Tab.Navigator initialRouteName="QuickLogTab" >
             <Tab.Screen name="QuickLogTab" component={QuickLogTab}
                         options={{
                             tabBarIcon: ({ color, size }) => (

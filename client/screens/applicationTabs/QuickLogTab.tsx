@@ -1,14 +1,9 @@
 import React, { useState } from 'react';
 import { View, TextInput, Button, FlatList, Text, TouchableOpacity } from 'react-native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import {
-    UserIcon,
-    MagnifyingGlassIcon,
     CheckCircleIcon
 } from 'react-native-heroicons/outline'
-
-const Tab = createBottomTabNavigator();
 
 const QuickLogTab = ({navigation}) => {
 
