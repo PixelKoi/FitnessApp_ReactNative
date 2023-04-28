@@ -1,7 +1,7 @@
 import React, { Component, useState } from 'react';
 import { Text, View } from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
-
+import QuickLogTab from "../applicationTabs/QuickLogTab";
 const LoginScreen = ({ navigation }) => {
 	const [ text, setText ] = useState('');
 
@@ -11,7 +11,7 @@ const LoginScreen = ({ navigation }) => {
 				<TextInput label="Name" className="mb-5" />
 				<TextInput label="Password" secureTextEntry right={<TextInput.Icon icon="eye" />} />
 			</View>
-			<Button className="" mode="contained" onPress={() => navigation.navigate('LogFood')}>
+			<Button className="" mode="contained" onPress={() => navigation.navigate('ApplicationNavigator', { screen: 'QuickLogTab' })}>
 				<Text>Login</Text>
 			</Button>
 			<Button onPress={() => navigation.navigate('ForgotPass')} mode="contained">

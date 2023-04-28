@@ -11,7 +11,7 @@ import {
 
 const Tab = createBottomTabNavigator();
 
-const MyComponent = ({navigation}) => {
+const QuickLogTab = ({navigation}) => {
 
     React.useLayoutEffect(() => {
         navigation.setOptions({
@@ -119,4 +119,4 @@ const MyComponent = ({navigation}) => {
     );
 };
 
-export default MyComponent;
+export default QuickLogTab;
