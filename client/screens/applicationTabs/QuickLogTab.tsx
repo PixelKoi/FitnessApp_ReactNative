@@ -70,14 +70,14 @@ const QuickLogTab = ({navigation}) => {
             newFoodLog.quantity += 1;
         }
 
-        setFoodLogs({
-            ...foodLogs,
-            [fdcId]: newFoodLog,
-        });
-        console.log(foodLogs)
-        console.log(foodArray)
-        // console.log(foodLogs.quantity)
-
+        // setFoodLogs({
+        //     ...foodLogs,
+        //     [fdcId]: newFoodLog,
+        // });
+        // console.log(foodLogs)
+        console.log(foodArray[0])
+        console.log(foodArray.length)
+        console.log(foodArray.map((food)=> console.log(food)))
     };
     const renderFoodItem = ({ item }) => {
         // only create objects when the component renders
