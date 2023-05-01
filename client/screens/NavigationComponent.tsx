@@ -1,6 +1,6 @@
 import HomeScreen from './authenticationScreens/HomeScreen';
 import LoginScreen from './authenticationScreens/LoginScreen';
-import Auth from "./authenticationScreens/LoginScreen_V1";
+import Auth from "./authenticationScreens/Auth";
 import SignUpScreen from './authenticationScreens/SignUpScreen';
 import ForgotPassScreen from './authenticationScreens/ForgotPassScreen';
 import ApplicationNavigator from "./applicationTabs/ApplicationNavigator";
@@ -16,8 +16,8 @@ export default function NavigationComponent() {
             headerShown: route.name !== 'ApplicationNavigator' && route.name !== 'UserBioInput',
         })}>
             <Stack.Screen name="Home" component={HomeScreen} />
-            <Stack.Screen name="Login" component={LoginScreen} />
-            {/*<Stack.Screen name="Login" component={Auth} />*/}
+            {/*<Stack.Screen name="Login" component={LoginScreen} />*/}
+            <Stack.Screen name="Login" component={Auth} />
             <Stack.Screen name="SignUp" component={SignUpScreen} />
             <Stack.Screen name="ForgotPass" component={ForgotPassScreen} />
             <Stack.Screen name="ApplicationNavigator" component={ApplicationNavigator} />
