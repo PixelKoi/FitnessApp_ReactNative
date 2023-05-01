@@ -31,12 +31,19 @@ export default function App() {
 		console.log(store.getState())
 	},[store])
 	return (
-		// <Provider store={store}>
-		// 	<NavigationComponent/>
-		// </Provider>
-		<View>
-			{session && session.user ? <Account key={session.user.id} session={session} /> : <Auth />}
-		</View>
+	<>
+		{
+			session && session.user ?
+				<Provider key={session.user.id} session={session} store={store}>
+					<NavigationComponent/>
+				</Provider> :
+				<View>
+					<Auth />
+				</View>
+
+		}
+	</>
+
 	);
 }
 
