@@ -16,8 +16,8 @@ export default function NavigationComponent() {
             headerShown: route.name !== 'ApplicationNavigator' && route.name !== 'UserBioInput',
         })}>
             <Stack.Screen name="Home" component={HomeScreen} />
-            {/*<Stack.Screen name="Login" component={LoginScreen} />*/}
-            <Stack.Screen name="Login" component={Auth} />
+            <Stack.Screen name="Login" component={LoginScreen} />
+            {/*<Stack.Screen name="Login" component={Auth} />*/}
             <Stack.Screen name="SignUp" component={SignUpScreen} />
             <Stack.Screen name="ForgotPass" component={ForgotPassScreen} />
             <Stack.Screen name="ApplicationNavigator" component={ApplicationNavigator} />
