@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { View, TextInput, Button, FlatList, Text, TouchableOpacity } from 'react-native';
-
+import {USDA_API_KEY} from '../../config'
 import {
     CheckCircleIcon
 } from 'react-native-heroicons/outline'
@@ -26,7 +26,7 @@ const QuickLogTab = ({navigation}) => {
 
     // Simple Query testing API: https://api.nal.usda.gov/fdc/v1/foods/search?api_key=DEMO_KEY&query=Cheddar%20Cheese
     const params = {
-        api_key: 'HiJgd0u4cvm1mRlNW8jizLfERifOUqcuNFFQPLWJ',
+        api_key: USDA_API_KEY,
         dataType: ["Survey (FNDDS)", "Branded"],
         pageSize: 5,
         pageNumber:5,
