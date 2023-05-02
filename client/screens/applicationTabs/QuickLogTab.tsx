@@ -44,22 +44,17 @@ const QuickLogTab = ({navigation}) => {
     const [foodLogs, setFoodLogs] = useState({});
     let foodArray = []
 
-    const handleMinus = (item) => {
-        const fdcId = item.fdcId;
-
-        if (newFoodLog.id > 0) {
-            newFoodLog.quantity -= 1;
+    const handleMinus = (foodLog) => {
+        let ID = foodLog.id
+        if (foodLog.quantity > 0) {
+            foodLog.quantity -= 1;
         }
-        setFoodLogs({
-            ...foodLogs,
-            [fdcId]: newFoodLog,
-        });
     };
 
-    const handlePlus = (item) => {
-        const fdcId = item.fdcId;
-        if (newFoodLog.id < 20) {
-            newFoodLog.quantity += 1;
+    const handlePlus = (foodLog) => {
+        let ID = foodLog.id
+        if (foodLog.quantity < 20) {
+            foodLog.quantity += 1;
         }
 
         // setFoodLogs({
@@ -69,7 +64,7 @@ const QuickLogTab = ({navigation}) => {
         // console.log(foodLogs)
         console.log("FOODARRAY?",foodArray)
         console.log('FOOD_ARRAY LENGTH: ',foodArray.length)
-        const descriptions = foodArray.map((food) => food.id);
+        const descriptions = foodArray.map((food) => food.quantity);
         console.log(descriptions)
     };
     const renderFoodItem = ({ item }) => {
@@ -98,15 +93,14 @@ const QuickLogTab = ({navigation}) => {
 
                 {/*<Text>{item.foodNutrients[0].nutrientName}</Text>*/}
                 <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 }}>
-                    <TouchableOpacity onPress={()=> handleMinus(item)} style={{ borderWidth: 1, borderColor: 'gray', borderRadius: 5, padding: 5 }}>
+                    <TouchableOpacity onPress={()=> handleMinus(foodLog)} style={{ borderWidth: 1, borderColor: 'gray', borderRadius: 5, padding: 5 }}>
                         <Text>-</Text>
                     </TouchableOpacity>
-
-                    <TextInput value={foodLog.quantity.toString()} onChangeText={(text) => setQuantity(parseInt(text))}
+                    <TextInput value={foodLog.quantity.toString()} onChangeText={(text) => foodLog.quantity.toString()}
                                keyboardType="numeric"
                                style={{ marginHorizontal: 10, padding: 5, borderWidth: 1, borderColor: 'gray', borderRadius: 5, minWidth: 50, textAlign: 'center' }} />
 
-                    <TouchableOpacity onPress={() => handlePlus(item)} style={{ borderWidth: 1, borderColor: 'gray', borderRadius: 5, padding: 5 }}>
+                    <TouchableOpacity onPress={() => handlePlus(foodLog)} style={{ borderWidth: 1, borderColor: 'gray', borderRadius: 5, padding: 5 }}>
                         <Text>+</Text>
                     </TouchableOpacity>
                 </View>
