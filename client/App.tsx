@@ -9,12 +9,13 @@ import { View } from 'react-native'
 // REDUX
 import thunkMiddleware from 'redux-thunk'
 import { Provider } from 'react-redux'
-import { createStore, applyMiddleware } from "redux";
+import { createStore, applyMiddleware, combineReducers } from "redux";
 import { createLogger } from 'redux-logger'
-import {quickLogFoods} from "./redux/reducers/quickLogReducer";
+import {quickLogFoods, requestAPI} from "./redux/reducers/quickLogReducer";
 //  @reduxjs/toolkit BAD IDEA for Initial implementation! Do not CHANGE
 const logger = createLogger();
-const store = createStore(quickLogFoods, applyMiddleware(thunkMiddleware, logger))
+const rootReducer = combineReducers({ quickLogFoods, requestAPI})
+const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, logger))
 
 export default function App() {
 	const [session, setSession] = useState<Session | null>(null)

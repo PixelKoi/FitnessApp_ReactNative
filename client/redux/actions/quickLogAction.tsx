@@ -5,6 +5,7 @@ import {
     REQUEST_USDA_API_PENDING,
     REQUEST_USDA_API_SUCCESS}
     from "../constants";
+
 import {USDA_API_KEY} from "../../config";
 const params = {
     api_key: USDA_API_KEY,
