@@ -22,8 +22,6 @@ const QuickLogTab = ({navigation}) => {
     const [foodList, setFoodList] = useState([]);
 
 
-    const [quantity, setQuantity] = useState({});
-
     // Simple Query testing API: https://api.nal.usda.gov/fdc/v1/foods/search?api_key=DEMO_KEY&query=Cheddar%20Cheese
     const params = {
         api_key: USDA_API_KEY,
@@ -37,7 +35,7 @@ const QuickLogTab = ({navigation}) => {
             const response = await fetch(apiUrl)
             const data = await response.json();
             setFoodList(data.foods);
-            console.log("foodList: ",data.foods[0])
+            // console.log("foodList: ",data.foods[0])
         } catch (error) {
             console.error(error);
         }
@@ -46,12 +44,6 @@ const QuickLogTab = ({navigation}) => {
     const [foodLogs, setFoodLogs] = useState({});
     let foodArray = []
 
-    const newFoodLog = {
-        quantity: 0,
-        isSelected: false,
-        food: null,
-        id: 0
-    };
     const handleMinus = (item) => {
         const fdcId = item.fdcId;
 
@@ -75,9 +67,10 @@ const QuickLogTab = ({navigation}) => {
         //     [fdcId]: newFoodLog,
         // });
         // console.log(foodLogs)
-        console.log(foodArray[0])
-        console.log(foodArray.length)
-        console.log(foodArray.map((food)=> console.log(food)))
+        console.log("FOODARRAY?",foodArray)
+        console.log('FOOD_ARRAY LENGTH: ',foodArray.length)
+        const descriptions = foodArray.map((food) => food.id);
+        console.log(descriptions)
     };
     const renderFoodItem = ({ item }) => {
         // only create objects when the component renders
@@ -109,7 +102,9 @@ const QuickLogTab = ({navigation}) => {
                         <Text>-</Text>
                     </TouchableOpacity>
 
-                    <TextInput value={item.quantity} onChangeText={(text) => setQuantity(parseInt(text))} keyboardType="numeric" style={{ marginHorizontal: 10, padding: 5, borderWidth: 1, borderColor: 'gray', borderRadius: 5, minWidth: 50, textAlign: 'center' }} />
+                    <TextInput value={foodLog.quantity.toString()} onChangeText={(text) => setQuantity(parseInt(text))}
+                               keyboardType="numeric"
+                               style={{ marginHorizontal: 10, padding: 5, borderWidth: 1, borderColor: 'gray', borderRadius: 5, minWidth: 50, textAlign: 'center' }} />
 
                     <TouchableOpacity onPress={() => handlePlus(item)} style={{ borderWidth: 1, borderColor: 'gray', borderRadius: 5, padding: 5 }}>
                         <Text>+</Text>
