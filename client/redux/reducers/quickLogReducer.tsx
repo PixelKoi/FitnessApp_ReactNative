@@ -38,6 +38,18 @@ export const requestAPI = (state=initialState, action={}) => {
     }
 }
 
+export const mapStateToProps = state => {
+    return {
+
+    }
+}
+
+export const mapDispatchToProps = (dispatch) => {
+    return{
+        usdaFoodData: (event) => dispatch
+    }
+}
+
 
 
 
