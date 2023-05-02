@@ -45,28 +45,28 @@ const QuickLogTab = ({navigation}) => {
     let foodArray = []
 
     const handleMinus = (foodLog) => {
-        let ID = foodLog.id
         if (foodLog.quantity > 0) {
             foodLog.quantity -= 1;
         }
-    };
-
-    const handlePlus = (foodLog) => {
-        let ID = foodLog.id
-        if (foodLog.quantity < 20) {
-            foodLog.quantity += 1;
-        }
-
-        // setFoodLogs({
-        //     ...foodLogs,
-        //     [fdcId]: newFoodLog,
-        // });
-        // console.log(foodLogs)
         console.log("FOODARRAY?",foodArray)
         console.log('FOOD_ARRAY LENGTH: ',foodArray.length)
         const descriptions = foodArray.map((food) => food.quantity);
         console.log(descriptions)
+        return foodLog;
     };
+
+    const handlePlus = (foodLog) => {
+        if (foodLog.quantity < 20) {
+            foodLog.quantity += 1;
+        }
+        console.log("FOODARRAY?",foodArray)
+        console.log('FOOD_ARRAY LENGTH: ',foodArray.length)
+        const descriptions = foodArray.map((food) => food.quantity);
+        console.log(descriptions)
+        return foodLog;
+
+    };
+
     const renderFoodItem = ({ item }) => {
         // only create objects when the component renders
         const foodLog = {
