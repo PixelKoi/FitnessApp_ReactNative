@@ -4,6 +4,7 @@ import {USDA_API_KEY} from '../../config'
 import {
     CheckCircleIcon
 } from 'react-native-heroicons/outline'
+import {handleMinus, handlePlus} from "../../counter/logCounter";
 
 const QuickLogTab = ({navigation}) => {
 
@@ -44,28 +45,6 @@ const QuickLogTab = ({navigation}) => {
     const [foodLogs, setFoodLogs] = useState({});
     let foodArray = []
 
-    const handleMinus = (foodLog) => {
-        if (foodLog.quantity > 0) {
-            foodLog.quantity -= 1;
-        }
-        console.log("FOODARRAY?",foodArray)
-        console.log('FOOD_ARRAY LENGTH: ',foodArray.length)
-        const descriptions = foodArray.map((food) => food.quantity);
-        console.log(descriptions)
-        return foodLog;
-    };
-
-    const handlePlus = (foodLog) => {
-        if (foodLog.quantity < 20) {
-            foodLog.quantity += 1;
-        }
-        console.log("FOODARRAY?",foodArray)
-        console.log('FOOD_ARRAY LENGTH: ',foodArray.length)
-        const descriptions = foodArray.map((food) => food.quantity);
-        console.log(descriptions)
-        return foodLog;
-
-    };
 
     const renderFoodItem = ({ item }) => {
         // only create objects when the component renders
@@ -93,14 +72,14 @@ const QuickLogTab = ({navigation}) => {
 
                 {/*<Text>{item.foodNutrients[0].nutrientName}</Text>*/}
                 <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 }}>
-                    <TouchableOpacity onPress={()=> handleMinus(foodLog)} style={{ borderWidth: 1, borderColor: 'gray', borderRadius: 5, padding: 5 }}>
+                    <TouchableOpacity onPress={()=> handleMinus(foodLog, foodArray)} style={{ borderWidth: 1, borderColor: 'gray', borderRadius: 5, padding: 5 }}>
                         <Text>-</Text>
                     </TouchableOpacity>
                     <TextInput value={foodLog.quantity.toString()} onChangeText={(text) => foodLog.quantity.toString()}
                                keyboardType="numeric"
                                style={{ marginHorizontal: 10, padding: 5, borderWidth: 1, borderColor: 'gray', borderRadius: 5, minWidth: 50, textAlign: 'center' }} />
 
-                    <TouchableOpacity onPress={() => handlePlus(foodLog)} style={{ borderWidth: 1, borderColor: 'gray', borderRadius: 5, padding: 5 }}>
+                    <TouchableOpacity onPress={() => handlePlus(foodLog, foodArray)} style={{ borderWidth: 1, borderColor: 'gray', borderRadius: 5, padding: 5 }}>
                         <Text>+</Text>
                     </TouchableOpacity>
                 </View>
