@@ -5,14 +5,8 @@ import {
     REQUEST_USDA_API_PENDING,
     REQUEST_USDA_API_SUCCESS}
     from "../constants";
-
+import {params} from "../constants";
 import {USDA_API_KEY} from "../../config";
-const params = {
-    api_key: USDA_API_KEY,
-    dataType: ["Survey (FNDDS)", "Branded"],
-    pageSize: 5,
-    pageNumber:5,
-}
 const apiUrl = `https://api.nal.usda.gov/fdc/v1/foods/search?query=${`cheese`}&pageSize=${params.pageSize}&pageNumber=${params.pageNumber}&api_key=${params.api_key}&dataType=${params.dataType}`
 export const incrementQuickLogItem = (text) => ({
     type: COUNT_INCREASE,

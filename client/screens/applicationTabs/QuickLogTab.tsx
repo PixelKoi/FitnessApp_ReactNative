@@ -5,6 +5,7 @@ import {
     CheckCircleIcon
 } from 'react-native-heroicons/outline'
 import {handleMinus, handlePlus} from "../../counter/logCounter";
+import {params} from "../../redux/constants";
 
 const QuickLogTab = ({navigation}) => {
 
@@ -24,12 +25,6 @@ const QuickLogTab = ({navigation}) => {
 
 
     // Simple Query testing API: https://api.nal.usda.gov/fdc/v1/foods/search?api_key=DEMO_KEY&query=Cheddar%20Cheese
-    const params = {
-        api_key: USDA_API_KEY,
-        dataType: ["Survey (FNDDS)", "Branded"],
-        pageSize: 5,
-        pageNumber:5,
-    }
     const apiUrl = `https://api.nal.usda.gov/fdc/v1/foods/search?query=${foodName}&pageSize=${params.pageSize}&pageNumber=${params.pageNumber}&api_key=${params.api_key}&dataType=${params.dataType}`
     const handleSearch = async () => {
         try {
