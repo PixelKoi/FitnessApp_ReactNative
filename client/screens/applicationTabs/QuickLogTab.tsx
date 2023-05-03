@@ -22,7 +22,7 @@ const QuickLogTab = ({navigation}) => {
     }, [navigation]);
     const [foodName, setFoodName] = useState('');
     const [foodList, setFoodList] = useState([]);
-
+    const [foodArray,setFoodArray] = useState([]);
 
     // Simple Query testing API: https://api.nal.usda.gov/fdc/v1/foods/search?api_key=DEMO_KEY&query=Cheddar%20Cheese
     const apiUrl = `https://api.nal.usda.gov/fdc/v1/foods/search?query=${foodName}&pageSize=${params.pageSize}&pageNumber=${params.pageNumber}&api_key=${params.api_key}&dataType=${params.dataType}`
@@ -30,51 +30,59 @@ const QuickLogTab = ({navigation}) => {
         try {
             const response = await fetch(apiUrl)
             const data = await response.json();
+            // console.log("DATA:",data)
+            let food = data.foods;
             setFoodList(data.foods);
+            let tempArray = [];
+            food.forEach((item) => {
+                console.log("ITERATE")
+                const foodLog = {
+                    quantity: 0,
+                    isSelected: false,
+                    id: item.fdcId,
+                    food: {
+                        description: item.description,
+                        Protein: item.foodNutrients[0].value,
+                        Fat: item.foodNutrients[1].value,
+                        Carbs: item.foodNutrients[2].value,
+                        Calories: item.foodNutrients[3].value,
+                    },
+                };
+                tempArray.push(foodLog)
+            })
+            // console.log("tempArray: ",tempArray)
+            // console.log("tempArray Length",tempArray.length)
+            setFoodArray(tempArray)
+            console.log("FOOD_ARRAY LENGTH: ", foodArray.length);
+            console.log("FOODARRAY?", foodArray);
+            foodArray.map((food) => console.log("FOOD?:",food.quantity));
             // console.log("foodList: ",data.foods[0])
         } catch (error) {
             console.error(error);
         }
     };
 
-    const [foodLogs, setFoodLogs] = useState({});
-    let foodArray = []
-
-
-    const renderFoodItem = ({ item }) => {
+    const renderFoodItem = () => {
         // only create objects when the component renders
-        const foodLog = {
-            quantity: 0,
-            isSelected: false,
-            id: item.fdcId,
-            food: {
-                description: item.description,
-                Protein: item.foodNutrients[0].value,
-                Fat: item.foodNutrients[1].value,
-                Carbs: item.foodNutrients[2].value,
-                Calories: item.foodNutrients[3].value,
-            }
-        };
-        foodArray.push(foodLog)
         return (
             <View className="border border-black p-8 m-2">
-                <Text>{foodLog.food.description}</Text>
-                <Text>{foodLog.food.Protein}g Protein</Text>
-                <Text>{foodLog.food.Fat}g Fat</Text>
-                <Text>{foodLog.food.Carbs}g Carbs</Text>
-                <Text>{foodLog.food.Calories} Calories</Text>
-                <Text>Service size: {item.servingSize} grams</Text>
+                <Text>{foodArray.description}</Text>
+                <Text>{foodArray.Protein}g Protein</Text>
+                <Text>{foodArray.Fat}g Fat</Text>
+                <Text>{foodArray.Carbs}g Carbs</Text>
+                <Text>{foodArray.Calories} Calories</Text>
+                {/*<Text>Service size: {item.servingSize} grams</Text>*/}
 
                 {/*<Text>{item.foodNutrients[0].nutrientName}</Text>*/}
                 <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 }}>
-                    <TouchableOpacity onPress={()=> handleMinus(foodLog, foodArray)} style={{ borderWidth: 1, borderColor: 'gray', borderRadius: 5, padding: 5 }}>
+                    <TouchableOpacity onPress={()=> handleMinus(foodArray)} style={{ borderWidth: 1, borderColor: 'gray', borderRadius: 5, padding: 5 }}>
                         <Text>-</Text>
                     </TouchableOpacity>
-                    <TextInput value={foodLog.quantity.toString()} onChangeText={(text) => foodLog.quantity.toString()}
+                    <TextInput value={foodArray.quantity} onChangeText={(text) => foodArray.quantity.toString()}
                                keyboardType="numeric"
                                style={{ marginHorizontal: 10, padding: 5, borderWidth: 1, borderColor: 'gray', borderRadius: 5, minWidth: 50, textAlign: 'center' }} />
 
-                    <TouchableOpacity onPress={() => handlePlus(foodLog, foodArray)} style={{ borderWidth: 1, borderColor: 'gray', borderRadius: 5, padding: 5 }}>
+                    <TouchableOpacity onPress={() => handlePlus(foodArray)} style={{ borderWidth: 1, borderColor: 'gray', borderRadius: 5, padding: 5 }}>
                         <Text>+</Text>
                     </TouchableOpacity>
                 </View>
