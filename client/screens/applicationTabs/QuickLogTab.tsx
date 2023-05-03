@@ -64,9 +64,12 @@ const QuickLogTab = ({navigation}) => {
     const handlePlus = (foodArray, index) => {
         const updatedFoodArray = [...foodArray];
         const updatedFood = {...updatedFoodArray[index]};
-        updatedFood.quantity += 1;
-        updatedFoodArray[index] = updatedFood;
-        setFoodArray(updatedFoodArray);
+        if (updatedFood.quantity < 20) {
+            updatedFood.quantity += 1;
+            updatedFoodArray[index] = updatedFood;
+            setFoodArray(updatedFoodArray);
+            console.log(foodArray)
+        }
     };
 
     const handleMinus = (foodArray, index) => {
@@ -76,6 +79,8 @@ const QuickLogTab = ({navigation}) => {
             updatedFood.quantity -= 1;
             updatedFoodArray[index] = updatedFood;
             setFoodArray(updatedFoodArray);
+            console.log(foodArray)
+
         }
     };
 
