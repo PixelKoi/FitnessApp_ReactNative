@@ -14,10 +14,12 @@ import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, combineReducers } from "redux";
 import { createLogger } from 'redux-logger'
 import {quickLogFoods, requestAPI} from "./redux/reducers/quickLogReducer";
+import rootReducer from './redux/reducers/rootReducer'
 //  @reduxjs/toolkit BAD IDEA for Initial implementation! Do not CHANGE
 const logger = createLogger();
-const rootReducer = combineReducers({ quickLogFoods, requestAPI})
-const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, logger))
+// const rootReducer = combineReducers({ quickLogFoods, requestAPI})
+// const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, logger))
+const store = createStore(rootReducer)
 
 export default function App() {
 	const [session, setSession] = useState<Session | null>(null)

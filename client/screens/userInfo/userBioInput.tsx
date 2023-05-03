@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { TextInput, Button } from 'react-native-paper';
+import { connect } from 'react-redux';
 
 const UserBioInput = () => {
 	const [ showEditProfile, setEditProfile ] = useState(false);
@@ -13,6 +14,8 @@ const UserBioInput = () => {
 	const [ activityLevel, setActivityLevel ] = useState('default');
 	const [ goal, setGoal ] = useState('default');
 	const navigation = useNavigation();
+
+	useEffect(() => {}, []);
 
 	// TODO: Fix navigation back button not showing on userBioInput page.
 	React.useLayoutEffect(
@@ -29,6 +32,7 @@ const UserBioInput = () => {
 	);
 
 	const profile = () => {
+		console.log(this.props);
 		return (
 			<View className="flex-1 mx-4">
 				<View className="mt-10">
@@ -66,4 +70,8 @@ const UserBioInput = () => {
 	return <View className="flex-1">{showEditProfile === false ? profile() : editProfile()}</View>;
 };
 
-export default UserBioInput;
+const mapStateToProps = (state) => {
+	return { user: state.user };
+};
+
+export default connect(mapStateToProps)(UserBioInput);
