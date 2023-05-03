@@ -55,14 +55,18 @@ const QuickLogTab = ({navigation}) => {
             setFoodArray(tempArray)
             // console.log("FOOD_ARRAY LENGTH: ", foodArray.length);
             // console.log("FOODARRAY?", foodArray);
-            foodArray.map((food) => console.log("FOOD?:",food.quantity));
+            // foodArray.map((food) => console.log("FOOD?:",food.quantity));
             // console.log("foodList: ",data.foods[0])
         } catch (error) {
             console.error(error);
         }
     };
 
-    const renderFoodItem = (food) => {
+
+    const handleInputChange = (text, food) =>{
+
+    }
+    const renderFoodItem = (food, index) => {
         // only create objects when the component renders
         console.log("food.quantity", food.quantity)
         return (
@@ -76,14 +80,15 @@ const QuickLogTab = ({navigation}) => {
 
                 {/*<Text>{item.foodNutrients[0].nutrientName}</Text>*/}
                 <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 }}>
-                    <TouchableOpacity onPress={()=> handleMinus(foodArray)} style={{ borderWidth: 1, borderColor: 'gray', borderRadius: 5, padding: 5 }}>
+                    <TouchableOpacity onPress={()=> handleMinus(food, index)} style={{ borderWidth: 1, borderColor: 'gray', borderRadius: 5, padding: 5 }}>
                         <Text>-</Text>
                     </TouchableOpacity>
-                    <TextInput value={food.quantity.toString()} onChangeText={(text) => foodArray[0].quantity.toString()}
+                    <TextInput value={food.quantity.toString()}
+                               onChangeText={(text) => handleInputChange(text, food)}
                                keyboardType="numeric"
                                style={{ marginHorizontal: 10, padding: 5, borderWidth: 1, borderColor: 'gray', borderRadius: 5, minWidth: 50, textAlign: 'center' }} />
 
-                    <TouchableOpacity onPress={() => handlePlus(foodArray)} style={{ borderWidth: 1, borderColor: 'gray', borderRadius: 5, padding: 5 }}>
+                    <TouchableOpacity onPress={() => handlePlus(food, index)} style={{ borderWidth: 1, borderColor: 'gray', borderRadius: 5, padding: 5 }}>
                         <Text>+</Text>
                     </TouchableOpacity>
                 </View>
@@ -102,7 +107,7 @@ const QuickLogTab = ({navigation}) => {
             <Button title="Search" onPress={handleSearch} />
             <FlatList
                 data={foodArray}
-                renderItem={({ item }) => renderFoodItem(item)}
+                renderItem={({ item, index }) => renderFoodItem(item, index)}
                 keyExtractor={(item) => item.id.toString()}
             />
         </View>

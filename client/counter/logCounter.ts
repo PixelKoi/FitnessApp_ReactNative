@@ -1,24 +1,15 @@
 import { useState } from "react";
 
-export const handlePlus = (foodArray) => {
-    if (foodArray[0].quantity < 20) {
-        foodArray[0].quantity += 1;
+export const handlePlus = (foodArray, index) => {
+    if (foodArray[index].quantity < 20) {
+        foodArray[index].quantity += 1;
     }
-    // console.log("FOODARRAY?",foodArray)
-    console.log('FOOD_ARRAY LENGTH: ',foodArray.length)
-    const descriptions = foodArray.map((food) => food.quantity);
-    console.log(descriptions)
-    return foodArray;
-
+    // rest of the code
 };
 
-export const handleMinus = (foodArray) => {
-    if (foodArray[0].quantity > 0) {
-        foodArray[0].quantity -= 1;
+export const handleMinus = (foodArray, index) => {
+    if (foodArray[index].quantity > 0) {
+        foodArray[index].quantity -= 1;
     }
-    // console.log("FOODARRAY?",foodArray)
-    console.log('FOOD_ARRAY LENGTH: ',foodArray.length)
-    const descriptions = foodArray.map((food) => food.quantity);
-    console.log(descriptions)
-    return foodArray;
+    // rest of the code
 };
