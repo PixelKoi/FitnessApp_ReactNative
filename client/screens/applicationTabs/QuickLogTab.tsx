@@ -35,7 +35,7 @@ const QuickLogTab = ({navigation}) => {
             setFoodList(data.foods);
             let tempArray = [];
             food.forEach((item) => {
-                console.log("ITERATE")
+                // console.log("ITERATE")
                 const foodLog = {
                     quantity: 0,
                     isSelected: false,
@@ -53,8 +53,8 @@ const QuickLogTab = ({navigation}) => {
             // console.log("tempArray: ",tempArray)
             // console.log("tempArray Length",tempArray.length)
             setFoodArray(tempArray)
-            console.log("FOOD_ARRAY LENGTH: ", foodArray.length);
-            console.log("FOODARRAY?", foodArray);
+            // console.log("FOOD_ARRAY LENGTH: ", foodArray.length);
+            // console.log("FOODARRAY?", foodArray);
             foodArray.map((food) => console.log("FOOD?:",food.quantity));
             // console.log("foodList: ",data.foods[0])
         } catch (error) {
@@ -62,15 +62,15 @@ const QuickLogTab = ({navigation}) => {
         }
     };
 
-    const renderFoodItem = () => {
+    const renderFoodItem = (food) => {
         // only create objects when the component renders
         return (
             <View className="border border-black p-8 m-2">
-                <Text>{foodArray.description}</Text>
-                <Text>{foodArray.Protein}g Protein</Text>
-                <Text>{foodArray.Fat}g Fat</Text>
-                <Text>{foodArray.Carbs}g Carbs</Text>
-                <Text>{foodArray.Calories} Calories</Text>
+                <Text>{food.food.description}</Text>
+                <Text>{food.food.Protein}g Protein</Text>
+                <Text>{food.food.Fat}g Fat</Text>
+                <Text>{food.food.Carbs}g Carbs</Text>
+                <Text>{food.food.Calories} Calories</Text>
                 {/*<Text>Service size: {item.servingSize} grams</Text>*/}
 
                 {/*<Text>{item.foodNutrients[0].nutrientName}</Text>*/}
@@ -100,9 +100,9 @@ const QuickLogTab = ({navigation}) => {
             />
             <Button title="Search" onPress={handleSearch} />
             <FlatList
-                data={foodList}
-                renderItem={renderFoodItem}
-                keyExtractor={(item) => item.fdcId.toString()}
+                data={foodArray}
+                renderItem={({ item }) => renderFoodItem(item)}
+                keyExtractor={(item) => item.id.toString()}
             />
         </View>
     );
