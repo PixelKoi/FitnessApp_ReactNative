@@ -64,6 +64,7 @@ const QuickLogTab = ({navigation}) => {
 
     const renderFoodItem = (food) => {
         // only create objects when the component renders
+        console.log("food.quantity", food.quantity)
         return (
             <View className="border border-black p-8 m-2">
                 <Text>{food.food.description}</Text>
@@ -78,7 +79,7 @@ const QuickLogTab = ({navigation}) => {
                     <TouchableOpacity onPress={()=> handleMinus(foodArray)} style={{ borderWidth: 1, borderColor: 'gray', borderRadius: 5, padding: 5 }}>
                         <Text>-</Text>
                     </TouchableOpacity>
-                    <TextInput value={foodArray.quantity} onChangeText={(text) => foodArray.quantity.toString()}
+                    <TextInput value={food.quantity.toString()} onChangeText={(text) => foodArray[0].quantity.toString()}
                                keyboardType="numeric"
                                style={{ marginHorizontal: 10, padding: 5, borderWidth: 1, borderColor: 'gray', borderRadius: 5, minWidth: 50, textAlign: 'center' }} />
 
