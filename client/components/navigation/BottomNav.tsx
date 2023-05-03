@@ -1,15 +1,14 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
-import UserBioInput from '../userInfo/userBioInput';
-
-import QuickLogTab from './QuickLogTab';
-import DiaryTab from './DiaryTab';
-import ExportTab from './ExportTab';
-import NutritionTab from './NutritionTab';
+import QuickLogTab from '../../screens/applicationTabs/QuickLogTab';
+import DiaryTab from '../../screens/applicationTabs/DiaryTab';
+import ExportTab from '../../screens/applicationTabs/ExportTab';
+import NutritionTab from '../../screens/applicationTabs/NutritionTab';
+import Auth from '../../screens/authenticationScreens/Auth';
 const Tab = createBottomTabNavigator();
 import { FireIcon, MagnifyingGlassIcon, BookOpenIcon, PaperClipIcon } from 'react-native-heroicons/outline';
-function ApplicationNavigator() {
+const BottomNav = () => {
 	return (
 		<NavigationContainer>
 			<Tab.Navigator initialRouteName="QuickLogTab">
@@ -29,7 +28,7 @@ function ApplicationNavigator() {
 				/>
 				<Tab.Screen
 					name="NutritionTab"
-					component={UserBioInput}
+					component={NutritionTab}
 					options={{
 						tabBarIcon: ({ color, size }) => <FireIcon name="ios-add" size={20} color="black" />
 					}}
@@ -44,6 +43,6 @@ function ApplicationNavigator() {
 			</Tab.Navigator>
 		</NavigationContainer>
 	);
-}
+};
 
-export default ApplicationNavigator;
+export default BottomNav;
