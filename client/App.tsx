@@ -8,18 +8,12 @@ import Auth from "./screens/authenticationScreens/Auth";
 import Account from "./screens/authenticationScreens/Account";
 import { Session } from '@supabase/supabase-js'
 import { View } from 'react-native'
-// REDUX
-import thunkMiddleware from 'redux-thunk'
+// REDUX toolkir
+import {store} from './app/store'
 import { Provider } from 'react-redux'
-import { createStore, applyMiddleware, combineReducers } from "redux";
-import { createLogger } from 'redux-logger'
-import {quickLogFoods, requestAPI} from "./redux/reducers/quickLogReducer";
-import rootReducer from './redux/reducers/rootReducer'
-//  @reduxjs/toolkit BAD IDEA for Initial implementation! Do not CHANGE
-const logger = createLogger();
-// const rootReducer = combineReducers({ quickLogFoods, requestAPI})
-// const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, logger))
-const store = createStore(rootReducer)
+
+
+
 
 export default function App() {
 	const [session, setSession] = useState<Session | null>(null)

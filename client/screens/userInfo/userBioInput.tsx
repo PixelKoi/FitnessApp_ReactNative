@@ -2,9 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { TextInput, Button } from 'react-native-paper';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import {changeName, changeAge} from '../../features/user/user-slice'
 import { connect } from 'react-redux';
 
 const UserBioInput = () => {
+
+	const userName = useAppSelector((state) => state.user.name);
+
 	const [ showEditProfile, setEditProfile ] = useState(false);
 	const [ name, setName ] = useState('default');
 	const [ age, setAge ] = useState('default');
@@ -37,7 +42,7 @@ const UserBioInput = () => {
 			<View className="flex-1 mx-4">
 				<View className="mt-10">
 					<View className="flex  gap-6">
-						<Text>Name: {name}</Text>
+						<Text>Name: {userName}</Text>
 						<Text>Age: {age}</Text>
 						<Text>Gender {gender}:</Text>
 						<Text>Height (cm): {height}</Text>
