@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 
 const UserBioInput = () => {
 
-	const userName = useAppSelector((state) => state.user.name);
+	const userInfo = useAppSelector((state) => state.user);
 
 	const [ showEditProfile, setEditProfile ] = useState(false);
 	const [ name, setName ] = useState('default');
@@ -42,13 +42,13 @@ const UserBioInput = () => {
 			<View className="flex-1 mx-4">
 				<View className="mt-10">
 					<View className="flex  gap-6">
-						<Text>Name: {userName}</Text>
-						<Text>Age: {age}</Text>
-						<Text>Gender {gender}:</Text>
-						<Text>Height (cm): {height}</Text>
-						<Text>Weight (kg): {weight}</Text>
-						<Text>Activity level (1-10): {activityLevel}</Text>
-						<Text>Goal (1-10): {goal}</Text>
+						<Text>Name: {userInfo.name}</Text>
+						<Text>Age: {userInfo.age}</Text>
+						<Text>Gender {userInfo.gender}</Text>
+						<Text>Height (cm): {userInfo.height}</Text>
+						<Text>Weight (kg): {userInfo.weight}</Text>
+						<Text>Activity level (1-10): {userInfo.activity}</Text>
+						<Text>Goal (1-10): {userInfo.goal}</Text>
 					</View>
 				</View>
 				<Button className="mt-6 py-1" onPress={() => setEditProfile(true)} mode="contained">
