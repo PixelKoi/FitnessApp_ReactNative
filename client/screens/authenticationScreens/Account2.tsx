@@ -1,17 +1,39 @@
 import { useState, useEffect } from "react";
 import { supabase } from "../../supabase_authentication/supabase";
-import { StyleSheet, View, Alert } from "react-native";
+import { StyleSheet, View, Alert, Text } from "react-native";
 import { Button, Input } from "react-native-elements";
 import { Session } from "@supabase/supabase-js";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import {
+	changeAge,
+	changeHeight,
+	changeName,
+	changeWeight,
+} from "../../features/user/user-slice";
 
 export default function Account({ session }: { session: Session }) {
 	const [loading, setLoading] = useState(true);
 	const [username, setUsername] = useState("");
-	const [website, setWebsite] = useState("");
-	const [avatarUrl, setAvatarUrl] = useState("");
+	const [age, setAge] = useState("");
+	const [height, setHeight] = useState("");
+	const [weight, setWeight] = useState("");
+
+	//redux toolkit
+	const userInfo = useAppSelector((state) => state.user);
+	const dispatch = useAppDispatch();
+
+	function updateGlobalProfileStates(data) {
+		setUsername(data.username);
+		setAge(data.age);
+		setHeight(data.height);
+		setWeight(data.weight);
+		dispatch(changeName(data.username));
+		dispatch(changeAge(data.age));
+		dispatch(changeHeight(data.height));
+		dispatch(changeWeight(data.weight));
+	}
 
 	useEffect(() => {
-		console.log(username);
 		if (session) getProfile();
 	}, [session]);
 
@@ -22,7 +44,7 @@ export default function Account({ session }: { session: Session }) {
 
 			let { data, error, status } = await supabase
 				.from("profiles")
-				.select(`username, website, avatar_url`)
+				.select(`*`)
 				.eq("id", session?.user.id)
 				.single();
 			if (error && status !== 406) {
@@ -30,11 +52,7 @@ export default function Account({ session }: { session: Session }) {
 			}
 
 			if (data) {
-				console.log("hello");
-				console.log(data);
-				setUsername(data.username);
-				setWebsite(data.website);
-				setAvatarUrl(data.avatar_url);
+				updateGlobalProfileStates(data);
 			}
 		} catch (error) {
 			if (error instanceof Error) {
@@ -47,12 +65,14 @@ export default function Account({ session }: { session: Session }) {
 
 	async function updateProfile({
 		username,
-		website,
-		avatar_url,
+		age,
+		height,
+		weight,
 	}: {
 		username: string;
-		website: string;
-		avatar_url: string;
+		age: string;
+		height: string;
+		weight: string;
 	}) {
 		try {
 			setLoading(true);
@@ -61,8 +81,9 @@ export default function Account({ session }: { session: Session }) {
 			const updates = {
 				id: session?.user.id,
 				username,
-				website,
-				avatar_url,
+				age,
+				height,
+				weight,
 				updated_at: new Date(),
 			};
 
@@ -83,7 +104,7 @@ export default function Account({ session }: { session: Session }) {
 	return (
 		<View style={styles.container}>
 			<View style={[styles.verticallySpaced, styles.mt20]}>
-				<Input label="Email" value={session?.user?.email} disabled />
+				<Text>Enter Information to get started!</Text>
 			</View>
 			<View style={styles.verticallySpaced}>
 				<Input
@@ -94,18 +115,30 @@ export default function Account({ session }: { session: Session }) {
 			</View>
 			<View style={styles.verticallySpaced}>
 				<Input
-					label="Website"
-					value={website || ""}
-					onChangeText={(text) => setWebsite(text)}
+					label="Age"
+					value={age || ""}
+					onChangeText={(text) => setAge(text)}
+				/>
+			</View>
+			<View style={styles.verticallySpaced}>
+				<Input
+					label="Height"
+					value={height || ""}
+					onChangeText={(text) => setHeight(text)}
+				/>
+			</View>
+			<View style={styles.verticallySpaced}>
+				<Input
+					label="Weight"
+					value={weight || ""}
+					onChangeText={(text) => setWeight(text)}
 				/>
 			</View>
 
 			<View style={[styles.verticallySpaced, styles.mt20]}>
 				<Button
-					title={loading ? "Loading ..." : "Update"}
-					onPress={() =>
-						updateProfile({ username, website, avatar_url: avatarUrl })
-					}
+					title={loading ? "Loading ..." : "Create Profile"}
+					onPress={() => updateProfile({ username, age, height, weight })}
 					disabled={loading}
 				/>
 			</View>

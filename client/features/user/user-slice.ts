@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface UserState {
 	name: string;
@@ -7,21 +7,23 @@ interface UserState {
 	weight: number;
 	height: number;
 	activity: number;
-	goal: number
+	goal: number;
+	loggedIn: boolean;
 }
 
 const initialState: UserState = {
-	name: 'Jonathan Bajada',
+	name: "Jonathan Bajada",
 	age: 0,
-	gender: 'male',
+	gender: "male",
 	weight: 0,
 	height: 0,
 	activity: 0,
-	goal: 0
+	goal: 0,
+	loggedIn: false,
 };
 
 const userSlice = createSlice({
-	name: 'user',
+	name: "user",
 	initialState,
 	reducers: {
 		changeName(state, action: PayloadAction<string>) {
@@ -41,10 +43,29 @@ const userSlice = createSlice({
 		},
 		changeActivity(state, action: PayloadAction<number>) {
 			state.activity = action.payload;
-		}
-	}
+		},
+		changeGoal(state, action: PayloadAction<number>) {
+			state.goal = action.payload;
+		},
+		loggedIn(state, action: PayloadAction<Boolean>) {
+			state.loggedIn = true;
+		},
+		loggedOff(state, action: PayloadAction<Boolean>) {
+			state.loggedIn = false;
+		},
+	},
 });
 
-export const { changeName,changeAge,changeGender,changeWeight, changeHeight,changeActivity} = userSlice.actions;
+export const {
+	changeName,
+	changeAge,
+	changeGender,
+	changeWeight,
+	changeHeight,
+	changeActivity,
+	changeGoal,
+	loggedIn,
+	loggedOff,
+} = userSlice.actions;
 
 export default userSlice.reducer;
