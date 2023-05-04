@@ -38,10 +38,13 @@ const userSlice = createSlice({
 		},
 		changeHeight(state, action: PayloadAction<number>) {
 			state.height = action.payload;
+		},
+		changeActivity(state, action: PayloadAction<number>) {
+			state.activity = action.payload;
 		}
 	}
 });
 
-export const { changeName,changeAge,changeGender,changeWeight, changeHeight} = userSlice.actions;
+export const { changeName,changeAge,changeGender,changeWeight, changeHeight,changeActivity} = userSlice.actions;
 
 export default userSlice.reducer;

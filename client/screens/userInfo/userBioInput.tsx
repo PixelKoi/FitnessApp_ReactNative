@@ -4,7 +4,6 @@ import { useNavigation } from '@react-navigation/native';
 import { TextInput, Button } from 'react-native-paper';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import {changeName, changeAge, changeGender, changeWeight, changeHeight} from '../../features/user/user-slice'
-import { connect } from 'react-redux';
 
 const UserBioInput = () => {
 
