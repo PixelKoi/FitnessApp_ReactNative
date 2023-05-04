@@ -29,10 +29,19 @@ const userSlice = createSlice({
 		},
 		changeAge(state, action: PayloadAction<number>) {
 			state.age = action.payload;
+		},
+		changeGender(state, action: PayloadAction<string>) {
+			state.gender = action.payload;
+		},
+		changeWeight(state, action: PayloadAction<number>) {
+			state.weight = action.payload;
+		},
+		changeHeight(state, action: PayloadAction<number>) {
+			state.height = action.payload;
 		}
 	}
 });
 
-export const { changeName, changeAge } = userSlice.actions;
+export const { changeName,changeAge,changeGender,changeWeight, changeHeight} = userSlice.actions;
 
 export default userSlice.reducer;
