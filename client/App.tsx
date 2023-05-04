@@ -12,11 +12,8 @@ import { View } from "react-native";
 // REDUX toolkir
 import { store } from "./app/store";
 import { Provider } from "react-redux";
-import { useAppSelector, useAppDispatch } from "./app/hooks";
 
 export default function App() {
-	//hooks
-
 	const [session, setSession] = useState<Session | null>(null);
 
 	useEffect(() => {

@@ -17,6 +17,8 @@ export default function Account({ session }: { session: Session }) {
 	const [age, setAge] = useState("");
 	const [height, setHeight] = useState("");
 	const [weight, setWeight] = useState("");
+	const [activity, setActivity] = useState("");
+	const [goal, setGoal] = useState("");
 
 	//redux toolkit
 	const userInfo = useAppSelector((state) => state.user);
@@ -132,6 +134,20 @@ export default function Account({ session }: { session: Session }) {
 					label="Weight"
 					value={weight || ""}
 					onChangeText={(text) => setWeight(text)}
+				/>
+			</View>
+			<View style={styles.verticallySpaced}>
+				<Input
+					label="Acivity Level 0-10"
+					value={activity || ""}
+					onChangeText={(text) => setWeight(text)}
+				/>
+			</View>
+			<View style={styles.verticallySpaced}>
+				<Input
+					label="Goal Weight"
+					value={goal || ""}
+					onChangeText={(text) => setGoal(text)}
 				/>
 			</View>
 
