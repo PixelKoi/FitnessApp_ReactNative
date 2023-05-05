@@ -38,6 +38,14 @@ const DiaryTab = (props) => {
 				</View>
 				{/* other content */}
 			<View className="w-full mt-4">
+				<Text className="text-2xl font-bold mb-2">Unlisted Foods</Text>
+				{selectedFoods.map((food) => (
+					<View key={food.id} className="w-full mt-4">
+						<Text>{food.food.description}</Text>
+					</View>
+				))}
+			</View>
+			<View className="w-full mt-4">
 				<Text className="text-2xl font-bold mb-2">Breakfast</Text>
 			</View>
 			<Divider />
