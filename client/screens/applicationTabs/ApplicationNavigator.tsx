@@ -6,9 +6,9 @@ import UserBioInput from '../userInfo/userBioInput';
 import QuickLogTab from './QuickLogTab';
 import DiaryTab from './DiaryTab';
 import ExportTab from './ExportTab';
-import NutritionTab from './NutritionTab';
+import ProfileTab from './ProfileTab';
 const Tab = createBottomTabNavigator();
-import { FireIcon, MagnifyingGlassIcon, BookOpenIcon, PaperClipIcon } from 'react-native-heroicons/outline';
+import { FireIcon, MagnifyingGlassIcon, BookOpenIcon, PaperClipIcon, UserCircleIcon } from 'react-native-heroicons/outline';
 function ApplicationNavigator() {
 	return (
 		<NavigationContainer>
@@ -28,10 +28,10 @@ function ApplicationNavigator() {
 					}}
 				/>
 				<Tab.Screen
-					name="NutritionTab"
+					name="Profile"
 					component={UserBioInput}
 					options={{
-						tabBarIcon: ({ color, size }) => <FireIcon name="ios-add" size={20} color="black" />
+						tabBarIcon: ({ color, size }) => <UserCircleIcon name="ios-add" size={20} color="black" />
 					}}
 				/>
 				<Tab.Screen

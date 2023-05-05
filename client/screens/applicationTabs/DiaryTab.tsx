@@ -20,6 +20,9 @@ const DiaryTab = (props) => {
 	console.log("selectedOptions",selectedOptions)
 
 
+
+	// TODO: Split objects by eating time and save in global state.
+
 	// const totalCalories = Object.keys(selectedFoods).reduce((total, foodId) => {
 	// 	const food = selectedFoods[foodId];
 	// 	return total + food.food.Calories * food.quantity;

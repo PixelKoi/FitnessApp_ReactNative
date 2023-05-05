@@ -4,7 +4,7 @@ import { CheckCircleIcon } from 'react-native-heroicons/outline';
 import { UserIcon } from 'react-native-heroicons/outline';
 import { TextInput, Button } from 'react-native-paper';
 import userBioInput from '../userInfo/userBioInput';
-const NutritionTab = ({ navigation }) => {
+const ProfileTab = ({ navigation }) => {
 	React.useLayoutEffect(
 		() => {
 			navigation.setOptions({
@@ -28,4 +28,4 @@ const NutritionTab = ({ navigation }) => {
 	);
 };
 
-export default NutritionTab;
+export default ProfileTab;

@@ -14,7 +14,7 @@ const QuickLogTab = ({ navigation }) => {
 	React.useLayoutEffect(
 		() => {
 			navigation.setOptions({
-				title: 'Food Quick Log',
+				title: 'Food Log',
 				headerLeft: () => null, // this will hide the back button
 				headerRight: () => (
 					<TouchableOpacity onPress={() => setSaveButton(true)}>
