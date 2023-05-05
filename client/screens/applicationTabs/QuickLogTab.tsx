@@ -4,8 +4,12 @@ import { USDA_API_KEY } from '../../config';
 import { CheckCircleIcon } from 'react-native-heroicons/outline';
 // import {handleMinus, handlePlus} from "../../counter/logCounter";
 import { params } from '../../redux/constants';
+import { useNavigation } from '@react-navigation/native';
 
 const QuickLogTab = ({ navigation }) => {
+
+	const tabNavigation = useNavigation();
+
 	React.useLayoutEffect(
 		() => {
 			navigation.setOptions({
@@ -96,6 +100,7 @@ const QuickLogTab = ({ navigation }) => {
 		const selectedFoods = foodArray.filter((food) => food.quantity > 0);
 		console.log("Selected FOODS: ", selectedFoods)
 		setSaveButton(false)
+		tabNavigation.navigate('DiaryTab', selectedFoods);
 	}
 
 	const handleInputChange = (text, food) => {};
