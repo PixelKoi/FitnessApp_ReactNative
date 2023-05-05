@@ -1,12 +1,30 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { View } from 'react-native';
 import { Divider, Text } from 'react-native-paper';
 
 const DiaryTab = (props) => {
 	console.log("passing food data to FOODDIARY:",props.route);
-	const selectedFoods = props.route
+	const selectedFoods = props.route.params
+	console.log(typeof selectedFoods)
 	// TODO: set a global state for totalCalories and pass to diary
+	console.log(selectedFoods)
+	selectedFoods.map(food => {
+		console.log(food.quantity , "count, calories: ", food.food.Calories)
+	})
+	const caloriesConsumed = Object.keys(selectedFoods).reduce((total, foodId) => {
+		const food = selectedFoods[foodId];
+		return total + food.food.Calories * food.quantity;
+	}, 0);
+	console.log(caloriesConsumed)
 
+
+	// const totalCalories = Object.keys(selectedFoods).reduce((total, foodId) => {
+	// 	const food = selectedFoods[foodId];
+	// 	return total + food.food.Calories * food.quantity;
+	// }, 0);
+	// useEffect(()=>{
+	// 	console.log(totalCalories)
+	// }, [props])
 	return (
 		<View className="flex-1 items-center">
 				<View className="h-16 p-4 bg-black justify-center">
