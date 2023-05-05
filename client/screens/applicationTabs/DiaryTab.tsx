@@ -30,7 +30,7 @@ const DiaryTab = (props) => {
 				<View className="h-16 p-4 bg-black justify-center">
 					<Text className="text-white ">
 						{/*This top bar will be changed to {} destruct variables...*/}
-						Total calories - consumed calories + exercise = calories remaining
+						Total calories - {caloriesConsumed} + exercise = calories remaining
 					</Text>
 					<Text className="text-white text font-bold">
 						Goal - Food + Exercise = Remaining
