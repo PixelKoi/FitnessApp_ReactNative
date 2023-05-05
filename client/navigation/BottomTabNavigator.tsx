@@ -5,6 +5,7 @@ import QuickLogTab from "../screens/applicationTabs/QuickLogTab";
 import DiaryTab from "../screens/applicationTabs/DiaryTab";
 import ExportTab from "../screens/applicationTabs/ExportTab";
 import NutritionTab from "../screens/applicationTabs/NutritionTab";
+
 const Tab = createBottomTabNavigator();
 import {
 	FireIcon,

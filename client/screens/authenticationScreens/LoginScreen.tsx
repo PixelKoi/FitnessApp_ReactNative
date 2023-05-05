@@ -20,7 +20,7 @@ const LoginScreen = ({ navigation }) => {
 			<Text>or</Text>
 			<Button mode="contained">
 				<Text>Continue With Google</Text>
-			</Button>
+			 </Button>
 		</View>
 	);
 };
