@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 
-const ExportTab = () => {
+const Export = () => {
     return (
         <View className="flex-1 justify-center items-center">
             <Text className="text-lg">Export Tab placeholder.</Text>
@@ -10,4 +10,4 @@ const ExportTab = () => {
 };
 
 
-export default ExportTab;
+export default Export;

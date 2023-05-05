@@ -1,28 +1,28 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
-import UserBioInput from '../userInfo/userBioInput';
+import UserBioInput from './userBioInput';
 
-import QuickLogTab from './QuickLogTab';
-import DiaryTab from './DiaryTab';
-import ExportTab from './ExportTab';
-import ProfileTab from './ProfileTab';
+import QuickLog from './QuickLog';
+import Diary from './Diary';
+import Export from './Export';
+import Profile from './Profile';
 const Tab = createBottomTabNavigator();
 import { FireIcon, MagnifyingGlassIcon, BookOpenIcon, PaperClipIcon, UserCircleIcon } from 'react-native-heroicons/outline';
 function ApplicationNavigator() {
 	return (
 		<NavigationContainer>
-			<Tab.Navigator initialRouteName="QuickLogTab">
+			<Tab.Navigator initialRouteName="QuickLog">
 				<Tab.Screen
 					name="QuickLogTab"
-					component={QuickLogTab}
+					component={QuickLog}
 					options={{
 						tabBarIcon: ({ color, size }) => <MagnifyingGlassIcon name="ios-add" size={20} color="black" />
 					}}
 				/>
 				<Tab.Screen
 					name="DiaryTab"
-					component={DiaryTab}
+					component={Diary}
 					options={{
 						tabBarIcon: ({ color, size }) => <BookOpenIcon name="ios-add" size={20} color="black" />
 					}}
@@ -36,7 +36,7 @@ function ApplicationNavigator() {
 				/>
 				<Tab.Screen
 					name="ExportTab"
-					component={ExportTab}
+					component={Export}
 					options={{
 						tabBarIcon: ({ color, size }) => <PaperClipIcon name="ios-add" size={20} color="black" />
 					}}

@@ -7,7 +7,7 @@ import { params } from '../../redux/constants';
 import { useNavigation } from '@react-navigation/native';
 import { Modal, Portal, Text, Button, Card, Menu, Provider } from 'react-native-paper';
 
-const QuickLogTab = ({ navigation }) => {
+const QuickLog = ({ navigation }) => {
 
 	const tabNavigation = useNavigation();
 
@@ -187,4 +187,4 @@ const QuickLogTab = ({ navigation }) => {
 	);
 };
 
-export default QuickLogTab;
+export default QuickLog;

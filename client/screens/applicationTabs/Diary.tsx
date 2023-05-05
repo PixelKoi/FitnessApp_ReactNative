@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import { View } from 'react-native';
 import { Divider, Text } from 'react-native-paper';
 
-const DiaryTab = (props) => {
+const Diary = (props) => {
 	console.log("SELECTFOOD:", props.route.params)
 	// console.log("SELECTFOOD:", props.route.selectedOption)
 	const selectedFoods = props.route.params.selectedFoods
@@ -73,4 +73,4 @@ const DiaryTab = (props) => {
 	);
 };
 
-export default DiaryTab;
+export default Diary;

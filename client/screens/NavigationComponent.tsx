@@ -4,10 +4,10 @@ import Auth from './authenticationScreens/Auth';
 import SignUpScreen from './authenticationScreens/SignUpScreen';
 import ForgotPassScreen from './authenticationScreens/ForgotPassScreen';
 import ApplicationNavigator from './applicationTabs/ApplicationNavigator';
-import UserBioInput from './userInfo/userBioInput';
+import UserBioInput from './applicationTabs/userBioInput';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import QuickLogTab from './applicationTabs/QuickLogTab';
+import QuickLog from './applicationTabs/QuickLog';
 const Stack = createNativeStackNavigator();
 
 export default function NavigationComponent() {
@@ -18,7 +18,7 @@ export default function NavigationComponent() {
 					headerShown: route.name !== 'ApplicationNavigator' && route.name !== 'UserBioInput'
 				})}
 			>
-				<Stack.Screen name="Home" component={QuickLogTab} />
+				<Stack.Screen name="Home" component={QuickLog} />
 				{/*<Stack.Screen name="Login" component={LoginScreen} />*/}
 				<Stack.Screen name="Login" component={Auth} />
 				<Stack.Screen name="SignUp" component={SignUpScreen} />
