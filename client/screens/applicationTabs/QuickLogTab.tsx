@@ -1,10 +1,11 @@
 import React, {useState, useMemo, useEffect} from 'react';
-import { View, TextInput, Button, FlatList, Text, TouchableOpacity } from 'react-native';
+import { View, TextInput, FlatList, TouchableOpacity } from 'react-native';
 import { USDA_API_KEY } from '../../config';
 import { CheckCircleIcon } from 'react-native-heroicons/outline';
 // import {handleMinus, handlePlus} from "../../counter/logCounter";
 import { params } from '../../redux/constants';
 import { useNavigation } from '@react-navigation/native';
+import { Modal, Portal, Text, Button, Provider } from 'react-native-paper';
 
 const QuickLogTab = ({ navigation }) => {
 
@@ -28,6 +29,11 @@ const QuickLogTab = ({ navigation }) => {
 	const [ foodList, setFoodList ] = useState([]);
 	const [ foodArray, setFoodArray ] = useState([]);
 	const [ saveButton, setSaveButton ] = useState(false)
+	const [visible, setVisible] = React.useState(false);
+	const showModal = () => setVisible(true);
+	const hideModal = () => setVisible(false);
+	const containerStyle = {backgroundColor: 'white', padding: 20};
+
 	// Simple Query testing API: https://api.nal.usda.gov/fdc/v1/foods/search?api_key=DEMO_KEY&query=Cheddar%20Cheese
 	const apiUrl = `https://api.nal.usda.gov/fdc/v1/foods/search?query=${foodName}&pageSize=${params.pageSize}&pageNumber=${params.pageNumber}&api_key=${params.api_key}&dataType=${params.dataType}`;
 	const handleSearch = async () => {
@@ -153,8 +159,10 @@ const QuickLogTab = ({ navigation }) => {
 
 	return (
 		<View>
-			<TextInput value={foodName} onChangeText={setFoodName} placeholder="Search Food" className="mb-5" />
-			<Button title="Search" onPress={handleSearch} />
+			<TextInput className="m-4 py-1 mx-4" value={foodName} onChangeText={setFoodName} placeholder="Search Food"  />
+			<Button className="mt-3 mb-3 py-1 mx-4" mode="contained" title="Search" onPress={handleSearch} >
+				<Text>Search</Text>
+			</Button>
 			<FlatList
 				data={foodArray}
 				renderItem={({ item, index }) => renderFoodItem(item, index, foodArray)}
