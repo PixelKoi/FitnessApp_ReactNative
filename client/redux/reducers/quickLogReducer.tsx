@@ -4,7 +4,7 @@ import {
     REQUEST_USDA_API_FAILED,
     REQUEST_USDA_API_PENDING,
     REQUEST_USDA_API_SUCCESS}
-    from "../constants";
+    from "../../features/constants";
 
 const initialState = {
     quickLog: [],
