@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, {useState, useMemo, useEffect} from 'react';
 import { View, TextInput, Button, FlatList, Text, TouchableOpacity } from 'react-native';
 import { USDA_API_KEY } from '../../config';
 import { CheckCircleIcon } from 'react-native-heroicons/outline';
@@ -12,7 +12,7 @@ const QuickLogTab = ({ navigation }) => {
 				title: 'Food Quick Log',
 				headerLeft: () => null, // this will hide the back button
 				headerRight: () => (
-					<TouchableOpacity onPress={() => console.log('Header profile button pressed')}>
+					<TouchableOpacity onPress={() => setSaveButton(true)}>
 						<CheckCircleIcon name="ios-add" size={30} color="black" style={{ marginRight: 10 }} />
 					</TouchableOpacity>
 				)
@@ -23,7 +23,7 @@ const QuickLogTab = ({ navigation }) => {
 	const [ foodName, setFoodName ] = useState('');
 	const [ foodList, setFoodList ] = useState([]);
 	const [ foodArray, setFoodArray ] = useState([]);
-
+	const [ saveButton, setSaveButton ] = useState(false)
 	// Simple Query testing API: https://api.nal.usda.gov/fdc/v1/foods/search?api_key=DEMO_KEY&query=Cheddar%20Cheese
 	const apiUrl = `https://api.nal.usda.gov/fdc/v1/foods/search?query=${foodName}&pageSize=${params.pageSize}&pageNumber=${params.pageNumber}&api_key=${params.api_key}&dataType=${params.dataType}`;
 	const handleSearch = async () => {
@@ -69,6 +69,7 @@ const QuickLogTab = ({ navigation }) => {
 			updatedFoodArray[index] = updatedFood;
 			setFoodArray(updatedFoodArray);
 			console.log(foodArray);
+			console.log("BABY");
 		}
 	};
 
@@ -83,10 +84,25 @@ const QuickLogTab = ({ navigation }) => {
 		}
 	};
 
+	useEffect(() => {
+		if (saveButton){
+			saveToDiary();
+		}
+
+	},[foodArray, saveButton])
+
+
+	const saveToDiary = () =>{
+		const selectedFoods = foodArray.filter((food) => food.quantity > 0);
+		console.log("Selected FOODS: ", selectedFoods)
+		setSaveButton(false)
+	}
+
 	const handleInputChange = (text, food) => {};
 	const renderFoodItem = (food, index, foodArray) => {
 		// only create objects when the component renders
 		console.log('food.quantity', food.quantity, index);
+		// console.log("STATE", foodArray);
 		return (
 			<View className="border border-black p-8 m-2">
 				<Text>{food.food.description}</Text>
