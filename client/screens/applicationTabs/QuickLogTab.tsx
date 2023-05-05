@@ -5,7 +5,7 @@ import { CheckCircleIcon } from 'react-native-heroicons/outline';
 // import {handleMinus, handlePlus} from "../../counter/logCounter";
 import { params } from '../../redux/constants';
 import { useNavigation } from '@react-navigation/native';
-import { Modal, Portal, Text, Button, Provider } from 'react-native-paper';
+import { Modal, Portal, Text, Button, Card, Provider } from 'react-native-paper';
 
 const QuickLogTab = ({ navigation }) => {
 
@@ -115,15 +115,19 @@ const QuickLogTab = ({ navigation }) => {
 		console.log('food.quantity', food.quantity, index);
 		// console.log("STATE", foodArray);
 		return (
-			<View className="border border-black p-8 m-2">
+			<View className="p-2 ">
+				<Card>
+					<Card.Content>
 				<Text>{food.food.description}</Text>
 				<Text>{food.food.Protein}g Protein</Text>
 				<Text>{food.food.Fat}g Fat</Text>
 				<Text>{food.food.Carbs}g Carbs</Text>
 				<Text>{food.food.Calories} Calories</Text>
+
 				{/*<Text>Service size: {item.servingSize} grams</Text>*/}
 
 				{/*<Text>{item.foodNutrients[0].nutrientName}</Text>*/}
+
 				<View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 }}>
 					<TouchableOpacity
 						onPress={() => handleMinus(foodArray, index)}
@@ -153,6 +157,10 @@ const QuickLogTab = ({ navigation }) => {
 						<Text>+</Text>
 					</TouchableOpacity>
 				</View>
+					</Card.Content>
+
+				</Card>
+
 			</View>
 		);
 	};
