@@ -4,10 +4,11 @@ import Auth from './authenticationScreens/Auth';
 import SignUpScreen from './authenticationScreens/SignUpScreen';
 import ForgotPassScreen from './authenticationScreens/ForgotPassScreen';
 import ApplicationNavigator from './applicationTabs/ApplicationNavigator';
-import UserBioInput from './applicationTabs/userBioInput';
+import Profile from './applicationTabs/Profile';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import QuickLog from './applicationTabs/QuickLog';
+import Profile from "./applicationTabs/Profile";
 const Stack = createNativeStackNavigator();
 
 export default function NavigationComponent() {
@@ -15,7 +16,7 @@ export default function NavigationComponent() {
 		<NavigationContainer>
 			<Stack.Navigator
 				screenOptions={({ route }) => ({
-					headerShown: route.name !== 'ApplicationNavigator' && route.name !== 'UserBioInput'
+					headerShown: route.name !== 'ApplicationNavigator' && route.name !== 'Profile'
 				})}
 			>
 				<Stack.Screen name="Home" component={QuickLog} />
@@ -24,7 +25,7 @@ export default function NavigationComponent() {
 				<Stack.Screen name="SignUp" component={SignUpScreen} />
 				<Stack.Screen name="ForgotPass" component={ForgotPassScreen} />
 				<Stack.Screen name="ApplicationNavigator" component={ApplicationNavigator} />
-				<Stack.Screen name="UserBioInput" component={UserBioInput} />
+				<Stack.Screen name="Profile" component={Profile} />
 			</Stack.Navigator>
 		</NavigationContainer>
 	);

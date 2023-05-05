@@ -1,8 +1,7 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
-import UserBioInput from './userBioInput';
-
+import profile from "./Profile";
 import QuickLog from './QuickLog';
 import Diary from './Diary';
 import Export from './Export';
@@ -29,7 +28,7 @@ function ApplicationNavigator() {
 				/>
 				<Tab.Screen
 					name="Profile"
-					component={UserBioInput}
+					component={profile}
 					options={{
 						tabBarIcon: ({ color, size }) => <UserCircleIcon name="ios-add" size={20} color="black" />
 					}}

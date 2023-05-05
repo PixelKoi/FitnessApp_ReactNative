@@ -3,8 +3,9 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { TextInput, Button } from 'react-native-paper';
 import { connect } from 'react-redux';
+import {CheckCircleIcon} from "react-native-heroicons/outline";
 
-const UserBioInput = () => {
+const Profile = () => {
 	const [ showEditProfile, setEditProfile ] = useState(false);
 	const [ name, setName ] = useState('default');
 	const [ age, setAge ] = useState('default');
@@ -23,7 +24,12 @@ const UserBioInput = () => {
 			navigation.setOptions({
 				headerLeft: () => (
 					<TouchableOpacity onPress={() => navigation.goBack()}>
-						<Text>Back</Text>
+						<Text>BBB</Text>
+					</TouchableOpacity>
+				),
+				headerRight: () => (
+					<TouchableOpacity onPress={() => navigation.navigate('Export')}>
+						<CheckCircleIcon name="ios-add" size={30} color="black" style={{ marginRight: 10 }} />
 					</TouchableOpacity>
 				)
 			});
@@ -74,4 +80,4 @@ const mapStateToProps = (state) => {
 	return { user: state.user };
 };
 
-export default connect(mapStateToProps)(UserBioInput);
+export default Profile;
