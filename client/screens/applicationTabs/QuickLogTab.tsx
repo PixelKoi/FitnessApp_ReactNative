@@ -5,7 +5,7 @@ import { CheckCircleIcon } from 'react-native-heroicons/outline';
 // import {handleMinus, handlePlus} from "../../counter/logCounter";
 import { params } from '../../redux/constants';
 import { useNavigation } from '@react-navigation/native';
-import { Modal, Portal, Text, Button, Card, Provider } from 'react-native-paper';
+import { Modal, Portal, Text, Button, Card, Menu, Provider } from 'react-native-paper';
 
 const QuickLogTab = ({ navigation }) => {
 
@@ -26,13 +26,13 @@ const QuickLogTab = ({ navigation }) => {
 		[ navigation ]
 	);
 	const [ foodName, setFoodName ] = useState('');
-	const [ foodList, setFoodList ] = useState([]);
 	const [ foodArray, setFoodArray ] = useState([]);
 	const [ saveButton, setSaveButton ] = useState(false)
+
 	const [visible, setVisible] = React.useState(false);
-	const showModal = () => setVisible(true);
-	const hideModal = () => setVisible(false);
-	const containerStyle = {backgroundColor: 'white', padding: 20};
+	const [selectedOption, setSelectedOption] = useState('');
+	const openMenu = () => setVisible(true);
+	const closeMenu = () => setVisible(false);
 
 	// Simple Query testing API: https://api.nal.usda.gov/fdc/v1/foods/search?api_key=DEMO_KEY&query=Cheddar%20Cheese
 	const apiUrl = `https://api.nal.usda.gov/fdc/v1/foods/search?query=${foodName}&pageSize=${params.pageSize}&pageNumber=${params.pageNumber}&api_key=${params.api_key}&dataType=${params.dataType}`;
@@ -40,12 +40,9 @@ const QuickLogTab = ({ navigation }) => {
 		try {
 			const response = await fetch(apiUrl);
 			const data = await response.json();
-			// console.log("DATA:",data)
 			let food = data.foods;
-			setFoodList(data.foods);
 			let tempArray = [];
 			food.forEach((item) => {
-				// console.log("ITERATE")
 				const foodLog = {
 					quantity: 0,
 					isSelected: false,
@@ -60,13 +57,7 @@ const QuickLogTab = ({ navigation }) => {
 				};
 				tempArray.push(foodLog);
 			});
-			// console.log("tempArray: ",tempArray)
-			// console.log("tempArray Length",tempArray.length)
 			setFoodArray(tempArray);
-			// console.log("FOOD_ARRAY LENGTH: ", foodArray.length);
-			// console.log("FOODARRAY?", foodArray);
-			// foodArray.map((food) => console.log("FOOD?:",food.quantity));
-			// console.log("foodList: ",data.foods[0])
 		} catch (error) {
 			console.error(error);
 		}
@@ -79,7 +70,6 @@ const QuickLogTab = ({ navigation }) => {
 			updatedFoodArray[index] = updatedFood;
 			setFoodArray(updatedFoodArray);
 			console.log(foodArray);
-			console.log("BABY");
 		}
 	};
 
@@ -101,6 +91,10 @@ const QuickLogTab = ({ navigation }) => {
 
 	},[foodArray, saveButton])
 
+	const handleOptionSelect = (option) => {
+		setSelectedOption(option);
+		setVisible(false);
+	}
 
 	const saveToDiary = () =>{
 		const selectedFoods = foodArray.filter((food) => food.quantity > 0);
@@ -116,6 +110,7 @@ const QuickLogTab = ({ navigation }) => {
 		// console.log("STATE", foodArray);
 		return (
 			<View className="p-2 ">
+
 				<Card>
 					<Card.Content>
 				<Text>{food.food.description}</Text>
@@ -123,10 +118,6 @@ const QuickLogTab = ({ navigation }) => {
 				<Text>{food.food.Fat}g Fat</Text>
 				<Text>{food.food.Carbs}g Carbs</Text>
 				<Text>{food.food.Calories} Calories</Text>
-
-				{/*<Text>Service size: {item.servingSize} grams</Text>*/}
-
-				{/*<Text>{item.foodNutrients[0].nutrientName}</Text>*/}
 
 				<View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 }}>
 					<TouchableOpacity
@@ -166,17 +157,33 @@ const QuickLogTab = ({ navigation }) => {
 	};
 
 	return (
-		<View>
-			<TextInput className="m-4 py-1 mx-4" value={foodName} onChangeText={setFoodName} placeholder="Search Food"  />
-			<Button className="mt-3 mb-3 py-1 mx-4" mode="contained" title="Search" onPress={handleSearch} >
-				<Text>Search</Text>
-			</Button>
-			<FlatList
-				data={foodArray}
-				renderItem={({ item, index }) => renderFoodItem(item, index, foodArray)}
-				keyExtractor={(item) => item.id.toString()}
-			/>
-		</View>
+		<Provider>
+			<View>
+				<TextInput className="m-4 py-1 mx-4" value={foodName} onChangeText={setFoodName} placeholder="Search Food"  />
+				<Button className="mt-3 mb-3 py-1 mx-4" mode="contained" title="Search" onPress={handleSearch} >
+					<Text>Search</Text>
+				</Button>
+				<Menu
+					visible={visible}
+					onDismiss={closeMenu}
+					anchor={
+						<Button onPress={openMenu}>
+							{selectedOption || 'Select a meal'}
+						</Button>
+					}
+				>
+					<Menu.Item onPress={() => handleOptionSelect('Breakfast')} title="Breakfast" />
+					<Menu.Item onPress={() => handleOptionSelect('Lunch')} title="Lunch" />
+					<Menu.Item onPress={() => handleOptionSelect('Dinner')} title="Dinner" />
+					<Menu.Item onPress={() => handleOptionSelect('Snacks')} title="Snacks" />
+				</Menu>
+				<FlatList
+					data={foodArray}
+					renderItem={({ item, index }) => renderFoodItem(item, index, foodArray)}
+					keyExtractor={(item) => item.id.toString()}
+				/>
+			</View>
+		</Provider>
 	);
 };
 
