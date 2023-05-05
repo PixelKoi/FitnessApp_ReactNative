@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import {PaperClipIcon} from "react-native-heroicons/outline";
+import {useNavigation} from "@react-navigation/native";
 
 const Export = ({ navigation }) => {
     React.useLayoutEffect(
