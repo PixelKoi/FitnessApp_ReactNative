@@ -17,12 +17,8 @@ const Tab = createBottomTabNavigator();
 export default function NavigationComponent() {
 	return (
 		<NavigationContainer>
-			<Stack.Navigator
-				screenOptions={({ route }) => ({
-					headerShown: route.name !== 'ApplicationNavigator' && route.name !== 'Profile'
-				})}
-			>
-				<Stack.Screen name="Home" component={QuickLog} />
+			<Stack.Navigator>
+				<Stack.Screen name="Food Log" component={QuickLog} />
 				<Stack.Screen name="Login" component={Auth} />
 				<Stack.Screen name="SignUp" component={SignUpScreen} />
 				<Stack.Screen name="ForgotPass" component={ForgotPassScreen} />
@@ -37,7 +33,7 @@ export function ApplicationContainer(){
 		<NavigationContainer>
 			<Tab.Navigator initialRouteName="QuickLog">
 				<Tab.Screen
-					name="QuickLogTab"
+					name="QuickLog"
 					component={QuickLog}
 					options={{
 						tabBarIcon: ({ color, size }) => <MagnifyingGlassIcon name="ios-add" size={20} color="black" />
@@ -64,13 +60,7 @@ export function ApplicationContainer(){
 						tabBarIcon: ({ color, size }) => <UserCircleIcon name="ios-add" size={20} color="black" />
 					}}
 				/>
-				<Tab.Screen
-					name="Export"
-					component={Export}
-					options={{
-						tabBarStyle: {display: "none"}
-					}}
-				/>
+
 
 			</Tab.Navigator>
 		</NavigationContainer>
