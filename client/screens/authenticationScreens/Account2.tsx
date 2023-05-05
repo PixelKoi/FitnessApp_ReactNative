@@ -5,7 +5,9 @@ import { Button, Input } from "react-native-elements";
 import { Session } from "@supabase/supabase-js";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import {
+	changeActivity,
 	changeAge,
+	changeGoal,
 	changeHeight,
 	changeName,
 	changeWeight,
@@ -33,10 +35,14 @@ export default function Account({ session }: { session: Session }) {
 		setAge(data.age);
 		setHeight(data.height);
 		setWeight(data.weight);
+		setActivity(data.activity);
+		setGoal(data.goal);
 		dispatch(changeName(data.username));
 		dispatch(changeAge(data.age));
 		dispatch(changeHeight(data.height));
 		dispatch(changeWeight(data.weight));
+		dispatch(changeActivity(data.activity));
+		dispatch(changeGoal(data.goal));
 	}
 
 	useEffect(() => {
@@ -75,11 +81,15 @@ export default function Account({ session }: { session: Session }) {
 		age,
 		height,
 		weight,
+		activity,
+		goal,
 	}: {
 		username: string;
 		age: string;
 		height: string;
 		weight: string;
+		activity: string;
+		goal: string;
 	}) {
 		try {
 			setLoading(true);
@@ -91,6 +101,8 @@ export default function Account({ session }: { session: Session }) {
 				age,
 				height,
 				weight,
+				activity,
+				goal,
 				updated_at: new Date(),
 			};
 
@@ -163,7 +175,7 @@ export default function Account({ session }: { session: Session }) {
 				<Input
 					label="Acivity Level 0-10"
 					value={activity || ""}
-					onChangeText={(text) => setWeight(text)}
+					onChangeText={(text) => setActivity(text)}
 				/>
 			</View>
 			<View style={styles.verticallySpaced}>
@@ -177,11 +189,12 @@ export default function Account({ session }: { session: Session }) {
 			<View style={[styles.verticallySpaced, styles.mt20]}>
 				<Button
 					title={loading ? "Loading ..." : "Create Profile"}
-					onPress={() => updateProfile({ username, age, height, weight })}
+					onPress={() =>
+						updateProfile({ username, age, height, weight, activity, goal })
+					}
 					disabled={loading}
 				/>
 			</View>
-
 			<View style={styles.verticallySpaced}>
 				<Button title="Sign Out" onPress={() => supabase.auth.signOut()} />
 			</View>
