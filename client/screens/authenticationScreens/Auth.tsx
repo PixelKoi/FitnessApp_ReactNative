@@ -9,11 +9,6 @@ const Auth = () => {
 	const [password, setPassword] = useState("");
 	const [loading, setLoading] = useState(false);
 
-	//navigation
-	const handleNavigator = () => {
-		navigation.navigate("Account");
-	};
-
 	async function signInWithEmail() {
 		setLoading(true);
 		const { error } = await supabase.auth.signInWithPassword({

@@ -1,53 +1,70 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { TextInput, Button } from "react-native-paper";
-import { PaperClipIcon, UserCircleIcon } from "react-native-heroicons/outline";
-const Profile = ({ navigation }) => {
-	const [showEditProfile, setEditProfile] = useState(false);
-	const [name, setName] = useState("default");
-	const [age, setAge] = useState("default");
-	const [gender, setGender] = useState("default");
-	const [height, setHeight] = useState("default");
-	const [weight, setWeight] = useState("default");
-	const [activityLevel, setActivityLevel] = useState("default");
-	const [goal, setGoal] = useState("default");
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import {
+	changeName,
+	changeAge,
+	changeGender,
+	changeWeight,
+	changeHeight,
+	changeActivity,
+	changeGoal,
+} from "../../features/user/user-slice";
+import { supabase } from "../../features/supabase_authentication/supabase";
 
-	useEffect(() => {}, []);
+const UserBioInput = () => {
+	//Navigation
+	const navigation = useNavigation();
+
+	//Redux
+	const userInfo = useAppSelector((state) => state.user);
+	const dispatch = useAppDispatch();
+
+	//Hooks
+	const [showEditProfile, setEditProfile] = useState<boolean>(false);
+	const [name, setName] = useState<string>("");
+	const [age, setAge] = useState<number>(0);
+	const [gender, setGender] = useState<string>("");
+	const [height, setHeight] = useState<number>(0);
+	const [weight, setWeight] = useState<number>(0);
+	const [activityLevel, setActivityLevel] = useState<number>(0);
+	const [goal, setGoal] = useState<number>(0);
+
+	function handleEditProfile() {
+		dispatch(changeName(name));
+		dispatch(changeAge(age));
+		dispatch(changeGender(gender));
+		dispatch(changeWeight(weight));
+		dispatch(changeHeight(height));
+		dispatch(changeActivity(activityLevel));
+		dispatch(changeGoal(goal));
+	}
 
 	// TODO: Fix navigation back button not showing on userBioInput page.
 	React.useLayoutEffect(() => {
 		navigation.setOptions({
 			headerLeft: () => (
 				<TouchableOpacity onPress={() => navigation.goBack()}>
-					<Text>BBB</Text>
-				</TouchableOpacity>
-			),
-			headerRight: () => (
-				<TouchableOpacity onPress={() => navigation.navigate("Export")}>
-					<PaperClipIcon
-						name="ios-add"
-						size={20}
-						color="black"
-						style={{ marginRight: 10 }}
-					/>
+					<Text>Back</Text>
 				</TouchableOpacity>
 			),
 		});
 	}, [navigation]);
 
 	const profile = () => {
-		console.log(this.props);
 		return (
 			<View className="flex-1 mx-4">
 				<View className="mt-10">
 					<View className="flex  gap-6">
-						<Text>Name: {name}</Text>
-						<Text>Age: {age}</Text>
-						<Text>Gender {gender}:</Text>
-						<Text>Height (cm): {height}</Text>
-						<Text>Weight (kg): {weight}</Text>
-						<Text>Activity level (1-10): {activityLevel}</Text>
-						<Text>Goal (1-10): {goal}</Text>
+						<Text>Name: {userInfo.name}</Text>
+						<Text>Age: {userInfo.age}</Text>
+						<Text>Gender {userInfo.gender}</Text>
+						<Text>Height (cm): {userInfo.height}</Text>
+						<Text>Weight (kg): {userInfo.weight}</Text>
+						<Text>Activity level (1-10): {userInfo.activity}</Text>
+						<Text>Goal (1-10): {userInfo.goal}</Text>
 					</View>
 				</View>
 				<Button
@@ -65,8 +82,8 @@ const Profile = ({ navigation }) => {
 			<View>
 				<TextInput
 					label="Enter Name"
-					value={age}
-					onChangeText={(age) => setAge(age)}
+					value={name}
+					onChangeText={(name) => setName(name)}
 				/>
 				<TextInput
 					label="Enter Age"
@@ -74,18 +91,35 @@ const Profile = ({ navigation }) => {
 					onChangeText={(age) => setAge(age)}
 				/>
 				<TextInput
+					label="Enter Gender"
+					value={gender}
+					onChangeText={(gender) => setGender(gender)}
+				/>
+				<TextInput
 					label="Enter Height (cm)"
 					value={height}
 					onChangeText={(height) => setHeight(height)}
 				/>
 				<TextInput
-					label="Enter weight (kg)"
+					label="Enter Weight (kg)"
 					value={weight}
 					onChangeText={(weight) => setWeight(weight)}
 				/>
+				<TextInput
+					label="Enter Activity Level"
+					value={activityLevel}
+					onChangeText={(activityLevel) => setActivityLevel(activityLevel)}
+				/>
+				<TextInput
+					label="Enter Weight Goal"
+					value={goal}
+					onChangeText={(goal) => setGoal(goal)}
+				/>
 				<Button
 					className="mt-6 py-1 mx-4"
-					onPress={() => setEditProfile(false)}
+					onPress={() => {
+						setEditProfile(false), handleEditProfile();
+					}}
 					mode="contained">
 					<Text>Save</Text>
 				</Button>
@@ -100,4 +134,4 @@ const Profile = ({ navigation }) => {
 	);
 };
 
-export default Profile;
+export default UserBioInput;

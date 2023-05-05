@@ -6,7 +6,7 @@ import BottomNav from "./navigation/BottomTabNavigator";
 // supabase AUTH
 import { supabase } from "./features/supabase_authentication/supabase";
 import Auth from "./screens/authenticationScreens/Auth";
-import Account from "./screens/authenticationScreens/Account2";
+import Account from "./screens/authenticationScreens/Account";
 import { Session } from "@supabase/supabase-js";
 import { View } from "react-native";
 // REDUX toolkir

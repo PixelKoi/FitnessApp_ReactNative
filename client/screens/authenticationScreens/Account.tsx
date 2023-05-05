@@ -1,17 +1,52 @@
 import { useState, useEffect } from "react";
-import { supabase } from "../../supabase_authentication/supabase";
-import { StyleSheet, View, Alert } from "react-native";
+import { supabase } from "../../features/supabase_authentication/supabase";
+import { StyleSheet, View, Alert, Text, Modal, Pressable } from "react-native";
 import { Button, Input } from "react-native-elements";
 import { Session } from "@supabase/supabase-js";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import {
+	changeActivity,
+	changeAge,
+	changeGoal,
+	changeHeight,
+	changeName,
+	changeWeight,
+} from "../../features/user/user-slice";
 
 export default function Account({ session }: { session: Session }) {
+	const [modalVisible, setModalVisible] = useState(false);
 	const [loading, setLoading] = useState(true);
+
+	//profile states
 	const [username, setUsername] = useState("");
-	const [website, setWebsite] = useState("");
-	const [avatarUrl, setAvatarUrl] = useState("");
+	const [age, setAge] = useState("");
+	const [height, setHeight] = useState("");
+	const [weight, setWeight] = useState("");
+	const [activity, setActivity] = useState("");
+	const [goal, setGoal] = useState("");
+
+	//redux toolkit
+	const userInfo = useAppSelector((state) => state.user);
+	const dispatch = useAppDispatch();
+
+	//update component and global states
+	function updateGlobalProfileStates(data) {
+		setUsername(data.username);
+		setAge(data.age);
+		setHeight(data.height);
+		setWeight(data.weight);
+		setActivity(data.activity);
+		setGoal(data.goal);
+		dispatch(changeName(data.username));
+		dispatch(changeAge(data.age));
+		dispatch(changeHeight(data.height));
+		dispatch(changeWeight(data.weight));
+		dispatch(changeActivity(data.activity));
+		dispatch(changeGoal(data.goal));
+	}
 
 	useEffect(() => {
-		console.log(username);
+		setModalVisible(true);
 		if (session) getProfile();
 	}, [session]);
 
@@ -22,7 +57,7 @@ export default function Account({ session }: { session: Session }) {
 
 			let { data, error, status } = await supabase
 				.from("profiles")
-				.select(`username, website, avatar_url`)
+				.select(`*`)
 				.eq("id", session?.user.id)
 				.single();
 			if (error && status !== 406) {
@@ -30,11 +65,7 @@ export default function Account({ session }: { session: Session }) {
 			}
 
 			if (data) {
-				console.log("hello");
-				console.log(data);
-				setUsername(data.username);
-				setWebsite(data.website);
-				setAvatarUrl(data.avatar_url);
+				updateGlobalProfileStates(data);
 			}
 		} catch (error) {
 			if (error instanceof Error) {
@@ -47,12 +78,18 @@ export default function Account({ session }: { session: Session }) {
 
 	async function updateProfile({
 		username,
-		website,
-		avatar_url,
+		age,
+		height,
+		weight,
+		activity,
+		goal,
 	}: {
 		username: string;
-		website: string;
-		avatar_url: string;
+		age: string;
+		height: string;
+		weight: string;
+		activity: string;
+		goal: string;
 	}) {
 		try {
 			setLoading(true);
@@ -61,8 +98,11 @@ export default function Account({ session }: { session: Session }) {
 			const updates = {
 				id: session?.user.id,
 				username,
-				website,
-				avatar_url,
+				age,
+				height,
+				weight,
+				activity,
+				goal,
 				updated_at: new Date(),
 			};
 
@@ -82,9 +122,27 @@ export default function Account({ session }: { session: Session }) {
 
 	return (
 		<View style={styles.container}>
-			<View style={[styles.verticallySpaced, styles.mt20]}>
-				<Input label="Email" value={session?.user?.email} disabled />
-			</View>
+			<Modal
+				animationType="slide"
+				transparent={true}
+				visible={modalVisible}
+				onRequestClose={() => {
+					Alert.alert("Modal has been closed.");
+					setModalVisible(!modalVisible);
+				}}>
+				<View style={styles.centeredView}>
+					<View style={styles.modalView}>
+						<Text style={styles.modalText}>
+							Fill out your profile to get started!
+						</Text>
+						<Pressable
+							style={[styles.button, styles.buttonClose]}
+							onPress={() => setModalVisible(!modalVisible)}>
+							<Text style={styles.textStyle}>Close</Text>
+						</Pressable>
+					</View>
+				</View>
+			</Modal>
 			<View style={styles.verticallySpaced}>
 				<Input
 					label="Username"
@@ -94,22 +152,49 @@ export default function Account({ session }: { session: Session }) {
 			</View>
 			<View style={styles.verticallySpaced}>
 				<Input
-					label="Website"
-					value={website || ""}
-					onChangeText={(text) => setWebsite(text)}
+					label="Age"
+					value={age || ""}
+					onChangeText={(text) => setAge(text)}
+				/>
+			</View>
+			<View style={styles.verticallySpaced}>
+				<Input
+					label="Height"
+					value={height || ""}
+					onChangeText={(text) => setHeight(text)}
+				/>
+			</View>
+			<View style={styles.verticallySpaced}>
+				<Input
+					label="Weight"
+					value={weight || ""}
+					onChangeText={(text) => setWeight(text)}
+				/>
+			</View>
+			<View style={styles.verticallySpaced}>
+				<Input
+					label="Acivity Level 0-10"
+					value={activity || ""}
+					onChangeText={(text) => setActivity(text)}
+				/>
+			</View>
+			<View style={styles.verticallySpaced}>
+				<Input
+					label="Goal Weight"
+					value={goal || ""}
+					onChangeText={(text) => setGoal(text)}
 				/>
 			</View>
 
 			<View style={[styles.verticallySpaced, styles.mt20]}>
 				<Button
-					title={loading ? "Loading ..." : "Update"}
+					title={loading ? "Loading ..." : "Create Profile"}
 					onPress={() =>
-						updateProfile({ username, website, avatar_url: avatarUrl })
+						updateProfile({ username, age, height, weight, activity, goal })
 					}
 					disabled={loading}
 				/>
 			</View>
-
 			<View style={styles.verticallySpaced}>
 				<Button title="Sign Out" onPress={() => supabase.auth.signOut()} />
 			</View>
@@ -129,5 +214,46 @@ const styles = StyleSheet.create({
 	},
 	mt20: {
 		marginTop: 20,
+	},
+	centeredView: {
+		flex: 1,
+		justifyContent: "center",
+		alignItems: "center",
+		marginTop: 22,
+	},
+	modalView: {
+		margin: 20,
+		backgroundColor: "white",
+		borderRadius: 20,
+		padding: 35,
+		alignItems: "center",
+		shadowColor: "#000",
+		shadowOffset: {
+			width: 0,
+			height: 2,
+		},
+		shadowOpacity: 0.25,
+		shadowRadius: 4,
+		elevation: 5,
+	},
+	button: {
+		borderRadius: 20,
+		padding: 10,
+		elevation: 2,
+	},
+	buttonOpen: {
+		backgroundColor: "#F194FF",
+	},
+	buttonClose: {
+		backgroundColor: "#2196F3",
+	},
+	textStyle: {
+		color: "white",
+		fontWeight: "bold",
+		textAlign: "center",
+	},
+	modalText: {
+		marginBottom: 15,
+		textAlign: "center",
 	},
 });
