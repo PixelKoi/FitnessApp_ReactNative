@@ -1,7 +1,5 @@
 import {useState, useEffect} from "react";
-import NavigationComponent from "./screens/NavigationComponent";
-import ApplicationNavigator from './screens/applicationTabs/ApplicationNavigator'
-import BottomNav from './components/navigation/BottomNav'
+import NavigationComponent, {ApplicationContainer} from "./screens/NavigationComponent";
 // supabase AUTH
 import { supabase } from "./features/supabase_authentication/supabase";
 import Auth from "./screens/authenticationScreens/Auth";
@@ -41,7 +39,7 @@ export default function App() {
 		{
 			session && session.user ?
 				<Provider key={session.user.id} session={session} store={store}>
-					<ApplicationNavigator/>
+					<ApplicationContainer/>
 				</Provider> :
 				<View>
 					<Auth />

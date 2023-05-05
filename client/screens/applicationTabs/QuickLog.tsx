@@ -100,7 +100,7 @@ const QuickLog = ({ navigation }) => {
 		const selectedFoods = foodArray.filter((food) => food.quantity > 0);
 		console.log("Selected FOODS: ", selectedFoods)
 		setSaveButton(false)
-		tabNavigation.navigate('DiaryTab', {selectedFoods, selectedOption});
+		tabNavigation.navigate('Diary', {selectedFoods, selectedOption});
 	}
 
 	const handleInputChange = (text, food) => {};

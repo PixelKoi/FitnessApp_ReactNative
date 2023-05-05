@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 import { TextInput, Button } from 'react-native-paper';
-import { connect } from 'react-redux';
-import {CheckCircleIcon} from "react-native-heroicons/outline";
-
-const Profile = () => {
+import { PaperClipIcon, UserCircleIcon } from 'react-native-heroicons/outline';
+const Profile = ({ navigation }) => {
 	const [ showEditProfile, setEditProfile ] = useState(false);
 	const [ name, setName ] = useState('default');
 	const [ age, setAge ] = useState('default');
@@ -14,7 +11,6 @@ const Profile = () => {
 	const [ weight, setWeight ] = useState('default');
 	const [ activityLevel, setActivityLevel ] = useState('default');
 	const [ goal, setGoal ] = useState('default');
-	const navigation = useNavigation();
 
 	useEffect(() => {}, []);
 
@@ -29,7 +25,7 @@ const Profile = () => {
 				),
 				headerRight: () => (
 					<TouchableOpacity onPress={() => navigation.navigate('Export')}>
-						<CheckCircleIcon name="ios-add" size={30} color="black" style={{ marginRight: 10 }} />
+						<PaperClipIcon name="ios-add" size={20} color="black" style={{ marginRight: 10 }}/>
 					</TouchableOpacity>
 				)
 			});
@@ -76,8 +72,5 @@ const Profile = () => {
 	return <View className="flex-1">{showEditProfile === false ? profile() : editProfile()}</View>;
 };
 
-const mapStateToProps = (state) => {
-	return { user: state.user };
-};
 
 export default Profile;
