@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
 import { PaperClipIcon, UserCircleIcon } from 'react-native-heroicons/outline';
-const Profile = ({ navigation }) => {
+import { useRoute, useNavigation } from '@react-navigation/native';
+
+const Profile = () => {
 	const [ showEditProfile, setEditProfile ] = useState(false);
 	const [ name, setName ] = useState('default');
 	const [ age, setAge ] = useState('default');
@@ -11,6 +13,9 @@ const Profile = ({ navigation }) => {
 	const [ weight, setWeight ] = useState('default');
 	const [ activityLevel, setActivityLevel ] = useState('default');
 	const [ goal, setGoal ] = useState('default');
+	const route = useRoute();
+	const navigation = useNavigation();
+	const parentNavigation = route.params?.navigation;
 
 	useEffect(() => {}, []);
 
@@ -24,7 +29,7 @@ const Profile = ({ navigation }) => {
 					</TouchableOpacity>
 				),
 				headerRight: () => (
-					<TouchableOpacity onPress={() => navigation.navigate('Export')}>
+					<TouchableOpacity onPress={handlePress}>
 						<PaperClipIcon name="ios-add" size={20} color="black" style={{ marginRight: 10 }}/>
 					</TouchableOpacity>
 				)
@@ -33,6 +38,9 @@ const Profile = ({ navigation }) => {
 		[ navigation ]
 	);
 
+	const handlePress = () => {
+		parentNavigation?.navigate('Export');
+	};
 	const profile = () => {
 		console.log(this.props);
 		return (
