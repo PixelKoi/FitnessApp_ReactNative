@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import NavigationComponent from "./screens/NavigationComponent";
 import RootNavigator from "./navigation/RootNavigator";
-import ApplicationNavigator from "./screens/applicationTabs/ApplicationNavigator";
 import BottomNav from "./navigation/BottomTabNavigator";
 // supabase AUTH
 import { supabase } from "./features/supabase_authentication/supabase";
@@ -12,7 +11,7 @@ import { View } from "react-native";
 // REDUX toolkir
 import { store } from "./app/store";
 import { Provider } from "react-redux";
-
+import ApplicationContainer from "./screens/NavigationComponent";
 export default function App() {
 	/* I commented out your previous code and placed it at the bottom and used the supabase auth tutorial to work on account screen */
 	const [session, setSession] = useState<Session | null>(null);
@@ -30,13 +29,14 @@ export default function App() {
 	return (
 		<>
 			{
-				<Provider store={store}>
-					{session && session.user ? (
-						<Account key={session.user.id} session={session} />
-					) : (
+				session && session.user ?
+					<Provider key={session.user.id} session={session} store={store}>
+						<ApplicationContainer/>
+					</Provider> :
+					<View>
 						<Auth />
-					)}
-				</Provider>
+					</View>
+
 			}
 		</>
 	);
