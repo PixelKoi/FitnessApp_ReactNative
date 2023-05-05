@@ -3,9 +3,10 @@ import { View } from 'react-native';
 import { Divider, Text } from 'react-native-paper';
 
 const DiaryTab = (props) => {
-	console.log("passing food data to FOODDIARY:",props.route);
-	const selectedFoods = props.route.params
-	console.log(typeof selectedFoods)
+	console.log("SELECTFOOD:", props.route.params)
+	// console.log("SELECTFOOD:", props.route.selectedOption)
+	const selectedFoods = props.route.params.selectedFoods
+	const selectedOptions = props.route.params.selectedOption
 	// TODO: set a global state for totalCalories and pass to diary
 	console.log(selectedFoods)
 	selectedFoods.map(food => {
@@ -16,6 +17,7 @@ const DiaryTab = (props) => {
 		return total + food.food.Calories * food.quantity;
 	}, 0);
 	console.log(caloriesConsumed)
+	console.log("selectedOptions",selectedOptions)
 
 
 	// const totalCalories = Object.keys(selectedFoods).reduce((total, foodId) => {
