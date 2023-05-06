@@ -15,7 +15,7 @@ import {
 import { supabase } from "../../features/supabase_authentication/supabase";
 
 const UserBioInput = () => {
-	/* 
+	/*
 	For men: BMR = 88.36 + (13.4 x weight in kg) + (4.8 x height in cm) - (5.7 x age in years)
 	For women: BMR = 447.6 + (9.2 x weight in kg) + (3.1 x height in cm) - (4.3 x age in years)
 
@@ -36,6 +36,8 @@ const UserBioInput = () => {
 	const dispatch = useAppDispatch();
 
 	//Hooks
+	const [maleChecked, setMaleChecked] = useState(false);
+	const [femaleChecked, setFemaleChecked] = useState(false);
 	const [checked, setChecked] = useState<boolean>(false);
 	const [showEditProfile, setEditProfile] = useState<boolean>(false);
 	const [bmr, setBMR] = useState<number>(0);
@@ -46,7 +48,7 @@ const UserBioInput = () => {
 	const [height, setHeight] = useState<number>(0);
 	const [weight, setWeight] = useState<number>(0);
 	const [activityLevel, setActivityLevel] = useState<string>("");
-	const [goal, setGoal] = useState<number>(0);
+	const [goal, setGoal] = useState<string>("");
 
 	const calAlgo = () => {
 		let calBMR = 0;
@@ -78,7 +80,19 @@ const UserBioInput = () => {
 				break;
 		}
 
-		return setBMR(calBMR);
+		switch (goal) {
+			case "1":
+				setCalories(calBMR - 500);
+				break;
+			case "2":
+				setCalories(calBMR - 1000);
+				break;
+			default:
+				setCalories(calBMR);
+				break;
+		}
+
+		setBMR(calBMR);
 	};
 
 	function handleEditProfile() {
@@ -114,7 +128,7 @@ const UserBioInput = () => {
 						<Text>Weight (kg): {userInfo.weight}</Text>
 						<Text>Activity level (1-10): {userInfo.activity}</Text>
 						<Text>Goal (1-10): {userInfo.goal}</Text>
-						<Text>BMR:{bmr} calories</Text>
+						<Text>BMR: {bmr} calories</Text>
 						<Text>Daily Calorie Needs: {dailyCalories} calories</Text>
 					</View>
 				</View>
@@ -133,8 +147,6 @@ const UserBioInput = () => {
 			</View>
 		);
 	};
-	const [maleChecked, setMaleChecked] = useState(false);
-	const [femaleChecked, setFemaleChecked] = useState(false);
 
 	const handleMaleCheck = () => {
 		setMaleChecked(!maleChecked);
