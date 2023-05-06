@@ -15,6 +15,17 @@ import {
 import { supabase } from "../../features/supabase_authentication/supabase";
 
 const UserBioInput = () => {
+	/* 
+	For men: BMR = 88.36 + (13.4 x weight in kg) + (4.8 x height in cm) - (5.7 x age in years)
+	For women: BMR = 447.6 + (9.2 x weight in kg) + (3.1 x height in cm) - (4.3 x age in years)
+
+	Sedentary (little or no exercise): TDEE = BMR x 1.2
+	Lightly active (light exercise or sports 1-3 days/week): TDEE = BMR x 1.375
+	Moderately active (moderate exercise or sports 3-5 days/week): TDEE = BMR x 1.55
+	Very active (hard exercise or sports 6-7 days/week): TDEE = BMR x 1.725
+	Extremely active (very hard exercise or sports, physical job or training twice a day): TDEE = BMR x 1.9
+	*/
+
 	//Navigation
 	const navigation = useNavigation();
 
@@ -24,13 +35,51 @@ const UserBioInput = () => {
 
 	//Hooks
 	const [showEditProfile, setEditProfile] = useState<boolean>(false);
+	const [bmr, setBMR] = useState<number>(0);
 	const [name, setName] = useState<string>("");
 	const [age, setAge] = useState<number>(0);
 	const [gender, setGender] = useState<string>("");
 	const [height, setHeight] = useState<number>(0);
 	const [weight, setWeight] = useState<number>(0);
-	const [activityLevel, setActivityLevel] = useState<number>(0);
+	const [activityLevel, setActivityLevel] = useState<string>("");
 	const [goal, setGoal] = useState<number>(0);
+
+	const calAlgo = () => {
+		let calBMR = 0;
+
+		if (gender === "male") {
+			calBMR = 88.3 + 14.4 * weight + 4.8 * height - 5.7 * age;
+		} else if (gender === "female") {
+			calBMR = 447.6 + 9.2 * weight + 3.1 * height - 4.3 * age;
+		}
+
+		switch (activityLevel) {
+			case "sedentary":
+				calBMR *= 1.2;
+				setBMR(calBMR);
+				break;
+			case "lightly active":
+				calBMR *= 1.375;
+				setBMR(calBMR);
+				break;
+			case "moderately active":
+				calBMR *= 1.55;
+				setBMR(calBMR);
+				break;
+			case "very active":
+				calBMR *= 1.725;
+				setBMR(calBMR);
+				break;
+			case "extremely active":
+				calBMR *= 1.9;
+				setBMR(calBMR);
+				break;
+			default:
+				break;
+		}
+
+		return calBMR;
+	};
 
 	function handleEditProfile() {
 		dispatch(changeName(name));
