@@ -24,6 +24,8 @@ const UserBioInput = () => {
 	Moderately active (moderate exercise or sports 3-5 days/week): TDEE = BMR x 1.55
 	Very active (hard exercise or sports 6-7 days/week): TDEE = BMR x 1.725
 	Extremely active (very hard exercise or sports, physical job or training twice a day): TDEE = BMR x 1.9
+
+	Lose 1lb a week = -500 cal deficit
 	*/
 
 	//Navigation
@@ -47,32 +49,28 @@ const UserBioInput = () => {
 	const calAlgo = () => {
 		let calBMR = 0;
 
-		if (gender === "male") {
+		if (gender === "Male") {
 			calBMR = 88.3 + 14.4 * weight + 4.8 * height - 5.7 * age;
+			console.log(calBMR);
 		} else if (gender === "female") {
 			calBMR = 447.6 + 9.2 * weight + 3.1 * height - 4.3 * age;
 		}
 
 		switch (activityLevel) {
-			case "sedentary":
+			case "Sedentary":
 				calBMR *= 1.2;
-
 				break;
-			case "lightly active":
+			case "Lightly active":
 				calBMR *= 1.375;
-
 				break;
-			case "moderately active":
+			case "Moderately active":
 				calBMR *= 1.55;
-
 				break;
-			case "very active":
+			case "Very active":
 				calBMR *= 1.725;
-
 				break;
-			case "extremely active":
+			case "Extremely active":
 				calBMR *= 1.9;
-
 				break;
 			default:
 				break;
@@ -122,6 +120,13 @@ const UserBioInput = () => {
 					mode="contained">
 					<Text>Edit Profile</Text>
 				</Button>
+				<Button
+					className="mt-6 py-1 mx-4"
+					onPress={() => calAlgo()}
+					mode="contained">
+					<Text>Calculate Algo</Text>
+				</Button>
+				<Text>{bmr}</Text>
 			</View>
 		);
 	};
@@ -164,6 +169,7 @@ const UserBioInput = () => {
 					value={goal}
 					onChangeText={(goal) => setGoal(goal)}
 				/>
+
 				<Button
 					className="mt-6 py-1 mx-4"
 					onPress={() => {
