@@ -11,10 +11,28 @@ const Diary = (props) => {
 	// TODO: set a global state for totalCalories and pass to diary
 	const object = props.route.params
 	console.log(object)
-	let snacks = [];
-	let breakfast = [];
-	let lunch = [];
-	let dinner = [];	// console.log(selectedFoods)
+	interface Category {
+		name: string;
+		items: FoodItem[];
+	}
+	interface FoodItem {
+		food: {
+			Calories: number;
+			Carbs: number;
+			Fat: number;
+			Protein: number;
+			description: string;
+		};
+		id: number;
+		isSelected: boolean;
+		quantity: number;
+	}
+	const categories: Category[] = [
+		{ name: "Snacks", items: [] },
+		{ name: "Breakfast", items: [] },
+		{ name: "Lunch", items: [] },
+		{ name: "Dinner", items: [] },
+	];
 	selectedFoods.map(food => {
 		console.log(food.quantity , "count, calories: ", food.food.Calories)
 	})
@@ -23,28 +41,14 @@ const Diary = (props) => {
 		return total + food.food.Calories * food.quantity;
 	}, 0);
 	// console.log(caloriesConsumed)
-	console.log("selectedOptions",typeof selectedOption)
-	useEffect(()=>{
-		switch (selectedOption) {
-			case "Snacks":
-				console.log("RUNS")
-				snacks.push(selectedFoods);
-				break;
-			case 'Breakfast':
-				breakfast.push(selectedFoods);
-				break;
-			case 'Lunch':
-				lunch.push(selectedFoods);
-				break;
-			case 'Dinner':
-				dinner.push(selectedFoods);
-				break;
-			default:
-				// do nothing for unknown options
-				break;
+	console.log("selectedOptions",typeof selectedOption, selectedOption)
+	useEffect(() => {
+		const categoryIndex = categories.findIndex((category) => category.name === selectedOption);
+		if (categoryIndex >= 0) {
+			categories[categoryIndex].items.push(...selectedFoods);
 		}
-		console.log("SWITCH: ", snacks)
-	}, [props])
+		console.log("CATEGORIES:", categories)
+	}, [props]);
 
 
 
