@@ -1,9 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
 import userReducer from '../features/user/user-slice';
-import counterReducer from '../features/counter/counter-slice';
 
 export const store = configureStore({
-	reducer: { user: userReducer, counter: counterReducer }
+	reducer: { user: userReducer }
 });
 
 export type AppDispatch = typeof store.dispatch;

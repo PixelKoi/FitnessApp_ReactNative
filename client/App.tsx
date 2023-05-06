@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
 import NavigationComponent from "./screens/NavigationComponent";
-import RootNavigator from "./navigation/RootNavigator";
-import BottomNav from "./navigation/BottomTabNavigator";
 // supabase AUTH
 import { supabase } from "./features/supabase_authentication/supabase";
 import Auth from "./screens/authenticationScreens/Auth";
