@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { TextInput, Button } from "react-native-paper";
+import { TextInput, Button, Checkbox } from "react-native-paper";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import {
 	changeName,
@@ -36,8 +36,10 @@ const UserBioInput = () => {
 	const dispatch = useAppDispatch();
 
 	//Hooks
+	const [checked, setChecked] = useState<boolean>(false);
 	const [showEditProfile, setEditProfile] = useState<boolean>(false);
 	const [bmr, setBMR] = useState<number>(0);
+	const [dailyCalories, setCalories] = useState<number>(0);
 	const [name, setName] = useState<string>("");
 	const [age, setAge] = useState<number>(0);
 	const [gender, setGender] = useState<string>("");
@@ -112,6 +114,8 @@ const UserBioInput = () => {
 						<Text>Weight (kg): {userInfo.weight}</Text>
 						<Text>Activity level (1-10): {userInfo.activity}</Text>
 						<Text>Goal (1-10): {userInfo.goal}</Text>
+						<Text>BMR:{bmr} calories</Text>
+						<Text>Daily Calorie Needs: {dailyCalories} calories</Text>
 					</View>
 				</View>
 				<Button
@@ -126,9 +130,22 @@ const UserBioInput = () => {
 					mode="contained">
 					<Text>Calculate Algo</Text>
 				</Button>
-				<Text>{bmr}</Text>
 			</View>
 		);
+	};
+	const [maleChecked, setMaleChecked] = useState(false);
+	const [femaleChecked, setFemaleChecked] = useState(false);
+
+	const handleMaleCheck = () => {
+		setMaleChecked(!maleChecked);
+		setGender("Male");
+		setFemaleChecked(false);
+	};
+
+	const handleFemaleCheck = () => {
+		setFemaleChecked(!femaleChecked);
+		setGender("Female");
+		setMaleChecked(false);
 	};
 
 	const editProfile = () => {
@@ -144,10 +161,15 @@ const UserBioInput = () => {
 					value={age}
 					onChangeText={(age) => setAge(age)}
 				/>
-				<TextInput
-					label="Enter Gender"
-					value={gender}
-					onChangeText={(gender) => setGender(gender)}
+				<Checkbox.Item
+					label="Male"
+					status={maleChecked ? "checked" : "unchecked"}
+					onPress={handleMaleCheck}
+				/>
+				<Checkbox.Item
+					label="Female"
+					status={femaleChecked ? "checked" : "unchecked"}
+					onPress={handleFemaleCheck}
 				/>
 				<TextInput
 					label="Enter Height (cm)"
