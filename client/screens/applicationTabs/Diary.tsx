@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import { View } from 'react-native';
 import { Divider, Text } from 'react-native-paper';
 
@@ -36,6 +36,7 @@ const Diary = (props) => {
 	selectedFoods.map(food => {
 		console.log(food.quantity , "count, calories: ", food.food.Calories)
 	})
+	const [selectedFud, setSelectedFud] = useState();
 	const caloriesConsumed = Object.keys(selectedFoods).reduce((total, foodId) => {
 		const food = selectedFoods[foodId];
 		return total + food.food.Calories * food.quantity;
@@ -46,8 +47,10 @@ const Diary = (props) => {
 		const categoryIndex = categories.findIndex((category) => category.name === selectedOption);
 		if (categoryIndex >= 0) {
 			categories[categoryIndex].items.push(...selectedFoods);
+			const populatedCategories = categories.filter(category => category.items.length > 0);
+			setSelectedFud(populatedCategories);
+			console.log("THE OPS", selectedFud.selectedOption)
 		}
-		console.log("CATEGORIES:", categories)
 	}, [props]);
 
 
