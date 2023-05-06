@@ -1,50 +1,59 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import { View } from 'react-native';
 import { Divider, Text } from 'react-native-paper';
 
 const Diary = (props) => {
-	console.log("SELECTFOOD:", props.route.params)
+	// console.log("SELECTFOOD:", props.route.params)
 	// console.log("SELECTFOOD:", props.route.selectedOption)
 	const selectedObject = props.route
 	const selectedFoods = props.route.params.selectedFoods
 	const selectedOption = props.route.params.selectedOption
 	// TODO: set a global state for totalCalories and pass to diary
 	const object = props.route.params
-	console.log(object)
-	let snacks = [];
-	let breakfast = [];
-	let lunch = [];
-	let dinner = [];	// console.log(selectedFoods)
-	selectedFoods.map(food => {
-		console.log(food.quantity , "count, calories: ", food.food.Calories)
-	})
+	// console.log(object)
+	interface Category {
+		name: string;
+		items: FoodItem[];
+	}
+	interface FoodItem {
+		food: {
+			Calories: number;
+			Carbs: number;
+			Fat: number;
+			Protein: number;
+			description: string;
+		};
+		id: number;
+		isSelected: boolean;
+		quantity: number;
+	}
+	const categories: Category[] = [
+		{ name: "Snacks", items: [] },
+		{ name: "Breakfast", items: [] },
+		{ name: "Lunch", items: [] },
+		{ name: "Dinner", items: [] },
+	];
+	// selectedFoods.map(food => {
+	// 	console.log(food.quantity , "count, calories: ", food.food.Calories)
+	// })
+	const [selectedFud, setSelectedFud] = useState();
 	const caloriesConsumed = Object.keys(selectedFoods).reduce((total, foodId) => {
 		const food = selectedFoods[foodId];
 		return total + food.food.Calories * food.quantity;
 	}, 0);
 	// console.log(caloriesConsumed)
-	console.log("selectedOptions",typeof selectedOption)
-	useEffect(()=>{
-		switch (selectedOption) {
-			case "Snacks":
-				console.log("RUNS")
-				snacks.push(selectedFoods);
-				break;
-			case 'Breakfast':
-				breakfast.push(selectedFoods);
-				break;
-			case 'Lunch':
-				lunch.push(selectedFoods);
-				break;
-			case 'Dinner':
-				dinner.push(selectedFoods);
-				break;
-			default:
-				// do nothing for unknown options
-				break;
+	// console.log("selectedOptions",typeof selectedOption, selectedOption)
+	useEffect(() => {
+		const categoryIndex = categories.findIndex((category) => category.name === selectedOption);
+		if (categoryIndex >= 0) {
+			categories[categoryIndex].items.push(...selectedFoods);
+			const populatedCategories = categories.filter(category => category.items.length > 0);
+			console.log("selectedFud", populatedCategories)
+			console.log("THE OPS", populatedCategories[0].selectedOption)
+
+			setSelectedFud(populatedCategories);
 		}
-		console.log("SWITCH: ", snacks)
-	}, [props])
+	}, [props]);
 
 
 
