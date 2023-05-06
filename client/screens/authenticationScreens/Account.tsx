@@ -12,6 +12,7 @@ import {
 	changeName,
 	changeWeight,
 } from "../../features/user/user-slice";
+import { setSession } from "../../features/user/session-slice";
 
 export default function Account({ session }: { session: Session }) {
 	const [modalVisible, setModalVisible] = useState(false);
@@ -47,7 +48,10 @@ export default function Account({ session }: { session: Session }) {
 
 	useEffect(() => {
 		setModalVisible(true);
-		if (session) getProfile();
+		if (session) {
+			getProfile();
+			dispatch(setSession(session));
+		}
 	}, [session]);
 
 	async function getProfile() {
