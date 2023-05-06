@@ -54,7 +54,7 @@ const UserBioInput = () => {
 		if (gender === "Male") {
 			calBMR = 88.3 + 14.4 * weight + 4.8 * height - 5.7 * age;
 			console.log(calBMR);
-		} else if (gender === "female") {
+		} else if (gender === "Female") {
 			calBMR = 447.6 + 9.2 * weight + 3.1 * height - 4.3 * age;
 		}
 
