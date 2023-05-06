@@ -56,29 +56,29 @@ const UserBioInput = () => {
 		switch (activityLevel) {
 			case "sedentary":
 				calBMR *= 1.2;
-				setBMR(calBMR);
+
 				break;
 			case "lightly active":
 				calBMR *= 1.375;
-				setBMR(calBMR);
+
 				break;
 			case "moderately active":
 				calBMR *= 1.55;
-				setBMR(calBMR);
+
 				break;
 			case "very active":
 				calBMR *= 1.725;
-				setBMR(calBMR);
+
 				break;
 			case "extremely active":
 				calBMR *= 1.9;
-				setBMR(calBMR);
+
 				break;
 			default:
 				break;
 		}
 
-		return calBMR;
+		return setBMR(calBMR);
 	};
 
 	function handleEditProfile() {
