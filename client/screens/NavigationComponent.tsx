@@ -1,4 +1,4 @@
-import Auth from './authenticationScreens/Auth';
+import Auth from './screens/Auth';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';

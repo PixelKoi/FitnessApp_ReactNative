@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import NavigationComponent from "./screens/NavigationComponent";
 // supabase AUTH
 import { supabase } from "./features/supabase_authentication/supabase";
-import Auth from "./screens/authenticationScreens/Auth";
-import Account from "./screens/authenticationScreens/Account";
+import Auth from "./screens/screens/Auth";
+import Account from "./screens/screens/Account";
 import { Session } from "@supabase/supabase-js";
 import { View } from "react-native";
 // REDUX toolkir
