@@ -3,7 +3,8 @@ import {View, Text, TouchableOpacity} from 'react-native';
 import {PaperClipIcon} from "react-native-heroicons/outline";
 import {useNavigation} from "@react-navigation/native";
 
-const Export = ({ navigation }) => {
+const Fasting = () => {
+    const navigation = useNavigation()
     React.useLayoutEffect(
         () => {
             navigation.setOptions({
@@ -29,4 +30,4 @@ const Export = ({ navigation }) => {
 };
 
 
-export default Export;
+export default Fasting;

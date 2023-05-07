@@ -10,7 +10,6 @@ import {BookOpenIcon, ClockIcon, MagnifyingGlassIcon, UserCircleIcon} from "reac
 import Diary from "./applicationTabs/Diary";
 import profile from "./applicationTabs/Profile";
 import React from "react";
-const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 export default function NavigationComponent() {
@@ -28,7 +27,15 @@ export default function NavigationComponent() {
 export function ApplicationContainer(){
     return (
         <NavigationContainer>
-            <Tab.Navigator initialRouteName="QuickLog">
+            <Tab.Navigator initialRouteName="QuickLog"
+                           screenOptions={{
+                               tabBarActiveTintColor: '#6700ff',
+                               tabBarInactiveTintColor: '#4d4d4d',
+                               tabBarStyle: {
+                                   backgroundColor: '#84d0ff',
+                                   borderTopColor: 'transparent',
+                               },
+                           }} >
                 <Tab.Screen
                     name="QuickLog"
                     component={QuickLog}
@@ -63,3 +70,5 @@ export function ApplicationContainer(){
         </NavigationContainer>
     );
 }
+
+const Stack = createNativeStackNavigator();

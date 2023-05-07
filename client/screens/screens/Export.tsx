@@ -9,7 +9,7 @@ const Export = ({ navigation }) => {
             navigation.setOptions({
                 headerLeft: () => (
                     <TouchableOpacity onPress={() => navigation.goBack()}>
-                        <Text>BBB</Text>
+                        <Text>Back</Text>
                     </TouchableOpacity>
                 ),
                 headerRight: () => (
