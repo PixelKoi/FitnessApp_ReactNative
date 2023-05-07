@@ -31,6 +31,7 @@ const Diary = (props) => {
 		{ name: "Dinner", items: [] },
 	];
 	const [selectedFud, setSelectedFud] = useState();
+	const [isLoaded, setIsLoaded] = useState(false);
 	const caloriesConsumed = Object.keys(selectedFoods).reduce((total, foodId) => {
 		const food = selectedFoods[foodId];
 		return total + food.food.Calories * food.quantity;
@@ -55,7 +56,11 @@ const Diary = (props) => {
 		}
 	}, [props]);
 
-	const displaySelectedFud = () => {
+	useEffect(()=>{
+		setIsLoaded(true)
+	}, [selectedFud])
+
+	const displaySelectedFud = (mealTime) => {
 		console.log("selectedFud", selectedFud)
 		return (
 			<>
@@ -64,15 +69,14 @@ const Diary = (props) => {
 					const option = obj.name;
 					return (
 						<Text key={option}>
-							empty text
-							{/* {option === mealTime ? (
+							{option === mealTime ? (
 						items.map((item) => (
 							<Text key={item.id}>
 								{item.food.description} - {item.quantity} {" "}
 								{item.description}  {item.Calories * item.quantity} Calories
 							</Text>
 						))
-					) : <Text></Text>} */}
+					) : <Text></Text>}
 						</Text>
 					);
 				})}
@@ -102,19 +106,22 @@ const Diary = (props) => {
 			</View>
 			<View className="w-full mt-4">
 				<Text className="text-2xl font-bold mb-2">Breakfast</Text>
-				{displaySelectedFud()}
+				{isLoaded && displaySelectedFud("Breakfast")}
 			</View>
 			<Divider />
 			<View className="w-full mt-4">
 				<Text className="text-2xl font-bold mb-2">Lunch</Text>
+				{isLoaded && displaySelectedFud("Lunch")}
 			</View>
 			<Divider />
 			<View className="w-full mt-4">
 				<Text className="text-2xl font-bold mb-2">Dinner</Text>
+				{isLoaded && displaySelectedFud("Dinner")}
 			</View>
 			<Divider />
 			<View className="w-full mt-4">
 				<Text className="text-2xl font-bold mb-2">Snacks</Text>
+				{isLoaded && displaySelectedFud("Snacks")}
 			</View>
 			<Divider />
 		</View>
