@@ -1,4 +1,4 @@
-import React, {useState, useMemo, useEffect} from 'react';
+import React, {useState, useCallback, useEffect} from 'react';
 import { View, TextInput, FlatList, TouchableOpacity } from 'react-native';
 import { USDA_API_KEY } from '../../config';
 import { CheckCircleIcon } from 'react-native-heroicons/outline';
@@ -11,6 +11,36 @@ const QuickLog = ({ navigation }) => {
 
 	const tabNavigation = useNavigation();
 
+
+	const [ foodName, setFoodName ] = useState('');
+	const [ foodArray, setFoodArray ] = useState([]);
+	const [ saveButton, setSaveButton ] = useState(false)
+
+	const [visible, setVisible] = useState(false);
+	const [selectedOption, setSelectedOption] = useState('');
+	const openMenu = () => setVisible(true);
+	const closeMenu = () => setVisible(false);
+	const [mealError, setMealError] = useState(false);
+	// let user submit quick log when state selectedOption set
+	const checkOption = useCallback(() => {
+		console.log(selectedOption.length);
+		console.log(foodArray.length, "FOODARRAY");
+		console.log(selectedOption)
+		if (selectedOption.length > 0 ) {
+			setSaveButton(true);
+		} else if (selectedOption.length == 0) {
+			console.log("DID NOT Select food option");
+			showErrorDialog();
+		}
+	},[selectedOption, handleOptionSelect]);
+	const handleOptionSelect = (option) => {
+		setSelectedOption(option);
+		setVisible(false);
+		console.log("Selected option:", option, selectedOption);
+	};
+	// React.useEffect(() => {
+	// 	checkOption();
+	// }, [selectedOption]);
 	React.useLayoutEffect(
 		() => {
 			navigation.setOptions({
@@ -18,25 +48,20 @@ const QuickLog = ({ navigation }) => {
 				headerLeft: () => null, // this will hide the back button
 				headerRight: () => (
 					// <TouchableOpacity onPress={() => setSaveButton(true)}>
-					<TouchableOpacity onPress={() => showErrorDialog()}>
+					<TouchableOpacity onPress={() => checkOption()}>
 						<CheckCircleIcon name="ios-add" size={30} color="black" style={{ marginRight: 10 }} />
 					</TouchableOpacity>
 				)
 			});
 		},
-		[ navigation ]
+		[ navigation, checkOption ]
 	);
-	const [ foodName, setFoodName ] = useState('');
-	const [ foodArray, setFoodArray ] = useState([]);
-	const [ saveButton, setSaveButton ] = useState(false)
+	const showErrorDialog = () => {
 
-	const [visible, setVisible] = React.useState(false);
-	const [selectedOption, setSelectedOption] = useState('');
-	const openMenu = () => setVisible(true);
-	const closeMenu = () => setVisible(false);
-
-	const [mealError, setMealError] = useState(true);
-	const showErrorDialog = () => setMealError(true);
+		console.log("WTF")
+		console.log(selectedOption.length)
+		setMealError(true);
+	}
 	const hideErrorDialog = () => setMealError(false);
 
 	// Simple Query testing API: https://api.nal.usda.gov/fdc/v1/foods/search?api_key=DEMO_KEY&query=Cheddar%20Cheese
@@ -94,12 +119,8 @@ const QuickLog = ({ navigation }) => {
 			saveToDiary();
 		}
 
-	},[foodArray, saveButton])
+	},[saveButton])
 
-	const handleOptionSelect = (option) => {
-		setSelectedOption(option);
-		setVisible(false);
-	}
 
 	const saveToDiary = () =>{
 		const selectedFoods = foodArray.filter((food) => food.quantity > 0);
