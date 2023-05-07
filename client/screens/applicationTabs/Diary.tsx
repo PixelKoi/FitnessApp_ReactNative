@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import { View } from 'react-native';
-import { Divider, Text } from 'react-native-paper';
+import { Divider, Text, Card } from 'react-native-paper';
 
 const Diary = (props) => {
 	const selectedObject = props.route
@@ -72,8 +72,8 @@ const Diary = (props) => {
 							{option === mealTime ? (
 						items.map((item) => (
 							<Text key={item.id}>
-								{item.food.description} - {item.quantity} {" "}
-								{item.description}  {item.Calories * item.quantity} Calories
+								{item.food.description} - {item.quantity} Quantity
+								{item.food.description}  {item.food.Calories * item.quantity} Calories
 							</Text>
 						))
 					) : <Text></Text>}
@@ -97,31 +97,52 @@ const Diary = (props) => {
 				</View>
 				{/* other content */}
 			<View className="w-full mt-4">
+				<Card>
+					<Card.Content>
 				<Text className="text-2xl font-bold mb-2">Unlisted Foods :{caloriesConsumed} Cals</Text>
 				{selectedFoods.map((food) => (
 					<View key={food.id} className="w-full mt-4">
 						<Text>{food.food.description}  {food.food.Calories * food.quantity} Calories</Text>
 					</View>
 				))}
+					</Card.Content>
+				</Card>
 			</View>
 			<View className="w-full mt-4">
-				<Text className="text-2xl font-bold mb-2">Breakfast</Text>
-				{isLoaded && displaySelectedFud("Breakfast")}
+				<Card>
+					<Card.Content>
+						<Text className="text-2xl font-bold mb-2">Breakfast</Text>
+						{isLoaded && displaySelectedFud("Breakfast")}
+					</Card.Content>
+				</Card>
+
 			</View>
 			<Divider />
 			<View className="w-full mt-4">
+				<Card>
+					<Card.Content>
 				<Text className="text-2xl font-bold mb-2">Lunch</Text>
 				{isLoaded && displaySelectedFud("Lunch")}
+					</Card.Content>
+				</Card>
 			</View>
 			<Divider />
 			<View className="w-full mt-4">
+				<Card>
+					<Card.Content>
 				<Text className="text-2xl font-bold mb-2">Dinner</Text>
 				{isLoaded && displaySelectedFud("Dinner")}
+					</Card.Content>
+				</Card>
 			</View>
 			<Divider />
 			<View className="w-full mt-4">
-				<Text className="text-2xl font-bold mb-2">Snacks</Text>
-				{isLoaded && displaySelectedFud("Snacks")}
+				<Card>
+					<Card.Content>
+					<Text className="text-2xl font-bold mb-2">Snacks</Text>
+					{isLoaded && displaySelectedFud("Snacks")}
+					</Card.Content>
+				</Card>
 			</View>
 			<Divider />
 		</View>
