@@ -72,8 +72,8 @@ const Diary = (props) => {
 							{option === mealTime ? (
 								items.map((item) => (
 									<Text key={item.id}>
-										{item.food.description} - {item.quantity} Quantity
-										{item.food.description} {item.food.Calories * item.quantity} Calories
+										{item.food.description} - {item.quantity} Quantity {"| "}
+										{item.food.Calories * item.quantity} Calories
 									</Text>
 								))
 							) : <Text></Text>}
