@@ -3,6 +3,62 @@ import { View } from 'react-native';
 import { Divider, Text, Card } from 'react-native-paper';
 
 const Diary = (props) => {
+	// error handling, so it shows empty diary page when clicked on!
+	if (props.route.params == undefined){
+		return (
+			<View className="flex-1 items-center">
+				<View className="justify-center">
+					<Card className="px-4">
+						<Text className="pt-4">
+							Total calories - caloriesConsumed = calories remaining
+						</Text>
+						<Text className="text-white text font-bold">
+							Goal - Food = Remaining
+						</Text>
+					</Card>
+
+				</View>
+				{/* other content */}
+				<View className="w-full">
+					<Card className="m-2 pb-4">
+						<Card.Title title="Breakfast"
+									titleStyle={{ fontSize: 20, fontWeight: 'bold' }}
+						/>
+						<Divider className="mb-4"/>
+					</Card>
+
+				</View>
+				<Divider />
+				<View className="w-full">
+					<Card className="m-2 pb-4">
+						<Card.Title title="Lunch"
+									titleStyle={{ fontSize: 20, fontWeight: 'bold' }}
+						/>
+						<Divider />
+					</Card>
+				</View>
+				<Divider />
+				<View className="w-full">
+					<Card className="m-2 pb-4">
+						<Card.Title title="Dinner"
+									titleStyle={{ fontSize: 20, fontWeight: 'bold' }}
+						/>
+						<Divider />
+					</Card>
+				</View>
+				<Divider />
+				<View className="w-full">
+					<Card className="m-2 pb-4">
+						<Card.Title title="Snacks"
+									titleStyle={{ fontSize: 20, fontWeight: 'bold' }}
+						/>
+						<Divider />
+					</Card>
+				</View>
+				<Divider />
+			</View>
+		);
+	}
 	const selectedObject = props.route
 	const selectedFoods = props.route.params.selectedFoods
 	const selectedOption = props.route.params.selectedOption
