@@ -4,7 +4,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import QuickLog from './applicationTabs/QuickLog';
 import Profile from "./applicationTabs/Profile";
-import Export from "./applicationTabs/Export";
+import Fasting from "./applicationTabs/Fasting";
+import Export from "./screens/Export";
 import {BookOpenIcon, ClockIcon, MagnifyingGlassIcon, UserCircleIcon} from "react-native-heroicons/outline";
 import Diary from "./applicationTabs/Diary";
 import profile from "./applicationTabs/Profile";
@@ -18,8 +19,6 @@ export default function NavigationComponent() {
             <Stack.Navigator>
                 <Stack.Screen name="Food Log" component={QuickLog} />
                 <Stack.Screen name="Login" component={Auth} />
-                <Stack.Screen name="SignUp" component={SignUpScreen} />
-                <Stack.Screen name="ForgotPass" component={ForgotPassScreen} />
                 <Stack.Screen name="Export" component={Export} />
             </Stack.Navigator>
         </NavigationContainer>
@@ -45,8 +44,8 @@ export function ApplicationContainer(){
                     }}
                 />
                 <Tab.Screen
-                    name="Zero"
-                    component={Export}
+                    name="Fasting"
+                    component={Fasting}
                     options={{
                         tabBarIcon: ({ color, size }) => <ClockIcon name="ios-add" size={20} color="black" />
                     }}
