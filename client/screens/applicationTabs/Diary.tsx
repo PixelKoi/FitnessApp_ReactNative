@@ -68,18 +68,19 @@ const Diary = (props) => {
 					const items = obj.items;
 					const option = obj.name;
 					return (
-						<Text key={option}>
+						<Card.Content key={option}>
 							{option === mealTime ? (
-						items.map((item) => (
-							<Text key={item.id}>
-								{item.food.description} - {item.quantity} Quantity
-								{item.food.description}  {item.food.Calories * item.quantity} Calories
-							</Text>
-						))
-					) : <Text></Text>}
-						</Text>
+								items.map((item) => (
+									<Text key={item.id}>
+										{item.food.description} - {item.quantity} Quantity
+										{item.food.description} {item.food.Calories * item.quantity} Calories
+									</Text>
+								))
+							) : <Text></Text>}
+						</Card.Content>
 					);
 				})}
+
 			</>
 		);
 	};
@@ -97,63 +98,53 @@ const Diary = (props) => {
 				</View>
 				{/* other content */}
 			<View className="w-full">
-				<Card className="m-2">
-					<Card.Content>
+				<Card className="m-2 pb-4">
 				<Text className="text-2xl font-bold mb-2">Unlisted Foods :{caloriesConsumed} Cals</Text>
 				{selectedFoods.map((food) => (
 					<View key={food.id} className="w-full mt-4">
 						<Text>{food.food.description}  {food.food.Calories * food.quantity} Calories</Text>
 					</View>
 				))}
-					</Card.Content>
 				</Card>
 			</View>
 			<View className="w-full">
-				<Card className="m-2">
+				<Card className="m-2 pb-4">
 					<Card.Title title="Breakfast"
 								titleStyle={{ fontSize: 20, fontWeight: 'bold' }}
 					/>
-					<Divider />
-					<Card.Content className="pt-5">
+					<Divider className="mb-4"/>
 					{isLoaded && displaySelectedFud("Breakfast")}
-					</Card.Content>
 				</Card>
 
 			</View>
 			<Divider />
 			<View className="w-full">
-				<Card className="m-2">
+				<Card className="m-2 pb-4">
 					<Card.Title title="Lunch"
 								titleStyle={{ fontSize: 20, fontWeight: 'bold' }}
 					/>
 					<Divider />
-					<Card.Content>
-				{isLoaded && displaySelectedFud("Lunch")}
-					</Card.Content>
+					{isLoaded && displaySelectedFud("Lunch")}
 				</Card>
 			</View>
 			<Divider />
 			<View className="w-full">
-				<Card className="m-2">
+				<Card className="m-2 pb-4">
 					<Card.Title title="Dinner"
 								titleStyle={{ fontSize: 20, fontWeight: 'bold' }}
 					/>
 					<Divider />
-					<Card.Content>
-				{isLoaded && displaySelectedFud("Dinner")}
-					</Card.Content>
+					{isLoaded && displaySelectedFud("Dinner")}
 				</Card>
 			</View>
 			<Divider />
 			<View className="w-full">
-				<Card className="m-2">
+				<Card className="m-2 pb-4">
 					<Card.Title title="Snacks"
 								titleStyle={{ fontSize: 20, fontWeight: 'bold' }}
 					/>
 					<Divider />
-					<Card.Content>
 					{isLoaded && displaySelectedFud("Snacks")}
-					</Card.Content>
 				</Card>
 			</View>
 			<Divider />
