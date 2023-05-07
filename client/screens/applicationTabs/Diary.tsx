@@ -96,8 +96,8 @@ const Diary = (props) => {
 					</Text>
 				</View>
 				{/* other content */}
-			<View className="w-full mt-4">
-				<Card>
+			<View className="w-full">
+				<Card className="m-2">
 					<Card.Content>
 				<Text className="text-2xl font-bold mb-2">Unlisted Foods :{caloriesConsumed} Cals</Text>
 				{selectedFoods.map((food) => (
@@ -108,38 +108,50 @@ const Diary = (props) => {
 					</Card.Content>
 				</Card>
 			</View>
-			<View className="w-full mt-4">
-				<Card>
-					<Card.Content>
-						<Text className="text-2xl font-bold mb-2">Breakfast</Text>
-						{isLoaded && displaySelectedFud("Breakfast")}
+			<View className="w-full">
+				<Card className="m-2">
+					<Card.Title title="Breakfast"
+								titleStyle={{ fontSize: 20, fontWeight: 'bold' }}
+					/>
+					<Divider />
+					<Card.Content className="pt-5">
+					{isLoaded && displaySelectedFud("Breakfast")}
 					</Card.Content>
 				</Card>
 
 			</View>
 			<Divider />
-			<View className="w-full mt-4">
-				<Card>
+			<View className="w-full">
+				<Card className="m-2">
+					<Card.Title title="Lunch"
+								titleStyle={{ fontSize: 20, fontWeight: 'bold' }}
+					/>
+					<Divider />
 					<Card.Content>
-				<Text className="text-2xl font-bold mb-2">Lunch</Text>
 				{isLoaded && displaySelectedFud("Lunch")}
 					</Card.Content>
 				</Card>
 			</View>
 			<Divider />
-			<View className="w-full mt-4">
-				<Card>
+			<View className="w-full">
+				<Card className="m-2">
+					<Card.Title title="Dinner"
+								titleStyle={{ fontSize: 20, fontWeight: 'bold' }}
+					/>
+					<Divider />
 					<Card.Content>
-				<Text className="text-2xl font-bold mb-2">Dinner</Text>
 				{isLoaded && displaySelectedFud("Dinner")}
 					</Card.Content>
 				</Card>
 			</View>
 			<Divider />
-			<View className="w-full mt-4">
-				<Card>
+			<View className="w-full">
+				<Card className="m-2">
+					<Card.Title title="Snacks"
+								titleStyle={{ fontSize: 20, fontWeight: 'bold' }}
+					/>
+					<Divider />
 					<Card.Content>
-					<Text className="text-2xl font-bold mb-2">Snacks</Text>
 					{isLoaded && displaySelectedFud("Snacks")}
 					</Card.Content>
 				</Card>
