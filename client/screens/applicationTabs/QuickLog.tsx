@@ -5,7 +5,7 @@ import { CheckCircleIcon } from 'react-native-heroicons/outline';
 // import {handleMinus, handlePlus} from "../../counter/logCounter";
 import { params } from '../../features/constants';
 import { useNavigation } from '@react-navigation/native';
-import { Modal, Portal, Text, Button, Card, Menu, Provider } from 'react-native-paper';
+import { Dialog, Text, Button, Card, Menu, Provider, Portal } from 'react-native-paper';
 
 const QuickLog = ({ navigation }) => {
 
@@ -17,7 +17,8 @@ const QuickLog = ({ navigation }) => {
 				title: 'Food Log',
 				headerLeft: () => null, // this will hide the back button
 				headerRight: () => (
-					<TouchableOpacity onPress={() => setSaveButton(true)}>
+					// <TouchableOpacity onPress={() => setSaveButton(true)}>
+					<TouchableOpacity onPress={() => showErrorDialog()}>
 						<CheckCircleIcon name="ios-add" size={30} color="black" style={{ marginRight: 10 }} />
 					</TouchableOpacity>
 				)
@@ -33,6 +34,10 @@ const QuickLog = ({ navigation }) => {
 	const [selectedOption, setSelectedOption] = useState('');
 	const openMenu = () => setVisible(true);
 	const closeMenu = () => setVisible(false);
+
+	const [mealError, setMealError] = useState(true);
+	const showErrorDialog = () => setMealError(true);
+	const hideErrorDialog = () => setMealError(false);
 
 	// Simple Query testing API: https://api.nal.usda.gov/fdc/v1/foods/search?api_key=DEMO_KEY&query=Cheddar%20Cheese
 	const apiUrl = `https://api.nal.usda.gov/fdc/v1/foods/search?query=${foodName}&pageSize=${params.pageSize}&pageNumber=${params.pageNumber}&api_key=${params.api_key}&dataType=${params.dataType}`;
@@ -110,7 +115,6 @@ const QuickLog = ({ navigation }) => {
 		// console.log("STATE", foodArray);
 		return (
 			<View className="p-2 ">
-
 				<Card>
 					<Card.Content>
 				<Text>{food.food.description}</Text>
@@ -159,6 +163,17 @@ const QuickLog = ({ navigation }) => {
 	return (
 		<Provider>
 			<View>
+				<Portal>
+					<Dialog visible={mealError} onDismiss={hideErrorDialog}>
+						<Dialog.Title>Error</Dialog.Title>
+						<Dialog.Content>
+							<Text variant="bodyMedium">Please Select what meal you are entering</Text>
+						</Dialog.Content>
+						<Dialog.Actions>
+							<Button onPress={hideErrorDialog}>I understand</Button>
+						</Dialog.Actions>
+					</Dialog>
+				</Portal>
 				<TextInput className="m-4 py-1 mx-4" value={foodName} onChangeText={setFoodName} placeholder="Search Food"  />
 				<Button className="mt-3 mb-3 py-1 mx-4" mode="contained" title="Search" onPress={handleSearch} >
 					<Text>Search</Text>
