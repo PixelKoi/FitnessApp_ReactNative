@@ -49,7 +49,16 @@ const Diary = (props) => {
 			categories[categoryIndex].items.push(...selectedFoods);
 			const populatedCategories = categories.filter(category => category.items.length > 0);
 			console.log("selectedFud", populatedCategories)
-			console.log("THE OPS", populatedCategories[0].selectedOption)
+
+			for (const obj of populatedCategories) { // loop through each object in the array
+				const items = obj.items; // get the "items" array property from the current object
+				const option = obj.name;
+				console.log("option", option)
+				for (const item of items) { // loop through each item object in the "items" array
+					const food = item.food; // get the "food" object property from the current item object
+					console.log("food", food); // target the "food" object and log it to the console
+				}
+			}
 
 			setSelectedFud(populatedCategories);
 		}
