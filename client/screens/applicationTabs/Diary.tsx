@@ -99,16 +99,6 @@ const Diary = (props) => {
 				{/* other content */}
 			<View className="w-full">
 				<Card className="m-2 pb-4">
-				<Text className="text-2xl font-bold mb-2">Unlisted Foods :{caloriesConsumed} Cals</Text>
-				{selectedFoods.map((food) => (
-					<View key={food.id} className="w-full mt-4">
-						<Text>{food.food.description}  {food.food.Calories * food.quantity} Calories</Text>
-					</View>
-				))}
-				</Card>
-			</View>
-			<View className="w-full">
-				<Card className="m-2 pb-4">
 					<Card.Title title="Breakfast"
 								titleStyle={{ fontSize: 20, fontWeight: 'bold' }}
 					/>

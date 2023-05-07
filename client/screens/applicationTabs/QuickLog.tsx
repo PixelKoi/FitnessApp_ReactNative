@@ -38,9 +38,6 @@ const QuickLog = ({ navigation }) => {
 		setVisible(false);
 		console.log("Selected option:", option, selectedOption);
 	};
-	// React.useEffect(() => {
-	// 	checkOption();
-	// }, [selectedOption]);
 	React.useLayoutEffect(
 		() => {
 			navigation.setOptions({
