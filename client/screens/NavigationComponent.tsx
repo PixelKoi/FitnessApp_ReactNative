@@ -1,6 +1,4 @@
 import Auth from './authenticationScreens/Auth';
-import SignUpScreen from './authenticationScreens/SignUpScreen';
-import ForgotPassScreen from './authenticationScreens/ForgotPassScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
