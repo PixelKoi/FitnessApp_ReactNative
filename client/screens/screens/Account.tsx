@@ -6,6 +6,7 @@ import { Session } from "@supabase/supabase-js";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import {
 	changeActivity,
+	changeGender,
 	changeAge,
 	changeGoal,
 	changeHeight,
@@ -20,20 +21,22 @@ export default function Account({ session }: { session: Session }) {
 	const [loading, setLoading] = useState(true);
 	const navigation = useNavigation();
 
-	//profile states
+	//Account states
 	const [username, setUsername] = useState("");
-	const [age, setAge] = useState("");
-	const [height, setHeight] = useState("");
-	const [weight, setWeight] = useState("");
+	const [age, setAge] = useState(0);
+	const [gender, setGender] = useState("");
+	const [height, setHeight] = useState(0);
+	const [weight, setWeight] = useState(0);
 	const [activity, setActivity] = useState("");
-	const [goal, setGoal] = useState("");
+	const [goal, setGoal] = useState(0);
 
 	const dispatch = useAppDispatch();
 
 	//update component and global states
-	function updateGlobalProfileStates(data) {
+	function updateReduxUserStates(data) {
 		dispatch(changeName(data.username));
 		dispatch(changeAge(data.age));
+		dispatch(changeGender(data.gender));
 		dispatch(changeHeight(data.height));
 		dispatch(changeWeight(data.weight));
 		dispatch(changeActivity(data.activity));
@@ -81,17 +84,19 @@ export default function Account({ session }: { session: Session }) {
 	async function updateProfile({
 		username,
 		age,
+		gender,
 		height,
 		weight,
 		activity,
 		goal,
 	}: {
 		username: string;
-		age: string;
-		height: string;
-		weight: string;
+		age: number;
+		gender: string;
+		height: number;
+		weight: number;
 		activity: string;
-		goal: string;
+		goal: number;
 	}) {
 		try {
 			setLoading(true);
@@ -101,6 +106,7 @@ export default function Account({ session }: { session: Session }) {
 				id: session?.user.id,
 				username,
 				age,
+				gender,
 				height,
 				weight,
 				activity,
@@ -110,7 +116,7 @@ export default function Account({ session }: { session: Session }) {
 
 			let { error } = await supabase.from("profiles").upsert(updates);
 
-			updateGlobalProfileStates(updates);
+			updateReduxUserStates(updates);
 
 			if (error) {
 				throw error;
@@ -159,6 +165,13 @@ export default function Account({ session }: { session: Session }) {
 			</View>
 			<View style={styles.verticallySpaced}>
 				<Input
+					label="Gender"
+					value={gender}
+					onChangeText={(text) => setGender(text)}
+				/>
+			</View>
+			<View style={styles.verticallySpaced}>
+				<Input
 					label="Height"
 					value={height || ""}
 					onChangeText={(text) => setHeight(text)}
@@ -193,6 +206,7 @@ export default function Account({ session }: { session: Session }) {
 						await updateProfile({
 							username,
 							age,
+							gender,
 							height,
 							weight,
 							activity,

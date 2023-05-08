@@ -36,19 +36,6 @@ const UserBioInput = () => {
 		});
 	}, [navigation]);
 
-	/*
-	For men: BMR = 88.36 + (13.4 x weight in kg) + (4.8 x height in cm) - (5.7 x age in years)
-	For women: BMR = 447.6 + (9.2 x weight in kg) + (3.1 x height in cm) - (4.3 x age in years)
-
-	Sedentary (little or no exercise): TDEE = BMR x 1.2
-	Lightly active (light exercise or sports 1-3 days/week): TDEE = BMR x 1.375
-	Moderately active (moderate exercise or sports 3-5 days/week): TDEE = BMR x 1.55
-	Very active (hard exercise or sports 6-7 days/week): TDEE = BMR x 1.725
-	Extremely active (very hard exercise or sports, physical job or training twice a day): TDEE = BMR x 1.9
-
-	Lose 1lb a week = -500 cal deficit
-	*/
-
 	//Navigation
 	const navigation = useNavigation();
 
@@ -57,37 +44,34 @@ const UserBioInput = () => {
 	const dispatch = useAppDispatch();
 
 	useEffect(() => {
-		console.log(userInfo.weight * userInfo.height);
+		console.log(userInfo);
 	});
-
-	//   }, [dispatch, userInfo]);
 
 	//Hooks
 	const [maleChecked, setMaleChecked] = useState(false);
 	const [femaleChecked, setFemaleChecked] = useState(false);
-	const [checked, setChecked] = useState<boolean>(false);
 	const [showEditProfile, setEditProfile] = useState<boolean>(false);
-	const [bmr, setBMR] = useState<string>(0);
-	const [dailyCalories, setCalories] = useState<string>("");
+	const [bmr, setBMR] = useState<number>(0);
+	const [dailyCalories, setCalories] = useState<number>(0);
 	const [name, setName] = useState<string>("");
-	const [age, setAge] = useState<string>(0);
+	const [age, setAge] = useState<number>(0);
 	const [gender, setGender] = useState<string>("");
-	const [height, setHeight] = useState<string>(0);
-	const [weight, setWeight] = useState<string>(0);
+	const [height, setHeight] = useState<number>(0);
+	const [weight, setWeight] = useState<number>(0);
 	const [activityLevel, setActivityLevel] = useState<string>("");
-	const [goal, setGoal] = useState<string>("");
+	const [goal, setGoal] = useState<number>(0);
 
 	const calAlgo = () => {
 		let calBMR = 0;
 
-		if (userInfo.gender === "male") {
+		if (userInfo.gender === "Male") {
 			calBMR =
 				88.3 +
 				14.4 * userInfo.weight +
 				4.8 * userInfo.height -
 				5.7 * userInfo.age;
 			console.log(calBMR);
-		} else if (userInfo.gender === "female") {
+		} else if (userInfo.gender === "Female") {
 			calBMR =
 				447.6 +
 				9.2 * userInfo.weight +
@@ -259,3 +243,16 @@ const UserBioInput = () => {
 };
 
 export default UserBioInput;
+
+/*
+	For men: BMR = 88.36 + (13.4 x weight in kg) + (4.8 x height in cm) - (5.7 x age in years)
+	For women: BMR = 447.6 + (9.2 x weight in kg) + (3.1 x height in cm) - (4.3 x age in years)
+
+	Sedentary (little or no exercise): TDEE = BMR x 1.2
+	Lightly active (light exercise or sports 1-3 days/week): TDEE = BMR x 1.375
+	Moderately active (moderate exercise or sports 3-5 days/week): TDEE = BMR x 1.55
+	Very active (hard exercise or sports 6-7 days/week): TDEE = BMR x 1.725
+	Extremely active (very hard exercise or sports, physical job or training twice a day): TDEE = BMR x 1.9
+
+	Lose 1lb a week = -500 cal deficit
+	*/

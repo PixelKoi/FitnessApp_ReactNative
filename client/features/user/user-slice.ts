@@ -7,18 +7,20 @@ interface UserState {
 	weight: number;
 	height: number;
 	activity: string;
-	goal: string;
+	goal: number;
 	loggedIn: boolean;
+	bmr: number;
 }
 
 const initialState: UserState = {
-	name: "Jonathan Bajada",
+	name: "",
 	age: 0,
-	gender: "male",
+	gender: "",
 	weight: 0,
 	height: 0,
 	activity: "",
-	goal: "",
+	goal: 0,
+	bmr: 0,
 	loggedIn: false,
 };
 
@@ -44,7 +46,7 @@ const userSlice = createSlice({
 		changeActivity(state, action: PayloadAction<string>) {
 			state.activity = action.payload;
 		},
-		changeGoal(state, action: PayloadAction<string>) {
+		changeGoal(state, action: PayloadAction<number>) {
 			state.goal = action.payload;
 		},
 		loggedIn(state, action: PayloadAction<Boolean>) {
