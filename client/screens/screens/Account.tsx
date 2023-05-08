@@ -13,10 +13,12 @@ import {
 	changeWeight,
 } from "../../features/user/user-slice";
 import { setSession } from "../../features/user/session-slice";
+import { useNavigation } from "@react-navigation/native";
 
 export default function Account({ session }: { session: Session }) {
 	const [modalVisible, setModalVisible] = useState(false);
 	const [loading, setLoading] = useState(true);
+	const navigation = useNavigation();
 
 	//profile states
 	const [username, setUsername] = useState("");
@@ -53,6 +55,10 @@ export default function Account({ session }: { session: Session }) {
 			dispatch(setSession(session));
 		}
 	}, [session]);
+
+	const navigateToTabNavigator = () => {
+		navigation.navigate("TabNavigator");
+	};
 
 	async function getProfile() {
 		try {
@@ -193,9 +199,10 @@ export default function Account({ session }: { session: Session }) {
 			<View style={[styles.verticallySpaced, styles.mt20]}>
 				<Button
 					title={loading ? "Loading ..." : "Create Profile"}
-					onPress={() =>
-						updateProfile({ username, age, height, weight, activity, goal })
-					}
+					onPress={() => {
+						navigateToTabNavigator();
+						updateProfile({ username, age, height, weight, activity, goal });
+					}}
 					disabled={loading}
 				/>
 			</View>
