@@ -12,11 +12,6 @@ const Fasting = () => {
                     <TouchableOpacity onPress={() => navigation.goBack()}>
                         <Text>Back</Text>
                     </TouchableOpacity>
-                ),
-                headerRight: () => (
-                    <TouchableOpacity onPress={() => navigation.navigate('Export')}>
-                        <PaperClipIcon name="ios-add" size={20} color="black" style={{ marginRight: 10 }}/>
-                    </TouchableOpacity>
                 )
             });
         },
