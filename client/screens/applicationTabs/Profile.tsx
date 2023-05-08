@@ -11,31 +11,13 @@ import {
 	changeHeight,
 	changeActivity,
 	changeGoal,
+	changeDailyCal,
+	changeBMR,
 } from "../../features/user/user-slice";
 import { supabase } from "../../features/supabase_authentication/supabase";
 import { PaperClipIcon } from "react-native-heroicons/outline";
 
 const UserBioInput = () => {
-	React.useLayoutEffect(() => {
-		navigation.setOptions({
-			headerLeft: () => (
-				<TouchableOpacity onPress={() => navigation.goBack()}>
-					<Text>Back</Text>
-				</TouchableOpacity>
-			),
-			headerRight: () => (
-				<TouchableOpacity onPress={() => navigation.navigate("Export")}>
-					<PaperClipIcon
-						name="ios-add"
-						size={20}
-						color="black"
-						style={{ marginRight: 10 }}
-					/>
-				</TouchableOpacity>
-			),
-		});
-	}, [navigation]);
-
 	//Navigation
 	const navigation = useNavigation();
 
@@ -47,12 +29,7 @@ const UserBioInput = () => {
 		console.log(userInfo);
 	});
 
-	//Hooks
-	const [maleChecked, setMaleChecked] = useState(false);
-	const [femaleChecked, setFemaleChecked] = useState(false);
-	const [showEditProfile, setEditProfile] = useState<boolean>(false);
-	const [bmr, setBMR] = useState<number>(0);
-	const [dailyCalories, setCalories] = useState<number>(0);
+	//Profile hooks
 	const [name, setName] = useState<string>("");
 	const [age, setAge] = useState<number>(0);
 	const [gender, setGender] = useState<string>("");
@@ -60,7 +37,26 @@ const UserBioInput = () => {
 	const [weight, setWeight] = useState<number>(0);
 	const [activityLevel, setActivityLevel] = useState<string>("");
 	const [goal, setGoal] = useState<number>(0);
+	const [bmr, setBMR] = useState<number>(0);
+	const [dailyCalories, setCalories] = useState<number>(0);
 
+	//Edit profile hooks
+	const [maleChecked, setMaleChecked] = useState(false);
+	const [femaleChecked, setFemaleChecked] = useState(false);
+	const [showEditProfile, setEditProfile] = useState<boolean>(false);
+
+	/*
+	For men: BMR = 88.36 + (13.4 x weight in kg) + (4.8 x height in cm) - (5.7 x age in years)
+	For women: BMR = 447.6 + (9.2 x weight in kg) + (3.1 x height in cm) - (4.3 x age in years)
+
+	Sedentary (little or no exercise): TDEE = BMR x 1.2
+	Lightly active (light exercise or sports 1-3 days/week): TDEE = BMR x 1.375
+	Moderately active (moderate exercise or sports 3-5 days/week): TDEE = BMR x 1.55
+	Very active (hard exercise or sports 6-7 days/week): TDEE = BMR x 1.725
+	Extremely active (very hard exercise or sports, physical job or training twice a day): TDEE = BMR x 1.9
+
+	Lose 1lb a week = -500 cal deficit
+	*/
 	const calAlgo = () => {
 		let calBMR = 0;
 
@@ -101,17 +97,17 @@ const UserBioInput = () => {
 
 		switch (userInfo.goal) {
 			case "1":
-				setCalories(calBMR - 500);
+				dispatch(changeDailyCal(calBMR - 500));
 				break;
 			case "2":
-				setCalories(calBMR - 1000);
+				dispatch(changeDailyCal(calBMR - 1000));
 				break;
 			default:
-				setCalories(calBMR);
+				dispatch(changeDailyCal(calBMR));
 				break;
 		}
 
-		setBMR(calBMR);
+		dispatch(changeBMR(calBMR));
 	};
 
 	function handleEditProfile() {
@@ -147,8 +143,8 @@ const UserBioInput = () => {
 						<Text>Weight (kg): {userInfo.weight}</Text>
 						<Text>Activity level (1-10): {userInfo.activity}</Text>
 						<Text>Goal (1-10): {userInfo.goal}</Text>
-						<Text>BMR: {bmr} calories</Text>
-						<Text>Daily Calorie Needs: {dailyCalories} calories</Text>
+						<Text>BMR: {userInfo.bmr} calories</Text>
+						<Text>Daily Calorie Needs: {userInfo.dailyCal} calories</Text>
 					</View>
 				</View>
 				<Button
@@ -244,15 +240,22 @@ const UserBioInput = () => {
 
 export default UserBioInput;
 
-/*
-	For men: BMR = 88.36 + (13.4 x weight in kg) + (4.8 x height in cm) - (5.7 x age in years)
-	For women: BMR = 447.6 + (9.2 x weight in kg) + (3.1 x height in cm) - (4.3 x age in years)
-
-	Sedentary (little or no exercise): TDEE = BMR x 1.2
-	Lightly active (light exercise or sports 1-3 days/week): TDEE = BMR x 1.375
-	Moderately active (moderate exercise or sports 3-5 days/week): TDEE = BMR x 1.55
-	Very active (hard exercise or sports 6-7 days/week): TDEE = BMR x 1.725
-	Extremely active (very hard exercise or sports, physical job or training twice a day): TDEE = BMR x 1.9
-
-	Lose 1lb a week = -500 cal deficit
-	*/
+// React.useLayoutEffect(() => {
+// 	navigation.setOptions({
+// 		headerLeft: () => (
+// 			<TouchableOpacity onPress={() => navigation.goBack()}>
+// 				<Text>Back</Text>
+// 			</TouchableOpacity>
+// 		),
+// 		headerRight: () => (
+// 			<TouchableOpacity onPress={() => navigation.navigate("Export")}>
+// 				<PaperClipIcon
+// 					name="ios-add"
+// 					size={20}
+// 					color="black"
+// 					style={{ marginRight: 10 }}
+// 				/>
+// 			</TouchableOpacity>
+// 		),
+// 	});
+// }, [navigation]);

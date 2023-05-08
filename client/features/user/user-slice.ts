@@ -10,6 +10,7 @@ interface UserState {
 	goal: number;
 	loggedIn: boolean;
 	bmr: number;
+	dailyCal: number;
 }
 
 const initialState: UserState = {
@@ -21,6 +22,7 @@ const initialState: UserState = {
 	activity: "",
 	goal: 0,
 	bmr: 0,
+	dailyCal: 0,
 	loggedIn: false,
 };
 
@@ -49,6 +51,12 @@ const userSlice = createSlice({
 		changeGoal(state, action: PayloadAction<number>) {
 			state.goal = action.payload;
 		},
+		changeBMR(state, action: PayloadAction<number>) {
+			state.bmr = action.payload;
+		},
+		changeDailyCal(state, action: PayloadAction<number>) {
+			state.dailyCal = action.payload;
+		},
 		loggedIn(state, action: PayloadAction<Boolean>) {
 			state.loggedIn = true;
 		},
@@ -66,6 +74,8 @@ export const {
 	changeHeight,
 	changeActivity,
 	changeGoal,
+	changeBMR,
+	changeDailyCal,
 	loggedIn,
 	loggedOff,
 } = userSlice.actions;
