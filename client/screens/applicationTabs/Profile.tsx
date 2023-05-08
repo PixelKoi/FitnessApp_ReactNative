@@ -57,7 +57,7 @@ const UserBioInput = () => {
 	const dispatch = useAppDispatch();
 
 	useEffect(() => {
-		console.log(userInfo);
+		console.log(userInfo.weight * userInfo.height);
 	});
 
 	//   }, [dispatch, userInfo]);
@@ -67,27 +67,35 @@ const UserBioInput = () => {
 	const [femaleChecked, setFemaleChecked] = useState(false);
 	const [checked, setChecked] = useState<boolean>(false);
 	const [showEditProfile, setEditProfile] = useState<boolean>(false);
-	const [bmr, setBMR] = useState<number>(0);
-	const [dailyCalories, setCalories] = useState<number>(0);
+	const [bmr, setBMR] = useState<string>(0);
+	const [dailyCalories, setCalories] = useState<string>("");
 	const [name, setName] = useState<string>("");
-	const [age, setAge] = useState<number>(0);
+	const [age, setAge] = useState<string>(0);
 	const [gender, setGender] = useState<string>("");
-	const [height, setHeight] = useState<number>(0);
-	const [weight, setWeight] = useState<number>(0);
+	const [height, setHeight] = useState<string>(0);
+	const [weight, setWeight] = useState<string>(0);
 	const [activityLevel, setActivityLevel] = useState<string>("");
 	const [goal, setGoal] = useState<string>("");
 
 	const calAlgo = () => {
 		let calBMR = 0;
 
-		if (gender === "Male") {
-			calBMR = 88.3 + 14.4 * weight + 4.8 * height - 5.7 * age;
+		if (userInfo.gender === "male") {
+			calBMR =
+				88.3 +
+				14.4 * userInfo.weight +
+				4.8 * userInfo.height -
+				5.7 * userInfo.age;
 			console.log(calBMR);
-		} else if (gender === "Female") {
-			calBMR = 447.6 + 9.2 * weight + 3.1 * height - 4.3 * age;
+		} else if (userInfo.gender === "female") {
+			calBMR =
+				447.6 +
+				9.2 * userInfo.weight +
+				3.1 * userInfo.height -
+				4.3 * userInfo.age;
 		}
 
-		switch (activityLevel) {
+		switch (userInfo.activity) {
 			case "Sedentary":
 				calBMR *= 1.2;
 				break;
@@ -107,7 +115,7 @@ const UserBioInput = () => {
 				break;
 		}
 
-		switch (goal) {
+		switch (userInfo.goal) {
 			case "1":
 				setCalories(calBMR - 500);
 				break;
