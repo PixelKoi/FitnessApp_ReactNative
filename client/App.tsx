@@ -24,6 +24,22 @@ export default function App() {
 		});
 	}, []);
 
+	// const HomeStack = () => {
+	// 	return (
+	// 		<NavigationContainer>
+	// 			<Stack.Navigator>
+	// 				<Stack.Screen
+	// 					options={{ headerShown: false }}
+	// 					name="Food Log"
+	// 					component={ApplicationContainer}
+	// 				/>
+	// 				<Stack.Screen name="Login" component={Auth} />
+	// 				<Stack.Screen name="Export" component={Export} />
+	// 			</Stack.Navigator>
+	// 		</NavigationContainer>
+	// 	);
+	// }
+
 	return (
 		<>
 			{session && session.user ? (
