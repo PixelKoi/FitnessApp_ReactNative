@@ -13,26 +13,28 @@ import {
 	changeGoal,
 } from "../../features/user/user-slice";
 import { supabase } from "../../features/supabase_authentication/supabase";
-import {PaperClipIcon} from "react-native-heroicons/outline";
+import { PaperClipIcon } from "react-native-heroicons/outline";
 
 const UserBioInput = () => {
-	React.useLayoutEffect(
-		() => {
-			navigation.setOptions({
-				headerLeft: () => (
-					<TouchableOpacity onPress={() => navigation.goBack()}>
-						<Text>Back</Text>
-					</TouchableOpacity>
-				),
-				headerRight: () => (
-					<TouchableOpacity onPress={() => navigation.navigate('Export')}>
-						<PaperClipIcon name="ios-add" size={20} color="black" style={{ marginRight: 10 }}/>
-					</TouchableOpacity>
-				)
-			});
-		},
-		[ navigation ]
-	);
+	React.useLayoutEffect(() => {
+		navigation.setOptions({
+			headerLeft: () => (
+				<TouchableOpacity onPress={() => navigation.goBack()}>
+					<Text>Back</Text>
+				</TouchableOpacity>
+			),
+			headerRight: () => (
+				<TouchableOpacity onPress={() => navigation.navigate("Export")}>
+					<PaperClipIcon
+						name="ios-add"
+						size={20}
+						color="black"
+						style={{ marginRight: 10 }}
+					/>
+				</TouchableOpacity>
+			),
+		});
+	}, [navigation]);
 
 	/*
 	For men: BMR = 88.36 + (13.4 x weight in kg) + (4.8 x height in cm) - (5.7 x age in years)
@@ -53,6 +55,12 @@ const UserBioInput = () => {
 	//Redux
 	const userInfo = useAppSelector((state) => state.user);
 	const dispatch = useAppDispatch();
+
+	useEffect(() => {
+		console.log(userInfo);
+	});
+
+	//   }, [dispatch, userInfo]);
 
 	//Hooks
 	const [maleChecked, setMaleChecked] = useState(false);

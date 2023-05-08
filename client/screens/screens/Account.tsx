@@ -28,18 +28,10 @@ export default function Account({ session }: { session: Session }) {
 	const [activity, setActivity] = useState("");
 	const [goal, setGoal] = useState("");
 
-	//redux toolkit
-	const userInfo = useAppSelector((state) => state.user);
 	const dispatch = useAppDispatch();
 
 	//update component and global states
 	function updateGlobalProfileStates(data) {
-		setUsername(data.username);
-		setAge(data.age);
-		setHeight(data.height);
-		setWeight(data.weight);
-		setActivity(data.activity);
-		setGoal(data.goal);
 		dispatch(changeName(data.username));
 		dispatch(changeAge(data.age));
 		dispatch(changeHeight(data.height));
@@ -75,7 +67,7 @@ export default function Account({ session }: { session: Session }) {
 			}
 
 			if (data) {
-				updateGlobalProfileStates(data);
+				console.log(data);
 			}
 		} catch (error) {
 			if (error instanceof Error) {
@@ -117,6 +109,8 @@ export default function Account({ session }: { session: Session }) {
 			};
 
 			let { error } = await supabase.from("profiles").upsert(updates);
+
+			updateGlobalProfileStates(updates);
 
 			if (error) {
 				throw error;
@@ -161,11 +155,7 @@ export default function Account({ session }: { session: Session }) {
 				/>
 			</View>
 			<View style={styles.verticallySpaced}>
-				<Input
-					label="Age"
-					value={age || ""}
-					onChangeText={(text) => setAge(text)}
-				/>
+				<Input label="Age" value={age} onChangeText={(text) => setAge(text)} />
 			</View>
 			<View style={styles.verticallySpaced}>
 				<Input
@@ -183,7 +173,7 @@ export default function Account({ session }: { session: Session }) {
 			</View>
 			<View style={styles.verticallySpaced}>
 				<Input
-					label="Acivity Level 0-10"
+					label="Activity Level 0-10"
 					value={activity || ""}
 					onChangeText={(text) => setActivity(text)}
 				/>
@@ -199,9 +189,16 @@ export default function Account({ session }: { session: Session }) {
 			<View style={[styles.verticallySpaced, styles.mt20]}>
 				<Button
 					title={loading ? "Loading ..." : "Create Profile"}
-					onPress={() => {
+					onPress={async () => {
+						await updateProfile({
+							username,
+							age,
+							height,
+							weight,
+							activity,
+							goal,
+						});
 						navigateToTabNavigator();
-						updateProfile({ username, age, height, weight, activity, goal });
 					}}
 					disabled={loading}
 				/>

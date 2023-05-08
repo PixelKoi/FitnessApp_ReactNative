@@ -27,7 +27,6 @@ import {
 } from "react-native-heroicons/outline";
 
 export default function App() {
-	/* I commented out your previous code and placed it at the bottom and used the supabase auth tutorial to work on account screen */
 	const [session, setSession] = useState<Session | null>(null);
 
 	useEffect(() => {
