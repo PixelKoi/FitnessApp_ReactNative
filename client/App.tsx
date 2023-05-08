@@ -28,7 +28,7 @@ export default function App() {
 		<>
 			{session && session.user ? (
 				<Provider key={session.user.id} session={session} store={store}>
-					<ApplicationContainer />
+					<NavigationComponent />
 				</Provider>
 			) : (
 				<View>

@@ -16,7 +16,10 @@ export default function NavigationComponent() {
     return (
         <NavigationContainer>
             <Stack.Navigator>
-                <Stack.Screen name="Food Log" component={QuickLog} />
+                <Stack.Screen
+                    options={{ headerShown: false }}
+                    name="Food Log"
+                    component={ApplicationContainer} />
                 <Stack.Screen name="Login" component={Auth} />
                 <Stack.Screen name="Export" component={Export} />
             </Stack.Navigator>
@@ -26,7 +29,6 @@ export default function NavigationComponent() {
 
 export function ApplicationContainer(){
     return (
-        <NavigationContainer>
             <Tab.Navigator initialRouteName="QuickLog"
                            screenOptions={{
                                tabBarActiveTintColor: '#6700ff',
@@ -67,7 +69,6 @@ export function ApplicationContainer(){
 
 
             </Tab.Navigator>
-        </NavigationContainer>
     );
 }
 
