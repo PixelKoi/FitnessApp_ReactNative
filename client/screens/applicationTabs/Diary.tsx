@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import { View } from 'react-native';
-import { Divider, Text, Card } from 'react-native-paper';
+import { Divider, Text, Card, Button } from 'react-native-paper';
 
 const Diary = (props) => {
 	// error handling, so it shows empty diary page when clicked on!
@@ -25,8 +25,12 @@ const Diary = (props) => {
 									titleStyle={{ fontSize: 20, fontWeight: 'bold' }}
 						/>
 						<Divider className="mb-4"/>
+						<View className="flex-row start-0">
+							<Button icon="plus" mode="text" onPress={() => console.log('Pressed')}>
+								Add Food
+							</Button>
+						</View>
 					</Card>
-
 				</View>
 				<Divider />
 				<View className="w-full">
@@ -35,6 +39,11 @@ const Diary = (props) => {
 									titleStyle={{ fontSize: 20, fontWeight: 'bold' }}
 						/>
 						<Divider />
+						<View className="flex-row start-0">
+							<Button icon="plus" mode="text" onPress={() => console.log('Pressed')}>
+								Add Food
+							</Button>
+						</View>
 					</Card>
 				</View>
 				<Divider />
@@ -44,6 +53,11 @@ const Diary = (props) => {
 									titleStyle={{ fontSize: 20, fontWeight: 'bold' }}
 						/>
 						<Divider />
+						<View className="flex-row start-0">
+							<Button icon="plus" mode="text" onPress={() => console.log('Pressed')}>
+								Add Food
+							</Button>
+						</View>
 					</Card>
 				</View>
 				<Divider />
@@ -53,6 +67,11 @@ const Diary = (props) => {
 									titleStyle={{ fontSize: 20, fontWeight: 'bold' }}
 						/>
 						<Divider />
+						<View className="flex-row start-0">
+							<Button icon="plus" mode="text" onPress={() => console.log('Pressed')}>
+								Add Food
+							</Button>
+						</View>
 					</Card>
 				</View>
 				<Divider />
@@ -152,8 +171,8 @@ const Diary = (props) => {
 						<Text className="text-white text font-bold">
 							Goal - Food = Remaining
 						</Text>
-					</Card>
 
+					</Card>
 				</View>
 				{/* other content */}
 			<View className="w-full">
@@ -163,6 +182,7 @@ const Diary = (props) => {
 					/>
 					<Divider className="mb-4"/>
 					{isLoaded && displaySelectedFud("Breakfast")}
+
 				</Card>
 
 			</View>
@@ -174,6 +194,7 @@ const Diary = (props) => {
 					/>
 					<Divider />
 					{isLoaded && displaySelectedFud("Lunch")}
+
 				</Card>
 			</View>
 			<Divider />
@@ -184,6 +205,7 @@ const Diary = (props) => {
 					/>
 					<Divider />
 					{isLoaded && displaySelectedFud("Dinner")}
+
 				</Card>
 			</View>
 			<Divider />
@@ -194,6 +216,7 @@ const Diary = (props) => {
 					/>
 					<Divider />
 					{isLoaded && displaySelectedFud("Snacks")}
+
 				</Card>
 			</View>
 			<Divider />

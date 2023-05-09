@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import {PaperClipIcon} from "react-native-heroicons/outline";
 import {useNavigation} from "@react-navigation/native";
+import { Button } from 'react-native-paper';
 
 const Export = ({ navigation }) => {
     React.useLayoutEffect(
@@ -22,8 +23,15 @@ const Export = ({ navigation }) => {
         [ navigation ]
     );
     return (
-        <View className="flex-1 justify-center items-center">
-            <Text className="text-lg">Export Tab placeholder.</Text>
+        <View className="flex-1 items-center">
+            <Text className="pt-5">Premium Features:</Text>
+
+            <Button className="mt-3 mb-3 py-1 mx-4" mode="contained">
+                <Text>Export Fasting Data</Text>
+            </Button>
+            <Button className="mt-3 mb-3 py-1 mx-4" mode="contained">
+                <Text>Export Diary Data</Text>
+            </Button>
         </View>
     );
 };
