@@ -30,15 +30,15 @@ const UserBioInput = () => {
 	});
 
 	//Profile hooks
-	const [name, setName] = useState<string>("");
-	const [age, setAge] = useState<number>(0);
-	const [gender, setGender] = useState<string>("");
-	const [height, setHeight] = useState<number>(0);
-	const [weight, setWeight] = useState<number>(0);
-	const [activityLevel, setActivityLevel] = useState<string>("");
-	const [goal, setGoal] = useState<number>(0);
-	const [bmr, setBMR] = useState<number>(0);
-	const [dailyCalories, setCalories] = useState<number>(0);
+	const [name, setName] = useState<string>(userInfo.name);
+	const [age, setAge] = useState<number>(userInfo.age);
+	const [gender, setGender] = useState<string>(userInfo.gender);
+	const [height, setHeight] = useState<number>(userInfo.height);
+	const [weight, setWeight] = useState<number>(userInfo.weight);
+	const [activityLevel, setActivityLevel] = useState<string>(userInfo.activity);
+	const [goal, setGoal] = useState<number>(userInfo.goal);
+	const [bmr, setBMR] = useState<number>(userInfo.bmr);
+	const [dailyCalories, setCalories] = useState<number>(userInfo.dailyCal);
 
 	//Edit profile hooks
 	const [maleChecked, setMaleChecked] = useState(false);
@@ -110,6 +110,7 @@ const UserBioInput = () => {
 		dispatch(changeBMR(calBMR));
 	};
 
+	//Update redux states
 	function handleEditProfile() {
 		dispatch(changeName(name));
 		dispatch(changeAge(age));
@@ -239,23 +240,3 @@ const UserBioInput = () => {
 };
 
 export default UserBioInput;
-
-// React.useLayoutEffect(() => {
-// 	navigation.setOptions({
-// 		headerLeft: () => (
-// 			<TouchableOpacity onPress={() => navigation.goBack()}>
-// 				<Text>Back</Text>
-// 			</TouchableOpacity>
-// 		),
-// 		headerRight: () => (
-// 			<TouchableOpacity onPress={() => navigation.navigate("Export")}>
-// 				<PaperClipIcon
-// 					name="ios-add"
-// 					size={20}
-// 					color="black"
-// 					style={{ marginRight: 10 }}
-// 				/>
-// 			</TouchableOpacity>
-// 		),
-// 	});
-// }, [navigation]);
