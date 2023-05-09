@@ -152,6 +152,11 @@ const Diary = (props) => {
 									</Text>
 								))
 							) : <Text></Text>}
+							<View className="flex-row start-0 pt-2">
+								<Button icon="plus" mode="text" onPress={() => console.log('Pressed')}>
+									Add Food
+								</Button>
+							</View>
 						</Card.Content>
 					);
 				})}
