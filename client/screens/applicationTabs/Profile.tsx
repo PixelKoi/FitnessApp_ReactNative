@@ -119,6 +119,7 @@ const UserBioInput = () => {
 		dispatch(changeHeight(height));
 		dispatch(changeActivity(activityLevel));
 		dispatch(changeGoal(goal));
+		calAlgo();
 	}
 
 	// TODO: Fix navigation back button not showing on userBioInput page.
@@ -222,8 +223,9 @@ const UserBioInput = () => {
 
 				<Button
 					className="mt-6 py-1 mx-4"
-					onPress={() => {
-						setEditProfile(false), handleEditProfile();
+					onPress={async () => {
+						await handleEditProfile();
+						setEditProfile(false);
 					}}
 					mode="contained">
 					<Text>Save</Text>
