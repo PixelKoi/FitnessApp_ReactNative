@@ -1,8 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import { View } from 'react-native';
 import { Divider, Text, Card, Button } from 'react-native-paper';
+import {useNavigation} from "@react-navigation/native";
 
 const Diary = (props) => {
+	const tabNavigation = useNavigation();
+
 	// error handling, so it shows empty diary page when clicked on!
 	if (props.route.params == undefined){
 		return (
@@ -26,7 +29,7 @@ const Diary = (props) => {
 						/>
 						<Divider className="mb-4"/>
 						<View className="flex-row start-0">
-							<Button icon="plus" mode="text" onPress={() => console.log('Pressed')}>
+							<Button icon="plus" mode="text" onPress={() => tabNavigation.navigate('QuickLog')}>
 								Add Food
 							</Button>
 						</View>
@@ -40,7 +43,7 @@ const Diary = (props) => {
 						/>
 						<Divider />
 						<View className="flex-row start-0">
-							<Button icon="plus" mode="text" onPress={() => console.log('Pressed')}>
+							<Button icon="plus" mode="text" onPress={() => tabNavigation.navigate('QuickLog')}>
 								Add Food
 							</Button>
 						</View>
@@ -54,7 +57,7 @@ const Diary = (props) => {
 						/>
 						<Divider />
 						<View className="flex-row start-0">
-							<Button icon="plus" mode="text" onPress={() => console.log('Pressed')}>
+							<Button icon="plus" mode="text" onPress={() => tabNavigation.navigate('QuickLog')}>
 								Add Food
 							</Button>
 						</View>
@@ -68,7 +71,7 @@ const Diary = (props) => {
 						/>
 						<Divider />
 						<View className="flex-row start-0">
-							<Button icon="plus" mode="text" onPress={() => console.log('Pressed')}>
+							<Button icon="plus" mode="text" onPress={() => tabNavigation.navigate('QuickLog')}>
 								Add Food
 							</Button>
 						</View>
@@ -153,7 +156,7 @@ const Diary = (props) => {
 								))
 							) : <Text></Text>}
 							<View className="flex-row start-0 pt-2">
-								<Button icon="plus" mode="text" onPress={() => console.log('Pressed')}>
+								<Button icon="plus" mode="text"  onPress={() => tabNavigation.navigate('QuickLog')}>
 									Add Food
 								</Button>
 							</View>
