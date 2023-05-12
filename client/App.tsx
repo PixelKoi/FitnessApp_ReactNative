@@ -25,6 +25,7 @@ import {
 	MagnifyingGlassIcon,
 	UserCircleIcon,
 } from "react-native-heroicons/outline";
+import Navigation from "./Navigation/Navigation";
 
 export default function App() {
 	const [session, setSession] = useState<Session | null>(null);
@@ -39,82 +40,11 @@ export default function App() {
 		});
 	}, []);
 
-	const Stack = createNativeStackNavigator();
-	const HomeStack = ({ session }: { session: Session }) => {
-		return (
-			<NavigationContainer>
-				<Stack.Navigator>
-					<Stack.Screen name="Login">
-						{(props) => <Account {...props} session={session} />}
-					</Stack.Screen>
-					<Stack.Screen
-						options={{ headerShown: false }}
-						name="TabNavigator"
-						component={TabNavigator}
-					/>
-				</Stack.Navigator>
-			</NavigationContainer>
-		);
-	};
-
-	const Tab = createBottomTabNavigator();
-	const TabNavigator = () => {
-		return (
-			<Tab.Navigator
-				initialRouteName="QuickLog"
-				screenOptions={{
-					tabBarActiveTintColor: "#6700ff",
-					tabBarInactiveTintColor: "#4d4d4d",
-					tabBarStyle: {
-						backgroundColor: "#84d0ff",
-						borderTopColor: "transparent",
-					},
-				}}>
-				<Tab.Screen
-					name="QuickLog"
-					component={QuickLog}
-					options={{
-						tabBarIcon: ({ color, size }) => (
-							<MagnifyingGlassIcon name="ios-add" size={20} color="black" />
-						),
-					}}
-				/>
-				<Tab.Screen
-					name="Diary"
-					component={Diary}
-					options={{
-						tabBarIcon: ({ color, size }) => (
-							<BookOpenIcon name="ios-add" size={20} color="black" />
-						),
-					}}
-				/>
-				<Tab.Screen
-					name="Fasting"
-					component={Fasting}
-					options={{
-						tabBarIcon: ({ color, size }) => (
-							<ClockIcon name="ios-add" size={20} color="black" />
-						),
-					}}
-				/>
-				<Tab.Screen
-					name="Profile"
-					component={Proflile}
-					options={{
-						tabBarIcon: ({ color, size }) => (
-							<UserCircleIcon name="ios-add" size={20} color="black" />
-						),
-					}}
-				/>
-			</Tab.Navigator>
-		);
-	};
-
 	return (
 		<>
 			{session && session.user ? (
 				<Provider key={session.user.id} store={store}>
-					<HomeStack session={session} />
+					<Navigation session={session} />
 				</Provider>
 			) : (
 				<View>

@@ -29,6 +29,7 @@ export default function Account({ session }: { session: Session }) {
 	const [weight, setWeight] = useState(0);
 	const [activity, setActivity] = useState("");
 	const [goal, setGoal] = useState(0);
+	const created = true;
 
 	const dispatch = useAppDispatch();
 
@@ -89,6 +90,7 @@ export default function Account({ session }: { session: Session }) {
 		weight,
 		activity,
 		goal,
+		created,
 	}: {
 		username: string;
 		age: number;
@@ -97,6 +99,7 @@ export default function Account({ session }: { session: Session }) {
 		weight: number;
 		activity: string;
 		goal: number;
+		created: boolean;
 	}) {
 		try {
 			setLoading(true);
@@ -111,6 +114,7 @@ export default function Account({ session }: { session: Session }) {
 				weight,
 				activity,
 				goal,
+				created,
 				updated_at: new Date(),
 			};
 
@@ -211,6 +215,7 @@ export default function Account({ session }: { session: Session }) {
 							weight,
 							activity,
 							goal,
+							created,
 						});
 						navigateToTabNavigator();
 					}}
