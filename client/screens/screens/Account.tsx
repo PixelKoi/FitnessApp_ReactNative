@@ -62,9 +62,9 @@ export default function Account({ session }: { session: Session }) {
 			if (!session?.user) throw new Error("No user on the session!");
 
 			let { data, error, status } = await supabase
-				.from("profiles")
+				.from("profile")
 				.select(`*`)
-				.eq("id", session?.user.id)
+				.eq("user_id", session?.user.id)
 				.single();
 			if (error && status !== 406) {
 				throw error;
@@ -83,7 +83,6 @@ export default function Account({ session }: { session: Session }) {
 	}
 
 	async function updateProfile({
-		username,
 		age,
 		gender,
 		height,
@@ -92,7 +91,6 @@ export default function Account({ session }: { session: Session }) {
 		goal,
 		created,
 	}: {
-		username: string;
 		age: number;
 		gender: string;
 		height: number;
@@ -106,8 +104,7 @@ export default function Account({ session }: { session: Session }) {
 			if (!session?.user) throw new Error("No user on the session!");
 
 			const updates = {
-				id: session?.user.id,
-				username,
+				user_id: session?.user.id,
 				age,
 				gender,
 				height,
@@ -118,7 +115,7 @@ export default function Account({ session }: { session: Session }) {
 				updated_at: new Date(),
 			};
 
-			let { error } = await supabase.from("profiles").upsert(updates);
+			let { error } = await supabase.from("profile").upsert(updates);
 
 			updateReduxUserStates(updates);
 

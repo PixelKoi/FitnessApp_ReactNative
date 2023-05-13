@@ -154,7 +154,7 @@ const Navigation = ({ session }: { session: Session }) => {
 					<ActivityIndicator size="large" color="#00ff00" />
 				</View>
 			) : loading === false && userData === false ? (
-				<HomeStack />
+				<HomeStack session={session} />
 			) : (
 				<TabNavigator />
 			)}
