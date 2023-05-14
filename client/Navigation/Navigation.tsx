@@ -51,9 +51,9 @@ const Navigation = ({ session }: { session: Session }) => {
 			if (!session?.user) throw new Error("No user on the session!");
 
 			let { data, error, status } = await supabase
-				.from("profiles")
+				.from("profile")
 				.select(`*`)
-				.eq("id", session?.user.id)
+				.eq("user_id", session?.user.id)
 				.single();
 			if (error && status !== 406) {
 				throw error;
@@ -62,7 +62,6 @@ const Navigation = ({ session }: { session: Session }) => {
 			if (data) {
 				updateReduxUserStates(data);
 				setUserData(data.created);
-				console.log(data.created);
 			}
 		} catch (error) {
 			if (error instanceof Error) {
