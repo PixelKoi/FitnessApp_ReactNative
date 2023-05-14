@@ -83,6 +83,7 @@ export default function Account({ session }: { session: Session }) {
 	}
 
 	async function updateProfile({
+		username,
 		age,
 		gender,
 		height,
@@ -91,6 +92,7 @@ export default function Account({ session }: { session: Session }) {
 		goal,
 		created,
 	}: {
+		username: string;
 		age: number;
 		gender: string;
 		height: number;
@@ -105,6 +107,7 @@ export default function Account({ session }: { session: Session }) {
 
 			const updates = {
 				user_id: session?.user.id,
+				username,
 				age,
 				gender,
 				height,
