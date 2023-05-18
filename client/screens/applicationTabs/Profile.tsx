@@ -121,6 +121,7 @@ const UserBioInput = () => {
 	// TODO: Fix navigation back button not showing on userBioInput page.
 	React.useLayoutEffect(() => {
 		navigation.setOptions({
+			title: showEditProfile === false ? "Profile" : "Edit Profile",
 			headerLeft: () =>
 				showEditProfile === false ? null : (
 					<TouchableOpacity
@@ -210,18 +211,6 @@ const UserBioInput = () => {
 		);
 	};
 
-	const handleMaleCheck = () => {
-		setMaleChecked(!maleChecked);
-		setGender("Male");
-		setFemaleChecked(false);
-	};
-
-	const handleFemaleCheck = () => {
-		setFemaleChecked(!femaleChecked);
-		setGender("Female");
-		setMaleChecked(false);
-	};
-
 	const editProfile = () => {
 		return (
 			<View>
@@ -248,12 +237,13 @@ const UserBioInput = () => {
 
 				<Button
 					className="mt-6 py-1 mx-4"
+					style={{ backgroundColor: "#84d0ff" }}
 					onPress={async () => {
 						await handleEditProfile();
 						setEditProfile(false);
 					}}
 					mode="contained">
-					<Text>Save</Text>
+					<Text className="text-black">Save</Text>
 				</Button>
 			</View>
 		);
