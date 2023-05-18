@@ -121,13 +121,17 @@ const UserBioInput = () => {
 	// TODO: Fix navigation back button not showing on userBioInput page.
 	React.useLayoutEffect(() => {
 		navigation.setOptions({
-			headerLeft: () => (
-				<TouchableOpacity onPress={() => navigation.goBack()}>
-					<Text className="ml-4">back</Text>
-				</TouchableOpacity>
-			),
+			headerLeft: () =>
+				showEditProfile === false ? null : (
+					<TouchableOpacity
+						onPress={() => {
+							setEditProfile(false);
+						}}>
+						<Text className="ml-4">back</Text>
+					</TouchableOpacity>
+				),
 		});
-	}, [navigation]);
+	}, [showEditProfile]);
 
 	useEffect(() => {
 		calAlgo();
