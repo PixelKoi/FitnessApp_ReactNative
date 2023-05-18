@@ -135,57 +135,68 @@ const UserBioInput = () => {
 
 	const profile = () => {
 		return (
-			<View className="flex-1 mx-4">
-				<View className="mt-10">
-					<View className="flex  gap-6">
-						<View className="flex flex-row">
+			<View className="flex-1 ">
+				<View className="">
+					<View className="flex  ">
+						<View className="flex flex-row border-solid border-y-2 m-0 border-black p-6">
 							<Text>User Name:</Text>
-							<Text className="ml-auto">{userInfo.name}</Text>
+							<Text className="ml-auto text-blue-600">{userInfo.name}</Text>
 						</View>
 
-						<View className="flex flex-row">
+						<View className="flex flex-row border-solid border-b-2  border-black p-6">
 							<Text>Age:</Text>
-							<Text className="ml-auto">{userInfo.age}</Text>
+							<Text className="ml-auto text-blue-600">{userInfo.age}</Text>
 						</View>
 
-						<View className="flex flex-row">
+						<View className="flex flex-row border-solid border-b-2  border-black p-6">
 							<Text>Gender:</Text>
-							<Text className="ml-auto">{userInfo.gender}</Text>
+							<Text className="ml-auto text-blue-600">{userInfo.gender}</Text>
 						</View>
 
-						<View className="flex flex-row">
+						<View className="flex flex-row border-solid border-b-2  border-black p-6">
 							<Text>Height (cm):</Text>
-							<Text className="ml-auto">{userInfo.height} cm</Text>
+							<Text className="ml-auto text-blue-600">
+								{userInfo.height} cm
+							</Text>
 						</View>
 
-						<View className="flex flex-row">
+						<View className="flex flex-row border-solid border-b-2  border-black p-6">
 							<Text>Weight (kg)</Text>
-							<Text className="ml-auto">{userInfo.weight} kg</Text>
+							<Text className="ml-auto text-blue-600">
+								{userInfo.weight} kg
+							</Text>
 						</View>
 
-						<View className="flex flex-row">
+						<View className="flex flex-row border-solid border-b-2  border-black p-6">
 							<Text>Activity level</Text>
-							<Text className="ml-auto">{userInfo.activity}</Text>
+							<Text className="ml-auto text-blue-600">{userInfo.activity}</Text>
 						</View>
 
-						<View className="flex flex-row">
+						<View className="flex flex-row border-solid border-b-2  border-black p-6">
 							<Text>Weekly Goal:</Text>
-							<Text className="ml-auto">{userInfo.goal} lb</Text>
+							<Text className="ml-auto text-blue-600">{userInfo.goal} lb</Text>
 						</View>
 
-						<View className="flex flex-row">
+						<View className="flex flex-row border-solid border-b-2  border-black p-6">
+							<Text>Email:</Text>
+							<Text className="ml-auto text-blue-600">@email.com</Text>
+						</View>
+
+						<View className="flex flex-row border-solid border-b-2  border-black p-6">
 							<Text>BMR:</Text>
-							<Text className="ml-auto">{userInfo.bmr} cal</Text>
+							<Text className="ml-auto text-blue-600">{userInfo.bmr} cal</Text>
 						</View>
 
-						<View className="flex flex-row">
+						<View className="flex flex-row border-solid border-b-2  border-black p-6">
 							<Text>Daily Calorie Needs:</Text>
-							<Text className="ml-auto"> {userInfo.dailyCal} cal</Text>
+							<Text className="ml-auto text-blue-600">
+								{userInfo.dailyCal} cal
+							</Text>
 						</View>
 					</View>
 				</View>
 				<Button
-					className="mt-6 py-1"
+					className="py-auto"
 					onPress={() => setEditProfile(true)}
 					mode="contained">
 					<Text>Edit Profile</Text>
