@@ -11,6 +11,7 @@ interface UserState {
 	loggedIn: boolean;
 	bmr: number;
 	dailyCal: number;
+	email: string;
 }
 
 const initialState: UserState = {
@@ -24,6 +25,7 @@ const initialState: UserState = {
 	bmr: 0,
 	dailyCal: 0,
 	loggedIn: false,
+	email: "",
 };
 
 const userSlice = createSlice({
@@ -56,6 +58,9 @@ const userSlice = createSlice({
 		},
 		changeDailyCal(state, action: PayloadAction<number>) {
 			state.dailyCal = action.payload;
+		},
+		changeEmail(state, action: PayloadAction<string>) {
+			state.email = action.payload;
 		},
 		loggedIn(state, action: PayloadAction<Boolean>) {
 			state.loggedIn = true;
