@@ -123,7 +123,7 @@ const UserBioInput = () => {
 		navigation.setOptions({
 			headerLeft: () => (
 				<TouchableOpacity onPress={() => navigation.goBack()}>
-					<Text>Back</Text>
+					<Text className="ml-4">back</Text>
 				</TouchableOpacity>
 			),
 		});
@@ -222,29 +222,9 @@ const UserBioInput = () => {
 		return (
 			<View>
 				<TextInput
-					label="Enter Name"
+					label="User Name"
 					value={name}
 					onChangeText={(name) => setName(name)}
-				/>
-				<TextInput
-					label="Enter Age"
-					value={age}
-					onChangeText={(age) => setAge(age)}
-				/>
-				<Checkbox.Item
-					label="Male"
-					status={maleChecked ? "checked" : "unchecked"}
-					onPress={handleMaleCheck}
-				/>
-				<Checkbox.Item
-					label="Female"
-					status={femaleChecked ? "checked" : "unchecked"}
-					onPress={handleFemaleCheck}
-				/>
-				<TextInput
-					label="Enter Height (cm)"
-					value={height}
-					onChangeText={(height) => setHeight(height)}
 				/>
 				<TextInput
 					label="Enter Weight (kg)"
