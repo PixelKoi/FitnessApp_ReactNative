@@ -11,22 +11,6 @@ import { store } from "./app/store";
 import { Provider } from "react-redux";
 import { ApplicationContainer } from "./screens/NavigationComponent";
 
-<<<<<<< HEAD
-//navigation
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { NavigationContainer } from "@react-navigation/native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import QuickLog from "./screens/applicationTabs/QuickLog";
-import Proflile from "./screens/applicationTabs/Profile";
-import Fasting from "./screens/applicationTabs/Fasting";
-import Diary from "./screens/applicationTabs/Diary";
-import {
-	BookOpenIcon,
-	ClockIcon,
-	MagnifyingGlassIcon,
-	UserCircleIcon,
-} from "react-native-heroicons/outline";
-=======
 //SQLite
 import db, { initializeDatabase } from "./database/index";
 import {
@@ -36,7 +20,6 @@ import {
 } from "./database/testQueries";
 
 //navigation
->>>>>>> sqlite
 import Navigation from "./Navigation/Navigation";
 
 export default function App() {
