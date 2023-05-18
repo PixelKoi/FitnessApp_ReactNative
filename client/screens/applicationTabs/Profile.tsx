@@ -5,10 +5,7 @@ import { TextInput, Button, List } from "react-native-paper";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import {
 	changeName,
-	changeAge,
-	changeGender,
 	changeWeight,
-	changeHeight,
 	changeActivity,
 	changeGoal,
 	changeDailyCal,
@@ -39,14 +36,9 @@ const UserBioInput = () => {
 
 	//Profile hooks
 	const [name, setName] = useState<string>(userInfo.name);
-	const [age, setAge] = useState<number>(userInfo.age);
-	const [gender, setGender] = useState<string>(userInfo.gender);
-	const [height, setHeight] = useState<number>(userInfo.height);
 	const [weight, setWeight] = useState<number>(userInfo.weight);
 	const [activityLevel, setActivityLevel] = useState<string>(userInfo.activity);
-	const [goal, setGoal] = useState<number>(userInfo.goal);
-	const [bmr, setBMR] = useState<number>(userInfo.bmr);
-	const [dailyCalories, setCalories] = useState<number>(userInfo.dailyCal);
+	const [goal, setGoal] = useState<string>("1");
 
 	//Edit profile hooks
 	const [showEditProfile, setEditProfile] = useState<boolean>(false);
@@ -90,7 +82,7 @@ const UserBioInput = () => {
 			default:
 				break;
 		}
-
+		console.log(calBMR);
 		switch (userInfo.goal) {
 			case "1":
 				dispatch(changeDailyCal(calBMR - 500));
@@ -107,14 +99,11 @@ const UserBioInput = () => {
 	};
 
 	//Update redux states
-	function handleEditProfile() {
-		dispatch(changeName(name));
-		dispatch(changeAge(age));
-		dispatch(changeGender(gender));
-		dispatch(changeWeight(weight));
-		dispatch(changeHeight(height));
-		dispatch(changeActivity(activityLevel));
-		dispatch(changeGoal(goal));
+	async function handleEditProfile() {
+		await dispatch(changeName(name));
+		await dispatch(changeWeight(weight));
+		await dispatch(changeActivity(activityLevel));
+		await dispatch(changeGoal(goal));
 		calAlgo();
 	}
 
@@ -183,7 +172,9 @@ const UserBioInput = () => {
 
 						<View className="flex flex-row border-solid border-b-2  border-gray-300 p-6">
 							<Text>Weekly Goal:</Text>
-							<Text className="ml-auto text-blue-600">{userInfo.goal} lb</Text>
+							<Text className="ml-auto text-blue-600">
+								{userInfo.goal} lb/s
+							</Text>
 						</View>
 
 						<View className="flex flex-row border-solid border-b-2  border-gray-300 p-6">
@@ -270,6 +261,7 @@ const UserBioInput = () => {
 					style={{ backgroundColor: "#84d0ff" }}
 					onPress={async () => {
 						await handleEditProfile();
+
 						setEditProfile(false);
 					}}
 					mode="contained">
