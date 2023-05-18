@@ -252,8 +252,8 @@ const UserBioInput = () => {
 					left={(props) => <List.Icon {...props} icon="scale" />}
 					expanded={expandGoal}
 					onPress={handleExpandGoal}>
-					<List.Item title="1lb / week" />
-					<List.Item title="2lbs / week" />
+					<List.Item onPress={() => setGoal("1")} title="1lb / week" />
+					<List.Item onPress={() => setGoal("2")} title="2lbs / week" />
 				</List.Accordion>
 
 				<Button
