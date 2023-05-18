@@ -10,8 +10,24 @@ import { View } from "react-native";
 import { store } from "./app/store";
 import { Provider } from "react-redux";
 import { ApplicationContainer } from "./screens/NavigationComponent";
+
+//navigation
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { NavigationContainer } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import QuickLog from "./screens/applicationTabs/QuickLog";
+import Proflile from "./screens/applicationTabs/Profile";
+import Fasting from "./screens/applicationTabs/Fasting";
+import Diary from "./screens/applicationTabs/Diary";
+import {
+	BookOpenIcon,
+	ClockIcon,
+	MagnifyingGlassIcon,
+	UserCircleIcon,
+} from "react-native-heroicons/outline";
+import Navigation from "./Navigation/Navigation";
+
 export default function App() {
-	/* I commented out your previous code and placed it at the bottom and used the supabase auth tutorial to work on account screen */
 	const [session, setSession] = useState<Session | null>(null);
 
 	useEffect(() => {
@@ -27,8 +43,8 @@ export default function App() {
 	return (
 		<>
 			{session && session.user ? (
-				<Provider key={session.user.id} session={session} store={store}>
-					<NavigationComponent />
+				<Provider key={session.user.id} store={store}>
+					<Navigation session={session} />
 				</Provider>
 			) : (
 				<View>
@@ -38,33 +54,3 @@ export default function App() {
 		</>
 	);
 }
-
-// export default function App() {
-// 	const [session, setSession] = useState<Session | null>(null)
-
-// 	useEffect(() => {
-// 		supabase.auth.getSession().then(({ data: { session } }) => {
-// 			setSession(session)
-// 		})
-
-// 		supabase.auth.onAuthStateChange((_event, session) => {
-// 			setSession(session)
-// 		})
-// 	}, [])
-
-// 	return (
-// 	<>
-// 		{
-// 			session && session.user ?
-// 				<Provider key={session.user.id} session={session} store={store}>
-// 					<ApplicationNavigator/>
-// 				</Provider> :
-// 				<View>
-// 					<Auth />
-// 				</View>
-
-// 		}
-// 	</>
-
-// 	);
-// }

@@ -11,28 +11,39 @@ import {
 	changeHeight,
 	changeActivity,
 	changeGoal,
+	changeDailyCal,
+	changeBMR,
 } from "../../features/user/user-slice";
 import { supabase } from "../../features/supabase_authentication/supabase";
-import {PaperClipIcon} from "react-native-heroicons/outline";
+import { PaperClipIcon } from "react-native-heroicons/outline";
 
 const UserBioInput = () => {
-	React.useLayoutEffect(
-		() => {
-			navigation.setOptions({
-				headerLeft: () => (
-					<TouchableOpacity onPress={() => navigation.goBack()}>
-						<Text>Back</Text>
-					</TouchableOpacity>
-				),
-				headerRight: () => (
-					<TouchableOpacity onPress={() => navigation.navigate('Export')}>
-						<PaperClipIcon name="ios-add" size={20} color="black" style={{ marginRight: 10 }}/>
-					</TouchableOpacity>
-				)
-			});
-		},
-		[ navigation ]
-	);
+	//Navigation
+	const navigation = useNavigation();
+
+	//Redux
+	const userInfo = useAppSelector((state) => state.user);
+	const dispatch = useAppDispatch();
+
+	useEffect(() => {
+		console.log(userInfo);
+	});
+
+	//Profile hooks
+	const [name, setName] = useState<string>(userInfo.name);
+	const [age, setAge] = useState<number>(userInfo.age);
+	const [gender, setGender] = useState<string>(userInfo.gender);
+	const [height, setHeight] = useState<number>(userInfo.height);
+	const [weight, setWeight] = useState<number>(userInfo.weight);
+	const [activityLevel, setActivityLevel] = useState<string>(userInfo.activity);
+	const [goal, setGoal] = useState<number>(userInfo.goal);
+	const [bmr, setBMR] = useState<number>(userInfo.bmr);
+	const [dailyCalories, setCalories] = useState<number>(userInfo.dailyCal);
+
+	//Edit profile hooks
+	const [maleChecked, setMaleChecked] = useState(false);
+	const [femaleChecked, setFemaleChecked] = useState(false);
+	const [showEditProfile, setEditProfile] = useState<boolean>(false);
 
 	/*
 	For men: BMR = 88.36 + (13.4 x weight in kg) + (4.8 x height in cm) - (5.7 x age in years)
@@ -46,40 +57,25 @@ const UserBioInput = () => {
 
 	Lose 1lb a week = -500 cal deficit
 	*/
-
-	//Navigation
-	const navigation = useNavigation();
-
-	//Redux
-	const userInfo = useAppSelector((state) => state.user);
-	const dispatch = useAppDispatch();
-
-	//Hooks
-	const [maleChecked, setMaleChecked] = useState(false);
-	const [femaleChecked, setFemaleChecked] = useState(false);
-	const [checked, setChecked] = useState<boolean>(false);
-	const [showEditProfile, setEditProfile] = useState<boolean>(false);
-	const [bmr, setBMR] = useState<number>(0);
-	const [dailyCalories, setCalories] = useState<number>(0);
-	const [name, setName] = useState<string>("");
-	const [age, setAge] = useState<number>(0);
-	const [gender, setGender] = useState<string>("");
-	const [height, setHeight] = useState<number>(0);
-	const [weight, setWeight] = useState<number>(0);
-	const [activityLevel, setActivityLevel] = useState<string>("");
-	const [goal, setGoal] = useState<string>("");
-
 	const calAlgo = () => {
 		let calBMR = 0;
 
-		if (gender === "Male") {
-			calBMR = 88.3 + 14.4 * weight + 4.8 * height - 5.7 * age;
+		if (userInfo.gender === "Male") {
+			calBMR =
+				88.3 +
+				14.4 * userInfo.weight +
+				4.8 * userInfo.height -
+				5.7 * userInfo.age;
 			console.log(calBMR);
-		} else if (gender === "Female") {
-			calBMR = 447.6 + 9.2 * weight + 3.1 * height - 4.3 * age;
+		} else if (userInfo.gender === "Female") {
+			calBMR =
+				447.6 +
+				9.2 * userInfo.weight +
+				3.1 * userInfo.height -
+				4.3 * userInfo.age;
 		}
 
-		switch (activityLevel) {
+		switch (userInfo.activity) {
 			case "Sedentary":
 				calBMR *= 1.2;
 				break;
@@ -99,21 +95,22 @@ const UserBioInput = () => {
 				break;
 		}
 
-		switch (goal) {
+		switch (userInfo.goal) {
 			case "1":
-				setCalories(calBMR - 500);
+				dispatch(changeDailyCal(calBMR - 500));
 				break;
 			case "2":
-				setCalories(calBMR - 1000);
+				dispatch(changeDailyCal(calBMR - 1000));
 				break;
 			default:
-				setCalories(calBMR);
+				dispatch(changeDailyCal(calBMR));
 				break;
 		}
 
-		setBMR(calBMR);
+		dispatch(changeBMR(calBMR));
 	};
 
+	//Update redux states
 	function handleEditProfile() {
 		dispatch(changeName(name));
 		dispatch(changeAge(age));
@@ -122,6 +119,7 @@ const UserBioInput = () => {
 		dispatch(changeHeight(height));
 		dispatch(changeActivity(activityLevel));
 		dispatch(changeGoal(goal));
+		calAlgo();
 	}
 
 	// TODO: Fix navigation back button not showing on userBioInput page.
@@ -147,8 +145,8 @@ const UserBioInput = () => {
 						<Text>Weight (kg): {userInfo.weight}</Text>
 						<Text>Activity level (1-10): {userInfo.activity}</Text>
 						<Text>Goal (1-10): {userInfo.goal}</Text>
-						<Text>BMR: {bmr} calories</Text>
-						<Text>Daily Calorie Needs: {dailyCalories} calories</Text>
+						<Text>BMR: {userInfo.bmr} calories</Text>
+						<Text>Daily Calorie Needs: {userInfo.dailyCal} calories</Text>
 					</View>
 				</View>
 				<Button
@@ -225,8 +223,9 @@ const UserBioInput = () => {
 
 				<Button
 					className="mt-6 py-1 mx-4"
-					onPress={() => {
-						setEditProfile(false), handleEditProfile();
+					onPress={async () => {
+						await handleEditProfile();
+						setEditProfile(false);
 					}}
 					mode="contained">
 					<Text>Save</Text>

@@ -6,6 +6,7 @@ import { Session } from "@supabase/supabase-js";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import {
 	changeActivity,
+	changeGender,
 	changeAge,
 	changeGoal,
 	changeHeight,
@@ -13,33 +14,30 @@ import {
 	changeWeight,
 } from "../../features/user/user-slice";
 import { setSession } from "../../features/user/session-slice";
+import { useNavigation } from "@react-navigation/native";
 
 export default function Account({ session }: { session: Session }) {
 	const [modalVisible, setModalVisible] = useState(false);
 	const [loading, setLoading] = useState(true);
+	const navigation = useNavigation();
 
-	//profile states
+	//Account states
 	const [username, setUsername] = useState("");
-	const [age, setAge] = useState("");
-	const [height, setHeight] = useState("");
-	const [weight, setWeight] = useState("");
+	const [age, setAge] = useState(0);
+	const [gender, setGender] = useState("");
+	const [height, setHeight] = useState(0);
+	const [weight, setWeight] = useState(0);
 	const [activity, setActivity] = useState("");
-	const [goal, setGoal] = useState("");
+	const [goal, setGoal] = useState(0);
+	const created = true;
 
-	//redux toolkit
-	const userInfo = useAppSelector((state) => state.user);
 	const dispatch = useAppDispatch();
 
 	//update component and global states
-	function updateGlobalProfileStates(data) {
-		setUsername(data.username);
-		setAge(data.age);
-		setHeight(data.height);
-		setWeight(data.weight);
-		setActivity(data.activity);
-		setGoal(data.goal);
+	function updateReduxUserStates(data) {
 		dispatch(changeName(data.username));
 		dispatch(changeAge(data.age));
+		dispatch(changeGender(data.gender));
 		dispatch(changeHeight(data.height));
 		dispatch(changeWeight(data.weight));
 		dispatch(changeActivity(data.activity));
@@ -54,22 +52,26 @@ export default function Account({ session }: { session: Session }) {
 		}
 	}, [session]);
 
+	const navigateToTabNavigator = () => {
+		navigation.navigate("TabNavigator");
+	};
+
 	async function getProfile() {
 		try {
 			setLoading(true);
 			if (!session?.user) throw new Error("No user on the session!");
 
 			let { data, error, status } = await supabase
-				.from("profiles")
+				.from("profile")
 				.select(`*`)
-				.eq("id", session?.user.id)
+				.eq("user_id", session?.user.id)
 				.single();
 			if (error && status !== 406) {
 				throw error;
 			}
 
 			if (data) {
-				updateGlobalProfileStates(data);
+				console.log(data);
 			}
 		} catch (error) {
 			if (error instanceof Error) {
@@ -83,34 +85,42 @@ export default function Account({ session }: { session: Session }) {
 	async function updateProfile({
 		username,
 		age,
+		gender,
 		height,
 		weight,
 		activity,
 		goal,
+		created,
 	}: {
 		username: string;
-		age: string;
-		height: string;
-		weight: string;
+		age: number;
+		gender: string;
+		height: number;
+		weight: number;
 		activity: string;
-		goal: string;
+		goal: number;
+		created: boolean;
 	}) {
 		try {
 			setLoading(true);
 			if (!session?.user) throw new Error("No user on the session!");
 
 			const updates = {
-				id: session?.user.id,
+				user_id: session?.user.id,
 				username,
 				age,
+				gender,
 				height,
 				weight,
 				activity,
 				goal,
+				created,
 				updated_at: new Date(),
 			};
 
-			let { error } = await supabase.from("profiles").upsert(updates);
+			let { error } = await supabase.from("profile").upsert(updates);
+
+			updateReduxUserStates(updates);
 
 			if (error) {
 				throw error;
@@ -155,10 +165,13 @@ export default function Account({ session }: { session: Session }) {
 				/>
 			</View>
 			<View style={styles.verticallySpaced}>
+				<Input label="Age" value={age} onChangeText={(text) => setAge(text)} />
+			</View>
+			<View style={styles.verticallySpaced}>
 				<Input
-					label="Age"
-					value={age || ""}
-					onChangeText={(text) => setAge(text)}
+					label="Gender"
+					value={gender}
+					onChangeText={(text) => setGender(text)}
 				/>
 			</View>
 			<View style={styles.verticallySpaced}>
@@ -177,7 +190,7 @@ export default function Account({ session }: { session: Session }) {
 			</View>
 			<View style={styles.verticallySpaced}>
 				<Input
-					label="Acivity Level 0-10"
+					label="Activity Level 0-10"
 					value={activity || ""}
 					onChangeText={(text) => setActivity(text)}
 				/>
@@ -193,9 +206,19 @@ export default function Account({ session }: { session: Session }) {
 			<View style={[styles.verticallySpaced, styles.mt20]}>
 				<Button
 					title={loading ? "Loading ..." : "Create Profile"}
-					onPress={() =>
-						updateProfile({ username, age, height, weight, activity, goal })
-					}
+					onPress={async () => {
+						await updateProfile({
+							username,
+							age,
+							gender,
+							height,
+							weight,
+							activity,
+							goal,
+							created,
+						});
+						navigateToTabNavigator();
+					}}
 					disabled={loading}
 				/>
 			</View>
