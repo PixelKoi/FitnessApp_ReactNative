@@ -138,56 +138,56 @@ const UserBioInput = () => {
 			<View className="flex-1 ">
 				<View className="">
 					<View className="flex  ">
-						<View className="flex flex-row border-solid border-y-2 m-0 border-black p-6">
+						<View className="flex flex-row border-solid border-y-2 m-0 border-gray-300 p-6">
 							<Text>User Name:</Text>
 							<Text className="ml-auto text-blue-600">{userInfo.name}</Text>
 						</View>
 
-						<View className="flex flex-row border-solid border-b-2  border-black p-6">
+						<View className="flex flex-row border-solid border-b-2  border-gray-300 p-6">
 							<Text>Age:</Text>
 							<Text className="ml-auto text-blue-600">{userInfo.age}</Text>
 						</View>
 
-						<View className="flex flex-row border-solid border-b-2  border-black p-6">
+						<View className="flex flex-row border-solid border-b-2  border-gray-300 p-6">
 							<Text>Gender:</Text>
 							<Text className="ml-auto text-blue-600">{userInfo.gender}</Text>
 						</View>
 
-						<View className="flex flex-row border-solid border-b-2  border-black p-6">
+						<View className="flex flex-row border-solid border-b-2  border-gray-300 p-6">
 							<Text>Height (cm):</Text>
 							<Text className="ml-auto text-blue-600">
 								{userInfo.height} cm
 							</Text>
 						</View>
 
-						<View className="flex flex-row border-solid border-b-2  border-black p-6">
+						<View className="flex flex-row border-solid border-b-2  border-gray-300 p-6">
 							<Text>Weight (kg)</Text>
 							<Text className="ml-auto text-blue-600">
 								{userInfo.weight} kg
 							</Text>
 						</View>
 
-						<View className="flex flex-row border-solid border-b-2  border-black p-6">
+						<View className="flex flex-row border-solid border-b-2  border-gray-300 p-6">
 							<Text>Activity level</Text>
 							<Text className="ml-auto text-blue-600">{userInfo.activity}</Text>
 						</View>
 
-						<View className="flex flex-row border-solid border-b-2  border-black p-6">
+						<View className="flex flex-row border-solid border-b-2  border-gray-300 p-6">
 							<Text>Weekly Goal:</Text>
 							<Text className="ml-auto text-blue-600">{userInfo.goal} lb</Text>
 						</View>
 
-						<View className="flex flex-row border-solid border-b-2  border-black p-6">
+						<View className="flex flex-row border-solid border-b-2  border-gray-300 p-6">
 							<Text>Email:</Text>
 							<Text className="ml-auto text-blue-600">@email.com</Text>
 						</View>
 
-						<View className="flex flex-row border-solid border-b-2  border-black p-6">
+						<View className="flex flex-row border-solid border-b-2  border-gray-300 p-6">
 							<Text>BMR:</Text>
 							<Text className="ml-auto text-blue-600">{userInfo.bmr} cal</Text>
 						</View>
 
-						<View className="flex flex-row border-solid border-b-2  border-black p-6">
+						<View className="flex flex-row border-solid  p-6">
 							<Text>Daily Calorie Needs:</Text>
 							<Text className="ml-auto text-blue-600">
 								{userInfo.dailyCal} cal
@@ -196,10 +196,11 @@ const UserBioInput = () => {
 					</View>
 				</View>
 				<Button
-					className="py-auto"
+					className="p-4 rounded-none rounded-t-2xl mt-auto"
+					style={{ backgroundColor: "#84d0ff" }}
 					onPress={() => setEditProfile(true)}
 					mode="contained">
-					<Text>Edit Profile</Text>
+					<Text className="text-black">Edit Profile</Text>
 				</Button>
 			</View>
 		);
