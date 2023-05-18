@@ -14,9 +14,21 @@ import {
 	changeDailyCal,
 	changeBMR,
 } from "../../features/user/user-slice";
-import { supabase } from "../../features/supabase_authentication/supabase";
-import { PaperClipIcon } from "react-native-heroicons/outline";
 
+/*
+Calorie Counting Algorithm
+
+	For men: BMR = 88.36 + (13.4 x weight in kg) + (4.8 x height in cm) - (5.7 x age in years)
+	For women: BMR = 447.6 + (9.2 x weight in kg) + (3.1 x height in cm) - (4.3 x age in years)
+
+	Sedentary (little or no exercise): TDEE = BMR x 1.2
+	Lightly active (light exercise or sports 1-3 days/week): TDEE = BMR x 1.375
+	Moderately active (moderate exercise or sports 3-5 days/week): TDEE = BMR x 1.55
+	Very active (hard exercise or sports 6-7 days/week): TDEE = BMR x 1.725
+	Extremely active (very hard exercise or sports, physical job or training twice a day): TDEE = BMR x 1.9
+
+	Lose 1lb a week = -500 cal deficit
+*/
 const UserBioInput = () => {
 	//Navigation
 	const navigation = useNavigation();
@@ -24,10 +36,6 @@ const UserBioInput = () => {
 	//Redux
 	const userInfo = useAppSelector((state) => state.user);
 	const dispatch = useAppDispatch();
-
-	useEffect(() => {
-		console.log(userInfo);
-	});
 
 	//Profile hooks
 	const [name, setName] = useState<string>(userInfo.name);
@@ -45,18 +53,6 @@ const UserBioInput = () => {
 	const [femaleChecked, setFemaleChecked] = useState(false);
 	const [showEditProfile, setEditProfile] = useState<boolean>(false);
 
-	/*
-	For men: BMR = 88.36 + (13.4 x weight in kg) + (4.8 x height in cm) - (5.7 x age in years)
-	For women: BMR = 447.6 + (9.2 x weight in kg) + (3.1 x height in cm) - (4.3 x age in years)
-
-	Sedentary (little or no exercise): TDEE = BMR x 1.2
-	Lightly active (light exercise or sports 1-3 days/week): TDEE = BMR x 1.375
-	Moderately active (moderate exercise or sports 3-5 days/week): TDEE = BMR x 1.55
-	Very active (hard exercise or sports 6-7 days/week): TDEE = BMR x 1.725
-	Extremely active (very hard exercise or sports, physical job or training twice a day): TDEE = BMR x 1.9
-
-	Lose 1lb a week = -500 cal deficit
-	*/
 	const calAlgo = () => {
 		let calBMR = 0;
 
@@ -133,20 +129,59 @@ const UserBioInput = () => {
 		});
 	}, [navigation]);
 
+	useEffect(() => {
+		calAlgo();
+	}, []);
+
 	const profile = () => {
 		return (
 			<View className="flex-1 mx-4">
 				<View className="mt-10">
 					<View className="flex  gap-6">
-						<Text>Name: {userInfo.name}</Text>
-						<Text>Age: {userInfo.age}</Text>
-						<Text>Gender {userInfo.gender}</Text>
-						<Text>Height (cm): {userInfo.height}</Text>
-						<Text>Weight (kg): {userInfo.weight}</Text>
-						<Text>Activity level (1-10): {userInfo.activity}</Text>
-						<Text>Goal (1-10): {userInfo.goal}</Text>
-						<Text>BMR: {userInfo.bmr} calories</Text>
-						<Text>Daily Calorie Needs: {userInfo.dailyCal} calories</Text>
+						<View className="flex flex-row">
+							<Text>User Name:</Text>
+							<Text className="ml-auto">{userInfo.name}</Text>
+						</View>
+
+						<View className="flex flex-row">
+							<Text>Age:</Text>
+							<Text className="ml-auto">{userInfo.age}</Text>
+						</View>
+
+						<View className="flex flex-row">
+							<Text>Gender:</Text>
+							<Text className="ml-auto">{userInfo.gender}</Text>
+						</View>
+
+						<View className="flex flex-row">
+							<Text>Height (cm):</Text>
+							<Text className="ml-auto">{userInfo.height} cm</Text>
+						</View>
+
+						<View className="flex flex-row">
+							<Text>Weight (kg)</Text>
+							<Text className="ml-auto">{userInfo.weight} kg</Text>
+						</View>
+
+						<View className="flex flex-row">
+							<Text>Activity level</Text>
+							<Text className="ml-auto">{userInfo.activity}</Text>
+						</View>
+
+						<View className="flex flex-row">
+							<Text>Weekly Goal:</Text>
+							<Text className="ml-auto">{userInfo.goal} lb</Text>
+						</View>
+
+						<View className="flex flex-row">
+							<Text>BMR:</Text>
+							<Text className="ml-auto">{userInfo.bmr} cal</Text>
+						</View>
+
+						<View className="flex flex-row">
+							<Text>Daily Calorie Needs:</Text>
+							<Text className="ml-auto"> {userInfo.dailyCal} cal</Text>
+						</View>
 					</View>
 				</View>
 				<Button
@@ -154,12 +189,6 @@ const UserBioInput = () => {
 					onPress={() => setEditProfile(true)}
 					mode="contained">
 					<Text>Edit Profile</Text>
-				</Button>
-				<Button
-					className="mt-6 py-1 mx-4"
-					onPress={() => calAlgo()}
-					mode="contained">
-					<Text>Calculate Algo</Text>
 				</Button>
 			</View>
 		);
