@@ -49,8 +49,6 @@ const UserBioInput = () => {
 	const [dailyCalories, setCalories] = useState<number>(userInfo.dailyCal);
 
 	//Edit profile hooks
-	const [maleChecked, setMaleChecked] = useState(false);
-	const [femaleChecked, setFemaleChecked] = useState(false);
 	const [showEditProfile, setEditProfile] = useState<boolean>(false);
 	const [expandActivity, setExpandActivity] = useState<boolean>(false);
 	const [expandGoal, setExpandGoal] = useState<boolean>(false);
@@ -120,6 +118,10 @@ const UserBioInput = () => {
 		calAlgo();
 	}
 
+	//Handle Accordian Dropdown
+	const handleExpandActivity = () => setExpandActivity(!expandActivity);
+	const handleExpandGoal = () => setExpandGoal(!expandGoal);
+
 	// TODO: Fix navigation back button not showing on userBioInput page.
 	React.useLayoutEffect(() => {
 		navigation.setOptions({
@@ -135,9 +137,6 @@ const UserBioInput = () => {
 				),
 		});
 	}, [showEditProfile]);
-
-	const handleExpandActivity = () => setExpandActivity(!expandActivity);
-	const handleExpandGoal = () => setExpandGoal(!expandGoal);
 
 	useEffect(() => {
 		calAlgo();
@@ -229,26 +228,32 @@ const UserBioInput = () => {
 					value={weight}
 					onChangeText={(weight) => setWeight(weight)}
 				/>
-				{/* <TextInput
-					label="Enter Activity Level"
-					value={activityLevel}
-					onChangeText={(activityLevel) => setActivityLevel(activityLevel)}
-				/>
-				<TextInput
-					label="Enter Weight Goal"
-					value={goal}
-					onChangeText={(goal) => setGoal(goal)}
-				/> */}
+
 				<List.Accordion
 					title="Select Activity Level"
 					left={(props) => <List.Icon {...props} icon="run" />}
 					expanded={expandActivity}
 					onPress={handleExpandActivity}>
-					<List.Item title="Sedentary" />
-					<List.Item title="Lightly active" />
-					<List.Item title="Moderately active" />
-					<List.Item title="Very active" />
-					<List.Item title="Extremely active" />
+					<List.Item
+						onPress={() => setActivityLevel("Sedentary")}
+						title="Sedentary"
+					/>
+					<List.Item
+						onPress={() => setActivityLevel("Lightly active")}
+						title="Lightly active"
+					/>
+					<List.Item
+						onPress={() => setActivityLevel("Moderately active")}
+						title="Moderately active"
+					/>
+					<List.Item
+						onPress={() => setActivityLevel("Very active")}
+						title="Very active"
+					/>
+					<List.Item
+						onPress={() => setActivityLevel("Extremely active")}
+						title="Extremely active"
+					/>
 				</List.Accordion>
 
 				<List.Accordion
