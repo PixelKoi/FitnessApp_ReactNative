@@ -52,7 +52,8 @@ const UserBioInput = () => {
 	const [maleChecked, setMaleChecked] = useState(false);
 	const [femaleChecked, setFemaleChecked] = useState(false);
 	const [showEditProfile, setEditProfile] = useState<boolean>(false);
-	const [expanded, setExpanded] = useState<boolean>(false);
+	const [expandActivity, setExpandActivity] = useState<boolean>(false);
+	const [expandGoal, setExpandGoal] = useState<boolean>(false);
 
 	const calAlgo = () => {
 		let calBMR = 0;
@@ -135,7 +136,8 @@ const UserBioInput = () => {
 		});
 	}, [showEditProfile]);
 
-	const handlePress = () => setExpanded(!expanded);
+	const handleExpandActivity = () => setExpandActivity(!expandActivity);
+	const handleExpandGoal = () => setExpandGoal(!expandGoal);
 
 	useEffect(() => {
 		calAlgo();
@@ -240,8 +242,8 @@ const UserBioInput = () => {
 				<List.Accordion
 					title="Select Activity Level"
 					left={(props) => <List.Icon {...props} icon="run" />}
-					expanded={expanded}
-					onPress={handlePress}>
+					expanded={expandActivity}
+					onPress={handleExpandActivity}>
 					<List.Item title="Sedentary" />
 					<List.Item title="Lightly active" />
 					<List.Item title="Moderately active" />
@@ -252,8 +254,8 @@ const UserBioInput = () => {
 				<List.Accordion
 					title="Select Weight Loss Goal"
 					left={(props) => <List.Icon {...props} icon="scale" />}
-					expanded={expanded}
-					onPress={handlePress}>
+					expanded={expandGoal}
+					onPress={handleExpandGoal}>
 					<List.Item title="1lb / week" />
 					<List.Item title="2lbs / week" />
 				</List.Accordion>
