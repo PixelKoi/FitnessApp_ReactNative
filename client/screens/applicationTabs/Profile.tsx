@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { TextInput, Button, Checkbox } from "react-native-paper";
+import { TextInput, Button, List } from "react-native-paper";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import {
 	changeName,
@@ -52,6 +52,7 @@ const UserBioInput = () => {
 	const [maleChecked, setMaleChecked] = useState(false);
 	const [femaleChecked, setFemaleChecked] = useState(false);
 	const [showEditProfile, setEditProfile] = useState<boolean>(false);
+	const [expanded, setExpanded] = useState<boolean>(false);
 
 	const calAlgo = () => {
 		let calBMR = 0;
@@ -133,6 +134,8 @@ const UserBioInput = () => {
 				),
 		});
 	}, [showEditProfile]);
+
+	const handlePress = () => setExpanded(!expanded);
 
 	useEffect(() => {
 		calAlgo();
@@ -224,7 +227,7 @@ const UserBioInput = () => {
 					value={weight}
 					onChangeText={(weight) => setWeight(weight)}
 				/>
-				<TextInput
+				{/* <TextInput
 					label="Enter Activity Level"
 					value={activityLevel}
 					onChangeText={(activityLevel) => setActivityLevel(activityLevel)}
@@ -233,7 +236,27 @@ const UserBioInput = () => {
 					label="Enter Weight Goal"
 					value={goal}
 					onChangeText={(goal) => setGoal(goal)}
-				/>
+				/> */}
+				<List.Accordion
+					title="Select Activity Level"
+					left={(props) => <List.Icon {...props} icon="run" />}
+					expanded={expanded}
+					onPress={handlePress}>
+					<List.Item title="Sedentary" />
+					<List.Item title="Lightly active" />
+					<List.Item title="Moderately active" />
+					<List.Item title="Very active" />
+					<List.Item title="Extremely active" />
+				</List.Accordion>
+
+				<List.Accordion
+					title="Select Weight Loss Goal"
+					left={(props) => <List.Icon {...props} icon="scale" />}
+					expanded={expanded}
+					onPress={handlePress}>
+					<List.Item title="1lb / week" />
+					<List.Item title="2lbs / week" />
+				</List.Accordion>
 
 				<Button
 					className="mt-6 py-1 mx-4"
