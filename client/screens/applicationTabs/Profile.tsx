@@ -34,16 +34,27 @@ const UserBioInput = () => {
 	const userInfo = useAppSelector((state) => state.user);
 	const dispatch = useAppDispatch();
 
-	//Profile hooks
-	const [name, setName] = useState<string>(userInfo.name);
-	const [weight, setWeight] = useState<number>(userInfo.weight);
-	const [activityLevel, setActivityLevel] = useState<string>(userInfo.activity);
-	const [goal, setGoal] = useState<string>("1");
-
 	//Edit profile hooks
 	const [showEditProfile, setEditProfile] = useState<boolean>(false);
 	const [expandActivity, setExpandActivity] = useState<boolean>(false);
 	const [expandGoal, setExpandGoal] = useState<boolean>(false);
+	const [name, setName] = useState<string>(userInfo.name);
+	const [weight, setWeight] = useState<number>(userInfo.weight);
+	const [activityLevel, setActivityLevel] = useState<string>(userInfo.activity);
+	const [goal, setGoal] = useState<string>(userInfo.goal);
+
+	//Handle Accordian Dropdown
+	const handleExpandActivity = () => setExpandActivity(!expandActivity);
+	const handleExpandGoal = () => setExpandGoal(!expandGoal);
+
+	//Update redux states
+	async function handleEditProfile() {
+		await dispatch(changeName(name));
+		await dispatch(changeWeight(weight));
+		await dispatch(changeActivity(activityLevel));
+		await dispatch(changeGoal(goal));
+		await calAlgo();
+	}
 
 	const calAlgo = () => {
 		let calBMR = 0;
@@ -98,20 +109,7 @@ const UserBioInput = () => {
 		dispatch(changeBMR(calBMR));
 	};
 
-	//Update redux states
-	async function handleEditProfile() {
-		await dispatch(changeName(name));
-		await dispatch(changeWeight(weight));
-		await dispatch(changeActivity(activityLevel));
-		await dispatch(changeGoal(goal));
-		calAlgo();
-	}
-
-	//Handle Accordian Dropdown
-	const handleExpandActivity = () => setExpandActivity(!expandActivity);
-	const handleExpandGoal = () => setExpandGoal(!expandGoal);
-
-	// TODO: Fix navigation back button not showing on userBioInput page.
+	//Top Nav on Edit Profile Screen
 	React.useLayoutEffect(() => {
 		navigation.setOptions({
 			title: showEditProfile === false ? "Profile" : "Edit Profile",
@@ -166,7 +164,7 @@ const UserBioInput = () => {
 						</View>
 
 						<View className="flex flex-row border-solid border-b-2  border-gray-300 p-6">
-							<Text>Activity level</Text>
+							<Text>Activity Level</Text>
 							<Text className="ml-auto text-blue-600">{userInfo.activity}</Text>
 						</View>
 
@@ -226,7 +224,7 @@ const UserBioInput = () => {
 					expanded={expandActivity}
 					onPress={handleExpandActivity}>
 					<List.Item
-						onPress={() => setActivityLevel("Sedentary")}
+						onPress={() => changeActivity("Sedentary")}
 						title="Sedentary"
 					/>
 					<List.Item
