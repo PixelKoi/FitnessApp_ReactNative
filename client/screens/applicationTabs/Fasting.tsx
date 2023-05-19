@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import {
 	View,
 	Text,
@@ -11,6 +11,7 @@ import { PaperClipIcon } from "react-native-heroicons/outline";
 import { useNavigation } from "@react-navigation/native";
 import Svg, { G, Circle } from "react-native-svg";
 import { transparent } from "react-native-paper/lib/typescript/src/styles/themes/v2/colors";
+import { Button } from "react-native-paper";
 
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 const AnimatedInput = Animated.createAnimatedComponent(TextInput);
@@ -23,11 +24,11 @@ const Donut = ({
 	color = "red",
 	delay = 0,
 	textColor,
-	max = 100,
+	max = 16,
 }) => {
 	const animatedValue = React.useRef(new Animated.Value(0)).current;
-	const circleRef = React.useRef();
-	const inputRef = React.useRef();
+	const circleRef = useRef(null);
+	const inputRef = useRef(null);
 
 	const halfCircle = radius + strokeWidth;
 	const circleCircumferance = 2 * Math.PI * radius;
@@ -45,7 +46,7 @@ const Donut = ({
 
 		animatedValue.addListener((v) => {
 			if (circleRef?.current) {
-				const maxPerc = (100 * v.value) / max;
+				const maxPerc = (11 / max) * 100;
 				const strokeDashoffset =
 					circleCircumferance - (circleCircumferance * maxPerc) / 100;
 				circleRef.current.setNativeProps({
@@ -54,11 +55,14 @@ const Donut = ({
 			}
 			if (inputRef?.current) {
 				inputRef.current.setNativeProps({
-					text: `${Math.round(v.value)} /16`,
+					text: `${Math.round(v.value)}`,
 				});
 			}
 		});
-	});
+		return () => {
+			animatedValue.removeAllListeners();
+		};
+	}, [max, percentage]);
 
 	return (
 		<View className="flex-1 justify-center items-center">
@@ -81,7 +85,7 @@ const Donut = ({
 						cx="50%"
 						cy="50%"
 						stroke={color}
-						strokeWidth={strokeWidth}
+						strokeWidth={20}
 						r={radius}
 						fill="transparent"
 						strokeDasharray={circleCircumferance}
@@ -119,6 +123,20 @@ const Fasting = () => {
 	return (
 		<View className="flex-1 justify-center items-center">
 			<Donut />
+			<Button
+				icon="clock"
+				mode="contained"
+				onPress={() => console.log("Pressed")}>
+				End fast now
+			</Button>
+			<View className="flex flex-row gap-8 mt-1">
+				<View>
+					<Text>START TIME</Text>
+				</View>
+				<View>
+					<Text>END TIME</Text>
+				</View>
+			</View>
 		</View>
 	);
 };
