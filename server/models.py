@@ -31,6 +31,7 @@ class JournalEntry(db.Model):
     food_id = db.Column(db.Integer, db.ForeignKey('foods.id'))
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
+
 # One-To-Many relationship User with multiple journal entries.
 class User(UserMixin, db.Model):
     __tablename__ = "users"
@@ -43,3 +44,7 @@ class User(UserMixin, db.Model):
 # Create database tables
 with app.app_context():
     db.create_all()
+
+
+
+
