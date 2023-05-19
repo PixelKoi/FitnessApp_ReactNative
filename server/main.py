@@ -5,7 +5,8 @@ import smtplib
 import os
 from models import app, db
 from serialize import FoodSchema, JournalEntrySchema, UserSchema
-
+with app.app_context():
+    db.create_all()
 
 # initiating my serializers
 food_schema = FoodSchema()

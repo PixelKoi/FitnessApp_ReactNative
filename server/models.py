@@ -28,7 +28,6 @@ class JournalEntry(db.Model):
     __tablename__ = 'journal_entries'
     id = db.Column(db.Integer, primary_key=True)
     date = db.Column(db.DateTime, default=datetime.datetime.now)
-    meal_id = db.Column(db.Integer, db.ForeignKey('meals.id'))
     food_id = db.Column(db.Integer, db.ForeignKey('foods.id'))
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
@@ -42,5 +41,5 @@ class User(UserMixin, db.Model):
 
 
 # Create database tables
-# with app.app_context():
-#     db.create_all()
+with app.app_context():
+    db.create_all()
