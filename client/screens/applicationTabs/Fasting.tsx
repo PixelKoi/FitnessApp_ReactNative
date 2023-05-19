@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import {
 	View,
 	Text,
@@ -11,14 +11,15 @@ import { PaperClipIcon } from "react-native-heroicons/outline";
 import { useNavigation } from "@react-navigation/native";
 import Svg, { G, Circle } from "react-native-svg";
 import { transparent } from "react-native-paper/lib/typescript/src/styles/themes/v2/colors";
-import { Button } from "react-native-paper";
+import { Button, List } from "react-native-paper";
 
+//Graph Animations
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 const AnimatedInput = Animated.createAnimatedComponent(TextInput);
 
 const Donut = ({
 	percentage = 75,
-	radius = 120,
+	radius = 160,
 	strokeWidth = 10,
 	duration = 500,
 	color = "red",
@@ -109,6 +110,9 @@ const Donut = ({
 };
 
 const Fasting = () => {
+	const [expandList, setExpandList] = useState<boolean>(false);
+	const handleExplandList = () => setExpandList(!expandList);
+
 	const navigation = useNavigation();
 	React.useLayoutEffect(() => {
 		navigation.setOptions({
@@ -121,15 +125,22 @@ const Fasting = () => {
 	}, [navigation]);
 
 	return (
-		<View className="flex-1 justify-center items-center">
+		<View className="flex-1 justify-center bg-white">
+			<Text className="text-center mt-4 bg-white	">You're fasting!</Text>
+			<View className="mt-4">
+				<List.Accordion
+					title="Select Activity Level"
+					left={(props) => <List.Icon {...props} icon="pencil" />}
+					expanded={expandList}
+					onPress={handleExplandList}>
+					<List.Item title="16/8 intermittent fast" />
+					<List.Item title="18/4 intermittent fast" />
+					<List.Item title="24hr fast" />
+				</List.Accordion>
+			</View>
 			<Donut />
-			<Button
-				icon="clock"
-				mode="contained"
-				onPress={() => console.log("Pressed")}>
-				End fast now
-			</Button>
-			<View className="flex flex-row gap-8 mt-1">
+
+			<View className="flex flex-row gap-8 justify-center">
 				<View>
 					<Text>START TIME</Text>
 				</View>
@@ -137,6 +148,13 @@ const Fasting = () => {
 					<Text>END TIME</Text>
 				</View>
 			</View>
+			<Button
+				className="my-8 w-60 mx-auto"
+				icon="clock"
+				mode="contained"
+				onPress={() => console.log("Pressed")}>
+				End fast now
+			</Button>
 		</View>
 	);
 };
