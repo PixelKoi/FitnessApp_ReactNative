@@ -1,47 +1,48 @@
-from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
+import datetime
+from flask_login import UserMixin
 from flask_sqlalchemy import SQLAlchemy
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask
 from flask_bootstrap import Bootstrap
-from sqlalchemy.orm import relationship
-from sqlalchemy_utils import  ChoiceType
-
-
-## CHOICES IMPORT
-## https://sqlalchemy-utils.readthedocs.io/en/latest/data_types.html#module-sqlalchemy_utils.types.choice
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '8BYkEfbA606donzWlsih'
 Bootstrap(app)
-app = Flask(__name__)
-
-## CONNECT TO DB
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///basic.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 
-class Journal(db.Model):
-    __tablename__ = 'Journal'
+class Meal(db.Model):
+    __tablename__ = 'meals'
     id = db.Column(db.Integer, primary_key=True)
-    date = db.Column(db.DateTime, )
+    name = db.Column(db.String(100))
 
 
-class Fasting(db.Model):
-    __tablename__ = 'Fasting'
+class Food(db.Model):
+    __tablename__ = 'foods'
     id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100))
+    calories = db.Column(db.Integer)
+    macros = db.Column(db.String(100))
 
 
-class Calendar(db.Model):
-    __tablename__ = 'Calendar'
+class JournalEntry(db.Model):
+    __tablename__ = 'journal_entries'
     id = db.Column(db.Integer, primary_key=True)
+    date = db.Column(db.DateTime, default=datetime.datetime.now)
+    meal_id = db.Column(db.Integer, db.ForeignKey('meals.id'))
+    food_id = db.Column(db.Integer, db.ForeignKey('foods.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
 
 class User(UserMixin, db.Model):
-    __tablename__ = "Users"
+    __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(100), unique=True)
     name = db.Column(db.String(1000))
+    journal_entries = db.relationship('JournalEntry', backref='user', lazy=True)
 
-## CREATE DATABASE
+
+# Create database tables
 with app.app_context():
     db.create_all()
