@@ -15,13 +15,32 @@ Bootstrap(app)
 app = Flask(__name__)
 
 ## CONNECT TO DB
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///posts.db'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///basic.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 
+class Journal(db.Model):
+    __tablename__ = 'Journal'
+    id = db.Column(db.Integer, primary_key=True)
+    date = db.Column(db.DateTime, )
 
+
+class Fasting(db.Model):
+    __tablename__ = 'Fasting'
+    id = db.Column(db.Integer, primary_key=True)
+
+
+class Calendar(db.Model):
+    __tablename__ = 'Calendar'
+    id = db.Column(db.Integer, primary_key=True)
+
+
+class User(UserMixin, db.Model):
+    __tablename__ = "Users"
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(100), unique=True)
+    name = db.Column(db.String(1000))
 
 ## CREATE DATABASE
 with app.app_context():
