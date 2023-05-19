@@ -17,7 +17,7 @@ class Meal(db.Model):
     __tablename__ = 'meals'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100))
-
+4
 # Food table contains information about individual foods, including name, calories, macros
 class Food(db.Model):
     __tablename__ = 'foods'
