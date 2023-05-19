@@ -96,17 +96,17 @@ const UserBioInput = () => {
 		console.log(calBMR);
 		switch (userInfo.goal) {
 			case "1":
-				dispatch(changeDailyCal(calBMR - 500));
+				dispatch(changeDailyCal(Math.round(calBMR - 500)));
 				break;
 			case "2":
-				dispatch(changeDailyCal(calBMR - 1000));
+				dispatch(changeDailyCal(Math.round(calBMR - 1000)));
 				break;
 			default:
-				dispatch(changeDailyCal(calBMR));
+				dispatch(changeDailyCal(Math.round(calBMR)));
 				break;
 		}
 
-		dispatch(changeBMR(calBMR));
+		dispatch(changeBMR(Math.round(calBMR)));
 	};
 
 	//Top Nav on Edit Profile Screen
@@ -129,6 +129,7 @@ const UserBioInput = () => {
 		calAlgo();
 	}, []);
 
+	//Profile Screen
 	const profile = () => {
 		return (
 			<View className="flex-1 ">
@@ -204,6 +205,7 @@ const UserBioInput = () => {
 		);
 	};
 
+	//Edit Profile Screen
 	const editProfile = () => {
 		return (
 			<View>
