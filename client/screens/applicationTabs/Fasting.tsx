@@ -1,15 +1,23 @@
 import React from "react";
-import { View, Text, TouchableOpacity, Animated } from "react-native";
+import {
+	View,
+	Text,
+	TouchableOpacity,
+	Animated,
+	TextInput,
+	StyleSheet,
+} from "react-native";
 import { PaperClipIcon } from "react-native-heroicons/outline";
 import { useNavigation } from "@react-navigation/native";
 import Svg, { G, Circle } from "react-native-svg";
 import { transparent } from "react-native-paper/lib/typescript/src/styles/themes/v2/colors";
 
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
+const AnimatedInput = Animated.createAnimatedComponent(TextInput);
 
 const Donut = ({
 	percentage = 75,
-	radius = 150,
+	radius = 120,
 	strokeWidth = 10,
 	duration = 500,
 	color = "red",
@@ -19,6 +27,8 @@ const Donut = ({
 }) => {
 	const animatedValue = React.useRef(new Animated.Value(0)).current;
 	const circleRef = React.useRef();
+	const inputRef = React.useRef();
+
 	const halfCircle = radius + strokeWidth;
 	const circleCircumferance = 2 * Math.PI * radius;
 	const animation = (toValue) => {
@@ -40,6 +50,11 @@ const Donut = ({
 					circleCircumferance - (circleCircumferance * maxPerc) / 100;
 				circleRef.current.setNativeProps({
 					strokeDashoffset,
+				});
+			}
+			if (inputRef?.current) {
+				inputRef.current.setNativeProps({
+					text: `${Math.round(v.value)} /16`,
 				});
 			}
 		});
@@ -75,6 +90,16 @@ const Donut = ({
 					/>
 				</G>
 			</Svg>
+			<AnimatedInput
+				ref={inputRef}
+				underlineColorAndroid="transparent"
+				editable={false}
+				defaultValue="0"
+				style={[
+					StyleSheet.absoluteFillObject,
+					{ fontSize: radius / 2, color: textColor ?? color },
+					{ fontWeight: "900", textAlign: "center" },
+				]}></AnimatedInput>
 		</View>
 	);
 };
