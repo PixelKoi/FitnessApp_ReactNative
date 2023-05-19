@@ -5,7 +5,6 @@ import smtplib
 import os
 from models import app, db
 
-
 @app.route('/')
 def home(page=1):  # put application's code here
     return render_template('index.html')
