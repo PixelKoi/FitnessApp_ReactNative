@@ -5,14 +5,9 @@ from models import app, db
 ma = Marshmallow(app)
 
 
-class MealSchema(ma.Schema):
-    class Meta:
-        fields = ('id', 'name')
-
-
 class FoodSchema(ma.Schema):
     class Meta:
-        fields = ('id', 'name', 'calories', 'macros')
+        fields = ('id', 'name', 'calories', 'macros', 'meal_category')
 
 
 class JournalEntrySchema(ma.Schema):

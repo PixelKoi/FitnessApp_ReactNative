@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask import Flask
 from flask_bootstrap import Bootstrap
 
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '8BYkEfbA606donzWlsih'
 Bootstrap(app)
@@ -12,12 +13,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 
-# Meal table stores different meal categories (Breakfast, Lunch, Dinner, Snacks)
-class Meal(db.Model):
-    __tablename__ = 'meals'
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100))
-4
 # Food table contains information about individual foods, including name, calories, macros
 class Food(db.Model):
     __tablename__ = 'foods'
@@ -25,6 +20,8 @@ class Food(db.Model):
     name = db.Column(db.String(100))
     calories = db.Column(db.Integer)
     macros = db.Column(db.String(100))
+    meal_category = db.Column(db.String(20))
+
 
 # JournalEntry is each journal, linking a specific meal, food, and user
 class JournalEntry(db.Model):
@@ -45,5 +42,5 @@ class User(UserMixin, db.Model):
 
 
 # Create database tables
-with app.app_context():
-    db.create_all()
+# with app.app_context():
+#     db.create_all()
