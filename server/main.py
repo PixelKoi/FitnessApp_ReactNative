@@ -11,6 +11,11 @@ def home(page=1):  # put application's code here
     return render_template('index.html')
 
 
+# test dummy data for api
+@app.route('/food')
+def food(page=1):  # put application's code here
+    return {"foods": ["Chicken", "BEEF", "PORK"]}
+
 
 
 if __name__ == '__main__':
