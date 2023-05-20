@@ -19,7 +19,7 @@ const AnimatedInput = Animated.createAnimatedComponent(TextInput);
 
 const Donut = ({
 	percentage = 75,
-	radius = 160,
+	radius = 130,
 	strokeWidth = 10,
 	duration = 500,
 	color = "red",
@@ -111,41 +111,60 @@ const Donut = ({
 
 const Fasting = () => {
 	const [expandList, setExpandList] = useState<boolean>(false);
+	const [fasting, setFasting] = useState<String>("16/8 intermittent fast");
 	const handleExplandList = () => setExpandList(!expandList);
 
 	const navigation = useNavigation();
 	React.useLayoutEffect(() => {
 		navigation.setOptions({
-			headerLeft: () => (
-				<TouchableOpacity onPress={() => navigation.goBack()}>
-					<Text>Back</Text>
-				</TouchableOpacity>
-			),
+			headerShown: false,
 		});
 	}, [navigation]);
 
 	return (
-		<View className="flex-1 justify-center bg-white">
-			<Text className="text-center mt-4 bg-white	">You're fasting!</Text>
+		<View className="flex-1 justify-center bg-white mt-14">
+			<Text className="text-center mt-4 bg-white	text-base">
+				You're fasting!
+			</Text>
 			<View className="mt-4">
 				<List.Accordion
-					title="Select Activity Level"
+					style={accordionStyle}
+					title={fasting}
 					left={(props) => <List.Icon {...props} icon="pencil" />}
 					expanded={expandList}
 					onPress={handleExplandList}>
-					<List.Item title="16/8 intermittent fast" />
-					<List.Item title="18/4 intermittent fast" />
-					<List.Item title="24hr fast" />
+					<List.Item
+						title="16/8 intermittent fast"
+						onPress={() => {
+							setFasting("16/8 intermittent fast");
+							setExpandList(false);
+						}}
+					/>
+					<List.Item
+						title="18/4 intermittent fast"
+						onPress={() => {
+							setFasting("18/4 intermittent fast");
+							setExpandList(false);
+						}}
+					/>
+					<List.Item
+						title="24hr fast"
+						onPress={() => {
+							setFasting("24hr fast");
+							setExpandList(false);
+						}}
+					/>
 				</List.Accordion>
 			</View>
+
 			<Donut />
 
 			<View className="flex flex-row gap-8 justify-center">
 				<View>
-					<Text>START TIME</Text>
+					<Text className="text-xs">STARTED TIME</Text>
 				</View>
 				<View>
-					<Text>END TIME</Text>
+					<Text className="text-xs">FAST ENDING </Text>
 				</View>
 			</View>
 			<Button
@@ -160,3 +179,12 @@ const Fasting = () => {
 };
 
 export default Fasting;
+
+const accordionStyle = {
+	backgroundColor: "white",
+	marginVertical: 10,
+	borderRadius: 8,
+	elevation: 2,
+	width: 300,
+	alignSelf: "center",
+};
