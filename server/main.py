@@ -34,7 +34,7 @@ def add_food():
 
 
 
-# test dummy data for api
+# tests dummy data for api
 @app.route('/food')
 def food(page=1):  # put application's code here
     return {"foods": ["Chicken", "BEEF", "PORK"]}
