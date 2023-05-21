@@ -2,7 +2,21 @@
 `It would be fair to refer to the combination of using MySQL for Flask backend and SQLite for local
 storage in the React Native application as part of the overall system architecture. `
 
+**System Architecture Definition**: _The design and organization of various components, technologies, 
+and subsystems that work together to achieve the desired functionality and meet the requirements 
+of the system._
 
+1. **Flask Backend:** Backend server implemented in Flask, which uses MySQL as the primary
+database engine. Handling requests from React Native app, performs business logic, and interacts
+with the MySQL database.
+2. **MySQL Database:**  The MySQL database stores the main data for our application. It is responsible
+for managing the persistence and retrieval of data and is typically hosted on our cloud server (AWS)
+3. **React Native App:** The mobile app developed using React Native, which communicates
+with the Flask backend API to fetch data and perform actions. Utilizes SQLite as a local storage
+mechanism to store specific data locally on the mobile device.
+4. **SQLite Local Storage:** SQLite serves as the local storage solution within the React Native app. 
+It stores data locally on the mobile device, allowing the app to operate offline or to provide
+a more responsive user experience by caching data.
 
 **SQLite**: React Native provides the react-native-sqlite-storage package, which allows you to use SQLite as a local database in our app.
 You can create tables and store specific data from your Flask backend in SQLite
@@ -41,21 +55,3 @@ providing appropriate error handling and feedback to the user.
 ensure that appropriate security measures are in place for both MySQL backend and 
 SQLite local storage. Implement proper authentication, authorization, 
 and data encryption techniques to protect user information and maintain data integrity.
-
-
-**System Architecture Definition**: The design and organization of various components, technologies, 
-and subsystems that work together to achieve the desired functionality and meet the requirements 
-of the system.
-
-
-1. **Flask Backend:** Backend server implemented in Flask, which uses MySQL as the primary
-database engine. Handling requests from React Native app, performs business logic, and interacts
-with the MySQL database.
-2. **MySQL Database:**  The MySQL database stores the main data for our application. It is responsible
-for managing the persistence and retrieval of data and is typically hosted on our cloud server (AWS)
-3. **React Native App:** The mobile app developed using React Native, which communicates
-with the Flask backend API to fetch data and perform actions. Utilizes SQLite as a local storage
-mechanism to store specific data locally on the mobile device.
-4. **SQLite Local Storage:** SQLite serves as the local storage solution within the React Native app. 
-It stores data locally on the mobile device, allowing the app to operate offline or to provide
-a more responsive user experience by caching data.
