@@ -1,16 +1,7 @@
 import React, { useRef, useState } from "react";
-import {
-	View,
-	Text,
-	TouchableOpacity,
-	Animated,
-	TextInput,
-	StyleSheet,
-} from "react-native";
-import { PaperClipIcon } from "react-native-heroicons/outline";
+import { View, Text, Animated, TextInput, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Svg, { G, Circle } from "react-native-svg";
-import { transparent } from "react-native-paper/lib/typescript/src/styles/themes/v2/colors";
 import { Button, List } from "react-native-paper";
 
 //Graph Animations
@@ -121,6 +112,22 @@ const Fasting = () => {
 		});
 	}, [navigation]);
 
+	//fasting states
+	const [startTime, setStartTime] = useState(null);
+	const [endTime, setEndTime] = useState(null);
+
+	const handleButtonClick = () => {
+		const currentDate = new Date();
+		// Assuming a 16-hour fasting cycle
+		const fastingDuration = 16; // in hours
+		const endTime = new Date(
+			currentDate.getTime() + fastingDuration * 60 * 60 * 1000
+		);
+
+		setStartTime(currentDate);
+		setEndTime(endTime);
+	};
+
 	return (
 		<View className="flex-1 justify-center bg-white mt-14">
 			<Text className="text-center mt-4 bg-white	text-base">
@@ -162,16 +169,18 @@ const Fasting = () => {
 			<View className="flex flex-row gap-8 justify-center">
 				<View>
 					<Text className="text-xs">STARTED TIME</Text>
+					{startTime && <Text>{startTime.toLocaleString()}</Text>}
 				</View>
 				<View>
 					<Text className="text-xs">FAST ENDING </Text>
+					{startTime && <Text>{endTime.toLocaleString()}</Text>}
 				</View>
 			</View>
 			<Button
 				className="my-8 w-60 mx-auto"
 				icon="clock"
 				mode="contained"
-				onPress={() => console.log("Pressed")}>
+				onPress={handleButtonClick}>
 				End fast now
 			</Button>
 		</View>
