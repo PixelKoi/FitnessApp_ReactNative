@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { View, Text, Animated, TextInput, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Svg, { G, Circle } from "react-native-svg";
@@ -102,9 +102,7 @@ const Donut2 = ({
 };
 
 const Fasting = () => {
-	const [expandList, setExpandList] = useState<boolean>(false);
-	const handleExplandList = () => setExpandList(!expandList);
-
+	//Top left nav button - remove top nav
 	const navigation = useNavigation();
 	React.useLayoutEffect(() => {
 		navigation.setOptions({
@@ -117,8 +115,14 @@ const Fasting = () => {
 	const [endTime, setEndTime] = useState(null);
 	const [fastTime, setFastTime] = useState<number>(16);
 	const [fasting, setFasting] = useState<String>("16/8 intermittent fast");
-	const [clicked, setClicked] = useState(false);
 	const [fastingDuration, setFastingDuration] = useState(null);
+
+	//Keep track of starting / ending fast button
+	const [clicked, setClicked] = useState(false);
+
+	//handle fasting mode selector
+	const [expandList, setExpandList] = useState<boolean>(false);
+	const handleExplandList = () => setExpandList(!expandList);
 
 	const handleStartFast = () => {
 		const currentDate = new Date();
@@ -141,10 +145,12 @@ const Fasting = () => {
 		}
 	};
 
+	//process time displayed - remove seconds and leading zero
 	const getTimeStringWithoutSeconds = (time) => {
 		return format(time, "h:mm a").replace(/^0/, "");
 	};
 
+	//Get day for start and end time
 	const getWeekday = (date) => {
 		const weekday = getDay(date);
 		const weekdays = ["Sund", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"];
@@ -189,7 +195,12 @@ const Fasting = () => {
 			</View>
 
 			<View className="mt-10">
-				<Donut fastTime={fastTime} />
+				<Donut
+					fastTime={fastTime}
+					timePassed={fastTime}
+					startTime={startTime}
+					endTime={endTime}
+				/>
 			</View>
 
 			<View className="flex flex-row gap-8 justify-center mt-4">
@@ -217,6 +228,7 @@ const Fasting = () => {
 				onPress={clicked === false ? handleStartFast : handleEndFast}>
 				{clicked === false ? "Start fast" : "End fast now"}
 			</Button>
+			<Text>Time Fasted: {fastingDuration}</Text>
 		</View>
 	);
 };

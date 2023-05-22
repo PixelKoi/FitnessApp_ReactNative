@@ -1,6 +1,11 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { View, Text, Animated, TextInput, StyleSheet } from "react-native";
 import Svg, { G, Circle } from "react-native-svg";
+import {
+	differenceInSeconds,
+	formatDuration,
+	intervalToDuration,
+} from "date-fns";
 
 //Graph Animations
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
@@ -9,18 +14,23 @@ const AnimatedInput = Animated.createAnimatedComponent(TextInput);
 const Donut = (
 	props,
 	{
-		percentage = 75,
 		radius = 130,
 		strokeWidth = 10,
 		duration = 500,
-		color = "red",
+		color = "blue",
 		delay = 0,
 		textColor,
 		max = props.fastTime,
+		timePassed = props.timePassed,
+		percentage = (props.timePassed / props.fastTime) * 100,
+		startTime = props.startTime,
+		endTime = props.endTime,
 	}
 ) => {
-	const [fastTime, setFastTime] = useState<number>(16);
 	const animatedValue = React.useRef(new Animated.Value(0)).current;
+	const [fastingDuration, setFastingDuration] = useState(null);
+	const [countdown, setCountdown] = useState(null);
+
 	const circleRef = useRef(null);
 	const inputRef = useRef(null);
 
@@ -35,11 +45,47 @@ const Donut = (
 		}).start();
 	};
 
+	// React.useEffect(() => {
+	// 	let countdownInterval;
+	// 	if (startTime && endTime) {
+	// 		const timeRemaining = differenceInSeconds(endTime, new Date());
+	// 		if (timeRemaining > 0) {
+	// 			setCountdown(
+	// 				formatDuration(
+	// 					intervalToDuration({ start: 0, end: timeRemaining * 1000 })
+	// 				)
+	// 			);
+	// 			countdownInterval = setInterval(() => {
+	// 				const updatedTimeRemaining = differenceInSeconds(endTime, new Date());
+	// 				if (updatedTimeRemaining <= 0) {
+	// 					clearInterval(countdownInterval);
+	// 					setCountdown(null);
+	// 				} else {
+	// 					setCountdown(
+	// 						formatDuration(
+	// 							intervalToDuration({
+	// 								start: 0,
+	// 								end: updatedTimeRemaining * 1000,
+	// 							})
+	// 						)
+	// 					);
+	// 				}
+	// 			}, 1000);
+	// 		} else {
+	// 			setCountdown(null);
+	// 		}
+	// 	}
+
+	// 	return () => {
+	// 		clearInterval(countdownInterval);
+	// 	};
+	// }, [startTime, endTime]);
+
 	React.useEffect(() => {
 		animation(percentage);
 		animatedValue.addListener((v) => {
 			if (circleRef?.current) {
-				const maxPerc = (11 / max) * 100;
+				const maxPerc = (timePassed / max) * 100;
 				const strokeDashoffset =
 					circleCircumferance - (circleCircumferance * maxPerc) / 100;
 				circleRef.current.setNativeProps({
@@ -100,6 +146,12 @@ const Donut = (
 					{ fontSize: radius / 2, color: textColor ?? color },
 					{ fontWeight: "900", textAlign: "center" },
 				]}></AnimatedInput>
+			{/* {countdown && (
+				<Text>
+					Countdown: {countdown.hours}h {countdown.minutes}m {countdown.seconds}
+					s
+				</Text>
+			)} */}
 		</View>
 	);
 };
