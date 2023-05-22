@@ -6,103 +6,8 @@ import { Button, List } from "react-native-paper";
 import { format, add, startOfWeek, getDay } from "date-fns";
 import Donut from "./Donut";
 
-//Graph Animations
-const AnimatedCircle = Animated.createAnimatedComponent(Circle);
-const AnimatedInput = Animated.createAnimatedComponent(TextInput);
-
-const Donut2 = ({
-	percentage = 75,
-	radius = 130,
-	strokeWidth = 10,
-	duration = 500,
-	color = "red",
-	delay = 0,
-	textColor,
-	max = 16,
-}) => {
-	const animatedValue = React.useRef(new Animated.Value(0)).current;
-	const circleRef = useRef(null);
-	const inputRef = useRef(null);
-
-	const halfCircle = radius + strokeWidth;
-	const circleCircumferance = 2 * Math.PI * radius;
-	const animation = (toValue) => {
-		return Animated.timing(animatedValue, {
-			toValue,
-			duration,
-			delay,
-			useNativeDriver: true,
-		}).start();
-	};
-
-	React.useEffect(() => {
-		animation(percentage);
-		animatedValue.addListener((v) => {
-			if (circleRef?.current) {
-				const maxPerc = (11 / max) * 100;
-				const strokeDashoffset =
-					circleCircumferance - (circleCircumferance * maxPerc) / 100;
-				circleRef.current.setNativeProps({
-					strokeDashoffset,
-				});
-			}
-			if (inputRef?.current) {
-				inputRef.current.setNativeProps({
-					text: `${Math.round(v.value)}`,
-				});
-			}
-		});
-		return () => {
-			animatedValue.removeAllListeners();
-		};
-	}, [max, percentage]);
-
-	return (
-		<View className="flex-1 justify-center items-center">
-			<Svg
-				width={radius * 2}
-				height={radius * 2}
-				viewBox={`0 0 ${halfCircle * 2} ${halfCircle * 2}`}>
-				<G rotation="-90" origin={`${halfCircle}, ${halfCircle}`}>
-					<Circle
-						cx="50%"
-						cy="50%"
-						stroke={color}
-						strokeWidth={strokeWidth}
-						r={radius}
-						fill="transparent"
-						strokeOpacity={0.2}
-					/>
-					<AnimatedCircle
-						ref={circleRef}
-						cx="50%"
-						cy="50%"
-						stroke={color}
-						strokeWidth={20}
-						r={radius}
-						fill="transparent"
-						strokeDasharray={circleCircumferance}
-						strokeDashoffset={circleCircumferance}
-						strokeLinecap="round"
-					/>
-				</G>
-			</Svg>
-			<AnimatedInput
-				ref={inputRef}
-				underlineColorAndroid="transparent"
-				editable={false}
-				defaultValue="0"
-				style={[
-					StyleSheet.absoluteFillObject,
-					{ fontSize: radius / 2, color: textColor ?? color },
-					{ fontWeight: "900", textAlign: "center" },
-				]}></AnimatedInput>
-		</View>
-	);
-};
-
 const Fasting = () => {
-	//Top left nav button - remove top nav
+	//Top left nav button - removed top nav
 	const navigation = useNavigation();
 	React.useLayoutEffect(() => {
 		navigation.setOptions({
@@ -124,6 +29,7 @@ const Fasting = () => {
 	const [expandList, setExpandList] = useState<boolean>(false);
 	const handleExplandList = () => setExpandList(!expandList);
 
+	//start fast function
 	const handleStartFast = () => {
 		const currentDate = new Date();
 
@@ -137,6 +43,7 @@ const Fasting = () => {
 		setFastingDuration(null);
 	};
 
+	//end fast function
 	const handleEndFast = () => {
 		if (startTime && endTime) {
 			const duration = (endTime - startTime) / (60 * 1000); // Convert to minutes
@@ -206,18 +113,22 @@ const Fasting = () => {
 			<View className="flex flex-row gap-8 justify-center mt-4">
 				<View>
 					<Text className="text-xs">STARTED TIME</Text>
-					{startTime && (
+					{startTime ? (
 						<Text>
 							{getWeekday(startTime)}, {getTimeStringWithoutSeconds(startTime)}
 						</Text>
+					) : (
+						<View />
 					)}
 				</View>
 				<View>
 					<Text className="text-xs">FAST ENDING </Text>
-					{startTime && (
+					{startTime ? (
 						<Text>
 							{getWeekday(endTime)}, {getTimeStringWithoutSeconds(endTime)}
 						</Text>
+					) : (
+						<View />
 					)}
 				</View>
 			</View>
