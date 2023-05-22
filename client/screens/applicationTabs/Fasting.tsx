@@ -15,6 +15,8 @@ const Fasting = () => {
 		});
 	}, [navigation]);
 
+	const countdownInterval = useRef(null);
+
 	//fasting states
 	const [startTime, setStartTime] = useState(null);
 	const [endTime, setEndTime] = useState(null);
@@ -43,12 +45,13 @@ const Fasting = () => {
 		setFastingDuration(null);
 	};
 
-	//end fast function
 	const handleEndFast = () => {
 		if (startTime && endTime) {
 			const duration = (endTime - startTime) / (60 * 1000); // Convert to minutes
 			setFastingDuration(duration);
 			setClicked(false);
+			clearInterval(countdownInterval.current); // Clear the countdown interval
+			setCountdown(null); // Reset the countdown state
 		}
 	};
 
@@ -63,6 +66,38 @@ const Fasting = () => {
 		const weekdays = ["Sund", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"];
 		return weekdays[weekday];
 	};
+
+	const [countdown, setCountdown] = useState(null);
+
+	//updates countdown once fasting starts
+	useEffect(() => {
+		if (startTime && endTime) {
+			countdownInterval.current = setInterval(() => {
+				const remainingTime = endTime - new Date();
+				if (remainingTime > 0) {
+					const countdownHours = Math.floor(remainingTime / (60 * 60 * 1000));
+					const countdownMinutes = Math.floor(
+						(remainingTime % (60 * 60 * 1000)) / (60 * 1000)
+					);
+					const countdownSeconds = Math.floor(
+						(remainingTime % (60 * 1000)) / 1000
+					);
+					setCountdown({
+						hours: countdownHours,
+						minutes: countdownMinutes,
+						seconds: countdownSeconds,
+					});
+				} else {
+					clearInterval(countdownInterval);
+					setCountdown(null);
+				}
+			}, 1000);
+		}
+
+		return () => {
+			clearInterval(countdownInterval);
+		};
+	}, [startTime, endTime]);
 
 	return (
 		<View className="flex-1 justify-center bg-white">
@@ -107,6 +142,7 @@ const Fasting = () => {
 					timePassed={fastTime}
 					startTime={startTime}
 					endTime={endTime}
+					countdown={countdown}
 				/>
 			</View>
 

@@ -25,11 +25,11 @@ const Donut = (
 		percentage = (props.timePassed / props.fastTime) * 100,
 		startTime = props.startTime,
 		endTime = props.endTime,
+		countdown = props.countdown,
 	}
 ) => {
 	const animatedValue = React.useRef(new Animated.Value(0)).current;
 	const [fastingDuration, setFastingDuration] = useState(null);
-	const [countdown, setCountdown] = useState(null);
 
 	const circleRef = useRef(null);
 	const inputRef = useRef(null);
@@ -44,42 +44,6 @@ const Donut = (
 			useNativeDriver: true,
 		}).start();
 	};
-
-	// React.useEffect(() => {
-	// 	let countdownInterval;
-	// 	if (startTime && endTime) {
-	// 		const timeRemaining = differenceInSeconds(endTime, new Date());
-	// 		if (timeRemaining > 0) {
-	// 			setCountdown(
-	// 				formatDuration(
-	// 					intervalToDuration({ start: 0, end: timeRemaining * 1000 })
-	// 				)
-	// 			);
-	// 			countdownInterval = setInterval(() => {
-	// 				const updatedTimeRemaining = differenceInSeconds(endTime, new Date());
-	// 				if (updatedTimeRemaining <= 0) {
-	// 					clearInterval(countdownInterval);
-	// 					setCountdown(null);
-	// 				} else {
-	// 					setCountdown(
-	// 						formatDuration(
-	// 							intervalToDuration({
-	// 								start: 0,
-	// 								end: updatedTimeRemaining * 1000,
-	// 							})
-	// 						)
-	// 					);
-	// 				}
-	// 			}, 1000);
-	// 		} else {
-	// 			setCountdown(null);
-	// 		}
-	// 	}
-
-	// 	return () => {
-	// 		clearInterval(countdownInterval);
-	// 	};
-	// }, [startTime, endTime]);
 
 	React.useEffect(() => {
 		animation(percentage);
@@ -146,12 +110,12 @@ const Donut = (
 					{ fontSize: radius / 2, color: textColor ?? color },
 					{ fontWeight: "900", textAlign: "center" },
 				]}></AnimatedInput>
-			{/* {countdown && (
+			{countdown && (
 				<Text>
-					Countdown: {countdown.hours}h {countdown.minutes}m {countdown.seconds}
-					s
+					{props.countdown.hours}h {props.countdown.minutes}m{" "}
+					{props.countdown.seconds}s
 				</Text>
-			)} */}
+			)}
 		</View>
 	);
 };
