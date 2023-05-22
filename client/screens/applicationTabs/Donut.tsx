@@ -69,9 +69,9 @@ const Donut = (
 
 	return (
 		<View className="flex justify-center items-center">
-			<View className="ml-auto mr-10 flex items-center justify-center w-10 h-10 rounded-full bg-gray-500">
+			{/* <View className="ml-auto mr-10 flex items-center justify-center w-10 h-10 rounded-full bg-gray-500">
 				<Text>{max}h</Text>
-			</View>
+			</View> */}
 			<Svg
 				width={radius * 2}
 				height={radius * 2}
@@ -100,7 +100,15 @@ const Donut = (
 					/>
 				</G>
 			</Svg>
-			<AnimatedInput
+			{countdown ? (
+				<Text className="text-3xl	 text-center absolute">
+					{props.countdown.hours}:{props.countdown.minutes}:
+					{props.countdown.seconds}
+				</Text>
+			) : (
+				<Text className="text-3xl	 text-center absolute">00:00:00</Text>
+			)}
+			{/* <AnimatedInput
 				ref={inputRef}
 				underlineColorAndroid="transparent"
 				editable={false}
@@ -109,13 +117,14 @@ const Donut = (
 					StyleSheet.absoluteFillObject,
 					{ fontSize: radius / 2, color: textColor ?? color },
 					{ fontWeight: "900", textAlign: "center" },
-				]}></AnimatedInput>
-			{countdown && (
-				<Text>
-					{props.countdown.hours}h {props.countdown.minutes}m{" "}
-					{props.countdown.seconds}s
-				</Text>
-			)}
+				]}>
+				{countdown && (
+					<Text className="text-xs">
+						{props.countdown.hours}h {props.countdown.minutes}m{" "}
+						{props.countdown.seconds}s
+					</Text>
+				)}
+			</AnimatedInput> */}
 		</View>
 	);
 };
