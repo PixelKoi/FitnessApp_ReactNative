@@ -3,6 +3,7 @@ import { View, Text, Animated, TextInput, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Svg, { G, Circle } from "react-native-svg";
 import { Button, List } from "react-native-paper";
+import { format, add, startOfWeek, getDay } from "date-fns";
 
 //Graph Animations
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
@@ -115,17 +116,35 @@ const Fasting = () => {
 	//fasting states
 	const [startTime, setStartTime] = useState(null);
 	const [endTime, setEndTime] = useState(null);
+	const [fastingDuration, setFastingDuration] = useState(null);
 
-	const handleButtonClick = () => {
+	const handleStartFast = () => {
 		const currentDate = new Date();
+
 		// Assuming a 16-hour fasting cycle
-		const fastingDuration = 16; // in hours
-		const endTime = new Date(
-			currentDate.getTime() + fastingDuration * 60 * 60 * 1000
-		);
+		const duration = 16; // in hours
+		const endTime = add(currentDate, { hours: duration });
 
 		setStartTime(currentDate);
 		setEndTime(endTime);
+		setFastingDuration(null);
+	};
+
+	const handleEndFast = () => {
+		if (startTime && endTime) {
+			const duration = (endTime - startTime) / (60 * 1000); // Convert to minutes
+			setFastingDuration(duration);
+		}
+	};
+
+	const getTimeStringWithoutSeconds = (time) => {
+		return format(time, "h:mm a").replace(/^0/, "");
+	};
+
+	const getWeekday = (date) => {
+		const weekday = getDay(date);
+		const weekdays = ["Sund", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"];
+		return weekdays[weekday];
 	};
 
 	return (
@@ -169,18 +188,26 @@ const Fasting = () => {
 			<View className="flex flex-row gap-8 justify-center">
 				<View>
 					<Text className="text-xs">STARTED TIME</Text>
-					{startTime && <Text>{startTime.toLocaleString()}</Text>}
+					{startTime && (
+						<Text>
+							{getWeekday(startTime)}, {getTimeStringWithoutSeconds(startTime)}
+						</Text>
+					)}
 				</View>
 				<View>
 					<Text className="text-xs">FAST ENDING </Text>
-					{startTime && <Text>{endTime.toLocaleString()}</Text>}
+					{startTime && (
+						<Text>
+							{getWeekday(endTime)}, {getTimeStringWithoutSeconds(endTime)}
+						</Text>
+					)}
 				</View>
 			</View>
 			<Button
 				className="my-8 w-60 mx-auto"
 				icon="clock"
 				mode="contained"
-				onPress={handleButtonClick}>
+				onPress={handleStartFast}>
 				End fast now
 			</Button>
 		</View>
