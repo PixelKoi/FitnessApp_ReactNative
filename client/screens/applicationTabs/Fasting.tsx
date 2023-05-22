@@ -88,14 +88,14 @@ const Fasting = () => {
 						seconds: countdownSeconds,
 					});
 				} else {
-					clearInterval(countdownInterval);
+					clearInterval(countdownInterval.current);
 					setCountdown(null);
 				}
 			}, 1000);
 		}
 
 		return () => {
-			clearInterval(countdownInterval);
+			clearInterval(countdownInterval.current);
 		};
 	}, [startTime, endTime]);
 
