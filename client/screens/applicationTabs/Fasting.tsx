@@ -116,6 +116,7 @@ const Fasting = () => {
 	//fasting states
 	const [startTime, setStartTime] = useState(null);
 	const [endTime, setEndTime] = useState(null);
+	const [clicked, setClicked] = useState(false);
 	const [fastingDuration, setFastingDuration] = useState(null);
 
 	const handleStartFast = () => {
@@ -127,6 +128,7 @@ const Fasting = () => {
 
 		setStartTime(currentDate);
 		setEndTime(endTime);
+		setClicked(true);
 		setFastingDuration(null);
 	};
 
@@ -134,6 +136,7 @@ const Fasting = () => {
 		if (startTime && endTime) {
 			const duration = (endTime - startTime) / (60 * 1000); // Convert to minutes
 			setFastingDuration(duration);
+			setClicked(false);
 		}
 	};
 
@@ -207,8 +210,8 @@ const Fasting = () => {
 				className="my-8 w-60 mx-auto"
 				icon="clock"
 				mode="contained"
-				onPress={handleStartFast}>
-				End fast now
+				onPress={clicked === false ? handleStartFast : handleEndFast}>
+				{clicked === false ? "Start fast" : "End fast now"}
 			</Button>
 		</View>
 	);
