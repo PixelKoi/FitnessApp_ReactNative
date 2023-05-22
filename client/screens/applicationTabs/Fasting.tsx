@@ -1,9 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
-import { View, Text, Animated, TextInput, StyleSheet } from "react-native";
+import { View, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import Svg, { G, Circle } from "react-native-svg";
 import { Button, List } from "react-native-paper";
-import { format, add, startOfWeek, getDay } from "date-fns";
+import { format, add, getDay } from "date-fns";
 import Donut from "./Donut";
 
 const Fasting = () => {
