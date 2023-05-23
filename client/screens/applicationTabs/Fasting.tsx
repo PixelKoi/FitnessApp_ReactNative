@@ -3,7 +3,7 @@ import { View, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Button, List } from "react-native-paper";
 import { format, add, getDay, addSeconds, differenceInSeconds } from "date-fns";
-import Donut from "./Donut";
+import FastingTimer from "./FastingDonutGraph";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { setEndTime, setStartTime } from "../../features/user/fasting-slice";
 const Fasting = () => {
@@ -139,7 +139,7 @@ const Fasting = () => {
 
 	return (
 		<View className="flex-1 justify-center bg-white">
-			<View className="flex flex-row justify-center gap-4">
+			{/* <View className="flex flex-row justify-center gap-4">
 				<Button
 					className="text-center w-40 bg-blue text-base"
 					icon="clock"
@@ -152,7 +152,7 @@ const Fasting = () => {
 					mode="contained">
 					Meditation
 				</Button>
-			</View>
+			</View> */}
 			<View className="mt-4">
 				<List.Accordion
 					style={accordionStyle}
@@ -190,7 +190,7 @@ const Fasting = () => {
 				<Text>{fastTime}h</Text>
 			</View>
 			<View className="mt-10">
-				<Donut
+				<FastingTimer
 					fastTime={fastTime}
 					timePassed={fastTime}
 					startTime={startTime}
@@ -229,8 +229,8 @@ const Fasting = () => {
 				onPress={clicked === false ? handleStartFast : handleEndFast}>
 				{clicked === false ? "Start fast" : "End fast now"}
 			</Button>
-			<Text>Fasting started: </Text>
-			<Text>Time Fasted: {fastingDuration}</Text>
+			{/* <Text>Fasting started: </Text>
+			<Text>Time Fasted: {fastingDuration}</Text> */}
 		</View>
 	);
 };

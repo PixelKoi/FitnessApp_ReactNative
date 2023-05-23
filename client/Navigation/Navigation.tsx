@@ -9,6 +9,7 @@ import Proflile from "../screens/applicationTabs/Profile";
 import Fasting from "../screens/applicationTabs/Fasting";
 import Diary from "../screens/applicationTabs/Diary";
 import Dashboard from "../screens/applicationTabs/Dashboard";
+import Timer from "../screens/applicationTabs/Timer";
 //nav imports
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
@@ -137,7 +138,7 @@ const Navigation = ({ session }: { session: Session }) => {
 				/>
 				<Tab.Screen
 					name="Fasting"
-					component={Fasting}
+					component={Timer}
 					options={{
 						tabBarIcon: ({ color, size }) => (
 							<ClockIcon name="ios-add" size={20} color="black" />

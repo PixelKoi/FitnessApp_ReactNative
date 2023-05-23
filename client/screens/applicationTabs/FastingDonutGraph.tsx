@@ -4,9 +4,8 @@ import Svg, { G, Circle } from "react-native-svg";
 
 //Graph Animations
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
-const AnimatedInput = Animated.createAnimatedComponent(TextInput);
 
-const Donut = (
+const FastingDonutGraph = (
 	props,
 	{
 		radius = 130,
@@ -91,4 +90,4 @@ const Donut = (
 	);
 };
 
-export default Donut;
+export default FastingDonutGraph;

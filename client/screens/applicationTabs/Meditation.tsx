@@ -3,7 +3,7 @@ import { View, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Button, List } from "react-native-paper";
 import { format, add, getDay, addSeconds, differenceInSeconds } from "date-fns";
-import Donut from "./Donut";
+import Donut from "./FastingDonutGraph";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { setEndTime, setStartTime } from "../../features/user/fasting-slice";
 const Meditation = () => {
@@ -139,20 +139,6 @@ const Meditation = () => {
 
 	return (
 		<View className="flex-1 justify-center bg-white">
-			<View className="flex flex-row justify-center gap-4">
-				<Button
-					className="text-center bg-blue text-base"
-					icon="clock"
-					mode="contained">
-					Fasting
-				</Button>
-				<Button
-					icon="brain"
-					className="text-center bg-blue text-base"
-					mode="contained">
-					Meditation
-				</Button>
-			</View>
 			<View className="mt-4">
 				<List.Accordion
 					style={accordionStyle}
@@ -202,7 +188,7 @@ const Meditation = () => {
 
 			<View className="flex flex-row gap-8 justify-center mt-4">
 				<View>
-					<Text className="text-xs">STARTED TIME</Text>
+					<Text className="text-xs">START</Text>
 					{startTime ? (
 						<Text>
 							{getWeekday(startTime)}, {getTimeStringWithoutSeconds(startTime)}
@@ -212,7 +198,7 @@ const Meditation = () => {
 					)}
 				</View>
 				<View>
-					<Text className="text-xs">FAST ENDING </Text>
+					<Text className="text-xs">END</Text>
 					{startTime ? (
 						<Text>
 							{getWeekday(endTime)}, {getTimeStringWithoutSeconds(endTime)}
@@ -224,13 +210,11 @@ const Meditation = () => {
 			</View>
 			<Button
 				className="my-4 w-60 mx-auto"
-				icon="clock"
+				icon="brain"
 				mode="contained"
 				onPress={clicked === false ? handleStartFast : handleEndFast}>
-				{clicked === false ? "Start fast" : "End fast now"}
+				{clicked === false ? "Start Meditating" : "End Meditating"}
 			</Button>
-			<Text>Fasting started: </Text>
-			<Text>Time Fasted: {fastingDuration}</Text>
 		</View>
 	);
 };
