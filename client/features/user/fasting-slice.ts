@@ -1,16 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { format } from "date-fns";
 
 interface FastingState {
-	startDay: Date;
-	endDay: Date;
+	startDay: string;
+	endDay: string;
 	startTime: Date;
 	endTime: Date;
 }
 
 const initialState: FastingState = {
-	startDay: new Date(),
+	startDay: format(new Date(), "MM-dd-yyyy"),
+	endDay: format(new Date(), "MM-dd-yyyy"),
 	startTime: new Date(),
-	endDay: new Date(),
 	endTime: new Date(),
 };
 

@@ -77,7 +77,7 @@ const Donut = (
 				</G>
 			</Svg>
 			<Text className="text-base text-center absolute top-14">
-				Elapsed: {props.elapsed}
+				Elapsed: {props.elapsed}%
 			</Text>
 			{countdown ? (
 				<Text className="text-3xl text-center absolute">

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { View, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Button, List } from "react-native-paper";
-import { format, add, getDay } from "date-fns";
+import { format, add, getDay, addSeconds, differenceInSeconds } from "date-fns";
 import Donut from "./Donut";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { setEndTime, setStartTime } from "../../features/user/fasting-slice";
@@ -17,13 +17,14 @@ const Fasting = () => {
 
 	const countdownInterval = useRef(null);
 
+	//Call to fasting redux
 	const fastingInfo = useAppSelector((state) => state.fasting);
 	const dispatch = useAppDispatch();
 
 	//fasting states
 	const [startTime, setStartTime] = useState(null);
 	const [endTime, setEndTime] = useState(null);
-	const [fastTime, setFastTime] = useState<number>(16);
+	const [fastTime, setFastTime] = useState<number>(1);
 	const [fasting, setFasting] = useState<String>("16/8 intermittent fast");
 	const [fastingDuration, setFastingDuration] = useState(null);
 	const [elapsedTimePercentage, setElapsedTimePercentage] = useState(0);
@@ -106,7 +107,7 @@ const Fasting = () => {
 	}, [startTime, endTime]);
 
 	//updates elapsed
-	useEffect(() => {
+	const updateElapsedTime = () => {
 		if (startTime && endTime) {
 			const currentTime = new Date();
 			const elapsedTime = currentTime - startTime; // Elapsed time in milliseconds
@@ -115,7 +116,26 @@ const Fasting = () => {
 			const roundedPercentage = percentage.toFixed(0);
 			setElapsedTimePercentage(roundedPercentage);
 		}
-	}, [startTime, endTime]);
+	};
+	useEffect(() => {
+		// Call the updateElapsedTime function immediately
+		updateElapsedTime();
+
+		// Update elapsed time periodically (every second)
+		const intervalId = setInterval(updateElapsedTime, 1000);
+
+		// Clean up the interval on component unmount
+		return () => clearInterval(intervalId);
+	}, [startTime, endTime]); // Add startTime and endTime to the dependency array
+
+	// Use another useEffect to update elapsedTimePercentage when currentTime changes
+	useEffect(() => {
+		const intervalId = setInterval(() => {
+			updateElapsedTime();
+		}, 1000);
+
+		return () => clearInterval(intervalId);
+	}, []); // Empty dependency array to only run once on component mount
 
 	return (
 		<View className="flex-1 justify-center bg-white">
@@ -196,6 +216,7 @@ const Fasting = () => {
 				onPress={clicked === false ? handleStartFast : handleEndFast}>
 				{clicked === false ? "Start fast" : "End fast now"}
 			</Button>
+			<Text>Fasting started: </Text>
 			<Text>Time Fasted: {fastingDuration}</Text>
 		</View>
 	);
