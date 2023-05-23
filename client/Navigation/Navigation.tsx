@@ -8,6 +8,7 @@ import QuickLog from "../screens/applicationTabs/QuickLog";
 import Proflile from "../screens/applicationTabs/Profile";
 import Fasting from "../screens/applicationTabs/Fasting";
 import Diary from "../screens/applicationTabs/Diary";
+import Dashboard from "../screens/applicationTabs/Dashboard";
 //nav imports
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
@@ -16,6 +17,7 @@ import {
 	BookOpenIcon,
 	ClockIcon,
 	MagnifyingGlassIcon,
+	SquaresPlusIcon,
 	UserCircleIcon,
 } from "react-native-heroicons/outline";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
@@ -106,6 +108,15 @@ const Navigation = ({ session }: { session: Session }) => {
 						borderTopColor: "transparent",
 					},
 				}}>
+				<Tab.Screen
+					name="Dashboard"
+					component={Dashboard}
+					options={{
+						tabBarIcon: ({ color, size }) => (
+							<SquaresPlusIcon name="ios-add" size={20} color="black" />
+						),
+					}}
+				/>
 				<Tab.Screen
 					name="QuickLog"
 					component={QuickLog}

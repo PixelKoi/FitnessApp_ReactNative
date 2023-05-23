@@ -6,7 +6,7 @@ import { format, add, getDay, addSeconds, differenceInSeconds } from "date-fns";
 import Donut from "./Donut";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { setEndTime, setStartTime } from "../../features/user/fasting-slice";
-const Fasting = () => {
+const Meditation = () => {
 	//Top left nav button - removed top nav
 	const navigation = useNavigation();
 	React.useLayoutEffect(() => {
@@ -141,14 +141,14 @@ const Fasting = () => {
 		<View className="flex-1 justify-center bg-white">
 			<View className="flex flex-row justify-center gap-4">
 				<Button
-					className="text-center w-40 bg-blue text-base"
+					className="text-center bg-blue text-base"
 					icon="clock"
 					mode="contained">
 					Fasting
 				</Button>
 				<Button
 					icon="brain"
-					className="text-center w-40 bg-blue text-base"
+					className="text-center bg-blue text-base"
 					mode="contained">
 					Meditation
 				</Button>
@@ -235,7 +235,7 @@ const Fasting = () => {
 	);
 };
 
-export default Fasting;
+export default Meditation;
 
 const accordionStyle = {
 	backgroundColor: "white",
