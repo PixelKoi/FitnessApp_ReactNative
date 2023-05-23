@@ -29,7 +29,6 @@ const Donut = (
 	}
 ) => {
 	const animatedValue = React.useRef(new Animated.Value(0)).current;
-	const [fastingDuration, setFastingDuration] = useState(null);
 
 	const circleRef = useRef(null);
 	const inputRef = useRef(null);
@@ -45,27 +44,27 @@ const Donut = (
 		}).start();
 	};
 
-	React.useEffect(() => {
-		animation(percentage);
-		animatedValue.addListener((v) => {
-			if (circleRef?.current) {
-				const maxPerc = (timePassed / max) * 100;
-				const strokeDashoffset =
-					circleCircumferance - (circleCircumferance * maxPerc) / 100;
-				circleRef.current.setNativeProps({
-					strokeDashoffset,
-				});
-			}
-			if (inputRef?.current) {
-				inputRef.current.setNativeProps({
-					text: `${Math.round(v.value)}`,
-				});
-			}
-		});
-		return () => {
-			animatedValue.removeAllListeners();
-		};
-	}, [max, percentage]);
+	// React.useEffect(() => {
+	// 	animation(percentage);
+	// 	animatedValue.addListener((v) => {
+	// 		if (circleRef?.current) {
+	// 			const maxPerc = (timePassed / max) * 100;
+	// 			const strokeDashoffset =
+	// 				circleCircumferance - (circleCircumferance * maxPerc) / 100;
+	// 			circleRef.current.setNativeProps({
+	// 				strokeDashoffset,
+	// 			});
+	// 		}
+	// 		if (inputRef?.current) {
+	// 			inputRef.current.setNativeProps({
+	// 				text: `${Math.round(v.value)}`,
+	// 			});
+	// 		}
+	// 	});
+	// 	return () => {
+	// 		animatedValue.removeAllListeners();
+	// 	};
+	// }, [max, percentage]);
 
 	return (
 		<View className="flex justify-center items-center">
@@ -92,12 +91,14 @@ const Donut = (
 						r={radius}
 						fill="transparent"
 						strokeDasharray={circleCircumferance}
-						strokeDashoffset={circleCircumferance}
+						strokeDashoffset={802}
 						strokeLinecap="round"
 					/>
 				</G>
 			</Svg>
-			<Text className="text-base text-center absolute top-14">Elapsed:</Text>
+			<Text className="text-base text-center absolute top-14">
+				Elapsed: {props.elapsed}
+			</Text>
 			{countdown ? (
 				<Text className="text-3xl text-center absolute">
 					{props.countdown.hours}:{props.countdown.minutes}:

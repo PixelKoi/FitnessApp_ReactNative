@@ -22,6 +22,7 @@ const Fasting = () => {
 	const [fastTime, setFastTime] = useState<number>(16);
 	const [fasting, setFasting] = useState<String>("16/8 intermittent fast");
 	const [fastingDuration, setFastingDuration] = useState(null);
+	const [elapsedTimePercentage, setElapsedTimePercentage] = useState(0);
 
 	//Keep track of starting / ending fast button
 	const [clicked, setClicked] = useState(false);
@@ -98,6 +99,18 @@ const Fasting = () => {
 		};
 	}, [startTime, endTime]);
 
+	//updates elapsed
+	useEffect(() => {
+		if (startTime && endTime) {
+			const currentTime = new Date();
+			const elapsedTime = currentTime - startTime; // Elapsed time in milliseconds
+			const totalTime = endTime - startTime; // Total fasting duration in milliseconds
+			const percentage = (elapsedTime / totalTime) * 100;
+			const roundedPercentage = percentage.toFixed(0);
+			setElapsedTimePercentage(roundedPercentage);
+		}
+	}, [startTime, endTime]);
+
 	return (
 		<View className="flex-1 justify-center bg-white">
 			<Text className="text-center bg-white text-base">You're fasting!</Text>
@@ -144,6 +157,7 @@ const Fasting = () => {
 					startTime={startTime}
 					endTime={endTime}
 					countdown={countdown}
+					elapsed={elapsedTimePercentage}
 				/>
 			</View>
 
