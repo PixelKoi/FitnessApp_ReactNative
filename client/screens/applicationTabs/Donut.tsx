@@ -69,9 +69,6 @@ const Donut = (
 
 	return (
 		<View className="flex justify-center items-center">
-			{/* <View className="ml-auto mr-10 flex items-center justify-center w-10 h-10 rounded-full bg-gray-500">
-				<Text>{max}h</Text>
-			</View> */}
 			<Svg
 				width={radius * 2}
 				height={radius * 2}
@@ -100,15 +97,22 @@ const Donut = (
 					/>
 				</G>
 			</Svg>
+			<Text className="text-base text-center absolute top-14">Elapsed:</Text>
 			{countdown ? (
-				<Text className="text-3xl	 text-center absolute">
+				<Text className="text-3xl text-center absolute">
 					{props.countdown.hours}:{props.countdown.minutes}:
 					{props.countdown.seconds}
 				</Text>
 			) : (
-				<Text className="text-3xl	 text-center absolute">00:00:00</Text>
+				<Text className="text-3xl text-center absolute">00:00:00</Text>
 			)}
-			{/* <AnimatedInput
+		</View>
+	);
+};
+
+export default Donut;
+
+/* <AnimatedInput
 				ref={inputRef}
 				underlineColorAndroid="transparent"
 				editable={false}
@@ -124,9 +128,4 @@ const Donut = (
 						{props.countdown.seconds}s
 					</Text>
 				)}
-			</AnimatedInput> */}
-		</View>
-	);
-};
-
-export default Donut;
+</AnimatedInput> */

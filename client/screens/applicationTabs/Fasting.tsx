@@ -134,7 +134,9 @@ const Fasting = () => {
 					/>
 				</List.Accordion>
 			</View>
-
+			<View className="ml-auto mr-10 -mb-8 flex items-center justify-center w-10 h-10 rounded-full bg-gray-500">
+				<Text>{fastTime}h</Text>
+			</View>
 			<View className="mt-10">
 				<Donut
 					fastTime={fastTime}
@@ -153,7 +155,7 @@ const Fasting = () => {
 							{getWeekday(startTime)}, {getTimeStringWithoutSeconds(startTime)}
 						</Text>
 					) : (
-						<View />
+						<View className="py-2" />
 					)}
 				</View>
 				<View>
@@ -163,7 +165,7 @@ const Fasting = () => {
 							{getWeekday(endTime)}, {getTimeStringWithoutSeconds(endTime)}
 						</Text>
 					) : (
-						<View />
+						<View className="py-2" />
 					)}
 				</View>
 			</View>
