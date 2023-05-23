@@ -139,20 +139,6 @@ const Fasting = () => {
 
 	return (
 		<View className="flex-1 justify-center bg-white">
-			{/* <View className="flex flex-row justify-center gap-4">
-				<Button
-					className="text-center w-40 bg-blue text-base"
-					icon="clock"
-					mode="contained">
-					Fasting
-				</Button>
-				<Button
-					icon="brain"
-					className="text-center w-40 bg-blue text-base"
-					mode="contained">
-					Meditation
-				</Button>
-			</View> */}
 			<View className="mt-4">
 				<List.Accordion
 					style={accordionStyle}

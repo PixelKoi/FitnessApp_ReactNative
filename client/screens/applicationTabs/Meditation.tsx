@@ -3,7 +3,7 @@ import { View, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Button, List } from "react-native-paper";
 import { format, add, getDay, addSeconds, differenceInSeconds } from "date-fns";
-import Donut from "./FastingDonutGraph";
+import MedTimer from "./MedDonutGraph";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { setEndTime, setStartTime } from "../../features/user/fasting-slice";
 const Meditation = () => {
@@ -25,7 +25,7 @@ const Meditation = () => {
 	const [startTime, setStartTime] = useState(null);
 	const [endTime, setEndTime] = useState(null);
 	const [fastTime, setFastTime] = useState<number>(16);
-	const [fasting, setFasting] = useState<String>("16/8 intermittent fast");
+	const [fasting, setFasting] = useState<String>("Choose Meditation Time");
 	const [fastingDuration, setFastingDuration] = useState(null);
 	const [elapsedTimePercentage, setElapsedTimePercentage] = useState(0);
 
@@ -147,36 +147,57 @@ const Meditation = () => {
 					expanded={expandList}
 					onPress={handleExplandList}>
 					<List.Item
-						title="16/8 intermittent fast"
+						title="5 minutes (beginner)"
 						onPress={() => {
-							setFasting("16/8 intermittent fast");
-							setFastTime(16);
+							setFasting("5 minutes");
+							setFastTime(5);
 							setExpandList(false);
 						}}
 					/>
 					<List.Item
-						title="18/4 intermittent fast"
+						title="10 minutes"
 						onPress={() => {
-							setFasting("18/4 intermittent fast");
-							setFastTime(18);
+							setFasting("10 minutes");
+							setFastTime(10);
 							setExpandList(false);
 						}}
 					/>
 					<List.Item
-						title="24hr fast"
+						title="15 minutes"
 						onPress={() => {
-							setFasting("24hr fast");
-							setFastTime(24);
+							setFasting("15 minutes");
+							setFastTime(15);
+							setExpandList(false);
+						}}
+					/>
+					<List.Item
+						title="20 minutes (recommended)"
+						onPress={() => {
+							setFasting("20 minutes");
+							setFastTime(20);
+							setExpandList(false);
+						}}
+					/>
+					<List.Item
+						title="30 minutes (deep)"
+						onPress={() => {
+							setFasting("30 minutes");
+							setFastTime(30);
+							setExpandList(false);
+						}}
+					/>
+					<List.Item
+						title="45 minutes (expert)"
+						onPress={() => {
+							setFasting("45 minutes");
+							setFastTime(45);
 							setExpandList(false);
 						}}
 					/>
 				</List.Accordion>
 			</View>
-			<View className="ml-auto mr-10 -mb-8 flex items-center justify-center w-10 h-10 rounded-full bg-gray-500">
-				<Text>{fastTime}h</Text>
-			</View>
 			<View className="mt-10">
-				<Donut
+				<MedTimer
 					fastTime={fastTime}
 					timePassed={fastTime}
 					startTime={startTime}
@@ -186,30 +207,8 @@ const Meditation = () => {
 				/>
 			</View>
 
-			<View className="flex flex-row gap-8 justify-center mt-4">
-				<View>
-					<Text className="text-xs">START</Text>
-					{startTime ? (
-						<Text>
-							{getWeekday(startTime)}, {getTimeStringWithoutSeconds(startTime)}
-						</Text>
-					) : (
-						<View className="py-2" />
-					)}
-				</View>
-				<View>
-					<Text className="text-xs">END</Text>
-					{startTime ? (
-						<Text>
-							{getWeekday(endTime)}, {getTimeStringWithoutSeconds(endTime)}
-						</Text>
-					) : (
-						<View className="py-2" />
-					)}
-				</View>
-			</View>
 			<Button
-				className="my-4 w-60 mx-auto"
+				className="mt-20 w-60 mx-auto"
 				icon="brain"
 				mode="contained"
 				onPress={clicked === false ? handleStartFast : handleEndFast}>
