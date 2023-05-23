@@ -4,7 +4,8 @@ import { useNavigation } from "@react-navigation/native";
 import { Button, List } from "react-native-paper";
 import { format, add, getDay } from "date-fns";
 import Donut from "./Donut";
-
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { setEndTime, setStartTime } from "../../features/user/fasting-slice";
 const Fasting = () => {
 	//Top left nav button - removed top nav
 	const navigation = useNavigation();
@@ -15,6 +16,9 @@ const Fasting = () => {
 	}, [navigation]);
 
 	const countdownInterval = useRef(null);
+
+	const fastingInfo = useAppSelector((state) => state.fasting);
+	const dispatch = useAppDispatch();
 
 	//fasting states
 	const [startTime, setStartTime] = useState(null);
@@ -43,6 +47,8 @@ const Fasting = () => {
 		setEndTime(endTime);
 		setClicked(true);
 		setFastingDuration(null);
+		console.log(currentDate);
+		// dispatch(setStartTime({ startTime: currentDate }));
 	};
 
 	const handleEndFast = () => {

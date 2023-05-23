@@ -1,11 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import { View, Text, Animated, TextInput, StyleSheet } from "react-native";
+import { View, Text, Animated, TextInput } from "react-native";
 import Svg, { G, Circle } from "react-native-svg";
-import {
-	differenceInSeconds,
-	formatDuration,
-	intervalToDuration,
-} from "date-fns";
 
 //Graph Animations
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
@@ -19,22 +14,19 @@ const Donut = (
 		duration = 500,
 		color = "blue",
 		delay = 0,
-		textColor,
 		max = props.fastTime,
-		timePassed = props.timePassed,
-		percentage = (props.timePassed / props.fastTime) * 100,
-		startTime = props.startTime,
-		endTime = props.endTime,
+		elapsed = props.elaosed,
 		countdown = props.countdown,
 	}
 ) => {
 	const animatedValue = React.useRef(new Animated.Value(0)).current;
+	// const [elapsed, setElapsed] = useState(0);
 
 	const circleRef = useRef(null);
 	const inputRef = useRef(null);
 
 	const halfCircle = radius + strokeWidth;
-	const circleCircumferance = 2 * Math.PI * radius;
+	const circleCircumference = 2 * Math.PI * radius;
 	const animation = (toValue) => {
 		return Animated.timing(animatedValue, {
 			toValue,
@@ -44,27 +36,15 @@ const Donut = (
 		}).start();
 	};
 
-	// React.useEffect(() => {
-	// 	animation(percentage);
-	// 	animatedValue.addListener((v) => {
-	// 		if (circleRef?.current) {
-	// 			const maxPerc = (timePassed / max) * 100;
-	// 			const strokeDashoffset =
-	// 				circleCircumferance - (circleCircumferance * maxPerc) / 100;
-	// 			circleRef.current.setNativeProps({
-	// 				strokeDashoffset,
-	// 			});
-	// 		}
-	// 		if (inputRef?.current) {
-	// 			inputRef.current.setNativeProps({
-	// 				text: `${Math.round(v.value)}`,
-	// 			});
-	// 		}
-	// 	});
-	// 	return () => {
-	// 		animatedValue.removeAllListeners();
-	// 	};
-	// }, [max, percentage]);
+	// updates circle circ based on how much time has elapsed
+	useEffect(() => {
+		const value = (props.elapsed / 100) * max;
+		const strokeDashoffset =
+			circleCircumference - (value / max) * circleCircumference;
+		circleRef.current.setNativeProps({
+			strokeDashoffset,
+		});
+	}, [props.elapsed, max, circleCircumference]);
 
 	return (
 		<View className="flex justify-center items-center">
@@ -90,8 +70,8 @@ const Donut = (
 						strokeWidth={20}
 						r={radius}
 						fill="transparent"
-						strokeDasharray={circleCircumferance}
-						strokeDashoffset={802}
+						strokeDasharray={circleCircumference}
+						strokeDashoffset={elapsed}
 						strokeLinecap="round"
 					/>
 				</G>
@@ -112,21 +92,3 @@ const Donut = (
 };
 
 export default Donut;
-
-/* <AnimatedInput
-				ref={inputRef}
-				underlineColorAndroid="transparent"
-				editable={false}
-				defaultValue="0"
-				style={[
-					StyleSheet.absoluteFillObject,
-					{ fontSize: radius / 2, color: textColor ?? color },
-					{ fontWeight: "900", textAlign: "center" },
-				]}>
-				{countdown && (
-					<Text className="text-xs">
-						{props.countdown.hours}h {props.countdown.minutes}m{" "}
-						{props.countdown.seconds}s
-					</Text>
-				)}
-</AnimatedInput> */
