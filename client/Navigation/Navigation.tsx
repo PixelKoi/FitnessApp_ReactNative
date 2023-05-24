@@ -137,7 +137,7 @@ const Navigation = ({ session }: { session: Session }) => {
 					}}
 				/>
 				<Tab.Screen
-					name="Fasting"
+					name="Timer"
 					component={Timer}
 					options={{
 						tabBarIcon: ({ color, size }) => (
