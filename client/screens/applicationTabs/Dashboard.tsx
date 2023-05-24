@@ -24,7 +24,7 @@ const Dashboard = (props: Props) => {
 	const { weekView } = props;
 	return (
 		<View className="flex justify-center items-center">
-			<CalendarProvider date={new Date()} showTodayButton>
+			<CalendarProvider date={new Date()}>
 				<ExpandableCalendar firstDay={1} onDayPress={handleDateSelect} />
 			</CalendarProvider>
 		</View>
