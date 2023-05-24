@@ -1,28 +1,32 @@
 import React, { useEffect, useRef, useState } from "react";
 import { View, Text } from "react-native";
 // import {`[Calendar](#calendar), [CalendarList](#calendarlist), [Agenda](#agenda)`} from 'react-native-calendars';
-import { Calendar, LocaleConfig } from "react-native-calendars";
+import {
+	Calendar,
+	LocaleConfig,
+	CalendarProvider,
+	ExpandableCalendar,
+	WeekCalendar,
+} from "react-native-calendars";
 import { Button } from "react-native-paper";
 
-const Dashboard = () => {
+interface Props {
+	weekView?: boolean;
+}
+
+const Dashboard = (props: Props) => {
 	const [selected, setSelected] = useState("");
 
+	const handleDateSelect = (date: string) => {
+		setSelected(date);
+	};
+
+	const { weekView } = props;
 	return (
 		<View className="flex justify-center items-center">
-			<Calendar
-				onDayPress={(day) => {
-					setSelected(day.dateString);
-				}}
-				markedDates={{
-					[selected]: {
-						selected: true,
-						disableTouchEvent: true,
-						selectedDotColor: "orange",
-					},
-				}}
-			/>
-			<Text>Hello World</Text>
-			<Button mode="contained">Expand</Button>
+			<CalendarProvider date={new Date()} showTodayButton>
+				<ExpandableCalendar firstDay={1} onDayPress={handleDateSelect} />
+			</CalendarProvider>
 		</View>
 	);
 };
