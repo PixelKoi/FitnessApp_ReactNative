@@ -127,7 +127,7 @@ const UserBioInput = () => {
 
 	useEffect(() => {
 		calAlgo();
-	}, []);
+	}, [showEditProfile === false]);
 
 	//Profile Screen
 	const profile = () => {
@@ -226,7 +226,7 @@ const UserBioInput = () => {
 					expanded={expandActivity}
 					onPress={handleExpandActivity}>
 					<List.Item
-						onPress={() => changeActivity("Sedentary")}
+						onPress={() => setActivityLevel("Sedentary")}
 						title="Sedentary"
 					/>
 					<List.Item
@@ -261,7 +261,6 @@ const UserBioInput = () => {
 					style={{ backgroundColor: "#84d0ff" }}
 					onPress={async () => {
 						await handleEditProfile();
-
 						setEditProfile(false);
 					}}
 					mode="contained">
