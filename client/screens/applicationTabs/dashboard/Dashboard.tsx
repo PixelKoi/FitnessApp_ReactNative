@@ -8,6 +8,7 @@ import {
 	ExpandableCalendar,
 	WeekCalendar,
 } from "react-native-calendars";
+import SumGraph from "./SumDonutGraph";
 import { Button } from "react-native-paper";
 
 interface Props {
@@ -23,10 +24,21 @@ const Dashboard = (props: Props) => {
 
 	const { weekView } = props;
 	return (
-		<View className="flex justify-center items-center">
+		<View className="flex justify-centerr">
 			<CalendarProvider date={new Date()}>
 				<ExpandableCalendar firstDay={1} onDayPress={handleDateSelect} />
 			</CalendarProvider>
+			<View className="flex flex-row justify-center mt-40 mx-6 bg-white py-4">
+				<View className="flex justify-center ">
+					<Text className="text-base mb-2 px-2">SUM</Text>
+					<SumGraph />
+				</View>
+				<View className="gap-6 ml-10 mt-1 self-center">
+					<Text>Fasting</Text>
+					<Text>Nutrition</Text>
+					<Text>Mindfulness</Text>
+				</View>
+			</View>
 		</View>
 	);
 };

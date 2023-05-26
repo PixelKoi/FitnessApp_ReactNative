@@ -8,7 +8,7 @@ import QuickLog from "../screens/applicationTabs/QuickLog";
 import Proflile from "../screens/applicationTabs/Profile";
 import Fasting from "../screens/applicationTabs/Fasting";
 import Diary from "../screens/applicationTabs/Diary";
-import Dashboard from "../screens/applicationTabs/Dashboard";
+import Dashboard from "../screens/applicationTabs/dashboard/Dashboard";
 import Timer from "../screens/applicationTabs/Timer";
 //nav imports
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
