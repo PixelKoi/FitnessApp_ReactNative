@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { View, Text, Animated, TextInput } from "react-native";
 import Svg, { G, Circle } from "react-native-svg";
+import { FontAwesome5 } from "@expo/vector-icons";
 
 //Graph Animations
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
