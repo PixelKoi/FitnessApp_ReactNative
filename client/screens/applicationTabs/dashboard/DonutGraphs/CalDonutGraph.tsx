@@ -5,9 +5,9 @@ import Svg, { G, Circle } from "react-native-svg";
 //Graph Animations
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
-const SumDonutGraph = (
+const CalDonutGraph = (
 	props,
-	{ radius = 60, strokeWidth = 10, duration = 500, color = "blue", delay = 0 }
+	{ radius = 70, strokeWidth = 10, duration = 500, color = "blue", delay = 0 }
 ) => {
 	const animatedValue = React.useRef(new Animated.Value(0)).current;
 	// const [elapsed, setElapsed] = useState(0);
@@ -56,8 +56,12 @@ const SumDonutGraph = (
 					/>
 				</G>
 			</Svg>
+			<View className="text-base text-center absolute top-14">
+				<Text className="text-center">500 calories</Text>
+				<Text className="text-center top-1">remaining</Text>
+			</View>
 		</View>
 	);
 };
 
-export default SumDonutGraph;
+export default CalDonutGraph;
