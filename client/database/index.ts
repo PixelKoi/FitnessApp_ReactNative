@@ -6,7 +6,7 @@ import { schemas } from "./schemas";
 
 
 const adapter = new SQLiteAdapter({
-    schema: mySchema,
+    schema: schemas,
     migrations,
 })
 
