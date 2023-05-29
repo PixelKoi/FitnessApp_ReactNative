@@ -2,7 +2,7 @@ import { Platform } from 'react-native'
 import { Database } from '@nozbe/watermelondb'
 import SQLiteAdapter from '@nozbe/watermelondb/adapters/sqlite'
 
-import schema from './schema'
+import schema from '../schemas/schema'
 import migrations from './migrations'
 // import Post from './model/Post' // ⬅️ You'll import your Models here
 
