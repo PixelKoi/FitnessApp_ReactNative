@@ -90,7 +90,7 @@ const Dashboard = (props: Props) => {
 				))}
 			</View>
 			<View className="mt-2">
-				<Text className="text-center">Streak: </Text>
+				<Text className="text-center">Streak: 0</Text>
 			</View>
 		</View>
 	);
