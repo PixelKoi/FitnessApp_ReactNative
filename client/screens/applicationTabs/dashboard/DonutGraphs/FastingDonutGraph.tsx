@@ -1,22 +1,34 @@
 import React, { useEffect, useRef, useState } from "react";
 import { View, Text, Animated, TextInput } from "react-native";
 import Svg, { G, Circle } from "react-native-svg";
+import { useAppSelector } from "../../../../app/hooks";
 
 //Graph Animations
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
 const FastingDonutGraph = (
 	props,
-	{ radius = 70, strokeWidth = 10, duration = 500, color = "blue", delay = 0 }
+	{
+		radius = 70,
+		strokeWidth = 10,
+		duration = 500,
+		color = "blue",
+		delay = 0,
+		max = 16,
+		countdown = props.countdown,
+	}
 ) => {
 	const animatedValue = React.useRef(new Animated.Value(0)).current;
 	// const [elapsed, setElapsed] = useState(0);
+
+	const fastingInfo = useAppSelector((state) => state.fasting);
 
 	const circleRef = useRef(null);
 	const inputRef = useRef(null);
 
 	const halfCircle = radius + strokeWidth;
 	const circleCircumference = 2 * Math.PI * radius;
+
 	const animation = (toValue) => {
 		return Animated.timing(animatedValue, {
 			toValue,
@@ -25,6 +37,19 @@ const FastingDonutGraph = (
 			useNativeDriver: true,
 		}).start();
 	};
+
+	// useEffect(() => {
+	// 	const value = (props.elapsed / 100) * max;
+	// 	const strokeDashoffset =
+	// 		circleCircumference - (value / max) * circleCircumference;
+	// 	circleRef.current.setNativeProps({
+	// 		strokeDashoffset,
+	// 	});
+	// }, [fastingInfo.elapsed, max, circleCircumference]);
+
+	useEffect(() => {
+		console.log(fastingInfo.elapsed);
+	}, []);
 
 	return (
 		<View className="justify-center items-center">
@@ -56,7 +81,17 @@ const FastingDonutGraph = (
 					/>
 				</G>
 			</Svg>
-			<Text className="text-base text-center absolute top-14">100%</Text>
+			<Text className="text-base text-center absolute top-12">
+				{fastingInfo.elapsed}%
+			</Text>
+			{countdown ? (
+				<Text className="text-xs text-center absolut top-4">
+					{props.countdown.hours}:{props.countdown.minutes}:
+					{props.countdown.seconds}
+				</Text>
+			) : (
+				<Text className="text-xs text-center absolute top-20">00:00:00</Text>
+			)}
 		</View>
 	);
 };

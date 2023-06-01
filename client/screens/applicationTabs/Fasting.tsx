@@ -5,7 +5,7 @@ import { Button, List } from "react-native-paper";
 import { format, add, getDay, addSeconds, differenceInSeconds } from "date-fns";
 import FastingTimer from "./FastingDonutGraph";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { setEndTime, setStartTime } from "../../features/user/fasting-slice";
+import { updateElapsed } from "../../features/user/fasting-slice";
 const Fasting = () => {
 	//Top left nav button - removed top nav
 	const navigation = useNavigation();
@@ -24,7 +24,7 @@ const Fasting = () => {
 	//fasting states
 	const [startTime, setStartTime] = useState(null);
 	const [endTime, setEndTime] = useState(null);
-	const [fastTime, setFastTime] = useState<number>(16);
+	const [fastTime, setFastTime] = useState<number>(1);
 	const [fasting, setFasting] = useState<String>("16/8 intermittent fast");
 	const [fastingDuration, setFastingDuration] = useState(null);
 	const [elapsedTimePercentage, setElapsedTimePercentage] = useState(0);
@@ -100,6 +100,7 @@ const Fasting = () => {
 				}
 			}, 1000);
 		}
+		console.log("hello world");
 
 		return () => {
 			clearInterval(countdownInterval.current);
@@ -115,8 +116,10 @@ const Fasting = () => {
 			const percentage = (elapsedTime / totalTime) * 100;
 			const roundedPercentage = percentage.toFixed(0);
 			setElapsedTimePercentage(roundedPercentage);
+			dispatch(updateElapsed(roundedPercentage));
 		}
 	};
+
 	useEffect(() => {
 		// Call the updateElapsedTime function immediately
 		updateElapsedTime();
