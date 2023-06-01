@@ -5,7 +5,12 @@ import { Button, List } from "react-native-paper";
 import { format, add, getDay, addSeconds, differenceInSeconds } from "date-fns";
 import FastingTimer from "./FastingDonutGraph";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { updateElapsed, updateMax } from "../../features/user/fasting-slice";
+import {
+	setElapsedPercentage,
+	setMaxTime,
+	setStartDate,
+	setEndDate,
+} from "../../features/user/fasting-slice";
 const Fasting = () => {
 	//Top left nav button - removed top nav
 	const navigation = useNavigation();
@@ -24,10 +29,8 @@ const Fasting = () => {
 	//fasting states
 	const [startTime, setStartTime] = useState(null);
 	const [endTime, setEndTime] = useState(null);
-	const [fastTime, setFastTime] = useState<number>(1);
 	const [fasting, setFasting] = useState<String>("16/8 intermittent fast");
 	const [fastingDuration, setFastingDuration] = useState(null);
-	const [elapsedTimePercentage, setElapsedTimePercentage] = useState(0);
 
 	//Keep track of starting / ending fast button
 	const [clicked, setClicked] = useState(false);
@@ -35,32 +38,6 @@ const Fasting = () => {
 	//handle fasting mode selector
 	const [expandList, setExpandList] = useState<boolean>(false);
 	const handleExplandList = () => setExpandList(!expandList);
-
-	//start fast function
-	const handleStartFast = () => {
-		const currentDate = new Date();
-
-		// fastTime state updates fasting duration
-		const duration = fastTime; // in hours
-		const endTime = add(currentDate, { hours: duration });
-
-		setStartTime(currentDate);
-		setEndTime(endTime);
-		setClicked(true);
-		setFastingDuration(null);
-		console.log(currentDate);
-		// dispatch(setStartTime({ startTime: currentDate }));
-	};
-
-	const handleEndFast = () => {
-		if (startTime && endTime) {
-			const duration = (endTime - startTime) / (60 * 1000); // Convert to minutes
-			setFastingDuration(duration);
-			setClicked(false);
-			clearInterval(countdownInterval.current); // Clear the countdown interval
-			setCountdown(null); // Reset the countdown state
-		}
-	};
 
 	//process time displayed - remove seconds and leading zero
 	const getTimeStringWithoutSeconds = (time) => {
@@ -74,7 +51,46 @@ const Fasting = () => {
 		return weekdays[weekday];
 	};
 
+	//Check if fasting redux for startDate. If there is a startDate update local start and end states
+	useEffect(() => {
+		if (fastingInfo.startDate !== "") {
+			setStartTime(new Date(fastingInfo.startDate));
+			setEndTime(new Date(fastingInfo.endDate));
+		}
+	}, []);
+
 	const [countdown, setCountdown] = useState(null);
+
+	//start fast function
+	const handleStartFast = () => {
+		const currentDate = new Date();
+
+		// fastTime state updates fasting duration
+		const duration = fastingInfo.maxTime; // in hours
+		const endTime = add(currentDate, { hours: duration });
+
+		//update redux time stampe string
+		dispatch(setStartDate(currentDate.toString()));
+		dispatch(setEndDate(endTime.toString()));
+
+		setStartTime(currentDate);
+		setEndTime(endTime);
+		setClicked(true);
+		setFastingDuration(null);
+		console.log(currentDate);
+	};
+
+	const handleEndFast = () => {
+		if (startTime && endTime) {
+			const duration = (endTime - startTime) / (60 * 1000); // Convert to minutes
+			setFastingDuration(duration);
+			setClicked(false);
+			clearInterval(countdownInterval.current); // Clear the countdown interval
+			setCountdown(null); // Reset the countdown state
+		}
+		dispatch(setStartDate(""));
+		dispatch(setEndDate(""));
+	};
 
 	//updates countdown once fasting starts
 	useEffect(() => {
@@ -115,8 +131,7 @@ const Fasting = () => {
 			const totalTime = endTime - startTime; // Total fasting duration in milliseconds
 			const percentage = (elapsedTime / totalTime) * 100;
 			const roundedPercentage = percentage.toFixed(0);
-			setElapsedTimePercentage(roundedPercentage);
-			dispatch(updateElapsed(roundedPercentage));
+			dispatch(setElapsedPercentage(roundedPercentage));
 		}
 	};
 
@@ -188,10 +203,10 @@ const Fasting = () => {
 
 			<View className="flex flex-row gap-8 justify-center mt-4">
 				<View>
-					<Text className="text-xs">STARTED TIME</Text>
+					<Text className="text-xs">STARTED TIME </Text>
 					{startTime ? (
 						<Text>
-							{getWeekday(startTime)}, {getTimeStringWithoutSeconds(startTime)}
+							{getWeekday(startTime)}, {getTimeStringWithoutSeconds(startTime)},
 						</Text>
 					) : (
 						<View className="py-2" />
@@ -212,11 +227,15 @@ const Fasting = () => {
 				className="my-4 w-60 mx-auto"
 				icon="clock"
 				mode="contained"
-				onPress={clicked === false ? handleStartFast : handleEndFast}>
-				{clicked === false ? "Start fast" : "End fast now"}
+				onPress={
+					clicked === false || fastingInfo.startDate !== ""
+						? handleStartFast
+						: handleEndFast
+				}>
+				{clicked === false || fastingInfo.startDate !== ""
+					? "Start fast"
+					: "End fast now"}
 			</Button>
-			{/* <Text>Fasting started: </Text>
-			<Text>Time Fasted: {fastingDuration}</Text> */}
 		</View>
 	);
 };

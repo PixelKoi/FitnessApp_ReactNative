@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { View, Text, Animated, TextInput } from "react-native";
 import Svg, { G, Circle } from "react-native-svg";
 import { useAppSelector } from "../../../../app/hooks";
@@ -8,14 +8,7 @@ const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
 const FastingDonutGraph = (
 	props,
-	{
-		radius = 70,
-		strokeWidth = 10,
-		duration = 500,
-		color = "blue",
-		delay = 0,
-		countdown = props.countdown,
-	}
+	{ radius = 70, strokeWidth = 20, color = "blue", countdown = props.countdown }
 ) => {
 	const fastingInfo = useAppSelector((state) => state.fasting);
 
@@ -58,7 +51,7 @@ const FastingDonutGraph = (
 						fill="transparent"
 						strokeDasharray={circleCircumference}
 						strokeDashoffset={fastingInfo.elapsedPercentage}
-						strokeLinecap="round"
+						// strokeLinecap="round"
 					/>
 				</G>
 			</Svg>

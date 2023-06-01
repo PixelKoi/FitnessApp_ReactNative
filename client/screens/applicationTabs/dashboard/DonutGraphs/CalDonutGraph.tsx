@@ -7,7 +7,7 @@ const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
 const CalDonutGraph = (
 	props,
-	{ radius = 70, strokeWidth = 10, duration = 500, color = "blue", delay = 0 }
+	{ radius = 70, strokeWidth = 20, duration = 500, color = "blue", delay = 0 }
 ) => {
 	const animatedValue = React.useRef(new Animated.Value(0)).current;
 	// const [elapsed, setElapsed] = useState(0);
