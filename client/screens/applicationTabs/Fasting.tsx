@@ -78,7 +78,6 @@ const Fasting = () => {
 		setEndTime(endTime);
 		setClicked(true);
 		setFastingDuration(null);
-		console.log(currentDate);
 	};
 
 	const handleEndFast = () => {
@@ -169,7 +168,7 @@ const Fasting = () => {
 						title="16/8 intermittent fast"
 						onPress={() => {
 							setFasting("16/8 intermittent fast");
-							setFastTime(16);
+							setMaxTime(16);
 							setExpandList(false);
 						}}
 					/>
@@ -177,7 +176,7 @@ const Fasting = () => {
 						title="18/4 intermittent fast"
 						onPress={() => {
 							setFasting("18/4 intermittent fast");
-							setFastTime(18);
+							setMaxTime(18);
 							setExpandList(false);
 						}}
 					/>
@@ -185,7 +184,7 @@ const Fasting = () => {
 						title="24hr fast"
 						onPress={() => {
 							setFasting("24hr fast");
-							setFastTime(24);
+							setMaxTime(24);
 							setExpandList(false);
 						}}
 					/>
