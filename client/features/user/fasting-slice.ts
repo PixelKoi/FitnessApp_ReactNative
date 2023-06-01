@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 interface FastingState {
-	elapsed: number;
+	elapsedPercentage: number;
+	maxTime: number;
 	// startDay: Date;
 	// endDay: Date;
 	// startTime: Date;
@@ -9,7 +10,8 @@ interface FastingState {
 }
 
 const initialState: FastingState = {
-	elapsed: 0,
+	elapsedPercentage: 0,
+	maxTime: 1,
 	// startDay: new Date(),
 	// endDay: new Date(),
 	// startTime: new Date(),
@@ -21,11 +23,14 @@ const fastingSlice = createSlice({
 	initialState,
 	reducers: {
 		updateElapsed(state, action: PayloadAction<number>) {
-			state.elapsed = action.payload;
+			state.elapsedPercentage = action.payload;
+		},
+		updateMax(state, action: PayloadAction<number>) {
+			state.maxTime = action.payload;
 		},
 	},
 });
 
-export const { updateElapsed } = fastingSlice.actions;
+export const { updateElapsed, updateMax } = fastingSlice.actions;
 
 export default fastingSlice.reducer;

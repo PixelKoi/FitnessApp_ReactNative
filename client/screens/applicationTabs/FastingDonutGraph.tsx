@@ -1,6 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
-import { View, Text, Animated, TextInput } from "react-native";
+import React, { useEffect, useRef } from "react";
+import { View, Text, Animated } from "react-native";
 import Svg, { G, Circle } from "react-native-svg";
+import { useAppSelector } from "../../app/hooks";
 
 //Graph Animations
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
@@ -13,19 +14,18 @@ const FastingDonutGraph = (
 		duration = 500,
 		color = "blue",
 		delay = 0,
-		max = props.fastTime,
-		elapsed = props.elaosed,
 		countdown = props.countdown,
 	}
 ) => {
 	const animatedValue = React.useRef(new Animated.Value(0)).current;
-	// const [elapsed, setElapsed] = useState(0);
 
 	const circleRef = useRef(null);
 	const inputRef = useRef(null);
 
+	const fastingInfo = useAppSelector((state) => state.fasting);
 	const halfCircle = radius + strokeWidth;
 	const circleCircumference = 2 * Math.PI * radius;
+
 	const animation = (toValue) => {
 		return Animated.timing(animatedValue, {
 			toValue,
@@ -37,13 +37,13 @@ const FastingDonutGraph = (
 
 	// updates circle circ based on how much time has elapsed
 	useEffect(() => {
-		const value = (props.elapsed / 100) * max;
+		const value = (fastingInfo.elapsedPercentage / 100) * fastingInfo.maxTime;
 		const strokeDashoffset =
-			circleCircumference - (value / max) * circleCircumference;
+			circleCircumference - (value / fastingInfo.maxTime) * circleCircumference;
 		circleRef.current.setNativeProps({
 			strokeDashoffset,
 		});
-	}, [props.elapsed, max, circleCircumference]);
+	}, [fastingInfo.elapsedPercentage, fastingInfo.maxTime, circleCircumference]);
 
 	return (
 		<View className="flex justify-center items-center">
@@ -70,13 +70,13 @@ const FastingDonutGraph = (
 						r={radius}
 						fill="transparent"
 						strokeDasharray={circleCircumference}
-						strokeDashoffset={elapsed}
+						strokeDashoffset={fastingInfo.elapsedPercentage}
 						strokeLinecap="round"
 					/>
 				</G>
 			</Svg>
 			<Text className="text-base text-center absolute top-14">
-				Elapsed: {props.elapsed}%
+				Elapsed: {fastingInfo.elapsedPercentage}%
 			</Text>
 			{countdown ? (
 				<Text className="text-3xl text-center absolute">

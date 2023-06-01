@@ -14,42 +14,23 @@ const FastingDonutGraph = (
 		duration = 500,
 		color = "blue",
 		delay = 0,
-		max = 16,
 		countdown = props.countdown,
 	}
 ) => {
-	const animatedValue = React.useRef(new Animated.Value(0)).current;
-	// const [elapsed, setElapsed] = useState(0);
-
 	const fastingInfo = useAppSelector((state) => state.fasting);
 
 	const circleRef = useRef(null);
-	const inputRef = useRef(null);
-
 	const halfCircle = radius + strokeWidth;
 	const circleCircumference = 2 * Math.PI * radius;
 
-	const animation = (toValue) => {
-		return Animated.timing(animatedValue, {
-			toValue,
-			duration,
-			delay,
-			useNativeDriver: true,
-		}).start();
-	};
-
-	// useEffect(() => {
-	// 	const value = (props.elapsed / 100) * max;
-	// 	const strokeDashoffset =
-	// 		circleCircumference - (value / max) * circleCircumference;
-	// 	circleRef.current.setNativeProps({
-	// 		strokeDashoffset,
-	// 	});
-	// }, [fastingInfo.elapsed, max, circleCircumference]);
-
 	useEffect(() => {
-		console.log(fastingInfo.elapsed);
-	}, []);
+		const value = (fastingInfo.elapsedPercentage / 100) * fastingInfo.maxTime;
+		const strokeDashoffset =
+			circleCircumference - (value / fastingInfo.maxTime) * circleCircumference;
+		circleRef.current.setNativeProps({
+			strokeDashoffset,
+		});
+	}, [fastingInfo.elapsedPercentage, fastingInfo.maxTime, circleCircumference]);
 
 	return (
 		<View className="justify-center items-center">
@@ -76,13 +57,13 @@ const FastingDonutGraph = (
 						r={radius}
 						fill="transparent"
 						strokeDasharray={circleCircumference}
-						strokeDashoffset={circleCircumference}
+						strokeDashoffset={fastingInfo.elapsedPercentage}
 						strokeLinecap="round"
 					/>
 				</G>
 			</Svg>
 			<Text className="text-base text-center absolute top-12">
-				{fastingInfo.elapsed}%
+				{fastingInfo.elapsedPercentage}%
 			</Text>
 			{countdown ? (
 				<Text className="text-xs text-center absolut top-4">

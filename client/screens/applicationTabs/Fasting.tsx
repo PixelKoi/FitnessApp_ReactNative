@@ -5,7 +5,7 @@ import { Button, List } from "react-native-paper";
 import { format, add, getDay, addSeconds, differenceInSeconds } from "date-fns";
 import FastingTimer from "./FastingDonutGraph";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { updateElapsed } from "../../features/user/fasting-slice";
+import { updateElapsed, updateMax } from "../../features/user/fasting-slice";
 const Fasting = () => {
 	//Top left nav button - removed top nav
 	const navigation = useNavigation();
@@ -176,16 +176,13 @@ const Fasting = () => {
 				</List.Accordion>
 			</View>
 			<View className="ml-auto mr-10 -mb-8 flex items-center justify-center w-10 h-10 rounded-full bg-gray-500">
-				<Text>{fastTime}h</Text>
+				<Text>{fastingInfo.maxTime}h</Text>
 			</View>
 			<View className="mt-10">
 				<FastingTimer
-					fastTime={fastTime}
-					timePassed={fastTime}
 					startTime={startTime}
 					endTime={endTime}
 					countdown={countdown}
-					elapsed={elapsedTimePercentage}
 				/>
 			</View>
 
