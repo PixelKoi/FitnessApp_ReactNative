@@ -52,6 +52,7 @@ const Fasting = () => {
 	};
 
 	//Check if fasting redux for startDate. If there is a startDate update local start and end states
+	//ToDo: Check if end date has passed and then reset start and end date to ""
 	useEffect(() => {
 		if (fastingInfo.startDate !== "") {
 			setStartTime(new Date(fastingInfo.startDate));
@@ -228,13 +229,9 @@ const Fasting = () => {
 				icon="clock"
 				mode="contained"
 				onPress={
-					clicked === false || fastingInfo.startDate !== ""
-						? handleStartFast
-						: handleEndFast
+					fastingInfo.startDate === "" ? handleStartFast : handleEndFast
 				}>
-				{clicked === false || fastingInfo.startDate !== ""
-					? "Start fast"
-					: "End fast now"}
+				{fastingInfo.startDate === "" ? "Start fast" : "End fast now"}
 			</Button>
 		</View>
 	);
