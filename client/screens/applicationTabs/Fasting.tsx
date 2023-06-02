@@ -194,11 +194,7 @@ const Fasting = () => {
 				<Text>{fastingInfo.maxTime}h</Text>
 			</View>
 			<View className="mt-10">
-				<FastingTimer
-					startTime={startTime}
-					endTime={endTime}
-					countdown={countdown}
-				/>
+				<FastingTimer countdown={countdown} />
 			</View>
 
 			<View className="flex flex-row gap-8 justify-center mt-4">

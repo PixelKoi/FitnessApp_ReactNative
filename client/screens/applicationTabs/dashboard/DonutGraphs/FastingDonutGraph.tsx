@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { View, Text, Animated, TextInput } from "react-native";
 import Svg, { G, Circle } from "react-native-svg";
 import { useAppSelector } from "../../../../app/hooks";
@@ -8,7 +8,7 @@ const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
 const FastingDonutGraph = (
 	props,
-	{ radius = 70, strokeWidth = 20, color = "blue", countdown = props.countdown }
+	{ radius = 70, strokeWidth = 20, color = "blue" }
 ) => {
 	const fastingInfo = useAppSelector((state) => state.fasting);
 
@@ -24,6 +24,47 @@ const FastingDonutGraph = (
 			strokeDashoffset,
 		});
 	}, [fastingInfo.elapsedPercentage, fastingInfo.maxTime, circleCircumference]);
+
+	const countdownInterval = useRef(null);
+	const [countdown, setCountdown] = useState(null);
+	const [startTime, setStartTime] = useState(null);
+	const [endTime, setEndTime] = useState(null);
+
+	useEffect(() => {
+		if (fastingInfo.startDate !== "") {
+			setStartTime(new Date(fastingInfo.startDate));
+			setEndTime(new Date(fastingInfo.endDate));
+		}
+	}, [fastingInfo.startDate]);
+
+	//updates countdown once fasting starts
+	useEffect(() => {
+		if (startTime && endTime) {
+			countdownInterval.current = setInterval(() => {
+				const remainingTime = endTime - new Date();
+				if (remainingTime > 0) {
+					const countdownHours = Math.floor(remainingTime / (60 * 60 * 1000));
+					const countdownMinutes = Math.floor(
+						(remainingTime % (60 * 60 * 1000)) / (60 * 1000)
+					);
+					const countdownSeconds = Math.floor(
+						(remainingTime % (60 * 1000)) / 1000
+					);
+					setCountdown({
+						hours: countdownHours,
+						minutes: countdownMinutes,
+						seconds: countdownSeconds,
+					});
+				} else {
+					clearInterval(countdownInterval.current);
+					setCountdown(null);
+				}
+			}, 1000);
+		}
+		return () => {
+			clearInterval(countdownInterval.current);
+		};
+	}, [startTime, endTime]);
 
 	return (
 		<View className="justify-center items-center">
@@ -59,9 +100,8 @@ const FastingDonutGraph = (
 				{fastingInfo.elapsedPercentage}%
 			</Text>
 			{countdown ? (
-				<Text className="text-xs text-center absolut top-4">
-					{props.countdown.hours}:{props.countdown.minutes}:
-					{props.countdown.seconds}
+				<Text className="text-xs text-center absolute top-20">
+					{countdown.hours}:{countdown.minutes}:{countdown.seconds}
 				</Text>
 			) : (
 				<Text className="text-xs text-center absolute top-20">00:00:00</Text>
