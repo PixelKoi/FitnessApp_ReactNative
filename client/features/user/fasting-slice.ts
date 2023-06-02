@@ -6,6 +6,7 @@ interface FastingState {
 	maxTime: number;
 	startDate: string;
 	endDate: string;
+	countdown: string;
 	// startDay: Date;
 	// endDay: Date;
 	// endTime: Date;
@@ -16,6 +17,7 @@ const initialState: FastingState = {
 	maxTime: 1,
 	startDate: "",
 	endDate: "",
+	countdown: "",
 	// startDay: new Date(),
 	// endDay: new Date(),
 	// endTime: new Date(),

@@ -32,9 +32,6 @@ const Fasting = () => {
 	const [fasting, setFasting] = useState<String>("16/8 intermittent fast");
 	const [fastingDuration, setFastingDuration] = useState(null);
 
-	//Keep track of starting / ending fast button
-	const [clicked, setClicked] = useState(false);
-
 	//handle fasting mode selector
 	const [expandList, setExpandList] = useState<boolean>(false);
 	const handleExplandList = () => setExpandList(!expandList);
@@ -76,7 +73,6 @@ const Fasting = () => {
 
 		setStartTime(currentDate);
 		setEndTime(endTime);
-		setClicked(true);
 		setFastingDuration(null);
 	};
 
@@ -84,7 +80,6 @@ const Fasting = () => {
 		if (startTime && endTime) {
 			const duration = (endTime - startTime) / (60 * 1000); // Convert to minutes
 			setFastingDuration(duration);
-			setClicked(false);
 			clearInterval(countdownInterval.current); // Clear the countdown interval
 			setCountdown(null); // Reset the countdown state
 		}
