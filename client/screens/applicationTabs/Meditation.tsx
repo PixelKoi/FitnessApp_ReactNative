@@ -6,6 +6,8 @@ import { format, add, getDay, addSeconds, differenceInSeconds } from "date-fns";
 import MedTimer from "./MedDonutGraph";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { setEndTime, setStartTime } from "../../features/user/fasting-slice";
+import { Feather, FontAwesome5 } from "@expo/vector-icons";
+
 const Meditation = () => {
 	//Top left nav button - removed top nav
 	const navigation = useNavigation();
@@ -14,6 +16,8 @@ const Meditation = () => {
 			headerShown: false,
 		});
 	}, [navigation]);
+
+	const completedDays = [true, false, true, true, false, false, true]; // Sample data for completed days, you can modify it as per your needs
 
 	const countdownInterval = useRef(null);
 
@@ -214,6 +218,34 @@ const Meditation = () => {
 				onPress={clicked === false ? handleStartFast : handleEndFast}>
 				{clicked === false ? "Start Meditating" : "End Meditating"}
 			</Button>
+			<View className="mt-4">
+				<Text className="text-center">Days Meditated</Text>
+			</View>
+			<View className="flex-row justify-center mt-2">
+				{completedDays.map((completed, index) => (
+					<View
+						key={index}
+						style={{
+							margin: 6,
+							width: 20,
+							height: 20,
+							borderRadius: 10,
+							backgroundColor: completed ? "green" : "gray",
+						}}>
+						{completed && (
+							<Feather
+								name="check"
+								size={10}
+								color="white"
+								style={{ textAlign: "center", marginTop: -1 }}
+							/>
+						)}
+					</View>
+				))}
+			</View>
+			<View className="mt-2">
+				<Text className="text-center">Streak: 0</Text>
+			</View>
 		</View>
 	);
 };

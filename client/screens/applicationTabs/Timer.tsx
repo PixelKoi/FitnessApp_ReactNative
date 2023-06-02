@@ -24,7 +24,8 @@ const Timer = () => {
 					Meditation
 				</Button>
 			</View>
-			{mode === "fasting" ? <Fasting /> : <Meditation />}
+			{mode === "fasting" && <Fasting />}
+			{mode === "meditation" && <Meditation />}
 		</View>
 	);
 };

@@ -9,7 +9,7 @@ const MedDonutGraph = (
 	props,
 	{
 		radius = 130,
-		strokeWidth = 10,
+		strokeWidth = 20,
 		duration = 500,
 		color = "blue",
 		delay = 0,
