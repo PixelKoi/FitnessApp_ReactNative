@@ -5,7 +5,6 @@ import { Button, List } from "react-native-paper";
 import { format, add, getDay, addSeconds, differenceInSeconds } from "date-fns";
 import MedTimer from "./MedDonutGraph";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { setEndTime, setStartTime } from "../../features/user/fasting-slice";
 import { Feather, FontAwesome5 } from "@expo/vector-icons";
 
 const Meditation = () => {

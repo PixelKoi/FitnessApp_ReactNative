@@ -90,6 +90,8 @@ const Fasting = () => {
 		}
 		dispatch(setStartDate(""));
 		dispatch(setEndDate(""));
+		setStartTime("");
+		setEndTime("");
 	};
 
 	//updates countdown once fasting starts
@@ -124,36 +126,21 @@ const Fasting = () => {
 	}, [startTime, endTime]);
 
 	//updates elapsed
-	const updateElapsedTime = () => {
-		if (startTime && endTime) {
-			const currentTime = new Date();
-			const elapsedTime = currentTime - startTime; // Elapsed time in milliseconds
-			const totalTime = endTime - startTime; // Total fasting duration in milliseconds
-			const percentage = (elapsedTime / totalTime) * 100;
-			const roundedPercentage = percentage.toFixed(0);
-			dispatch(setElapsedPercentage(roundedPercentage));
-		}
-	};
-
 	useEffect(() => {
-		// Call the updateElapsedTime function immediately
-		updateElapsedTime();
-
+		const updateElapsedTime = () => {
+			if (startTime && endTime) {
+				const currentTime = new Date();
+				const elapsedTime = currentTime - startTime;
+				const totalTime = endTime - startTime;
+				const percentage = (elapsedTime / totalTime) * 100;
+				const roundedPercentage = percentage.toFixed(0);
+				dispatch(setElapsedPercentage(roundedPercentage));
+			}
+		};
 		// Update elapsed time periodically (every second)
 		const intervalId = setInterval(updateElapsedTime, 1000);
-
-		// Clean up the interval on component unmount
 		return () => clearInterval(intervalId);
-	}, [startTime, endTime]); // Add startTime and endTime to the dependency array
-
-	// Use another useEffect to update elapsedTimePercentage when currentTime changes
-	useEffect(() => {
-		const intervalId = setInterval(() => {
-			updateElapsedTime();
-		}, 1000);
-
-		return () => clearInterval(intervalId);
-	}, []); // Empty dependency array to only run once on component mount
+	}, [startTime, endTime]);
 
 	return (
 		<View className="flex-1 justify-center bg-white">
@@ -200,22 +187,18 @@ const Fasting = () => {
 			<View className="flex flex-row gap-8 justify-center mt-4">
 				<View>
 					<Text className="text-xs">STARTED TIME </Text>
-					{startTime ? (
+					{startTime && (
 						<Text>
-							{getWeekday(startTime)}, {getTimeStringWithoutSeconds(startTime)},
+							{getWeekday(startTime)}, {getTimeStringWithoutSeconds(startTime)}
 						</Text>
-					) : (
-						<View className="py-2" />
 					)}
 				</View>
 				<View>
 					<Text className="text-xs">FAST ENDING </Text>
-					{startTime ? (
+					{startTime && (
 						<Text>
 							{getWeekday(endTime)}, {getTimeStringWithoutSeconds(endTime)}
 						</Text>
-					) : (
-						<View className="py-2" />
 					)}
 				</View>
 			</View>
