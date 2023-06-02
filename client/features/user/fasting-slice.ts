@@ -1,4 +1,8 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import {
+	createSlice,
+	PayloadAction,
+	createListenerMiddleware,
+} from "@reduxjs/toolkit";
 import { produce } from "immer";
 
 interface FastingState {
@@ -46,3 +50,18 @@ export const { setElapsedPercentage, setMaxTime, setStartDate, setEndDate } =
 	fastingSlice.actions;
 
 export default fastingSlice.reducer;
+
+const listenerMiddleware = createListenerMiddleware();
+
+listenerMiddleware.startListening({
+	actionCreator: setStartDate,
+	effect: async (action, listenerApi) => {
+		const state = listenerApi.getState();
+		const startDate = state.fasting.startDate;
+		const endDate = state.fasting.endDate;
+		const startTime = new Date(startDate).getTime();
+		const endTime = new Date(endDate).getTime();
+
+		console.log(startTime);
+	},
+});
