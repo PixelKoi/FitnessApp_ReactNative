@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
-import { View, Text, Animated, TextInput } from "react-native";
+import React, { useEffect, useRef } from "react";
+import { View, Text, Animated } from "react-native";
 import Svg, { G, Circle } from "react-native-svg";
 import { useAppSelector } from "../../app/hooks";
 

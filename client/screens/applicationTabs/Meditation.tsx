@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { View, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Button, List } from "react-native-paper";
-import { format, add, getDay, addSeconds, differenceInSeconds } from "date-fns";
+import { add } from "date-fns";
 import MedTimer from "./MedDonutGraph";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { Feather, FontAwesome5 } from "@expo/vector-icons";
