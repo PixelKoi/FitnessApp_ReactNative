@@ -19,10 +19,10 @@ const Fasting = () => {
 		});
 	}, [navigation]);
 
-	const countdownInterval = useRef(null);
-
 	//initiate fasting redux states
-	const fastingInfo = useAppSelector((state) => state.fasting);
+	const { startDate, endDate, maxTime } = useAppSelector(
+		(state) => state.fasting
+	);
 	const dispatch = useAppDispatch();
 
 	//fasting component states
@@ -38,35 +38,33 @@ const Fasting = () => {
 	//Check if fasting redux for startDate. If there is a startDate update local start and end states
 	//ToDo: Check if end date has passed and then reset start and end date to ""
 	useEffect(() => {
-		if (fastingInfo.startDate !== "") {
-			setStartTime(new Date(fastingInfo.startDate));
-			setEndTime(new Date(fastingInfo.endDate));
+		if (startDate !== "") {
+			setStartTime(new Date(startDate));
+			setEndTime(new Date(endDate));
 		}
 	}, []);
 
-	//start fast function
+	//Start fast
 	const handleStartFast = () => {
 		const currentDate = new Date();
-
-		// fastTime state updates fasting duration
-		const duration = fastingInfo.maxTime; // in hours
+		const duration = maxTime; // in hours
 		const endTime = add(currentDate, { hours: duration });
-
 		setStartTime(currentDate);
 		setEndTime(endTime);
 
-		//update redux time stampe string
+		//update redux startDade and endDate
 		dispatch(
 			setTimerStates({
 				startDate: currentDate.toString(),
 				endDate: endTime.toString(),
 			})
 		);
-		setClicked(true);
+		setClicked((prevClick) => !prevClick);
 	};
 
+	//End fast
 	const handleEndFast = () => {
-		setClicked(false);
+		setClicked((prevClick) => !prevClick);
 		setStartTime("");
 		setEndTime("");
 	};
@@ -81,7 +79,6 @@ const Fasting = () => {
 		const getTimeStringWithoutSeconds = (time) => {
 			return format(time, "h:mm a").replace(/^0/, "");
 		};
-
 		return getWeekday(event), getTimeStringWithoutSeconds(event);
 	};
 
@@ -138,7 +135,7 @@ const Fasting = () => {
 				</List.Accordion>
 			</View>
 			<View className="ml-auto mr-10 -mb-8 flex items-center justify-center w-10 h-10 rounded-full bg-gray-500">
-				<Text>{fastingInfo.maxTime}h</Text>
+				<Text>{maxTime}h</Text>
 			</View>
 			<View className="mt-10">
 				<FastingTimer />
