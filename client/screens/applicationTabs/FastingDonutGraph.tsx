@@ -6,44 +6,29 @@ import { useAppSelector } from "../../app/hooks";
 //Graph Animations
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
-const FastingDonutGraph = (
-	props,
-	{
-		radius = 130,
-		strokeWidth = 20,
-		duration = 500,
-		color = "blue",
-		delay = 0,
-		countdown = props.countdown,
-	}
-) => {
-	const animatedValue = React.useRef(new Animated.Value(0)).current;
+const FastingDonutGraph = ({
+	radius = 130,
+	strokeWidth = 20,
+	color = "blue",
+}) => {
+	//initiate fasting redux states
+	const { countdown, elapsedPercentage, maxTime } = useAppSelector(
+		(state) => state.fasting
+	);
 
 	const circleRef = useRef(null);
-	const inputRef = useRef(null);
-
-	const fastingInfo = useAppSelector((state) => state.fasting);
 	const halfCircle = radius + strokeWidth;
 	const circleCircumference = 2 * Math.PI * radius;
 
-	const animation = (toValue) => {
-		return Animated.timing(animatedValue, {
-			toValue,
-			duration,
-			delay,
-			useNativeDriver: true,
-		}).start();
-	};
-
 	// updates circle circ based on how much time has elapsed
 	useEffect(() => {
-		const value = (fastingInfo.elapsedPercentage / 100) * fastingInfo.maxTime;
+		const value = (elapsedPercentage / 100) * maxTime;
 		const strokeDashoffset =
-			circleCircumference - (value / fastingInfo.maxTime) * circleCircumference;
+			circleCircumference - (value / maxTime) * circleCircumference;
 		circleRef.current.setNativeProps({
 			strokeDashoffset,
 		});
-	}, [fastingInfo.elapsedPercentage, fastingInfo.maxTime, circleCircumference]);
+	}, [elapsedPercentage, maxTime, circleCircumference]);
 
 	return (
 		<View className="flex justify-center items-center">
@@ -70,18 +55,16 @@ const FastingDonutGraph = (
 						r={radius}
 						fill="transparent"
 						strokeDasharray={circleCircumference}
-						strokeDashoffset={fastingInfo.elapsedPercentage}
+						strokeDashoffset={elapsedPercentage}
 						strokeLinecap="round"
 					/>
 				</G>
 			</Svg>
 			<Text className="text-base text-center absolute top-14">
-				Elapsed: {fastingInfo.elapsedPercentage}%
+				Elapsed: {elapsedPercentage}%
 			</Text>
 
-			<Text className="text-3xl text-center absolute">
-				{fastingInfo.countdown}
-			</Text>
+			<Text className="text-3xl text-center absolute">{countdown}</Text>
 		</View>
 	);
 };

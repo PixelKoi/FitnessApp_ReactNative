@@ -79,7 +79,7 @@ const Fasting = () => {
 		const getTimeStringWithoutSeconds = (time) => {
 			return format(time, "h:mm a").replace(/^0/, "");
 		};
-		return getWeekday(event), getTimeStringWithoutSeconds(event);
+		return getWeekday(event) + " " + getTimeStringWithoutSeconds(event);
 	};
 
 	//updates elapsed
