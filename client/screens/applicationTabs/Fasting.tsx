@@ -21,17 +21,17 @@ const Fasting = () => {
 
 	const countdownInterval = useRef(null);
 
-	//Call to fasting redux
+	//initiate fasting redux states
 	const fastingInfo = useAppSelector((state) => state.fasting);
 	const dispatch = useAppDispatch();
 
-	//fasting states
+	//fasting component states
 	const [startTime, setStartTime] = useState(null);
 	const [endTime, setEndTime] = useState(null);
 	const [clicked, setClicked] = useState(false);
-	const [fasting, setFasting] = useState<String>("16/8 intermittent fast");
 
 	//handle fasting mode selector
+	const [fasting, setFasting] = useState<String>("16/8 intermittent fast");
 	const [expandList, setExpandList] = useState<boolean>(false);
 	const handleExplandList = () => setExpandList(!expandList);
 
@@ -43,8 +43,6 @@ const Fasting = () => {
 			setEndTime(new Date(fastingInfo.endDate));
 		}
 	}, []);
-
-	const [countdown, setCountdown] = useState(null);
 
 	//start fast function
 	const handleStartFast = () => {
@@ -68,11 +66,6 @@ const Fasting = () => {
 	};
 
 	const handleEndFast = () => {
-		if (startTime && endTime) {
-			const duration = (endTime - startTime) / (60 * 1000); // Convert to minutes
-			clearInterval(countdownInterval.current); // Clear the countdown interval
-			setCountdown(null); // Reset the countdown state
-		}
 		setClicked(false);
 		setStartTime("");
 		setEndTime("");
@@ -148,7 +141,7 @@ const Fasting = () => {
 				<Text>{fastingInfo.maxTime}h</Text>
 			</View>
 			<View className="mt-10">
-				<FastingTimer countdown={countdown} />
+				<FastingTimer />
 			</View>
 
 			<View className="flex flex-row gap-8 justify-center mt-4">
