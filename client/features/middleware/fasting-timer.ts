@@ -6,9 +6,6 @@ import { createListenerMiddleware } from "@reduxjs/toolkit";
 
 const startFastingTimer = createListenerMiddleware();
 
-//Todo: figure how to getState of fasting state startDate and endDate
-//When fasting timer starts it will update the startDate and endDate states off the fasting-slice
-//We take those states which are a string and convert them to Date type
 startFastingTimer.startListening({
 	actionCreator: setTimerStates,
 	effect: async (action, listenerApi) => {
@@ -51,8 +48,6 @@ startFastingTimer.startListening({
 				listenerApi.dispatch(setCountdown(`${hours}:${minutes}:${seconds}`));
 			}
 		}, 1000); // Update every second
-		console.log(startDate);
-		console.log(endDate);
 	},
 });
 

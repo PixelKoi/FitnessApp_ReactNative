@@ -1,9 +1,4 @@
-import {
-	createSlice,
-	PayloadAction,
-	createListenerMiddleware,
-} from "@reduxjs/toolkit";
-import { produce } from "immer";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface FastingState {
 	elapsedPercentage: number;
@@ -11,9 +6,6 @@ interface FastingState {
 	startDate: string;
 	endDate: string;
 	countdown: string;
-	// startDay: Date;
-	// endDay: Date;
-	// endTime: Date;
 }
 
 const initialState: FastingState = {
@@ -22,9 +14,6 @@ const initialState: FastingState = {
 	startDate: "",
 	endDate: "",
 	countdown: "00:00:00",
-	// startDay: new Date(),
-	// endDay: new Date(),
-	// endTime: new Date(),
 };
 
 const fastingSlice = createSlice({

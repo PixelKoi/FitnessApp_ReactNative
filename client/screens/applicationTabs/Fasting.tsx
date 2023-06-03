@@ -2,14 +2,12 @@ import React, { useEffect, useRef, useState } from "react";
 import { View, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Button, List } from "react-native-paper";
-import { format, add, getDay, addSeconds, differenceInSeconds } from "date-fns";
+import { format, add, getDay } from "date-fns";
 import FastingTimer from "./FastingDonutGraph";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import {
 	setElapsedPercentage,
 	setMaxTime,
-	setStartDate,
-	setEndDate,
 	setTimerStates,
 } from "../../features/user/fasting-slice";
 const Fasting = () => {
@@ -92,35 +90,6 @@ const Fasting = () => {
 		setStartTime("");
 		setEndTime("");
 	};
-
-	//updates countdown once fasting starts
-	useEffect(() => {
-		if (startTime && endTime) {
-			countdownInterval.current = setInterval(() => {
-				const remainingTime = endTime - new Date();
-				if (remainingTime > 0) {
-					const countdownHours = Math.floor(remainingTime / (60 * 60 * 1000));
-					const countdownMinutes = Math.floor(
-						(remainingTime % (60 * 60 * 1000)) / (60 * 1000)
-					);
-					const countdownSeconds = Math.floor(
-						(remainingTime % (60 * 1000)) / 1000
-					);
-					setCountdown({
-						hours: countdownHours,
-						minutes: countdownMinutes,
-						seconds: countdownSeconds,
-					});
-				} else {
-					clearInterval(countdownInterval.current);
-					setCountdown(null);
-				}
-			}, 1000);
-		}
-		return () => {
-			clearInterval(countdownInterval.current);
-		};
-	}, [startTime, endTime]);
 
 	//updates elapsed
 	useEffect(() => {
