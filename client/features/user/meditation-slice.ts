@@ -6,6 +6,15 @@ interface MedState {
 	startDate: string;
 	endDate: string;
 	countdown: string;
+	medStreak: {
+		Mon: boolean;
+		Tues: boolean;
+		Wed: boolean;
+		Thurs: boolean;
+		Fri: boolean;
+		Sat: boolean;
+		Sun: boolean;
+	};
 }
 
 const initialState: MedState = {
@@ -14,6 +23,15 @@ const initialState: MedState = {
 	startDate: "",
 	endDate: "",
 	countdown: "00:00",
+	medStreak: {
+		Mon: false,
+		Tues: false,
+		Wed: false,
+		Thurs: false,
+		Fri: false,
+		Sat: false,
+		Sun: false,
+	},
 };
 
 const medSlice = createSlice({

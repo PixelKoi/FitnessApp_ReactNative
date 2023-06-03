@@ -20,7 +20,38 @@ const Meditation = () => {
 		});
 	}, [navigation]);
 
-	const completedDays = [true, false, true, true, false, false, true]; // Sample data for completed days, you can modify it as per your needs
+	const stack = [];
+
+	const medStreak = {
+		Mon: false,
+		Tues: false,
+		Wed: false,
+		Thurs: false,
+		Fri: false,
+		Sat: false,
+		Sun: false,
+	};
+
+	const updateDayCompleted = () => {
+		const currentDate = new Date();
+		const dayOfWeek = currentDate.toLocaleDateString("en-US", {
+			weekday: "short",
+		});
+
+		if (!medStreak[dayOfWeek]) {
+			medStreak[dayOfWeek] = true;
+			stack.push(dayOfWeek);
+		}
+	};
+
+	const completedDays = [false, false, false, false, false, false, false];
+
+	for (const dayOfWeek in medStreak) {
+		const index = ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"].indexOf(
+			dayOfWeek
+		);
+		completedDays[index] = medStreak[dayOfWeek];
+	}
 
 	//Call to fasting redux
 	const { maxTime } = useAppSelector((state) => state.meditation);
