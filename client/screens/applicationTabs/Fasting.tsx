@@ -26,8 +26,8 @@ const Fasting = () => {
 	const dispatch = useAppDispatch();
 
 	//fasting component states
-	const [startTime, setStartTime] = useState(null);
-	const [endTime, setEndTime] = useState(null);
+	const [startTime, setStartTime] = useState<Date | null>(null);
+	const [endTime, setEndTime] = useState<Date | null>(null);
 	const [clicked, setClicked] = useState(false);
 
 	//handle fasting mode selector
@@ -70,13 +70,13 @@ const Fasting = () => {
 	};
 
 	//Get day for start and end time for timer
-	const getDate = (event) => {
-		const getWeekday = (date) => {
+	const getDate = (event: Date) => {
+		const getWeekday = (date: Date) => {
 			const weekday = getDay(date);
 			const weekdays = ["Sund", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"];
 			return weekdays[weekday];
 		};
-		const getTimeStringWithoutSeconds = (time) => {
+		const getTimeStringWithoutSeconds = (time: Date) => {
 			return format(time, "h:mm a").replace(/^0/, "");
 		};
 		return getWeekday(event) + " " + getTimeStringWithoutSeconds(event);
