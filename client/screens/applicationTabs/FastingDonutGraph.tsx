@@ -6,7 +6,13 @@ import { useAppSelector } from "../../app/hooks";
 //Graph Animations
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
-const FastingDonutGraph = ({
+interface FastingDonutGraphProps {
+	radius?: number;
+	strokeWidth?: number;
+	color?: string;
+}
+
+const FastingDonutGraph: React.FC<FastingDonutGraphProps> = ({
 	radius = 130,
 	strokeWidth = 20,
 	color = "blue",
