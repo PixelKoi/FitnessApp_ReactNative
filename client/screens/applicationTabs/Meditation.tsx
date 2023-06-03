@@ -22,6 +22,7 @@ const Meditation = () => {
 
 	//Call to fasting redux
 	const fastingInfo = useAppSelector((state) => state.fasting);
+	const { startDate, endDate } = useAppSelector((state) => state.meditation);
 	const dispatch = useAppDispatch();
 
 	//fasting states
@@ -49,7 +50,7 @@ const Meditation = () => {
 
 		setStartTime(currentDate);
 		setEndTime(endTime);
-		setClicked(true);
+		setClicked((prevClicked) => !prevClicked);
 		setFastingDuration(null);
 		console.log(currentDate);
 		// dispatch(setStartTime({ startTime: currentDate }));
@@ -59,22 +60,10 @@ const Meditation = () => {
 		if (startTime && endTime) {
 			const duration = (endTime - startTime) / (60 * 1000); // Convert to minutes
 			setFastingDuration(duration);
-			setClicked(false);
+			setClicked((prevClicked) => !prevClicked);
 			clearInterval(countdownInterval.current); // Clear the countdown interval
 			setCountdown(null); // Reset the countdown state
 		}
-	};
-
-	//process time displayed - remove seconds and leading zero
-	const getTimeStringWithoutSeconds = (time) => {
-		return format(time, "h:mm a").replace(/^0/, "");
-	};
-
-	//Get day for start and end time
-	const getWeekday = (date) => {
-		const weekday = getDay(date);
-		const weekdays = ["Sund", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"];
-		return weekdays[weekday];
 	};
 
 	const [countdown, setCountdown] = useState(null);

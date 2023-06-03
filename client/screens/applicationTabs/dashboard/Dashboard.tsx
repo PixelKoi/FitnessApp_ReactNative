@@ -1,13 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { View, Text } from "react-native";
 // import {`[Calendar](#calendar), [CalendarList](#calendarlist), [Agenda](#agenda)`} from 'react-native-calendars';
-import {
-	Calendar,
-	LocaleConfig,
-	CalendarProvider,
-	ExpandableCalendar,
-	WeekCalendar,
-} from "react-native-calendars";
+import { CalendarProvider, ExpandableCalendar } from "react-native-calendars";
 import SumGraph from "./DonutGraphs/SumDonutGraph";
 import { Button } from "react-native-paper";
 import CalDonutGraph from "./DonutGraphs/CalDonutGraph";
@@ -39,16 +33,46 @@ const Dashboard = (props: Props) => {
 				</View>
 				<View className="gap-5 ml-4 mt-1 self-center">
 					<View className="flex-row">
-						<FontAwesome5 name="award" size={24} color="black" />
-						<Text className="ml-2">Fasting</Text>
+						<View
+							className="my-auto"
+							style={{
+								width: 10,
+								height: 10,
+								borderRadius: 5,
+								backgroundColor: "green",
+								marginRight: 6,
+							}}
+						/>
+						<Text className="ml-1 my-auto text-xs self-auto">Fasting</Text>
+						{/* <FontAwesome5 name="award" size={14} color="black" /> */}
 					</View>
 					<View className="flex-row">
-						<FontAwesome5 name="award" size={24} color="black" />
-						<Text className="ml-2">Nutrition</Text>
+						<View
+							className="my-auto"
+							style={{
+								width: 10,
+								height: 10,
+								borderRadius: 5,
+								backgroundColor: "green",
+								marginRight: 6,
+							}}
+						/>
+						<Text className="ml-1 text-xs self-auto">Nutrition</Text>
+						{/* <FontAwesome5 name="award" size={14} color="black" /> */}
 					</View>
 					<View className="flex-row">
-						<FontAwesome5 name="award" size={24} color="black" />
-						<Text className="ml-2">Mindfulness</Text>
+						<View
+							className="my-auto"
+							style={{
+								width: 10,
+								height: 10,
+								borderRadius: 5,
+								backgroundColor: "green",
+								marginRight: 6,
+							}}
+						/>
+						<Text className="ml-1 text-xs">Mindfulness</Text>
+						{/* <FontAwesome5 name="award" size={14} color="black" /> */}
 					</View>
 				</View>
 			</View>

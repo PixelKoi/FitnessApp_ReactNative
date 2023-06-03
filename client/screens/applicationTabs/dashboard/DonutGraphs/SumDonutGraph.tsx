@@ -8,7 +8,7 @@ const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
 const SumDonutGraph = (
 	props,
-	{ radius = 80, strokeWidth = 20, duration = 500, color = "blue", delay = 0 }
+	{ radius = 60, strokeWidth = 20, duration = 500, color = "blue", delay = 0 }
 ) => {
 	const animatedValue = React.useRef(new Animated.Value(0)).current;
 	// const [elapsed, setElapsed] = useState(0);

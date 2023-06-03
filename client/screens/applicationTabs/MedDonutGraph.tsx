@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { View, Text, Animated, TextInput } from "react-native";
 import Svg, { G, Circle } from "react-native-svg";
+import { useAppSelector } from "../../app/hooks";
 
 //Graph Animations
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
@@ -20,6 +21,7 @@ const MedDonutGraph = (
 ) => {
 	const animatedValue = React.useRef(new Animated.Value(0)).current;
 	// const [elapsed, setElapsed] = useState(0);
+	const { startDate, endDate } = useAppSelector((state) => state.meditation);
 
 	const circleRef = useRef(null);
 	const inputRef = useRef(null);

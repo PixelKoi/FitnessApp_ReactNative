@@ -1,12 +1,9 @@
-import {
-	setTimerStates,
-	setCountdown,
-} from "../../features/user/fasting-slice";
+import { setTimerStates } from "../../features/user/meditation-slice";
 import { createListenerMiddleware } from "@reduxjs/toolkit";
 
-const startFastingTimer = createListenerMiddleware();
+const startMeditationTimer = createListenerMiddleware();
 
-startFastingTimer.startListening({
+startMeditationTimer.startListening({
 	actionCreator: setTimerStates,
 	effect: async (action, listenerApi) => {
 		const state = listenerApi.getState();
@@ -46,4 +43,4 @@ startFastingTimer.startListening({
 	},
 });
 
-export default startFastingTimer;
+export default startMeditationTimer;
