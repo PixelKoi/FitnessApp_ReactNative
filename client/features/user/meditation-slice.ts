@@ -29,6 +29,6 @@ const medSlice = createSlice({
 	},
 });
 
-export const { setTimerStates } = medSlice.actions;
+export const { setTimerStates, setCountdown } = medSlice.actions;
 
 export default medSlice.reducer;

@@ -1,4 +1,7 @@
-import { setTimerStates } from "../../features/user/meditation-slice";
+import {
+	setTimerStates,
+	setCountdown,
+} from "../../features/user/meditation-slice";
 import { createListenerMiddleware } from "@reduxjs/toolkit";
 
 const startMeditationTimer = createListenerMiddleware();
@@ -7,7 +10,8 @@ startMeditationTimer.startListening({
 	actionCreator: setTimerStates,
 	effect: async (action, listenerApi) => {
 		const state = listenerApi.getState();
-		const endDate = state.fasting.endDate;
+
+		const endDate = state.meditation.endDate;
 		const endTime = new Date(endDate).getTime();
 		let timeRemaining = endTime - Date.now();
 
@@ -37,7 +41,7 @@ startMeditationTimer.startListening({
 				minutes = String(minutes).padStart(2, "0");
 				seconds = String(seconds).padStart(2, "0");
 
-				listenerApi.dispatch(setCountdown(`${hours}:${minutes}:${seconds}`));
+				listenerApi.dispatch(setCountdown(`${minutes}:${seconds}`));
 			}
 		}, 1000); // Update every second
 	},

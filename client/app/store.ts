@@ -4,6 +4,7 @@ import sessionReducer from "../features/user/session-slice";
 import fastingReducer from "../features/user/fasting-slice";
 import meditationReducer from "../features/user/meditation-slice";
 import startFastingTimer from "../features/middleware/fasting-timer";
+import startMeditationTimer from "../features/middleware/meditation-timer";
 
 export const store = configureStore({
 	reducer: {
@@ -13,7 +14,10 @@ export const store = configureStore({
 		meditation: meditationReducer,
 	},
 	middleware: (getDefaultMiddleware) =>
-		getDefaultMiddleware().prepend(startFastingTimer.middleware),
+		getDefaultMiddleware().prepend(
+			startFastingTimer.middleware,
+			startMeditationTimer.middleware
+		),
 });
 
 export type AppDispatch = typeof store.dispatch;

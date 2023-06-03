@@ -16,12 +16,13 @@ const MedDonutGraph = (
 		delay = 0,
 		max = props.fastTime,
 		elapsed = props.elaosed,
-		countdown = props.countdown,
 	}
 ) => {
 	const animatedValue = React.useRef(new Animated.Value(0)).current;
 	// const [elapsed, setElapsed] = useState(0);
-	const { startDate, endDate } = useAppSelector((state) => state.meditation);
+	const { startDate, endDate, countdown } = useAppSelector(
+		(state) => state.meditation
+	);
 
 	const circleRef = useRef(null);
 	const inputRef = useRef(null);
@@ -79,9 +80,7 @@ const MedDonutGraph = (
 			</Svg>
 
 			{countdown ? (
-				<Text className="text-3xl text-center absolute">
-					{props.countdown.minutes}:{props.countdown.seconds}
-				</Text>
+				<Text className="text-3xl text-center absolute">{countdown}</Text>
 			) : (
 				<Text className="text-3xl text-center absolute">00:00</Text>
 			)}

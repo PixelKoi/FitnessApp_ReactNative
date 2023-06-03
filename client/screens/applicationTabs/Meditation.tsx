@@ -6,6 +6,7 @@ import { format, add, getDay, addSeconds, differenceInSeconds } from "date-fns";
 import MedTimer from "./MedDonutGraph";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { Feather, FontAwesome5 } from "@expo/vector-icons";
+import { setTimerStates } from "../../features/user/meditation-slice";
 
 const Meditation = () => {
 	//Top left nav button - removed top nav
@@ -22,7 +23,9 @@ const Meditation = () => {
 
 	//Call to fasting redux
 	const fastingInfo = useAppSelector((state) => state.fasting);
-	const { startDate, endDate } = useAppSelector((state) => state.meditation);
+	const { startDate, endDate, countdown, maxTime } = useAppSelector(
+		(state) => state.meditation
+	);
 	const dispatch = useAppDispatch();
 
 	//fasting states
@@ -43,10 +46,15 @@ const Meditation = () => {
 	//start fast function
 	const handleStartFast = () => {
 		const currentDate = new Date();
+		const duration = maxTime; // in hours
+		const endTime = add(currentDate, { minutes: duration });
 
-		// fastTime state updates fasting duration
-		const duration = fastTime; // in hours
-		const endTime = add(currentDate, { hours: duration });
+		dispatch(
+			setTimerStates({
+				startDate: currentDate.toString(),
+				endDate: endTime.toString(),
+			})
+		);
 
 		setStartTime(currentDate);
 		setEndTime(endTime);
@@ -66,38 +74,6 @@ const Meditation = () => {
 		}
 	};
 
-	const [countdown, setCountdown] = useState(null);
-
-	//updates countdown once fasting starts
-	useEffect(() => {
-		if (startTime && endTime) {
-			countdownInterval.current = setInterval(() => {
-				const remainingTime = endTime - new Date();
-				if (remainingTime > 0) {
-					const countdownHours = Math.floor(remainingTime / (60 * 60 * 1000));
-					const countdownMinutes = Math.floor(
-						(remainingTime % (60 * 60 * 1000)) / (60 * 1000)
-					);
-					const countdownSeconds = Math.floor(
-						(remainingTime % (60 * 1000)) / 1000
-					);
-					setCountdown({
-						hours: countdownHours,
-						minutes: countdownMinutes,
-						seconds: countdownSeconds,
-					});
-				} else {
-					clearInterval(countdownInterval.current);
-					setCountdown(null);
-				}
-			}, 1000);
-		}
-
-		return () => {
-			clearInterval(countdownInterval.current);
-		};
-	}, [startTime, endTime]);
-
 	//updates elapsed
 	const updateElapsedTime = () => {
 		if (startTime && endTime) {
@@ -109,25 +85,6 @@ const Meditation = () => {
 			setElapsedTimePercentage(roundedPercentage);
 		}
 	};
-	useEffect(() => {
-		// Call the updateElapsedTime function immediately
-		updateElapsedTime();
-
-		// Update elapsed time periodically (every second)
-		const intervalId = setInterval(updateElapsedTime, 1000);
-
-		// Clean up the interval on component unmount
-		return () => clearInterval(intervalId);
-	}, [startTime, endTime]); // Add startTime and endTime to the dependency array
-
-	// Use another useEffect to update elapsedTimePercentage when currentTime changes
-	useEffect(() => {
-		const intervalId = setInterval(() => {
-			updateElapsedTime();
-		}, 1000);
-
-		return () => clearInterval(intervalId);
-	}, []); // Empty dependency array to only run once on component mount
 
 	return (
 		<View className="flex-1 justify-center bg-white">
@@ -194,18 +151,9 @@ const Meditation = () => {
 					timePassed={fastTime}
 					startTime={startTime}
 					endTime={endTime}
-					countdown={countdown}
 					elapsed={elapsedTimePercentage}
 				/>
 			</View>
-
-			<Button
-				className="mt-20 w-60 mx-auto"
-				icon="brain"
-				mode="contained"
-				onPress={clicked === false ? handleStartFast : handleEndFast}>
-				{clicked === false ? "Start Meditating" : "End Meditating"}
-			</Button>
 			<View className="mt-4">
 				<Text className="text-center">Days Meditated</Text>
 			</View>
@@ -234,6 +182,14 @@ const Meditation = () => {
 			<View className="mt-2">
 				<Text className="text-center">Streak: 0</Text>
 			</View>
+			<Button
+				className="mt-8 w-60 mx-auto"
+				icon="brain"
+				mode="contained"
+				onPress={clicked === false ? handleStartFast : handleEndFast}>
+				{clicked === false ? "Start Meditating" : "End Meditating"}
+			</Button>
+			<Text>{countdown}</Text>
 		</View>
 	);
 };
