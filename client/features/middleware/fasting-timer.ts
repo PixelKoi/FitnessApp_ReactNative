@@ -10,10 +10,8 @@ startFastingTimer.startListening({
 	actionCreator: setTimerStates,
 	effect: async (action, listenerApi) => {
 		const state = listenerApi.getState();
-		const startDate = state.fasting.startDate;
-		const endDate = state.fasting.endDate;
 
-		const startTime = new Date(startDate).getTime();
+		const endDate = state.fasting.endDate;
 		const endTime = new Date(endDate).getTime();
 
 		// Calculate the initial time remaining
