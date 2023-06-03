@@ -1,17 +1,16 @@
 // model/schema.js
 import { appSchema, tableSchema } from '@nozbe/watermelondb'
 
-export const mySchema = appSchema({
+export default appSchema({
     version: 1,
     tables: [
         tableSchema({
-            name: 'posts',
+            name: 'weights',
             columns: [
-                { name: 'title', type: 'string' },
-                { name: 'subtitle', type: 'string', isOptional: true },
-                { name: 'body', type: 'string' },
-                { name: 'is_pinned', type: 'boolean' },
-            ]
+                {name: 'weight', type: 'number'},
+                {name: 'created_at', type: 'number'},
+                {name: 'note', type: 'string', isOptional: true},
+            ],
         }),
         tableSchema({
             name: 'comments',

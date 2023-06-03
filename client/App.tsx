@@ -14,8 +14,14 @@ import { ApplicationContainer } from "./screens/NavigationComponent";
 //navigation
 import Navigation from "./Navigation/Navigation";
 
+// Watermelon
+import DatabaseProvider from '@nozbe/watermelondb/DatabaseProvider';
+import {database} from './database/index'
+import {useDatabase} from "@nozbe/watermelondb/hooks";
+
 export default function App() {
 	const [session, setSession] = useState<Session | null>(null);
+
 
 	useEffect(() => {
 		supabase.auth.getSession().then(({ data: { session } }) => {
@@ -27,12 +33,18 @@ export default function App() {
 		});
 	}, []);
 
+	console.log("Database:", database);
+
+
 	return (
 		<>
 			{session && session.user ? (
-				<Provider key={session.user.id} store={store}>
-					<Navigation session={session} />
-				</Provider>
+				<DatabaseProvider database={database}>
+					<Provider key={session.user.id} store={store}>
+						<Navigation session={session} />
+					</Provider>
+				</DatabaseProvider>
+
 			) : (
 				<View>
 					<Auth />
