@@ -6,7 +6,10 @@ import { format, add, getDay, addSeconds, differenceInSeconds } from "date-fns";
 import MedTimer from "./MedDonutGraph";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { Feather, FontAwesome5 } from "@expo/vector-icons";
-import { setTimerStates } from "../../features/user/meditation-slice";
+import {
+	setTimerStates,
+	setMaxTime,
+} from "../../features/user/meditation-slice";
 
 const Meditation = () => {
 	//Top left nav button - removed top nav
@@ -19,21 +22,14 @@ const Meditation = () => {
 
 	const completedDays = [true, false, true, true, false, false, true]; // Sample data for completed days, you can modify it as per your needs
 
-	const countdownInterval = useRef(null);
-
 	//Call to fasting redux
-	const fastingInfo = useAppSelector((state) => state.fasting);
-	const { startDate, endDate, countdown, maxTime } = useAppSelector(
-		(state) => state.meditation
-	);
+	const { maxTime } = useAppSelector((state) => state.meditation);
 	const dispatch = useAppDispatch();
 
 	//fasting states
 	const [startTime, setStartTime] = useState(null);
 	const [endTime, setEndTime] = useState(null);
-	const [fastTime, setFastTime] = useState<number>(16);
 	const [fasting, setFasting] = useState<String>("Choose Meditation Time");
-	const [fastingDuration, setFastingDuration] = useState(null);
 	const [elapsedTimePercentage, setElapsedTimePercentage] = useState(0);
 
 	//Keep track of starting / ending fast button
@@ -55,24 +51,12 @@ const Meditation = () => {
 				endDate: endTime.toString(),
 			})
 		);
-
 		setStartTime(currentDate);
 		setEndTime(endTime);
 		setClicked((prevClicked) => !prevClicked);
-		setFastingDuration(null);
-		console.log(currentDate);
-		// dispatch(setStartTime({ startTime: currentDate }));
 	};
 
-	const handleEndFast = () => {
-		if (startTime && endTime) {
-			const duration = (endTime - startTime) / (60 * 1000); // Convert to minutes
-			setFastingDuration(duration);
-			setClicked((prevClicked) => !prevClicked);
-			clearInterval(countdownInterval.current); // Clear the countdown interval
-			setCountdown(null); // Reset the countdown state
-		}
-	};
+	const handleEndFast = () => {};
 
 	//updates elapsed
 	const updateElapsedTime = () => {
@@ -99,7 +83,7 @@ const Meditation = () => {
 						title="5 minutes (beginner)"
 						onPress={() => {
 							setFasting("5 minutes");
-							setFastTime(5);
+							setMaxTime(5);
 							setExpandList(false);
 						}}
 					/>
@@ -107,7 +91,7 @@ const Meditation = () => {
 						title="10 minutes"
 						onPress={() => {
 							setFasting("10 minutes");
-							setFastTime(10);
+							setMaxTime(10);
 							setExpandList(false);
 						}}
 					/>
@@ -115,7 +99,7 @@ const Meditation = () => {
 						title="15 minutes"
 						onPress={() => {
 							setFasting("15 minutes");
-							setFastTime(15);
+							setMaxTime(15);
 							setExpandList(false);
 						}}
 					/>
@@ -123,7 +107,7 @@ const Meditation = () => {
 						title="20 minutes (recommended)"
 						onPress={() => {
 							setFasting("20 minutes");
-							setFastTime(20);
+							setMaxTime(20);
 							setExpandList(false);
 						}}
 					/>
@@ -131,7 +115,7 @@ const Meditation = () => {
 						title="30 minutes (deep)"
 						onPress={() => {
 							setFasting("30 minutes");
-							setFastTime(30);
+							setMaxTime(30);
 							setExpandList(false);
 						}}
 					/>
@@ -139,7 +123,7 @@ const Meditation = () => {
 						title="45 minutes (expert)"
 						onPress={() => {
 							setFasting("45 minutes");
-							setFastTime(45);
+							setMaxTime(45);
 							setExpandList(false);
 						}}
 					/>
@@ -147,8 +131,6 @@ const Meditation = () => {
 			</View>
 			<View className="mt-10">
 				<MedTimer
-					fastTime={fastTime}
-					timePassed={fastTime}
 					startTime={startTime}
 					endTime={endTime}
 					elapsed={elapsedTimePercentage}
@@ -189,7 +171,6 @@ const Meditation = () => {
 				onPress={clicked === false ? handleStartFast : handleEndFast}>
 				{clicked === false ? "Start Meditating" : "End Meditating"}
 			</Button>
-			<Text>{countdown}</Text>
 		</View>
 	);
 };

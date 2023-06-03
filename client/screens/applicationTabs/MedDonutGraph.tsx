@@ -8,45 +8,25 @@ const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
 const MedDonutGraph = (
 	props,
-	{
-		radius = 130,
-		strokeWidth = 20,
-		duration = 500,
-		color = "blue",
-		delay = 0,
-		max = props.fastTime,
-		elapsed = props.elaosed,
-	}
+	{ radius = 130, strokeWidth = 20, color = "blue", elapsed = props.elaosed }
 ) => {
-	const animatedValue = React.useRef(new Animated.Value(0)).current;
-	// const [elapsed, setElapsed] = useState(0);
-	const { startDate, endDate, countdown } = useAppSelector(
+	const { startDate, endDate, countdown, maxTime } = useAppSelector(
 		(state) => state.meditation
 	);
 
 	const circleRef = useRef(null);
-	const inputRef = useRef(null);
-
 	const halfCircle = radius + strokeWidth;
 	const circleCircumference = 2 * Math.PI * radius;
-	const animation = (toValue) => {
-		return Animated.timing(animatedValue, {
-			toValue,
-			duration,
-			delay,
-			useNativeDriver: true,
-		}).start();
-	};
 
 	// updates circle circ based on how much time has elapsed
 	useEffect(() => {
-		const value = (props.elapsed / 100) * max;
+		const value = (props.elapsed / 100) * maxTime;
 		const strokeDashoffset =
-			circleCircumference - (value / max) * circleCircumference;
+			circleCircumference - (value / maxTime) * circleCircumference;
 		circleRef.current.setNativeProps({
 			strokeDashoffset,
 		});
-	}, [props.elapsed, max, circleCircumference]);
+	}, [props.elapsed, maxTime, circleCircumference]);
 
 	return (
 		<View className="flex justify-center items-center">

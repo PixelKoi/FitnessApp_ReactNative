@@ -20,6 +20,9 @@ const medSlice = createSlice({
 	name: "meditation",
 	initialState,
 	reducers: {
+		setMaxTime(state, action: PayloadAction<number>) {
+			state.maxTime = action.payload;
+		},
 		setCountdown(state, action: PayloadAction<string>) {
 			state.countdown = action.payload;
 		},
