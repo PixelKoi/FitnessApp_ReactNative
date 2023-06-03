@@ -28,24 +28,12 @@ const Fasting = () => {
 	//fasting states
 	const [startTime, setStartTime] = useState(null);
 	const [endTime, setEndTime] = useState(null);
+	const [clicked, setClicked] = useState(false);
 	const [fasting, setFasting] = useState<String>("16/8 intermittent fast");
-	const [fastingDuration, setFastingDuration] = useState(null);
 
 	//handle fasting mode selector
 	const [expandList, setExpandList] = useState<boolean>(false);
 	const handleExplandList = () => setExpandList(!expandList);
-
-	//process time displayed - remove seconds and leading zero
-	const getTimeStringWithoutSeconds = (time) => {
-		return format(time, "h:mm a").replace(/^0/, "");
-	};
-
-	//Get day for start and end time
-	const getWeekday = (date) => {
-		const weekday = getDay(date);
-		const weekdays = ["Sund", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"];
-		return weekdays[weekday];
-	};
 
 	//Check if fasting redux for startDate. If there is a startDate update local start and end states
 	//ToDo: Check if end date has passed and then reset start and end date to ""
@@ -66,6 +54,9 @@ const Fasting = () => {
 		const duration = fastingInfo.maxTime; // in hours
 		const endTime = add(currentDate, { hours: duration });
 
+		setStartTime(currentDate);
+		setEndTime(endTime);
+
 		//update redux time stampe string
 		dispatch(
 			setTimerStates({
@@ -73,22 +64,32 @@ const Fasting = () => {
 				endDate: endTime.toString(),
 			})
 		);
-
-		setStartTime(currentDate);
-		setEndTime(endTime);
-		setFastingDuration(null);
+		setClicked(true);
 	};
 
 	const handleEndFast = () => {
 		if (startTime && endTime) {
 			const duration = (endTime - startTime) / (60 * 1000); // Convert to minutes
-			setFastingDuration(duration);
 			clearInterval(countdownInterval.current); // Clear the countdown interval
 			setCountdown(null); // Reset the countdown state
 		}
-
+		setClicked(false);
 		setStartTime("");
 		setEndTime("");
+	};
+
+	//Get day for start and end time for timer
+	const getDate = (event) => {
+		const getWeekday = (date) => {
+			const weekday = getDay(date);
+			const weekdays = ["Sund", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"];
+			return weekdays[weekday];
+		};
+		const getTimeStringWithoutSeconds = (time) => {
+			return format(time, "h:mm a").replace(/^0/, "");
+		};
+
+		return getWeekday(event), getTimeStringWithoutSeconds(event);
 	};
 
 	//updates elapsed
@@ -153,29 +154,19 @@ const Fasting = () => {
 			<View className="flex flex-row gap-8 justify-center mt-4">
 				<View>
 					<Text className="text-xs">STARTED TIME </Text>
-					{startTime && (
-						<Text>
-							{getWeekday(startTime)}, {getTimeStringWithoutSeconds(startTime)}
-						</Text>
-					)}
+					{startTime && <Text>{getDate(startTime)}</Text>}
 				</View>
 				<View>
 					<Text className="text-xs">FAST ENDING </Text>
-					{startTime && (
-						<Text>
-							{getWeekday(endTime)}, {getTimeStringWithoutSeconds(endTime)}
-						</Text>
-					)}
+					{endTime && <Text>{getDate(endTime)}</Text>}
 				</View>
 			</View>
 			<Button
 				className="my-4 w-60 mx-auto"
 				icon="clock"
 				mode="contained"
-				onPress={
-					fastingInfo.startDate === "" ? handleStartFast : handleEndFast
-				}>
-				{fastingInfo.startDate === "" ? "Start fast" : "End fast now"}
+				onPress={clicked === false ? handleStartFast : handleEndFast}>
+				{clicked === false ? "Start fast" : "End fast now"}
 			</Button>
 		</View>
 	);
