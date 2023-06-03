@@ -78,14 +78,10 @@ const FastingDonutGraph = (
 			<Text className="text-base text-center absolute top-14">
 				Elapsed: {fastingInfo.elapsedPercentage}%
 			</Text>
-			{countdown ? (
-				<Text className="text-3xl text-center absolute">
-					{props.countdown.hours}:{props.countdown.minutes}:
-					{props.countdown.seconds}
-				</Text>
-			) : (
-				<Text className="text-3xl text-center absolute">00:00:00</Text>
-			)}
+
+			<Text className="text-3xl text-center absolute">
+				{fastingInfo.countdown}
+			</Text>
 		</View>
 	);
 };

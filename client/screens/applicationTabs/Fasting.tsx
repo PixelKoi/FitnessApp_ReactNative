@@ -10,6 +10,7 @@ import {
 	setMaxTime,
 	setStartDate,
 	setEndDate,
+	setTimerStates,
 } from "../../features/user/fasting-slice";
 const Fasting = () => {
 	//Top left nav button - removed top nav
@@ -68,8 +69,12 @@ const Fasting = () => {
 		const endTime = add(currentDate, { hours: duration });
 
 		//update redux time stampe string
-		dispatch(setStartDate(currentDate.toString()));
-		dispatch(setEndDate(endTime.toString()));
+		dispatch(
+			setTimerStates({
+				startDate: currentDate.toString(),
+				endDate: endTime.toString(),
+			})
+		);
 
 		setStartTime(currentDate);
 		setEndTime(endTime);
@@ -83,8 +88,7 @@ const Fasting = () => {
 			clearInterval(countdownInterval.current); // Clear the countdown interval
 			setCountdown(null); // Reset the countdown state
 		}
-		dispatch(setStartDate(""));
-		dispatch(setEndDate(""));
+
 		setStartTime("");
 		setEndTime("");
 	};
@@ -113,8 +117,6 @@ const Fasting = () => {
 				}
 			}, 1000);
 		}
-		console.log("hello world");
-
 		return () => {
 			clearInterval(countdownInterval.current);
 		};

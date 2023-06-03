@@ -21,7 +21,7 @@ const initialState: FastingState = {
 	maxTime: 1,
 	startDate: "",
 	endDate: "",
-	countdown: "",
+	countdown: "00:00:00",
 	// startDay: new Date(),
 	// endDay: new Date(),
 	// endTime: new Date(),
@@ -43,25 +43,22 @@ const fastingSlice = createSlice({
 		setEndDate(state, action: PayloadAction<string>) {
 			state.endDate = action.payload;
 		},
+		setCountdown(state, action: PayloadAction<string>) {
+			state.countdown = action.payload;
+		},
+		setTimerStates(state, action) {
+			return { ...state, ...action.payload };
+		},
 	},
 });
 
-export const { setElapsedPercentage, setMaxTime, setStartDate, setEndDate } =
-	fastingSlice.actions;
+export const {
+	setElapsedPercentage,
+	setMaxTime,
+	setStartDate,
+	setEndDate,
+	setCountdown,
+	setTimerStates,
+} = fastingSlice.actions;
 
 export default fastingSlice.reducer;
-
-const listenerMiddleware = createListenerMiddleware();
-
-listenerMiddleware.startListening({
-	actionCreator: setStartDate,
-	effect: async (action, listenerApi) => {
-		const state = listenerApi.getState();
-		const startDate = state.fasting.startDate;
-		const endDate = state.fasting.endDate;
-		const startTime = new Date(startDate).getTime();
-		const endTime = new Date(endDate).getTime();
-
-		console.log(startTime);
-	},
-});
