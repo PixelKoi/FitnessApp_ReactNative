@@ -145,11 +145,7 @@ const Meditation = () => {
 				</List.Accordion>
 			</View>
 			<View className="mt-10">
-				<MedTimer
-					startTime={startTime}
-					endTime={endTime}
-					elapsed={elapsedTimePercentage}
-				/>
+				<MedTimer elapsed={elapsedTimePercentage} />
 			</View>
 			<View className="mt-4">
 				<Text className="text-center">Days Meditated</Text>

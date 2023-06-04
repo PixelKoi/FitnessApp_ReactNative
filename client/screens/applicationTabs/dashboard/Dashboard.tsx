@@ -7,14 +7,15 @@ import { Button } from "react-native-paper";
 import CalDonutGraph from "./DonutGraphs/CalDonutGraph";
 import FastingDonutGraph from "./DonutGraphs/FastingDonutGraph";
 import { Feather, FontAwesome5 } from "@expo/vector-icons";
+import { useAppSelector } from "../../../app/hooks";
 
 interface Props {
 	weekView?: boolean;
 }
 
 const Dashboard = (props: Props) => {
-	const [selected, setSelected] = useState("");
-	const completedDays = [true, false, true, true, false, false, true]; // Sample data for completed days, you can modify it as per your needs
+	//intiate meditation redux states
+	const { medStreak } = useAppSelector((state) => state.meditation);
 
 	const handleDateSelect = (date: string) => {
 		setSelected(date);
@@ -92,7 +93,7 @@ const Dashboard = (props: Props) => {
 				<Text className="text-center">Days Meditated</Text>
 			</View>
 			<View className="flex-row justify-center mt-2">
-				{completedDays.map((completed, index) => (
+				{Object.entries(medStreak).map(([day, completed], index) => (
 					<View
 						key={index}
 						style={{
@@ -101,16 +102,7 @@ const Dashboard = (props: Props) => {
 							height: 20,
 							borderRadius: 10,
 							backgroundColor: completed ? "green" : "gray",
-						}}>
-						{completed && (
-							<Feather
-								name="check"
-								size={10}
-								color="white"
-								style={{ textAlign: "center", marginTop: -1 }}
-							/>
-						)}
-					</View>
+						}}></View>
 				))}
 			</View>
 			<View className="mt-2">
