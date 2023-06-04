@@ -8,9 +8,9 @@ interface MedState {
 	countdown: string;
 	medStreak: {
 		Mon: boolean;
-		Tues: boolean;
+		Tue: boolean;
 		Wed: boolean;
-		Thurs: boolean;
+		Thu: boolean;
 		Fri: boolean;
 		Sat: boolean;
 		Sun: boolean;
@@ -24,13 +24,13 @@ const initialState: MedState = {
 	endDate: "",
 	countdown: "00:00",
 	medStreak: {
+		Sun: false,
 		Mon: false,
-		Tues: false,
+		Tue: false,
 		Wed: false,
-		Thurs: false,
+		Thu: false,
 		Fri: false,
 		Sat: false,
-		Sun: false,
 	},
 };
 
@@ -47,9 +47,20 @@ const medSlice = createSlice({
 		setTimerStates(state, action) {
 			return { ...state, ...action.payload };
 		},
+		updateMedStreak(
+			state,
+			action: PayloadAction<{
+				day: keyof MedState["medStreak"];
+				completed: boolean;
+			}>
+		) {
+			const { day, completed } = action.payload;
+			state.medStreak[day] = completed;
+		},
 	},
 });
 
-export const { setTimerStates, setCountdown, setMaxTime } = medSlice.actions;
+export const { setTimerStates, setCountdown, setMaxTime, updateMedStreak } =
+	medSlice.actions;
 
 export default medSlice.reducer;

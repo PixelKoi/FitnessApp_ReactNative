@@ -9,6 +9,7 @@ import { Feather, FontAwesome5 } from "@expo/vector-icons";
 import {
 	setTimerStates,
 	setMaxTime,
+	updateMedStreak,
 } from "../../features/user/meditation-slice";
 
 const Meditation = () => {
@@ -20,41 +21,18 @@ const Meditation = () => {
 		});
 	}, [navigation]);
 
-	const stack = [];
-
-	const medStreak = {
-		Mon: false,
-		Tues: false,
-		Wed: false,
-		Thurs: false,
-		Fri: false,
-		Sat: false,
-		Sun: false,
+	const dayOfWeekMap = {
+		0: "Sun",
+		1: "Mon",
+		2: "Tue",
+		3: "Wed",
+		4: "Thu",
+		5: "Fri",
+		6: "Sat",
 	};
-
-	const updateDayCompleted = () => {
-		const currentDate = new Date();
-		const dayOfWeek = currentDate.toLocaleDateString("en-US", {
-			weekday: "short",
-		});
-
-		if (!medStreak[dayOfWeek]) {
-			medStreak[dayOfWeek] = true;
-			stack.push(dayOfWeek);
-		}
-	};
-
-	const completedDays = [false, false, false, false, false, false, false];
-
-	for (const dayOfWeek in medStreak) {
-		const index = ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"].indexOf(
-			dayOfWeek
-		);
-		completedDays[index] = medStreak[dayOfWeek];
-	}
 
 	//Call to fasting redux
-	const { maxTime } = useAppSelector((state) => state.meditation);
+	const { maxTime, medStreak } = useAppSelector((state) => state.meditation);
 	const dispatch = useAppDispatch();
 
 	//fasting states
@@ -76,6 +54,10 @@ const Meditation = () => {
 		const duration = maxTime; // in hours
 		const endTime = add(currentDate, { minutes: duration });
 
+		const dayOfWeek = new Date().getDay();
+		const currentDay = dayOfWeekMap[dayOfWeek];
+		dispatch(updateMedStreak({ day: currentDay, completed: true }));
+
 		dispatch(
 			setTimerStates({
 				startDate: currentDate.toString(),
@@ -87,7 +69,9 @@ const Meditation = () => {
 		setClicked((prevClicked) => !prevClicked);
 	};
 
-	const handleEndFast = () => {};
+	const handleEndFast = () => {
+		setClicked((prevClicked) => !prevClicked);
+	};
 
 	//updates elapsed
 	const updateElapsedTime = () => {
@@ -171,7 +155,7 @@ const Meditation = () => {
 				<Text className="text-center">Days Meditated</Text>
 			</View>
 			<View className="flex-row justify-center mt-2">
-				{completedDays.map((completed, index) => (
+				{Object.entries(medStreak).map(([day, completed], index) => (
 					<View
 						key={index}
 						style={{
@@ -180,16 +164,7 @@ const Meditation = () => {
 							height: 20,
 							borderRadius: 10,
 							backgroundColor: completed ? "green" : "gray",
-						}}>
-						{completed && (
-							<Feather
-								name="check"
-								size={10}
-								color="white"
-								style={{ textAlign: "center", marginTop: -1 }}
-							/>
-						)}
-					</View>
+						}}></View>
 				))}
 			</View>
 			<View className="mt-2">
