@@ -1,5 +1,6 @@
 // model/schema.js
 import { appSchema, tableSchema } from '@nozbe/watermelondb'
+import Food from "./model/food";
 
 export default appSchema({
     version: 1,
@@ -18,6 +19,16 @@ export default appSchema({
                 { name: 'body', type: 'string' },
                 { name: 'post_id', type: 'string', isIndexed: true },
             ]
+        }),
+        tableSchema({
+            name: 'foods',
+            columns: [
+                { name: 'calories', type: 'number' },
+                { name: 'carbs', type: 'number' },
+                { name: 'fat', type: 'number' },
+                { name: 'protein', type: 'number' },
+                { name: 'description', type: 'string' },
+            ],
         }),
     ]
 })

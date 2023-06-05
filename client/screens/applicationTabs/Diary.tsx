@@ -2,13 +2,31 @@ import React, {useEffect, useState} from 'react';
 import { View } from 'react-native';
 import { Divider, Text, Card, Button } from 'react-native-paper';
 import {useNavigation} from "@react-navigation/native";
+import { useDatabase } from "@nozbe/watermelondb/hooks";
 
 const Diary = (props) => {
 	const tabNavigation = useNavigation();
+	const database = useDatabase();
 
-	const completeDiary = () =>{
+	const completeDiary = async () =>{
 		console.log("Insert into dB 🍉🍉🍉🍉")
-	}
+		console.log(selectedFoods[0].food)
+		try {
+			await database.action(async () => {
+				const newFood = await database.collections.get('foods').create((food) => {
+					const selectedFood = selectedFoods[0].food;
+					food.calories = selectedFood.Calories;
+					food.carbs = selectedFood.Carbs;
+					food.fat = selectedFood.Fat;
+					food.protein = selectedFood.Protein;
+					food.description = selectedFood.description;
+				});
+				console.log('Inserted new food:', newFood);
+			});
+		} catch (error) {
+			console.log('Error inserting food:', error);
+		}}
+
 
 	// error handling, so it shows empty diary page when clicked on!
 	if (props.route.params == undefined){
