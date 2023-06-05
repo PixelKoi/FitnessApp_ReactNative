@@ -6,6 +6,10 @@ import {useNavigation} from "@react-navigation/native";
 const Diary = (props) => {
 	const tabNavigation = useNavigation();
 
+	const completeDiary = () =>{
+		console.log("Insert into dB 🍉🍉🍉🍉")
+	}
+
 	// error handling, so it shows empty diary page when clicked on!
 	if (props.route.params == undefined){
 		return (
@@ -78,6 +82,12 @@ const Diary = (props) => {
 					</Card>
 				</View>
 				<Divider />
+				<View className="pt-8">
+					<Button className="bg-green-950" icon="book" mode="text" onPress={() => console.log("log it ")}>
+						Complete Diary
+					</Button>
+				</View>
+
 			</View>
 		);
 	}
@@ -228,6 +238,11 @@ const Diary = (props) => {
 				</Card>
 			</View>
 			<Divider />
+			<View className="pt-8">
+				<Button className="bg-green-950" icon="book" mode="text" onPress={() => completeDiary()}>
+					Complete Diary
+				</Button>
+			</View>
 		</View>
 	);
 };
