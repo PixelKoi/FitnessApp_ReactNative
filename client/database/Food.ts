@@ -21,13 +21,15 @@ export default class Food extends Model {
   @text("protein") protein;
   @text("description") description;
 
-  // @writer async createFood(objectData) {
-  //   const new_food = await this.collections.get("foods").create((food) => {
-  //     food.calories = objectData.Calories;
-  //     food.carbs = objectData.Carbs;
-  //     food.fat = objectData.Fat;
-  //     food.protein = objectData.Protein;
-  //     food.description = objectData.description;
-  //   });
-  // }
+  @writer async completeDiary(calories, carbs, fat, protein, description) {
+    const newDiary = await this.collections.get("foods").create((food) => {
+      // food.calendar.set(this); (if we relating to a calendar?
+      food.calories.set(calories);
+      food.carbs.set(carbs);
+      food.fat.set(fat);
+      food.protein.set(protein);
+      food.description.set(description);
+    });
+    return newDiary;
+  }
 }
