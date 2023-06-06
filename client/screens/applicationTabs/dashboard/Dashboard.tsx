@@ -17,6 +17,8 @@ const Dashboard = (props: Props) => {
 	//intiate meditation redux states
 	const { medStreak } = useAppSelector((state) => state.meditation);
 
+	//Calendar date selector
+	const [selected, setSelected] = useState("");
 	const handleDateSelect = (date: string) => {
 		setSelected(date);
 	};
@@ -24,9 +26,9 @@ const Dashboard = (props: Props) => {
 	const { weekView } = props;
 	return (
 		<View className="flex justify-centerr ">
-			<CalendarProvider date={new Date()}>
+			{/* <CalendarProvider date={new Date()}>
 				<ExpandableCalendar firstDay={1} onDayPress={handleDateSelect} />
-			</CalendarProvider>
+			</CalendarProvider> */}
 			<View className="flex flex-row justify-center mt-40 mx-6 bg-white py-4">
 				<View className="flex justify-center ">
 					<Text className="text-base mb-2 px-2">SUM</Text>
