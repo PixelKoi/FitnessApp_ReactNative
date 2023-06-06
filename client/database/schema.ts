@@ -1,6 +1,6 @@
 // model/schema.js
 import { appSchema, tableSchema } from '@nozbe/watermelondb'
-import Food from "./model/food";
+import Food from "./food";
 
 export default appSchema({
     version: 1,
