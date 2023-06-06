@@ -2,8 +2,8 @@ import {Database} from '@nozbe/watermelondb';
 import SQLiteAdapter from '@nozbe/watermelondb/adapters/sqlite';
 
 import migrations from "./migrations";
-import Weight from './model/weight';
 import schema from './schema';
+import Food from "./model/food";
 
 const adapter = new SQLiteAdapter({
     schema,
@@ -17,5 +17,5 @@ const adapter = new SQLiteAdapter({
 
 export const database = new Database({
     adapter,
-    modelClasses: [Weight],
+    modelClasses: [Food]
 });
