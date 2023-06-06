@@ -16,7 +16,7 @@ import Navigation from "./Navigation/Navigation";
 
 // Watermelon
 import DatabaseProvider from '@nozbe/watermelondb/DatabaseProvider';
-import {database} from './database/index'
+import {database} from './database/database'
 import {useDatabase} from "@nozbe/watermelondb/hooks";
 
 export default function App() {

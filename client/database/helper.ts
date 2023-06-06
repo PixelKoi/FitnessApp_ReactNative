@@ -1,4 +1,4 @@
-import {index} from './index';
+import {index} from './database';
 
 export type Weight = {
     createdAt?: Date;
