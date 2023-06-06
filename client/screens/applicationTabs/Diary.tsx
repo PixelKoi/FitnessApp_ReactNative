@@ -14,6 +14,19 @@ const Diary = (props) => {
     const postsCollection = database.get("foods");
 
     console.log("FOODS in 🍉🍉🍉", postsCollection);
+    console.log("FOODS in 🍉🍉🍉", selectedFoods[0].food);
+
+    // CRUD must be done in a `Writer`
+    await database.write(async () => {
+      const food_entry = await database.get("foods").create((input) => {
+        input = selectedFoods[0].food;
+      });
+      if (food_entry) {
+        console.log("FOOD ENTRY", food_entry);
+      } else {
+        console.log("e");
+      }
+    });
   };
 
   if (props.route.params == undefined) {
