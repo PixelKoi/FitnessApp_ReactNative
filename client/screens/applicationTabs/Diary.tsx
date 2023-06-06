@@ -20,25 +20,24 @@ const Diary = (props) => {
     console.log(typeof selectedFoods[0].food);
 
     // Note: function passed to `database.write()` MUST be asynchronous
-    }
-
-    // console.log(selectedFoods[0].food)
-    // try {
-    // 	await database.action(async () => {
-    // 		const newFood = await database.collections.get('foods').create((food) => {
-    // 			const selectedFood = selectedFoods[0].food;x
-    // 			food.calories = selectedFood.Calories;
-    // 			food.carbs = selectedFood.Carbs;
-    // 			food.fat = selectedFood.Fat;
-    // 			food.protein = selectedFood.Protein;
-    // 			food.description = selectedFood.description;
-    // 		});
-    // 		console.log('Inserted new food:', newFood);
-    // 	});
-    // } catch (error) {
-    // 	console.log('Error inserting food:', error);
-    // }
   };
+
+  // console.log(selectedFoods[0].food)
+  // try {
+  // 	await database.action(async () => {
+  // 		const newFood = await database.collections.get('foods').create((food) => {
+  // 			const selectedFood = selectedFoods[0].food;x
+  // 			food.calories = selectedFood.Calories;
+  // 			food.carbs = selectedFood.Carbs;
+  // 			food.fat = selectedFood.Fat;
+  // 			food.protein = selectedFood.Protein;
+  // 			food.description = selectedFood.description;
+  // 		});
+  // 		console.log('Inserted new food:', newFood);
+  // 	});
+  // } catch (error) {
+  // 	console.log('Error inserting food:', error);
+  // }
 
   // error handling, so it shows empty diary page when clicked on!
   if (props.route.params == undefined) {
