@@ -1,6 +1,6 @@
 // Import necessary dependencies
 import { Model } from '@nozbe/watermelondb';
-import { field, relation } from '@nozbe/watermelondb/decorators';
+import { field, relation, writer } from '@nozbe/watermelondb/decorators';
 
 // Define the Foods table schema
 export default class Food extends Model {
@@ -12,6 +12,17 @@ export default class Food extends Model {
     @field('fat') fat;
     @field('protein') protein;
     @field('description') description;
+
+    @writer async createFood(objectData) {
+        return await this.batch(
+            this.collections.get('foods').prepareCreate(food => {
+                food.calories = objectData.Calories
+                food.carbs = objectData.Carbs
+                food.fat = objectData.Fat
+                food.protein = objectData.Protein
+                food.description = objectData.description
+            })
+        )
 }
 
 

@@ -4,17 +4,23 @@ import { Divider, Text, Card, Button } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { useDatabase } from "@nozbe/watermelondb/hooks";
 import { Q } from "@nozbe/watermelondb";
+import { writer } from "@nozbe/watermelondb/decorators";
 
 const Diary = (props) => {
   const tabNavigation = useNavigation();
   const database = useDatabase();
   const completeDiary = async () => {
-    console.log("Insert into dB 🍉🍉🍉🍉");
+    // console.log("Insert into dB 🍉🍉🍉🍉");
     // console.log(database.collections.get('foods'))
-    const foodsCollection = database.collections.get("foods");
-
+    // const foodsCollection = database.collections.get("foods");
+    // database.get("foods").query(Q.where(""));
     // Call the fetchFoods function to retrieve the records
-    fetchFoods();
+    // fetchFoods();
+    console.log(selectedFoods[0].food);
+    console.log(typeof selectedFoods[0].food);
+
+    // Note: function passed to `database.write()` MUST be asynchronous
+    }
 
     // console.log(selectedFoods[0].food)
     // try {
