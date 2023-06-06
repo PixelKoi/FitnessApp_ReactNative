@@ -22,10 +22,10 @@ export default appSchema({
     tableSchema({
       name: "foods",
       columns: [
-        { name: "calories", type: "string" },
-        { name: "carbs", type: "string" },
-        { name: "fat", type: "string" },
-        { name: "protein", type: "string" },
+        { name: "calories", type: "number" },
+        { name: "carbs", type: "number" },
+        { name: "fat", type: "number" },
+        { name: "protein", type: "number" },
         { name: "description", type: "string" },
       ],
     }),

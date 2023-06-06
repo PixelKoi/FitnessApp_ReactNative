@@ -12,35 +12,25 @@ const Diary = (props) => {
   const diaryButton = async () => {
     const food_instance = database.get("foods");
 
-    console.log("FOODS in 🍉🍉🍉", food_instance);
-    // console.log("FOODS in 🍉🍉🍉", selectedFoods[0].food);
-
-    // // CRUD must be done in a `Writer`
-    // database.write(async ()=>{
-    //   await food_instance.compl
-    // })
-    // const input = database.read(async () => {
-    //   await database.completeDiary();
-    // });
-
-    // const data = await database.write(async () => {
-    //   await database.get<Food>("foods").create((data) => {
-    //     data.completeDiary(
-    //       (data.calories = selectedFoods[0].food.Calories),
-    //       (data.carbs = selectedFoods[0].food.Carbs),
-    //       (data.fat = selectedFoods[0].food.Fat),
-    //       (data.protein = selectedFoods[0].food.Protein),
-    //       (data.description = selectedFoods[0].food.description)
-    //     );
-    //   });
-    // });
-
-    const all_food = await database.get("foods").query().fetch();
-    console.log("food saved in DB!:", all_food);
-
+    // console.log("FOODS in 🍉🍉🍉", food_instance);
+    console.log("FOODS", typeof selectedFoods[0].food.Carbs);
     //
-    // const foods = await database.get<Food>("foods").query().fetch();
-    // console.log(foods);
+    const data = await database.write(async () => {
+      await database.get<Food>("foods").create((data) => {
+        data.completeDiary(
+          (data.calories = selectedFoods[0].food.Calories),
+          (data.carbs = selectedFoods[0].food.Carbs),
+          (data.fat = selectedFoods[0].food.Fat),
+          (data.protein = selectedFoods[0].food.Protein),
+          (data.description = selectedFoods[0].food.description)
+        );
+      });
+    });
+    if (data) {
+      console.log("Successfully created food post");
+      const all_food = await database.get("foods").query().fetch();
+      console.log("food saved in DB!:", all_food);
+    }
   };
 
   if (props.route.params == undefined) {

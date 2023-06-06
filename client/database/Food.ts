@@ -15,7 +15,7 @@ export default class Food extends Model {
     try {
       const newDiary = await this.collections.get("foods").create((food) => {
         food.calories = calories;
-        food.carbs = calories;
+        food.carbs = carbs;
         food.fat = fat;
         food.protein = protein;
         food.description = description;
