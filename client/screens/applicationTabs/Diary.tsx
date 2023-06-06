@@ -4,29 +4,40 @@ import { Divider, Text, Card, Button } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { useDatabase } from "@nozbe/watermelondb/hooks";
 import { Q } from "@nozbe/watermelondb";
-import { writer } from "@nozbe/watermelondb/decorators";
-import { database } from "../../database/index";
+import completeDiary from "../../database/Food";
+import Food from "../../database/Food";
 
 const Diary = (props) => {
   const tabNavigation = useNavigation();
   const database = useDatabase();
-  const completeDiary = async () => {
-    const postsCollection = database.get("foods");
+  const diaryButton = async () => {
+    const food_instance = database.get("foods");
 
-    console.log("FOODS in 🍉🍉🍉", postsCollection);
+    console.log("FOODS in 🍉🍉🍉", food_instance);
     console.log("FOODS in 🍉🍉🍉", selectedFoods[0].food);
 
-    // CRUD must be done in a `Writer`
+    // // CRUD must be done in a `Writer`
+    // database.write(async ()=>{
+    //   await food_instance.compl
+    // })
+    // const input = database.read(async () => {
+    //   await database.completeDiary();
+    // });
+
     await database.write(async () => {
-      const food_entry = await database.get("foods").create((input) => {
-        input = selectedFoods[0].food;
+      await database.get<Food>("foods").create((data) => {
+        data.completeDiary(
+          (data.calories = selectedFoods[0].food.Calories),
+          (data.carbs = selectedFoods[0].food.Carbs),
+          (data.fat = selectedFoods[0].food.Fat),
+          (data.protein = selectedFoods[0].food.Protein),
+          (data.description = selectedFoods[0].food.description)
+        );
       });
-      if (food_entry) {
-        console.log("FOOD ENTRY", food_entry);
-      } else {
-        console.log("e");
-      }
     });
+
+    const foods = await database.get<Food>("foods").query().fetch();
+    console.log(foods);
   };
 
   if (props.route.params == undefined) {
@@ -295,7 +306,7 @@ const Diary = (props) => {
           className="bg-green-950"
           icon="book"
           mode="text"
-          onPress={() => completeDiary()}
+          onPress={() => diaryButton()}
         >
           Complete Diary
         </Button>
