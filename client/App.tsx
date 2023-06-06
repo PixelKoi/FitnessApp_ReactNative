@@ -16,8 +16,7 @@ import Navigation from "./Navigation/Navigation";
 
 // Watermelon
 import DatabaseProvider from "@nozbe/watermelondb/DatabaseProvider";
-import { index } from "./database";
-import { useDatabase } from "@nozbe/watermelondb/hooks";
+import { database } from "./database/index";
 
 export default function App() {
   const [session, setSession] = useState<Session | null>(null);
@@ -32,12 +31,10 @@ export default function App() {
     });
   }, []);
 
-  console.log("Database:", index);
-
   return (
     <>
       {session && session.user ? (
-        <DatabaseProvider database={index}>
+        <DatabaseProvider database={database}>
           <Provider key={session.user.id} store={store}>
             <Navigation session={session} />
           </Provider>

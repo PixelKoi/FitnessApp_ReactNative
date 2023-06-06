@@ -9,7 +9,7 @@ export default appSchema({
       name: "weights",
       columns: [
         { name: "weight", type: "number" },
-        { name: "created_at", type: "string" },
+        { name: "created_at", type: "number" },
         { name: "note", type: "string", isOptional: true },
       ],
     }),
