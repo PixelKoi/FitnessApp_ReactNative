@@ -6,6 +6,11 @@ import { field, relation, writer } from "@nozbe/watermelondb/decorators";
 export default class Food extends Model {
   static table = "foods";
 
+  // relationship templating
+  // static associations = {
+  //   calendar: { type: "has_many", foreignKey: "post_id" },
+  // };
+
   // Define table fields
   @field("calories") calories;
   @field("carbs") carbs;
