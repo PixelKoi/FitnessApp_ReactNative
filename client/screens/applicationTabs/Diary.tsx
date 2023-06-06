@@ -5,6 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 import { useDatabase } from "@nozbe/watermelondb/hooks";
 import { Q } from "@nozbe/watermelondb";
 import { writer } from "@nozbe/watermelondb/decorators";
+import { database } from "../../database/index";
 
 const Diary = (props) => {
   const tabNavigation = useNavigation();
@@ -16,8 +17,10 @@ const Diary = (props) => {
     // index.get("foods").query(Q.where(""));
     // Call the fetchFoods function to retrieve the records
     // fetchFoods();
-    console.log(selectedFoods[0].food);
-    console.log(typeof selectedFoods[0].food);
+    const postsCollection = database.get("foods");
+    console.log("FOODS?", postsCollection);
+    // console.log(selectedFoods[0].food);
+    // console.log(typeof selectedFoods[0].food);
 
     // Note: function passed to `index.write()` MUST be asynchronous
   };
