@@ -6,7 +6,6 @@ import { useDatabase } from "@nozbe/watermelondb/hooks";
 import { Q } from "@nozbe/watermelondb";
 import completeDiary from "../../database/Food";
 import Food from "../../database/Food";
-
 const Diary = (props) => {
   const tabNavigation = useNavigation();
   const database = useDatabase();
@@ -14,7 +13,7 @@ const Diary = (props) => {
     const food_instance = database.get("foods");
 
     console.log("FOODS in 🍉🍉🍉", food_instance);
-    console.log("FOODS in 🍉🍉🍉", selectedFoods[0].food);
+    // console.log("FOODS in 🍉🍉🍉", selectedFoods[0].food);
 
     // // CRUD must be done in a `Writer`
     // database.write(async ()=>{
