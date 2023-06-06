@@ -23,17 +23,17 @@ const Diary = (props) => {
     //   await database.completeDiary();
     // });
 
-    // await database.write(async () => {
-    //   await database.get<Food>("foods").create((data) => {
-    //     data.completeDiary(
-    //       (data.calories = selectedFoods[0].food.Calories),
-    //       (data.carbs = selectedFoods[0].food.Carbs),
-    //       (data.fat = selectedFoods[0].food.Fat),
-    //       (data.protein = selectedFoods[0].food.Protein),
-    //       (data.description = selectedFoods[0].food.description)
-    //     );
-    //   });
-    // });
+    await database.write(async () => {
+      await database.get<Food>("foods").create((data) => {
+        data.completeDiary(
+          (data.calories = selectedFoods[0].food.Calories),
+          (data.carbs = selectedFoods[0].food.Carbs),
+          (data.fat = selectedFoods[0].food.Fat),
+          (data.protein = selectedFoods[0].food.Protein),
+          (data.description = selectedFoods[0].food.description)
+        );
+      });
+    });
     //
     // const foods = await database.get<Food>("foods").query().fetch();
     // console.log(foods);
