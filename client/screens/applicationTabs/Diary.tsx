@@ -11,21 +11,21 @@ const Diary = (props) => {
   const database = useDatabase();
   const completeDiary = async () => {
     // console.log("Insert into dB 🍉🍉🍉🍉");
-    // console.log(database.collections.get('foods'))
-    // const foodsCollection = database.collections.get("foods");
-    // database.get("foods").query(Q.where(""));
+    // console.log(index.collections.get('foods'))
+    // const foodsCollection = index.collections.get("foods");
+    // index.get("foods").query(Q.where(""));
     // Call the fetchFoods function to retrieve the records
     // fetchFoods();
     console.log(selectedFoods[0].food);
     console.log(typeof selectedFoods[0].food);
 
-    // Note: function passed to `database.write()` MUST be asynchronous
+    // Note: function passed to `index.write()` MUST be asynchronous
   };
 
   // console.log(selectedFoods[0].food)
   // try {
-  // 	await database.action(async () => {
-  // 		const newFood = await database.collections.get('foods').create((food) => {
+  // 	await index.action(async () => {
+  // 		const newFood = await index.collections.get('foods').create((food) => {
   // 			const selectedFood = selectedFoods[0].food;x
   // 			food.calories = selectedFood.Calories;
   // 			food.carbs = selectedFood.Carbs;

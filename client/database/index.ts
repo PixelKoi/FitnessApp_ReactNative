@@ -2,8 +2,8 @@ import { Database } from "@nozbe/watermelondb";
 import SQLiteAdapter from "@nozbe/watermelondb/adapters/sqlite";
 
 import migrations from "./migrations";
-import schema from "./AppSchema";
-import Food from "./food";
+import schema from "./schema";
+import Food from "./Food";
 
 const adapter = new SQLiteAdapter({
   schema,

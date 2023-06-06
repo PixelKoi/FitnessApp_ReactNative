@@ -15,41 +15,38 @@ import { ApplicationContainer } from "./screens/NavigationComponent";
 import Navigation from "./Navigation/Navigation";
 
 // Watermelon
-import DatabaseProvider from '@nozbe/watermelondb/DatabaseProvider';
-import {database} from './database/database'
-import {useDatabase} from "@nozbe/watermelondb/hooks";
+import DatabaseProvider from "@nozbe/watermelondb/DatabaseProvider";
+import { index } from "./database";
+import { useDatabase } from "@nozbe/watermelondb/hooks";
 
 export default function App() {
-	const [session, setSession] = useState<Session | null>(null);
+  const [session, setSession] = useState<Session | null>(null);
 
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
 
-	useEffect(() => {
-		supabase.auth.getSession().then(({ data: { session } }) => {
-			setSession(session);
-		});
+    supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+  }, []);
 
-		supabase.auth.onAuthStateChange((_event, session) => {
-			setSession(session);
-		});
-	}, []);
+  console.log("Database:", index);
 
-	console.log("Database:", database);
-
-
-	return (
-		<>
-			{session && session.user ? (
-				<DatabaseProvider database={database}>
-					<Provider key={session.user.id} store={store}>
-						<Navigation session={session} />
-					</Provider>
-				</DatabaseProvider>
-
-			) : (
-				<View>
-					<Auth />
-				</View>
-			)}
-		</>
-	);
+  return (
+    <>
+      {session && session.user ? (
+        <DatabaseProvider database={index}>
+          <Provider key={session.user.id} store={store}>
+            <Navigation session={session} />
+          </Provider>
+        </DatabaseProvider>
+      ) : (
+        <View>
+          <Auth />
+        </View>
+      )}
+    </>
+  );
 }
