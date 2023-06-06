@@ -9,7 +9,7 @@ export default appSchema({
       name: "weights",
       columns: [
         { name: "weight", type: "number" },
-        { name: "created_at", type: "number" },
+        { name: "created_at", type: "string" },
         { name: "note", type: "string", isOptional: true },
       ],
     }),
@@ -23,10 +23,10 @@ export default appSchema({
     tableSchema({
       name: "foods",
       columns: [
-        { name: "calories", type: "number" },
-        { name: "carbs", type: "number" },
-        { name: "fat", type: "number" },
-        { name: "protein", type: "number" },
+        { name: "calories", type: "string" },
+        { name: "carbs", type: "string" },
+        { name: "fat", type: "string" },
+        { name: "protein", type: "string" },
         { name: "description", type: "string" },
       ],
     }),

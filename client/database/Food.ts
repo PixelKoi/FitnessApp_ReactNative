@@ -1,6 +1,6 @@
 // Import necessary dependencies
 import { Model } from "@nozbe/watermelondb";
-import { field, relation, writer } from "@nozbe/watermelondb/decorators";
+import { field, text, relation, writer } from "@nozbe/watermelondb/decorators";
 
 // Define the Foods table schema
 export default class Food extends Model {
@@ -12,11 +12,14 @@ export default class Food extends Model {
   // };
 
   // Define table fields
-  @field("calories") calories;
-  @field("carbs") carbs;
-  @field("fat") fat;
-  @field("protein") protein;
-  @field("description") description;
+  //https://watermelondb.dev/docs/Model
+  // Field type guarantees same type as input
+  // Text extends field but removes whitespaces
+  @text("calories") calories;
+  @text("carbs") carbs;
+  @text("fat") fat;
+  @text("protein") protein;
+  @text("description") description;
 
   // @writer async createFood(objectData) {
   //   const new_food = await this.collections.get("foods").create((food) => {
