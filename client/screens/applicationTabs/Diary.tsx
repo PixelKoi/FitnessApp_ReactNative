@@ -11,38 +11,11 @@ const Diary = (props) => {
   const tabNavigation = useNavigation();
   const database = useDatabase();
   const completeDiary = async () => {
-    // console.log("Insert into dB 🍉🍉🍉🍉");
-    // console.log(index.collections.get('foods'))
-    // const foodsCollection = index.collections.get("foods");
-    // index.get("foods").query(Q.where(""));
-    // Call the fetchFoods function to retrieve the records
-    // fetchFoods();
     const postsCollection = database.get("foods");
-    console.log("FOODS?", postsCollection);
-    // console.log(selectedFoods[0].food);
-    // console.log(typeof selectedFoods[0].food);
 
-    // Note: function passed to `index.write()` MUST be asynchronous
+    console.log("FOODS in 🍉🍉🍉", postsCollection);
   };
 
-  // console.log(selectedFoods[0].food)
-  // try {
-  // 	await index.action(async () => {
-  // 		const newFood = await index.collections.get('foods').create((food) => {
-  // 			const selectedFood = selectedFoods[0].food;x
-  // 			food.calories = selectedFood.Calories;
-  // 			food.carbs = selectedFood.Carbs;
-  // 			food.fat = selectedFood.Fat;
-  // 			food.protein = selectedFood.Protein;
-  // 			food.description = selectedFood.description;
-  // 		});
-  // 		console.log('Inserted new food:', newFood);
-  // 	});
-  // } catch (error) {
-  // 	console.log('Error inserting food:', error);
-  // }
-
-  // error handling, so it shows empty diary page when clicked on!
   if (props.route.params == undefined) {
     return (
       <View className="flex-1 items-center">
