@@ -1,0 +1,66 @@
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+
+interface MedState {
+	elapsedPercentage: number;
+	maxTime: number;
+	startDate: string;
+	endDate: string;
+	countdown: string;
+	medStreak: {
+		Mon: boolean;
+		Tue: boolean;
+		Wed: boolean;
+		Thu: boolean;
+		Fri: boolean;
+		Sat: boolean;
+		Sun: boolean;
+	};
+}
+
+const initialState: MedState = {
+	elapsedPercentage: 0,
+	maxTime: 5,
+	startDate: "",
+	endDate: "",
+	countdown: "00:00",
+	medStreak: {
+		Sun: false,
+		Mon: false,
+		Tue: false,
+		Wed: false,
+		Thu: false,
+		Fri: false,
+		Sat: false,
+	},
+};
+
+const medSlice = createSlice({
+	name: "meditation",
+	initialState,
+	reducers: {
+		setMaxTime(state, action: PayloadAction<number>) {
+			state.maxTime = action.payload;
+		},
+		setCountdown(state, action: PayloadAction<string>) {
+			state.countdown = action.payload;
+		},
+		setTimerStates(state, action) {
+			return { ...state, ...action.payload };
+		},
+		updateMedStreak(
+			state,
+			action: PayloadAction<{
+				day: keyof MedState["medStreak"];
+				completed: boolean;
+			}>
+		) {
+			const { day, completed } = action.payload;
+			state.medStreak[day] = completed;
+		},
+	},
+});
+
+export const { setTimerStates, setCountdown, setMaxTime, updateMedStreak } =
+	medSlice.actions;
+
+export default medSlice.reducer;
