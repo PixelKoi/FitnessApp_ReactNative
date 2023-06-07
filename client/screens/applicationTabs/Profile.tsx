@@ -65,6 +65,7 @@ const UserBioInput = () => {
 
 	//Date picker
 	const [date, setDate] = useState(new Date());
+	const [showPicker, setShowPicker] = useState(false);
 
 	//Update redux states
 	async function updateReduxProfileStates(
@@ -277,17 +278,24 @@ const UserBioInput = () => {
 					value={newName}
 					onChangeText={(newName) => setName(newName)}
 				/>
-				<TouchableOpacity className="py-3 px-4 flex-row">
+				<TouchableOpacity
+					onPress={() => setShowPicker((prevClick) => !prevClick)}
+					className="py-3 px-4 flex-row">
 					<View>
 						<Text>Age</Text>
 						<Text className="mt-2">{age}</Text>
 					</View>
 					<View className="ml-auto my-auto">
-						<Icon name="plus" size={30} color="black" />
-						<Icon name="plus" size={30} color="black" />
+						<Icon
+							name={showPicker === true ? "minus" : "plus"}
+							size={30}
+							color="black"
+						/>
 					</View>
 				</TouchableOpacity>
-				<DateTimePicker value={new Date()} mode="date" display="spinner" />
+				{showPicker && (
+					<DateTimePicker value={new Date()} mode="date" display="spinner" />
+				)}
 				<TextInput
 					label="Enter Height (cm)"
 					value={newHeight}
