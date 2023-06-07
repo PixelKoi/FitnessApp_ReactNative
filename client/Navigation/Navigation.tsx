@@ -1,7 +1,5 @@
-import { Session } from "@supabase/supabase-js";
 import React, { useEffect, useState } from "react";
 import { Alert, View, ActivityIndicator, StyleSheet } from "react-native";
-
 //Screen imports
 import Account from "../screens/screens/Account";
 import QuickLog from "../screens/applicationTabs/QuickLog";
@@ -13,6 +11,10 @@ import Timer from "../screens/applicationTabs/Timer";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+//Supabse imports
+import { Session } from "@supabase/supabase-js";
+import { supabase } from "../features/supabase_authentication/supabase";
+//redux imports
 import {
 	BookOpenIcon,
 	ClockIcon,
@@ -22,7 +24,6 @@ import {
 } from "react-native-heroicons/outline";
 import { useAppDispatch } from "../app/hooks";
 import { setSessionID, setUserStates } from "../features/user/user-slice";
-import { supabase } from "../features/supabase_authentication/supabase";
 
 const Navigation = ({ session }: { session: Session }) => {
 	const [loading, setLoading] = useState(true);

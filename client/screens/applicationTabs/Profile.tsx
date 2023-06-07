@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from "react";
+//UI imports
 import { View, Text, TouchableOpacity, Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { TextInput, Button, List } from "react-native-paper";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
+//Supabase imports
 import { supabase } from "../../features/supabase_authentication/supabase";
+//Redux imports
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import {
 	changeDailyCal,
 	changeBMR,
 	setUserStates,
 } from "../../features/user/user-slice";
+//Date picker import
 import DateTimePicker from "@react-native-community/datetimepicker";
+//Icons
 import Icon from "react-native-vector-icons/FontAwesome";
 
 const UserBioInput = () => {
