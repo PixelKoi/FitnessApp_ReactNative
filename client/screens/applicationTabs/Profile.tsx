@@ -51,6 +51,7 @@ const UserBioInput = () => {
 	const [newName, setName] = useState<string>(name);
 	const [newHeight, setHeight] = useState<string>(height.toString());
 	const [newWeight, setWeight] = useState<string>(weight.toString());
+	const [newAge, setAge] = useState<number>(age);
 	const [selectedGender, setGender] = useState<string>(gender);
 	const [selectedActivity, setActivityLevel] = useState<string>(activity);
 	const [selectedGoal, setGoal] = useState<string>(goal.toString());
@@ -70,6 +71,7 @@ const UserBioInput = () => {
 	//Update redux states
 	async function updateReduxProfileStates(
 		username: string,
+		age: number,
 		gender: string,
 		height: number,
 		weight: number,
@@ -79,6 +81,7 @@ const UserBioInput = () => {
 		await dispatch(
 			setUserStates({
 				name: username,
+				age: age,
 				gender: gender,
 				height: Number(height),
 				weight: Number(weight),
@@ -93,6 +96,7 @@ const UserBioInput = () => {
 	const [loading, setLoading] = useState(true);
 	async function updateProfile(
 		username: string,
+		age: number,
 		gender: string,
 		height: number,
 		weight: number,
@@ -103,6 +107,7 @@ const UserBioInput = () => {
 			setLoading(true);
 			const updates = {
 				user_id: sessionID,
+				age,
 				username,
 				gender,
 				height,
@@ -116,6 +121,7 @@ const UserBioInput = () => {
 			if (!error) {
 				await updateReduxProfileStates(
 					username,
+					age,
 					gender,
 					height,
 					weight,
@@ -178,6 +184,32 @@ const UserBioInput = () => {
 		}
 
 		dispatch(changeBMR(Math.round(calBMR)));
+	};
+
+	//Get Age after selecting date from time picker
+	function getAgeFromDateOfBirth(dateOfBirth) {
+		const today = new Date();
+		const birthDate = new Date(dateOfBirth);
+		let age = today.getFullYear() - birthDate.getFullYear();
+
+		const monthDifference = today.getMonth() - birthDate.getMonth();
+		if (
+			monthDifference < 0 ||
+			(monthDifference === 0 && today.getDate() < birthDate.getDate())
+		) {
+			age--;
+		}
+
+		return age;
+	}
+
+	//Get date from time picker
+	const [selectedDate, setSelectedDate] = useState(new Date());
+	const handleDateChange = (event, date) => {
+		if (date !== undefined) {
+			setSelectedDate(date);
+			setAge(getAgeFromDateOfBirth(date));
+		}
 	};
 
 	//Top Nav on Edit Profile Screen
@@ -283,7 +315,7 @@ const UserBioInput = () => {
 					className="py-3 px-4 flex-row">
 					<View>
 						<Text>Age</Text>
-						<Text className="mt-2">{age}</Text>
+						<Text className="mt-2">{newAge}</Text>
 					</View>
 					<View className="ml-auto my-auto">
 						<Icon
@@ -294,7 +326,12 @@ const UserBioInput = () => {
 					</View>
 				</TouchableOpacity>
 				{showPicker && (
-					<DateTimePicker value={new Date()} mode="date" display="spinner" />
+					<DateTimePicker
+						value={selectedDate}
+						onChange={handleDateChange}
+						mode="date"
+						display="spinner"
+					/>
 				)}
 				<TextInput
 					label="Enter Height (cm)"
@@ -431,6 +468,7 @@ const UserBioInput = () => {
 					onPress={async () => {
 						await updateProfile(
 							newName,
+							newAge,
 							selectedGender,
 							Number(newHeight),
 							Number(newWeight),
