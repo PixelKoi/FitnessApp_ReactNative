@@ -68,6 +68,9 @@ const userSlice = createSlice({
 		loggedOff(state, action: PayloadAction<Boolean>) {
 			state.loggedIn = false;
 		},
+		setUserStates(state, action) {
+			return { ...state, ...action.payload };
+		},
 	},
 });
 
@@ -81,6 +84,7 @@ export const {
 	changeGoal,
 	changeBMR,
 	changeDailyCal,
+	setUserStates,
 	loggedIn,
 	loggedOff,
 } = userSlice.actions;

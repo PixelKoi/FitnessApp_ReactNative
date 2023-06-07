@@ -4,12 +4,9 @@ import { useNavigation } from "@react-navigation/native";
 import { TextInput, Button, List } from "react-native-paper";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import {
-	changeName,
-	changeWeight,
-	changeActivity,
-	changeGoal,
 	changeDailyCal,
 	changeBMR,
+	setUserStates,
 } from "../../features/user/user-slice";
 
 /*
@@ -32,17 +29,16 @@ const UserBioInput = () => {
 
 	//Initiate User-Slice Redux
 	const userInfo = useAppSelector((state) => state.user);
-	const { gender, weight, height, age, name, activity, goal } = useAppSelector(
-		(state) => state.user
-	);
+	const { gender, weight, height, age, name, activity, goal, bmr } =
+		useAppSelector((state) => state.user);
 	const dispatch = useAppDispatch();
 
 	//Edit profile hooks
 	const [showEditProfile, setEditProfile] = useState<boolean>(false);
 	const [newName, setName] = useState<string>(name);
-	const [selectedGender, setGender] = useState<string>(gender);
 	const [newWeight, setWeight] = useState<string>(weight.toString());
-	const [activityLevel, setActivityLevel] = useState<string>(activity);
+	const [selectedGender, setGender] = useState<string>(gender);
+	const [selectedActivity, setActivityLevel] = useState<string>(activity);
 	const [selectedGoal, setGoal] = useState<string>(goal);
 
 	//Handle Accordian Dropdown Lists
@@ -55,10 +51,14 @@ const UserBioInput = () => {
 
 	//Update redux states
 	async function handleEditProfile() {
-		await dispatch(changeName(newName));
-		await dispatch(changeWeight(Number(newWeight)));
-		await dispatch(changeActivity(activityLevel));
-		await dispatch(changeGoal(selectedGoal));
+		await dispatch(
+			setUserStates({
+				name: newName,
+				weight: newWeight,
+				activity: selectedActivity,
+				goal: selectedGoal,
+			})
+		);
 		await calAlgo();
 	}
 
@@ -92,7 +92,7 @@ const UserBioInput = () => {
 				break;
 		}
 
-		switch (userInfo.goal) {
+		switch (goal) {
 			case "1":
 				dispatch(changeDailyCal(Math.round(calBMR - 500)));
 				break;
@@ -175,7 +175,7 @@ const UserBioInput = () => {
 
 						<View className="flex flex-row border-solid border-b-2  border-gray-300 p-6">
 							<Text>BMR:</Text>
-							<Text className="ml-auto text-blue-600">{userInfo.bmr} cal</Text>
+							<Text className="ml-auto text-blue-600">{bmr} cal</Text>
 						</View>
 
 						<View className="flex flex-row border-solid  p-6">
@@ -240,14 +240,15 @@ const UserBioInput = () => {
 				</List.Accordion>
 
 				<List.Accordion
-					title={activityLevel}
+					title={selectedActivity}
 					description="Select activity level"
 					left={(props) => <List.Icon {...props} icon="run" />}
 					expanded={expandActivity}
 					onPress={handleExpandActivity}>
 					<List.Item
 						style={{
-							backgroundColor: activityLevel === "Sedentary" ? "red" : "none",
+							backgroundColor:
+								selectedActivity === "Sedentary" ? "red" : "none",
 						}}
 						onPress={() => {
 							setActivityLevel("Sedentary");
@@ -258,7 +259,7 @@ const UserBioInput = () => {
 					<List.Item
 						style={{
 							backgroundColor:
-								activityLevel === "Lightly active" ? "red" : "none",
+								selectedActivity === "Lightly active" ? "red" : "none",
 						}}
 						onPress={() => {
 							setActivityLevel("Lightly active");
@@ -269,7 +270,7 @@ const UserBioInput = () => {
 					<List.Item
 						style={{
 							backgroundColor:
-								activityLevel === "Moderately active" ? "red" : "none",
+								selectedActivity === "Moderately active" ? "red" : "none",
 						}}
 						onPress={() => {
 							setActivityLevel("Moderately active");
@@ -279,7 +280,8 @@ const UserBioInput = () => {
 					/>
 					<List.Item
 						style={{
-							backgroundColor: activityLevel === "Very active" ? "red" : "none",
+							backgroundColor:
+								selectedActivity === "Very active" ? "red" : "none",
 						}}
 						onPress={() => {
 							setActivityLevel("Very active");
@@ -290,7 +292,7 @@ const UserBioInput = () => {
 					<List.Item
 						style={{
 							backgroundColor:
-								activityLevel === "Extremely active" ? "red" : "none",
+								selectedActivity === "Extremely active" ? "red" : "none",
 						}}
 						onPress={() => {
 							setActivityLevel("Extremely active");
