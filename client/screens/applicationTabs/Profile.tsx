@@ -30,9 +30,9 @@ const UserBioInput = () => {
 	//Navigation
 	const navigation = useNavigation();
 
-	//Redux
+	//Initiate User-Slice Redux
 	const userInfo = useAppSelector((state) => state.user);
-	const { gender, weight, height, age, name, activity } = useAppSelector(
+	const { gender, weight, height, age, name, activity, goal } = useAppSelector(
 		(state) => state.user
 	);
 	const dispatch = useAppDispatch();
@@ -43,7 +43,7 @@ const UserBioInput = () => {
 	const [selectedGender, setGender] = useState<string>(gender);
 	const [newWeight, setWeight] = useState<string>(weight.toString());
 	const [activityLevel, setActivityLevel] = useState<string>(activity);
-	const [goal, setGoal] = useState<string>(userInfo.goal);
+	const [selectedGoal, setGoal] = useState<string>(goal);
 
 	//Handle Accordian Dropdown Lists
 	const [expandActivity, setExpandActivity] = useState<boolean>(false);
@@ -58,21 +58,21 @@ const UserBioInput = () => {
 		await dispatch(changeName(newName));
 		await dispatch(changeWeight(Number(newWeight)));
 		await dispatch(changeActivity(activityLevel));
-		await dispatch(changeGoal(goal));
+		await dispatch(changeGoal(selectedGoal));
 		await calAlgo();
 	}
 
 	const calAlgo = () => {
 		let calBMR = 0;
 
-		if (userInfo.gender === "Male") {
+		if (gender === "Male") {
 			calBMR = 88.3 + 14.4 * weight + 4.8 * height - 5.7 * age;
 			console.log(calBMR);
-		} else if (userInfo.gender === "Female") {
+		} else if (gender === "Female") {
 			calBMR = 447.6 + 9.2 * weight + 3.1 * height - 4.3 * age;
 		}
 
-		switch (userInfo.activity) {
+		switch (activity) {
 			case "Sedentary":
 				calBMR *= 1.2;
 				break;
@@ -91,7 +91,7 @@ const UserBioInput = () => {
 			default:
 				break;
 		}
-		console.log(calBMR);
+
 		switch (userInfo.goal) {
 			case "1":
 				dispatch(changeDailyCal(Math.round(calBMR - 500)));
@@ -165,9 +165,7 @@ const UserBioInput = () => {
 
 						<View className="flex flex-row border-solid border-b-2  border-gray-300 p-6">
 							<Text>Weekly Goal:</Text>
-							<Text className="ml-auto text-blue-600">
-								{userInfo.goal} lb/s
-							</Text>
+							<Text className="ml-auto text-blue-600">{goal} lb/s</Text>
 						</View>
 
 						<View className="flex flex-row border-solid border-b-2  border-gray-300 p-6">
@@ -303,14 +301,14 @@ const UserBioInput = () => {
 				</List.Accordion>
 
 				<List.Accordion
-					title={goal + "lbs"}
+					title={selectedGoal + "lbs"}
 					description="Select Weight Loss Goal"
 					left={(props) => <List.Icon {...props} icon="scale" />}
 					expanded={expandGoal}
 					onPress={handleExpandGoal}>
 					<List.Item
 						style={{
-							backgroundColor: goal === "1" ? "red" : "none",
+							backgroundColor: selectedGoal === "1" ? "red" : "none",
 						}}
 						onPress={() => {
 							setGoal("1");
@@ -320,7 +318,7 @@ const UserBioInput = () => {
 					/>
 					<List.Item
 						style={{
-							backgroundColor: goal === "2" ? "red" : "none",
+							backgroundColor: selectedGoal === "2" ? "red" : "none",
 						}}
 						onPress={() => {
 							setGoal("2");
