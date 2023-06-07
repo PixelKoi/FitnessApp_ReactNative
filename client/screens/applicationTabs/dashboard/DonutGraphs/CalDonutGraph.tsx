@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { View, Text, Animated, TextInput } from "react-native";
 import Svg, { G, Circle } from "react-native-svg";
+import { useAppSelector } from "../../../../app/hooks";
 
 //Graph Animations
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
@@ -9,6 +10,9 @@ const CalDonutGraph = (
 	props,
 	{ radius = 70, strokeWidth = 20, duration = 500, color = "blue", delay = 0 }
 ) => {
+	//Initiate User Redux State
+	const { dailyCal } = useAppSelector((state) => state.user);
+
 	const animatedValue = React.useRef(new Animated.Value(0)).current;
 	// const [elapsed, setElapsed] = useState(0);
 
@@ -57,7 +61,7 @@ const CalDonutGraph = (
 				</G>
 			</Svg>
 			<View className="text-base text-center absolute top-14">
-				<Text className="text-center">500 calories</Text>
+				<Text className="text-center">{dailyCal} calories</Text>
 				<Text className="text-center top-1">remaining</Text>
 			</View>
 		</View>

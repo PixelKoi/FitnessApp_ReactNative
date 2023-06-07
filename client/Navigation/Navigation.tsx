@@ -29,6 +29,7 @@ const Navigation = ({ session }: { session: Session }) => {
 	const [userData, setUserData] = useState(false);
 	const dispatch = useAppDispatch();
 
+	//Update redux states for profile
 	async function updateReduxUserStates(data) {
 		await dispatch(
 			setUserStates({
@@ -43,6 +44,7 @@ const Navigation = ({ session }: { session: Session }) => {
 		);
 	}
 
+	//Get user data from supabase and update redux
 	async function getProfile() {
 		try {
 			setLoading(true);

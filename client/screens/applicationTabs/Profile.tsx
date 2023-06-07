@@ -9,6 +9,8 @@ import {
 	changeBMR,
 	setUserStates,
 } from "../../features/user/user-slice";
+import DateTimePicker from "@react-native-community/datetimepicker";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 /*
 Calorie Counting Algorithm
@@ -28,6 +30,7 @@ const UserBioInput = () => {
 	//Navigation
 	const navigation = useNavigation();
 
+	//Todo get age from Daten_fns
 	//Initiate User-Slice Redux
 	const {
 		sessionID,
@@ -43,7 +46,7 @@ const UserBioInput = () => {
 	} = useAppSelector((state) => state.user);
 	const dispatch = useAppDispatch();
 
-	//Edit profile hooks
+	//Edit Profile Hooks
 	const [showEditProfile, setEditProfile] = useState<boolean>(false);
 	const [newName, setName] = useState<string>(name);
 	const [newHeight, setHeight] = useState<string>(height.toString());
@@ -52,7 +55,7 @@ const UserBioInput = () => {
 	const [selectedActivity, setActivityLevel] = useState<string>(activity);
 	const [selectedGoal, setGoal] = useState<string>(goal.toString());
 
-	//Handle Accordian Dropdown Lists
+	//Accordian Dropdown Lists Hooks
 	const [expandActivity, setExpandActivity] = useState<boolean>(false);
 	const [expandGoal, setExpandGoal] = useState<boolean>(false);
 	const [expandGender, setExpandGender] = useState<boolean>(false);
@@ -60,14 +63,17 @@ const UserBioInput = () => {
 	const handleExpandActivity = () => setExpandActivity(!expandActivity);
 	const handleExpandGoal = () => setExpandGoal(!expandGoal);
 
+	//Date picker
+	const [date, setDate] = useState(new Date());
+
 	//Update redux states
-	async function handleEditProfile(
-		username,
-		gender,
-		height,
-		weight,
-		activity,
-		goal
+	async function updateReduxProfileStates(
+		username: string,
+		gender: string,
+		height: number,
+		weight: number,
+		activity: string,
+		goal: number
 	) {
 		await dispatch(
 			setUserStates({
@@ -85,12 +91,12 @@ const UserBioInput = () => {
 	//Update supabase profile
 	const [loading, setLoading] = useState(true);
 	async function updateProfile(
-		username,
-		gender,
-		height,
-		weight,
-		activity,
-		goal
+		username: string,
+		gender: string,
+		height: number,
+		weight: number,
+		activity: string,
+		goal: number
 	) {
 		try {
 			setLoading(true);
@@ -106,7 +112,16 @@ const UserBioInput = () => {
 			};
 			console.log(updates);
 			let { error } = await supabase.from("profile").upsert(updates);
-			await handleEditProfile(username, gender, height, weight, activity, goal);
+			if (!error) {
+				await updateReduxProfileStates(
+					username,
+					gender,
+					height,
+					weight,
+					activity,
+					goal
+				);
+			}
 
 			if (error) {
 				throw error;
@@ -262,6 +277,17 @@ const UserBioInput = () => {
 					value={newName}
 					onChangeText={(newName) => setName(newName)}
 				/>
+				<TouchableOpacity className="py-3 px-4 flex-row">
+					<View>
+						<Text>Age</Text>
+						<Text className="mt-2">{age}</Text>
+					</View>
+					<View className="ml-auto my-auto">
+						<Icon name="plus" size={30} color="black" />
+						<Icon name="plus" size={30} color="black" />
+					</View>
+				</TouchableOpacity>
+				<DateTimePicker value={new Date()} mode="date" display="spinner" />
 				<TextInput
 					label="Enter Height (cm)"
 					value={newHeight}
