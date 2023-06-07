@@ -221,28 +221,43 @@ const UserBioInput = () => {
 				/>
 
 				<List.Accordion
-					title="Select Activity Level"
+					title={activityLevel}
 					left={(props) => <List.Icon {...props} icon="run" />}
 					expanded={expandActivity}
 					onPress={handleExpandActivity}>
 					<List.Item
-						onPress={() => setActivityLevel("Sedentary")}
+						onPress={() => {
+							setActivityLevel("Sedentary");
+							setExpandActivity((prevClick) => !prevClick);
+						}}
 						title="Sedentary"
 					/>
 					<List.Item
-						onPress={() => setActivityLevel("Lightly active")}
+						onPress={() => {
+							setActivityLevel("Lightly active");
+							setExpandActivity((prevClick) => !prevClick);
+						}}
 						title="Lightly active"
 					/>
 					<List.Item
-						onPress={() => setActivityLevel("Moderately active")}
+						onPress={() => {
+							setActivityLevel("Moderately active");
+							setExpandActivity((prevClick) => !prevClick);
+						}}
 						title="Moderately active"
 					/>
 					<List.Item
-						onPress={() => setActivityLevel("Very active")}
+						onPress={() => {
+							setActivityLevel("Very active");
+							setExpandActivity((prevClick) => !prevClick);
+						}}
 						title="Very active"
 					/>
 					<List.Item
-						onPress={() => setActivityLevel("Extremely active")}
+						onPress={() => {
+							setActivityLevel("Extremely active");
+							setExpandActivity((prevClick) => !prevClick);
+						}}
 						title="Extremely active"
 					/>
 				</List.Accordion>
@@ -252,8 +267,20 @@ const UserBioInput = () => {
 					left={(props) => <List.Icon {...props} icon="scale" />}
 					expanded={expandGoal}
 					onPress={handleExpandGoal}>
-					<List.Item onPress={() => setGoal("1")} title="1lb / week" />
-					<List.Item onPress={() => setGoal("2")} title="2lbs / week" />
+					<List.Item
+						onPress={() => {
+							setGoal("1");
+							setExpandGoal((prevClick) => !prevClick);
+						}}
+						title="1lb / week"
+					/>
+					<List.Item
+						onPress={() => {
+							setGoal("2");
+							setExpandGoal((prevClick) => !prevClick);
+						}}
+						title="2lbs / week"
+					/>
 				</List.Accordion>
 
 				<Button
