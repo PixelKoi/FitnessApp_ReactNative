@@ -32,28 +32,31 @@ const UserBioInput = () => {
 
 	//Redux
 	const userInfo = useAppSelector((state) => state.user);
+	const { gender, weight, height, age, name, activity } = useAppSelector(
+		(state) => state.user
+	);
 	const dispatch = useAppDispatch();
 
 	//Edit profile hooks
 	const [showEditProfile, setEditProfile] = useState<boolean>(false);
+	const [newName, setName] = useState<string>(name);
+	const [selectedGender, setGender] = useState<string>(gender);
+	const [newWeight, setWeight] = useState<string>(weight.toString());
+	const [activityLevel, setActivityLevel] = useState<string>(activity);
+	const [goal, setGoal] = useState<string>(userInfo.goal);
+
+	//Handle Accordian Dropdown Lists
 	const [expandActivity, setExpandActivity] = useState<boolean>(false);
 	const [expandGoal, setExpandGoal] = useState<boolean>(false);
 	const [expandGender, setExpandGender] = useState<boolean>(false);
-	const [name, setName] = useState<string>(userInfo.name);
-	const [gender, setGender] = useState<string>(userInfo.gender);
-	const [weight, setWeight] = useState<string>(userInfo.weight.toString());
-	const [activityLevel, setActivityLevel] = useState<string>(userInfo.activity);
-	const [goal, setGoal] = useState<string>(userInfo.goal);
-
-	//Handle Accordian Dropdown
 	const handleExpandGender = () => setExpandGender(!expandGender);
 	const handleExpandActivity = () => setExpandActivity(!expandActivity);
 	const handleExpandGoal = () => setExpandGoal(!expandGoal);
 
 	//Update redux states
 	async function handleEditProfile() {
-		await dispatch(changeName(name));
-		await dispatch(changeWeight(Number(weight)));
+		await dispatch(changeName(newName));
+		await dispatch(changeWeight(Number(newWeight)));
 		await dispatch(changeActivity(activityLevel));
 		await dispatch(changeGoal(goal));
 		await calAlgo();
@@ -63,18 +66,10 @@ const UserBioInput = () => {
 		let calBMR = 0;
 
 		if (userInfo.gender === "Male") {
-			calBMR =
-				88.3 +
-				14.4 * userInfo.weight +
-				4.8 * userInfo.height -
-				5.7 * userInfo.age;
+			calBMR = 88.3 + 14.4 * weight + 4.8 * height - 5.7 * age;
 			console.log(calBMR);
 		} else if (userInfo.gender === "Female") {
-			calBMR =
-				447.6 +
-				9.2 * userInfo.weight +
-				3.1 * userInfo.height -
-				4.3 * userInfo.age;
+			calBMR = 447.6 + 9.2 * weight + 3.1 * height - 4.3 * age;
 		}
 
 		switch (userInfo.activity) {
@@ -140,36 +135,32 @@ const UserBioInput = () => {
 					<View className="flex  ">
 						<View className="flex flex-row border-solid border-y-2 m-0 border-gray-300 p-6">
 							<Text>User Name:</Text>
-							<Text className="ml-auto text-blue-600">{userInfo.name}</Text>
+							<Text className="ml-auto text-blue-600">{name}</Text>
 						</View>
 
 						<View className="flex flex-row border-solid border-b-2  border-gray-300 p-6">
 							<Text>Age:</Text>
-							<Text className="ml-auto text-blue-600">{userInfo.age}</Text>
+							<Text className="ml-auto text-blue-600">{age}</Text>
 						</View>
 
 						<View className="flex flex-row border-solid border-b-2  border-gray-300 p-6">
 							<Text>Gender:</Text>
-							<Text className="ml-auto text-blue-600">{userInfo.gender}</Text>
+							<Text className="ml-auto text-blue-600">{gender}</Text>
 						</View>
 
 						<View className="flex flex-row border-solid border-b-2  border-gray-300 p-6">
 							<Text>Height (cm):</Text>
-							<Text className="ml-auto text-blue-600">
-								{userInfo.height} cm
-							</Text>
+							<Text className="ml-auto text-blue-600">{height} cm</Text>
 						</View>
 
 						<View className="flex flex-row border-solid border-b-2  border-gray-300 p-6">
 							<Text>Weight (kg)</Text>
-							<Text className="ml-auto text-blue-600">
-								{userInfo.weight} kg
-							</Text>
+							<Text className="ml-auto text-blue-600">{weight} kg</Text>
 						</View>
 
 						<View className="flex flex-row border-solid border-b-2  border-gray-300 p-6">
 							<Text>Activity Level</Text>
-							<Text className="ml-auto text-blue-600">{userInfo.activity}</Text>
+							<Text className="ml-auto text-blue-600">{activity}</Text>
 						</View>
 
 						<View className="flex flex-row border-solid border-b-2  border-gray-300 p-6">
@@ -214,23 +205,23 @@ const UserBioInput = () => {
 			<View>
 				<TextInput
 					label="User Name"
-					value={name}
-					onChangeText={(name) => setName(name)}
+					value={newName}
+					onChangeText={(newName) => setName(newName)}
 				/>
 				<TextInput
 					label="Enter Weight (kg)"
-					value={weight}
-					onChangeText={(weight) => setWeight(weight)}
+					value={newWeight}
+					onChangeText={(newWeight) => setWeight(newWeight)}
 				/>
 
 				<List.Accordion
-					title={gender}
-					left={(props) => <List.Icon {...props} icon="face" />}
+					title={selectedGender}
+					left={(props) => <List.Icon {...props} />}
 					expanded={expandGender}
 					onPress={handleExpandGender}>
 					<List.Item
 						style={{
-							backgroundColor: gender === "Female" ? "red" : "none",
+							backgroundColor: selectedGender === "Female" ? "red" : "none",
 						}}
 						onPress={() => {
 							setGender("Female");
@@ -240,7 +231,7 @@ const UserBioInput = () => {
 					/>
 					<List.Item
 						style={{
-							backgroundColor: gender === "Male" ? "red" : "none",
+							backgroundColor: selectedGender === "Male" ? "red" : "none",
 						}}
 						onPress={() => {
 							setGender("Male");
