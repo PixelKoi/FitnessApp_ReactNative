@@ -21,7 +21,6 @@ const UserBioInput = () => {
 	//Navigation
 	const navigation = useNavigation();
 
-	//Todo get age from Daten_fns
 	//Initiate User-Slice Redux
 	const {
 		sessionID,
