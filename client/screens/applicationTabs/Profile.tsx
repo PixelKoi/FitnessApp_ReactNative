@@ -281,11 +281,15 @@ const UserBioInput = () => {
 				</List.Accordion>
 
 				<List.Accordion
-					title="Select Weight Loss Goal"
+					title={goal + "lbs"}
+					description="Select Weight Loss Goal"
 					left={(props) => <List.Icon {...props} icon="scale" />}
 					expanded={expandGoal}
 					onPress={handleExpandGoal}>
 					<List.Item
+						style={{
+							backgroundColor: goal === "1" ? "red" : "none",
+						}}
 						onPress={() => {
 							setGoal("1");
 							setExpandGoal((prevClick) => !prevClick);
@@ -293,6 +297,9 @@ const UserBioInput = () => {
 						title="1lb / week"
 					/>
 					<List.Item
+						style={{
+							backgroundColor: goal === "2" ? "red" : "none",
+						}}
 						onPress={() => {
 							setGoal("2");
 							setExpandGoal((prevClick) => !prevClick);
