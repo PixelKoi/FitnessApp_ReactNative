@@ -38,12 +38,15 @@ const UserBioInput = () => {
 	const [showEditProfile, setEditProfile] = useState<boolean>(false);
 	const [expandActivity, setExpandActivity] = useState<boolean>(false);
 	const [expandGoal, setExpandGoal] = useState<boolean>(false);
+	const [expandGender, setExpandGender] = useState<boolean>(false);
 	const [name, setName] = useState<string>(userInfo.name);
+	const [gender, setGender] = useState<string>(userInfo.gender);
 	const [weight, setWeight] = useState<string>(userInfo.weight.toString());
 	const [activityLevel, setActivityLevel] = useState<string>(userInfo.activity);
 	const [goal, setGoal] = useState<string>(userInfo.goal);
 
 	//Handle Accordian Dropdown
+	const handleExpandGender = () => setExpandGender(!expandActivity);
 	const handleExpandActivity = () => setExpandActivity(!expandActivity);
 	const handleExpandGoal = () => setExpandGoal(!expandGoal);
 
@@ -219,6 +222,34 @@ const UserBioInput = () => {
 					value={weight}
 					onChangeText={(weight) => setWeight(weight)}
 				/>
+
+				<List.Accordion
+					title={gender}
+					left={(props) => <List.Icon {...props} icon="face" />}
+					expanded={expandGender}
+					onPress={handleExpandGender}>
+					<List.Item
+						style={{
+							backgroundColor: gender === "Female" ? "red" : "none",
+						}}
+						onPress={() => {
+							setGender("Female");
+							setExpandGender((prevClick) => !prevClick);
+						}}
+						title="Female"
+					/>
+					<List.Item
+						style={{
+							backgroundColor: gender === "Male" ? "red" : "none",
+						}}
+						onPress={() => {
+							setGender("Male");
+							setExpandGender((prevClick) => !prevClick);
+						}}
+						title="Male"
+					/>
+				</List.Accordion>
+
 				<List.Accordion
 					title={activityLevel}
 					description="Select activity level"
