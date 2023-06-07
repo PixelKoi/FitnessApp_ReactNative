@@ -28,14 +28,14 @@ const UserBioInput = () => {
 	const navigation = useNavigation();
 
 	//Initiate User-Slice Redux
-	const userInfo = useAppSelector((state) => state.user);
-	const { gender, weight, height, age, name, activity, goal, bmr } =
+	const { gender, weight, height, age, name, activity, goal, bmr, dailyCal } =
 		useAppSelector((state) => state.user);
 	const dispatch = useAppDispatch();
 
 	//Edit profile hooks
 	const [showEditProfile, setEditProfile] = useState<boolean>(false);
 	const [newName, setName] = useState<string>(name);
+	const [newHeight, setHeight] = useState<string>(height.toString());
 	const [newWeight, setWeight] = useState<string>(weight.toString());
 	const [selectedGender, setGender] = useState<string>(gender);
 	const [selectedActivity, setActivityLevel] = useState<string>(activity);
@@ -54,6 +54,7 @@ const UserBioInput = () => {
 		await dispatch(
 			setUserStates({
 				name: newName,
+				height: newHeight,
 				weight: newWeight,
 				activity: selectedActivity,
 				goal: selectedGoal,
@@ -67,7 +68,6 @@ const UserBioInput = () => {
 
 		if (gender === "Male") {
 			calBMR = 88.3 + 14.4 * weight + 4.8 * height - 5.7 * age;
-			console.log(calBMR);
 		} else if (gender === "Female") {
 			calBMR = 447.6 + 9.2 * weight + 3.1 * height - 4.3 * age;
 		}
@@ -180,9 +180,7 @@ const UserBioInput = () => {
 
 						<View className="flex flex-row border-solid  p-6">
 							<Text>Daily Calorie Needs:</Text>
-							<Text className="ml-auto text-blue-600">
-								{userInfo.dailyCal} cal
-							</Text>
+							<Text className="ml-auto text-blue-600">{dailyCal} cal</Text>
 						</View>
 					</View>
 				</View>
@@ -207,6 +205,11 @@ const UserBioInput = () => {
 					onChangeText={(newName) => setName(newName)}
 				/>
 				<TextInput
+					label="Enter Height (cm)"
+					value={newHeight}
+					onChangeText={(newHeight) => setHeight(newHeight)}
+				/>
+				<TextInput
 					label="Enter Weight (kg)"
 					value={newWeight}
 					onChangeText={(newWeight) => setWeight(newWeight)}
@@ -214,7 +217,7 @@ const UserBioInput = () => {
 
 				<List.Accordion
 					title={selectedGender}
-					left={(props) => <List.Icon {...props} />}
+					left={(props) => <List.Icon {...props} icon="run" />}
 					expanded={expandGender}
 					onPress={handleExpandGender}>
 					<List.Item

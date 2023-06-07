@@ -52,7 +52,7 @@ const Fasting = () => {
 		setStartTime(currentDate);
 		setEndTime(endTime);
 
-		//update redux startDade and endDate
+		//Update redux startDade and endDate
 		dispatch(
 			setTimerStates({
 				startDate: currentDate.toString(),
