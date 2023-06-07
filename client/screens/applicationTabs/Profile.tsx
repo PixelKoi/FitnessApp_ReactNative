@@ -12,20 +12,6 @@ import {
 import DateTimePicker from "@react-native-community/datetimepicker";
 import Icon from "react-native-vector-icons/FontAwesome";
 
-/*
-Calorie Counting Algorithm
-
-	For men: BMR = 88.36 + (13.4 x weight in kg) + (4.8 x height in cm) - (5.7 x age in years)
-	For women: BMR = 447.6 + (9.2 x weight in kg) + (3.1 x height in cm) - (4.3 x age in years)
-
-	Sedentary (little or no exercise): TDEE = BMR x 1.2
-	Lightly active (light exercise or sports 1-3 days/week): TDEE = BMR x 1.375
-	Moderately active (moderate exercise or sports 3-5 days/week): TDEE = BMR x 1.55
-	Very active (hard exercise or sports 6-7 days/week): TDEE = BMR x 1.725
-	Extremely active (very hard exercise or sports, physical job or training twice a day): TDEE = BMR x 1.9
-
-	Lose 1lb a week = -500 cal deficit
-*/
 const UserBioInput = () => {
 	//Navigation
 	const navigation = useNavigation();
@@ -142,6 +128,20 @@ const UserBioInput = () => {
 		}
 	}
 
+	/*
+		Calorie Counting Algorithm
+
+		For men: BMR = 88.36 + (13.4 x weight in kg) + (4.8 x height in cm) - (5.7 x age in years)
+		For women: BMR = 447.6 + (9.2 x weight in kg) + (3.1 x height in cm) - (4.3 x age in years)
+
+		Sedentary (little or no exercise): TDEE = BMR x 1.2
+		Lightly active (light exercise or sports 1-3 days/week): TDEE = BMR x 1.375
+		Moderately active (moderate exercise or sports 3-5 days/week): TDEE = BMR x 1.55
+		Very active (hard exercise or sports 6-7 days/week): TDEE = BMR x 1.725
+		Extremely active (very hard exercise or sports, physical job or training twice a day): TDEE = BMR x 1.9
+
+		Lose 1lb a week = -500 cal deficit
+	*/
 	const calAlgo = () => {
 		let calBMR = 0;
 
