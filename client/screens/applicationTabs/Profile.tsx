@@ -29,7 +29,6 @@ const UserBioInput = () => {
 	const navigation = useNavigation();
 
 	//Initiate User-Slice Redux
-	const session = useAppSelector((state) => state.session);
 	const {
 		sessionID,
 		gender,

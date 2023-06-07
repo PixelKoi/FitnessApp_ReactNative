@@ -1,12 +1,11 @@
 import { Session } from "@supabase/supabase-js";
 import React, { useEffect, useState } from "react";
-import { Alert, View, ActivityIndicator, StyleSheet, Text } from "react-native";
+import { Alert, View, ActivityIndicator, StyleSheet } from "react-native";
 
 //Screen imports
 import Account from "../screens/screens/Account";
 import QuickLog from "../screens/applicationTabs/QuickLog";
 import Proflile from "../screens/applicationTabs/Profile";
-import Fasting from "../screens/applicationTabs/Fasting";
 import Diary from "../screens/applicationTabs/Diary";
 import Dashboard from "../screens/applicationTabs/dashboard/Dashboard";
 import Timer from "../screens/applicationTabs/Timer";
@@ -21,17 +20,8 @@ import {
 	SquaresPlusIcon,
 	UserCircleIcon,
 } from "react-native-heroicons/outline";
-import { useAppDispatch, useAppSelector } from "../app/hooks";
-import {
-	changeAge,
-	setSessionID,
-	changeGender,
-	changeGoal,
-	changeHeight,
-	changeName,
-	changeWeight,
-	setUserStates,
-} from "../features/user/user-slice";
+import { useAppDispatch } from "../app/hooks";
+import { setSessionID, setUserStates } from "../features/user/user-slice";
 import { supabase } from "../features/supabase_authentication/supabase";
 
 const Navigation = ({ session }: { session: Session }) => {
@@ -43,8 +33,8 @@ const Navigation = ({ session }: { session: Session }) => {
 		await dispatch(
 			setUserStates({
 				name: data.username,
-				gender: data.age,
-				age: data.gender,
+				gender: data.gender,
+				age: data.age,
 				height: data.height,
 				weight: data.weight,
 				activity: data.activity,
