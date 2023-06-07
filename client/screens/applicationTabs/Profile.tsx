@@ -219,13 +219,16 @@ const UserBioInput = () => {
 					value={weight}
 					onChangeText={(weight) => setWeight(weight)}
 				/>
-
 				<List.Accordion
 					title={activityLevel}
+					description="Select activity level"
 					left={(props) => <List.Icon {...props} icon="run" />}
 					expanded={expandActivity}
 					onPress={handleExpandActivity}>
 					<List.Item
+						style={{
+							backgroundColor: activityLevel === "Sedentary" ? "red" : "none",
+						}}
 						onPress={() => {
 							setActivityLevel("Sedentary");
 							setExpandActivity((prevClick) => !prevClick);
@@ -233,6 +236,10 @@ const UserBioInput = () => {
 						title="Sedentary"
 					/>
 					<List.Item
+						style={{
+							backgroundColor:
+								activityLevel === "Lightly active" ? "red" : "none",
+						}}
 						onPress={() => {
 							setActivityLevel("Lightly active");
 							setExpandActivity((prevClick) => !prevClick);
@@ -240,6 +247,10 @@ const UserBioInput = () => {
 						title="Lightly active"
 					/>
 					<List.Item
+						style={{
+							backgroundColor:
+								activityLevel === "Moderately active" ? "red" : "none",
+						}}
 						onPress={() => {
 							setActivityLevel("Moderately active");
 							setExpandActivity((prevClick) => !prevClick);
@@ -247,6 +258,9 @@ const UserBioInput = () => {
 						title="Moderately active"
 					/>
 					<List.Item
+						style={{
+							backgroundColor: activityLevel === "Very active" ? "red" : "none",
+						}}
 						onPress={() => {
 							setActivityLevel("Very active");
 							setExpandActivity((prevClick) => !prevClick);
@@ -254,6 +268,10 @@ const UserBioInput = () => {
 						title="Very active"
 					/>
 					<List.Item
+						style={{
+							backgroundColor:
+								activityLevel === "Extremely active" ? "red" : "none",
+						}}
 						onPress={() => {
 							setActivityLevel("Extremely active");
 							setExpandActivity((prevClick) => !prevClick);
