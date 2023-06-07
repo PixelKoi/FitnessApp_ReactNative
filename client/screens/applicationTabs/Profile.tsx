@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { TextInput, Button, List } from "react-native-paper";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { supabase } from "../../features/supabase_authentication/supabase";
 import {
 	changeDailyCal,
 	changeBMR,
@@ -28,8 +29,19 @@ const UserBioInput = () => {
 	const navigation = useNavigation();
 
 	//Initiate User-Slice Redux
-	const { gender, weight, height, age, name, activity, goal, bmr, dailyCal } =
-		useAppSelector((state) => state.user);
+	const session = useAppSelector((state) => state.session);
+	const {
+		sessionID,
+		gender,
+		weight,
+		height,
+		age,
+		name,
+		activity,
+		goal,
+		bmr,
+		dailyCal,
+	} = useAppSelector((state) => state.user);
 	const dispatch = useAppDispatch();
 
 	//Edit profile hooks
@@ -39,7 +51,7 @@ const UserBioInput = () => {
 	const [newWeight, setWeight] = useState<string>(weight.toString());
 	const [selectedGender, setGender] = useState<string>(gender);
 	const [selectedActivity, setActivityLevel] = useState<string>(activity);
-	const [selectedGoal, setGoal] = useState<string>(goal);
+	const [selectedGoal, setGoal] = useState<string>(goal.toString());
 
 	//Handle Accordian Dropdown Lists
 	const [expandActivity, setExpandActivity] = useState<boolean>(false);
@@ -50,17 +62,63 @@ const UserBioInput = () => {
 	const handleExpandGoal = () => setExpandGoal(!expandGoal);
 
 	//Update redux states
-	async function handleEditProfile() {
+	async function handleEditProfile(
+		username,
+		gender,
+		height,
+		weight,
+		activity,
+		goal
+	) {
 		await dispatch(
 			setUserStates({
-				name: newName,
-				height: newHeight,
-				weight: newWeight,
-				activity: selectedActivity,
-				goal: selectedGoal,
+				name: username,
+				gender: gender,
+				height: Number(height),
+				weight: Number(weight),
+				activity: activity,
+				goal: Number(goal),
 			})
 		);
 		await calAlgo();
+	}
+
+	//Update supabase profile
+	const [loading, setLoading] = useState(true);
+	async function updateProfile(
+		username,
+		gender,
+		height,
+		weight,
+		activity,
+		goal
+	) {
+		try {
+			setLoading(true);
+			const updates = {
+				user_id: sessionID,
+				username,
+				gender,
+				height,
+				weight,
+				activity,
+				goal,
+				updated_at: new Date(),
+			};
+			console.log(updates);
+			let { error } = await supabase.from("profile").upsert(updates);
+			await handleEditProfile(username, gender, height, weight, activity, goal);
+
+			if (error) {
+				throw error;
+			}
+		} catch (error) {
+			if (error instanceof Error) {
+				Alert.alert(error.message);
+			}
+		} finally {
+			setLoading(false);
+		}
 	}
 
 	const calAlgo = () => {
@@ -93,10 +151,10 @@ const UserBioInput = () => {
 		}
 
 		switch (goal) {
-			case "1":
+			case 1:
 				dispatch(changeDailyCal(Math.round(calBMR - 500)));
 				break;
-			case "2":
+			case 2:
 				dispatch(changeDailyCal(Math.round(calBMR - 1000)));
 				break;
 			default:
@@ -124,6 +182,7 @@ const UserBioInput = () => {
 	}, [showEditProfile]);
 
 	useEffect(() => {
+		console.log(sessionID);
 		calAlgo();
 	}, [showEditProfile === false]);
 
@@ -337,7 +396,14 @@ const UserBioInput = () => {
 					className="mt-6 py-1 mx-4"
 					style={{ backgroundColor: "#84d0ff" }}
 					onPress={async () => {
-						await handleEditProfile();
+						await updateProfile(
+							newName,
+							selectedGender,
+							Number(newHeight),
+							Number(newWeight),
+							selectedActivity,
+							Number(selectedGoal)
+						);
 						setEditProfile(false);
 					}}
 					mode="contained">

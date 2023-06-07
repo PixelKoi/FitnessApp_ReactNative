@@ -12,6 +12,7 @@ import {
 	changeHeight,
 	changeName,
 	changeWeight,
+	setUserStates,
 } from "../../features/user/user-slice";
 import { setSession } from "../../features/user/session-slice";
 import { useNavigation } from "@react-navigation/native";
@@ -34,17 +35,24 @@ export default function Account({ session }: { session: Session }) {
 	const dispatch = useAppDispatch();
 
 	//update component and global states
-	function updateReduxUserStates(data) {
-		dispatch(changeName(data.username));
-		dispatch(changeAge(data.age));
-		dispatch(changeGender(data.gender));
-		dispatch(changeHeight(data.height));
-		dispatch(changeWeight(data.weight));
-		dispatch(changeActivity(data.activity));
-		dispatch(changeGoal(data.goal));
+	function updateReduxUserStates(data, sessionID) {
+		dispatch(
+			setUserStates({
+				sessionID: sessionID,
+				name: data.username,
+				age: data.age,
+				gender: data.gender,
+				height: data.height,
+				weight: data.weight,
+				activity: data.activity,
+				goal: data.goal,
+			})
+		);
 	}
 
 	useEffect(() => {
+		console.log("hello");
+		console.log(session?.user.id);
 		setModalVisible(true);
 		if (session) {
 			getProfile();
@@ -120,7 +128,7 @@ export default function Account({ session }: { session: Session }) {
 
 			let { error } = await supabase.from("profile").upsert(updates);
 
-			updateReduxUserStates(updates);
+			updateReduxUserStates(updates, session?.user.id);
 
 			if (error) {
 				throw error;

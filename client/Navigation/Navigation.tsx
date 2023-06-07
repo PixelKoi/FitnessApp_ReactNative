@@ -23,13 +23,14 @@ import {
 } from "react-native-heroicons/outline";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import {
-	changeActivity,
 	changeAge,
+	setSessionID,
 	changeGender,
 	changeGoal,
 	changeHeight,
 	changeName,
 	changeWeight,
+	setUserStates,
 } from "../features/user/user-slice";
 import { supabase } from "../features/supabase_authentication/supabase";
 
@@ -38,14 +39,18 @@ const Navigation = ({ session }: { session: Session }) => {
 	const [userData, setUserData] = useState(false);
 	const dispatch = useAppDispatch();
 
-	function updateReduxUserStates(data) {
-		dispatch(changeName(data.username));
-		dispatch(changeAge(data.age));
-		dispatch(changeGender(data.gender));
-		dispatch(changeHeight(data.height));
-		dispatch(changeWeight(data.weight));
-		dispatch(changeActivity(data.activity));
-		dispatch(changeGoal(data.goal));
+	async function updateReduxUserStates(data) {
+		await dispatch(
+			setUserStates({
+				name: data.username,
+				gender: data.age,
+				age: data.gender,
+				height: data.height,
+				weight: data.weight,
+				activity: data.activity,
+				goal: data.goal,
+			})
+		);
 	}
 
 	async function getProfile() {
@@ -64,6 +69,7 @@ const Navigation = ({ session }: { session: Session }) => {
 
 			if (data) {
 				updateReduxUserStates(data);
+				dispatch(setSessionID(data.user_id));
 				setUserData(data.created);
 			}
 		} catch (error) {

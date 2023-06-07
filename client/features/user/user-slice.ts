@@ -1,13 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface UserState {
+	sessionID: string;
 	name: string;
 	age: number;
 	gender: string;
 	weight: number;
 	height: number;
 	activity: string;
-	goal: string;
+	goal: number;
 	loggedIn: boolean;
 	bmr: number;
 	dailyCal: number;
@@ -15,13 +16,14 @@ interface UserState {
 }
 
 const initialState: UserState = {
+	sessionID: "",
 	name: "",
 	age: 0,
 	gender: "",
 	weight: 0,
 	height: 0,
 	activity: "",
-	goal: "",
+	goal: 1,
 	bmr: 0,
 	dailyCal: 0,
 	loggedIn: false,
@@ -32,6 +34,9 @@ const userSlice = createSlice({
 	name: "user",
 	initialState,
 	reducers: {
+		setSessionID(state, action: PayloadAction<string>) {
+			state.sessionID = action.payload;
+		},
 		changeName(state, action: PayloadAction<string>) {
 			state.name = action.payload;
 		},
@@ -87,6 +92,7 @@ export const {
 	setUserStates,
 	loggedIn,
 	loggedOff,
+	setSessionID,
 } = userSlice.actions;
 
 export default userSlice.reducer;
