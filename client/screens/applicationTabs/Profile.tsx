@@ -46,7 +46,7 @@ const UserBioInput = () => {
 	const [goal, setGoal] = useState<string>(userInfo.goal);
 
 	//Handle Accordian Dropdown
-	const handleExpandGender = () => setExpandGender(!expandActivity);
+	const handleExpandGender = () => setExpandGender(!expandGender);
 	const handleExpandActivity = () => setExpandActivity(!expandActivity);
 	const handleExpandGoal = () => setExpandGoal(!expandGoal);
 
