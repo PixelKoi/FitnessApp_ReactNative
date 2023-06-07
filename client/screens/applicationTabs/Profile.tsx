@@ -39,7 +39,7 @@ const UserBioInput = () => {
 	const [expandActivity, setExpandActivity] = useState<boolean>(false);
 	const [expandGoal, setExpandGoal] = useState<boolean>(false);
 	const [name, setName] = useState<string>(userInfo.name);
-	const [weight, setWeight] = useState<number>(userInfo.weight);
+	const [weight, setWeight] = useState<string>(userInfo.weight.toString());
 	const [activityLevel, setActivityLevel] = useState<string>(userInfo.activity);
 	const [goal, setGoal] = useState<string>(userInfo.goal);
 
@@ -50,7 +50,7 @@ const UserBioInput = () => {
 	//Update redux states
 	async function handleEditProfile() {
 		await dispatch(changeName(name));
-		await dispatch(changeWeight(weight));
+		await dispatch(changeWeight(Number(weight)));
 		await dispatch(changeActivity(activityLevel));
 		await dispatch(changeGoal(goal));
 		await calAlgo();
