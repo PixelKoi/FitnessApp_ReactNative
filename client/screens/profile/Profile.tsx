@@ -14,6 +14,7 @@ const UserBioInput = () => {
 	const database = useDatabase();
 	const navigation = useNavigation();
 
+	//Initiate user redux states
 	const {
 		sessionID,
 		gender,
@@ -49,6 +50,7 @@ const UserBioInput = () => {
 	const [date, setDate] = useState(new Date());
 	const [showPicker, setShowPicker] = useState(false);
 
+	//Create Calorie Param object for calAlgo function
 	const calParams = {
 		age: age,
 		gender: gender,
