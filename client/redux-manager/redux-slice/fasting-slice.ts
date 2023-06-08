@@ -20,7 +20,7 @@ const fastingSlice = createSlice({
 	name: "fasting",
 	initialState,
 	reducers: {
-		setElapsedPercentage(state, action: PayloadAction<number>) {
+		setPercentageComplete(state, action: PayloadAction<number>) {
 			state.elapsedPercentage = action.payload;
 		},
 		setMaxTime(state, action: PayloadAction<number>) {
@@ -42,7 +42,7 @@ const fastingSlice = createSlice({
 });
 
 export const {
-	setElapsedPercentage,
+	setPercentageComplete,
 	setMaxTime,
 	setStartDate,
 	setEndDate,

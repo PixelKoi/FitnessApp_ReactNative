@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface MedState {
-	elapsedPercentage: number;
+	percentageComplete: number;
 	maxTime: number;
 	startDate: string;
 	endDate: string;
@@ -18,7 +18,7 @@ interface MedState {
 }
 
 const initialState: MedState = {
-	elapsedPercentage: 0,
+	percentageComplete: 0,
 	maxTime: 5,
 	startDate: "",
 	endDate: "",
@@ -38,6 +38,9 @@ const medSlice = createSlice({
 	name: "meditation",
 	initialState,
 	reducers: {
+		setPercentageComplete(state, action: PayloadAction<number>) {
+			state.percentageComplete = action.payload;
+		},
 		setMaxTime(state, action: PayloadAction<number>) {
 			state.maxTime = action.payload;
 		},
@@ -60,7 +63,12 @@ const medSlice = createSlice({
 	},
 });
 
-export const { setTimerStates, setCountdown, setMaxTime, updateMedStreak } =
-	medSlice.actions;
+export const {
+	setTimerStates,
+	setCountdown,
+	setMaxTime,
+	updateMedStreak,
+	setPercentageComplete,
+} = medSlice.actions;
 
 export default medSlice.reducer;

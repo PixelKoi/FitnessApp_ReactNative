@@ -1,7 +1,7 @@
 import {
 	setTimerStates,
 	setCountdown,
-	setElapsedPercentage,
+	setPercentageComplete,
 } from "../redux-slice/fasting-slice";
 import { createListenerMiddleware } from "@reduxjs/toolkit";
 
@@ -50,7 +50,7 @@ startFastingTimer.startListening({
 				seconds = String(seconds).padStart(2, "0");
 
 				listenerApi.dispatch(setCountdown(`${hours}:${minutes}:${seconds}`));
-				listenerApi.dispatch(setElapsedPercentage(roundedPercentage)); // Dispatch the percentage complete
+				listenerApi.dispatch(setPercentageComplete(roundedPercentage)); // Dispatch the percentage complete
 			}
 		}, 1000); // Update every second
 	},
