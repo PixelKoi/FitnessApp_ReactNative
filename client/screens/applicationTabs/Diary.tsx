@@ -5,8 +5,8 @@ import { useNavigation } from "@react-navigation/native";
 import { useDatabase } from "@nozbe/watermelondb/hooks";
 import { Q } from "@nozbe/watermelondb";
 import completeDiary from "../../database/Food";
-import { useAppSelector } from "../../app/hooks";
-import { RootState } from "../../app/store";
+import { useAppSelector } from "../../redux-manager/hooks";
+import { RootState } from "../../redux-manager/store";
 
 import Food from "../../database/Food";
 const Diary = (props) => {

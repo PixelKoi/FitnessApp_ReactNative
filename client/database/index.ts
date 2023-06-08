@@ -16,7 +16,7 @@ const adapter = new SQLiteAdapter({
   onSetUpError: (error) => {
     console.log("DB FAILED TO LOAD");
     console.log(error);
-    // Database failed to load -- offer the user to reload the app or log out
+    // Database failed to load -- offer the user to reload the redux-manager or log out
   },
 });
 
