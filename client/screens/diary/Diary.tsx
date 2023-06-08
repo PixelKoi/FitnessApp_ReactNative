@@ -4,11 +4,11 @@ import { Divider, Text, Card, Button } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { useDatabase } from "@nozbe/watermelondb/hooks";
 import { Q } from "@nozbe/watermelondb";
-import completeDiary from "../../database/Food";
+import completeDiary from "../../database/models/Food";
 import { useAppSelector } from "../../redux-manager/hooks";
 import { RootState } from "../../redux-manager/store";
 
-import Food from "../../database/Food";
+import Food from "../../database/models/Food";
 const Diary = (props) => {
   const tabNavigation = useNavigation();
   const database = useDatabase();

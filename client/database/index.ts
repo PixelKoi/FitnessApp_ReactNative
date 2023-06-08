@@ -3,7 +3,7 @@ import SQLiteAdapter from "@nozbe/watermelondb/adapters/sqlite";
 
 import migrations from "./migrations";
 import schema from "./schema";
-import Food from "./Food";
+import Food from "./models/Food";
 
 const adapter = new SQLiteAdapter({
   schema,
