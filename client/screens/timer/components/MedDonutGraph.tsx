@@ -55,7 +55,9 @@ const MedDonutGraph = ({ radius = 130, strokeWidth = 20, color = "blue" }) => {
 					/>
 				</G>
 			</Svg>
-
+			<Text className="text-base text-center absolute top-14">
+				Elapsed: {percentageComplete}%
+			</Text>
 			{countdown ? (
 				<Text className="text-3xl text-center absolute">{countdown}</Text>
 			) : (
