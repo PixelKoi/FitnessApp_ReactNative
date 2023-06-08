@@ -5,32 +5,39 @@ import { useNavigation } from "@react-navigation/native";
 import { useDatabase } from "@nozbe/watermelondb/hooks";
 import { Q } from "@nozbe/watermelondb";
 import completeDiary from "../../database/Food";
+import { useAppSelector } from "../../app/hooks";
+import { RootState } from "../../app/store";
+
 import Food from "../../database/Food";
 const Diary = (props) => {
   const tabNavigation = useNavigation();
   const database = useDatabase();
+  const profileInfo = useAppSelector((state) => state.user);
+  console.log("PROFILE INFO: ", profileInfo);
+  console.log("PROFILE CALS: ", profileInfo.dailyCal);
+
   const diaryButton = async () => {
     const food_instance = database.get("foods");
 
     // console.log("FOODS in 🍉🍉🍉", food_instance);
     console.log("FOODS", typeof selectedFoods[0].food.Carbs);
     //
-    const data = await database.write(async () => {
-      await database.get<Food>("foods").create((data) => {
-        data.completeDiary(
-          (data.calories = selectedFoods[0].food.Calories),
-          (data.carbs = selectedFoods[0].food.Carbs),
-          (data.fat = selectedFoods[0].food.Fat),
-          (data.protein = selectedFoods[0].food.Protein),
-          (data.description = selectedFoods[0].food.description)
-        );
-      });
-    });
-    if (data) {
-      console.log("Successfully created food post");
-      const all_food = await database.get("foods").query().fetch();
-      console.log("food saved in DB!:", all_food);
-    }
+    // const data = await database.write(async () => {
+    //   await database.get<Food>("foods").create((data) => {
+    //     data.completeDiary(
+    //       (data.calories = selectedFoods[0].food.Calories),
+    //       (data.carbs = selectedFoods[0].food.Carbs),
+    //       (data.fat = selectedFoods[0].food.Fat),
+    //       (data.protein = selectedFoods[0].food.Protein),
+    //       (data.description = selectedFoods[0].food.description)
+    //     );
+    //   });
+    // });
+    // if (data) {
+    //   console.log("Successfully created food post");
+    //   const all_food = await database.get("foods").query().fetch();
+    //   console.log("food saved in DB!:", all_food);
+    // }
   };
 
   if (props.route.params == undefined) {
@@ -39,10 +46,7 @@ const Diary = (props) => {
         <View className="justify-center">
           <Card className="px-4">
             <Text className="pt-4">
-              Total calories - caloriesConsumed = calories remaining
-            </Text>
-            <Text className="text-white text font-bold">
-              Goal - Food = Remaining
+              {profileInfo.dailyCal} - caloriesConsumed = calories remaining
             </Text>
           </Card>
         </View>
