@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { View, Text, Animated } from "react-native";
 import Svg, { G, Circle } from "react-native-svg";
-import { useAppSelector } from "../../redux-manager/hooks";
+import { useAppSelector } from "../../../redux-manager/hooks";
 
 //Graph Animations
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);

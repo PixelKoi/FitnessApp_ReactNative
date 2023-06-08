@@ -3,7 +3,7 @@ import { View, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Button, List } from "react-native-paper";
 import { add } from "date-fns";
-import MedTimer from "./MedDonutGraph";
+import MedTimer from "./components/MedDonutGraph";
 import { useAppDispatch, useAppSelector } from "../../redux-manager/hooks";
 import { Feather, FontAwesome5 } from "@expo/vector-icons";
 import {

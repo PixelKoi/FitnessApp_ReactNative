@@ -1,35 +1,37 @@
-import React, { useEffect, useRef } from "react";
-import { View, Text, Animated } from "react-native";
+import React, { useEffect, useRef, useState } from "react";
+import { View, Text, Animated, TextInput } from "react-native";
 import Svg, { G, Circle } from "react-native-svg";
-import { useAppSelector } from "../../redux-manager/hooks";
+import { useAppSelector } from "../../../redux-manager/hooks";
 
 //Graph Animations
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
-const MedDonutGraph = (
+const CalDonutGraph = (
   props,
-  { radius = 130, strokeWidth = 20, color = "blue", elapsed = props.elaosed }
+  { radius = 70, strokeWidth = 20, duration = 500, color = "blue", delay = 0 }
 ) => {
-  const { startDate, endDate, countdown, maxTime } = useAppSelector(
-    (state) => state.meditation
-  );
+  //Initiate User Redux State
+  const { dailyCal } = useAppSelector((state) => state.user);
+
+  const animatedValue = React.useRef(new Animated.Value(0)).current;
+  // const [elapsed, setElapsed] = useState(0);
 
   const circleRef = useRef(null);
+  const inputRef = useRef(null);
+
   const halfCircle = radius + strokeWidth;
   const circleCircumference = 2 * Math.PI * radius;
-
-  // updates circle circ based on how much time has elapsed
-  useEffect(() => {
-    const value = (props.elapsed / 100) * maxTime;
-    const strokeDashoffset =
-      circleCircumference - (value / maxTime) * circleCircumference;
-    circleRef.current.setNativeProps({
-      strokeDashoffset,
-    });
-  }, [props.elapsed, maxTime, circleCircumference]);
+  const animation = (toValue) => {
+    return Animated.timing(animatedValue, {
+      toValue,
+      duration,
+      delay,
+      useNativeDriver: true,
+    }).start();
+  };
 
   return (
-    <View className="flex justify-center items-center">
+    <View className="justify-center items-center">
       <Svg
         width={radius * 2}
         height={radius * 2}
@@ -54,19 +56,17 @@ const MedDonutGraph = (
             r={radius}
             fill="transparent"
             strokeDasharray={circleCircumference}
-            strokeDashoffset={elapsed}
+            strokeDashoffset={circleCircumference}
             strokeLinecap="round"
           />
         </G>
       </Svg>
-
-      {countdown ? (
-        <Text className="text-3xl text-center absolute">{countdown}</Text>
-      ) : (
-        <Text className="text-3xl text-center absolute">00:00</Text>
-      )}
+      <View className="text-base text-center absolute top-14">
+        <Text className="text-center">{dailyCal} calories</Text>
+        <Text className="text-center top-1">remaining</Text>
+      </View>
     </View>
   );
 };
 
-export default MedDonutGraph;
+export default CalDonutGraph;

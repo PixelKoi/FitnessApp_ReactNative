@@ -7,7 +7,7 @@ import { Button } from "react-native-paper";
 import CalDonutGraph from "./DonutGraphs/CalDonutGraph";
 import FastingDonutGraph from "./DonutGraphs/FastingDonutGraph";
 import { Feather, FontAwesome5 } from "@expo/vector-icons";
-import { useAppSelector } from "../../../redux-manager/hooks";
+import { useAppSelector } from "../../redux-manager/hooks";
 
 interface Props {
   weekView?: boolean;

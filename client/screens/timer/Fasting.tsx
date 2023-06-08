@@ -3,7 +3,7 @@ import { View, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Button, List } from "react-native-paper";
 import { format, add, getDay } from "date-fns";
-import FastingTimer from "./FastingDonutGraph";
+import FastingTimer from "./components/FastingDonutGraph";
 import { useAppDispatch, useAppSelector } from "../../redux-manager/hooks";
 import {
   setElapsedPercentage,

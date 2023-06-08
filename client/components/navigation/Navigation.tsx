@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { Alert, View, ActivityIndicator, StyleSheet } from "react-native";
 //Screen imports
-import Account from "../screens/screens/Account";
-import QuickLog from "../screens/applicationTabs/QuickLog";
-import Proflile from "../screens/applicationTabs/Profile";
-import Diary from "../screens/applicationTabs/Diary";
-import Dashboard from "../screens/applicationTabs/dashboard/Dashboard";
-import Timer from "../screens/applicationTabs/Timer";
+import Account from "../../screens/account/Account";
+import QuickLog from "../../screens/diary/QuickLog";
+import Proflile from "../../screens/profile/Profile";
+import Diary from "../../screens/diary/Diary";
+import Dashboard from "../../screens/dashboard/Dashboard";
+import Timer from "../../screens/timer/Timer";
 //nav imports
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 //Supabse imports
 import { Session } from "@supabase/supabase-js";
-import { supabase } from "../utils/supabase_authentication/supabase";
+import { supabase } from "../../utils/supabase_authentication/supabase";
 //redux imports
 import {
   BookOpenIcon,
@@ -22,11 +22,11 @@ import {
   SquaresPlusIcon,
   UserCircleIcon,
 } from "react-native-heroicons/outline";
-import { useAppDispatch } from "../redux-manager/hooks";
+import { useAppDispatch } from "../../redux-manager/hooks";
 import {
   setSessionID,
   setUserStates,
-} from "../redux-manager/redux-slice/user-slice";
+} from "../../redux-manager/redux-slice/user-slice";
 
 const Navigation = ({ session }: { session: Session }) => {
   const [loading, setLoading] = useState(true);
