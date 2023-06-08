@@ -11,8 +11,11 @@ import {
 } from "../../redux-manager/redux-slice/user-slice";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import Icon from "react-native-vector-icons/FontAwesome";
+import Profile from "../../database/models/Profile";
+import { useDatabase } from "@nozbe/watermelondb/hooks";
 
 const UserBioInput = () => {
+  const database = useDatabase();
   const navigation = useNavigation();
   const {
     sessionID,
@@ -97,6 +100,24 @@ const UserBioInput = () => {
         updated_at: new Date(),
       };
       console.log(updates);
+      const profile_data = await database.write(async () => {
+        await database.get<Profile>("profiles").create((profile) => {
+          profile.completeProfile(
+            (profile.username = username),
+            (profile.age = age),
+            (profile.gender = gender),
+            (profile.height = height),
+            (profile.weight = weight),
+            (profile.activity = activity),
+            (profile.goal = goal)
+          );
+        });
+      });
+      if (profile_data) {
+        console.log("Successfully created food post");
+        const all_profiles = await database.get("profiles").query().fetch();
+        console.log("food saved in DB!:", all_profiles);
+      }
       // let { error } = await supabase.from("profile").upsert(updates);
       // if (!error) {
       //   await updateReduxProfileStates(
