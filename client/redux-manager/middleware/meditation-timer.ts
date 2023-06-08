@@ -1,7 +1,4 @@
-import {
-  setTimerStates,
-  setCountdown,
-} from "../../redux-manager/redux-slice/meditation-slice";
+import { setTimerStates, setCountdown } from "../redux-slice/meditation-slice";
 import { createListenerMiddleware } from "@reduxjs/toolkit";
 
 const startMeditationTimer = createListenerMiddleware();

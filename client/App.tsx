@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 // supabase AUTH
-import { supabase } from "./components/supabase_authentication/supabase";
+import { supabase } from "./utils/supabase_authentication/supabase";
 import Auth from "./screens/screens/Auth";
 import { Session } from "@supabase/supabase-js";
 import { View } from "react-native";
@@ -12,7 +12,7 @@ import { Provider } from "react-redux";
 import { ApplicationContainer } from "./screens/NavigationComponent";
 
 //navigation
-import Navigation from "./Navigation/Navigation";
+import Navigation from "./navigation/Navigation";
 
 // Watermelon
 import DatabaseProvider from "@nozbe/watermelondb/DatabaseProvider";

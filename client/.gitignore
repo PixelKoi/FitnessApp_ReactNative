@@ -11,7 +11,7 @@ npm-debug.*
 web-build/
 config.ts
 /config.ts*.
-components/constants.ts
+constants.ts
 # macOS
 .DS_Store
 

@@ -3,7 +3,7 @@ import { View, TextInput, FlatList, TouchableOpacity } from "react-native";
 import { USDA_API_KEY } from "../../config";
 import { CheckCircleIcon } from "react-native-heroicons/outline";
 // import {handleMinus, handlePlus} from "../../counter/logCounter";
-import { params } from "../../components/constants";
+import { params } from "../../constants";
 import { useNavigation } from "@react-navigation/native";
 import {
   Dialog,

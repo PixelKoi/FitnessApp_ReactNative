@@ -1,7 +1,4 @@
-import {
-  setTimerStates,
-  setCountdown,
-} from "../../redux-manager/redux-slice/fasting-slice";
+import { setTimerStates, setCountdown } from "../redux-slice/fasting-slice";
 import { createListenerMiddleware } from "@reduxjs/toolkit";
 
 const startFastingTimer = createListenerMiddleware();

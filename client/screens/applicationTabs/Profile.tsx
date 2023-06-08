@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { TextInput, Button, List } from "react-native-paper";
-import { supabase } from "../../components/supabase_authentication/supabase";
+import { supabase } from "../../utils/supabase_authentication/supabase";
 import { useAppDispatch, useAppSelector } from "../../redux-manager/hooks";
 import {
   changeDailyCal,

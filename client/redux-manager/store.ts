@@ -3,8 +3,8 @@ import userReducer from "./redux-slice/user-slice";
 import sessionReducer from "./redux-slice/session-slice";
 import fastingReducer from "./redux-slice/fasting-slice";
 import meditationReducer from "./redux-slice/meditation-slice";
-import startFastingTimer from "../components/middleware/fasting-timer";
-import startMeditationTimer from "../components/middleware/meditation-timer";
+import startFastingTimer from "./middleware/fasting-timer";
+import startMeditationTimer from "./middleware/meditation-timer";
 
 export const store = configureStore({
   reducer: {

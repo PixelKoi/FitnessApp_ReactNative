@@ -13,7 +13,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 //Supabse imports
 import { Session } from "@supabase/supabase-js";
-import { supabase } from "../components/supabase_authentication/supabase";
+import { supabase } from "../utils/supabase_authentication/supabase";
 //redux imports
 import {
   BookOpenIcon,
