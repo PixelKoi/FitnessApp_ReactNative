@@ -1,6 +1,7 @@
 {
-  "compilerOptions": {
-	  "module": "esnext"
-},
-  "extends": "expo/tsconfig.base"
+	"compilerOptions": {
+		"module": "esnext",
+		"allowImportingTsExtensions": true
+	},
+	"extends": "expo/tsconfig.base"
 }
