@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { TextInput, Button, List } from "react-native-paper";
-import { supabase } from "../../features/supabase_authentication/supabase";
+import { supabase } from "../../components/supabase_authentication/supabase";
 import { useAppDispatch, useAppSelector } from "../../redux-manager/hooks";
 import {
   changeDailyCal,
   changeBMR,
   setUserStates,
-} from "../../features/user/user-slice";
+} from "../../redux-manager/redux-slice/user-slice";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import Icon from "react-native-vector-icons/FontAwesome";
 

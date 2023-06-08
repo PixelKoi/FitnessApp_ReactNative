@@ -10,7 +10,7 @@ import {
   setTimerStates,
   setMaxTime,
   updateMedStreak,
-} from "../../features/user/meditation-slice";
+} from "../../redux-manager/redux-slice/meditation-slice";
 
 const Meditation = () => {
   //Top left nav button - removed top nav

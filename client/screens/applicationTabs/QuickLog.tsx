@@ -3,7 +3,7 @@ import { View, TextInput, FlatList, TouchableOpacity } from "react-native";
 import { USDA_API_KEY } from "../../config";
 import { CheckCircleIcon } from "react-native-heroicons/outline";
 // import {handleMinus, handlePlus} from "../../counter/logCounter";
-import { params } from "../../features/constants";
+import { params } from "../../components/constants";
 import { useNavigation } from "@react-navigation/native";
 import {
   Dialog,
@@ -26,7 +26,7 @@ const QuickLog = ({ navigation }) => {
   const openMenu = () => setVisible(true);
   const closeMenu = () => setVisible(false);
   const [mealError, setMealError] = useState(false);
-  // let user submit quick log when state selectedOption set
+  // let redux-slice submit quick log when state selectedOption set
   const checkOption = useCallback(() => {
     console.log(selectedOption.length);
     console.log(foodArray.length, "FOODARRAY");

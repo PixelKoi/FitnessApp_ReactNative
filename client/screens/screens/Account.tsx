@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { supabase } from "../../features/supabase_authentication/supabase";
+import { supabase } from "../../components/supabase_authentication/supabase";
 import { StyleSheet, View, Alert, Text, Modal, Pressable } from "react-native";
 import { Button, Input } from "react-native-elements";
 import { Session } from "@supabase/supabase-js";
@@ -13,8 +13,8 @@ import {
   changeName,
   changeWeight,
   setUserStates,
-} from "../../features/user/user-slice";
-import { setSession } from "../../features/user/session-slice";
+} from "../../redux-manager/redux-slice/user-slice";
+import { setSession } from "../../redux-manager/redux-slice/session-slice";
 import { useNavigation } from "@react-navigation/native";
 
 export default function Account({ session }: { session: Session }) {
@@ -67,7 +67,7 @@ export default function Account({ session }: { session: Session }) {
   async function getProfile() {
     try {
       setLoading(true);
-      if (!session?.user) throw new Error("No user on the session!");
+      if (!session?.user) throw new Error("No redux-slice on the session!");
 
       let { data, error, status } = await supabase
         .from("profile")
@@ -111,7 +111,7 @@ export default function Account({ session }: { session: Session }) {
   }) {
     try {
       setLoading(true);
-      if (!session?.user) throw new Error("No user on the session!");
+      if (!session?.user) throw new Error("No redux-slice on the session!");
 
       const updates = {
         user_id: session?.user.id,

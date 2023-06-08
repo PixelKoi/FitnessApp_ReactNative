@@ -9,7 +9,7 @@ import {
   setElapsedPercentage,
   setMaxTime,
   setTimerStates,
-} from "../../features/user/fasting-slice";
+} from "../../redux-manager/redux-slice/fasting-slice";
 const Fasting = () => {
   //Top left nav button - removed top nav
   const navigation = useNavigation();

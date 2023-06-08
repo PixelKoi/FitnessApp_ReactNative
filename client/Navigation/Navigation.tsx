@@ -13,7 +13,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 //Supabse imports
 import { Session } from "@supabase/supabase-js";
-import { supabase } from "../features/supabase_authentication/supabase";
+import { supabase } from "../components/supabase_authentication/supabase";
 //redux imports
 import {
   BookOpenIcon,
@@ -23,7 +23,10 @@ import {
   UserCircleIcon,
 } from "react-native-heroicons/outline";
 import { useAppDispatch } from "../redux-manager/hooks";
-import { setSessionID, setUserStates } from "../features/user/user-slice";
+import {
+  setSessionID,
+  setUserStates,
+} from "../redux-manager/redux-slice/user-slice";
 
 const Navigation = ({ session }: { session: Session }) => {
   const [loading, setLoading] = useState(true);
@@ -45,11 +48,11 @@ const Navigation = ({ session }: { session: Session }) => {
     );
   }
 
-  //Get user data from supabase and update redux
+  //Get redux-slice data from supabase and update redux
   async function getProfile() {
     try {
       setLoading(true);
-      if (!session?.user) throw new Error("No user on the session!");
+      if (!session?.user) throw new Error("No redux-slice on the session!");
 
       let { data, error, status } = await supabase
         .from("profile")
