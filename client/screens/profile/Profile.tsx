@@ -49,6 +49,15 @@ const UserBioInput = () => {
 	const [date, setDate] = useState(new Date());
 	const [showPicker, setShowPicker] = useState(false);
 
+	const calParams = {
+		age: age,
+		gender: gender,
+		weight: weight,
+		height: height,
+		activity: activity,
+		goal: goal,
+	};
+
 	//Update redux states
 	async function updateReduxProfileStates(
 		username: string,
@@ -167,7 +176,7 @@ const UserBioInput = () => {
 
 	useEffect(() => {
 		console.log(sessionID);
-		calAlgo(age, gender, weight, height, activity, goal, dispatch);
+		calAlgo(calParams, dispatch);
 	}, [showEditProfile === false]);
 
 	//Profile Screen

@@ -18,17 +18,22 @@ import { AppDispatch } from "../../redux-manager/store";
 
 	Lose 1lb a week = -500 cal deficit
 */
+interface CalAlgoParams {
+	age: number;
+	gender: string;
+	weight: number;
+	height: number;
+	activity: string;
+	goal: number;
+}
+
 export default function calAlgo(
-	age: number,
-	gender: string,
-	weight: number,
-	height: number,
-	activity: string,
-	goal: number,
+	params: CalAlgoParams,
 	dispatch: AppDispatch
 ): void {
-	let calBMR = 0;
+	const { age, gender, weight, height, activity, goal } = params;
 
+	let calBMR = 0;
 	if (gender === "Male") {
 		calBMR = 88.3 + 14.4 * weight + 4.8 * height - 5.7 * age;
 	} else if (gender === "Female") {
