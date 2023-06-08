@@ -175,7 +175,6 @@ const UserBioInput = () => {
 	}, [showEditProfile]);
 
 	useEffect(() => {
-		console.log(sessionID);
 		calAlgo(calParams, dispatch);
 	}, [showEditProfile === false]);
 
@@ -412,7 +411,7 @@ const UserBioInput = () => {
 					className="mt-6 py-1 mx-4"
 					style={{ backgroundColor: "#84d0ff" }}
 					onPress={async () => {
-						await updateReduxProfileStates(
+						await updateProfile(
 							newName,
 							newAge,
 							selectedGender,
@@ -421,6 +420,16 @@ const UserBioInput = () => {
 							selectedActivity,
 							Number(selectedGoal)
 						);
+
+						// await updateReduxProfileStates(
+						// 	newName,
+						// 	newAge,
+						// 	selectedGender,
+						// 	Number(newHeight),
+						// 	Number(newWeight),
+						// 	selectedActivity,
+						// 	Number(selectedGoal)
+						// );
 						setEditProfile(false);
 					}}
 					mode="contained">

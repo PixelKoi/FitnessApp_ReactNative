@@ -2,6 +2,7 @@ import {
 	changeBMR,
 	changeDailyCal,
 } from "../../redux-manager/redux-slice/user-slice";
+//Imports AppDispatch type to use as parameter type
 import { AppDispatch } from "../../redux-manager/store";
 
 /*
@@ -27,10 +28,9 @@ interface CalAlgoParams {
 	goal: number;
 }
 
-export default function calAlgo(
-	params: CalAlgoParams,
-	dispatch: AppDispatch
-): void {
+type CalAlgoFn = (params: CalAlgoParams, dispatch: AppDispatch) => void;
+
+const calAlgo: CalAlgoFn = (params, dispatch) => {
 	const { age, gender, weight, height, activity, goal } = params;
 
 	let calBMR = 0;
@@ -73,4 +73,6 @@ export default function calAlgo(
 	}
 
 	dispatch(changeBMR(Math.round(calBMR)));
-}
+};
+
+export default calAlgo;
