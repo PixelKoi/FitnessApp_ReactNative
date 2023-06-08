@@ -29,5 +29,17 @@ export default appSchema({
         { name: "description", type: "string" },
       ],
     }),
+    tableSchema({
+      name: "profiles",
+      columns: [
+        { name: "username", type: "string" },
+        { name: "age", type: "number" },
+        { name: "gender", type: "string" },
+        { name: "height", type: "number" },
+        { name: "weight", type: "number" },
+        { name: "activity", type: "string" },
+        { name: "goal", type: "number" },
+      ],
+    }),
   ],
 });
