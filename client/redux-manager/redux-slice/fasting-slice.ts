@@ -10,7 +10,7 @@ interface FastingState {
 
 const initialState: FastingState = {
 	elapsedPercentage: 0,
-	maxTime: 16,
+	maxTime: 1,
 	startDate: "",
 	endDate: "",
 	countdown: "00:00:00",

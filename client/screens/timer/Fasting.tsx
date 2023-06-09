@@ -75,12 +75,12 @@ const Fasting = () => {
 		setClicked((prevClick) => !prevClick);
 		setStartTime("");
 		setEndTime("");
-		dispatch(
-			setTimerStates({
-				startDate: "",
-				endDate: "",
-			})
-		);
+		// dispatch(
+		// 	setTimerStates({
+		// 		startDate: "",
+		// 		endDate: "",
+		// 	})
+		// );
 	};
 
 	//Get day for start and end time for timer
@@ -98,7 +98,7 @@ const Fasting = () => {
 
 	return (
 		<View className="flex-1 flex-col justify-center bg-background ">
-			<View>
+			<View className="z-10">
 				<Surface className="bg-secondary h-8 w-52 self-center rounded-xl">
 					<TouchableOpacity
 						className="flex-row h-8 w-52"
@@ -128,7 +128,7 @@ const Fasting = () => {
 							className="flex-row h-8 w-52"
 							onPress={() => {
 								setFasting("16/8 Intermittent Fast");
-								setMaxTime(16);
+								dispatch(setMaxTime(16));
 								setShowTimerList(false);
 							}}>
 							<Text className="my-auto text-xs ml-2">
@@ -152,7 +152,7 @@ const Fasting = () => {
 							className="flex-row h-8 w-52"
 							onPress={() => {
 								setFasting("18/6 intermittent fast");
-								setMaxTime(18);
+								dispatch(setMaxTime(18));
 								setShowTimerList(false);
 							}}>
 							<Text className="my-auto text-xs ml-2">
@@ -176,7 +176,7 @@ const Fasting = () => {
 							className="flex-row h-8 w-52"
 							onPress={() => {
 								setFasting("24hr fast");
-								setMaxTime(24);
+								dispatch(setMaxTime(24));
 								setShowTimerList(false);
 							}}>
 							<Text className="my-auto text-xs ml-2">24/hr Fast</Text>
