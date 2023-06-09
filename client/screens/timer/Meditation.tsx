@@ -81,7 +81,7 @@ const Meditation = () => {
 	return (
 		<View className="mt-auto flex flex-col justify-center bg-background ">
 			{/* Clock section */}
-			<View className="mt-auto mb-28 top-1">
+			<View className="mt-auto mb-28 -top-3">
 				<View className="z-10">
 					<Surface className="bg-secondary h-8 w-52 self-center rounded-xl">
 						<TouchableOpacity
@@ -91,9 +91,12 @@ const Meditation = () => {
 									? setShowTimerList(true)
 									: setShowTimerList(false)
 							}>
-							<Text className="ml-4 text-center my-auto">{fasting}</Text>
+							<Text className="ml-4 text-center my-auto text-primary">
+								{fasting}
+							</Text>
 							<Icon
 								style={{
+									color: "#E07594",
 									marginLeft: "auto",
 									marginRight: 20,
 									marginTop: "auto",
@@ -186,7 +189,7 @@ const Meditation = () => {
 					<MedTimer />
 				</View>
 
-				<Text className="text-SM text-center mt-4">
+				<Text className="text-SM text-center mt-4 text-primary">
 					Elapsed: [{percentageComplete}]%
 				</Text>
 			</View>

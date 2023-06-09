@@ -107,9 +107,12 @@ const Fasting = () => {
 									? setShowTimerList(true)
 									: setShowTimerList(false)
 							}>
-							<Text className="ml-4 text-center my-auto">{fasting}</Text>
+							<Text className="ml-4 text-center my-auto text-primary">
+								{fasting}
+							</Text>
 							<Icon
 								style={{
+									color: "#E07594",
 									marginLeft: "auto",
 									marginRight: 20,
 									marginTop: "auto",
@@ -151,7 +154,7 @@ const Fasting = () => {
 							<TouchableOpacity
 								className="flex-row h-8 w-52"
 								onPress={() => {
-									setFasting("18/6 intermittent fast");
+									setFasting("18/6 Intermittent Fast");
 									dispatch(setMaxTime(18));
 									setShowTimerList(false);
 								}}>
@@ -175,7 +178,7 @@ const Fasting = () => {
 							<TouchableOpacity
 								className="flex-row h-8 w-52"
 								onPress={() => {
-									setFasting("24hr fast");
+									setFasting("24hr Fast");
 									dispatch(setMaxTime(24));
 									setShowTimerList(false);
 								}}>
@@ -202,29 +205,37 @@ const Fasting = () => {
 					<FastingTimer />
 				</View>
 
-				<Text className="text-SM text-center mt-4">
+				<Text className="text-SM text-center mt-4 text-primary">
 					Elapsed: [{elapsedPercentage}]%
 				</Text>
 			</View>
 
 			{/* Timer Start */}
 			<View className="mb-8">
-				<View className="flex flex-row  justify-center">
+				<View className="flex flex-row justify-center mb-2">
 					<View className="w-32">
-						<Text className="text-xs text-center text-primary">START</Text>
+						<Text className="text-xs text-center text-primary mb-2">START</Text>
 						{startTime !== null ? (
-							<Text className="text-sm text-center">{getDate(startTime)}</Text>
+							<Text className="text-sm text-center text-primary opacity-60	">
+								{getDate(startTime)}
+							</Text>
 						) : (
-							<Text className="text-sm text-center">.........</Text>
+							<Text className="text-sm text-center text-primary opacity-60	">
+								.........
+							</Text>
 						)}
 					</View>
 
 					<View className=" w-32">
-						<Text className="text-xs text-center text-primary">END</Text>
+						<Text className="text-xs text-center text-primary mb-2">END</Text>
 						{endTime !== null ? (
-							<Text className="text-sm text-center">{getDate(endTime)}</Text>
+							<Text className="text-sm text-center text-primary opacity-60	">
+								{getDate(endTime)}
+							</Text>
 						) : (
-							<Text className="text-sm text-center">.........</Text>
+							<Text className="text-sm text-center text-primary opacity-60	">
+								.........
+							</Text>
 						)}
 					</View>
 				</View>

@@ -67,7 +67,9 @@ const FastingDonutGraph: React.FC<FastingDonutGraphProps> = ({
 				</G>
 			</Svg>
 
-			<Text className="text-3xl text-center absolute">{countdown}</Text>
+			<Text className="text-3xl text-center absolute text-primary">
+				{countdown}
+			</Text>
 		</View>
 	);
 };

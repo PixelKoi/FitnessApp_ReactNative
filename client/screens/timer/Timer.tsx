@@ -4,6 +4,7 @@ import { Button } from "react-native-paper";
 import Fasting from "./Fasting";
 import Meditation from "./Meditation";
 
+//Todo: get tailwind theme primary and secondary colors set to states and put it inside the labelStyle prop
 const Timer = () => {
 	const [mode, setMode] = useState("fasting");
 	return (
@@ -15,17 +16,31 @@ const Timer = () => {
 						mode === "fasting" ? "bg-primary" : "bg-secondary"
 					} text-base`}
 					icon="clock"
+					labelStyle={{
+						color: `${mode === "fasting" ? "#ffff" : "#E07594"}`,
+					}}
 					mode="contained">
-					Fasting
+					<Text
+						className={`${mode === "fasting" ? "text-white" : "text-primary"}`}>
+						Fasting
+					</Text>
 				</Button>
 				<Button
 					onPress={() => setMode("meditation")}
 					icon="brain"
+					labelStyle={{
+						color: `${mode === "meditation" ? "#ffff" : "#E07594"}`,
+					}}
 					className={`text-center  w-40 ${
 						mode === "meditation" ? "bg-primary" : "bg-secondary"
 					} text-base`}
 					mode="contained">
-					Meditation
+					<Text
+						className={`${
+							mode === "meditation" ? "text-white" : "text-primary"
+						}`}>
+						Meditation
+					</Text>
 				</Button>
 			</View>
 			{mode === "fasting" && <Fasting />}

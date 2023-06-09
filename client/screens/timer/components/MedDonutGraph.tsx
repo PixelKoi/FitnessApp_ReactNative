@@ -60,7 +60,9 @@ const MedDonutGraph = ({
 				</G>
 			</Svg>
 			{countdown ? (
-				<Text className="text-3xl text-center absolute">{countdown}</Text>
+				<Text className="text-3xl text-center absolute text-primary">
+					{countdown}
+				</Text>
 			) : (
 				<Text className="text-3xl text-center absolute">00:00</Text>
 			)}
