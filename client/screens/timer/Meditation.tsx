@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
-import { View, Text } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { Button, List } from "react-native-paper";
+import { Button, List, Surface } from "react-native-paper";
 import { add } from "date-fns";
 import MedTimer from "./components/MedDonutGraph";
 import { useAppDispatch, useAppSelector } from "../../redux-manager/hooks";
@@ -12,6 +12,9 @@ import {
 	updateMedStreak,
 	percentageComplete,
 } from "../../redux-manager/redux-slice/meditation-slice";
+//import icons
+import Icon from "react-native-vector-icons/FontAwesome";
+import CheckMark from "react-native-vector-icons/Ionicons";
 
 const Meditation = () => {
 	//Top left nav button - removed top nav
@@ -33,7 +36,9 @@ const Meditation = () => {
 	};
 
 	//Call to fasting redux
-	const { maxTime, medStreak } = useAppSelector((state) => state.meditation);
+	const { maxTime, medStreak, percentageComplete } = useAppSelector(
+		(state) => state.meditation
+	);
 	const dispatch = useAppDispatch();
 
 	//fasting states
@@ -45,9 +50,8 @@ const Meditation = () => {
 	//Keep track of starting / ending fast button
 	const [clicked, setClicked] = useState(false);
 
-	//handle fasting mode selector
-	const [expandList, setExpandList] = useState<boolean>(false);
-	const handleExplandList = () => setExpandList(!expandList);
+	//handle Meditation mode selector
+	const [showTimerList, setShowTimerList] = useState(false);
 
 	//start fast function
 	const handleStartFast = () => {
@@ -75,70 +79,113 @@ const Meditation = () => {
 	};
 
 	return (
-		<View className="flex-1 justify-center bg-white">
-			<View className="mt-4">
-				<List.Accordion
-					style={accordionStyle}
-					title={fasting}
-					left={(props) => <List.Icon {...props} icon="pencil" />}
-					expanded={expandList}
-					onPress={handleExplandList}>
-					<List.Item
-						title="5 minutes (beginner)"
-						onPress={() => {
-							setFasting("5 minutes");
-							setMaxTime(5);
-							setExpandList(false);
-						}}
-					/>
-					<List.Item
-						title="10 minutes"
-						onPress={() => {
-							setFasting("10 minutes");
-							setMaxTime(10);
-							setExpandList(false);
-						}}
-					/>
-					<List.Item
-						title="15 minutes"
-						onPress={() => {
-							setFasting("15 minutes");
-							setMaxTime(15);
-							setExpandList(false);
-						}}
-					/>
-					<List.Item
-						title="20 minutes (recommended)"
-						onPress={() => {
-							setFasting("20 minutes");
-							setMaxTime(20);
-							setExpandList(false);
-						}}
-					/>
-					<List.Item
-						title="30 minutes (deep)"
-						onPress={() => {
-							setFasting("30 minutes");
-							setMaxTime(30);
-							setExpandList(false);
-						}}
-					/>
-					<List.Item
-						title="45 minutes (expert)"
-						onPress={() => {
-							setFasting("45 minutes");
-							setMaxTime(45);
-							setExpandList(false);
-						}}
-					/>
-				</List.Accordion>
+		<View className="flex-1 justify-center bg-background">
+			<View className="z-10 -mt-20">
+				<Surface className="bg-secondary h-8 w-52 self-center rounded-xl">
+					<TouchableOpacity
+						className="flex-row h-8 w-52"
+						onPress={() =>
+							showTimerList === false
+								? setShowTimerList(true)
+								: setShowTimerList(false)
+						}>
+						<Text className="ml-4 text-center my-auto">{fasting}</Text>
+						<Icon
+							style={{
+								marginLeft: "auto",
+								marginRight: 20,
+								marginTop: "auto",
+								marginBottom: "auto",
+							}}
+							name={showTimerList === true ? "caret-up" : "caret-down"}
+							size={15}
+							color="black"
+						/>
+					</TouchableOpacity>
+				</Surface>
+
+				{showTimerList === true && (
+					<Surface className="w-52 bg-background rounded-xl self-center mt-12 absolute z-10">
+						<TouchableOpacity
+							className="flex-row h-8 w-52"
+							onPress={() => {
+								setFasting("16/8 Intermittent Fast");
+								dispatch(setMaxTime(16));
+								setShowTimerList(false);
+							}}>
+							<Text className="my-auto text-xs ml-2">
+								16/8 Intermittent Fast
+							</Text>
+							{maxTime === 16 && (
+								<CheckMark
+									style={{
+										color: "#E07594",
+										marginLeft: "auto",
+										marginTop: "auto",
+										marginBottom: "auto",
+										marginRight: 10,
+									}}
+									size={15}
+									name={"ios-checkmark-circle-outline"}
+								/>
+							)}
+						</TouchableOpacity>
+						<TouchableOpacity
+							className="flex-row h-8 w-52"
+							onPress={() => {
+								setFasting("18/6 intermittent fast");
+								dispatch(setMaxTime(18));
+								setShowTimerList(false);
+							}}>
+							<Text className="my-auto text-xs ml-2">
+								18/6 Intermittent Fast
+							</Text>
+							{maxTime === 18 && (
+								<CheckMark
+									style={{
+										color: "#E07594",
+										marginLeft: "auto",
+										marginTop: "auto",
+										marginBottom: "auto",
+										marginRight: 10,
+									}}
+									size={15}
+									name={"ios-checkmark-circle-outline"}
+								/>
+							)}
+						</TouchableOpacity>
+						<TouchableOpacity
+							className="flex-row h-8 w-52"
+							onPress={() => {
+								setFasting("24hr fast");
+								dispatch(setMaxTime(24));
+								setShowTimerList(false);
+							}}>
+							<Text className="my-auto text-xs ml-2">24/hr Fast</Text>
+							{maxTime === 24 && (
+								<CheckMark
+									style={{
+										color: "#E07594",
+										marginLeft: "auto",
+										marginTop: "auto",
+										marginBottom: "auto",
+										marginRight: 10,
+									}}
+									size={15}
+									name={"ios-checkmark-circle-outline"}
+								/>
+							)}
+						</TouchableOpacity>
+					</Surface>
+				)}
 			</View>
+
 			<View className="mt-10">
 				<MedTimer />
 			</View>
 
 			<Text className="text-SM text-center mt-4">
-				Elapsed: {percentageComplete}%
+				Elapsed: [{percentageComplete}]%
 			</Text>
 			<Button
 				className="mt-8 w-60 mx-auto bg-primary"

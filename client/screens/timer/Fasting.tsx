@@ -7,9 +7,7 @@ import FastingTimer from "./components/FastingDonutGraph";
 //Redux imports
 import { useAppDispatch, useAppSelector } from "../../redux-manager/hooks";
 import {
-	setEndDate,
 	setMaxTime,
-	setStartDate,
 	setTimerStates,
 } from "../../redux-manager/redux-slice/fasting-slice";
 //import icons
@@ -17,14 +15,6 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import CheckMark from "react-native-vector-icons/Ionicons";
 
 const Fasting = () => {
-	//Top left nav button - removed top nav
-	const navigation = useNavigation();
-	React.useLayoutEffect(() => {
-		navigation.setOptions({
-			headerShown: false,
-		});
-	}, [navigation]);
-
 	//initiate fasting redux states
 	const { startDate, endDate, maxTime, elapsedPercentage } = useAppSelector(
 		(state) => state.fasting
@@ -96,173 +86,149 @@ const Fasting = () => {
 		return getWeekday(event) + " " + getTimeStringWithoutSeconds(event);
 	};
 
+	//Top left nav button - removed top nav
+	const navigation = useNavigation();
+	React.useLayoutEffect(() => {
+		navigation.setOptions({
+			headerShown: false,
+		});
+	}, [navigation]);
+
 	return (
 		<View className="flex-1 flex-col justify-center bg-background ">
-			<View className="z-10">
-				<Surface className="bg-secondary h-8 w-52 self-center rounded-xl">
-					<TouchableOpacity
-						className="flex-row h-8 w-52"
-						onPress={() =>
-							showTimerList === false
-								? setShowTimerList(true)
-								: setShowTimerList(false)
-						}>
-						<Text className="ml-4 text-center my-auto">{fasting}</Text>
-						<Icon
-							style={{
-								marginLeft: "auto",
-								marginRight: 20,
-								marginTop: "auto",
-								marginBottom: "auto",
-							}}
-							name={showTimerList === true ? "caret-up" : "caret-down"}
-							size={15}
-							color="black"
-						/>
-					</TouchableOpacity>
-				</Surface>
-
-				{showTimerList === true && (
-					<Surface className="w-52 bg-background rounded-xl self-center mt-12 absolute z-10">
+			{/* Clock section */}
+			<View className="mt-auto">
+				<View className="z-10">
+					<Surface className="bg-secondary h-8 w-52 self-center rounded-xl">
 						<TouchableOpacity
 							className="flex-row h-8 w-52"
-							onPress={() => {
-								setFasting("16/8 Intermittent Fast");
-								dispatch(setMaxTime(16));
-								setShowTimerList(false);
-							}}>
-							<Text className="my-auto text-xs ml-2">
-								16/8 Intermittent Fast
-							</Text>
-							{maxTime === 16 && (
-								<CheckMark
-									style={{
-										color: "#E07594",
-										marginLeft: "auto",
-										marginTop: "auto",
-										marginBottom: "auto",
-										marginRight: 10,
-									}}
-									size={15}
-									name={"ios-checkmark-circle-outline"}
-								/>
-							)}
-						</TouchableOpacity>
-						<TouchableOpacity
-							className="flex-row h-8 w-52"
-							onPress={() => {
-								setFasting("18/6 intermittent fast");
-								dispatch(setMaxTime(18));
-								setShowTimerList(false);
-							}}>
-							<Text className="my-auto text-xs ml-2">
-								18/6 Intermittent Fast
-							</Text>
-							{maxTime === 18 && (
-								<CheckMark
-									style={{
-										color: "#E07594",
-										marginLeft: "auto",
-										marginTop: "auto",
-										marginBottom: "auto",
-										marginRight: 10,
-									}}
-									size={15}
-									name={"ios-checkmark-circle-outline"}
-								/>
-							)}
-						</TouchableOpacity>
-						<TouchableOpacity
-							className="flex-row h-8 w-52"
-							onPress={() => {
-								setFasting("24hr fast");
-								dispatch(setMaxTime(24));
-								setShowTimerList(false);
-							}}>
-							<Text className="my-auto text-xs ml-2">24/hr Fast</Text>
-							{maxTime === 24 && (
-								<CheckMark
-									style={{
-										color: "#E07594",
-										marginLeft: "auto",
-										marginTop: "auto",
-										marginBottom: "auto",
-										marginRight: 10,
-									}}
-									size={15}
-									name={"ios-checkmark-circle-outline"}
-								/>
-							)}
+							onPress={() =>
+								showTimerList === false
+									? setShowTimerList(true)
+									: setShowTimerList(false)
+							}>
+							<Text className="ml-4 text-center my-auto">{fasting}</Text>
+							<Icon
+								style={{
+									marginLeft: "auto",
+									marginRight: 20,
+									marginTop: "auto",
+									marginBottom: "auto",
+								}}
+								name={showTimerList === true ? "caret-up" : "caret-down"}
+								size={15}
+								color="black"
+							/>
 						</TouchableOpacity>
 					</Surface>
-				)}
+
+					{showTimerList === true && (
+						<Surface className="w-52 bg-background rounded-xl self-center mt-12 absolute z-10">
+							<TouchableOpacity
+								className="flex-row h-8 w-52"
+								onPress={() => {
+									setFasting("16/8 Intermittent Fast");
+									dispatch(setMaxTime(16));
+									setShowTimerList(false);
+								}}>
+								<Text className="my-auto text-xs ml-2">
+									16/8 Intermittent Fast
+								</Text>
+								{maxTime === 16 && (
+									<CheckMark
+										style={{
+											color: "#E07594",
+											marginLeft: "auto",
+											marginTop: "auto",
+											marginBottom: "auto",
+											marginRight: 10,
+										}}
+										size={15}
+										name={"ios-checkmark-circle-outline"}
+									/>
+								)}
+							</TouchableOpacity>
+							<TouchableOpacity
+								className="flex-row h-8 w-52"
+								onPress={() => {
+									setFasting("18/6 intermittent fast");
+									dispatch(setMaxTime(18));
+									setShowTimerList(false);
+								}}>
+								<Text className="my-auto text-xs ml-2">
+									18/6 Intermittent Fast
+								</Text>
+								{maxTime === 18 && (
+									<CheckMark
+										style={{
+											color: "#E07594",
+											marginLeft: "auto",
+											marginTop: "auto",
+											marginBottom: "auto",
+											marginRight: 10,
+										}}
+										size={15}
+										name={"ios-checkmark-circle-outline"}
+									/>
+								)}
+							</TouchableOpacity>
+							<TouchableOpacity
+								className="flex-row h-8 w-52"
+								onPress={() => {
+									setFasting("24hr fast");
+									dispatch(setMaxTime(24));
+									setShowTimerList(false);
+								}}>
+								<Text className="my-auto text-xs ml-2">24/hr Fast</Text>
+								{maxTime === 24 && (
+									<CheckMark
+										style={{
+											color: "#E07594",
+											marginLeft: "auto",
+											marginTop: "auto",
+											marginBottom: "auto",
+											marginRight: 10,
+										}}
+										size={15}
+										name={"ios-checkmark-circle-outline"}
+									/>
+								)}
+							</TouchableOpacity>
+						</Surface>
+					)}
+				</View>
+
+				<View className="mt-6 z-0">
+					<FastingTimer />
+				</View>
+
+				<Text className="text-SM text-center mt-4">
+					Elapsed: [{elapsedPercentage}]%
+				</Text>
 			</View>
 
-			<View className="mt-6 z-0">
-				<FastingTimer />
-			</View>
-
-			<Text className="text-SM text-center mt-4">
-				Elapsed: {elapsedPercentage}%
-			</Text>
-			<View className="flex flex-row gap-8 justify-center mt-4">
-				<View>
-					<Text className="text-xs text-primary">START TIME</Text>
-					{startTime && <Text className="text-sm">{getDate(startTime)}</Text>}
+			{/* Timer Start */}
+			<View className="mt-auto mb-8">
+				<View className="flex flex-row gap-8 justify-center">
+					<View>
+						<Text className="text-xs text-center text-primary">START</Text>
+						{startTime && <Text className="text-sm">{getDate(startTime)}</Text>}
+					</View>
+					<View>
+						<Text className="text-xs text-center text-primary">END</Text>
+						{endTime && <Text className="text-sm">{getDate(endTime)}</Text>}
+					</View>
 				</View>
-				<View>
-					<Text className="text-xs text-primary">END TIME</Text>
-					{endTime && <Text className="text-sm">{getDate(endTime)}</Text>}
-				</View>
+				<Button
+					className="my-4 w-60 mx-auto bg-button-focus "
+					icon="clock"
+					mode="contained"
+					onPress={clicked === false ? handleStartFast : handleEndFast}>
+					{clicked === false ? "Start fast" : "End fast now"}
+				</Button>
 			</View>
-			<Button
-				className="my-4 w-60 mx-auto bg-button-focus "
-				icon="clock"
-				mode="contained"
-				onPress={clicked === false ? handleStartFast : handleEndFast}>
-				{clicked === false ? "Start fast" : "End fast now"}
-			</Button>
 		</View>
 	);
 };
 
 export default Fasting;
-
-{
-	/* <List.Section className="text-center self-center" title="Fasting Time">
-				<List.Accordion
-					theme={{ colors: { background: "white" } }}
-					className="flex self-center justify-center rounded-lg bg-button-blur w-60"
-					title={fasting}
-					expanded={expandList}
-					onPress={handleExplandList}>
-					<List.Item
-						className="self-center w-60"
-						title="16/8 Intermittent Fast"
-						onPress={() => {
-							setFasting("16/8 Intermittent Fast");
-							setMaxTime(16);
-							setExpandList(false);
-						}}
-					/>
-					<List.Item
-						className="self-center w-60"
-						title="18/4 intermittent fast"
-						onPress={() => {
-							setFasting("18/4 intermittent fast");
-							setMaxTime(18);
-							setExpandList(false);
-						}}
-					/>
-					<List.Item
-						className="self-center w-60"
-						title="24hr fast"
-						onPress={() => {
-							setFasting("24hr fast");
-							setMaxTime(24);
-							setExpandList(false);
-						}}
-					/>
-				</List.Accordion>
-			</List.Section> */
-}
