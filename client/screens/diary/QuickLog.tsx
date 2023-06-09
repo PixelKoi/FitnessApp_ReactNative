@@ -67,6 +67,7 @@ const QuickLog = ({ navigation }) => {
   };
   const hideErrorDialog = () => setMealError(false);
 
+  // convert to RTK: https://redux-toolkit.js.org/rtk-query/overview#configure-the-store
   // Simple Query testing API: https://api.nal.usda.gov/fdc/v1/foods/search?api_key=DEMO_KEY&query=Cheddar%20Cheese
   const apiUrl = `https://api.nal.usda.gov/fdc/v1/foods/search?query=${foodName}&pageSize=${params.pageSize}&pageNumber=${params.pageNumber}&api_key=${params.api_key}&dataType=${params.dataType}`;
   const handleSearch = async () => {
