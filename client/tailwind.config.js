@@ -7,7 +7,14 @@ module.exports = {
 		"./screens/**/**/*.{js,jsx,ts,tsx}",
 	],
 	theme: {
-		extend: {},
+		extend: {
+			colors: {
+				primary: "#E07594",
+				"button-focus": "#E07594",
+				"button-blur": "#F6E6EB",
+				background: "#FFFFFF",
+			},
+		},
 	},
 	plugins: [],
 };

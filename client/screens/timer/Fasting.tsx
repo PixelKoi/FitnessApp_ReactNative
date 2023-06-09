@@ -1,13 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import { View, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { Button, List } from "react-native-paper";
+import { Button, List, Surface } from "react-native-paper";
 import { format, add, getDay } from "date-fns";
 import FastingTimer from "./components/FastingDonutGraph";
 import { useAppDispatch, useAppSelector } from "../../redux-manager/hooks";
 import {
-	setElapsedPercentage,
+	setEndDate,
 	setMaxTime,
+	setStartDate,
 	setTimerStates,
 } from "../../redux-manager/redux-slice/fasting-slice";
 const Fasting = () => {
@@ -20,7 +21,7 @@ const Fasting = () => {
 	}, [navigation]);
 
 	//initiate fasting redux states
-	const { startDate, endDate, maxTime } = useAppSelector(
+	const { startDate, endDate, maxTime, elapsedPercentage } = useAppSelector(
 		(state) => state.fasting
 	);
 	const dispatch = useAppDispatch();
@@ -31,7 +32,7 @@ const Fasting = () => {
 	const [clicked, setClicked] = useState(false);
 
 	//handle fasting mode selector
-	const [fasting, setFasting] = useState<String>("16/8 intermittent fast");
+	const [fasting, setFasting] = useState<String>("16/8 Intermittent Fast");
 	const [expandList, setExpandList] = useState<boolean>(false);
 	const handleExplandList = () => setExpandList(!expandList);
 
@@ -67,6 +68,12 @@ const Fasting = () => {
 		setClicked((prevClick) => !prevClick);
 		setStartTime("");
 		setEndTime("");
+		dispatch(
+			setTimerStates({
+				startDate: "",
+				endDate: "",
+			})
+		);
 	};
 
 	//Get day for start and end time for timer
@@ -83,57 +90,58 @@ const Fasting = () => {
 	};
 
 	return (
-		<View className="flex-1 justify-center bg-white">
-			<View className="mt-4">
-				<List.Accordion
-					style={accordionStyle}
-					title={fasting}
-					left={(props) => <List.Icon {...props} icon="pencil" />}
-					expanded={expandList}
-					onPress={handleExplandList}>
-					<List.Item
-						title="16/8 intermittent fast"
-						onPress={() => {
-							setFasting("16/8 intermittent fast");
-							setMaxTime(16);
-							setExpandList(false);
-						}}
-					/>
-					<List.Item
-						title="18/4 intermittent fast"
-						onPress={() => {
-							setFasting("18/4 intermittent fast");
-							setMaxTime(18);
-							setExpandList(false);
-						}}
-					/>
-					<List.Item
-						title="24hr fast"
-						onPress={() => {
-							setFasting("24hr fast");
-							setMaxTime(24);
-							setExpandList(false);
-						}}
-					/>
-				</List.Accordion>
-			</View>
+		<View className="flex-1 flex-col justify-center bg-background">
+			<List.Accordion
+				className="bg-button-blur"
+				style={accordionStyle}
+				title={fasting}
+				// left={(props) => <List.Icon {...props} icon="pencil" />}
+				expanded={expandList}
+				onPress={handleExplandList}>
+				<List.Item
+					title="16/8 Intermittent Fast"
+					onPress={() => {
+						setFasting("16/8 Intermittent Fast");
+						setMaxTime(16);
+						setExpandList(false);
+					}}
+				/>
+				<List.Item
+					title="18/4 intermittent fast"
+					onPress={() => {
+						setFasting("18/4 intermittent fast");
+						setMaxTime(18);
+						setExpandList(false);
+					}}
+				/>
+				<List.Item
+					title="24hr fast"
+					onPress={() => {
+						setFasting("24hr fast");
+						setMaxTime(24);
+						setExpandList(false);
+					}}
+				/>
+			</List.Accordion>
 
-			<View className="mt-10">
+			<View className="mt-6">
 				<FastingTimer />
 			</View>
-
+			<Text className="text-SM text-center mt-4">
+				Elapsed: {elapsedPercentage}%
+			</Text>
 			<View className="flex flex-row gap-8 justify-center mt-4">
 				<View>
-					<Text className="text-xs">STARTED TIME </Text>
-					{startTime && <Text>{getDate(startTime)}</Text>}
+					<Text className="text-xs text-primary">START TIME</Text>
+					{startTime && <Text className="text-sm">{getDate(startTime)}</Text>}
 				</View>
 				<View>
-					<Text className="text-xs">FAST ENDING </Text>
-					{endTime && <Text>{getDate(endTime)}</Text>}
+					<Text className="text-xs text-primary">END TIME</Text>
+					{endTime && <Text className="text-sm">{getDate(endTime)}</Text>}
 				</View>
 			</View>
 			<Button
-				className="my-4 w-60 mx-auto"
+				className="my-4 w-60 mx-auto bg-button-focus"
 				icon="clock"
 				mode="contained"
 				onPress={clicked === false ? handleStartFast : handleEndFast}>
@@ -146,10 +154,18 @@ const Fasting = () => {
 export default Fasting;
 
 const accordionStyle = {
-	backgroundColor: "white",
-	marginVertical: 10,
-	borderRadius: 8,
+	borderRadius: 10,
 	elevation: 2,
-	width: 300,
+	width: 230,
+	height: 60,
+	fontSize: 14,
+	alignSelf: "center",
+	justifyContent: "center",
+};
+
+const surface = {
+	borderRadius: 10,
+	width: 230,
+	height: 60,
 	alignSelf: "center",
 };

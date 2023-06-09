@@ -135,25 +135,7 @@ const Meditation = () => {
 			<View className="mt-10">
 				<MedTimer />
 			</View>
-			<View className="mt-4">
-				<Text className="text-center">Days Meditated</Text>
-			</View>
-			<View className="flex-row justify-center mt-2">
-				{Object.entries(medStreak).map(([day, completed], index) => (
-					<View
-						key={index}
-						style={{
-							margin: 6,
-							width: 20,
-							height: 20,
-							borderRadius: 10,
-							backgroundColor: completed ? "green" : "gray",
-						}}></View>
-				))}
-			</View>
-			<View className="mt-2">
-				<Text className="text-center">Streak: 0</Text>
-			</View>
+
 			<Button
 				className="mt-8 w-60 mx-auto"
 				icon="brain"
