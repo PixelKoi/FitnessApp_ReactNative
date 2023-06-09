@@ -10,6 +10,7 @@ module.exports = {
 		extend: {
 			colors: {
 				primary: "#E07594",
+				secondary: "#F6E6EB",
 				"button-focus": "#E07594",
 				"button-blur": "#F6E6EB",
 				background: "#FFFFFF",
