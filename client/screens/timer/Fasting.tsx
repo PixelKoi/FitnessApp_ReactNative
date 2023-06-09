@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { Button, List, Surface } from "react-native-paper";
+import { Button, Surface } from "react-native-paper";
 import { format, add, getDay } from "date-fns";
 import FastingTimer from "./components/FastingDonutGraph";
 //Redux imports
@@ -14,6 +14,7 @@ import {
 } from "../../redux-manager/redux-slice/fasting-slice";
 //import icons
 import Icon from "react-native-vector-icons/FontAwesome";
+import CheckMark from "react-native-vector-icons/Ionicons";
 
 const Fasting = () => {
 	//Top left nav button - removed top nav
@@ -124,7 +125,7 @@ const Fasting = () => {
 				{showTimerList === true && (
 					<Surface className="w-52 bg-background rounded-xl self-center mt-12 absolute z-10">
 						<TouchableOpacity
-							className="h-8 w-52"
+							className="flex-row h-8 w-52"
 							onPress={() => {
 								setFasting("16/8 Intermittent Fast");
 								setMaxTime(16);
@@ -133,9 +134,22 @@ const Fasting = () => {
 							<Text className="my-auto text-xs ml-2">
 								16/8 Intermittent Fast
 							</Text>
+							{maxTime === 16 && (
+								<CheckMark
+									style={{
+										color: "#E07594",
+										marginLeft: "auto",
+										marginTop: "auto",
+										marginBottom: "auto",
+										marginRight: 10,
+									}}
+									size={15}
+									name={"ios-checkmark-circle-outline"}
+								/>
+							)}
 						</TouchableOpacity>
 						<TouchableOpacity
-							className="h-8 w-52"
+							className="flex-row h-8 w-52"
 							onPress={() => {
 								setFasting("18/6 intermittent fast");
 								setMaxTime(18);
@@ -144,15 +158,41 @@ const Fasting = () => {
 							<Text className="my-auto text-xs ml-2">
 								18/6 Intermittent Fast
 							</Text>
+							{maxTime === 18 && (
+								<CheckMark
+									style={{
+										color: "#E07594",
+										marginLeft: "auto",
+										marginTop: "auto",
+										marginBottom: "auto",
+										marginRight: 10,
+									}}
+									size={15}
+									name={"ios-checkmark-circle-outline"}
+								/>
+							)}
 						</TouchableOpacity>
 						<TouchableOpacity
-							className="h-8 w-52"
+							className="flex-row h-8 w-52"
 							onPress={() => {
 								setFasting("24hr fast");
 								setMaxTime(24);
 								setShowTimerList(false);
 							}}>
 							<Text className="my-auto text-xs ml-2">24/hr Fast</Text>
+							{maxTime === 24 && (
+								<CheckMark
+									style={{
+										color: "#E07594",
+										marginLeft: "auto",
+										marginTop: "auto",
+										marginBottom: "auto",
+										marginRight: 10,
+									}}
+									size={15}
+									name={"ios-checkmark-circle-outline"}
+								/>
+							)}
 						</TouchableOpacity>
 					</Surface>
 				)}
