@@ -79,9 +79,10 @@ const Meditation = () => {
 	};
 
 	return (
-		<View className="flex-1 justify-center bg-background">
-			<View className="mt-auto">
-				<View className="z-10 -mt-20">
+		<View className="mt-auto flex flex-col justify-center bg-background ">
+			{/* Clock section */}
+			<View className="mt-auto mb-28 top-1">
+				<View className="z-10">
 					<Surface className="bg-secondary h-8 w-52 self-center rounded-xl">
 						<TouchableOpacity
 							className="flex-row h-8 w-52"
@@ -181,16 +182,17 @@ const Meditation = () => {
 					)}
 				</View>
 
-				<View className="mt-10">
+				<View className="mt-6 z-0">
 					<MedTimer />
 				</View>
+
+				<Text className="text-SM text-center mt-4">
+					Elapsed: [{percentageComplete}]%
+				</Text>
 			</View>
 
-			<Text className="text-SM text-center mt-4">
-				Elapsed: [{percentageComplete}]%
-			</Text>
 			<Button
-				className="mt-auto mb-8 w-60 mx-auto bg-primary"
+				className="mt-auto mb-12 w-60 mx-auto bg-primary"
 				icon="brain"
 				mode="contained"
 				onPress={clicked === false ? handleStartFast : handleEndFast}>

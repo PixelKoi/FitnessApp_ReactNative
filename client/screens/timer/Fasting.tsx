@@ -95,9 +95,9 @@ const Fasting = () => {
 	}, [navigation]);
 
 	return (
-		<View className="flex-1 flex-col justify-center bg-background ">
+		<View className="mt-auto flex flex-col justify-center bg-background ">
 			{/* Clock section */}
-			<View className="mt-auto">
+			<View className="mt-auto mb-14">
 				<View className="z-10">
 					<Surface className="bg-secondary h-8 w-52 self-center rounded-xl">
 						<TouchableOpacity
@@ -208,7 +208,7 @@ const Fasting = () => {
 			</View>
 
 			{/* Timer Start */}
-			<View className="mt-auto mb-8">
+			<View className="mb-8">
 				<View className="flex flex-row  justify-center">
 					<View className="w-32">
 						<Text className="text-xs text-center text-primary">START</Text>

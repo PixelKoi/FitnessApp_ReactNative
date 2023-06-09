@@ -8,7 +8,7 @@ const Timer = () => {
 	const [mode, setMode] = useState("fasting");
 	return (
 		<View className="flex-1 justify-center bg-background">
-			<View className="flex flex-row justify-center gap-4 mt-20">
+			<View className="flex-row justify-center gap-4 mt-20">
 				<Button
 					onPress={() => setMode("fasting")}
 					className={`text-center w-40 ${
