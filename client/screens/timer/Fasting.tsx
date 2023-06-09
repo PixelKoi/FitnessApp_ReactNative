@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { View, Text } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Button, List, Surface } from "react-native-paper";
 import { format, add, getDay } from "date-fns";
@@ -35,6 +35,8 @@ const Fasting = () => {
 	const [fasting, setFasting] = useState<String>("16/8 Intermittent Fast");
 	const [expandList, setExpandList] = useState<boolean>(false);
 	const handleExplandList = () => setExpandList(!expandList);
+
+	const [showTimerList, setShowTimerList] = useState(!expandList);
 
 	//Check if fasting redux for startDate. If there is a startDate update local start and end states
 	//ToDo: Check if end date has passed and then reset start and end date to ""
@@ -90,40 +92,87 @@ const Fasting = () => {
 	};
 
 	return (
-		<View className="flex-1 flex-col justify-center bg-background">
-			<List.Accordion
-				className="flex self-center justify-center rounded-lg bg-button-blur w-60"
-				title={fasting}
-				expanded={expandList}
-				onPress={handleExplandList}>
-				<List.Item
-					className="self-center w-60"
-					title="16/8 Intermittent Fast"
-					onPress={() => {
-						setFasting("16/8 Intermittent Fast");
-						setMaxTime(16);
-						setExpandList(false);
-					}}
-				/>
-				<List.Item
-					className="self-center w-60"
-					title="18/4 intermittent fast"
-					onPress={() => {
-						setFasting("18/4 intermittent fast");
-						setMaxTime(18);
-						setExpandList(false);
-					}}
-				/>
-				<List.Item
-					className="self-center w-60"
-					title="24hr fast"
-					onPress={() => {
-						setFasting("24hr fast");
-						setMaxTime(24);
-						setExpandList(false);
-					}}
-				/>
-			</List.Accordion>
+		<View className="flex-1 flex-col justify-center bg-background ">
+			{/* <List.Section className="text-center self-center" title="Fasting Time">
+				<List.Accordion
+					theme={{ colors: { background: "white" } }}
+					className="flex self-center justify-center rounded-lg bg-button-blur w-60"
+					title={fasting}
+					expanded={expandList}
+					onPress={handleExplandList}>
+					<List.Item
+						className="self-center w-60"
+						title="16/8 Intermittent Fast"
+						onPress={() => {
+							setFasting("16/8 Intermittent Fast");
+							setMaxTime(16);
+							setExpandList(false);
+						}}
+					/>
+					<List.Item
+						className="self-center w-60"
+						title="18/4 intermittent fast"
+						onPress={() => {
+							setFasting("18/4 intermittent fast");
+							setMaxTime(18);
+							setExpandList(false);
+						}}
+					/>
+					<List.Item
+						className="self-center w-60"
+						title="24hr fast"
+						onPress={() => {
+							setFasting("24hr fast");
+							setMaxTime(24);
+							setExpandList(false);
+						}}
+					/>
+				</List.Accordion>
+			</List.Section> */}
+
+			<Surface className="bg-secondary h-8 w-52 self-center rounded-xl">
+				<TouchableOpacity
+					className="h-8 w-52"
+					onPress={() =>
+						showTimerList === false
+							? setShowTimerList(true)
+							: setShowTimerList(false)
+					}>
+					<Text className="text-center my-auto">{fasting}</Text>
+				</TouchableOpacity>
+			</Surface>
+
+			{showTimerList === true && (
+				<Surface className="w-52 bg-background rounded-xl  self-center">
+					<TouchableOpacity
+						className="h-8 w-52"
+						onPress={() => {
+							setFasting("16/8 Intermittent Fast");
+							setMaxTime(16);
+							setShowTimerList(false);
+						}}>
+						<Text className="my-auto text-xs ml-2">16/8 Intermittent Fast</Text>
+					</TouchableOpacity>
+					<TouchableOpacity
+						className="h-8 w-52"
+						onPress={() => {
+							setFasting("18/6 intermittent fast");
+							setMaxTime(18);
+							setShowTimerList(false);
+						}}>
+						<Text className="my-auto text-xs ml-2">18/6 Intermittent Fast</Text>
+					</TouchableOpacity>
+					<TouchableOpacity
+						className="h-8 w-52"
+						onPress={() => {
+							setFasting("24hr fast");
+							setMaxTime(24);
+							setShowTimerList(false);
+						}}>
+						<Text className="my-auto text-xs ml-2">24/hr Fast</Text>
+					</TouchableOpacity>
+				</Surface>
+			)}
 
 			<View className="mt-6">
 				<FastingTimer />
