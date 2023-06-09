@@ -129,54 +129,60 @@ const Fasting = () => {
 					/>
 				</List.Accordion>
 			</List.Section> */}
-
-			<Surface className="bg-secondary h-8 w-52 self-center rounded-xl">
-				<TouchableOpacity
-					className="h-8 w-52"
-					onPress={() =>
-						showTimerList === false
-							? setShowTimerList(true)
-							: setShowTimerList(false)
-					}>
-					<Text className="text-center my-auto">{fasting}</Text>
-				</TouchableOpacity>
-			</Surface>
-
-			{showTimerList === true && (
-				<Surface className="w-52 bg-background rounded-xl  self-center">
+			<View>
+				<Surface className="bg-secondary h-8 w-52 self-center rounded-xl">
 					<TouchableOpacity
 						className="h-8 w-52"
-						onPress={() => {
-							setFasting("16/8 Intermittent Fast");
-							setMaxTime(16);
-							setShowTimerList(false);
-						}}>
-						<Text className="my-auto text-xs ml-2">16/8 Intermittent Fast</Text>
-					</TouchableOpacity>
-					<TouchableOpacity
-						className="h-8 w-52"
-						onPress={() => {
-							setFasting("18/6 intermittent fast");
-							setMaxTime(18);
-							setShowTimerList(false);
-						}}>
-						<Text className="my-auto text-xs ml-2">18/6 Intermittent Fast</Text>
-					</TouchableOpacity>
-					<TouchableOpacity
-						className="h-8 w-52"
-						onPress={() => {
-							setFasting("24hr fast");
-							setMaxTime(24);
-							setShowTimerList(false);
-						}}>
-						<Text className="my-auto text-xs ml-2">24/hr Fast</Text>
+						onPress={() =>
+							showTimerList === false
+								? setShowTimerList(true)
+								: setShowTimerList(false)
+						}>
+						<Text className="text-center my-auto">{fasting}</Text>
 					</TouchableOpacity>
 				</Surface>
-			)}
 
-			<View className="mt-6">
+				{showTimerList === true && (
+					<Surface className="w-52 bg-background rounded-xl self-center mt-12 absolute z-10">
+						<TouchableOpacity
+							className="h-8 w-52"
+							onPress={() => {
+								setFasting("16/8 Intermittent Fast");
+								setMaxTime(16);
+								setShowTimerList(false);
+							}}>
+							<Text className="my-auto text-xs ml-2">
+								16/8 Intermittent Fast
+							</Text>
+						</TouchableOpacity>
+						<TouchableOpacity
+							className="h-8 w-52"
+							onPress={() => {
+								setFasting("18/6 intermittent fast");
+								setMaxTime(18);
+								setShowTimerList(false);
+							}}>
+							<Text className="my-auto text-xs ml-2">
+								18/6 Intermittent Fast
+							</Text>
+						</TouchableOpacity>
+						<TouchableOpacity
+							className="h-8 w-52"
+							onPress={() => {
+								setFasting("24hr fast");
+								setMaxTime(24);
+								setShowTimerList(false);
+							}}>
+							<Text className="my-auto text-xs ml-2">24/hr Fast</Text>
+						</TouchableOpacity>
+					</Surface>
+				)}
+			</View>
+
+			<View className="mt-6 z-0">
 				<FastingTimer />
 			</View>
+
 			<Text className="text-SM text-center mt-4">
 				Elapsed: {elapsedPercentage}%
 			</Text>
