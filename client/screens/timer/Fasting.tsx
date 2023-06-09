@@ -92,13 +92,12 @@ const Fasting = () => {
 	return (
 		<View className="flex-1 flex-col justify-center bg-background">
 			<List.Accordion
-				className="bg-button-blur"
-				style={accordionStyle}
+				className="flex self-center justify-center rounded-lg bg-button-blur w-60"
 				title={fasting}
-				// left={(props) => <List.Icon {...props} icon="pencil" />}
 				expanded={expandList}
 				onPress={handleExplandList}>
 				<List.Item
+					className="self-center w-60"
 					title="16/8 Intermittent Fast"
 					onPress={() => {
 						setFasting("16/8 Intermittent Fast");
@@ -107,6 +106,7 @@ const Fasting = () => {
 					}}
 				/>
 				<List.Item
+					className="self-center w-60"
 					title="18/4 intermittent fast"
 					onPress={() => {
 						setFasting("18/4 intermittent fast");
@@ -115,6 +115,7 @@ const Fasting = () => {
 					}}
 				/>
 				<List.Item
+					className="self-center w-60"
 					title="24hr fast"
 					onPress={() => {
 						setFasting("24hr fast");
@@ -153,19 +154,12 @@ const Fasting = () => {
 
 export default Fasting;
 
-const accordionStyle = {
-	borderRadius: 10,
-	elevation: 2,
-	width: 230,
-	height: 60,
-	fontSize: 14,
-	alignSelf: "center",
-	justifyContent: "center",
-};
-
-const surface = {
-	borderRadius: 10,
-	width: 230,
-	height: 60,
-	alignSelf: "center",
-};
+// const accordionStyle = {
+// 	borderRadius: 10,
+// 	elevation: 2,
+// 	width: 230,
+// 	height: 60,
+// 	fontSize: 14,
+// 	alignSelf: "center",
+// 	justifyContent: "center",
+// };
