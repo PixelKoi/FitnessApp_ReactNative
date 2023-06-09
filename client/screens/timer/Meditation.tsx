@@ -80,115 +80,117 @@ const Meditation = () => {
 
 	return (
 		<View className="flex-1 justify-center bg-background">
-			<View className="z-10 -mt-20">
-				<Surface className="bg-secondary h-8 w-52 self-center rounded-xl">
-					<TouchableOpacity
-						className="flex-row h-8 w-52"
-						onPress={() =>
-							showTimerList === false
-								? setShowTimerList(true)
-								: setShowTimerList(false)
-						}>
-						<Text className="ml-4 text-center my-auto">{fasting}</Text>
-						<Icon
-							style={{
-								marginLeft: "auto",
-								marginRight: 20,
-								marginTop: "auto",
-								marginBottom: "auto",
-							}}
-							name={showTimerList === true ? "caret-up" : "caret-down"}
-							size={15}
-							color="black"
-						/>
-					</TouchableOpacity>
-				</Surface>
-
-				{showTimerList === true && (
-					<Surface className="w-52 bg-background rounded-xl self-center mt-12 absolute z-10">
+			<View className="mt-auto">
+				<View className="z-10 -mt-20">
+					<Surface className="bg-secondary h-8 w-52 self-center rounded-xl">
 						<TouchableOpacity
 							className="flex-row h-8 w-52"
-							onPress={() => {
-								setFasting("16/8 Intermittent Fast");
-								dispatch(setMaxTime(16));
-								setShowTimerList(false);
-							}}>
-							<Text className="my-auto text-xs ml-2">
-								16/8 Intermittent Fast
-							</Text>
-							{maxTime === 16 && (
-								<CheckMark
-									style={{
-										color: "#E07594",
-										marginLeft: "auto",
-										marginTop: "auto",
-										marginBottom: "auto",
-										marginRight: 10,
-									}}
-									size={15}
-									name={"ios-checkmark-circle-outline"}
-								/>
-							)}
-						</TouchableOpacity>
-						<TouchableOpacity
-							className="flex-row h-8 w-52"
-							onPress={() => {
-								setFasting("18/6 intermittent fast");
-								dispatch(setMaxTime(18));
-								setShowTimerList(false);
-							}}>
-							<Text className="my-auto text-xs ml-2">
-								18/6 Intermittent Fast
-							</Text>
-							{maxTime === 18 && (
-								<CheckMark
-									style={{
-										color: "#E07594",
-										marginLeft: "auto",
-										marginTop: "auto",
-										marginBottom: "auto",
-										marginRight: 10,
-									}}
-									size={15}
-									name={"ios-checkmark-circle-outline"}
-								/>
-							)}
-						</TouchableOpacity>
-						<TouchableOpacity
-							className="flex-row h-8 w-52"
-							onPress={() => {
-								setFasting("24hr fast");
-								dispatch(setMaxTime(24));
-								setShowTimerList(false);
-							}}>
-							<Text className="my-auto text-xs ml-2">24/hr Fast</Text>
-							{maxTime === 24 && (
-								<CheckMark
-									style={{
-										color: "#E07594",
-										marginLeft: "auto",
-										marginTop: "auto",
-										marginBottom: "auto",
-										marginRight: 10,
-									}}
-									size={15}
-									name={"ios-checkmark-circle-outline"}
-								/>
-							)}
+							onPress={() =>
+								showTimerList === false
+									? setShowTimerList(true)
+									: setShowTimerList(false)
+							}>
+							<Text className="ml-4 text-center my-auto">{fasting}</Text>
+							<Icon
+								style={{
+									marginLeft: "auto",
+									marginRight: 20,
+									marginTop: "auto",
+									marginBottom: "auto",
+								}}
+								name={showTimerList === true ? "caret-up" : "caret-down"}
+								size={15}
+								color="black"
+							/>
 						</TouchableOpacity>
 					</Surface>
-				)}
-			</View>
 
-			<View className="mt-10">
-				<MedTimer />
+					{showTimerList === true && (
+						<Surface className="w-52 bg-background rounded-xl self-center mt-12 absolute z-10">
+							<TouchableOpacity
+								className="flex-row h-8 w-52"
+								onPress={() => {
+									setFasting("16/8 Intermittent Fast");
+									dispatch(setMaxTime(16));
+									setShowTimerList(false);
+								}}>
+								<Text className="my-auto text-xs ml-2">
+									16/8 Intermittent Fast
+								</Text>
+								{maxTime === 16 && (
+									<CheckMark
+										style={{
+											color: "#E07594",
+											marginLeft: "auto",
+											marginTop: "auto",
+											marginBottom: "auto",
+											marginRight: 10,
+										}}
+										size={15}
+										name={"ios-checkmark-circle-outline"}
+									/>
+								)}
+							</TouchableOpacity>
+							<TouchableOpacity
+								className="flex-row h-8 w-52"
+								onPress={() => {
+									setFasting("18/6 intermittent fast");
+									dispatch(setMaxTime(18));
+									setShowTimerList(false);
+								}}>
+								<Text className="my-auto text-xs ml-2">
+									18/6 Intermittent Fast
+								</Text>
+								{maxTime === 18 && (
+									<CheckMark
+										style={{
+											color: "#E07594",
+											marginLeft: "auto",
+											marginTop: "auto",
+											marginBottom: "auto",
+											marginRight: 10,
+										}}
+										size={15}
+										name={"ios-checkmark-circle-outline"}
+									/>
+								)}
+							</TouchableOpacity>
+							<TouchableOpacity
+								className="flex-row h-8 w-52"
+								onPress={() => {
+									setFasting("24hr fast");
+									dispatch(setMaxTime(24));
+									setShowTimerList(false);
+								}}>
+								<Text className="my-auto text-xs ml-2">24/hr Fast</Text>
+								{maxTime === 24 && (
+									<CheckMark
+										style={{
+											color: "#E07594",
+											marginLeft: "auto",
+											marginTop: "auto",
+											marginBottom: "auto",
+											marginRight: 10,
+										}}
+										size={15}
+										name={"ios-checkmark-circle-outline"}
+									/>
+								)}
+							</TouchableOpacity>
+						</Surface>
+					)}
+				</View>
+
+				<View className="mt-10">
+					<MedTimer />
+				</View>
 			</View>
 
 			<Text className="text-SM text-center mt-4">
 				Elapsed: [{percentageComplete}]%
 			</Text>
 			<Button
-				className="mt-8 w-60 mx-auto bg-primary"
+				className="mt-auto mb-8 w-60 mx-auto bg-primary"
 				icon="brain"
 				mode="contained"
 				onPress={clicked === false ? handleStartFast : handleEndFast}>

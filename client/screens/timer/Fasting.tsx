@@ -209,14 +209,23 @@ const Fasting = () => {
 
 			{/* Timer Start */}
 			<View className="mt-auto mb-8">
-				<View className="flex flex-row gap-8 justify-center">
-					<View>
+				<View className="flex flex-row  justify-center">
+					<View className="w-32">
 						<Text className="text-xs text-center text-primary">START</Text>
-						{startTime && <Text className="text-sm">{getDate(startTime)}</Text>}
+						{startTime !== null ? (
+							<Text className="text-sm text-center">{getDate(startTime)}</Text>
+						) : (
+							<Text className="text-sm text-center">.........</Text>
+						)}
 					</View>
-					<View>
+
+					<View className=" w-32">
 						<Text className="text-xs text-center text-primary">END</Text>
-						{endTime && <Text className="text-sm">{getDate(endTime)}</Text>}
+						{endTime !== null ? (
+							<Text className="text-sm text-center">{getDate(endTime)}</Text>
+						) : (
+							<Text className="text-sm text-center">.........</Text>
+						)}
 					</View>
 				</View>
 				<Button
