@@ -4,6 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 import { Button, List, Surface } from "react-native-paper";
 import { format, add, getDay } from "date-fns";
 import FastingTimer from "./components/FastingDonutGraph";
+//Redux imports
 import { useAppDispatch, useAppSelector } from "../../redux-manager/hooks";
 import {
 	setEndDate,
@@ -11,6 +12,9 @@ import {
 	setStartDate,
 	setTimerStates,
 } from "../../redux-manager/redux-slice/fasting-slice";
+//import icons
+import Icon from "react-native-vector-icons/FontAwesome";
+
 const Fasting = () => {
 	//Top left nav button - removed top nav
 	const navigation = useNavigation();
@@ -36,7 +40,7 @@ const Fasting = () => {
 	const [expandList, setExpandList] = useState<boolean>(false);
 	const handleExplandList = () => setExpandList(!expandList);
 
-	const [showTimerList, setShowTimerList] = useState(!expandList);
+	const [showTimerList, setShowTimerList] = useState(false);
 
 	//Check if fasting redux for startDate. If there is a startDate update local start and end states
 	//ToDo: Check if end date has passed and then reset start and end date to ""
@@ -93,52 +97,27 @@ const Fasting = () => {
 
 	return (
 		<View className="flex-1 flex-col justify-center bg-background ">
-			{/* <List.Section className="text-center self-center" title="Fasting Time">
-				<List.Accordion
-					theme={{ colors: { background: "white" } }}
-					className="flex self-center justify-center rounded-lg bg-button-blur w-60"
-					title={fasting}
-					expanded={expandList}
-					onPress={handleExplandList}>
-					<List.Item
-						className="self-center w-60"
-						title="16/8 Intermittent Fast"
-						onPress={() => {
-							setFasting("16/8 Intermittent Fast");
-							setMaxTime(16);
-							setExpandList(false);
-						}}
-					/>
-					<List.Item
-						className="self-center w-60"
-						title="18/4 intermittent fast"
-						onPress={() => {
-							setFasting("18/4 intermittent fast");
-							setMaxTime(18);
-							setExpandList(false);
-						}}
-					/>
-					<List.Item
-						className="self-center w-60"
-						title="24hr fast"
-						onPress={() => {
-							setFasting("24hr fast");
-							setMaxTime(24);
-							setExpandList(false);
-						}}
-					/>
-				</List.Accordion>
-			</List.Section> */}
 			<View>
 				<Surface className="bg-secondary h-8 w-52 self-center rounded-xl">
 					<TouchableOpacity
-						className="h-8 w-52"
+						className="flex-row h-8 w-52"
 						onPress={() =>
 							showTimerList === false
 								? setShowTimerList(true)
 								: setShowTimerList(false)
 						}>
-						<Text className="text-center my-auto">{fasting}</Text>
+						<Text className="ml-4 text-center my-auto">{fasting}</Text>
+						<Icon
+							style={{
+								marginLeft: "auto",
+								marginRight: 20,
+								marginTop: "auto",
+								marginBottom: "auto",
+							}}
+							name={showTimerList === true ? "caret-up" : "caret-down"}
+							size={15}
+							color="black"
+						/>
 					</TouchableOpacity>
 				</Surface>
 
@@ -197,7 +176,7 @@ const Fasting = () => {
 				</View>
 			</View>
 			<Button
-				className="my-4 w-60 mx-auto bg-button-focus"
+				className="my-4 w-60 mx-auto bg-button-focus "
 				icon="clock"
 				mode="contained"
 				onPress={clicked === false ? handleStartFast : handleEndFast}>
@@ -209,12 +188,41 @@ const Fasting = () => {
 
 export default Fasting;
 
-// const accordionStyle = {
-// 	borderRadius: 10,
-// 	elevation: 2,
-// 	width: 230,
-// 	height: 60,
-// 	fontSize: 14,
-// 	alignSelf: "center",
-// 	justifyContent: "center",
-// };
+{
+	/* <List.Section className="text-center self-center" title="Fasting Time">
+				<List.Accordion
+					theme={{ colors: { background: "white" } }}
+					className="flex self-center justify-center rounded-lg bg-button-blur w-60"
+					title={fasting}
+					expanded={expandList}
+					onPress={handleExplandList}>
+					<List.Item
+						className="self-center w-60"
+						title="16/8 Intermittent Fast"
+						onPress={() => {
+							setFasting("16/8 Intermittent Fast");
+							setMaxTime(16);
+							setExpandList(false);
+						}}
+					/>
+					<List.Item
+						className="self-center w-60"
+						title="18/4 intermittent fast"
+						onPress={() => {
+							setFasting("18/4 intermittent fast");
+							setMaxTime(18);
+							setExpandList(false);
+						}}
+					/>
+					<List.Item
+						className="self-center w-60"
+						title="24hr fast"
+						onPress={() => {
+							setFasting("24hr fast");
+							setMaxTime(24);
+							setExpandList(false);
+						}}
+					/>
+				</List.Accordion>
+			</List.Section> */
+}

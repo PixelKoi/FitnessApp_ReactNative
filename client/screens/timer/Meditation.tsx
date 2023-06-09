@@ -10,6 +10,7 @@ import {
 	setTimerStates,
 	setMaxTime,
 	updateMedStreak,
+	percentageComplete,
 } from "../../redux-manager/redux-slice/meditation-slice";
 
 const Meditation = () => {
@@ -136,8 +137,11 @@ const Meditation = () => {
 				<MedTimer />
 			</View>
 
+			<Text className="text-SM text-center mt-4">
+				Elapsed: {percentageComplete}%
+			</Text>
 			<Button
-				className="mt-8 w-60 mx-auto"
+				className="mt-8 w-60 mx-auto bg-primary"
 				icon="brain"
 				mode="contained"
 				onPress={clicked === false ? handleStartFast : handleEndFast}>

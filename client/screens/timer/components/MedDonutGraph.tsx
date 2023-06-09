@@ -6,7 +6,11 @@ import { useAppSelector } from "../../../redux-manager/hooks";
 //Graph Animations
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
-const MedDonutGraph = ({ radius = 130, strokeWidth = 20, color = "blue" }) => {
+const MedDonutGraph = ({
+	radius = 130,
+	strokeWidth = 30,
+	color = "#F6E6EB",
+}) => {
 	const { countdown, maxTime, percentageComplete } = useAppSelector(
 		(state) => state.meditation
 	);
@@ -55,9 +59,6 @@ const MedDonutGraph = ({ radius = 130, strokeWidth = 20, color = "blue" }) => {
 					/>
 				</G>
 			</Svg>
-			<Text className="text-base text-center absolute top-14">
-				Elapsed: {percentageComplete}%
-			</Text>
 			{countdown ? (
 				<Text className="text-3xl text-center absolute">{countdown}</Text>
 			) : (

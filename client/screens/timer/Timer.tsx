@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View } from "react-native";
+import { View, Text } from "react-native";
 import { Button } from "react-native-paper";
 import Fasting from "./Fasting";
 import Meditation from "./Meditation";
@@ -21,7 +21,7 @@ const Timer = () => {
 				<Button
 					onPress={() => setMode("meditation")}
 					icon="brain"
-					className={`text-center w-40 ${
+					className={`text-center  w-40 ${
 						mode === "meditation" ? "bg-primary" : "bg-secondary"
 					} text-base`}
 					mode="contained">

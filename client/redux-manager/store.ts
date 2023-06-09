@@ -28,8 +28,11 @@ const persistConfig = {
 	version: 1,
 	storage,
 };
+
+//Custom Middleware
 const fastingTimerMiddleware = startFastingTimer.middleware;
 const meditationTimerMiddleware = startMeditationTimer.middleware;
+
 const persistedReducer = persistReducer(persistConfig, reducers);
 
 export const store = configureStore({
