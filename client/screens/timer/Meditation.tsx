@@ -3,15 +3,15 @@ import { View, Text, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Button, List, Surface } from "react-native-paper";
 import { add } from "date-fns";
+//Graph import
 import MedTimer from "./components/MedDonutGraph";
-import { useAppDispatch, useAppSelector } from "../../redux-manager/hooks";
-import { Feather, FontAwesome5 } from "@expo/vector-icons";
+//Redux imports
 import {
 	setTimerStates,
 	setMaxTime,
 	updateMedStreak,
-	percentageComplete,
 } from "../../redux-manager/redux-slice/meditation-slice";
+import { useAppDispatch, useAppSelector } from "../../redux-manager/hooks";
 //import icons
 import Icon from "react-native-vector-icons/FontAwesome";
 import CheckMark from "react-native-vector-icons/Ionicons";

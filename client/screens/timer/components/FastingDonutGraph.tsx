@@ -14,8 +14,8 @@ interface FastingDonutGraphProps {
 
 const FastingDonutGraph: React.FC<FastingDonutGraphProps> = ({
 	radius = 130,
-	strokeWidth = 30,
-	color = "#F6E6EB",
+	strokeWidth = 40,
+	color = "#E07594",
 }) => {
 	//initiate fasting redux states
 	const { countdown, elapsedPercentage, maxTime } = useAppSelector(
@@ -50,7 +50,16 @@ const FastingDonutGraph: React.FC<FastingDonutGraphProps> = ({
 						strokeWidth={strokeWidth}
 						r={radius}
 						fill="transparent"
-						strokeOpacity={0.2}
+						strokeOpacity={0.1}
+					/>
+					<Circle
+						cx="50%"
+						cy="50%"
+						stroke={color}
+						strokeWidth={20}
+						r={radius}
+						fill="transparent"
+						strokeOpacity={0.1}
 					/>
 					<AnimatedCircle
 						ref={circleRef}
