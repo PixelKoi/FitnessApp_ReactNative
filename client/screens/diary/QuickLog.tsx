@@ -49,7 +49,7 @@ interface QuickLogProps {
   foodItem: FoodItem; // Assuming you have a foodItem object as a prop
 }
 
-const QuickLog = ({}) => {
+const QuickLog: React.FC<QuickLogProps> = ({ foodItem }) => {
   const dispatch = useAppDispatch();
   const tabNavigation = useNavigation();
   const [foodName, setFoodName] = useState("");
@@ -177,7 +177,7 @@ const QuickLog = ({}) => {
     const updatedSelectedHearts = [...selectedHearts];
     updatedSelectedHearts[index] = !updatedSelectedHearts[index];
     setSelectedHearts(updatedSelectedHearts);
-    dispatch(addFavorite(array[index]));
+    // dispatch(addFavorite(array[index]));
   };
 
   const handleInputChange = (text, food) => {};
