@@ -8,7 +8,14 @@ import {
 	SafeAreaView,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { TextInput, Button, List, Surface } from "react-native-paper";
+import {
+	TextInput,
+	Button,
+	List,
+	Surface,
+	Pressable,
+	Modal,
+} from "react-native-paper";
 import { useAppDispatch, useAppSelector } from "../../redux-manager/hooks";
 import { setUserStates } from "../../redux-manager/redux-slice/user-slice";
 import DateTimePicker from "@react-native-community/datetimepicker";
@@ -17,6 +24,7 @@ import Profile from "../../database/models/Profile";
 import { useDatabase } from "@nozbe/watermelondb/hooks";
 import calAlgo from "./cal-algo";
 import { UserCircleIcon } from "react-native-heroicons/outline";
+import EditProfile from "./EditProfile";
 
 const UserBioInput = () => {
 	const database = useDatabase();
@@ -192,65 +200,86 @@ const UserBioInput = () => {
 	const profile = () => {
 		return (
 			<View className="flex-1 ">
-				<View className="">
-					<View className="flex  ">
-						<View className="flex flex-row border-solid border-y-2 m-0 border-gray-300 p-6">
-							<Text>User Name:</Text>
-							<Text className="ml-auto text-blue-600">{name}</Text>
+				<View className="flex bg-primary items-center pb-8 w-full rounded-b-full absolute z-10">
+					<UserCircleIcon
+						name="ios-add"
+						size={50}
+						color={"white"}
+						className="text-center"
+					/>
+					<Text className="text-white">{name}</Text>
+					<Text className="text-white">@gmail.com</Text>
+				</View>
+				<Surface className="mx-8 py-8 pb-12 mt-24 rounded-b-3xl bg-background">
+					<View className="mx-8">
+						<View className="flex flex-row border-solid border-b-2 py-3 border-secondary">
+							<Text className="text-primary text-xs">Age:</Text>
+							<Text className="ml-auto text-primary opacity-60  text-xs">
+								{age}
+							</Text>
 						</View>
 
-						<View className="flex flex-row border-solid border-b-2  border-gray-300 p-6">
-							<Text>Age:</Text>
-							<Text className="ml-auto text-blue-600">{age}</Text>
+						<View className="flex flex-row border-solid border-b-2 py-3 border-secondary">
+							<Text className="text-primary  text-xs">Gender:</Text>
+							<Text className="ml-auto text-primary opacity-60  text-xs">
+								{gender}
+							</Text>
 						</View>
 
-						<View className="flex flex-row border-solid border-b-2  border-gray-300 p-6">
-							<Text>Gender:</Text>
-							<Text className="ml-auto text-blue-600">{gender}</Text>
+						<View className="flex flex-row border-solid border-b-2 py-3 border-secondary">
+							<Text className="text-primary text-xs">Height (cm):</Text>
+							<Text className="ml-auto text-primary opacity-60 text-xs">
+								{height} cm
+							</Text>
 						</View>
 
-						<View className="flex flex-row border-solid border-b-2  border-gray-300 p-6">
-							<Text>Height (cm):</Text>
-							<Text className="ml-auto text-blue-600">{height} cm</Text>
+						<View className="flex flex-row border-solid border-b-2 py-3 border-secondary">
+							<Text className="text-primary text-xs">Weight (kg)</Text>
+							<Text className="ml-auto text-primary opacity-60 text-xs">
+								{weight} kg
+							</Text>
 						</View>
 
-						<View className="flex flex-row border-solid border-b-2  border-gray-300 p-6">
-							<Text>Weight (kg)</Text>
-							<Text className="ml-auto text-blue-600">{weight} kg</Text>
+						<View className="flex flex-row border-solid border-b-2 py-3 border-secondary">
+							<Text className="text-primary text-xs">Activity Level</Text>
+							<Text className="ml-auto text-primary opacity-60 text-xs">
+								{activity}
+							</Text>
 						</View>
 
-						<View className="flex flex-row border-solid border-b-2  border-gray-300 p-6">
-							<Text>Activity Level</Text>
-							<Text className="ml-auto text-blue-600">{activity}</Text>
+						<View className="flex flex-row border-solid border-b-2 py-3 border-secondary">
+							<Text className="text-primary text-xs">Weekly Goal:</Text>
+							<Text className="ml-auto text-primary opacity-60 text-xs">
+								{goal} lb/s
+							</Text>
 						</View>
 
-						<View className="flex flex-row border-solid border-b-2  border-gray-300 p-6">
-							<Text>Weekly Goal:</Text>
-							<Text className="ml-auto text-blue-600">{goal} lb/s</Text>
+						<View className="flex flex-row border-solid border-b-2 py-3 border-secondary">
+							<Text className="text-primary text-xs">Email:</Text>
+							<Text className="ml-auto text-primary opacity-60 text-xs">
+								@email.com
+							</Text>
 						</View>
 
-						<View className="flex flex-row border-solid border-b-2  border-gray-300 p-6">
-							<Text>Email:</Text>
-							<Text className="ml-auto text-blue-600">@email.com</Text>
+						<View className="flex flex-row border-solid border-b-2 py-3 border-secondary">
+							<Text className="text-primary text-xs">BMR:</Text>
+							<Text className="ml-auto text-primary opacity-60 text-xs">
+								{bmr} cal
+							</Text>
 						</View>
 
-						<View className="flex flex-row border-solid border-b-2  border-gray-300 p-6">
-							<Text>BMR:</Text>
-							<Text className="ml-auto text-blue-600">{bmr} cal</Text>
-						</View>
-
-						<View className="flex flex-row border-solid  p-6">
-							<Text>Daily Calorie Needs:</Text>
-							<Text className="ml-auto text-blue-600">{dailyCal} cal</Text>
+						<View className="flex flex-row border-solid border-b-2 py-3 border-secondary">
+							<Text className="text-primary text-xs">Daily Calorie Needs:</Text>
+							<Text className="ml-auto text-primary opacity-60 text-xs">
+								{dailyCal} cal
+							</Text>
 						</View>
 					</View>
-				</View>
+				</Surface>
 				<Button
-					className="p-4 rounded-none rounded-t-2xl mt-auto"
-					style={{ backgroundColor: "#84d0ff" }}
-					onPress={() => setEditProfile(true)}
-					mode="contained">
-					<Text className="text-black">Edit Profile</Text>
+					className="bg-primary w-40 mt-5 mx-auto"
+					onPress={() => setEditProfile(true)}>
+					<Text className="text-white">Edit</Text>
 				</Button>
 			</View>
 		);
@@ -261,6 +290,13 @@ const UserBioInput = () => {
 		return (
 			<View>
 				<TextInput
+					textColor="#E07594"
+					theme={{
+						colors: {
+							text: "#E07594", // Replace 'your_custom_color' with your desired label color
+						},
+					}}
+					className="bg-secondary"
 					label="User Name"
 					value={newName}
 					onChangeText={(newName) => setName(newName)}
@@ -300,6 +336,7 @@ const UserBioInput = () => {
 				/>
 
 				<List.Accordion
+					className="bg-secondary"
 					title={selectedGender}
 					left={(props) => <List.Icon {...props} icon="run" />}
 					expanded={expandGender}
@@ -327,6 +364,7 @@ const UserBioInput = () => {
 				</List.Accordion>
 
 				<List.Accordion
+					className="bg-secondary"
 					title={selectedActivity}
 					description="Select activity level"
 					left={(props) => <List.Icon {...props} icon="run" />}
@@ -390,6 +428,7 @@ const UserBioInput = () => {
 				</List.Accordion>
 
 				<List.Accordion
+					className="bg-secondary"
 					title={selectedGoal + "lbs"}
 					description="Select Weight Loss Goal"
 					left={(props) => <List.Icon {...props} icon="scale" />}
@@ -449,85 +488,11 @@ const UserBioInput = () => {
 		);
 	};
 
+	const [modalVisible, setModalVisible] = useState(false);
+
 	return (
 		<View className="flex-1 bg-secondary">
-			{/* {showEditProfile === false ? profile() : editProfile()} */}
-			<View className="flex bg-primary items-center pb-8 w-full rounded-b-full absolute z-10">
-				<UserCircleIcon
-					name="ios-add"
-					size={50}
-					color={"white"}
-					className="text-center"
-				/>
-				<Text className="text-white">{name}</Text>
-				<Text className="text-white">@gmail.com</Text>
-			</View>
-			<Surface className="mx-8 py-8 pb-12 mt-24 rounded-b-3xl">
-				<View className="mx-8">
-					<View className="flex flex-row border-solid border-b-2 py-3 border-secondary">
-						<Text className="text-primary text-xs">Age:</Text>
-						<Text className="ml-auto text-primary opacity-60  text-xs">
-							{age}
-						</Text>
-					</View>
-
-					<View className="flex flex-row border-solid border-b-2 py-3 border-secondary">
-						<Text className="text-primary  text-xs">Gender:</Text>
-						<Text className="ml-auto text-primary opacity-60  text-xs">
-							{gender}
-						</Text>
-					</View>
-
-					<View className="flex flex-row border-solid border-b-2 py-3 border-secondary">
-						<Text className="text-primary text-xs">Height (cm):</Text>
-						<Text className="ml-auto text-primary opacity-60 text-xs">
-							{height} cm
-						</Text>
-					</View>
-
-					<View className="flex flex-row border-solid border-b-2 py-3 border-secondary">
-						<Text className="text-primary text-xs">Weight (kg)</Text>
-						<Text className="ml-auto text-primary opacity-60 text-xs">
-							{weight} kg
-						</Text>
-					</View>
-
-					<View className="flex flex-row border-solid border-b-2 py-4 border-secondary">
-						<Text className="text-primary text-xs">Activity Level</Text>
-						<Text className="ml-auto text-primary opacity-60 text-xs">
-							{activity}
-						</Text>
-					</View>
-
-					<View className="flex flex-row border-solid border-b-2 py-3 border-secondary">
-						<Text className="text-primary text-xs">Weekly Goal:</Text>
-						<Text className="ml-auto text-primary opacity-60 text-xs">
-							{goal} lb/s
-						</Text>
-					</View>
-
-					<View className="flex flex-row border-solid border-b-2 py-3 border-secondary">
-						<Text className="text-primary text-xs">Email:</Text>
-						<Text className="ml-auto text-primary opacity-60 text-xs">
-							@email.com
-						</Text>
-					</View>
-
-					<View className="flex flex-row border-solid border-b-2 py-3 border-secondary">
-						<Text className="text-primary text-xs">BMR:</Text>
-						<Text className="ml-auto text-primary opacity-60 text-xs">
-							{bmr} cal
-						</Text>
-					</View>
-
-					<View className="flex flex-row border-solid border-b-2 py-3 border-secondary">
-						<Text className="text-primary text-xs">Daily Calorie Needs:</Text>
-						<Text className="ml-auto text-primary opacity-60 text-xs">
-							{dailyCal} cal
-						</Text>
-					</View>
-				</View>
-			</Surface>
+			{showEditProfile === false ? profile() : <EditProfile />}
 		</View>
 	);
 };
