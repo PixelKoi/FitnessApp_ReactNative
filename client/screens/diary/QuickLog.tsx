@@ -6,6 +6,8 @@ import {
   HeartIcon,
   XCircleIcon,
   MagnifyingGlassIcon,
+  ChevronDownIcon,
+  ChevronUpIcon,
 } from "react-native-heroicons/outline";
 // import {handleMinus, handlePlus} from "../../counter/logCounter";
 import { params } from "../../constants";
@@ -168,60 +170,45 @@ const QuickLog = ({ navigation }) => {
       <View className="p-2 ">
         <Card>
           <Card.Content>
-            <Text className="text-[#E07594] font-extrabold">
-              {food.food.description}
-            </Text>
-            <Text className="text-[#E07594]">{food.food.Protein}g Protein</Text>
-            <Text className="text-[#E07594]">{food.food.Fat}g Fat</Text>
-            <Text className="text-[#E07594]">{food.food.Carbs}g Carbs</Text>
-            <Text className="text-[#E07594] font-extrabold">
-              {food.food.Calories} Calories
-            </Text>
+            <View className="flex flex-row items-center mt-0">
+              <View className="flex flex-col">
+                <Text className="text-[#E07594] font-bold">
+                  {food.food.description}
+                </Text>
+                <Text className="text-[#E07594]">
+                  {food.food.Protein}g Protein
+                </Text>
+                <Text className="text-[#E07594]">{food.food.Fat}g Fat</Text>
+                <Text className="text-[#E07594]">{food.food.Carbs}g Carbs</Text>
+                <Text className="text-[#E07594] font-bold">
+                  {food.food.Calories} Calories
+                </Text>
+              </View>
 
-            <View
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-                marginTop: 10,
-              }}
-            >
-              <TouchableOpacity
-                onPress={() => handleMinus(foodArray, index)}
-                style={{
-                  borderWidth: 1,
-                  borderColor: "gray",
-                  borderRadius: 5,
-                  padding: 5,
-                }}
-              >
-                <Text>-</Text>
-              </TouchableOpacity>
-              <TextInput
-                value={food.quantity.toString()}
-                onChangeText={(text) => handleInputChange(text, food)}
-                keyboardType="numeric"
-                style={{
-                  marginHorizontal: 10,
-                  padding: 5,
-                  borderWidth: 1,
-                  borderColor: "gray",
-                  borderRadius: 5,
-                  minWidth: 50,
-                  textAlign: "center",
-                }}
-              />
-
-              <TouchableOpacity
-                onPress={() => handlePlus(foodArray, index)}
-                style={{
-                  borderWidth: 1,
-                  borderColor: "gray",
-                  borderRadius: 5,
-                  padding: 5,
-                }}
-              >
-                <Text>+</Text>
-              </TouchableOpacity>
+              <View className="flex flex-row ml-auto">
+                <TouchableOpacity
+                  onPress={() => handleMinus(foodArray, index)}
+                  className="rounded-full p-2"
+                >
+                  <ChevronDownIcon size={24} color="#E07594" />
+                </TouchableOpacity>
+                <TextInput
+                  value={food.quantity.toString()}
+                  onChangeText={(text) => handleInputChange(text, food)}
+                  keyboardType="numeric"
+                  className="mx-2 p-2 border-2 border-gray-500 rounded"
+                  style={{
+                    minWidth: 50,
+                    textAlign: "center",
+                  }}
+                />
+                <TouchableOpacity
+                  onPress={() => handlePlus(foodArray, index)}
+                  className="rounded-full p-2"
+                >
+                  <ChevronUpIcon size={24} color="#E07594" />
+                </TouchableOpacity>
+              </View>
             </View>
           </Card.Content>
         </Card>
