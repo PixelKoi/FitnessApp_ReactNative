@@ -23,6 +23,8 @@ import {
   Portal,
 } from "react-native-paper";
 import { StyleSheet } from "react-native";
+import { addFavorite } from "../../redux-manager/redux-slice/favorite-slice";
+import { useAppSelector, useAppDispatch } from "../../redux-manager/hooks";
 
 const styles = StyleSheet.create({
   container: {
@@ -43,14 +45,17 @@ const styles = StyleSheet.create({
   },
 });
 
-const QuickLog = ({ navigation }) => {
+interface QuickLogProps {
+  foodItem: FoodItem; // Assuming you have a foodItem object as a prop
+}
+
+const QuickLog: React.FC<QuickLogProps> = ({ foodItem }) => {
+  const dispatch = useAppDispatch();
   const tabNavigation = useNavigation();
   const [foodName, setFoodName] = useState("");
   const [foodArray, setFoodArray] = useState([]);
   const [saveButton, setSaveButton] = useState(false);
-  const [selectedHearts, setSelectedHearts] = useState(
-    Array(foodArray.length).fill(false)
-  );
+  const [selectedHearts, setSelectedHearts] = useState([]);
 
   const [visible, setVisible] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
@@ -78,7 +83,7 @@ const QuickLog = ({ navigation }) => {
     setFoodName(""); // Clear the TextInput value
   };
   React.useLayoutEffect(() => {
-    navigation.setOptions({
+    tabNavigation.setOptions({
       title: "Food Log",
       headerLeft: () => null, // this will hide the back button
       headerRight: () => (
@@ -93,7 +98,7 @@ const QuickLog = ({ navigation }) => {
         </TouchableOpacity>
       ),
     });
-  }, [navigation, checkOption]);
+  }, [checkOption]);
   const showErrorDialog = () => {
     console.log("WTF");
     console.log(selectedOption.length);
@@ -157,17 +162,22 @@ const QuickLog = ({ navigation }) => {
       saveToDiary();
     }
   }, [saveButton]);
-
+  // Update selectedHearts when foodArray changes
+  useEffect(() => {
+    setSelectedHearts(Array(foodArray.length).fill(false));
+  }, [foodArray]);
   const saveToDiary = () => {
     const selectedFoods = foodArray.filter((food) => food.quantity > 0);
     console.log("Selected FOODS: ", selectedFoods);
     setSaveButton(false);
     tabNavigation.navigate("Diary", { selectedFoods, selectedOption });
   };
-  const handleHeartToggle = (index) => {
+  const handleFavoriteToggle = (index, array) => {
+    console.log(array[index]);
     const updatedSelectedHearts = [...selectedHearts];
     updatedSelectedHearts[index] = !updatedSelectedHearts[index];
     setSelectedHearts(updatedSelectedHearts);
+    // dispatch(addFavorite(array[index]));
   };
 
   const handleInputChange = (text, food) => {};
@@ -217,7 +227,7 @@ const QuickLog = ({ navigation }) => {
                   <ChevronDownIcon size={24} color="#E07594" />
                 </TouchableOpacity>
                 <TouchableOpacity
-                  onPress={() => handleHeartToggle(index)}
+                  onPress={() => handleFavoriteToggle(index, foodArray)}
                   className="rounded-full p-2 text-primary"
                 >
                   {selectedHearts[index] ? (
@@ -233,10 +243,9 @@ const QuickLog = ({ navigation }) => {
       </View>
     );
   };
-
   return (
     <Provider>
-      <View>
+      <View className="flex-1">
         <Portal>
           <Dialog visible={mealError} onDismiss={hideErrorDialog}>
             <Dialog.Title>Error</Dialog.Title>
@@ -317,6 +326,22 @@ const QuickLog = ({ navigation }) => {
           }
           keyExtractor={(item) => item.id.toString()}
         />
+        <View className="flex-1 justify-center m-10">
+          {/* Card in the bottom half */}
+          <Text className="text-primary font-extrabold pl-4 pb-2 text-xl">
+            Favorite
+          </Text>
+          <Card className="p-5">
+            <Card.Content>
+              <Text className="text-primary pb-4" variant="titleLarge">
+                No favorite selected
+              </Text>
+              <Text className="text-primary" variant="bodyMedium">
+                Please select a favorite to display here.
+              </Text>
+            </Card.Content>
+          </Card>
+        </View>
       </View>
     </Provider>
   );
