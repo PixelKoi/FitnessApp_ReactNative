@@ -243,7 +243,7 @@ const Fasting = () => {
 					</View>
 				</View>
 				<Button
-					className="my-4 w-60 mx-auto bg-button-focus "
+					className="my-4 w-60 mx-auto bg-primary "
 					icon="clock"
 					mode="contained"
 					onPress={clicked === false ? handleStartFast : handleEndFast}>
