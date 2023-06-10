@@ -185,28 +185,27 @@ const QuickLog = ({ navigation }) => {
                 </Text>
               </View>
 
-              <View className="flex flex-row ml-auto">
-                <TouchableOpacity
-                  onPress={() => handleMinus(foodArray, index)}
-                  className="rounded-full p-2"
-                >
-                  <ChevronDownIcon size={24} color="#E07594" />
-                </TouchableOpacity>
-                <TextInput
-                  value={food.quantity.toString()}
-                  onChangeText={(text) => handleInputChange(text, food)}
-                  keyboardType="numeric"
-                  className="mx-2 p-2 border-2 border-gray-500 rounded"
-                  style={{
-                    minWidth: 50,
-                    textAlign: "center",
-                  }}
-                />
+              <View className="flex flex-col ml-auto">
                 <TouchableOpacity
                   onPress={() => handlePlus(foodArray, index)}
                   className="rounded-full p-2"
                 >
                   <ChevronUpIcon size={24} color="#E07594" />
+                </TouchableOpacity>
+                <TextInput
+                  value={food.quantity.toString()}
+                  onChangeText={(text) => handleInputChange(text, food)}
+                  keyboardType="numeric"
+                  className="rounded"
+                  style={{
+                    textAlign: "center",
+                  }}
+                />
+                <TouchableOpacity
+                  onPress={() => handleMinus(foodArray, index)}
+                  className="rounded-full p-2"
+                >
+                  <ChevronDownIcon size={24} color="#E07594" />
                 </TouchableOpacity>
               </View>
             </View>
