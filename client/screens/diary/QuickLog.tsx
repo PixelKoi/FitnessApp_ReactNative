@@ -164,7 +164,7 @@ const QuickLog = ({ navigation }) => {
     setSaveButton(false);
     tabNavigation.navigate("Diary", { selectedFoods, selectedOption });
   };
-  const handleHeartToggle = (index) => {
+  const handleFavoriteToggle = (index) => {
     const updatedSelectedHearts = [...selectedHearts];
     updatedSelectedHearts[index] = !updatedSelectedHearts[index];
     setSelectedHearts(updatedSelectedHearts);
@@ -217,7 +217,7 @@ const QuickLog = ({ navigation }) => {
                   <ChevronDownIcon size={24} color="#E07594" />
                 </TouchableOpacity>
                 <TouchableOpacity
-                  onPress={() => handleHeartToggle(index)}
+                  onPress={() => handleFavoriteToggle(index)}
                   className="rounded-full p-2 text-primary"
                 >
                   {selectedHearts[index] ? (
