@@ -318,12 +318,12 @@ const QuickLog = ({ navigation }) => {
         />
         <View className="flex-1 justify-center m-10">
           {/* Card in the bottom half */}
-          <Text className="text-primary font-extrabold pl-4 pb-2">
+          <Text className="text-primary font-extrabold pl-4 pb-2 text-xl">
             Favorite
           </Text>
           <Card className="p-5">
             <Card.Content>
-              <Text className="text-primary" variant="titleLarge">
+              <Text className="text-primary pb-4" variant="titleLarge">
                 No favorite selected
               </Text>
               <Text className="text-primary" variant="bodyMedium">

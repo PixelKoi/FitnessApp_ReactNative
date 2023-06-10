@@ -1,4 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { RootState } from "../store";
 
 interface FoodItem {
   Calories: number;
@@ -26,9 +28,17 @@ const favoriteSlice = createSlice({
     addFavorite: (state, action: PayloadAction<FoodItem>) => {
       state.favorites.push(action.payload);
     },
+    toggleFavorite: (state, action: PayloadAction<number>) => {
+      const foodIndex = action.payload;
+      state.favorites[foodIndex].isSelected =
+        !state.favorites[foodIndex].isSelected;
+
+      // Save updated favorites to AsyncStorage
+      AsyncStorage.setItem("favorites", JSON.stringify(state.favorites));
+    },
   },
 });
 
-export const { addFavorite } = favoriteSlice.actions;
+export const { addFavorite, toggleFavorite } = favoriteSlice.actions;
 
 export default favoriteSlice.reducer;
