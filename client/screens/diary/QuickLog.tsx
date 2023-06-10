@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { View, TextInput, FlatList, TouchableOpacity } from "react-native";
 import { USDA_API_KEY } from "../../config";
-import { CheckCircleIcon } from "react-native-heroicons/outline";
+import { CheckCircleIcon, HeartIcon } from "react-native-heroicons/outline";
 // import {handleMinus, handlePlus} from "../../counter/logCounter";
 import { params } from "../../constants";
 import { useNavigation } from "@react-navigation/native";
@@ -14,6 +14,26 @@ import {
   Provider,
   Portal,
 } from "react-native-paper";
+import { StyleSheet } from "react-native";
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    margin: 4,
+    paddingVertical: 1,
+    paddingHorizontal: 4,
+  },
+  searchInput: {
+    flex: 1,
+    marginRight: 4,
+  },
+  text: {
+    color: "#E07594",
+    // Additional text styles if needed
+  },
+});
 
 const QuickLog = ({ navigation }) => {
   const tabNavigation = useNavigation();
@@ -140,11 +160,15 @@ const QuickLog = ({ navigation }) => {
       <View className="p-2 ">
         <Card>
           <Card.Content>
-            <Text>{food.food.description}</Text>
-            <Text>{food.food.Protein}g Protein</Text>
-            <Text>{food.food.Fat}g Fat</Text>
-            <Text>{food.food.Carbs}g Carbs</Text>
-            <Text>{food.food.Calories} Calories</Text>
+            <Text className="text-[#E07594] font-extrabold">
+              {food.food.description}
+            </Text>
+            <Text className="text-[#E07594]">{food.food.Protein}g Protein</Text>
+            <Text className="text-[#E07594]">{food.food.Fat}g Fat</Text>
+            <Text className="text-[#E07594]">{food.food.Carbs}g Carbs</Text>
+            <Text className="text-[#E07594] font-extrabold">
+              {food.food.Calories} Calories
+            </Text>
 
             <View
               style={{
@@ -213,46 +237,50 @@ const QuickLog = ({ navigation }) => {
             </Dialog.Actions>
           </Dialog>
         </Portal>
-        <TextInput
-          className="m-4 py-1 mx-4"
-          value={foodName}
-          onChangeText={setFoodName}
-          placeholder="Search Food"
-        />
+        <View style={styles.container}>
+          <Menu
+            visible={visible}
+            onDismiss={closeMenu}
+            anchor={
+              <Button onPress={openMenu} color="#E07594">
+                {selectedOption || "Select a meal"}
+              </Button>
+            }
+          >
+            <Menu.Item
+              onPress={() => handleOptionSelect("Breakfast")}
+              title="Breakfast"
+            />
+            <Menu.Item
+              onPress={() => handleOptionSelect("Lunch")}
+              title="Lunch"
+            />
+            <Menu.Item
+              onPress={() => handleOptionSelect("Dinner")}
+              title="Dinner"
+            />
+            <Menu.Item
+              onPress={() => handleOptionSelect("Snacks")}
+              title="Snacks"
+            />
+          </Menu>
+          <TextInput
+            style={styles.searchInput}
+            value={foodName}
+            onChangeText={setFoodName}
+            placeholder="Search Food"
+          />
+        </View>
+
         <Button
-          className="mt-3 mb-3 py-1 mx-4"
+          className="mt-3 mb-3 py-1 mx-4 text-[#E07594]"
           mode="contained"
           title="Search"
           onPress={handleSearch}
         >
           <Text>Search</Text>
         </Button>
-        <Menu
-          visible={visible}
-          onDismiss={closeMenu}
-          anchor={
-            <Button onPress={openMenu}>
-              {selectedOption || "Select a meal"}
-            </Button>
-          }
-        >
-          <Menu.Item
-            onPress={() => handleOptionSelect("Breakfast")}
-            title="Breakfast"
-          />
-          <Menu.Item
-            onPress={() => handleOptionSelect("Lunch")}
-            title="Lunch"
-          />
-          <Menu.Item
-            onPress={() => handleOptionSelect("Dinner")}
-            title="Dinner"
-          />
-          <Menu.Item
-            onPress={() => handleOptionSelect("Snacks")}
-            title="Snacks"
-          />
-        </Menu>
+
         <FlatList
           data={foodArray}
           renderItem={({ item, index }) =>
