@@ -233,10 +233,9 @@ const QuickLog = ({ navigation }) => {
       </View>
     );
   };
-
   return (
     <Provider>
-      <View>
+      <View className="flex-1">
         <Portal>
           <Dialog visible={mealError} onDismiss={hideErrorDialog}>
             <Dialog.Title>Error</Dialog.Title>
@@ -317,6 +316,18 @@ const QuickLog = ({ navigation }) => {
           }
           keyExtractor={(item) => item.id.toString()}
         />
+        <View className="flex-1 justify-center m-10">
+          {/* Card in the bottom half */}
+          <Card>
+            <Card.Title title="Favorite" />
+            <Card.Content>
+              <Text variant="titleLarge">No favorite selected</Text>
+              <Text variant="bodyMedium">
+                Please select a favorite to display here.
+              </Text>
+            </Card.Content>
+          </Card>
+        </View>
       </View>
     </Provider>
   );
