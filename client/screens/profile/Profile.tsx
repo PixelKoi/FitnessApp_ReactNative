@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, Alert } from "react-native";
+import {
+	View,
+	Text,
+	TouchableOpacity,
+	Alert,
+	StatusBar,
+	SafeAreaView,
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { TextInput, Button, List } from "react-native-paper";
 import { useAppDispatch, useAppSelector } from "../../redux-manager/hooks";
@@ -9,6 +16,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import Profile from "../../database/models/Profile";
 import { useDatabase } from "@nozbe/watermelondb/hooks";
 import calAlgo from "./cal-algo";
+import { UserCircleIcon } from "react-native-heroicons/outline";
 
 const UserBioInput = () => {
 	const database = useDatabase();
@@ -442,8 +450,18 @@ const UserBioInput = () => {
 	};
 
 	return (
-		<View className="flex-1">
-			{showEditProfile === false ? profile() : editProfile()}
+		<View className="flex-1 bg-secondary">
+			{/* {showEditProfile === false ? profile() : editProfile()} */}
+			<View className="flex bg-primary items-center pb-4">
+				<UserCircleIcon
+					name="ios-add"
+					size={50}
+					color={"white"}
+					className="text-center"
+				/>
+				<Text className="text-white">{name}</Text>
+				<Text className="text-white">@gmail.com</Text>
+			</View>
 		</View>
 	);
 };
