@@ -9,6 +9,7 @@ import {
   ChevronDownIcon,
   ChevronUpIcon,
 } from "react-native-heroicons/outline";
+
 // import {handleMinus, handlePlus} from "../../counter/logCounter";
 import { params } from "../../constants";
 import { useNavigation } from "@react-navigation/native";
@@ -206,6 +207,12 @@ const QuickLog = ({ navigation }) => {
                   className="rounded-full p-2"
                 >
                   <ChevronDownIcon size={24} color="#E07594" />
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => console.log("HEART SELECTED")} // Add the handleHeartToggle function
+                  className="rounded-full p-2"
+                >
+                  <HeartIcon size={24} style={{ color: "#E07594" }} />
                 </TouchableOpacity>
               </View>
             </View>
