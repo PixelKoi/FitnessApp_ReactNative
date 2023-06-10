@@ -94,6 +94,7 @@ const Fasting = () => {
 		});
 	}, [navigation]);
 
+	//Todo: put tailwind css in state and update icon fonts + checkmark fonts
 	return (
 		<View className="mt-auto flex flex-col justify-center bg-background ">
 			{/* Clock section */}

@@ -105,7 +105,7 @@ const Navigation = ({ session }: { session: Session }) => {
 				initialRouteName="QuickLog"
 				screenOptions={{
 					tabBarActiveTintColor: "#E07594",
-					tabBarInactiveTintColor: "black",
+					tabBarInactiveTintColor: "#E0759480",
 					tabBarStyle: {
 						backgroundColor: "white",
 						borderTopColor: "transparent",
@@ -116,7 +116,7 @@ const Navigation = ({ session }: { session: Session }) => {
 					component={Dashboard}
 					options={{
 						tabBarIcon: ({ color, size }) => (
-							<SquaresPlusIcon name="ios-add" size={20} color="black" />
+							<SquaresPlusIcon name="ios-add" size={20} color={color} />
 						),
 					}}
 				/>
@@ -125,7 +125,7 @@ const Navigation = ({ session }: { session: Session }) => {
 					component={QuickLog}
 					options={{
 						tabBarIcon: ({ color, size }) => (
-							<MagnifyingGlassIcon name="ios-add" size={20} color="black" />
+							<MagnifyingGlassIcon name="ios-add" size={20} color={color} />
 						),
 					}}
 				/>
@@ -134,7 +134,7 @@ const Navigation = ({ session }: { session: Session }) => {
 					component={Diary}
 					options={{
 						tabBarIcon: ({ color, size }) => (
-							<BookOpenIcon name="ios-add" size={20} color="black" />
+							<BookOpenIcon name="ios-add" size={20} color={color} />
 						),
 					}}
 				/>
@@ -143,7 +143,7 @@ const Navigation = ({ session }: { session: Session }) => {
 					component={Timer}
 					options={{
 						tabBarIcon: ({ color, size }) => (
-							<ClockIcon name="ios-add" size={20} color="black" />
+							<ClockIcon name="ios-add" size={20} color={color} />
 						),
 					}}
 				/>
@@ -152,7 +152,7 @@ const Navigation = ({ session }: { session: Session }) => {
 					component={Proflile}
 					options={{
 						tabBarIcon: ({ color, size }) => (
-							<UserCircleIcon name="ios-add" size={20} color="black" />
+							<UserCircleIcon name="ios-add" size={20} color={color} />
 						),
 					}}
 				/>
