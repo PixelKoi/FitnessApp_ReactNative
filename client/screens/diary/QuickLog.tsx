@@ -23,6 +23,8 @@ import {
   Portal,
 } from "react-native-paper";
 import { StyleSheet } from "react-native";
+import { addFavorite } from "../../redux-manager/redux-slice/favorite-slice";
+import { useAppSelector, useAppDispatch } from "../../redux-manager/hooks";
 
 const styles = StyleSheet.create({
   container: {
@@ -48,13 +50,12 @@ interface QuickLogProps {
 }
 
 const QuickLog = ({}) => {
+  const dispatch = useAppDispatch();
   const tabNavigation = useNavigation();
   const [foodName, setFoodName] = useState("");
   const [foodArray, setFoodArray] = useState([]);
   const [saveButton, setSaveButton] = useState(false);
-  const [selectedHearts, setSelectedHearts] = useState(
-    Array(foodArray.length).fill(false)
-  );
+  const [selectedHearts, setSelectedHearts] = useState([]);
 
   const [visible, setVisible] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
@@ -161,17 +162,22 @@ const QuickLog = ({}) => {
       saveToDiary();
     }
   }, [saveButton]);
-
+  // Update selectedHearts when foodArray changes
+  useEffect(() => {
+    setSelectedHearts(Array(foodArray.length).fill(false));
+  }, [foodArray]);
   const saveToDiary = () => {
     const selectedFoods = foodArray.filter((food) => food.quantity > 0);
     console.log("Selected FOODS: ", selectedFoods);
     setSaveButton(false);
     tabNavigation.navigate("Diary", { selectedFoods, selectedOption });
   };
-  const handleFavoriteToggle = (index) => {
+  const handleFavoriteToggle = (index, array) => {
+    console.log(array[index]);
     const updatedSelectedHearts = [...selectedHearts];
     updatedSelectedHearts[index] = !updatedSelectedHearts[index];
     setSelectedHearts(updatedSelectedHearts);
+    dispatch(addFavorite(array[index]));
   };
 
   const handleInputChange = (text, food) => {};
@@ -221,7 +227,7 @@ const QuickLog = ({}) => {
                   <ChevronDownIcon size={24} color="#E07594" />
                 </TouchableOpacity>
                 <TouchableOpacity
-                  onPress={() => handleFavoriteToggle(index)}
+                  onPress={() => handleFavoriteToggle(index, foodArray)}
                   className="rounded-full p-2 text-primary"
                 >
                   {selectedHearts[index] ? (
