@@ -1,7 +1,11 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { View, TextInput, FlatList, TouchableOpacity } from "react-native";
 import { USDA_API_KEY } from "../../config";
-import { CheckCircleIcon, HeartIcon } from "react-native-heroicons/outline";
+import {
+  CheckCircleIcon,
+  HeartIcon,
+  XCircleIcon,
+} from "react-native-heroicons/outline";
 // import {handleMinus, handlePlus} from "../../counter/logCounter";
 import { params } from "../../constants";
 import { useNavigation } from "@react-navigation/native";
@@ -62,6 +66,9 @@ const QuickLog = ({ navigation }) => {
     setSelectedOption(option);
     setVisible(false);
     console.log("Selected option:", option, selectedOption);
+  };
+  const clearTextInput = () => {
+    setFoodName(""); // Clear the TextInput value
   };
   React.useLayoutEffect(() => {
     navigation.setOptions({
@@ -270,6 +277,14 @@ const QuickLog = ({ navigation }) => {
             onChangeText={setFoodName}
             placeholder="Search Food"
           />
+          {foodName.length > 0 && (
+            <TouchableOpacity
+              onPress={clearTextInput}
+              style={styles.clearButton}
+            >
+              <XCircleIcon size={24} color="black" />
+            </TouchableOpacity>
+          )}
         </View>
 
         <Button
