@@ -5,6 +5,7 @@ import {
   CheckCircleIcon,
   HeartIcon,
   XCircleIcon,
+  MagnifyingGlassIcon,
 } from "react-native-heroicons/outline";
 // import {handleMinus, handlePlus} from "../../counter/logCounter";
 import { params } from "../../constants";
@@ -282,19 +283,16 @@ const QuickLog = ({ navigation }) => {
               onPress={clearTextInput}
               style={styles.clearButton}
             >
-              <XCircleIcon size={24} color="black" />
+              <XCircleIcon size={24} color="#E07594" />
             </TouchableOpacity>
           )}
+          <TouchableOpacity
+            className="mt-3 mb-3 py-1 mx-4"
+            onPress={handleSearch}
+          >
+            <MagnifyingGlassIcon color="#E07594"></MagnifyingGlassIcon>
+          </TouchableOpacity>
         </View>
-
-        <Button
-          className="mt-3 mb-3 py-1 mx-4 text-[#E07594]"
-          mode="contained"
-          title="Search"
-          onPress={handleSearch}
-        >
-          <Text>Search</Text>
-        </Button>
 
         <FlatList
           data={foodArray}
