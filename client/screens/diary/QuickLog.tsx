@@ -236,24 +236,35 @@ const QuickLog = ({ navigation }) => {
             visible={visible}
             onDismiss={closeMenu}
             anchor={
-              <Button onPress={openMenu} color="#E07594">
-                {selectedOption || "Select a meal"}
-              </Button>
+              <View className="flex flex-row justify-center align-middle px-4">
+                <TouchableOpacity onPress={openMenu}>
+                  <Text className="font-bold px-2" style={{ color: "#E07594" }}>
+                    {selectedOption || "Select a meal"}
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={openMenu}>
+                  <ChevronDownIcon size={18} color="#E07594" />
+                </TouchableOpacity>
+              </View>
             }
           >
             <Menu.Item
+              titleStyle={{ color: "#E07594" }}
               onPress={() => handleOptionSelect("Breakfast")}
               title="Breakfast"
             />
             <Menu.Item
+              titleStyle={{ color: "#E07594" }}
               onPress={() => handleOptionSelect("Lunch")}
               title="Lunch"
             />
             <Menu.Item
+              titleStyle={{ color: "#E07594" }}
               onPress={() => handleOptionSelect("Dinner")}
               title="Dinner"
             />
             <Menu.Item
+              titleStyle={{ color: "#E07594" }}
               onPress={() => handleOptionSelect("Snacks")}
               title="Snacks"
             />
