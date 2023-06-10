@@ -8,7 +8,7 @@ import {
 	SafeAreaView,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { TextInput, Button, List } from "react-native-paper";
+import { TextInput, Button, List, Surface } from "react-native-paper";
 import { useAppDispatch, useAppSelector } from "../../redux-manager/hooks";
 import { setUserStates } from "../../redux-manager/redux-slice/user-slice";
 import DateTimePicker from "@react-native-community/datetimepicker";
@@ -452,7 +452,7 @@ const UserBioInput = () => {
 	return (
 		<View className="flex-1 bg-secondary">
 			{/* {showEditProfile === false ? profile() : editProfile()} */}
-			<View className="flex bg-primary items-center pb-4">
+			<View className="flex bg-primary items-center pb-8 w-full rounded-b-full absolute z-10">
 				<UserCircleIcon
 					name="ios-add"
 					size={50}
@@ -462,6 +462,72 @@ const UserBioInput = () => {
 				<Text className="text-white">{name}</Text>
 				<Text className="text-white">@gmail.com</Text>
 			</View>
+			<Surface className="mx-8 py-8 pb-12 mt-24 rounded-b-3xl">
+				<View className="mx-8">
+					<View className="flex flex-row border-solid border-b-2 py-3 border-secondary">
+						<Text className="text-primary text-xs">Age:</Text>
+						<Text className="ml-auto text-primary opacity-60  text-xs">
+							{age}
+						</Text>
+					</View>
+
+					<View className="flex flex-row border-solid border-b-2 py-3 border-secondary">
+						<Text className="text-primary  text-xs">Gender:</Text>
+						<Text className="ml-auto text-primary opacity-60  text-xs">
+							{gender}
+						</Text>
+					</View>
+
+					<View className="flex flex-row border-solid border-b-2 py-3 border-secondary">
+						<Text className="text-primary text-xs">Height (cm):</Text>
+						<Text className="ml-auto text-primary opacity-60 text-xs">
+							{height} cm
+						</Text>
+					</View>
+
+					<View className="flex flex-row border-solid border-b-2 py-3 border-secondary">
+						<Text className="text-primary text-xs">Weight (kg)</Text>
+						<Text className="ml-auto text-primary opacity-60 text-xs">
+							{weight} kg
+						</Text>
+					</View>
+
+					<View className="flex flex-row border-solid border-b-2 py-4 border-secondary">
+						<Text className="text-primary text-xs">Activity Level</Text>
+						<Text className="ml-auto text-primary opacity-60 text-xs">
+							{activity}
+						</Text>
+					</View>
+
+					<View className="flex flex-row border-solid border-b-2 py-3 border-secondary">
+						<Text className="text-primary text-xs">Weekly Goal:</Text>
+						<Text className="ml-auto text-primary opacity-60 text-xs">
+							{goal} lb/s
+						</Text>
+					</View>
+
+					<View className="flex flex-row border-solid border-b-2 py-3 border-secondary">
+						<Text className="text-primary text-xs">Email:</Text>
+						<Text className="ml-auto text-primary opacity-60 text-xs">
+							@email.com
+						</Text>
+					</View>
+
+					<View className="flex flex-row border-solid border-b-2 py-3 border-secondary">
+						<Text className="text-primary text-xs">BMR:</Text>
+						<Text className="ml-auto text-primary opacity-60 text-xs">
+							{bmr} cal
+						</Text>
+					</View>
+
+					<View className="flex flex-row border-solid border-b-2 py-3 border-secondary">
+						<Text className="text-primary text-xs">Daily Calorie Needs:</Text>
+						<Text className="ml-auto text-primary opacity-60 text-xs">
+							{dailyCal} cal
+						</Text>
+					</View>
+				</View>
+			</Surface>
 		</View>
 	);
 };
