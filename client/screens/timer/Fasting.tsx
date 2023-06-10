@@ -134,7 +134,7 @@ const Fasting = () => {
 									dispatch(setMaxTime(16));
 									setShowTimerList(false);
 								}}>
-								<Text className="my-auto text-xs ml-2">
+								<Text className="my-auto text-xs ml-4 text-primary">
 									16/8 Intermittent Fast
 								</Text>
 								{maxTime === 16 && (
@@ -144,7 +144,7 @@ const Fasting = () => {
 											marginLeft: "auto",
 											marginTop: "auto",
 											marginBottom: "auto",
-											marginRight: 10,
+											marginRight: 16,
 										}}
 										size={15}
 										name={"ios-checkmark-circle-outline"}
@@ -158,7 +158,7 @@ const Fasting = () => {
 									dispatch(setMaxTime(18));
 									setShowTimerList(false);
 								}}>
-								<Text className="my-auto text-xs ml-2">
+								<Text className="my-auto text-xs ml-4 text-primary">
 									18/6 Intermittent Fast
 								</Text>
 								{maxTime === 18 && (
@@ -182,7 +182,9 @@ const Fasting = () => {
 									dispatch(setMaxTime(24));
 									setShowTimerList(false);
 								}}>
-								<Text className="my-auto text-xs ml-2">24/hr Fast</Text>
+								<Text className="my-auto text-xs ml-4 text-primary">
+									24/hr Fast
+								</Text>
 								{maxTime === 24 && (
 									<CheckMark
 										style={{
