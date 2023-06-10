@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { Button, List, Surface } from "react-native-paper";
+import { Button, Surface } from "react-native-paper";
 import { add } from "date-fns";
 //Graph import
 import MedTimer from "./components/MedDonutGraph";
@@ -44,7 +44,7 @@ const Meditation = () => {
 	//fasting states
 	const [startTime, setStartTime] = useState(null);
 	const [endTime, setEndTime] = useState(null);
-	const [fasting, setFasting] = useState<String>("Choose Meditation Time");
+	const [fasting, setFasting] = useState<String>("5 minutes");
 	const [elapsedTimePercentage, setElapsedTimePercentage] = useState(0);
 
 	//Keep track of starting / ending fast button
@@ -83,7 +83,7 @@ const Meditation = () => {
 			{/* Clock section */}
 			<View className="mt-auto mb-28 -top-3">
 				<View className="z-10">
-					<Surface className="bg-secondary h-8 w-52 self-center rounded-xl">
+					<View className="bg-secondary h-8 w-52 self-center rounded-xl">
 						<TouchableOpacity
 							className="flex-row h-8 w-52"
 							onPress={() =>
@@ -107,21 +107,21 @@ const Meditation = () => {
 								color="black"
 							/>
 						</TouchableOpacity>
-					</Surface>
+					</View>
 
 					{showTimerList === true && (
 						<Surface className="w-52 bg-background rounded-xl self-center mt-12 absolute z-10">
 							<TouchableOpacity
 								className="flex-row h-8 w-52"
 								onPress={() => {
-									setFasting("16/8 Intermittent Fast");
-									dispatch(setMaxTime(16));
+									setFasting("5 minutes");
+									dispatch(setMaxTime(5));
 									setShowTimerList(false);
 								}}>
-								<Text className="my-auto text-xs ml-2">
-									16/8 Intermittent Fast
+								<Text className="my-auto text-xs ml-2 text-primary">
+									5 minutes
 								</Text>
-								{maxTime === 16 && (
+								{maxTime === 5 && (
 									<CheckMark
 										style={{
 											color: "#E07594",
@@ -138,14 +138,14 @@ const Meditation = () => {
 							<TouchableOpacity
 								className="flex-row h-8 w-52"
 								onPress={() => {
-									setFasting("18/6 intermittent fast");
-									dispatch(setMaxTime(18));
+									setFasting("10 minutes");
+									dispatch(setMaxTime(10));
 									setShowTimerList(false);
 								}}>
-								<Text className="my-auto text-xs ml-2">
-									18/6 Intermittent Fast
+								<Text className="my-auto text-xs ml-2 text-primary">
+									10 minutes
 								</Text>
-								{maxTime === 18 && (
+								{maxTime === 10 && (
 									<CheckMark
 										style={{
 											color: "#E07594",
@@ -162,12 +162,62 @@ const Meditation = () => {
 							<TouchableOpacity
 								className="flex-row h-8 w-52"
 								onPress={() => {
-									setFasting("24hr fast");
-									dispatch(setMaxTime(24));
+									setFasting("15 minutes");
+									dispatch(setMaxTime(15));
 									setShowTimerList(false);
 								}}>
-								<Text className="my-auto text-xs ml-2">24/hr Fast</Text>
-								{maxTime === 24 && (
+								<Text className="my-auto text-xs ml-2 text-primary">
+									15 minutes
+								</Text>
+								{maxTime === 15 && (
+									<CheckMark
+										style={{
+											color: "#E07594",
+											marginLeft: "auto",
+											marginTop: "auto",
+											marginBottom: "auto",
+											marginRight: 10,
+										}}
+										size={15}
+										name={"ios-checkmark-circle-outline"}
+									/>
+								)}
+							</TouchableOpacity>
+							<TouchableOpacity
+								className="flex-row h-8 w-52"
+								onPress={() => {
+									setFasting("20 minutes");
+									dispatch(setMaxTime(20));
+									setShowTimerList(false);
+								}}>
+								<Text className="my-auto text-xs ml-2 text-primary">
+									20 minutes
+								</Text>
+								{maxTime === 20 && (
+									<CheckMark
+										style={{
+											color: "#E07594",
+											marginLeft: "auto",
+											marginTop: "auto",
+											marginBottom: "auto",
+											marginRight: 10,
+										}}
+										size={15}
+										name={"ios-checkmark-circle-outline"}
+									/>
+								)}
+							</TouchableOpacity>
+							<TouchableOpacity
+								className="flex-row h-8 w-52"
+								onPress={() => {
+									setFasting("30 minutes");
+									dispatch(setMaxTime(30));
+									setShowTimerList(false);
+								}}>
+								<Text className="my-auto text-xs ml-2 text-primary">
+									30 minutes
+								</Text>
+								{maxTime === 30 && (
 									<CheckMark
 										style={{
 											color: "#E07594",
@@ -206,12 +256,3 @@ const Meditation = () => {
 };
 
 export default Meditation;
-
-const accordionStyle = {
-	backgroundColor: "white",
-	marginVertical: 10,
-	borderRadius: 8,
-	elevation: 2,
-	width: 300,
-	alignSelf: "center",
-};

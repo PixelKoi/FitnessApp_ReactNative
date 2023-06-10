@@ -12,7 +12,7 @@ import {
 } from "../../redux-manager/redux-slice/fasting-slice";
 //import icons
 import Icon from "react-native-vector-icons/FontAwesome";
-import CheckMark from "react-native-vector-icons/Ionicons";
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 const Fasting = () => {
 	//initiate fasting redux states
@@ -29,7 +29,6 @@ const Fasting = () => {
 	//handle fasting mode selector
 	const [fasting, setFasting] = useState<String>("16/8 Intermittent Fast");
 	const [expandList, setExpandList] = useState<boolean>(false);
-	const handleExplandList = () => setExpandList(!expandList);
 
 	const [showTimerList, setShowTimerList] = useState(false);
 
@@ -139,7 +138,7 @@ const Fasting = () => {
 									16/8 Intermittent Fast
 								</Text>
 								{maxTime === 16 && (
-									<CheckMark
+									<Ionicons
 										style={{
 											color: "#E07594",
 											marginLeft: "auto",
@@ -163,7 +162,7 @@ const Fasting = () => {
 									18/6 Intermittent Fast
 								</Text>
 								{maxTime === 18 && (
-									<CheckMark
+									<Ionicons
 										style={{
 											color: "#E07594",
 											marginLeft: "auto",
@@ -187,7 +186,7 @@ const Fasting = () => {
 									24/hr Fast
 								</Text>
 								{maxTime === 24 && (
-									<CheckMark
+									<Ionicons
 										style={{
 											color: "#E07594",
 											marginLeft: "auto",
@@ -249,6 +248,14 @@ const Fasting = () => {
 					onPress={clicked === false ? handleStartFast : handleEndFast}>
 					{clicked === false ? "Start fast" : "End fast now"}
 				</Button>
+				{/* <View className="flex-row justify-center gap-15">
+					<Ionicons
+						name="reload-circle"
+						size={60}
+						style={{ color: "#E07594" }}
+					/>
+					<Ionicons name="play-circle" size={60} style={{ color: "#E07594" }} />
+				</View> */}
 			</View>
 		</View>
 	);
