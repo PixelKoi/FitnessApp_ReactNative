@@ -43,7 +43,11 @@ const styles = StyleSheet.create({
   },
 });
 
-const QuickLog = ({ navigation }) => {
+interface QuickLogProps {
+  foodItem: FoodItem; // Assuming you have a foodItem object as a prop
+}
+
+const QuickLog = ({}) => {
   const tabNavigation = useNavigation();
   const [foodName, setFoodName] = useState("");
   const [foodArray, setFoodArray] = useState([]);
@@ -78,7 +82,7 @@ const QuickLog = ({ navigation }) => {
     setFoodName(""); // Clear the TextInput value
   };
   React.useLayoutEffect(() => {
-    navigation.setOptions({
+    tabNavigation.setOptions({
       title: "Food Log",
       headerLeft: () => null, // this will hide the back button
       headerRight: () => (
@@ -93,7 +97,7 @@ const QuickLog = ({ navigation }) => {
         </TouchableOpacity>
       ),
     });
-  }, [navigation, checkOption]);
+  }, [checkOption]);
   const showErrorDialog = () => {
     console.log("WTF");
     console.log(selectedOption.length);
