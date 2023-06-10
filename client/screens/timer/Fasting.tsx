@@ -100,7 +100,7 @@ const Fasting = () => {
 			{/* Clock section */}
 			<View className="mt-auto mb-14">
 				<View className="z-10">
-					<Surface className="bg-secondary h-8 w-52 self-center rounded-xl">
+					<View className="bg-secondary h-8 w-52 self-center rounded-xl">
 						<TouchableOpacity
 							className="flex-row h-8 w-52"
 							onPress={() =>
@@ -124,7 +124,7 @@ const Fasting = () => {
 								color="black"
 							/>
 						</TouchableOpacity>
-					</Surface>
+					</View>
 
 					{showTimerList === true && (
 						<Surface className="w-52 bg-background rounded-xl self-center mt-12 absolute z-10">
