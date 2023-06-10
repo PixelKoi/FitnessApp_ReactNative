@@ -321,7 +321,7 @@ const QuickLog = ({ navigation }) => {
           <Text className="text-primary font-extrabold pl-4 pb-2">
             Favorite
           </Text>
-          <Card>
+          <Card className="p-5">
             <Card.Content>
               <Text className="text-primary" variant="titleLarge">
                 No favorite selected
