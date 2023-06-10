@@ -218,12 +218,12 @@ const QuickLog = ({ navigation }) => {
                 </TouchableOpacity>
                 <TouchableOpacity
                   onPress={() => handleHeartToggle(index)}
-                  className="rounded-full p-2"
+                  className="rounded-full p-2 text-primary"
                 >
                   {selectedHearts[index] ? (
-                    <FilledHeartIcon size={24} color="text-primary" />
+                    <FilledHeartIcon size={24} color="#E07594" />
                   ) : (
-                    <HeartIcon size={24} color="text-primary" />
+                    <HeartIcon size={24} color="#E07594" />
                   )}
                 </TouchableOpacity>
               </View>
