@@ -16,6 +16,7 @@ import { useAppDispatch, useAppSelector } from "../../redux-manager/hooks";
 import Icon from "react-native-vector-icons/FontAwesome";
 import CheckMark from "react-native-vector-icons/Ionicons";
 
+//Todo: Add lotus icon above start meditating button
 const Meditation = () => {
 	//Top left nav button - removed top nav
 	const navigation = useNavigation();

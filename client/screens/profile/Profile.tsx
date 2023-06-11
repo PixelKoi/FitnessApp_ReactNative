@@ -17,7 +17,6 @@ import {
 	Modal,
 } from "react-native-paper";
 import { useAppDispatch, useAppSelector } from "../../redux-manager/hooks";
-import { setUserStates } from "../../redux-manager/redux-slice/user-slice";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import Icon from "react-native-vector-icons/FontAwesome";
 import Profile from "../../database/models/Profile";
@@ -47,13 +46,6 @@ const UserBioInput = () => {
 
 	//Edit Profile Hooks
 	const [showEditProfile, setEditProfile] = useState<boolean>(false);
-	const [newName, setName] = useState<string>(name);
-	const [newHeight, setHeight] = useState<string>(height.toString());
-	const [newWeight, setWeight] = useState<string>(weight.toString());
-	const [newAge, setAge] = useState<number>(age);
-	const [selectedGender, setGender] = useState<string>(gender);
-	const [selectedActivity, setActivityLevel] = useState<string>(activity);
-	const [selectedGoal, setGoal] = useState<string>(goal.toString());
 
 	//Accordian Dropdown Lists Hooks
 	const [expandActivity, setExpandActivity] = useState<boolean>(false);
@@ -75,29 +67,6 @@ const UserBioInput = () => {
 		activity: activity,
 		goal: goal,
 	};
-
-	//Update redux states
-	async function updateReduxProfileStates(
-		username: string,
-		age: number,
-		gender: string,
-		height: number,
-		weight: number,
-		activity: string,
-		goal: number
-	) {
-		await dispatch(
-			setUserStates({
-				name: username,
-				age: age,
-				gender: gender,
-				height: Number(height),
-				weight: Number(weight),
-				activity: activity,
-				goal: Number(goal),
-			})
-		);
-	}
 
 	const [loading, setLoading] = useState(true);
 	async function updateProfile(
@@ -285,211 +254,6 @@ const UserBioInput = () => {
 		);
 	};
 
-	//Edit Profile Screen
-	const editProfile = () => {
-		return (
-			<View>
-				<TextInput
-					textColor="#E07594"
-					theme={{
-						colors: {
-							text: "#E07594", // Replace 'your_custom_color' with your desired label color
-						},
-					}}
-					className="bg-secondary"
-					label="User Name"
-					value={newName}
-					onChangeText={(newName) => setName(newName)}
-				/>
-				<TouchableOpacity
-					onPress={() => setShowPicker((prevClick) => !prevClick)}
-					className="py-3 px-4 flex-row">
-					<View>
-						<Text>Age</Text>
-						<Text className="mt-2">{newAge}</Text>
-					</View>
-					<View className="ml-auto my-auto">
-						<Icon
-							name={showPicker === true ? "minus" : "plus"}
-							size={30}
-							color="black"
-						/>
-					</View>
-				</TouchableOpacity>
-				{showPicker && (
-					<DateTimePicker
-						value={selectedDate}
-						onChange={handleDateChange}
-						mode="date"
-						display="spinner"
-					/>
-				)}
-				<TextInput
-					label="Enter Height (cm)"
-					value={newHeight}
-					onChangeText={(newHeight) => setHeight(newHeight)}
-				/>
-				<TextInput
-					label="Enter Weight (kg)"
-					value={newWeight}
-					onChangeText={(newWeight) => setWeight(newWeight)}
-				/>
-
-				<List.Accordion
-					className="bg-secondary"
-					title={selectedGender}
-					left={(props) => <List.Icon {...props} icon="run" />}
-					expanded={expandGender}
-					onPress={handleExpandGender}>
-					<List.Item
-						style={{
-							backgroundColor: selectedGender === "Female" ? "red" : "none",
-						}}
-						onPress={() => {
-							setGender("Female");
-							setExpandGender((prevClick) => !prevClick);
-						}}
-						title="Female"
-					/>
-					<List.Item
-						style={{
-							backgroundColor: selectedGender === "Male" ? "red" : "none",
-						}}
-						onPress={() => {
-							setGender("Male");
-							setExpandGender((prevClick) => !prevClick);
-						}}
-						title="Male"
-					/>
-				</List.Accordion>
-
-				<List.Accordion
-					className="bg-secondary"
-					title={selectedActivity}
-					description="Select activity level"
-					left={(props) => <List.Icon {...props} icon="run" />}
-					expanded={expandActivity}
-					onPress={handleExpandActivity}>
-					<List.Item
-						style={{
-							backgroundColor:
-								selectedActivity === "Sedentary" ? "red" : "none",
-						}}
-						onPress={() => {
-							setActivityLevel("Sedentary");
-							setExpandActivity((prevClick) => !prevClick);
-						}}
-						title="Sedentary"
-					/>
-					<List.Item
-						style={{
-							backgroundColor:
-								selectedActivity === "Lightly active" ? "red" : "none",
-						}}
-						onPress={() => {
-							setActivityLevel("Lightly active");
-							setExpandActivity((prevClick) => !prevClick);
-						}}
-						title="Lightly active"
-					/>
-					<List.Item
-						style={{
-							backgroundColor:
-								selectedActivity === "Moderately active" ? "red" : "none",
-						}}
-						onPress={() => {
-							setActivityLevel("Moderately active");
-							setExpandActivity((prevClick) => !prevClick);
-						}}
-						title="Moderately active"
-					/>
-					<List.Item
-						style={{
-							backgroundColor:
-								selectedActivity === "Very active" ? "red" : "none",
-						}}
-						onPress={() => {
-							setActivityLevel("Very active");
-							setExpandActivity((prevClick) => !prevClick);
-						}}
-						title="Very active"
-					/>
-					<List.Item
-						style={{
-							backgroundColor:
-								selectedActivity === "Extremely active" ? "red" : "none",
-						}}
-						onPress={() => {
-							setActivityLevel("Extremely active");
-							setExpandActivity((prevClick) => !prevClick);
-						}}
-						title="Extremely active"
-					/>
-				</List.Accordion>
-
-				<List.Accordion
-					className="bg-secondary"
-					title={selectedGoal + "lbs"}
-					description="Select Weight Loss Goal"
-					left={(props) => <List.Icon {...props} icon="scale" />}
-					expanded={expandGoal}
-					onPress={handleExpandGoal}>
-					<List.Item
-						style={{
-							backgroundColor: selectedGoal === "1" ? "red" : "none",
-						}}
-						onPress={() => {
-							setGoal("1");
-							setExpandGoal((prevClick) => !prevClick);
-						}}
-						title="1lb / week"
-					/>
-					<List.Item
-						style={{
-							backgroundColor: selectedGoal === "2" ? "red" : "none",
-						}}
-						onPress={() => {
-							setGoal("2");
-							setExpandGoal((prevClick) => !prevClick);
-						}}
-						title="2lbs / week"
-					/>
-				</List.Accordion>
-
-				<Button
-					className="mt-6 py-1 mx-4"
-					style={{ backgroundColor: "#84d0ff" }}
-					onPress={async () => {
-						await updateProfile(
-							newName,
-							newAge,
-							selectedGender,
-							Number(newHeight),
-							Number(newWeight),
-							selectedActivity,
-							Number(selectedGoal)
-						);
-
-						// await updateReduxProfileStates(
-						// 	newName,
-						// 	newAge,
-						// 	selectedGender,
-						// 	Number(newHeight),
-						// 	Number(newWeight),
-						// 	selectedActivity,
-						// 	Number(selectedGoal)
-						// );
-						setEditProfile(false);
-					}}
-					mode="contained">
-					<Text className="text-black">Save</Text>
-				</Button>
-			</View>
-		);
-	};
-
-	const [modalVisible, setModalVisible] = useState(false);
-
 	return (
 		<View className="flex-1 bg-secondary">
 			{showEditProfile === false ? profile() : <EditProfile />}
@@ -498,3 +262,13 @@ const UserBioInput = () => {
 };
 
 export default UserBioInput;
+
+// await updateProfile(
+//   newName,
+//   newAge,
+//   selectedGender,
+//   Number(newHeight),
+//   Number(newWeight),
+//   selectedActivity,
+//   Number(selectedGoal)
+// );
