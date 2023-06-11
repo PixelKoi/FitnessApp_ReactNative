@@ -170,12 +170,14 @@ const UserBioInput = () => {
 				),
 			headerLeft: () =>
 				showEditProfile === false ? (
-					<TouchableOpacity
+					<Button
+						className="bg-primary ml-5"
+						mode="elevated"
 						onPress={() => {
 							navigation.navigate("Dashboard");
 						}}>
-						<Text className="ml-4">back</Text>
-					</TouchableOpacity>
+						<Icon name="angle-left" style={{ color: "#ffff" }} size={20} />
+					</Button>
 				) : (
 					<TouchableOpacity
 						onPress={() => {

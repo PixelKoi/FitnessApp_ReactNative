@@ -41,7 +41,7 @@ const Dashboard = (props: Props) => {
 						onPress={() => {
 							navigation.navigate("Profile");
 						}}>
-						<UserCircleIcon name="ios-add" size={35} color={"white"} />
+						<UserCircleIcon name="ios-add" size={30} color={"white"} />
 					</TouchableOpacity>
 				</View>
 			),
