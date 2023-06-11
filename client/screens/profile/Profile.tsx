@@ -6,6 +6,7 @@ import {
 	Alert,
 	StatusBar,
 	SafeAreaView,
+	StyleSheet,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import {
@@ -151,11 +152,13 @@ const UserBioInput = () => {
 			title: "Profile",
 			headerStyle: {
 				backgroundColor: "#E07594",
+				shadowColor: "transparent",
 			},
 			headerTintColor: "#fff",
 			headerTitleStyle: {
 				fontWeight: "bold",
 			},
+
 			headerLeft: () =>
 				showEditProfile === false ? null : (
 					<TouchableOpacity
@@ -279,3 +282,7 @@ export default UserBioInput;
 //   selectedActivity,
 //   Number(selectedGoal)
 // );
+
+const styles = StyleSheet.create({
+	container: {},
+});
