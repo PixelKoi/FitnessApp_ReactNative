@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { View, Text } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 // import {`[Calendar](#calendar), [CalendarList](#calendarlist), [Agenda](#agenda)`} from 'react-native-calendars';
 import { CalendarProvider, ExpandableCalendar } from "react-native-calendars";
 import SumGraph from "./DonutGraphs/SumDonutGraph";
@@ -8,8 +8,11 @@ import CalDonutGraph from "./DonutGraphs/CalDonutGraph";
 import FastingDonutGraph from "./DonutGraphs/FastingDonutGraph";
 import { useAppSelector } from "../../redux-manager/hooks";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import { useNavigation } from "@react-navigation/native";
+import { UserCircleIcon } from "react-native-heroicons/outline";
 
 const Dashboard = (props: Props) => {
+	const navigation = useNavigation();
 	//intiate meditation redux states
 	const { medStreak } = useAppSelector((state) => state.meditation);
 
@@ -20,6 +23,29 @@ const Dashboard = (props: Props) => {
 	};
 
 	const { weekView } = props;
+
+	React.useLayoutEffect(() => {
+		navigation.setOptions({
+			title: "Dashboard",
+			headerStyle: {
+				shadowColor: "transparent",
+			},
+			headerTintColor: "#E07594",
+			headerTitleStyle: {
+				fontWeight: "bold",
+			},
+			headerLeft: () => (
+				<View>
+					<TouchableOpacity
+						className="ml-8 bg-primary rounded-full"
+						onPress={() => {}}>
+						<UserCircleIcon name="ios-add" size={35} color={"white"} />
+					</TouchableOpacity>
+				</View>
+			),
+		});
+	}, []);
+
 	return (
 		<View className="flex-1 justify-center bg-background ">
 			{/* <CalendarProvider date={new Date()}>

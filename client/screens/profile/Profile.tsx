@@ -158,7 +158,16 @@ const UserBioInput = () => {
 			headerTitleStyle: {
 				fontWeight: "bold",
 			},
-
+			headerRight: () =>
+				showEditProfile === false && (
+					<View>
+						<Button
+							className="mr-14 bg-white"
+							onPress={() => setEditProfile(true)}>
+							Edit
+						</Button>
+					</View>
+				),
 			headerLeft: () =>
 				showEditProfile === false ? null : (
 					<TouchableOpacity
@@ -180,12 +189,7 @@ const UserBioInput = () => {
 		return (
 			<View className="flex-1 ">
 				<View className="flex bg-primary items-center  pb-6 w-full rounded-b-full absolute z-10">
-					<UserCircleIcon
-						name="ios-add"
-						size={50}
-						color={"white"}
-						style={{ marginTop: 6 }}
-					/>
+					<UserCircleIcon name="ios-add" size={50} color={"white"} />
 					<Text className="text-white my-2">{name}</Text>
 					<Text className="text-white">@gmail.com</Text>
 				</View>
@@ -255,11 +259,6 @@ const UserBioInput = () => {
 						</View>
 					</View>
 				</Surface>
-				<Button
-					className="bg-primary w-40 mt-5 mx-auto"
-					onPress={() => setEditProfile(true)}>
-					<Text className="text-white">Edit</Text>
-				</Button>
 			</View>
 		);
 	};
