@@ -6,7 +6,6 @@ import SumGraph from "./DonutGraphs/SumDonutGraph";
 import { Button, Surface } from "react-native-paper";
 import CalDonutGraph from "./DonutGraphs/CalDonutGraph";
 import FastingDonutGraph from "./DonutGraphs/FastingDonutGraph";
-import { Feather, FontAwesome5 } from "@expo/vector-icons";
 import { useAppSelector } from "../../redux-manager/hooks";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 

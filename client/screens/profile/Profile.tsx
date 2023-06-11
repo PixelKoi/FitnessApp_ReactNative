@@ -149,6 +149,13 @@ const UserBioInput = () => {
 	React.useLayoutEffect(() => {
 		navigation.setOptions({
 			title: "Profile",
+			headerStyle: {
+				backgroundColor: "#E07594",
+			},
+			headerTintColor: "#fff",
+			headerTitleStyle: {
+				fontWeight: "bold",
+			},
 			headerLeft: () =>
 				showEditProfile === false ? null : (
 					<TouchableOpacity
@@ -169,14 +176,14 @@ const UserBioInput = () => {
 	const profile = () => {
 		return (
 			<View className="flex-1 ">
-				<View className="flex bg-primary items-center gap-2 pb-6 w-full rounded-b-full absolute z-10">
+				<View className="flex bg-primary items-center  pb-6 w-full rounded-b-full absolute z-10">
 					<UserCircleIcon
 						name="ios-add"
 						size={50}
 						color={"white"}
-						className="text-center"
+						style={{ marginTop: 6 }}
 					/>
-					<Text className="text-white">{name}</Text>
+					<Text className="text-white my-2">{name}</Text>
 					<Text className="text-white">@gmail.com</Text>
 				</View>
 				<Surface className="mx-8 py-8 pb-12 mt-24 rounded-b-3xl bg-background">

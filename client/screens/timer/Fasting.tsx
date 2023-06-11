@@ -138,17 +138,9 @@ const Fasting = () => {
 									16/8 Intermittent Fast
 								</Text>
 								{maxTime === 16 && (
-									<Ionicons
-										style={{
-											color: "#E07594",
-											marginLeft: "auto",
-											marginTop: "auto",
-											marginBottom: "auto",
-											marginRight: 16,
-										}}
-										size={15}
-										name={"ios-checkmark-circle-outline"}
-									/>
+									<Text className="text-primary ml-auto my-auto mr-2">
+										<Ionicons size={15} name={"ios-checkmark-circle-outline"} />
+									</Text>
 								)}
 							</TouchableOpacity>
 							<TouchableOpacity
@@ -162,17 +154,9 @@ const Fasting = () => {
 									18/6 Intermittent Fast
 								</Text>
 								{maxTime === 18 && (
-									<Ionicons
-										style={{
-											color: "#E07594",
-											marginLeft: "auto",
-											marginTop: "auto",
-											marginBottom: "auto",
-											marginRight: 10,
-										}}
-										size={15}
-										name={"ios-checkmark-circle-outline"}
-									/>
+									<Text className="text-primary ml-auto my-auto mr-2">
+										<Ionicons size={15} name={"ios-checkmark-circle-outline"} />
+									</Text>
 								)}
 							</TouchableOpacity>
 							<TouchableOpacity
@@ -186,17 +170,9 @@ const Fasting = () => {
 									24/hr Fast
 								</Text>
 								{maxTime === 24 && (
-									<Ionicons
-										style={{
-											color: "#E07594",
-											marginLeft: "auto",
-											marginTop: "auto",
-											marginBottom: "auto",
-											marginRight: 10,
-										}}
-										size={15}
-										name={"ios-checkmark-circle-outline"}
-									/>
+									<Text className="text-primary ml-auto my-auto mr-2">
+										<Ionicons size={15} name={"ios-checkmark-circle-outline"} />
+									</Text>
 								)}
 							</TouchableOpacity>
 						</Surface>
@@ -252,17 +228,20 @@ const Fasting = () => {
 					onPress={clicked === false ? handleStartFast : handleEndFast}>
 					{clicked === false ? "Start Fast" : "End Fast Now"}
 				</Button>
-				{/* <View className="flex-row justify-center gap-15">
-					<Ionicons
-						name="reload-circle"
-						size={60}
-						style={{ color: "#E07594" }}
-					/>
-					<Ionicons name="play-circle" size={60} style={{ color: "#E07594" }} />
-				</View> */}
 			</View>
 		</View>
 	);
 };
 
 export default Fasting;
+
+{
+	/* <View className="flex-row justify-center gap-15">
+					<Ionicons
+						name="reload-circle"
+						size={60}
+						style={{ color: "#E07594" }}
+					/>
+					<Ionicons name="play-circle" size={60} style={{ color: "#E07594" }} />
+				</View> */
+}
