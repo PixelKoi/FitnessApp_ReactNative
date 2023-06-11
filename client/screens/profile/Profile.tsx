@@ -174,7 +174,7 @@ const UserBioInput = () => {
 						className="bg-primary ml-5"
 						mode="elevated"
 						onPress={() => {
-							navigation.navigate("Dashboard");
+							navigation.navigate("History");
 						}}>
 						<Icon name="angle-left" style={{ color: "#ffff" }} size={20} />
 					</Button>

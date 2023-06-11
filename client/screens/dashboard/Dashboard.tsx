@@ -26,7 +26,7 @@ const Dashboard = (props: Props) => {
 
 	React.useLayoutEffect(() => {
 		navigation.setOptions({
-			title: "Dashboard",
+			title: "History",
 			headerStyle: {
 				shadowColor: "transparent",
 			},

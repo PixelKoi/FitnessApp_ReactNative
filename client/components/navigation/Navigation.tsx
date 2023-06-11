@@ -117,7 +117,7 @@ const Navigation = ({ session }: { session: Session }) => {
 					},
 				}}>
 				<Tab.Screen
-					name="Dashboard"
+					name="History"
 					component={Dashboard}
 					options={{
 						tabBarIcon: ({ color, size }) => (
