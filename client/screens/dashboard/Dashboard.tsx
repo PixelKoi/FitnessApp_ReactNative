@@ -8,10 +8,7 @@ import CalDonutGraph from "./DonutGraphs/CalDonutGraph";
 import FastingDonutGraph from "./DonutGraphs/FastingDonutGraph";
 import { Feather, FontAwesome5 } from "@expo/vector-icons";
 import { useAppSelector } from "../../redux-manager/hooks";
-
-interface Props {
-	weekView?: boolean;
-}
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 const Dashboard = (props: Props) => {
 	//intiate meditation redux states
@@ -116,8 +113,14 @@ const Dashboard = (props: Props) => {
 							}}></View>
 					))}
 				</View>
-				<View className="mt-2">
-					<Text className="text-center text-xs text-primary">Streak: 0</Text>
+				<View className="mt-2 flex-row justify-center ">
+					<Text className="text-center text-xs self-center  text-primary ">
+						Streak: 0
+					</Text>
+
+					<Text className="text-primary  my-auto" style={{ marginBottom: 1.3 }}>
+						<MaterialCommunityIcons name="fire" size={14} />
+					</Text>
 				</View>
 			</View>
 		</View>
