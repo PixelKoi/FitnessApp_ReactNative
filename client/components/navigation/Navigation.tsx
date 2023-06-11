@@ -3,7 +3,7 @@ import { Alert, View, ActivityIndicator, StyleSheet } from "react-native";
 //Screen imports
 import Account from "../../screens/account/Account";
 import QuickLog from "../../screens/diary/QuickLog";
-import Proflile from "../../screens/profile/Profile";
+import ProfileScreen from "../../screens/profile/Profile";
 import Diary from "../../screens/diary/Diary";
 import Dashboard from "../../screens/dashboard/Dashboard";
 import Timer from "../../screens/timer/Timer";
@@ -27,11 +27,16 @@ import {
 	setSessionID,
 	setUserStates,
 } from "../../redux-manager/redux-slice/user-slice";
+import Profile from "../../database/models/Profile";
 
 const Navigation = ({ session }: { session: Session }) => {
 	const [loading, setLoading] = useState(true);
 	const [userData, setUserData] = useState(false);
 	const dispatch = useAppDispatch();
+
+	const Stack = createNativeStackNavigator();
+	const MainStack = createNativeStackNavigator();
+	const Tab = createBottomTabNavigator();
 
 	//Update redux states for profile
 	async function updateReduxUserStates(data) {
@@ -81,8 +86,7 @@ const Navigation = ({ session }: { session: Session }) => {
 		getProfile();
 	}, []);
 
-	const Stack = createNativeStackNavigator();
-
+	//Home Navigation
 	const HomeStack = ({ session }: { session: Session }) => {
 		return (
 			<Stack.Navigator>
@@ -91,14 +95,14 @@ const Navigation = ({ session }: { session: Session }) => {
 				</Stack.Screen>
 				<Stack.Screen
 					options={{ headerShown: false }}
-					name="TabNavigator"
-					component={TabNavigator}
+					name="NavGroup"
+					component={NavGroup}
 				/>
 			</Stack.Navigator>
 		);
 	};
 
-	const Tab = createBottomTabNavigator();
+	//Tab Navigation
 	const TabNavigator = () => {
 		return (
 			<Tab.Navigator
@@ -109,7 +113,7 @@ const Navigation = ({ session }: { session: Session }) => {
 					tabBarStyle: {
 						backgroundColor: "white",
 						borderTopColor: "transparent",
-						paddingHorizontal: 25,
+						paddingHorizontal: 50,
 					},
 				}}>
 				<Tab.Screen
@@ -148,16 +152,24 @@ const Navigation = ({ session }: { session: Session }) => {
 						),
 					}}
 				/>
-				<Tab.Screen
-					name="Profile"
-					component={Proflile}
-					options={{
-						tabBarIcon: ({ color, size }) => (
-							<UserCircleIcon name="ios-add" size={20} color={color} />
-						),
-					}}
-				/>
 			</Tab.Navigator>
+		);
+	};
+
+	const NavGroup = () => {
+		return (
+			<Stack.Navigator>
+				<Stack.Screen
+					name="TabScreen"
+					component={TabNavigator}
+					options={{ headerShown: false }}
+				/>
+				<Stack.Screen
+					name="Profile"
+					component={ProfileScreen}
+					options={{ headerShown: true }}
+				/>
+			</Stack.Navigator>
 		);
 	};
 
@@ -170,7 +182,7 @@ const Navigation = ({ session }: { session: Session }) => {
 			) : loading === false && userData === false ? (
 				<HomeStack session={session} />
 			) : (
-				<TabNavigator />
+				<NavGroup />
 			)}
 		</NavigationContainer>
 	);

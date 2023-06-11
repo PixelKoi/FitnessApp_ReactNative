@@ -149,7 +149,7 @@ const UserBioInput = () => {
 	//Top Nav on Edit Profile Screen
 	React.useLayoutEffect(() => {
 		navigation.setOptions({
-			title: "Profile",
+			title: showEditProfile === false ? "Profile" : "Edit Profile",
 			headerStyle: {
 				backgroundColor: showEditProfile === false ? "#E07594" : "#F6E6EB",
 				shadowColor: "transparent",
