@@ -241,7 +241,7 @@ const Meditation = () => {
 					<MedTimer />
 				</View>
 
-				<Text className="text-SM text-center mt-4 text-primary">
+				<Text className="text-SM text-center mt-4 text-primary font-bold">
 					Elapsed: [{percentageComplete}]%
 				</Text>
 			</View>

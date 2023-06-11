@@ -207,7 +207,7 @@ const Fasting = () => {
 					<FastingTimer />
 				</View>
 
-				<Text className="text-SM text-center mt-4 text-primary">
+				<Text className="text-SM text-center mt-4 text-primary font-bold">
 					Elapsed: [{elapsedPercentage}]%
 				</Text>
 			</View>
@@ -216,7 +216,9 @@ const Fasting = () => {
 			<View className="mb-8">
 				<View className="flex flex-row justify-center mb-2">
 					<View className="w-32">
-						<Text className="text-xs text-center text-primary mb-2">START</Text>
+						<Text className="text-xs text-center text-primary mb-2 font-bold">
+							START
+						</Text>
 						{startTime !== null ? (
 							<Text className="text-sm text-center text-primary opacity-60	">
 								{getDate(startTime)}
@@ -229,7 +231,9 @@ const Fasting = () => {
 					</View>
 
 					<View className=" w-32">
-						<Text className="text-xs text-center text-primary mb-2">END</Text>
+						<Text className="text-xs text-center text-primary mb-2 font-bold">
+							END
+						</Text>
 						{endTime !== null ? (
 							<Text className="text-sm text-center text-primary opacity-60	">
 								{getDate(endTime)}
