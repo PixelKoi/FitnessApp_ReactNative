@@ -169,7 +169,14 @@ const UserBioInput = () => {
 					</View>
 				),
 			headerLeft: () =>
-				showEditProfile === false ? null : (
+				showEditProfile === false ? (
+					<TouchableOpacity
+						onPress={() => {
+							navigation.navigate("Dashboard");
+						}}>
+						<Text className="ml-4">back</Text>
+					</TouchableOpacity>
+				) : (
 					<TouchableOpacity
 						onPress={() => {
 							setEditProfile(false);

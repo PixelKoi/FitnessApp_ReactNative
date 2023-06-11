@@ -38,7 +38,9 @@ const Dashboard = (props: Props) => {
 				<View>
 					<TouchableOpacity
 						className="ml-8 bg-primary rounded-full"
-						onPress={() => {}}>
+						onPress={() => {
+							navigation.navigate("Profile");
+						}}>
 						<UserCircleIcon name="ios-add" size={35} color={"white"} />
 					</TouchableOpacity>
 				</View>
