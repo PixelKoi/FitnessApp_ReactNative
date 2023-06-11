@@ -45,6 +45,13 @@ const Dashboard = (props: Props) => {
 					</TouchableOpacity>
 				</View>
 			),
+			headerRight: () => (
+				<View>
+					<Text className="ml-8 text-primary rounded-full mr-8">
+						<MaterialCommunityIcons name="trophy" size={32} />
+					</Text>
+				</View>
+			),
 		});
 	}, []);
 
