@@ -169,7 +169,7 @@ const UserBioInput = () => {
 	const profile = () => {
 		return (
 			<View className="flex-1 ">
-				<View className="flex bg-primary items-center pb-8 w-full rounded-b-full absolute z-10">
+				<View className="flex bg-primary items-center gap-2 pb-6 w-full rounded-b-full absolute z-10">
 					<UserCircleIcon
 						name="ios-add"
 						size={50}

@@ -109,6 +109,7 @@ const Navigation = ({ session }: { session: Session }) => {
 					tabBarStyle: {
 						backgroundColor: "white",
 						borderTopColor: "transparent",
+						paddingHorizontal: 25,
 					},
 				}}>
 				<Tab.Screen

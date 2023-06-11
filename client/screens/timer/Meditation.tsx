@@ -15,6 +15,7 @@ import { useAppDispatch, useAppSelector } from "../../redux-manager/hooks";
 //import icons
 import Icon from "react-native-vector-icons/FontAwesome";
 import CheckMark from "react-native-vector-icons/Ionicons";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 //Todo: Add lotus icon above start meditating button
 const Meditation = () => {
@@ -82,7 +83,7 @@ const Meditation = () => {
 	return (
 		<View className="mt-auto flex flex-col justify-center bg-background ">
 			{/* Clock section */}
-			<View className="mt-auto mb-28 -top-3">
+			<View className="mt-auto mb-4 -top-2">
 				<View className="z-10">
 					<View className="bg-secondary h-8 w-52 self-center rounded-xl">
 						<TouchableOpacity
@@ -244,7 +245,9 @@ const Meditation = () => {
 					Elapsed: [{percentageComplete}]%
 				</Text>
 			</View>
-
+			<View className="mx-auto mb-10">
+				<MaterialCommunityIcons name="meditation" size={60} color="#E07594" />
+			</View>
 			<Button
 				className="mt-auto mb-12 w-60 mx-auto bg-primary"
 				icon="brain"
