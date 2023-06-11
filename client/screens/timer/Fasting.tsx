@@ -246,7 +246,7 @@ const Fasting = () => {
 					icon="clock"
 					mode="contained"
 					onPress={clicked === false ? handleStartFast : handleEndFast}>
-					{clicked === false ? "Start fast" : "End fast now"}
+					{clicked === false ? "Start Fast" : "End Fast Now"}
 				</Button>
 				{/* <View className="flex-row justify-center gap-15">
 					<Ionicons

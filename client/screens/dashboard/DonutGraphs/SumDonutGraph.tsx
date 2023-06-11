@@ -8,7 +8,13 @@ const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
 const SumDonutGraph = (
 	props,
-	{ radius = 60, strokeWidth = 20, duration = 500, color = "blue", delay = 0 }
+	{
+		radius = 70,
+		strokeWidth = 25,
+		duration = 500,
+		color = "#E07594",
+		delay = 0,
+	}
 ) => {
 	const animatedValue = React.useRef(new Animated.Value(0)).current;
 	// const [elapsed, setElapsed] = useState(0);
@@ -48,7 +54,7 @@ const SumDonutGraph = (
 						cx="50%"
 						cy="50%"
 						stroke={color}
-						strokeWidth={20}
+						strokeWidth={25}
 						r={radius}
 						fill="transparent"
 						strokeDasharray={circleCircumference}
