@@ -151,10 +151,10 @@ const UserBioInput = () => {
 		navigation.setOptions({
 			title: "Profile",
 			headerStyle: {
-				backgroundColor: "#E07594",
+				backgroundColor: showEditProfile === false ? "#E07594" : "#F6E6EB",
 				shadowColor: "transparent",
 			},
-			headerTintColor: "#fff",
+			headerTintColor: showEditProfile === false ? "#fff" : "#E07594",
 			headerTitleStyle: {
 				fontWeight: "bold",
 			},
@@ -179,12 +179,14 @@ const UserBioInput = () => {
 						<Icon name="angle-left" style={{ color: "#ffff" }} size={20} />
 					</Button>
 				) : (
-					<TouchableOpacity
+					<Button
+						className="bg-primary ml-5"
+						mode="elevated"
 						onPress={() => {
 							setEditProfile(false);
 						}}>
-						<Text className="ml-4">back</Text>
-					</TouchableOpacity>
+						<Icon name="angle-left" style={{ color: "#ffff" }} size={20} />
+					</Button>
 				),
 		});
 	}, [showEditProfile]);
