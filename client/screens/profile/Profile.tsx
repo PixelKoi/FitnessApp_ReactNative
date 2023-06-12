@@ -167,9 +167,9 @@ const UserBioInput = () => {
 				showEditProfile === false && (
 					<View>
 						<Button
-							className="mr-14 bg-white"
+							className="mr-8 bg-white"
 							onPress={() => setEditProfile(true)}>
-							Edit
+							<Text className="text-primary">Edit</Text>
 						</Button>
 					</View>
 				),
