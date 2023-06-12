@@ -153,11 +153,16 @@ const UserBioInput = () => {
 			headerStyle: {
 				backgroundColor: showEditProfile === false ? "#E07594" : "#F6E6EB",
 				shadowColor: "transparent",
+				elevation: 0,
+				shadowOpacity: 0,
+				borderBottomWidth: 0,
 			},
 			headerTintColor: showEditProfile === false ? "#fff" : "#E07594",
 			headerTitleStyle: {
 				fontWeight: "bold",
 			},
+			headerShadowVisible: false,
+			headerBackTitleVisible: false,
 			headerRight: () =>
 				showEditProfile === false && (
 					<View>
