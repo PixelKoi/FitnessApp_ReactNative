@@ -39,9 +39,6 @@ const EditProfile = () => {
 	const [selectedActivity, setActivityLevel] = useState<string>(activity);
 	const [newGoal, setGoal] = useState<string>(goal.toString());
 
-	const [date, setDate] = useState(new Date());
-	const [showPicker, setShowPicker] = useState(false);
-
 	//Update Redux States
 	async function updateReduxProfileStates(
 		username: string,
@@ -142,11 +139,29 @@ const EditProfile = () => {
 		}
 	};
 
+	const [date, setDate] = useState(new Date());
+	const [showDatePicker, setShowDatePicker] = useState(false);
+	//Age picker modal
+	const AgePickerModal = () => {
+		return (
+			<Modal
+				style={{ backgroundColor: "white" }}
+				animationType="slide"
+				visible={showDatePicker}
+				transparent>
+				<View className="flex bg-primary mt-auto h-60">
+					<Button onPress={() => setShowDatePicker(false)}>Close</Button>
+					<DateTimePicker value={new Date()}></DateTimePicker>
+				</View>
+			</Modal>
+		);
+	};
+
 	//Activity picker hooks
 	const [showActivityPicker, setShowActivityPicker] = useState(false);
 
 	//Activty picker modal
-	const ActivityModal = () => {
+	const ActivityPickerModal = () => {
 		return (
 			<Modal
 				style={{ backgroundColor: "white" }}
@@ -200,18 +215,24 @@ const EditProfile = () => {
 
 					{/* Update Age */}
 					<View className="flex-row mx-8 ">
-						<TextInput
-							className="text-xs text-primary border-solid border-b-2 w-full border-secondary py-4"
-							value={newAge.toString()}
-							onChangeText={(newAge) => setAge(Number(newAge))}></TextInput>
-						<View className="ml-auto flex-row self-center">
-							<Text className="text-xs mr-2 text-primary opacity-60">Age</Text>
-							<MaterialCommunityIcons
-								name="pencil-outline"
-								size={15}
-								color={"#E07594"}
-							/>
-						</View>
+						<TouchableOpacity
+							onPress={() => {
+								Keyboard.dismiss;
+								setShowDatePicker(true);
+							}}
+							className="flex-row text-primary border-solid border-b-2 w-full border-secondary py-4">
+							<Text className="text-primary text-xs">{age}</Text>
+							<View className="ml-auto flex-row self-center">
+								<Text className="text-xs mr-2 text-primary opacity-60">
+									Age
+								</Text>
+								<MaterialCommunityIcons
+									name="pencil-outline"
+									size={15}
+									color={"#E07594"}
+								/>
+							</View>
+						</TouchableOpacity>
 					</View>
 
 					{/* Update Height */}
@@ -310,7 +331,8 @@ const EditProfile = () => {
 					mode="contained">
 					<Text className="text-white">Save</Text>
 				</Button>
-				{ActivityModal()}
+				{AgePickerModal()}
+				{ActivityPickerModal()}
 			</View>
 		</TouchableWithoutFeedback>
 	);
