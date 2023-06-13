@@ -19,6 +19,7 @@ import { useDatabase } from "@nozbe/watermelondb/hooks";
 import { useAppDispatch, useAppSelector } from "../../redux-manager/hooks";
 import { useNavigation } from "@react-navigation/native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 
 import { Picker } from "@react-native-picker/picker";
 
@@ -169,14 +170,20 @@ const EditProfile = () => {
 				visible={showActivityPicker}
 				transparent>
 				<View className="flex bg-primary mt-auto h-60">
-					<Button onPress={() => setShowActivityPicker(false)}>Close</Button>
+					<Button onPress={() => setShowActivityPicker(false)}>
+						<MaterialIcons name="keyboard-arrow-up" size={30} color={"#ffff"} />
+					</Button>
 					<Picker
-						style={{ color: "red" }}
+						itemStyle={{ color: "white" }}
 						selectedValue={selectedActivity}
 						onValueChange={(itemValue, itemIndex) => {
 							setActivityLevel(itemValue);
 						}}>
-						<Picker.Item label="Sedentary" value="Sedentary" />
+						<Picker.Item
+							style={{ color: "#ffff" }}
+							label="Sedentary"
+							value="Sedentary"
+						/>
 						<Picker.Item label="Lightly active" value="Lightly active" />
 						<Picker.Item label="Moderately active" value="Moderately active" />
 						<Picker.Item label="Very active" value="Very active" />
