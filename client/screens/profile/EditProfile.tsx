@@ -220,6 +220,44 @@ const EditProfile = () => {
 				{/* Update Name */}
 				<Surface className="mx-8 py-10 pb-12 bg-background rounded-3xl">
 					<View className="flex-row mx-8 ">
+						<TouchableOpacity
+							onPress={() => {
+								Keyboard.dismiss;
+							}}
+							className="flex-row text-primary border-solid border-b-2 w-full border-secondary py-4">
+							<View className="ml-auto flex-row self-center">
+								<Text className="text-xs mr-2 text-primary opacity-60">
+									Email
+								</Text>
+								<MaterialCommunityIcons
+									name="pencil-outline"
+									size={15}
+									color={"#E07594"}
+								/>
+							</View>
+						</TouchableOpacity>
+					</View>
+
+					<View className="flex-row mx-8 ">
+						<TouchableOpacity
+							onPress={() => {
+								Keyboard.dismiss;
+							}}
+							className="flex-row text-primary border-solid border-b-2 w-full border-secondary py-4">
+							<View className="ml-auto flex-row self-center">
+								<Text className="text-xs mr-2 text-primary opacity-60">
+									Password
+								</Text>
+								<MaterialCommunityIcons
+									name="pencil-outline"
+									size={15}
+									color={"#E07594"}
+								/>
+							</View>
+						</TouchableOpacity>
+					</View>
+
+					<View className="flex-row mx-8 ">
 						<TextInput
 							className="text-xs text-primary border-solid border-b-2 w-full border-secondary py-4"
 							value={newName}
