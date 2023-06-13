@@ -132,17 +132,17 @@ const EditProfile = () => {
 		return age;
 	}
 	//Get date from time picker
+	const [date, setDate] = useState(new Date());
+	const [showDatePicker, setShowDatePicker] = useState(false);
+
 	const [selectedDate, setSelectedDate] = useState(new Date());
-	const handleDateChange = (date) => {
-		console.log(date);
+	const handleDateChange = (event, date) => {
 		if (date !== undefined) {
 			setSelectedDate(date);
 			setAge(getAgeFromDateOfBirth(date));
 		}
 	};
 
-	const [date, setDate] = useState(new Date());
-	const [showDatePicker, setShowDatePicker] = useState(false);
 	//Age picker modal
 	const AgePickerModal = () => {
 		return (
@@ -160,7 +160,7 @@ const EditProfile = () => {
 						</View>
 					</TouchableOpacity>
 					<DateTimePicker
-						value={new Date()}
+						value={date}
 						onChange={handleDateChange}
 						textColor="#ffff"
 						mode="date"
@@ -244,7 +244,7 @@ const EditProfile = () => {
 								setShowDatePicker(true);
 							}}
 							className="flex-row text-primary border-solid border-b-2 w-full border-secondary py-4">
-							<Text className="text-primary text-xs">{age}</Text>
+							<Text className="text-primary text-xs">{newAge}</Text>
 							<View className="ml-auto flex-row self-center">
 								<Text className="text-xs mr-2 text-primary opacity-60">
 									Age
