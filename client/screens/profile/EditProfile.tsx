@@ -133,7 +133,8 @@ const EditProfile = () => {
 	}
 	//Get date from time picker
 	const [selectedDate, setSelectedDate] = useState(new Date());
-	const handleDateChange = (event, date) => {
+	const handleDateChange = (date) => {
+		console.log(date);
 		if (date !== undefined) {
 			setSelectedDate(date);
 			setAge(getAgeFromDateOfBirth(date));
@@ -151,8 +152,19 @@ const EditProfile = () => {
 				visible={showDatePicker}
 				transparent>
 				<View className="flex bg-primary mt-auto h-60">
-					<Button onPress={() => setShowDatePicker(false)}>Close</Button>
-					<DateTimePicker value={new Date()}></DateTimePicker>
+					<TouchableOpacity
+						className="py-2"
+						onPress={() => setShowDatePicker(false)}>
+						<View className="mx-auto">
+							<MaterialIcons name="angle-up" size={30} color={"#ffff"} />
+						</View>
+					</TouchableOpacity>
+					<DateTimePicker
+						value={new Date()}
+						onChange={handleDateChange}
+						textColor="#ffff"
+						mode="date"
+						display="spinner"></DateTimePicker>
 				</View>
 			</Modal>
 		);
@@ -170,11 +182,13 @@ const EditProfile = () => {
 				visible={showActivityPicker}
 				transparent>
 				<View className="flex bg-primary mt-auto h-60">
-					<Button onPress={() => setShowActivityPicker(false)}>
+					<TouchableOpacity
+						className="py-2"
+						onPress={() => setShowActivityPicker(false)}>
 						<View className="mx-auto">
-							<MaterialIcons name="angle-up" size={35} color={"#ffff"} />
+							<MaterialIcons name="angle-up" size={30} color={"#ffff"} />
 						</View>
-					</Button>
+					</TouchableOpacity>
 					<Picker
 						itemStyle={{ color: "white" }}
 						selectedValue={selectedActivity}
