@@ -171,7 +171,13 @@ const EditProfile = () => {
 				transparent>
 				<View className="flex bg-primary mt-auto h-60">
 					<Button onPress={() => setShowActivityPicker(false)}>
-						<MaterialIcons name="keyboard-arrow-up" size={30} color={"#ffff"} />
+						<View className="mx-auto">
+							<MaterialIcons
+								name="keyboard-arrow-up"
+								size={35}
+								color={"#ffff"}
+							/>
+						</View>
 					</Button>
 					<Picker
 						itemStyle={{ color: "white" }}
