@@ -19,7 +19,7 @@ import { useDatabase } from "@nozbe/watermelondb/hooks";
 import { useAppDispatch, useAppSelector } from "../../redux-manager/hooks";
 import { useNavigation } from "@react-navigation/native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import MaterialIcons from "react-native-vector-icons/FontAwesome";
 
 import { Picker } from "@react-native-picker/picker";
 
@@ -172,11 +172,7 @@ const EditProfile = () => {
 				<View className="flex bg-primary mt-auto h-60">
 					<Button onPress={() => setShowActivityPicker(false)}>
 						<View className="mx-auto">
-							<MaterialIcons
-								name="keyboard-arrow-up"
-								size={35}
-								color={"#ffff"}
-							/>
+							<MaterialIcons name="angle-up" size={35} color={"#ffff"} />
 						</View>
 					</Button>
 					<Picker
