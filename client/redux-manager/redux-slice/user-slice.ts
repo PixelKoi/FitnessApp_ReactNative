@@ -55,7 +55,7 @@ const userSlice = createSlice({
 		changeActivity(state, action: PayloadAction<string>) {
 			state.activity = action.payload;
 		},
-		changeGoal(state, action: PayloadAction<string>) {
+		changeGoal(state, action: PayloadAction<number>) {
 			state.goal = action.payload;
 		},
 		changeBMR(state, action: PayloadAction<number>) {

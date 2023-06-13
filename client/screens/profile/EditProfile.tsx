@@ -7,6 +7,7 @@ import {
 	TextInput,
 	Keyboard,
 	Alert,
+	Modal,
 } from "react-native";
 import { Button, List, Surface } from "react-native-paper";
 import DateTimePicker from "@react-native-community/datetimepicker";
@@ -18,6 +19,8 @@ import { useDatabase } from "@nozbe/watermelondb/hooks";
 import { useAppDispatch, useAppSelector } from "../../redux-manager/hooks";
 import { useNavigation } from "@react-navigation/native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+
+import { Picker } from "@react-native-picker/picker";
 
 const EditProfile = () => {
 	const database = useDatabase();
@@ -139,6 +142,34 @@ const EditProfile = () => {
 		}
 	};
 
+	//Activity picker hooks
+	const [selectActivityPicker, setSelectedActivityPicker] = useState("");
+	const [showActivityPicker, setShowActivityPicker] = useState(false);
+
+	//Activty picker modal
+	const ActivityModal = () => {
+		return (
+			<Modal
+				style={{ backgroundColor: "white" }}
+				animationType="slide"
+				visible={showActivityPicker}
+				transparent>
+				<View className="flex bg-primary mt-auto h-60">
+					<Button onPress={() => setShowActivityPicker(false)}>Close</Button>
+					<Picker
+						style={{ color: "red" }}
+						selectedValue={selectedActivity}
+						onValueChange={(itemValue, itemIndex) =>
+							setSelectedActivityPicker(itemValue)
+						}>
+						<Picker.Item label="Sedentary" value="Sedentary" />
+						<Picker.Item label="Active" value="Active" />
+					</Picker>
+				</View>
+			</Modal>
+		);
+	};
+
 	return (
 		<TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
 			<View className="flex-1 items-center justify-center bg-secondary">
@@ -218,7 +249,10 @@ const EditProfile = () => {
 					{/* Update Activity */}
 					<View className="flex-row mx-8 ">
 						<TouchableOpacity
-							onPress={Keyboard.dismiss}
+							onPress={() => {
+								Keyboard.dismiss;
+								setShowActivityPicker(true);
+							}}
 							className="flex-row text-primary border-solid border-b-2 w-full border-secondary py-4">
 							<Text className="text-primary text-xs">{selectedActivity}</Text>
 							<View className="ml-auto flex-row self-center">
@@ -270,6 +304,7 @@ const EditProfile = () => {
 					mode="contained">
 					<Text className="text-white">Save</Text>
 				</Button>
+				{ActivityModal()}
 			</View>
 		</TouchableWithoutFeedback>
 	);
