@@ -37,7 +37,7 @@ const EditProfile = () => {
 	const [newAge, setAge] = useState<number>(age);
 	const [selectedGender, setGender] = useState<string>(gender);
 	const [selectedActivity, setActivityLevel] = useState<string>(activity);
-	const [selectedGoal, setGoal] = useState<string>(goal.toString());
+	const [newGoal, setGoal] = useState<string>(goal.toString());
 
 	const [date, setDate] = useState(new Date());
 	const [showPicker, setShowPicker] = useState(false);
@@ -143,7 +143,6 @@ const EditProfile = () => {
 	};
 
 	//Activity picker hooks
-	const [selectActivityPicker, setSelectedActivityPicker] = useState("");
 	const [showActivityPicker, setShowActivityPicker] = useState(false);
 
 	//Activty picker modal
@@ -159,11 +158,14 @@ const EditProfile = () => {
 					<Picker
 						style={{ color: "red" }}
 						selectedValue={selectedActivity}
-						onValueChange={(itemValue, itemIndex) =>
-							setSelectedActivityPicker(itemValue)
-						}>
+						onValueChange={(itemValue, itemIndex) => {
+							setActivityLevel(itemValue);
+						}}>
 						<Picker.Item label="Sedentary" value="Sedentary" />
-						<Picker.Item label="Active" value="Active" />
+						<Picker.Item label="Lightly active" value="Lightly active" />
+						<Picker.Item label="Moderately active" value="Moderately active" />
+						<Picker.Item label="Very active" value="Very active" />
+						<Picker.Item label="Extremely active" value="Extremely active" />
 					</Picker>
 				</View>
 			</Modal>
@@ -171,7 +173,11 @@ const EditProfile = () => {
 	};
 
 	return (
-		<TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+		<TouchableWithoutFeedback
+			onPress={() => {
+				Keyboard.dismiss;
+			}}
+			accessible={false}>
 			<View className="flex-1 items-center justify-center bg-secondary">
 				{/* Update Name */}
 				<Surface className="mx-8 py-10 pb-12 bg-background rounded-3xl">
@@ -270,21 +276,21 @@ const EditProfile = () => {
 
 					{/* Weekly Goal */}
 					<View className="flex-row mx-8 ">
-						<TouchableOpacity
-							onPress={Keyboard.dismiss}
-							className="flex-row text-primary border-solid border-b-2 w-full border-secondary py-4">
-							<Text className="text-primary text-xs">{selectedGoal}</Text>
-							<View className="ml-auto flex-row self-center">
-								<Text className="text-xs mr-2 text-primary opacity-60">
-									Weight Loss (lbs)
-								</Text>
-								<MaterialCommunityIcons
-									name="pencil-outline"
-									size={15}
-									color={"#E07594"}
-								/>
-							</View>
-						</TouchableOpacity>
+						<TextInput
+							keyboardType="number-pad"
+							className="text-xs text-primary border-solid border-b-2 w-full border-secondary py-4"
+							value={newGoal.toString()}
+							onChangeText={(newGoal) => setGoal(newGoal)}></TextInput>
+						<View className="ml-auto flex-row self-center">
+							<Text className="text-xs mr-2 text-primary opacity-60">
+								Weekly Goal (lbs)
+							</Text>
+							<MaterialCommunityIcons
+								name="pencil-outline"
+								size={15}
+								color={"#E07594"}
+							/>
+						</View>
 					</View>
 				</Surface>
 				<Button
@@ -297,7 +303,7 @@ const EditProfile = () => {
 							Number(newHeight),
 							Number(newWeight),
 							selectedActivity,
-							Number(selectedGoal)
+							Number(newGoal)
 						);
 						navigation.goBack();
 					}}
