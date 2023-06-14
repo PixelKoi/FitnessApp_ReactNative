@@ -1,24 +1,30 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { RootState } from "../store";
 
-interface FoodItem {
-  Calories: number;
-  Carbs: number;
-  Fat: number;
-  Protein: number;
-  description: string;
+interface FavoriteState {
   id: number;
   isSelected: boolean;
   quantity: number;
-}
-
-interface FavoriteState {
-  favorites: FoodItem[];
+  food: {
+    Calories: number;
+    Carbs: number;
+    Fat: number;
+    Protein: number;
+    description: string;
+  };
 }
 
 const initialState: FavoriteState = {
-  favorites: [],
+  id: 0,
+  isSelected: false,
+  quantity: 0,
+  food: {
+    Calories: 0,
+    Carbs: 0,
+    Fat: 0,
+    Protein: 0,
+    description: "string",
+  },
 };
 
 const favoriteSlice = createSlice({

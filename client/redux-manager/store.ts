@@ -31,6 +31,8 @@ const persistConfig = {
   storage: AsyncStorage,
 };
 
+// Persist https://redux-toolkit.js.org/usage/usage-guide#use-with-redux-persist
+
 //Custom Middleware
 const fastingTimerMiddleware = startFastingTimer.middleware;
 const meditationTimerMiddleware = startMeditationTimer.middleware;
@@ -48,6 +50,8 @@ export const store = configureStore({
 });
 
 export const persistor = persistStore(store);
+
+console.log("Persistor: ", persistor);
 
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;

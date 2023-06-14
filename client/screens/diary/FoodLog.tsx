@@ -49,8 +49,37 @@ interface QuickLogProps {
   foodItem: FoodItem; // Assuming you have a foodItem object as a prop
 }
 
-const QuickLog: React.FC<QuickLogProps> = ({ foodItem }) => {
+const FoodLog: React.FC<QuickLogProps> = ({ foodItem }) => {
   const dispatch = useAppDispatch();
+
+  const { favorite } = useAppSelector((state) => state.favorite);
+
+  function updateFavoriteList(data) {
+    dispatch(
+      addFavorite({
+        id: 0,
+        isSelected: data.isSelected,
+        quantity: data.quantity,
+        food: {
+          Calories: data.food.Calories,
+          Carbs: data.food.Carbs,
+          Fat: data.food.Fat,
+          Protein: data.food.Protein,
+          description: data.food.description,
+        },
+      })
+    );
+  }
+
+  const handleFavoriteToggle = (index, array) => {
+    console.log("adding food?", array[index]);
+    const updatedSelectedHearts = [...selectedHearts];
+    updatedSelectedHearts[index] = !updatedSelectedHearts[index];
+    setSelectedHearts(updatedSelectedHearts);
+    updateFavoriteList(array[index]);
+  };
+
+  console.log("Favorite", favorite);
   const tabNavigation = useNavigation();
   const [foodName, setFoodName] = useState("");
   const [foodArray, setFoodArray] = useState([]);
@@ -171,13 +200,6 @@ const QuickLog: React.FC<QuickLogProps> = ({ foodItem }) => {
     console.log("Selected FOODS: ", selectedFoods);
     setSaveButton(false);
     tabNavigation.navigate("Diary", { selectedFoods, selectedOption });
-  };
-  const handleFavoriteToggle = (index, array) => {
-    console.log(array[index]);
-    const updatedSelectedHearts = [...selectedHearts];
-    updatedSelectedHearts[index] = !updatedSelectedHearts[index];
-    setSelectedHearts(updatedSelectedHearts);
-    // dispatch(addFavorite(array[index]));
   };
 
   const handleInputChange = (text, food) => {};
@@ -347,4 +369,4 @@ const QuickLog: React.FC<QuickLogProps> = ({ foodItem }) => {
   );
 };
 
-export default QuickLog;
+export default FoodLog;
