@@ -10,7 +10,7 @@ import {
 	Modal,
 } from "react-native";
 import { Button, List, Surface } from "react-native-paper";
-import DateTimePicker from "@react-native-community/datetimepicker";
+
 import Icon from "react-native-vector-icons/FontAwesome";
 import Profile from "../../database/models/Profile";
 
@@ -21,7 +21,11 @@ import { useNavigation } from "@react-navigation/native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import MaterialIcons from "react-native-vector-icons/FontAwesome";
 
+//Pickers
 import { Picker } from "@react-native-picker/picker";
+import DateTimePicker from "@react-native-community/datetimepicker";
+
+import ChangeEmailModal from "./modals/ChangeEmailModal";
 
 const EditProfile = () => {
 	const database = useDatabase();
@@ -210,6 +214,8 @@ const EditProfile = () => {
 		);
 	};
 
+	const [showChangeEmail, setShowChangeEmail] = useState(false);
+
 	return (
 		<TouchableWithoutFeedback
 			onPress={() => {
@@ -223,6 +229,7 @@ const EditProfile = () => {
 						<TouchableOpacity
 							onPress={() => {
 								Keyboard.dismiss;
+								setShowChangeEmail(true);
 							}}
 							className="flex-row text-primary border-solid border-b-2 w-full border-secondary py-4">
 							<View className="ml-auto flex-row self-center">
@@ -394,6 +401,10 @@ const EditProfile = () => {
 				</Button>
 				{AgePickerModal()}
 				{ActivityPickerModal()}
+				<ChangeEmailModal
+					visible={showChangeEmail}
+					setShowModal={setShowChangeEmail}
+				/>
 			</View>
 		</TouchableWithoutFeedback>
 	);
