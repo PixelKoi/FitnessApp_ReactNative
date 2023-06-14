@@ -9,6 +9,8 @@ const ChangeEmailModal = (props) => {
 	const navigation = useNavigation();
 
 	const [newEmail, setNewEmail] = useState("");
+	const [repeatEmail, setRepeatEmail] = useState("");
+	const [password, setPassword] = useState("");
 
 	return (
 		<Modal className="bg-secondary" visible={props.visible}>
@@ -39,8 +41,10 @@ const ChangeEmailModal = (props) => {
 					<View className="flex-row mx-8 ">
 						<TextInput
 							className="text-xs text-primary border-solid border-b-2 w-full border-secondary py-4"
-							value={newEmail}
-							onChangeText={(newEmail) => setNewEmail(newEmail)}></TextInput>
+							value={repeatEmail}
+							onChangeText={(repeatEmail) =>
+								setRepeatEmail(repeatEmail)
+							}></TextInput>
 						<View className="ml-auto flex-row self-center">
 							<Text className="text-xs mr-2 text-primary opacity-60">
 								Repeat Email
@@ -56,8 +60,8 @@ const ChangeEmailModal = (props) => {
 					<View className="flex-row mx-8 ">
 						<TextInput
 							className="text-xs text-primary border-solid border-b-2 w-full border-secondary py-4"
-							value={newEmail}
-							onChangeText={(newEmail) => setNewEmail(newEmail)}></TextInput>
+							value={password}
+							onChangeText={(password) => setPassword(password)}></TextInput>
 						<View className="ml-auto flex-row self-center">
 							<Text className="text-xs mr-2 text-primary opacity-60">
 								Password
