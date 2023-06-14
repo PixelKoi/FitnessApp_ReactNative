@@ -69,20 +69,7 @@ const FoodLog: React.FC<QuickLogProps> = ({ foodItem }) => {
       },
     };
     console.log("FAVO", favoriteItem);
-    // dispatch(
-    //   addFavorite({
-    //     id: 0,
-    //     isSelected: data.isSelected,
-    //     quantity: data.quantity,
-    //     food: {
-    //       Calories: data.food.Calories,
-    //       Carbs: data.food.Carbs,
-    //       Fat: data.food.Fat,
-    //       Protein: data.food.Protein,
-    //       description: data.food.description,
-    //     },
-    //   })
-    // );
+    dispatch(addFavorite(favoriteItem));
   }
 
   const handleFavoriteToggle = (index, array) => {
