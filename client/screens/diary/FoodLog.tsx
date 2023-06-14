@@ -53,7 +53,7 @@ const FoodLog: React.FC = () => {
   // );
 
   const { food } = useAppSelector((state) => state.favorite);
-  console.log("FoodObj", food);
+  console.log("Favorite Foods", food, "food.length=", typeof food);
   function updateFavoriteList(data) {
     const favoriteItem = {
       food: {
@@ -352,16 +352,38 @@ const FoodLog: React.FC = () => {
           <Text className="text-primary font-extrabold pl-4 pb-2 text-xl">
             Favorite
           </Text>
-          <Card className="p-5">
-            <Card.Content>
-              <Text className="text-primary pb-4" variant="titleLarge">
-                No favorite selected
-              </Text>
-              <Text className="text-primary" variant="bodyMedium">
-                Please select a favorite to display here.
-              </Text>
-            </Card.Content>
-          </Card>
+          {Object.keys(food).length > 0 ? (
+            <Card className="p-5">
+              <Card.Content>
+                <Text className="text-primary pb-4" variant="titleLarge">
+                  {food.description}
+                </Text>
+                <Text className="text-primary" variant="bodyMedium">
+                  Calories: {food.Calories}
+                </Text>
+                <Text className="text-primary" variant="bodyMedium">
+                  Carbs: {food.Carbs}
+                </Text>
+                <Text className="text-primary" variant="bodyMedium">
+                  Fat: {food.Fat}
+                </Text>
+                <Text className="text-primary" variant="bodyMedium">
+                  Protein: {food.Protein}
+                </Text>
+              </Card.Content>
+            </Card>
+          ) : (
+            <Card className="p-5">
+              <Card.Content>
+                <Text className="text-primary pb-4" variant="titleLarge">
+                  No favorite selected
+                </Text>
+                <Text className="text-primary" variant="bodyMedium">
+                  Please select a favorite to display here.
+                </Text>
+              </Card.Content>
+            </Card>
+          )}
         </View>
       </View>
     </Provider>
