@@ -45,16 +45,11 @@ const styles = StyleSheet.create({
   },
 });
 
-interface QuickLogProps {
-  foodItem: FoodItem; // Assuming you have a foodItem object as a prop
-}
-
-const FoodLog: React.FC<QuickLogProps> = ({ foodItem }) => {
+const FoodLog: React.FC = () => {
   const dispatch = useAppDispatch();
 
-  const { favorite } = useAppSelector((state) => state.favorite);
-
-  console.log("Favorite", favorite);
+  const { food } = useAppSelector((state) => state.favorite);
+  console.log("Favorite", food);
   function updateFavoriteList(data) {
     const favoriteItem = {
       id: data.id,
@@ -80,7 +75,6 @@ const FoodLog: React.FC<QuickLogProps> = ({ foodItem }) => {
     updateFavoriteList(array[index]);
   };
 
-  console.log("Favorite", favorite);
   const tabNavigation = useNavigation();
   const [foodName, setFoodName] = useState("");
   const [foodArray, setFoodArray] = useState([]);
