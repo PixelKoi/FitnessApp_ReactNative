@@ -32,7 +32,7 @@ const favoriteSlice = createSlice({
   initialState,
   reducers: {
     addFavorite: (state, action: PayloadAction<FoodItem>) => {
-      state.favorites.push(action.payload);
+      state.favorites = [...state.favorites, action.payload]; // Append the new favorite item to the favorites array
     },
     toggleFavorite: (state, action: PayloadAction<number>) => {
       const foodIndex = action.payload;

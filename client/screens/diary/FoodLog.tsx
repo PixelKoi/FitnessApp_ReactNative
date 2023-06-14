@@ -54,21 +54,35 @@ const FoodLog: React.FC<QuickLogProps> = ({ foodItem }) => {
 
   const { favorite } = useAppSelector((state) => state.favorite);
 
+  console.log("Favorite", favorite);
   function updateFavoriteList(data) {
-    dispatch(
-      addFavorite({
-        id: 0,
-        isSelected: data.isSelected,
-        quantity: data.quantity,
-        food: {
-          Calories: data.food.Calories,
-          Carbs: data.food.Carbs,
-          Fat: data.food.Fat,
-          Protein: data.food.Protein,
-          description: data.food.description,
-        },
-      })
-    );
+    const favoriteItem = {
+      id: data.id,
+      isSelected: data.isSelected,
+      quantity: data.quantity,
+      food: {
+        Calories: data.food.Calories,
+        Carbs: data.food.Carbs,
+        Fat: data.food.Fat,
+        Protein: data.food.Protein,
+        description: data.food.description,
+      },
+    };
+    console.log("FAVO", favoriteItem);
+    // dispatch(
+    //   addFavorite({
+    //     id: 0,
+    //     isSelected: data.isSelected,
+    //     quantity: data.quantity,
+    //     food: {
+    //       Calories: data.food.Calories,
+    //       Carbs: data.food.Carbs,
+    //       Fat: data.food.Fat,
+    //       Protein: data.food.Protein,
+    //       description: data.food.description,
+    //     },
+    //   })
+    // );
   }
 
   const handleFavoriteToggle = (index, array) => {
