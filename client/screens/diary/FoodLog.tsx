@@ -47,20 +47,24 @@ const styles = StyleSheet.create({
 
 const FoodLog: React.FC = () => {
   const dispatch = useAppDispatch();
+  //
+  // const { food, id, isSelected, quantity } = useAppSelector(
+  //   (state) => state.favorite
+  // );
 
   const { food } = useAppSelector((state) => state.favorite);
-  console.log("Favorite", food);
+  console.log("FoodObj", food);
   function updateFavoriteList(data) {
     const favoriteItem = {
-      id: data.id,
-      isSelected: data.isSelected,
-      quantity: data.quantity,
       food: {
         Calories: data.food.Calories,
         Carbs: data.food.Carbs,
         Fat: data.food.Fat,
         Protein: data.food.Protein,
         description: data.food.description,
+        id: data.id,
+        isSelected: data.isSelected,
+        quantity: data.quantity,
       },
     };
     console.log("FAVO", favoriteItem);

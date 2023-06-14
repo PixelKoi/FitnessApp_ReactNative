@@ -2,23 +2,23 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface FavoriteState {
-  id: number;
-  isSelected: boolean;
-  quantity: number;
   food: {
     Calories: number;
     Carbs: number;
     Fat: number;
     Protein: number;
     description: string;
+    id: number;
+    isSelected: boolean;
+    quantity: number;
   };
 }
 
 const initialState: FavoriteState = {
-  id: 0,
-  isSelected: true,
-  quantity: 0,
   food: {
+    id: 0,
+    isSelected: true,
+    quantity: 0,
     Calories: 0,
     Carbs: 0,
     Fat: 0,
