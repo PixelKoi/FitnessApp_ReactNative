@@ -1,5 +1,11 @@
 import React, { useState, useCallback, useEffect } from "react";
-import { View, TextInput, FlatList, TouchableOpacity } from "react-native";
+import {
+  View,
+  TextInput,
+  FlatList,
+  TouchableOpacity,
+  Text,
+} from "react-native";
 import { USDA_API_KEY } from "../../config";
 import {
   CheckCircleIcon,
@@ -15,7 +21,6 @@ import { params } from "../../constants";
 import { useNavigation } from "@react-navigation/native";
 import {
   Dialog,
-  Text,
   Button,
   Card,
   Menu,
@@ -45,7 +50,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const FoodLog: React.FC = () => {
+const Nutrition: React.FC = () => {
   const dispatch = useAppDispatch();
   //
   // const { food, id, isSelected, quantity } = useAppSelector(
@@ -112,18 +117,34 @@ const FoodLog: React.FC = () => {
   };
   React.useLayoutEffect(() => {
     tabNavigation.setOptions({
-      title: "Food Log",
-      headerLeft: () => null, // this will hide the back button
+      title: "Nutrition",
+      headerLeft: () => (
+        <View>
+          <TouchableOpacity
+            className="ml-8 bg-primary rounded-full"
+            onPress={() => console.log("Favorite Page placeholdeer")}
+          >
+            <FilledHeartIcon
+              name="ios-add"
+              color={"white"}
+              size={30}
+              style={{ marginLeft: 10 }}
+            />
+          </TouchableOpacity>
+        </View>
+      ),
       headerRight: () => (
         // <TouchableOpacity onPress={() => setSaveButton(true)}>
-        <TouchableOpacity onPress={() => checkOption()}>
-          <CheckCircleIcon
-            name="ios-add"
-            size={30}
-            color="black"
-            style={{ marginRight: 10 }}
-          />
-        </TouchableOpacity>
+        <View>
+          <TouchableOpacity onPress={() => checkOption()}>
+            <CheckCircleIcon
+              name="ios-add"
+              size={30}
+              color="black"
+              style={{ marginRight: 10 }}
+            />
+          </TouchableOpacity>
+        </View>
       ),
     });
   }, [checkOption]);
@@ -353,7 +374,7 @@ const FoodLog: React.FC = () => {
             Favorite
           </Text>
           {Object.keys(food).length > 0 ? (
-            <Card className="p-5">
+            <Card className="p-5 mb-4">
               <Card.Content>
                 <Text className="text-primary pb-4" variant="titleLarge">
                   {food.description}
@@ -390,4 +411,4 @@ const FoodLog: React.FC = () => {
   );
 };
 
-export default FoodLog;
+export default Nutrition;

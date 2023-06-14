@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Alert, View, ActivityIndicator, StyleSheet } from "react-native";
 //Screen imports
 import Account from "../../screens/account/Account";
-import FoodLog from "../../screens/diary/FoodLog";
+import Nutrition from "../../screens/diary/Nutrition";
 import ProfileScreen from "../../screens/profile/Profile";
 import Diary from "../../screens/diary/Diary";
 import Dashboard from "../../screens/dashboard/Dashboard";
@@ -106,7 +106,7 @@ const Navigation = ({ session }: { session: Session }) => {
   const TabNavigator = () => {
     return (
       <Tab.Navigator
-        initialRouteName="FoodLog"
+        initialRouteName="Nutrition"
         screenOptions={{
           tabBarActiveTintColor: "#E07594",
           tabBarInactiveTintColor: "#E0759480",
@@ -129,7 +129,7 @@ const Navigation = ({ session }: { session: Session }) => {
         />
         <Tab.Screen
           name="QuickLog"
-          component={FoodLog}
+          component={Nutrition}
           options={{
             tabBarIcon: ({ color, size }) => (
               <MagnifyingGlassIcon name="ios-add" size={24} color={color} />
