@@ -14,6 +14,7 @@ import {
   MagnifyingGlassIcon,
   ChevronDownIcon,
   ChevronUpIcon,
+  PlusCircleIcon,
 } from "react-native-heroicons/outline";
 import { HeartIcon as FilledHeartIcon } from "react-native-heroicons/solid";
 // import {handleMinus, handlePlus} from "../../counter/logCounter";
@@ -72,7 +73,6 @@ const Nutrition: React.FC = () => {
         quantity: data.quantity,
       },
     };
-    console.log("FAVO", favoriteItem);
     dispatch(addFavorite(favoriteItem));
   }
 
@@ -368,44 +368,43 @@ const Nutrition: React.FC = () => {
           }
           keyExtractor={(item) => item.id.toString()}
         />
-        <View className="flex-1 justify-center m-10">
-          {/* Card in the bottom half */}
-          <Text className="text-primary font-extrabold pl-4 pb-2 text-xl">
-            Favorite
-          </Text>
-          {Object.keys(food).length > 0 ? (
-            <Card className="p-5 mb-4">
-              <Card.Content>
-                <Text className="text-primary pb-4" variant="titleLarge">
-                  {food.description}
-                </Text>
-                <Text className="text-primary" variant="bodyMedium">
-                  Calories: {food.Calories}
-                </Text>
-                <Text className="text-primary" variant="bodyMedium">
-                  Carbs: {food.Carbs}
-                </Text>
-                <Text className="text-primary" variant="bodyMedium">
-                  Fat: {food.Fat}
-                </Text>
-                <Text className="text-primary" variant="bodyMedium">
-                  Protein: {food.Protein}
-                </Text>
-              </Card.Content>
-            </Card>
-          ) : (
-            <Card className="p-5">
-              <Card.Content>
-                <Text className="text-primary pb-4" variant="titleLarge">
-                  No favorite selected
-                </Text>
-                <Text className="text-primary" variant="bodyMedium">
-                  Please select a favorite to display here.
-                </Text>
-              </Card.Content>
-            </Card>
-          )}
-        </View>
+        {/* Card in the bottom half */}
+        <Text className="text-primary font-extrabold pl-4 pb-2 text-xl">
+          Favorite
+        </Text>
+        {Object.keys(food).length > 0 ? (
+          <Card className="p-5 mb-4 flex">
+            <View className="flex flex-row items-center mt-0">
+              <View className="flex flex-col">
+                <Card.Content>
+                  <Text
+                    className="text-primary font-extrabold"
+                    variant="titleLarge"
+                  >
+                    {food.description}
+                  </Text>
+                  <Text className="text-primary">
+                    Calories: {food.Calories}
+                  </Text>
+                </Card.Content>
+              </View>
+              <View className="flex flex-col ml-auto">
+                <PlusCircleIcon />
+              </View>
+            </View>
+          </Card>
+        ) : (
+          <Card className="p-5">
+            <Card.Content>
+              <Text className="text-primary pb-4" variant="titleLarge">
+                No favorite selected
+              </Text>
+              <Text className="text-primary" variant="bodyMedium">
+                Please select a favorite to display here.
+              </Text>
+            </Card.Content>
+          </Card>
+        )}
       </View>
     </Provider>
   );
