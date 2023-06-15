@@ -15,7 +15,6 @@ const Dashboard = (props: Props) => {
   const navigation = useNavigation();
   //intiate meditation redux states
   const { medStreak } = useAppSelector((state) => state.meditation);
-  console.log(medStreak);
   //Calendar date selector
   const [selected, setSelected] = useState("");
   const handleDateSelect = (date: string) => {

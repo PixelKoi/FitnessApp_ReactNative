@@ -59,7 +59,7 @@ const Nutrition: React.FC = () => {
   // );
 
   const { food } = useAppSelector((state) => state.favorite);
-  console.log("Favorite Foods", food, "food.length=", typeof food);
+  console.log(food);
   function updateFavoriteList(data) {
     const favoriteItem = {
       food: {
@@ -77,7 +77,6 @@ const Nutrition: React.FC = () => {
   }
 
   const handleFavoriteToggle = (index, array) => {
-    console.log("adding food?", array[index]);
     const updatedSelectedHearts = [...selectedHearts];
     updatedSelectedHearts[index] = !updatedSelectedHearts[index];
     setSelectedHearts(updatedSelectedHearts);
@@ -97,20 +96,15 @@ const Nutrition: React.FC = () => {
   const [mealError, setMealError] = useState(false);
   // let redux-slice submit quick log when state selectedOption set
   const checkOption = useCallback(() => {
-    console.log(selectedOption.length);
-    console.log(foodArray.length, "FOODARRAY");
-    console.log(selectedOption);
     if (selectedOption.length > 0) {
       setSaveButton(true);
     } else if (selectedOption.length == 0) {
-      console.log("DID NOT Select food option");
       showErrorDialog();
     }
   }, [selectedOption, handleOptionSelect]);
   const handleOptionSelect = (option) => {
     setSelectedOption(option);
     setVisible(false);
-    console.log("Selected option:", option, selectedOption);
   };
   const clearTextInput = () => {
     setFoodName(""); // Clear the TextInput value
@@ -149,8 +143,6 @@ const Nutrition: React.FC = () => {
     });
   }, [checkOption]);
   const showErrorDialog = () => {
-    console.log("WTF");
-    console.log(selectedOption.length);
     setMealError(true);
   };
   const hideErrorDialog = () => setMealError(false);
@@ -191,7 +183,6 @@ const Nutrition: React.FC = () => {
       updatedFood.quantity += 1;
       updatedFoodArray[index] = updatedFood;
       setFoodArray(updatedFoodArray);
-      console.log(foodArray);
     }
   };
 
@@ -202,7 +193,6 @@ const Nutrition: React.FC = () => {
       updatedFood.quantity -= 1;
       updatedFoodArray[index] = updatedFood;
       setFoodArray(updatedFoodArray);
-      console.log(foodArray);
     }
   };
 
@@ -217,7 +207,7 @@ const Nutrition: React.FC = () => {
   }, [foodArray]);
   const saveToDiary = () => {
     const selectedFoods = foodArray.filter((food) => food.quantity > 0);
-    console.log("Selected FOODS: ", selectedFoods);
+    // console.log("Selected FOODS: ", selectedFoods);
     setSaveButton(false);
     tabNavigation.navigate("Diary", { selectedFoods, selectedOption });
   };
@@ -225,7 +215,7 @@ const Nutrition: React.FC = () => {
   const handleInputChange = (text, food) => {};
   const renderFoodItem = (food, index, foodArray) => {
     // only create objects when the component renders
-    console.log("food.quantity", food.quantity, index);
+    // console.log("food.quantity", food.quantity, index);
     // console.log("STATE", foodArray);
     return (
       <View className="p-2 ">
