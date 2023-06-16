@@ -29,15 +29,15 @@ const ChangeEmailModal = (props) => {
 				throw error;
 			}
 
-			// // If the email update is successful, update the email in the user profile table
-			// const { data, error: profileError } = await supabase
-			// 	.from("profile.users")
-			// 	.update({ email: newEmail })
-			// 	.match({ id: session.user.id });
+			// If the email update is successful, update the email in the user profile table
+			const { data, error: profileError } = await supabase
+				.from("profile")
+				.update({ email: newEmail })
+				.match({ id: session.user.id });
 
-			// if (profileError) {
-			// 	throw profileError;
-			// }
+			if (profileError) {
+				throw profileError;
+			}
 
 			console.log("Email updated successfully");
 		} catch (error) {
