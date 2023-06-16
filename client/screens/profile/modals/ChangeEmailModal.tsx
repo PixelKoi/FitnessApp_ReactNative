@@ -7,21 +7,43 @@ import { supabase } from "../../../utils/supabase_authentication/supabase";
 import { Session } from "@supabase/supabase-js";
 
 const ChangeEmailModal = (props) => {
+	const [session, setSession] = useState<Session | null>(null);
+
 	//Change Email Hooks
 	const [newEmail, setNewEmail] = useState("");
 	const [repeatEmail, setRepeatEmail] = useState("");
 	const [password, setPassword] = useState("");
 
-	const updateEmail = async (newEmail) => {
-		const { data, error } = await supabase.auth.updateUser({
-			email: newEmail,
+	useEffect(() => {
+		supabase.auth.getSession().then(({ data: { session } }) => {
+			setSession(session);
 		});
-		if (error) {
-			console.log(error);
-		} else {
-			console.log(data);
+	});
+
+	async function updateEmail(newEmail) {
+		try {
+			// Update the email using Supabase's `update` method
+			const { error } = await supabase.auth.updateUser({ email: newEmail });
+
+			if (error) {
+				throw error;
+			}
+
+			// If the email update is successful, update the email in the user profile table
+			const { data, error: profileError } = await supabase
+				.from("Users")
+				.update({ email: newEmail })
+				.match({ id: session.user.id });
+
+			if (profileError) {
+				throw profileError;
+			}
+
+			console.log("Email updated successfully");
+		} catch (error) {
+			console.error("Error updating email:", error.message);
 		}
-	};
+	}
 
 	return (
 		<Modal className="bg-secondary" visible={props.visible}>
