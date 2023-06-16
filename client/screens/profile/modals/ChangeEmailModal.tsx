@@ -1,16 +1,27 @@
-import { useNavigation } from "@react-navigation/native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Modal, Text, TouchableOpacity, TextInput } from "react-native";
-import { Surface } from "react-native-paper";
+import { Button, Surface } from "react-native-paper";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import { supabase } from "../../../utils/supabase_authentication/supabase";
+import { Session } from "@supabase/supabase-js";
 
 const ChangeEmailModal = (props) => {
-	const navigation = useNavigation();
-
+	//Change Email Hooks
 	const [newEmail, setNewEmail] = useState("");
 	const [repeatEmail, setRepeatEmail] = useState("");
 	const [password, setPassword] = useState("");
+
+	const updateEmail = async (newEmail) => {
+		const { data, error } = await supabase.auth.updateUser({
+			email: newEmail,
+		});
+		if (error) {
+			console.log(error);
+		} else {
+			console.log(data);
+		}
+	};
 
 	return (
 		<Modal className="bg-secondary" visible={props.visible}>
@@ -28,7 +39,7 @@ const ChangeEmailModal = (props) => {
 							onChangeText={(newEmail) => setNewEmail(newEmail)}></TextInput>
 						<View className="ml-auto flex-row self-center">
 							<Text className="text-xs mr-2 text-primary opacity-60">
-								Email
+								New Email
 							</Text>
 							<MaterialCommunityIcons
 								name="pencil-outline"
@@ -73,6 +84,17 @@ const ChangeEmailModal = (props) => {
 							/>
 						</View>
 					</View>
+
+					<Button
+						onPress={() => {
+							if (newEmail === repeatEmail) {
+								updateEmail(newEmail);
+							}
+						}}
+						className="mt-10 mx-8"
+						mode="outlined">
+						Send
+					</Button>
 				</Surface>
 			</View>
 		</Modal>
