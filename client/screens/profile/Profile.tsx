@@ -25,6 +25,7 @@ import { useDatabase } from "@nozbe/watermelondb/hooks";
 import calAlgo from "./cal-algo";
 import { UserCircleIcon } from "react-native-heroicons/outline";
 import EditProfile from "./EditProfile";
+import { supabase } from "../../utils/supabase_authentication/supabase";
 
 const UserBioInput = () => {
 	const database = useDatabase();
@@ -33,6 +34,7 @@ const UserBioInput = () => {
 	//Initiate user redux states
 	const {
 		sessionID,
+		email,
 		gender,
 		weight,
 		height,
@@ -146,6 +148,18 @@ const UserBioInput = () => {
 		}
 	};
 
+	const signOut = async () => {
+		try {
+			const { error } = await supabase.auth.signOut();
+
+			if (error) {
+				console.log(error);
+			}
+		} catch (error) {
+			console.error("Error updating email:", error.message);
+		}
+	};
+
 	//Top Nav on Edit Profile Screen
 	React.useLayoutEffect(() => {
 		navigation.setOptions({
@@ -207,7 +221,7 @@ const UserBioInput = () => {
 				<View className="flex bg-primary items-center  pb-6 w-full rounded-b-full absolute z-10">
 					<UserCircleIcon name="ios-add" size={50} color={"white"} />
 					<Text className="text-white my-2">{name}</Text>
-					<Text className="text-white">@gmail.com</Text>
+					<Text className="text-white">{email}</Text>
 				</View>
 				<Surface className="mx-8 py-8 pb-12 mt-24 rounded-b-3xl bg-background">
 					<View className="mx-8">
@@ -256,7 +270,7 @@ const UserBioInput = () => {
 						<View className="flex flex-row border-solid border-b-2 py-4 border-secondary">
 							<Text className="text-primary text-xs">Email:</Text>
 							<Text className="ml-auto text-primary opacity-60 text-xs">
-								@email.com
+								{email}
 							</Text>
 						</View>
 
@@ -275,6 +289,12 @@ const UserBioInput = () => {
 						</View>
 					</View>
 				</Surface>
+				<Button
+					onPress={signOut}
+					className="w-40 mx-auto mt-4"
+					mode="contained">
+					Sign Out
+				</Button>
 			</View>
 		);
 	};

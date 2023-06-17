@@ -31,8 +31,17 @@ const EditProfile = () => {
 	const database = useDatabase();
 	const navigation = useNavigation();
 	//Initiate user redux states
-	const { sessionID, gender, weight, height, age, name, activity, goal } =
-		useAppSelector((state) => state.user);
+	const {
+		sessionID,
+		email,
+		gender,
+		weight,
+		height,
+		age,
+		name,
+		activity,
+		goal,
+	} = useAppSelector((state) => state.user);
 	const dispatch = useAppDispatch();
 
 	//Edit Profile Hooks
@@ -232,6 +241,7 @@ const EditProfile = () => {
 								setShowChangeEmail(true);
 							}}
 							className="flex-row text-primary border-solid border-b-2 w-full border-secondary py-4">
+							<Text className="text-primary text-xs">{email}</Text>
 							<View className="ml-auto flex-row self-center">
 								<Text className="text-xs mr-2 text-primary opacity-60">
 									Email
@@ -251,6 +261,7 @@ const EditProfile = () => {
 								Keyboard.dismiss;
 							}}
 							className="flex-row text-primary border-solid border-b-2 w-full border-secondary py-4">
+							<Text className="text-primary text-xs">************</Text>
 							<View className="ml-auto flex-row self-center">
 								<Text className="text-xs mr-2 text-primary opacity-60">
 									Password
