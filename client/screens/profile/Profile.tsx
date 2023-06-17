@@ -1,29 +1,15 @@
 import React, { useState, useEffect } from "react";
-import {
-	View,
-	Text,
-	TouchableOpacity,
-	Alert,
-	StatusBar,
-	SafeAreaView,
-	StyleSheet,
-} from "react-native";
+import { View, Text, Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import {
-	TextInput,
-	Button,
-	List,
-	Surface,
-	Pressable,
-	Modal,
-} from "react-native-paper";
+import { Button, Surface } from "react-native-paper";
+//Import redux
 import { useAppDispatch, useAppSelector } from "../../redux-manager/hooks";
-import DateTimePicker from "@react-native-community/datetimepicker";
-import Icon from "react-native-vector-icons/FontAwesome";
-import Profile from "../../database/models/Profile";
 import { useDatabase } from "@nozbe/watermelondb/hooks";
-import calAlgo from "./cal-algo";
+//Import Icons
+import Icon from "react-native-vector-icons/FontAwesome";
 import { UserCircleIcon } from "react-native-heroicons/outline";
+import Profile from "../../database/models/Profile";
+import calAlgo from "./cal-algo";
 import EditProfile from "./EditProfile";
 import { supabase } from "../../utils/supabase_authentication/supabase";
 
@@ -49,17 +35,6 @@ const UserBioInput = () => {
 
 	//Edit Profile Hooks
 	const [showEditProfile, setEditProfile] = useState<boolean>(false);
-
-	//Accordian Dropdown Lists Hooks
-	const [expandActivity, setExpandActivity] = useState<boolean>(false);
-	const [expandGoal, setExpandGoal] = useState<boolean>(false);
-	const [expandGender, setExpandGender] = useState<boolean>(false);
-	const handleExpandGender = () => setExpandGender(!expandGender);
-	const handleExpandActivity = () => setExpandActivity(!expandActivity);
-	const handleExpandGoal = () => setExpandGoal(!expandGoal);
-
-	const [date, setDate] = useState(new Date());
-	const [showPicker, setShowPicker] = useState(false);
 
 	//Create Calorie Param object for calAlgo function
 	const calParams = {
@@ -122,32 +97,7 @@ const UserBioInput = () => {
 		}
 	}
 
-	//Get Age after selecting date from time picker
-	function getAgeFromDateOfBirth(dateOfBirth) {
-		const today = new Date();
-		const birthDate = new Date(dateOfBirth);
-		let age = today.getFullYear() - birthDate.getFullYear();
-
-		const monthDifference = today.getMonth() - birthDate.getMonth();
-		if (
-			monthDifference < 0 ||
-			(monthDifference === 0 && today.getDate() < birthDate.getDate())
-		) {
-			age--;
-		}
-
-		return age;
-	}
-
-	//Get date from time picker
-	const [selectedDate, setSelectedDate] = useState(new Date());
-	const handleDateChange = (event, date) => {
-		if (date !== undefined) {
-			setSelectedDate(date);
-			setAge(getAgeFromDateOfBirth(date));
-		}
-	};
-
+	//Sign out of profile
 	const signOut = async () => {
 		try {
 			const { error } = await supabase.auth.signOut();
@@ -291,7 +241,7 @@ const UserBioInput = () => {
 				</Surface>
 				<Button
 					onPress={signOut}
-					className="w-40 mx-auto mt-4"
+					className="w-40 mx-auto mt-4 bg-primary"
 					mode="contained">
 					Sign Out
 				</Button>
@@ -317,7 +267,3 @@ export default UserBioInput;
 //   selectedActivity,
 //   Number(selectedGoal)
 // );
-
-const styles = StyleSheet.create({
-	container: {},
-});

@@ -7,24 +7,19 @@ import {
 	TextInput,
 	Keyboard,
 	Alert,
-	Modal,
 } from "react-native";
-import { Button, List, Surface } from "react-native-paper";
+import { Button, Surface } from "react-native-paper";
 
-import Icon from "react-native-vector-icons/FontAwesome";
 import Profile from "../../database/models/Profile";
-
 import { setUserStates } from "../../redux-manager/redux-slice/user-slice";
 import { useDatabase } from "@nozbe/watermelondb/hooks";
 import { useAppDispatch, useAppSelector } from "../../redux-manager/hooks";
 import { useNavigation } from "@react-navigation/native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import MaterialIcons from "react-native-vector-icons/FontAwesome";
 
 //Pickers
-import { Picker } from "@react-native-picker/picker";
-import DateTimePicker from "@react-native-community/datetimepicker";
-
+import ActivityPicker from "./modals/ActivityPickerModal";
+import AgePicker from "./modals/AgePickerModal";
 import ChangeEmailModal from "./modals/ChangeEmailModal";
 
 const EditProfile = () => {
@@ -52,6 +47,11 @@ const EditProfile = () => {
 	const [selectedGender, setGender] = useState<string>(gender);
 	const [selectedActivity, setActivityLevel] = useState<string>(activity);
 	const [newGoal, setGoal] = useState<string>(goal.toString());
+
+	//Show Modal hooks
+	const [showActivityPicker, setShowActivityPicker] = useState(false);
+	const [showChangeEmail, setShowChangeEmail] = useState(false);
+	const [showDatePicker, setShowDatePicker] = useState(false);
 
 	//Update Redux States
 	async function updateReduxProfileStates(
@@ -127,103 +127,6 @@ const EditProfile = () => {
 			setLoading(false);
 		}
 	}
-
-	//Get Age after selecting date from time picker
-	function getAgeFromDateOfBirth(dateOfBirth) {
-		const today = new Date();
-		const birthDate = new Date(dateOfBirth);
-		let age = today.getFullYear() - birthDate.getFullYear();
-
-		const monthDifference = today.getMonth() - birthDate.getMonth();
-		if (
-			monthDifference < 0 ||
-			(monthDifference === 0 && today.getDate() < birthDate.getDate())
-		) {
-			age--;
-		}
-
-		return age;
-	}
-	//Get date from time picker
-	const [date, setDate] = useState(new Date());
-	const [showDatePicker, setShowDatePicker] = useState(false);
-
-	const [selectedDate, setSelectedDate] = useState(new Date());
-	const handleDateChange = (event, date) => {
-		if (date !== undefined) {
-			setSelectedDate(date);
-			setAge(getAgeFromDateOfBirth(date));
-		}
-	};
-
-	//Age picker modal
-	const AgePickerModal = () => {
-		return (
-			<Modal
-				style={{ backgroundColor: "white" }}
-				animationType="slide"
-				visible={showDatePicker}
-				transparent>
-				<View className="flex bg-primary mt-auto h-60">
-					<TouchableOpacity
-						className="py-2"
-						onPress={() => setShowDatePicker(false)}>
-						<View className="mx-auto">
-							<MaterialIcons name="angle-up" size={30} color={"#ffff"} />
-						</View>
-					</TouchableOpacity>
-					<DateTimePicker
-						value={date}
-						onChange={handleDateChange}
-						textColor="#ffff"
-						mode="date"
-						display="spinner"></DateTimePicker>
-				</View>
-			</Modal>
-		);
-	};
-
-	//Activity picker hooks
-	const [showActivityPicker, setShowActivityPicker] = useState(false);
-
-	//Activty picker modal
-	const ActivityPickerModal = () => {
-		return (
-			<Modal
-				style={{ backgroundColor: "white" }}
-				animationType="slide"
-				visible={showActivityPicker}
-				transparent>
-				<View className="flex bg-primary mt-auto h-60">
-					<TouchableOpacity
-						className="py-2"
-						onPress={() => setShowActivityPicker(false)}>
-						<View className="mx-auto">
-							<MaterialIcons name="angle-up" size={30} color={"#ffff"} />
-						</View>
-					</TouchableOpacity>
-					<Picker
-						itemStyle={{ color: "white" }}
-						selectedValue={selectedActivity}
-						onValueChange={(itemValue, itemIndex) => {
-							setActivityLevel(itemValue);
-						}}>
-						<Picker.Item
-							style={{ color: "#ffff" }}
-							label="Sedentary"
-							value="Sedentary"
-						/>
-						<Picker.Item label="Lightly active" value="Lightly active" />
-						<Picker.Item label="Moderately active" value="Moderately active" />
-						<Picker.Item label="Very active" value="Very active" />
-						<Picker.Item label="Extremely active" value="Extremely active" />
-					</Picker>
-				</View>
-			</Modal>
-		);
-	};
-
-	const [showChangeEmail, setShowChangeEmail] = useState(false);
 
 	return (
 		<TouchableWithoutFeedback
@@ -410,8 +313,17 @@ const EditProfile = () => {
 					mode="contained">
 					<Text className="text-white">Save</Text>
 				</Button>
-				{AgePickerModal()}
-				{ActivityPickerModal()}
+				<AgePicker
+					showDatePicker={showDatePicker}
+					setShowDatePicker={setShowDatePicker}
+					setAge={setAge}
+				/>
+				<ActivityPicker
+					showActivityPicker={showActivityPicker}
+					selectedActivity={selectedActivity}
+					setActivityLevel={setActivityLevel}
+					setShowActivityPicker={setShowActivityPicker}
+				/>
 				<ChangeEmailModal
 					visible={showChangeEmail}
 					setShowModal={setShowChangeEmail}
