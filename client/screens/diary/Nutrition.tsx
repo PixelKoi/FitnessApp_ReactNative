@@ -58,8 +58,8 @@ const Nutrition: React.FC = () => {
   //   (state) => state.favorite
   // );
 
-  const favorite_objects = useAppSelector((state) => state.favorite);
-  console.log("VALUES", favorite_objects);
+  const { favorites } = useAppSelector((state) => state.favorite);
+  console.log("VALUES", favorites);
   function updateFavoriteList(data) {
     const favoriteItem = {
       Calories: data.food.Calories,
@@ -357,27 +357,29 @@ const Nutrition: React.FC = () => {
         <Text className="text-primary font-extrabold pl-4 pb-2 text-xl">
           Favorite
         </Text>
-        {Object.keys(favorite_objects).length > 0 ? (
-          <Card className="p-5 mb-4 flex">
-            <View className="flex flex-row items-center mt-0">
-              <View className="flex flex-col">
-                <Card.Content>
-                  <Text
-                    className="text-primary font-extrabold"
-                    variant="titleLarge"
-                  >
-                    {favorite_objects.description}
-                  </Text>
-                  <Text className="text-primary">
-                    Calories: {favorite_objects.Calories}
-                  </Text>
-                </Card.Content>
+        {favorites.length > 0 ? (
+          favorites.map((favorite) => (
+            <Card key={favorite.fav_id} className="p-5 mb-4 flex">
+              <View className="flex flex-row items-center mt-0">
+                <View className="flex flex-col">
+                  <Card.Content>
+                    <Text
+                      className="text-primary font-extrabold"
+                      variant="titleLarge"
+                    >
+                      {favorite.description}
+                    </Text>
+                    <Text className="text-primary">
+                      Calories: {favorite.Calories}
+                    </Text>
+                  </Card.Content>
+                </View>
+                <View className="flex flex-col ml-auto">
+                  <PlusCircleIcon />
+                </View>
               </View>
-              <View className="flex flex-col ml-auto">
-                <PlusCircleIcon />
-              </View>
-            </View>
-          </Card>
+            </Card>
+          ))
         ) : (
           <Card className="p-5">
             <Card.Content>
