@@ -2,7 +2,7 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import userReducer from "./redux-slice/user-slice";
 import sessionReducer from "./redux-slice/session-slice";
 import fastingReducer from "./redux-slice/fasting-slice";
-import favoriteReducer from "./redux-slice/favorite-slice";
+import favSlice from "./redux-slice/favorite-slice";
 import meditationReducer from "./redux-slice/meditation-slice";
 import startFastingTimer from "./middleware/fasting-timer";
 import startMeditationTimer from "./middleware/meditation-timer";
@@ -22,7 +22,7 @@ const reducers = combineReducers({
   session: sessionReducer,
   fasting: fastingReducer,
   meditation: meditationReducer,
-  favorite: favoriteReducer,
+  favorite: favSlice,
 });
 
 const persistConfig = {
@@ -49,6 +49,7 @@ export const store = configureStore({
     }).concat(fastingTimerMiddleware, meditationTimerMiddleware),
 });
 
+console.log("GETTING STORE STATE", store.getState());
 export const persistor = persistStore(store);
 
 export type AppDispatch = typeof store.dispatch;

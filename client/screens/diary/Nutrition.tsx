@@ -58,21 +58,18 @@ const Nutrition: React.FC = () => {
   //   (state) => state.favorite
   // );
 
-  const { food } = useAppSelector((state) => state.favorite);
-  console.log(food);
+  const favorite_objects = useAppSelector((state) => state.favorite);
+  console.log("VALUES", favorite_objects);
   function updateFavoriteList(data) {
     const favoriteItem = {
-      food: {
-        Calories: data.food.Calories,
-        Carbs: data.food.Carbs,
-        Fat: data.food.Fat,
-        Protein: data.food.Protein,
-        description: data.food.description,
-        id: data.id,
-        isSelected: data.isSelected,
-        quantity: data.quantity,
-      },
+      Calories: data.food.Calories,
+      Carbs: data.food.Carbs,
+      Fat: data.food.Fat,
+      Protein: data.food.Protein,
+      description: data.food.description,
+      id: data.id,
     };
+    console.log("DISPATCH", favoriteItem);
     dispatch(addFavorite(favoriteItem));
   }
 
@@ -350,7 +347,6 @@ const Nutrition: React.FC = () => {
             <MagnifyingGlassIcon color="#E07594"></MagnifyingGlassIcon>
           </TouchableOpacity>
         </View>
-
         <FlatList
           data={foodArray}
           renderItem={({ item, index }) =>
@@ -358,11 +354,10 @@ const Nutrition: React.FC = () => {
           }
           keyExtractor={(item) => item.id.toString()}
         />
-        {/* Card in the bottom half */}
         <Text className="text-primary font-extrabold pl-4 pb-2 text-xl">
           Favorite
         </Text>
-        {Object.keys(food).length > 0 ? (
+        {Object.keys(favorite_objects).length > 0 ? (
           <Card className="p-5 mb-4 flex">
             <View className="flex flex-row items-center mt-0">
               <View className="flex flex-col">
@@ -371,10 +366,10 @@ const Nutrition: React.FC = () => {
                     className="text-primary font-extrabold"
                     variant="titleLarge"
                   >
-                    {food.description}
+                    {favorite_objects.description}
                   </Text>
                   <Text className="text-primary">
-                    Calories: {food.Calories}
+                    Calories: {favorite_objects.Calories}
                   </Text>
                 </Card.Content>
               </View>
