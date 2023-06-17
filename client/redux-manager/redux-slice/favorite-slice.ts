@@ -17,14 +17,18 @@ const initialState = {
 };
 
 const favSlice = createSlice({
-  name: 'favorite',
-  initialState: [],
+  name: "favorite",
+  initialState,
   reducers: {
-    addFavorite(state, action) {
-      state.push(action.payload)
+    addFavorite(state, action: PayloadAction<FavoriteState>) {
+      const newFavorite = {
+        ...action.payload,
+        fav_id: state.length + 1, // Generate a unique ID based on the current length
+      };
+      state.push(newFavorite);
     },
   },
-})
+});
 
 export const { addFavorite } = favSlice.actions;
 export default favSlice.reducer;
