@@ -357,12 +357,12 @@ const Nutrition: React.FC = () => {
         <Text className="text-primary font-extrabold pl-4 pb-2 text-xl">
           Favorite
         </Text>
-        <Card className="pl-0 ml-0">
-          <Card.Content>
+        <Card className="">
+          <Card.Content className="">
             {favorites.length > 0 ? (
               favorites.map((favorite) => (
                 <View key={favorite.fav_id} className="p-2 m-4">
-                  <View className="flex flex-row items-center mt-0">
+                  <View className="flex flex-row  mt-0">
                     <View className="flex flex-col">
                       <Card.Content>
                         <Text
