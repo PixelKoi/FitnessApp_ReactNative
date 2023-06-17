@@ -357,41 +357,45 @@ const Nutrition: React.FC = () => {
         <Text className="text-primary font-extrabold pl-4 pb-2 text-xl">
           Favorite
         </Text>
-        {favorites.length > 0 ? (
-          favorites.map((favorite) => (
-            <Card key={favorite.fav_id} className="p-5 mb-4 flex">
-              <View className="flex flex-row items-center mt-0">
-                <View className="flex flex-col">
-                  <Card.Content>
-                    <Text
-                      className="text-primary font-extrabold"
-                      variant="titleLarge"
-                    >
-                      {favorite.description}
-                    </Text>
-                    <Text className="text-primary">
-                      Calories: {favorite.Calories}
-                    </Text>
-                  </Card.Content>
+        <Card className="">
+          <Card.Content className="">
+            {favorites.length > 0 ? (
+              favorites.map((favorite) => (
+                <View key={favorite.fav_id} className="p-2 m-4">
+                  <View className="flex flex-row  mt-0">
+                    <View className="flex flex-col">
+                      <Card.Content>
+                        <Text
+                          className="text-primary font-extrabold"
+                          variant="titleLarge"
+                        >
+                          {favorite.description}
+                        </Text>
+                        <Text className="text-primary">
+                          Calories: {favorite.Calories}
+                        </Text>
+                      </Card.Content>
+                    </View>
+                    <View className="flex flex-col ml-auto">
+                      <PlusCircleIcon />
+                    </View>
+                  </View>
                 </View>
-                <View className="flex flex-col ml-auto">
-                  <PlusCircleIcon />
-                </View>
-              </View>
-            </Card>
-          ))
-        ) : (
-          <Card className="p-5">
-            <Card.Content>
-              <Text className="text-primary pb-4" variant="titleLarge">
-                No favorite selected
-              </Text>
-              <Text className="text-primary" variant="bodyMedium">
-                Please select a favorite to display here.
-              </Text>
-            </Card.Content>
-          </Card>
-        )}
+              ))
+            ) : (
+              <Card>
+                <Card.Content>
+                  <Text className="text-primary pb-4" variant="titleLarge">
+                    No favorite selected
+                  </Text>
+                  <Text className="text-primary" variant="bodyMedium">
+                    Please select a favorite to display here.
+                  </Text>
+                </Card.Content>
+              </Card>
+            )}
+          </Card.Content>
+        </Card>
       </View>
     </Provider>
   );
