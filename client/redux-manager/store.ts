@@ -3,6 +3,7 @@ import userReducer from "./redux-slice/user-slice";
 import sessionReducer from "./redux-slice/session-slice";
 import fastingReducer from "./redux-slice/fasting-slice";
 import favSlice from "./redux-slice/favorite-slice";
+import themeSlice from "./redux-slice/theme-slice";
 import meditationReducer from "./redux-slice/meditation-slice";
 import startFastingTimer from "./middleware/fasting-timer";
 import startMeditationTimer from "./middleware/meditation-timer";
@@ -23,6 +24,7 @@ const reducers = combineReducers({
   fasting: fastingReducer,
   meditation: meditationReducer,
   favorite: favSlice,
+  theme: themeSlice,
 });
 
 const persistConfig = {

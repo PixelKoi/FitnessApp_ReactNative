@@ -382,7 +382,9 @@ const Nutrition: React.FC = () => {
                       <PlusCircleIcon />
                     </View>
                   </View>
-                  <Icon name="heart-circle" size={30} color="#900" />
+                  <View className="text-primary">
+                    <Icon name="heart-circle" size={30} />
+                  </View>
                 </View>
               ))
             ) : (
