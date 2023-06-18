@@ -12,6 +12,7 @@ import Profile from "../../database/models/Profile";
 import calAlgo from "./cal-algo";
 import EditProfile from "./EditProfile";
 import { supabase } from "../../utils/supabase_authentication/supabase";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 const UserBioInput = () => {
 	const database = useDatabase();
@@ -113,7 +114,7 @@ const UserBioInput = () => {
 	//Top Nav on Edit Profile Screen
 	React.useLayoutEffect(() => {
 		navigation.setOptions({
-			title: showEditProfile === false ? "Profile" : "Edit Profile",
+			title: showEditProfile === false ? "Quick Settings" : "Edit Profile",
 			headerStyle: {
 				backgroundColor: showEditProfile === false ? "#E07594" : "#F6E6EB",
 				shadowColor: "transparent",
@@ -176,52 +177,74 @@ const UserBioInput = () => {
 				<Surface className="mx-8 py-8 pb-12 mt-24 rounded-b-3xl bg-background">
 					<View className="mx-8">
 						<View className="flex flex-row border-solid border-b-2 py-4 border-secondary">
-							<Text className="text-primary text-xs">Age:</Text>
-							<Text className="ml-auto text-primary opacity-60  text-xs">
-								{age}
-							</Text>
+							<Text className="text-primary text-xs">Workout Plan</Text>
+							<View className="ml-auto flex-row self-center">
+								<MaterialCommunityIcons
+									name="pencil-outline"
+									size={15}
+									color={"#E07594"}
+								/>
+							</View>
 						</View>
 
 						<View className="flex flex-row border-solid border-b-2 py-4 border-secondary">
-							<Text className="text-primary  text-xs">Gender:</Text>
-							<Text className="ml-auto text-primary opacity-60  text-xs">
-								{gender}
-							</Text>
+							<Text className="text-primary text-xs">Diet Plan</Text>
+							<View className="ml-auto flex-row self-center">
+								<MaterialCommunityIcons
+									name="pencil-outline"
+									size={15}
+									color={"#E07594"}
+								/>
+							</View>
 						</View>
 
 						<View className="flex flex-row border-solid border-b-2 py-4 border-secondary">
-							<Text className="text-primary text-xs">Height (cm):</Text>
-							<Text className="ml-auto text-primary opacity-60 text-xs">
-								{height} cm
+							<Text className="text-primary text-xs">Theme</Text>
+
+							<Text className="ml-auto mr-2 text-primary opacity-60 text-xs">
+								Bubble Gum
 							</Text>
+							<MaterialCommunityIcons
+								name="pencil-outline"
+								size={15}
+								color={"#E07594"}
+							/>
 						</View>
 
 						<View className="flex flex-row border-solid border-b-2 py-4 border-secondary">
 							<Text className="text-primary text-xs">Weight (kg)</Text>
-							<Text className="ml-auto text-primary opacity-60 text-xs">
+							<Text className="ml-auto mr-2 text-primary opacity-60 text-xs">
 								{weight} kg
 							</Text>
+							<MaterialCommunityIcons
+								name="pencil-outline"
+								size={15}
+								color={"#E07594"}
+							/>
 						</View>
 
 						<View className="flex flex-row border-solid border-b-2 py-4 border-secondary">
 							<Text className="text-primary text-xs">Activity Level</Text>
-							<Text className="ml-auto text-primary opacity-60 text-xs">
+							<Text className="ml-auto mr-2 text-primary opacity-60 text-xs">
 								{activity}
 							</Text>
+							<MaterialCommunityIcons
+								name="pencil-outline"
+								size={15}
+								color={"#E07594"}
+							/>
 						</View>
 
 						<View className="flex flex-row border-solid border-b-2 py-4 border-secondary">
 							<Text className="text-primary text-xs">Weekly Goal:</Text>
-							<Text className="ml-auto text-primary opacity-60 text-xs">
+							<Text className="ml-auto mr-2 text-primary opacity-60 text-xs">
 								{goal} lb/s
 							</Text>
-						</View>
-
-						<View className="flex flex-row border-solid border-b-2 py-4 border-secondary">
-							<Text className="text-primary text-xs">Email:</Text>
-							<Text className="ml-auto text-primary opacity-60 text-xs">
-								{email}
-							</Text>
+							<MaterialCommunityIcons
+								name="pencil-outline"
+								size={15}
+								color={"#E07594"}
+							/>
 						</View>
 
 						<View className="flex flex-row border-solid border-b-2 py-4 border-secondary">
