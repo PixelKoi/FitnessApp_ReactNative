@@ -1,13 +1,13 @@
 // ThemeProvider.js
 
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useAppSelector, useAppDispatch } from "./redux-manager/hooks";
 import { ThemeProvider as StyledThemeProvider } from "styled-components/native";
-import { setTheme } from "./themeSlice";
+import { setTheme } from "./redux-manager/redux-slice/theme-slice";
 
 const ThemeProvider = ({ children }) => {
-  const theme = useSelector((state) => state.theme);
-  const dispatch = useDispatch();
+  const theme = useAppSelector((state) => state.theme);
+  const dispatch = useAppDispatch();
 
   const handleSetTheme = (newTheme) => {
     dispatch(setTheme(newTheme));
@@ -15,14 +15,15 @@ const ThemeProvider = ({ children }) => {
 
   // Define your theme colors based on the theme value
   const colors = {
-    pink: {
+    bubble_gum: {
       primary: "#E07594",
       secondary: "#F6E6EB",
       background: "#FFFFFF",
     },
-    dark: {
-      primary: "#FFFFFF",
-      secondary: "#000000",
+    steel: {
+      primary: "#454545",
+      secondary: "#6A6A6A",
+      background: "#FFFFFF",
     },
   };
 
