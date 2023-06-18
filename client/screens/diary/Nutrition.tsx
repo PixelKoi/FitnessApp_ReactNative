@@ -58,13 +58,12 @@ const Nutrition: React.FC = () => {
   // );
 
   const { colors } = useAppSelector((state) => state.theme);
-
   console.log("colors:", colors.primary);
   // ACCESS THEME COLORS
   // const primary_color = colors.primary;
-  const primary_color = colors.primary;
-  const secondary_color = colors.secondary;
-  const background = colors.background;
+  let primary_color = colors.primary;
+  let secondary_color = colors.secondary;
+  let background = colors.background;
   // ENDOF THEME COLORS
   const { favorites } = useAppSelector((state) => state.favorite);
   console.log("VALUES", favorites);
@@ -227,13 +226,19 @@ const Nutrition: React.FC = () => {
           <Card.Content>
             <View className="flex flex-row items-center mt-0">
               <View className="flex flex-col">
-                <Text color={primary_color} className="font-bold">
+                <Text style={{ color: primary_color }} className="font-bold">
                   {food.food.description}
                 </Text>
-                <Text color={primary_color}>{food.food.Protein}g Protein</Text>
-                <Text color={primary_color}>{food.food.Fat}g Fat</Text>
-                <Text color={primary_color}>{food.food.Carbs}g Carbs</Text>
-                <Text color={primary_color} className="font-bold">
+                <Text style={{ color: primary_color }}>
+                  {food.food.Protein}g Protein
+                </Text>
+                <Text style={{ color: primary_color }}>
+                  {food.food.Fat}g Fat
+                </Text>
+                <Text style={{ color: primary_color }}>
+                  {food.food.Carbs}g Carbs
+                </Text>
+                <Text style={{ color: primary_color }} className="font-bold">
                   {food.food.Calories} Calories
                 </Text>
               </View>
@@ -251,6 +256,7 @@ const Nutrition: React.FC = () => {
                   keyboardType="numeric"
                   className="rounded"
                   style={{
+                    color: primary_color,
                     textAlign: "center",
                   }}
                 />
@@ -284,7 +290,7 @@ const Nutrition: React.FC = () => {
           <Dialog visible={mealError} onDismiss={hideErrorDialog}>
             <Dialog.Title>Error</Dialog.Title>
             <Dialog.Content>
-              <Text variant="bodyMedium">
+              <Text style={{ color: primary_color }} variant="bodyMedium">
                 Please Select what meal you are entering
               </Text>
             </Dialog.Content>
@@ -300,7 +306,10 @@ const Nutrition: React.FC = () => {
             anchor={
               <View className="flex flex-row justify-center align-middle px-4">
                 <TouchableOpacity onPress={openMenu}>
-                  <Text color={primary_color} className="font-bold px-2">
+                  <Text
+                    style={{ color: primary_color }}
+                    className="font-bold px-2"
+                  >
                     {selectedOption || "Select a meal"}
                   </Text>
                 </TouchableOpacity>
@@ -356,7 +365,7 @@ const Nutrition: React.FC = () => {
           <Button
             buttonColor={primary_color}
             onPress={() => {
-              dispatch(setTheme("navy"));
+              dispatch(setTheme("green_light"));
             }}
           >
             THEME CHANGER
@@ -370,7 +379,7 @@ const Nutrition: React.FC = () => {
           keyExtractor={(item) => item.id.toString()}
         />
         <Text
-          color={primary_color}
+          style={{ color: primary_color }}
           className="font-extrabold pl-4 pb-2 text-xl"
         >
           Favorite
@@ -384,13 +393,13 @@ const Nutrition: React.FC = () => {
                     <View className="flex flex-col">
                       <Card.Content>
                         <Text
-                          color={primary_color}
+                          style={{ color: primary_color }}
                           className="font-extrabold"
                           variant="titleLarge"
                         >
                           {favorite.description}
                         </Text>
-                        <Text color={primary_color}>
+                        <Text style={{ color: primary_color }}>
                           Calories: {favorite.Calories}
                         </Text>
                       </Card.Content>
@@ -399,22 +408,19 @@ const Nutrition: React.FC = () => {
                       <PlusCircleIcon color={primary_color} />
                     </View>
                   </View>
-                  <View className="text-primary">
-                    <Icon name="heart-circle" size={30} />
-                  </View>
                 </View>
               ))
             ) : (
               <Card>
                 <Card.Content>
                   <Text
-                    color={primary_color}
+                    style={{ color: primary_color }}
                     className="pb-4"
                     variant="titleLarge"
                   >
                     No favorite selected
                   </Text>
-                  <Text color={primary_color} variant="bodyMedium">
+                  <Text style={{ color: primary_color }} variant="bodyMedium">
                     Please select a favorite to display here.
                   </Text>
                 </Card.Content>
