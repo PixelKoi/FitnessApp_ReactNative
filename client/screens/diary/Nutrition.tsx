@@ -33,6 +33,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 import { StyleSheet } from "react-native";
 import { addFavorite } from "../../redux-manager/redux-slice/favorite-slice";
 import { useAppSelector, useAppDispatch } from "../../redux-manager/hooks";
+import { orange50 } from "react-native-paper/lib/typescript/src/styles/themes/v2/colors";
 
 const styles = StyleSheet.create({
   container: {
@@ -60,12 +61,15 @@ const Nutrition: React.FC = () => {
   //   (state) => state.favorite
   // );
 
+  const currentThemeName = useAppSelector((state) => state.theme.currentTheme);
   const { colors } = useAppSelector((state) => state.theme);
 
+  console.log("colors:", colors, currentThemeName);
   // ACCESS THEME COLORS
-  const primary_color = colors.primary;
-  const secondary_color = colors.secondary;
-  const background = colors.background;
+  // const primary_color = colors.primary;
+  const primary_color = "orange";
+  // const secondary_color = colors.secondary;
+  // const background = colors.background;
   // ENDOF THEME COLORS
   const { favorites } = useAppSelector((state) => state.favorite);
   console.log("VALUES", favorites);
