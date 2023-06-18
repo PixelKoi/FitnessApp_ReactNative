@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, Alert } from "react-native";
+import { View, Text, Alert, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Button, Surface } from "react-native-paper";
 //Import redux
@@ -13,6 +13,8 @@ import calAlgo from "./cal-algo";
 import EditProfile from "./EditProfile";
 import { supabase } from "../../utils/supabase_authentication/supabase";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+
+import ActivityPickerModal from "./modals/ActivityPickerModal";
 
 const UserBioInput = () => {
 	const database = useDatabase();
@@ -165,6 +167,8 @@ const UserBioInput = () => {
 		calAlgo(calParams, dispatch);
 	}, [showEditProfile === false]);
 
+	const [showActivityModal, setShowActivityModal] = useState(false);
+
 	//Profile Screen
 	const profile = () => {
 		return (
@@ -223,7 +227,9 @@ const UserBioInput = () => {
 							/>
 						</View>
 
-						<View className="flex flex-row border-solid border-b-2 py-4 border-secondary">
+						<TouchableOpacity
+							onPress={() => setShowActivityModal(true)}
+							className="flex flex-row border-solid border-b-2 py-4 border-secondary">
 							<Text className="text-primary text-xs">Activity Level</Text>
 							<Text className="ml-auto mr-2 text-primary opacity-60 text-xs">
 								{activity}
@@ -233,7 +239,7 @@ const UserBioInput = () => {
 								size={15}
 								color={"#E07594"}
 							/>
-						</View>
+						</TouchableOpacity>
 
 						<View className="flex flex-row border-solid border-b-2 py-4 border-secondary">
 							<Text className="text-primary text-xs">Weekly Goal:</Text>
@@ -268,6 +274,11 @@ const UserBioInput = () => {
 					mode="contained">
 					Sign Out
 				</Button>
+
+				<ActivityPickerModal
+					showActivityModal={showActivityModal}
+					setShowActivityModal={setShowActivityModal}
+				/>
 			</View>
 		);
 	};
