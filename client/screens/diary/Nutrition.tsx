@@ -48,10 +48,6 @@ const styles = StyleSheet.create({
     flex: 1,
     marginRight: 4,
   },
-  text: {
-    color: "#E07594",
-    // Additional text styles if needed
-  },
 });
 
 const Nutrition: React.FC = () => {
@@ -231,15 +227,13 @@ const Nutrition: React.FC = () => {
           <Card.Content>
             <View className="flex flex-row items-center mt-0">
               <View className="flex flex-col">
-                <Text className="text-primary font-bold">
+                <Text color={primary_color} className="font-bold">
                   {food.food.description}
                 </Text>
-                <Text className="text-primary">
-                  {food.food.Protein}g Protein
-                </Text>
-                <Text className="text-primary">{food.food.Fat}g Fat</Text>
-                <Text className="text-primary">{food.food.Carbs}g Carbs</Text>
-                <Text className="text-primary font-bold">
+                <Text color={primary_color}>{food.food.Protein}g Protein</Text>
+                <Text color={primary_color}>{food.food.Fat}g Fat</Text>
+                <Text color={primary_color}>{food.food.Carbs}g Carbs</Text>
+                <Text color={primary_color} className="font-bold">
                   {food.food.Calories} Calories
                 </Text>
               </View>
@@ -306,23 +300,23 @@ const Nutrition: React.FC = () => {
             anchor={
               <View className="flex flex-row justify-center align-middle px-4">
                 <TouchableOpacity onPress={openMenu}>
-                  <Text className="font-bold px-2 text-primary">
+                  <Text color={primary_color} className="font-bold px-2">
                     {selectedOption || "Select a meal"}
                   </Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={openMenu}>
-                  <ChevronDownIcon size={18} color="#E07594" />
+                  <ChevronDownIcon size={18} color={primary_color} />
                 </TouchableOpacity>
               </View>
             }
           >
             <Menu.Item
-              titleStyle={{ color: "#E07594" }}
+              color={primary_color}
               onPress={() => handleOptionSelect("Breakfast")}
               title="Breakfast"
             />
             <Menu.Item
-              titleStyle={{ color: "#E07594" }}
+              color={primary_color}
               onPress={() => handleOptionSelect("Lunch")}
               title="Lunch"
             />
@@ -355,7 +349,7 @@ const Nutrition: React.FC = () => {
             className="mt-3 mb-3 py-1 mx-4"
             onPress={handleSearch}
           >
-            <MagnifyingGlassIcon color="#E07594"></MagnifyingGlassIcon>
+            <MagnifyingGlassIcon color={primary_color}></MagnifyingGlassIcon>
           </TouchableOpacity>
         </View>
         <View>
@@ -375,7 +369,10 @@ const Nutrition: React.FC = () => {
           }
           keyExtractor={(item) => item.id.toString()}
         />
-        <Text className="text-primary font-extrabold pl-4 pb-2 text-xl">
+        <Text
+          color={primary_color}
+          className="font-extrabold pl-4 pb-2 text-xl"
+        >
           Favorite
         </Text>
         <Card className="">
@@ -387,18 +384,19 @@ const Nutrition: React.FC = () => {
                     <View className="flex flex-col">
                       <Card.Content>
                         <Text
-                          className="text-primary font-extrabold"
+                          color={primary_color}
+                          className="font-extrabold"
                           variant="titleLarge"
                         >
                           {favorite.description}
                         </Text>
-                        <Text className="text-primary">
+                        <Text color={primary_color}>
                           Calories: {favorite.Calories}
                         </Text>
                       </Card.Content>
                     </View>
                     <View className="flex flex-col ml-auto">
-                      <PlusCircleIcon />
+                      <PlusCircleIcon color={primary_color} />
                     </View>
                   </View>
                   <View className="text-primary">
@@ -409,10 +407,14 @@ const Nutrition: React.FC = () => {
             ) : (
               <Card>
                 <Card.Content>
-                  <Text className="text-primary pb-4" variant="titleLarge">
+                  <Text
+                    color={primary_color}
+                    className="pb-4"
+                    variant="titleLarge"
+                  >
                     No favorite selected
                   </Text>
-                  <Text className="text-primary" variant="bodyMedium">
+                  <Text color={primary_color} variant="bodyMedium">
                     Please select a favorite to display here.
                   </Text>
                 </Card.Content>
