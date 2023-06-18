@@ -28,7 +28,7 @@ import {
   Provider,
   Portal,
 } from "react-native-paper";
-import Icon from "react-native-vector-icons/FontAwesome";
+import Icon from "react-native-vector-icons/Ionicons";
 
 import { StyleSheet } from "react-native";
 import { addFavorite } from "../../redux-manager/redux-slice/favorite-slice";
@@ -382,7 +382,7 @@ const Nutrition: React.FC = () => {
                       <PlusCircleIcon />
                     </View>
                   </View>
-                  <Icon name="rocket" size={30} color="#900" />
+                  <Icon name="heart-circle" size={30} color="#900" />
                 </View>
               ))
             ) : (
