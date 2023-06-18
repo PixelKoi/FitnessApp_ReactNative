@@ -5,6 +5,7 @@ import AntDesign from "react-native-vector-icons/AntDesign";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { supabase } from "../../../utils/supabase_authentication/supabase";
 import { Session } from "@supabase/supabase-js";
+import headerIMG from "../../../assets/images/weight_lifting.svg";
 
 const ChangeEmailModal = (props) => {
 	const [session, setSession] = useState<Session | null>(null);
