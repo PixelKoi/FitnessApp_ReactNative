@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { View, Text, Image, Modal } from "react-native";
 import headerIMG from "../../../assets/images/weight_lifting.png";
 import { Button } from "react-native-paper";
-import { useAppSelector } from "../../../redux-manager/hooks";
+import { useAppDispatch, useAppSelector } from "../../../redux-manager/hooks";
+import { changeActivity } from "../../../redux-manager/redux-slice/user-slice";
 
 const ActivityPickerModal = (props) => {
-	const [isFocused, setFocus] = useState(false);
+	const [activity, setActivity] = useState("");
+	const [currentIndex, setIndex] = useState(-1);
 
 	const activityList = [
 		"Sedentary",
@@ -16,6 +18,7 @@ const ActivityPickerModal = (props) => {
 	];
 
 	const { colors } = useAppSelector((state) => state.theme);
+	const dispatch = useAppDispatch();
 
 	return (
 		<Modal visible={props.showActivityModal}>
@@ -38,7 +41,16 @@ const ActivityPickerModal = (props) => {
 							{activityList.map((activity, index) => (
 								<Button
 									key={index}
-									style={{ backgroundColor: colors.secondary }}
+									onPress={() => {
+										setActivity(activity);
+										setIndex(index);
+									}}
+									style={{
+										backgroundColor: colors.secondary,
+										borderWidth: 1,
+										borderColor:
+											currentIndex === index ? colors.primary : "transparent",
+									}}
 									mode="contained">
 									<Text style={{ color: colors.primary, fontWeight: "bold" }}>
 										{activity}
@@ -49,13 +61,23 @@ const ActivityPickerModal = (props) => {
 					</View>
 					<View className="flex-row justify-center mt-12">
 						<Button
-							onPress={() => props.setShowActivityModal(false)}
+							onPress={() => {
+								props.setShowActivityModal(false);
+								setActivity("");
+								setIndex(-1);
+							}}
 							style={{ backgroundColor: colors.primary }}
 							className="w-24 mr-4"
 							mode="contained">
 							Cancel
 						</Button>
 						<Button
+							onPress={() => {
+								dispatch(changeActivity(activity));
+								props.setShowActivityModal(false);
+								setActivity("");
+								setIndex(-1);
+							}}
 							style={{ backgroundColor: colors.primary }}
 							className=" w-24"
 							mode="contained">
@@ -69,31 +91,3 @@ const ActivityPickerModal = (props) => {
 };
 
 export default ActivityPickerModal;
-
-{
-	/* <View className="flex bg-primary mt-auto h-60">
-<TouchableOpacity
-    className="py-2"
-    onPress={() => props.setShowActivityPicker(false)}>
-    <View className="mx-auto">
-        <MaterialIcons name="angle-up" size={30} color={"#ffff"} />
-    </View>
-</TouchableOpacity>
-<Picker
-    itemStyle={{ color: "white" }}
-    selectedValue={props.selectedActivity}
-    onValueChange={(itemValue, itemIndex) => {
-        props.setActivityLevel(itemValue);
-    }}>
-    <Picker.Item
-        style={{ color: "#ffff" }}
-        label="Sedentary"
-        value="Sedentary"
-    />
-    <Picker.Item label="Lightly active" value="Lightly active" />
-    <Picker.Item label="Moderately active" value="Moderately active" />
-    <Picker.Item label="Very active" value="Very active" />
-    <Picker.Item label="Extremely active" value="Extremely active" />
-</Picker>
-</View> */
-}
