@@ -61,13 +61,12 @@ const Nutrition: React.FC = () => {
   //   (state) => state.favorite
   // );
 
-  const currentThemeName = useAppSelector((state) => state.theme.currentTheme);
   const { colors } = useAppSelector((state) => state.theme);
 
-  console.log("colors:", colors, currentThemeName);
+  console.log("colors:", colors.primary);
   // ACCESS THEME COLORS
   // const primary_color = colors.primary;
-  const primary_color = "orange";
+  const primary_color = colors.primary;
   // const secondary_color = colors.secondary;
   // const background = colors.background;
   // ENDOF THEME COLORS

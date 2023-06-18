@@ -41,9 +41,9 @@ const themeSlice = createSlice({
   name: "theme",
   initialState,
   reducers: {
-    setTheme: (state, action: PayloadAction<keyof typeof themes>) => {
+    setTheme: (state, action: PayloadAction<ThemeState>) => {
       const selectedTheme = action.payload;
-      state.currentTheme = selectedTheme;
+      state.colors = selectedTheme.colors;
     },
   },
 });
@@ -51,3 +51,10 @@ const themeSlice = createSlice({
 export const { setTheme } = themeSlice.actions;
 
 export default themeSlice.reducer;
+// "theme": Object {
+//   "colors": Object {
+//     "background": "#FFFFFF",
+//         "primary": "#E07594",
+//         "secondary": "#F6E6EB",
+//   },
+// },
