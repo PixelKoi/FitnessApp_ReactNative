@@ -1,19 +1,23 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface ThemeState {
-  primary: string;
-  secondary: string;
-  background: string;
+  colors: {
+    primary: string;
+    secondary: string;
+    background: string;
+  };
 }
 
 const initialState: ThemeState = {
-  primary: "#E07594",
-  secondary: "#F6E6EB",
-  background: "#FFFFFF",
+  colors: {
+    primary: "#E07594",
+    secondary: "#F6E6EB",
+    background: "#FFFFFF",
+  },
 };
 
 const themeSlice = createSlice({
-  name: "theme",
+  name: "colors",
   initialState,
   reducers: {
     setTheme: (state, action: PayloadAction<ThemeState>) => {
