@@ -29,6 +29,7 @@ import {
   Portal,
 } from "react-native-paper";
 import Icon from "react-native-vector-icons/Ionicons";
+import AntIcon from "react-native-vector-icons/AntDesign";
 
 import { StyleSheet } from "react-native";
 import { addFavorite } from "../../redux-manager/redux-slice/favorite-slice";
@@ -121,10 +122,10 @@ const Nutrition: React.FC = () => {
           <TouchableOpacity
             onPress={() => console.log("Favorite Page placeholdeer")}
           >
-            <FilledHeartIcon
-              name="ios-add"
+            <Icon
+              name="heart"
               color={primary_color}
-              size={30}
+              size={24}
               style={{ marginLeft: 10 }}
             />
           </TouchableOpacity>
@@ -134,9 +135,9 @@ const Nutrition: React.FC = () => {
         // <TouchableOpacity onPress={() => setSaveButton(true)}>
         <View>
           <TouchableOpacity onPress={() => checkOption()}>
-            <CheckCircleIcon
-              name="ios-add"
-              size={30}
+            <AntIcon
+              name="pluscircle"
+              size={24}
               color={primary_color}
               style={{ marginRight: 10 }}
             />
@@ -144,7 +145,7 @@ const Nutrition: React.FC = () => {
         </View>
       ),
     });
-  }, [checkOption]);
+  }, [checkOption, primary_color]);
   const showErrorDialog = () => {
     setMealError(true);
   };
