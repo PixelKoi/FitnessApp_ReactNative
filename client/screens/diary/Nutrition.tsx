@@ -295,17 +295,30 @@ const Nutrition: React.FC = () => {
   return (
     <Provider>
       <View className="flex-1">
-        <Portal className="">
+        <Portal>
           <Modal
             style={{ backgroundColor: secondary_color }}
-            className="m-4 p-4 flex items-center justify-center"
+            className="m-8"
             visible={isModalVisible}
             animationType="fade"
           >
-            <View className="p-4 self-start">
+            <View className="items-end align-top">
+              <AntIcon
+                name="closecircle"
+                color={primary_color}
+                size={28}
+                onPress={() => {
+                  handleFavoritePress();
+                }}
+              ></AntIcon>
+            </View>
+
+            <View className="p-4 align-text-bottom">
               <Text
-                style={{ fontSize: 20, fontWeight: "bold", marginBottom: 10 }}
-                className="text-center"
+                style={{
+                  fontSize: 20,
+                  color: primary_color,
+                }}
               >
                 Favorite
               </Text>
