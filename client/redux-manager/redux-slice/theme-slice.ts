@@ -9,41 +9,50 @@ const themes = {
     },
   },
   steel: {
-    primary: "#454545",
-    secondary: "#6A6A6A",
-    background: "#FFFFFF",
+    colors: {
+      primary: "#454545",
+      secondary: "#6A6A6A",
+      background: "#FFFFFF",
+    },
   },
   green_light: {
-    primary: "#609966",
-    secondary: "#EDF1D6",
-    background: "#FFFFFF",
+    colors: {
+      primary: "#609966",
+      secondary: "#EDF1D6",
+      background: "#FFFFFF",
+    },
   },
   navy: {
-    primary: "#526D82",
-    secondary: "#DDE6ED",
-    background: "#FFFFFF",
+    colors: {
+      primary: "#526D82",
+      secondary: "#DDE6ED",
+      background: "#FFFFFF",
+    },
   },
 };
 
 interface ThemeState {
   colors: {
-    primary: String;
-    secondary: String;
-    background: String;
+    primary: string;
+    secondary: string;
+    background: string;
   };
 }
 
 const initialState: ThemeState = {
-  colors: themes.bubble_gum.colors,
+  colors: themes["bubble_gum"].colors,
 };
 
 const themeSlice = createSlice({
   name: "theme",
   initialState,
   reducers: {
-    setTheme: (state, action: PayloadAction<ThemeState>) => {
-      const selectedTheme = action.payload;
-      state.colors = selectedTheme.colors;
+    setTheme: (state, action: PayloadAction<string>) => {
+      const selectedThemeName = action.payload;
+      const selectedTheme = themes[selectedThemeName];
+      if (selectedTheme) {
+        state.colors = selectedTheme.colors;
+      }
     },
   },
 });
@@ -51,10 +60,3 @@ const themeSlice = createSlice({
 export const { setTheme } = themeSlice.actions;
 
 export default themeSlice.reducer;
-// "theme": Object {
-//   "colors": Object {
-//     "background": "#FFFFFF",
-//         "primary": "#E07594",
-//         "secondary": "#F6E6EB",
-//   },
-// },

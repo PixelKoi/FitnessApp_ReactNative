@@ -32,8 +32,8 @@ import Icon from "react-native-vector-icons/Ionicons";
 
 import { StyleSheet } from "react-native";
 import { addFavorite } from "../../redux-manager/redux-slice/favorite-slice";
+import { setTheme } from "../../redux-manager/redux-slice/theme-slice";
 import { useAppSelector, useAppDispatch } from "../../redux-manager/hooks";
-import { orange50 } from "react-native-paper/lib/typescript/src/styles/themes/v2/colors";
 
 const styles = StyleSheet.create({
   container: {
@@ -67,8 +67,8 @@ const Nutrition: React.FC = () => {
   // ACCESS THEME COLORS
   // const primary_color = colors.primary;
   const primary_color = colors.primary;
-  // const secondary_color = colors.secondary;
-  // const background = colors.background;
+  const secondary_color = colors.secondary;
+  const background = colors.background;
   // ENDOF THEME COLORS
   const { favorites } = useAppSelector((state) => state.favorite);
   console.log("VALUES", favorites);
@@ -357,6 +357,16 @@ const Nutrition: React.FC = () => {
           >
             <MagnifyingGlassIcon color="#E07594"></MagnifyingGlassIcon>
           </TouchableOpacity>
+        </View>
+        <View>
+          <Button
+            buttonColor={primary_color}
+            onPress={() => {
+              dispatch(setTheme("navy"));
+            }}
+          >
+            THEME CHANGER
+          </Button>
         </View>
         <FlatList
           data={foodArray}
