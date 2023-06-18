@@ -62,11 +62,11 @@ const Nutrition: React.FC = () => {
 
   const { colors } = useAppSelector((state) => state.theme);
 
-  // Access theme colors
+  // ACCESS THEME COLORS
   const primary_color = colors.primary;
   const secondary_color = colors.secondary;
   const background = colors.background;
-  console.log(primary_color, secondary_color, background);
+  // ENDOF THEME COLORS
   const { favorites } = useAppSelector((state) => state.favorite);
   console.log("VALUES", favorites);
   function updateFavoriteList(data) {
@@ -139,7 +139,7 @@ const Nutrition: React.FC = () => {
             <CheckCircleIcon
               name="ios-add"
               size={30}
-              color="black"
+              color={primary_color}
               style={{ marginRight: 10 }}
             />
           </TouchableOpacity>
@@ -246,7 +246,7 @@ const Nutrition: React.FC = () => {
                   onPress={() => handlePlus(foodArray, index)}
                   className="rounded-full p-2"
                 >
-                  <ChevronUpIcon size={24} color="#E07594" />
+                  <ChevronUpIcon size={24} color={primary_color} />
                 </TouchableOpacity>
                 <TextInput
                   value={food.quantity.toString()}
@@ -261,16 +261,16 @@ const Nutrition: React.FC = () => {
                   onPress={() => handleMinus(foodArray, index)}
                   className="rounded-full p-2"
                 >
-                  <ChevronDownIcon size={24} color="#E07594" />
+                  <ChevronDownIcon size={24} color={primary_color} />
                 </TouchableOpacity>
                 <TouchableOpacity
                   onPress={() => handleFavoriteToggle(index, foodArray)}
                   className="rounded-full p-2 text-primary"
                 >
                   {selectedHearts[index] ? (
-                    <FilledHeartIcon size={24} color="#E07594" />
+                    <FilledHeartIcon size={24} color={primary_color} />
                   ) : (
-                    <HeartIcon size={24} color="#E07594" />
+                    <HeartIcon size={24} color={primary_color} />
                   )}
                 </TouchableOpacity>
               </View>
@@ -324,12 +324,12 @@ const Nutrition: React.FC = () => {
               title="Lunch"
             />
             <Menu.Item
-              titleStyle={{ color: "#E07594" }}
+              color={primary_color}
               onPress={() => handleOptionSelect("Dinner")}
               title="Dinner"
             />
             <Menu.Item
-              titleStyle={{ color: "#E07594" }}
+              color={primary_color}
               onPress={() => handleOptionSelect("Snacks")}
               title="Snacks"
             />
@@ -345,7 +345,7 @@ const Nutrition: React.FC = () => {
               onPress={clearTextInput}
               style={styles.clearButton}
             >
-              <XCircleIcon size={24} color="#E07594" />
+              <XCircleIcon size={24} color={primary_color} />
             </TouchableOpacity>
           )}
           <TouchableOpacity
