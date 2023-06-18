@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import ThemeProvider from "./ThemeProvider";
 // supabase AUTH
 import { supabase } from "./utils/supabase_authentication/supabase";
 import Auth from "./screens/account/Auth";
@@ -36,11 +35,9 @@ export default function App() {
       {session && session.user ? (
         <DatabaseProvider database={database}>
           <Provider key={session.user.id} store={store}>
-            <ThemeProvider>
-              <PersistGate loading={null} persistor={persistor}>
-                <Navigation session={session} />
-              </PersistGate>
-            </ThemeProvider>
+            <PersistGate loading={null} persistor={persistor}>
+              <Navigation session={session} />
+            </PersistGate>
           </Provider>
         </DatabaseProvider>
       ) : (

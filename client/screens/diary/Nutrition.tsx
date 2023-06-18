@@ -60,6 +60,9 @@ const Nutrition: React.FC = () => {
   //   (state) => state.favorite
   // );
 
+  const theme = useAppSelector((state) => state.theme);
+  console.log("background", theme);
+
   const { favorites } = useAppSelector((state) => state.favorite);
   console.log("VALUES", favorites);
   function updateFavoriteList(data) {
