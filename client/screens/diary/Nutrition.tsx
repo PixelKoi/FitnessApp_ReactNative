@@ -61,8 +61,12 @@ const Nutrition: React.FC = () => {
   // );
 
   const { colors } = useAppSelector((state) => state.theme);
-  console.log("background", colors);
 
+  // Access theme colors
+  const primary_color = colors.primary;
+  const secondary_color = colors.secondary;
+  const background = colors.background;
+  console.log(primary_color, secondary_color, background);
   const { favorites } = useAppSelector((state) => state.favorite);
   console.log("VALUES", favorites);
   function updateFavoriteList(data) {
@@ -117,12 +121,11 @@ const Nutrition: React.FC = () => {
       headerLeft: () => (
         <View>
           <TouchableOpacity
-            className="ml-8 bg-primary rounded-full"
             onPress={() => console.log("Favorite Page placeholdeer")}
           >
             <FilledHeartIcon
               name="ios-add"
-              color={"white"}
+              color={primary_color}
               size={30}
               style={{ marginLeft: 10 }}
             />
