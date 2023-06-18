@@ -5,6 +5,7 @@ import {
   FlatList,
   TouchableOpacity,
   Text,
+  ScrollView,
 } from "react-native";
 import { USDA_API_KEY } from "../../config";
 import {
@@ -22,11 +23,13 @@ import { params } from "../../constants";
 import { useNavigation } from "@react-navigation/native";
 import {
   Dialog,
+  Modal,
   Button,
   Card,
   Menu,
   Provider,
   Portal,
+  PaperProvider,
 } from "react-native-paper";
 import Icon from "react-native-vector-icons/Ionicons";
 import AntIcon from "react-native-vector-icons/AntDesign";
@@ -88,6 +91,13 @@ const Nutrition: React.FC = () => {
     updateFavoriteList(array[index]);
   };
 
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const favs = ["Favorite 1", "Favorite 2", "Favorite 3"]; // Replace with your list of favorites
+
+  const handleFavoritePress = () => {
+    setIsModalVisible(!isModalVisible);
+  };
+
   const tabNavigation = useNavigation();
   const [foodName, setFoodName] = useState("");
   const [foodArray, setFoodArray] = useState([]);
@@ -119,9 +129,7 @@ const Nutrition: React.FC = () => {
       title: "Nutrition",
       headerLeft: () => (
         <View>
-          <TouchableOpacity
-            onPress={() => console.log("Favorite Page placeholdeer")}
-          >
+          <TouchableOpacity onPress={handleFavoritePress}>
             <Icon
               name="heart"
               color={primary_color}
@@ -287,6 +295,24 @@ const Nutrition: React.FC = () => {
   return (
     <Provider>
       <View className="flex-1">
+        <Portal className="">
+          <Modal
+            style={{ backgroundColor: secondary_color }}
+            className="m-4 p-4 flex items-center justify-center"
+            visible={isModalVisible}
+            animationType="fade"
+          >
+            <View className="p-4 self-start">
+              <Text
+                style={{ fontSize: 20, fontWeight: "bold", marginBottom: 10 }}
+                className="text-center"
+              >
+                Favorite
+              </Text>
+              {/* Add your favorite content here */}
+            </View>
+          </Modal>
+        </Portal>
         <Portal>
           <Dialog visible={mealError} onDismiss={hideErrorDialog}>
             <Dialog.Title>Error</Dialog.Title>

@@ -62,7 +62,7 @@ const Diary = (props) => {
               <Button
                 icon="plus"
                 mode="text"
-                onPress={() => tabNavigation.navigate("QuickLog")}
+                onPress={() => tabNavigation.navigate("Nutrition")}
               >
                 Add Food
               </Button>
@@ -81,7 +81,7 @@ const Diary = (props) => {
               <Button
                 icon="plus"
                 mode="text"
-                onPress={() => tabNavigation.navigate("QuickLog")}
+                onPress={() => tabNavigation.navigate("Nutrition")}
               >
                 Add Food
               </Button>
@@ -100,7 +100,7 @@ const Diary = (props) => {
               <Button
                 icon="plus"
                 mode="text"
-                onPress={() => tabNavigation.navigate("QuickLog")}
+                onPress={() => tabNavigation.navigate("Nutrition")}
               >
                 Add Food
               </Button>
@@ -119,7 +119,7 @@ const Diary = (props) => {
               <Button
                 icon="plus"
                 mode="text"
-                onPress={() => tabNavigation.navigate("QuickLog")}
+                onPress={() => tabNavigation.navigate("Nutrition")}
               >
                 Add Food
               </Button>
@@ -229,7 +229,7 @@ const Diary = (props) => {
                 <Button
                   icon="plus"
                   mode="text"
-                  onPress={() => tabNavigation.navigate("QuickLog")}
+                  onPress={() => tabNavigation.navigate("Nutrition")}
                 >
                   Add Food
                 </Button>
