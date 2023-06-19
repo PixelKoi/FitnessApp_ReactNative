@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { View, Text, Image, Modal } from "react-native";
+import {
+	View,
+	Text,
+	Image,
+	Modal,
+	FlatList,
+	TouchableOpacity,
+} from "react-native";
 import headerIMG from "../../../assets/images/weight_lifting.png";
 import person from "../../../assets/images/male_person.png";
 
@@ -34,6 +41,11 @@ const WeightPickerModal = (props) => {
 					<View className="flex-row justify-center">
 						<Image className="mt-10 mr-10" source={person} />
 						<Text className="self-center text-3xl font-bold">{weight} kg</Text>
+					</View>
+
+					<View className="flex-row justify-center mt-6">
+						<Text className="self-center text-base font-bold mr-8">kg</Text>
+						<Text className="self-center text-base font-bold">lbs</Text>
 					</View>
 
 					<View className="flex-row justify-center mt-12">
