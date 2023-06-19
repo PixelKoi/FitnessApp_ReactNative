@@ -38,6 +38,7 @@ import { addFavorite } from "../../redux-manager/redux-slice/favorite-slice";
 import { setTheme } from "../../redux-manager/redux-slice/theme-slice";
 import { useAppSelector, useAppDispatch } from "../../redux-manager/hooks";
 import Swipeable from "react-native-gesture-handler/Swipeable";
+import { GestureDetector } from "react-native-gesture-handler";
 import { RectButton } from "react-native-gesture-handler";
 
 const styles = StyleSheet.create({
@@ -52,6 +53,13 @@ const styles = StyleSheet.create({
   searchInput: {
     flex: 1,
     marginRight: 4,
+  },
+  ball: {
+    width: 100,
+    height: 100,
+    borderRadius: 100,
+    backgroundColor: "blue",
+    alignSelf: "center",
   },
 });
 
@@ -87,30 +95,7 @@ const Nutrition: React.FC = () => {
     updateFavoriteList(array[index]);
   };
 
-  const renderLeftActions = (progress, dragX) => {
-    const trans = dragX.interpolate({
-      inputRange: [0, 50, 100, 101],
-      outputRange: [-20, 0, 0, 1],
-    });
-    return (
-      <RectButton style={styles.leftAction} onPress={this.close}>
-        <Animated.Text
-          style={[
-            styles.actionText,
-            {
-              transform: [{ translateX: trans }],
-            },
-          ]}
-        >
-          Archive
-        </Animated.Text>
-      </RectButton>
-    );
-  };
-
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const favs = ["Favorite 1", "Favorite 2", "Favorite 3"]; // Replace with your list of favorites
-
   const handleFavoritePress = () => {
     setIsModalVisible(!isModalVisible);
   };
@@ -145,16 +130,25 @@ const Nutrition: React.FC = () => {
       outputRange: [0, 1],
       extrapolate: "clamp",
     });
+
     return (
-      <TouchableOpacity activeOpacity={0.6}>
-        <View>
-          <Animated.Text style={{ transform: [{ scale: scale }] }}>
-            Delete
-          </Animated.Text>
-        </View>
-      </TouchableOpacity>
+      <Animated.View
+        style={{ flex: 1, backgroundColor: "red", justifyContent: "center" }}
+      >
+        <Animated.Text
+          style={{
+            color: "white",
+            paddingHorizontal: 10,
+            fontWeight: "600",
+            transform: [{ scale }],
+          }}
+        >
+          Delete
+        </Animated.Text>
+      </Animated.View>
     );
   };
+
   const clearTextInput = () => {
     setFoodName(""); // Clear the TextInput value
   };

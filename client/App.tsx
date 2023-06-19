@@ -4,6 +4,7 @@ import { supabase } from "./utils/supabase_authentication/supabase";
 import Auth from "./screens/account/Auth";
 import { Session } from "@supabase/supabase-js";
 import { View } from "react-native";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 // REDUX toolkit
 import { store, persistor } from "./redux-manager/store";
@@ -37,7 +38,9 @@ export default function App() {
         <DatabaseProvider database={database}>
           <Provider key={session.user.id} store={store}>
             <PersistGate loading={null} persistor={persistor}>
-              <Navigation session={session} />
+              <GestureHandlerRootView style={{ flex: 1 }}>
+                <Navigation session={session} />
+              </GestureHandlerRootView>
             </PersistGate>
           </Provider>
         </DatabaseProvider>
