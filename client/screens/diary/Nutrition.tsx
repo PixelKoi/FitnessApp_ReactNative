@@ -134,7 +134,7 @@ const Nutrition: React.FC = () => {
     return (
       <View
         className=""
-        style={{ backgroundColor: "red", justifyContent: "center" }}
+        style={{ backgroundColor: "#E691A9", justifyContent: "center" }}
       >
         <Animated.Text
           className="items-start"
@@ -356,7 +356,7 @@ const Nutrition: React.FC = () => {
                     data={favorites}
                     keyExtractor={(item) => item.fav_id.toString()}
                     renderItem={({ item, index }) => (
-                      <View key={item.fav_id}>
+                      <View key={item.fav_id} className="p-1">
                         <Swipeable renderRightActions={leftSwipe}>
                           <View className="flex flex-row mt-0">
                             <View className="flex flex-col">
