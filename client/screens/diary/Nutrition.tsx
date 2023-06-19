@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Text,
   ScrollView,
+  Animated,
 } from "react-native";
 import { USDA_API_KEY } from "../../config";
 import {
@@ -33,11 +34,12 @@ import {
 } from "react-native-paper";
 import Icon from "react-native-vector-icons/Ionicons";
 import AntIcon from "react-native-vector-icons/AntDesign";
-
 import { StyleSheet } from "react-native";
 import { addFavorite } from "../../redux-manager/redux-slice/favorite-slice";
 import { setTheme } from "../../redux-manager/redux-slice/theme-slice";
 import { useAppSelector, useAppDispatch } from "../../redux-manager/hooks";
+import Swipeable from "react-native-gesture-handler/Swipeable";
+import { RectButton } from "react-native-gesture-handler";
 
 const styles = StyleSheet.create({
   container: {
@@ -91,6 +93,27 @@ const Nutrition: React.FC = () => {
     updateFavoriteList(array[index]);
   };
 
+  const renderLeftActions = (progress, dragX) => {
+    const trans = dragX.interpolate({
+      inputRange: [0, 50, 100, 101],
+      outputRange: [-20, 0, 0, 1],
+    });
+    return (
+      <RectButton style={styles.leftAction} onPress={this.close}>
+        <Animated.Text
+          style={[
+            styles.actionText,
+            {
+              transform: [{ translateX: trans }],
+            },
+          ]}
+        >
+          Archive
+        </Animated.Text>
+      </RectButton>
+    );
+  };
+
   const [isModalVisible, setIsModalVisible] = useState(false);
   const favs = ["Favorite 1", "Favorite 2", "Favorite 3"]; // Replace with your list of favorites
 
@@ -120,6 +143,23 @@ const Nutrition: React.FC = () => {
   const handleOptionSelect = (option) => {
     setSelectedOption(option);
     setVisible(false);
+  };
+
+  const leftSwipe = (progress, dragX) => {
+    const scale = dragX.interpolate({
+      inputRange: [0, 100],
+      outputRange: [0, 1],
+      extrapolate: "clamp",
+    });
+    return (
+      <TouchableOpacity activeOpacity={0.6}>
+        <View>
+          <Animated.Text style={{ transform: [{ scale: scale }] }}>
+            Delete
+          </Animated.Text>
+        </View>
+      </TouchableOpacity>
+    );
   };
   const clearTextInput = () => {
     setFoodName(""); // Clear the TextInput value
@@ -325,37 +365,39 @@ const Nutrition: React.FC = () => {
                     data={favorites}
                     keyExtractor={(item) => item.fav_id.toString()}
                     renderItem={({ item, index }) => (
-                      <View key={item.fav_id} className=" mt-4 px-1">
-                        <View className="flex flex-row mt-0">
-                          <View className="flex flex-col">
-                            <Card.Content>
-                              <Text
-                                style={{ color: primary_color }}
-                                className="font-bold mr-8"
-                                variant="titleLarge"
-                              >
-                                <Text>{item.description}</Text>
-                              </Text>
-                              <Text style={{ color: primary_color }}>
-                                Calories: {item.Calories}
-                              </Text>
-                            </Card.Content>
+                      <Swipeable renderLeftActions={leftSwipe}>
+                        <View key={item.fav_id} className=" mt-4 px-1">
+                          <View className="flex flex-row mt-0">
+                            <View className="flex flex-col">
+                              <Card.Content>
+                                <Text
+                                  style={{ color: primary_color }}
+                                  className="font-bold mr-8"
+                                  variant="titleLarge"
+                                >
+                                  <Text>{item.description}</Text>
+                                </Text>
+                                <Text style={{ color: primary_color }}>
+                                  Calories: {item.Calories}
+                                </Text>
+                              </Card.Content>
+                            </View>
+                            <View className="flex flex-col ml-auto justify-center">
+                              <PlusCircleIcon color={primary_color} />
+                            </View>
                           </View>
-                          <View className="flex flex-col ml-auto justify-center">
-                            <PlusCircleIcon color={primary_color} />
-                          </View>
+                          {index !== favorites.length - 1 && (
+                            <View
+                              className="mx-4"
+                              style={{
+                                borderBottomWidth: 1,
+                                borderBottomColor: secondary_color,
+                                marginVertical: 10,
+                              }}
+                            />
+                          )}
                         </View>
-                        {index !== favorites.length - 1 && (
-                          <View
-                            className="mx-4"
-                            style={{
-                              borderBottomWidth: 1,
-                              borderBottomColor: secondary_color,
-                              marginVertical: 10,
-                            }}
-                          />
-                        )}
-                      </View>
+                      </Swipeable>
                     )}
                   />
                 ) : (
