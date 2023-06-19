@@ -35,7 +35,11 @@ const ActivityPickerModal = (props) => {
 					}}
 					className=" h-screen w-screen">
 					<View className="mx-14 mt-6">
-						<Text className="text-2xl font-bold">Activity level?</Text>
+						<Text
+							style={{ color: colors.primary }}
+							className="text-2xl font-bold">
+							Activity level?
+						</Text>
 						{/* Display Activity Buttons */}
 						<View className="gap-4 mt-2">
 							{activityList.map((activity, index) => (

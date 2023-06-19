@@ -73,7 +73,7 @@ const WeightPickerModal = (props) => {
 						<Picker
 							style={{ marginTop: 20 }}
 							itemStyle={{
-								color: "black",
+								color: colors.primary,
 								width: 180,
 							}}
 							selectedValue={newWeight}
@@ -102,7 +102,7 @@ const WeightPickerModal = (props) => {
 									color: colors.primary,
 								}}
 								className={`self-center ${
-									metric === "kg" ? "opacity-100" : "opacity-60"
+									metric === "kg" ? "opacity-100" : "opacity-30"
 								}`}>
 								kg
 							</Text>
@@ -116,7 +116,7 @@ const WeightPickerModal = (props) => {
 									color: colors.primary,
 								}}
 								className={`self-center ${
-									metric === "lbs" ? "opacity-100" : "opacity-60"
+									metric === "lbs" ? "opacity-100" : "opacity-30"
 								}`}>
 								lbs
 							</Text>
