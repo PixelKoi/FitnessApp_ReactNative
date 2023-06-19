@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Text,
   ScrollView,
+  Animated,
 } from "react-native";
 import { USDA_API_KEY } from "../../config";
 import {
@@ -29,15 +30,16 @@ import {
   Menu,
   Provider,
   Portal,
-  PaperProvider,
 } from "react-native-paper";
 import Icon from "react-native-vector-icons/Ionicons";
 import AntIcon from "react-native-vector-icons/AntDesign";
-
 import { StyleSheet } from "react-native";
 import { addFavorite } from "../../redux-manager/redux-slice/favorite-slice";
 import { setTheme } from "../../redux-manager/redux-slice/theme-slice";
 import { useAppSelector, useAppDispatch } from "../../redux-manager/hooks";
+import Swipeable from "react-native-gesture-handler/Swipeable";
+import { GestureDetector } from "react-native-gesture-handler";
+import { RectButton } from "react-native-gesture-handler";
 
 const styles = StyleSheet.create({
   container: {
@@ -52,15 +54,17 @@ const styles = StyleSheet.create({
     flex: 1,
     marginRight: 4,
   },
+  ball: {
+    width: 100,
+    height: 100,
+    borderRadius: 100,
+    backgroundColor: "blue",
+    alignSelf: "center",
+  },
 });
 
 const Nutrition: React.FC = () => {
   const dispatch = useAppDispatch();
-  //
-  // const { food, id, isSelected, quantity } = useAppSelector(
-  //   (state) => state.favorite
-  // );
-
   const { colors } = useAppSelector((state) => state.theme);
   console.log("colors:", colors.primary);
   // ACCESS THEME COLORS
@@ -92,8 +96,6 @@ const Nutrition: React.FC = () => {
   };
 
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const favs = ["Favorite 1", "Favorite 2", "Favorite 3"]; // Replace with your list of favorites
-
   const handleFavoritePress = () => {
     setIsModalVisible(!isModalVisible);
   };
@@ -121,6 +123,34 @@ const Nutrition: React.FC = () => {
     setSelectedOption(option);
     setVisible(false);
   };
+
+  const leftSwipe = (progress, dragX) => {
+    const scale = dragX.interpolate({
+      inputRange: [0, 100],
+      outputRange: [1, 0],
+      extrapolate: "clamp",
+    });
+
+    return (
+      <View
+        className=""
+        style={{ backgroundColor: "#E691A9", justifyContent: "center" }}
+      >
+        <Animated.Text
+          className="items-start"
+          style={{
+            color: "white",
+            paddingHorizontal: 20,
+            fontWeight: "600",
+            transform: [{ scale }],
+          }}
+        >
+          Delete
+        </Animated.Text>
+      </View>
+    );
+  };
+
   const clearTextInput = () => {
     setFoodName(""); // Clear the TextInput value
   };
@@ -319,42 +349,41 @@ const Nutrition: React.FC = () => {
                 />
               </View>
               {/*Favorite Modal Body with scrollview */}
-              <View className="px-4">
+              <View className="">
                 {favorites.length > 0 ? (
                   <FlatList
+                    className="pt-8"
                     data={favorites}
                     keyExtractor={(item) => item.fav_id.toString()}
                     renderItem={({ item, index }) => (
-                      <View key={item.fav_id} className=" mt-4 px-1">
-                        <View className="flex flex-row mt-0">
-                          <View className="flex flex-col">
-                            <Card.Content>
-                              <Text
-                                style={{ color: primary_color }}
-                                className="font-bold mr-8"
-                                variant="titleLarge"
-                              >
-                                <Text>{item.description}</Text>
-                              </Text>
-                              <Text style={{ color: primary_color }}>
-                                Calories: {item.Calories}
-                              </Text>
-                            </Card.Content>
+                      <View key={item.fav_id} className="p-1">
+                        <Swipeable renderRightActions={leftSwipe}>
+                          <View className="flex flex-row mt-0">
+                            <View className="flex flex-col">
+                              <Card.Content>
+                                <Text
+                                  style={{ color: primary_color }}
+                                  className="font-bold"
+                                  variant="titleLarge"
+                                >
+                                  <Text>{item.description}</Text>
+                                </Text>
+                                <Text style={{ color: primary_color }}>
+                                  Calories: {item.Calories}
+                                </Text>
+                              </Card.Content>
+                            </View>
                           </View>
-                          <View className="flex flex-col ml-auto justify-center">
-                            <PlusCircleIcon color={primary_color} />
-                          </View>
-                        </View>
-                        {index !== favorites.length - 1 && (
-                          <View
-                            className="mx-4"
-                            style={{
-                              borderBottomWidth: 1,
-                              borderBottomColor: secondary_color,
-                              marginVertical: 10,
-                            }}
-                          />
-                        )}
+                          {index !== favorites.length - 1 && (
+                            <View
+                              className="mx-4"
+                              style={{
+                                borderBottomWidth: 1,
+                                borderBottomColor: secondary_color,
+                              }}
+                            />
+                          )}
+                        </Swipeable>
                       </View>
                     )}
                   />
@@ -495,20 +524,23 @@ const Nutrition: React.FC = () => {
                 )}
               />
             ) : (
-              <Card>
-                <Card.Content>
-                  <Text
-                    style={{ color: primary_color }}
-                    className="pb-4"
-                    variant="titleLarge"
-                  >
-                    No favorite selected
-                  </Text>
-                  <Text style={{ color: primary_color }} variant="bodyMedium">
-                    Please select a favorite to display here.
-                  </Text>
-                </Card.Content>
-              </Card>
+              <View>
+                <Text
+                  style={{ color: primary_color }}
+                  className="pt-4 pl-4 capitalize"
+                  variant="titleLarge"
+                >
+                  No favorite selected
+                </Text>
+                <Text
+                  style={{ color: primary_color }}
+                  className="pt-4 pl-4 italic"
+                  variant="bodyMedium"
+                >
+                  Please heart a food option to display here for quick
+                  selections.
+                </Text>
+              </View>
             )}
           </Card.Content>
         </Card>
