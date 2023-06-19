@@ -296,7 +296,11 @@ const Nutrition: React.FC = () => {
     <Provider>
       <View className="flex-1">
         <Portal>
-          <Modal className="m-8 " visible={isModalVisible} animationType="fade">
+          <Modal
+            className="m-8 overflow-hidden"
+            visible={isModalVisible}
+            animationType="fade"
+          >
             <View className="flex flex-col items-center justify-start h-full bg-white rounded-3xl">
               <View className="flex items-center justify-center mt-4 py-4">
                 <Text
@@ -454,7 +458,7 @@ const Nutrition: React.FC = () => {
           keyExtractor={(item) => item.id.toString()}
         />
 
-        <Card className="h-2/5 rounded-3xl m-3">
+        <Card className="h-2/5 rounded-3xl m-3 overflow-hidden">
           <Card.Content className="">
             <Text
               style={{ color: primary_color }}
