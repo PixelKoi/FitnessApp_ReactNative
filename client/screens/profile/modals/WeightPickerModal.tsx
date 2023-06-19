@@ -25,27 +25,6 @@ const WeightPickerModal = (props) => {
 	const weightKG = Array.from({ length: 150 }, (_, index) => index + 1);
 	const weightLB = Array.from({ length: 330 }, (_, index) => index + 1);
 
-	const WeightItem = ({ item, selected, onSelect }) => (
-		<TouchableOpacity
-			className="flex h-14"
-			style={{
-				backgroundColor: selected ? "blue" : "white",
-				padding: 10,
-				borderRadius: 5,
-				marginRight: 10,
-			}}
-			onPress={() => onSelect(item)}>
-			<Text style={{ color: selected ? "white" : "black" }}>{item}</Text>
-			<Text className="self-center">|</Text>
-		</TouchableOpacity>
-	);
-
-	const [selectedNumber, setSelectedNumber] = useState(null);
-
-	const handleSelectNumber = (number) => {
-		setSelectedNumber(number);
-	};
-
 	return (
 		<Modal visible={props.showWeightModal}>
 			<View
@@ -70,11 +49,6 @@ const WeightPickerModal = (props) => {
 						<Text className="self-center text-3xl font-bold">{weight} kg</Text>
 					</View>
 
-					{/* <View className="flex-row justify-center mt-6">
-						<Text className="self-center text-base font-bold mr-8">kg</Text>
-						<Text className="self-center text-base font-bold">lbs</Text>
-					</View> */}
-
 					<View className="mx-auto">
 						<Picker
 							style={{ marginTop: 20 }}
@@ -91,20 +65,6 @@ const WeightPickerModal = (props) => {
 							))}
 						</Picker>
 					</View>
-
-					{/* <FlatList
-						horizontal
-						data={weightKG}
-						renderItem={({ item }) => (
-							<WeightItem
-								item={item}
-								selected={item === selectedNumber}
-								onSelect={handleSelectNumber}
-							/>
-						)}
-						keyExtractor={(item) => item.toString()}
-						contentContainerStyle={{ paddingVertical: 10 }}
-					/> */}
 
 					<View className="flex-row justify-center mt-12">
 						<Button
