@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import headerIMG from "../../../assets/images/weight_lifting.png";
 import person from "../../../assets/images/male_person.png";
+import { Picker } from "@react-native-picker/picker";
 
 import { Button, Surface } from "react-native-paper";
 import { useAppDispatch, useAppSelector } from "../../../redux-manager/hooks";
@@ -18,6 +19,8 @@ const WeightPickerModal = (props) => {
 	const { colors } = useAppSelector((state) => state.theme);
 	const { weight } = useAppSelector((state) => state.user);
 	const dispatch = useAppDispatch();
+
+	const [newWeight, setNewWeight] = useState(weight.toString());
 
 	const weightKG = Array.from({ length: 150 }, (_, index) => index + 1);
 	const weightLB = Array.from({ length: 330 }, (_, index) => index + 1);
@@ -67,12 +70,24 @@ const WeightPickerModal = (props) => {
 						<Text className="self-center text-3xl font-bold">{weight} kg</Text>
 					</View>
 
-					<View className="flex-row justify-center mt-6">
+					{/* <View className="flex-row justify-center mt-6">
 						<Text className="self-center text-base font-bold mr-8">kg</Text>
 						<Text className="self-center text-base font-bold">lbs</Text>
-					</View>
+					</View> */}
 
-					<FlatList
+					<Picker
+						style={{ marginTop: 20 }}
+						itemStyle={{ color: "black" }}
+						selectedValue={newWeight}
+						onValueChange={(itemValue, itemIndex) => {
+							setNewWeight(itemValue);
+						}}>
+						{weightKG.map((item) => (
+							<Picker.Item label={item.toString()} value={item} />
+						))}
+					</Picker>
+
+					{/* <FlatList
 						horizontal
 						data={weightKG}
 						renderItem={({ item }) => (
@@ -84,7 +99,7 @@ const WeightPickerModal = (props) => {
 						)}
 						keyExtractor={(item) => item.toString()}
 						contentContainerStyle={{ paddingVertical: 10 }}
-					/>
+					/> */}
 
 					<View className="flex-row justify-center mt-12">
 						<Button
