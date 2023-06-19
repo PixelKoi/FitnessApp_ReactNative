@@ -59,7 +59,11 @@ const WeightPickerModal = (props) => {
 					}}
 					className=" h-screen w-screen">
 					<View className="mx-14 mt-6">
-						<Text className="text-2xl font-bold">Your weight?</Text>
+						<Text
+							style={{ color: colors.primary }}
+							className="text-2xl font-bold">
+							Your weight?
+						</Text>
 						{/* Display Activity Buttons */}
 					</View>
 
@@ -93,13 +97,29 @@ const WeightPickerModal = (props) => {
 							{newWeight} {metric}
 						</Text>
 						<View className="self-center flex-row gap-2 mt-4">
-							<Text className="self-center">kg</Text>
+							<Text
+								style={{
+									color: colors.primary,
+								}}
+								className={`self-center ${
+									metric === "kg" ? "opacity-100" : "opacity-60"
+								}`}>
+								kg
+							</Text>
 							<Switch
 								value={isSwitchOn}
 								onValueChange={onToggleSwitch}
 								color={colors.primary}
 							/>
-							<Text className="self-center">lbs</Text>
+							<Text
+								style={{
+									color: colors.primary,
+								}}
+								className={`self-center ${
+									metric === "lbs" ? "opacity-100" : "opacity-60"
+								}`}>
+								lbs
+							</Text>
 						</View>
 					</View>
 
