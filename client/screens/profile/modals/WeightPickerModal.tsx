@@ -17,17 +17,21 @@ const WeightPickerModal = (props) => {
 	const [metric, setMetric] = useState("kg");
 	const [newWeight, setNewWeight] = useState(weight);
 
+	//Populates kg and lb arrays
 	const weightKG = Array.from({ length: 150 }, (_, index) => index + 1);
 	const weightLB = Array.from({ length: 330 }, (_, index) => index + 1);
 
+	//Converts kg to lbs
 	function convertKgToLbs(kg) {
 		return kg * 2.20462;
 	}
 
+	//Converts lbs to kgs
 	function convertPoundsToKilograms(pounds) {
 		return pounds * 0.45359237;
 	}
 
+	//Toggle switch function
 	const [isSwitchOn, setIsSwitchOn] = React.useState(false);
 	const onToggleSwitch = () => {
 		setIsSwitchOn(!isSwitchOn);
@@ -60,18 +64,13 @@ const WeightPickerModal = (props) => {
 					</View>
 
 					<View className="flex-row justify-center">
-						<Image className="mt-10 mr-10" source={person} />
-						<Text className="self-center text-3xl font-bold">
-							{newWeight} {metric}
-						</Text>
-					</View>
+						<Image className="mt-10 mr-4" source={person} />
 
-					<View className="flex-row items-center justify-center gap-4">
 						<Picker
 							style={{ marginTop: 20 }}
 							itemStyle={{
 								color: "black",
-								width: 200,
+								width: 180,
 							}}
 							selectedValue={newWeight}
 							onValueChange={(itemValue, itemIndex) => {
@@ -85,7 +84,15 @@ const WeightPickerModal = (props) => {
 										<Picker.Item label={item.toString()} value={item} />
 								  ))}
 						</Picker>
-						<View className="self-center flex-row gap-2">
+					</View>
+
+					<View className="flex-col items-center justify-center mt-10">
+						<Text
+							style={{ color: colors.primary }}
+							className="self-center text-3xl font-bold">
+							{newWeight} {metric}
+						</Text>
+						<View className="self-center flex-row gap-2 mt-4">
 							<Text className="self-center">kg</Text>
 							<Switch
 								value={isSwitchOn}
