@@ -300,7 +300,7 @@ const Nutrition: React.FC = () => {
             <View className="flex flex-col items-center justify-start h-full bg-white rounded-3xl">
               <View className="flex items-center justify-center mt-4 py-4">
                 <Text
-                  className="text-center text-xl"
+                  className="text-center text-2xl font-bold"
                   style={{ color: primary_color }}
                 >
                   Favorite
@@ -320,14 +320,14 @@ const Nutrition: React.FC = () => {
                   <FlatList
                     data={favorites}
                     keyExtractor={(item) => item.fav_id.toString()}
-                    renderItem={({ item }) => (
+                    renderItem={({ item, index }) => (
                       <View key={item.fav_id} className=" mt-4 px-1">
                         <View className="flex flex-row mt-0">
                           <View className="flex flex-col">
                             <Card.Content>
                               <Text
                                 style={{ color: primary_color }}
-                                className="font-bold"
+                                className="font-bold mr-8"
                                 variant="titleLarge"
                               >
                                 <Text>{item.description}</Text>
@@ -341,6 +341,16 @@ const Nutrition: React.FC = () => {
                             <PlusCircleIcon color={primary_color} />
                           </View>
                         </View>
+                        {index !== favorites.length - 1 && (
+                          <View
+                            className="mx-4"
+                            style={{
+                              borderBottomWidth: 1,
+                              borderBottomColor: secondary_color,
+                              marginVertical: 10,
+                            }}
+                          />
+                        )}
                       </View>
                     )}
                   />
@@ -449,14 +459,14 @@ const Nutrition: React.FC = () => {
         >
           Favorite
         </Text>
-        <Card className="h-2/5">
+        <Card className="h-2/5 rounded-3xl m-3">
           <Card.Content className="">
             {favorites.length > 0 ? (
               <FlatList
                 data={favorites}
                 keyExtractor={(item) => item.fav_id.toString()}
                 renderItem={({ item: favorite }) => (
-                  <View key={favorite.fav_id} className="p-2 m-4">
+                  <View key={favorite.fav_id} className="p-2 pt-3">
                     <View className="flex flex-row  mt-0">
                       <View className="flex flex-col">
                         <Card.Content>
