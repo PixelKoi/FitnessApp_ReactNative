@@ -39,7 +39,6 @@ import { addFavorite } from "../../redux-manager/redux-slice/favorite-slice";
 import { setTheme } from "../../redux-manager/redux-slice/theme-slice";
 import { useAppSelector, useAppDispatch } from "../../redux-manager/hooks";
 import Swipeable from "react-native-gesture-handler/Swipeable";
-import { RectButton } from "react-native-gesture-handler";
 
 const styles = StyleSheet.create({
   container: {
@@ -58,11 +57,6 @@ const styles = StyleSheet.create({
 
 const Nutrition: React.FC = () => {
   const dispatch = useAppDispatch();
-  //
-  // const { food, id, isSelected, quantity } = useAppSelector(
-  //   (state) => state.favorite
-  // );
-
   const { colors } = useAppSelector((state) => state.theme);
   console.log("colors:", colors.primary);
   // ACCESS THEME COLORS
