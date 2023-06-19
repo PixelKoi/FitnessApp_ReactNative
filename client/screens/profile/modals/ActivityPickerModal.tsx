@@ -41,7 +41,7 @@ const ActivityPickerModal = (props) => {
 							Activity level?
 						</Text>
 						{/* Display Activity Buttons */}
-						<View className="gap-4 mt-2">
+						<View className="gap-4 mt-4">
 							{activityList.map((activity, index) => (
 								<Button
 									key={index}
@@ -56,7 +56,11 @@ const ActivityPickerModal = (props) => {
 											currentIndex === index ? colors.primary : "transparent",
 									}}
 									mode="contained">
-									<Text style={{ color: colors.primary, fontWeight: "bold" }}>
+									<Text
+										style={{
+											color: colors.primary,
+											fontWeight: "bold",
+										}}>
 										{activity}
 									</Text>
 								</Button>

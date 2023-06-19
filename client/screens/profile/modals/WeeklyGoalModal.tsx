@@ -63,7 +63,9 @@ const GoalModal = (props) => {
 					</View>
 					<View className="flex-row justify-center mt-12">
 						<Button
-							onPress={() => {}}
+							onPress={() => {
+								props.setShowGoalModal(false);
+							}}
 							style={{ backgroundColor: colors.primary }}
 							className="w-24 mr-4"
 							mode="contained">

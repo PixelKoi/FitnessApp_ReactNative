@@ -13,6 +13,7 @@ import calAlgo from "./cal-algo";
 import EditProfile from "./EditProfile";
 import { supabase } from "../../utils/supabase_authentication/supabase";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 import ActivityPickerModal from "./modals/ActivityPickerModal";
 import WeightPickerModal from "./modals/WeightPickerModal";
@@ -140,11 +141,9 @@ const UserBioInput = () => {
 			headerRight: () =>
 				showEditProfile === false && (
 					<View>
-						<Button
-							style={{ backgroundColor: colors.background }}
-							className="mr-8">
-							<Text style={{ color: colors.primary }}>Edit</Text>
-						</Button>
+						<TouchableOpacity className="mr-8">
+							<Ionicons name="ios-settings-sharp" size={30} color={"#ffff"} />
+						</TouchableOpacity>
 					</View>
 				),
 			headerLeft: () =>
@@ -331,13 +330,13 @@ const UserBioInput = () => {
 						</View>
 					</View>
 				</Surface>
-				<Button
+				{/* <Button
 					onPress={signOut}
 					style={{ backgroundColor: colors.primary }}
 					className="w-40 mx-auto mt-4 "
 					mode="contained">
 					Sign Out
-				</Button>
+				</Button> */}
 
 				{/* Modals */}
 				<ActivityPickerModal

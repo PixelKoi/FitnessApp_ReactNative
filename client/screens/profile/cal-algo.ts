@@ -64,6 +64,9 @@ const calAlgo: CalAlgoFn = (params, dispatch) => {
 		case 1:
 			dispatch(changeDailyCal(Math.round(calBMR - 500)));
 			break;
+		case 1.5:
+			dispatch(changeDailyCal(Math.round(calBMR - 750)));
+			break;
 		case 2:
 			dispatch(changeDailyCal(Math.round(calBMR - 1000)));
 			break;
