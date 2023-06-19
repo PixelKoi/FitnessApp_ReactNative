@@ -302,27 +302,31 @@ const Nutrition: React.FC = () => {
             visible={isModalVisible}
             animationType="fade"
           >
-            <View className="items-end align-top">
-              <AntIcon
-                name="closecircle"
-                color={primary_color}
-                size={28}
-                onPress={() => {
-                  handleFavoritePress();
-                }}
-              ></AntIcon>
-            </View>
-
-            <View className="p-4 align-text-bottom">
-              <Text
-                style={{
-                  fontSize: 20,
-                  color: primary_color,
-                }}
-              >
-                Favorite
-              </Text>
-              {/* Add your favorite content here */}
+            <View className="flex flex-col items-center justify-start h-full">
+              <View className="flex items-center justify-center mt-4">
+                <Text
+                  className="text-center text-xl"
+                  style={{ color: primary_color }}
+                >
+                  Favorite
+                </Text>
+              </View>
+              <View className="absolute top-0 right-0 p-3">
+                <AntIcon
+                  name="closecircle"
+                  color={primary_color}
+                  size={28}
+                  onPress={handleFavoritePress}
+                />
+              </View>
+              {/*Favorite Modal Body with scrollview */}
+              <View className="pt-12">
+                <ScrollView>
+                  <Text>TEXT HERE</Text>
+                  <Text>TEXT HERE</Text>
+                  <Text>TEXT HERE</Text>
+                </ScrollView>
+              </View>
             </View>
           </Modal>
         </Portal>
