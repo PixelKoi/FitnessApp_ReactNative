@@ -360,7 +360,7 @@ const Nutrition: React.FC = () => {
                               <Card.Content>
                                 <Text
                                   style={{ color: primary_color }}
-                                  className="font-bold mr-8"
+                                  className="font-bold"
                                   variant="titleLarge"
                                 >
                                   <Text>{item.description}</Text>
@@ -369,9 +369,6 @@ const Nutrition: React.FC = () => {
                                   Calories: {item.Calories}
                                 </Text>
                               </Card.Content>
-                            </View>
-                            <View className="flex flex-col ml-auto justify-center">
-                              <PlusCircleIcon color={primary_color} />
                             </View>
                           </View>
                           {index !== favorites.length - 1 && (
