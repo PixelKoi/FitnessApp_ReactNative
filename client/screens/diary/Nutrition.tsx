@@ -296,14 +296,9 @@ const Nutrition: React.FC = () => {
     <Provider>
       <View className="flex-1">
         <Portal>
-          <Modal
-            style={{ backgroundColor: secondary_color }}
-            className="m-8"
-            visible={isModalVisible}
-            animationType="fade"
-          >
-            <View className="flex flex-col items-center justify-start h-full">
-              <View className="flex items-center justify-center mt-4">
+          <Modal className="m-8 " visible={isModalVisible} animationType="fade">
+            <View className="flex flex-col items-center justify-start h-full bg-white rounded-3xl">
+              <View className="flex items-center justify-center mt-4 py-4">
                 <Text
                   className="text-center text-xl"
                   style={{ color: primary_color }}
@@ -311,16 +306,16 @@ const Nutrition: React.FC = () => {
                   Favorite
                 </Text>
               </View>
-              <View className="absolute top-0 right-0 p-3">
+              <View className="absolute top-0 right-0 p-4">
                 <AntIcon
                   name="closecircle"
                   color={primary_color}
-                  size={28}
+                  size={24}
                   onPress={handleFavoritePress}
                 />
               </View>
               {/*Favorite Modal Body with scrollview */}
-              <View className="">
+              <View className="px-4">
                 {favorites.length > 0 ? (
                   <FlatList
                     data={favorites}
@@ -332,7 +327,7 @@ const Nutrition: React.FC = () => {
                             <Card.Content>
                               <Text
                                 style={{ color: primary_color }}
-                                className="font-extrabold"
+                                className="font-bold"
                                 variant="titleLarge"
                               >
                                 <Text>{item.description}</Text>
@@ -454,32 +449,36 @@ const Nutrition: React.FC = () => {
         >
           Favorite
         </Text>
-        <Card className="">
+        <Card className="h-2/5">
           <Card.Content className="">
             {favorites.length > 0 ? (
-              favorites.map((favorite) => (
-                <View key={favorite.fav_id} className="p-2 m-4">
-                  <View className="flex flex-row  mt-0">
-                    <View className="flex flex-col">
-                      <Card.Content>
-                        <Text
-                          style={{ color: primary_color }}
-                          className="font-extrabold"
-                          variant="titleLarge"
-                        >
-                          {favorite.description}
-                        </Text>
-                        <Text style={{ color: primary_color }}>
-                          Calories: {favorite.Calories}
-                        </Text>
-                      </Card.Content>
-                    </View>
-                    <View className="flex flex-col ml-auto">
-                      <PlusCircleIcon color={primary_color} />
+              <FlatList
+                data={favorites}
+                keyExtractor={(item) => item.fav_id.toString()}
+                renderItem={({ item: favorite }) => (
+                  <View key={favorite.fav_id} className="p-2 m-4">
+                    <View className="flex flex-row  mt-0">
+                      <View className="flex flex-col">
+                        <Card.Content>
+                          <Text
+                            style={{ color: primary_color }}
+                            className="font-extrabold"
+                            variant="titleLarge"
+                          >
+                            {favorite.description}
+                          </Text>
+                          <Text style={{ color: primary_color }}>
+                            Calories: {favorite.Calories}
+                          </Text>
+                        </Card.Content>
+                      </View>
+                      <View className="flex flex-col ml-auto">
+                        <PlusCircleIcon color={primary_color} />
+                      </View>
                     </View>
                   </View>
-                </View>
-              ))
+                )}
+              />
             ) : (
               <Card>
                 <Card.Content>
