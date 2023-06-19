@@ -63,6 +63,8 @@ const styles = StyleSheet.create({
   },
 });
 
+// TODO: Add delete color to bubble_gum theme?
+
 const Nutrition: React.FC = () => {
   const dispatch = useAppDispatch();
   const { colors } = useAppSelector((state) => state.theme);
@@ -105,6 +107,8 @@ const Nutrition: React.FC = () => {
   const [foodArray, setFoodArray] = useState([]);
   const [saveButton, setSaveButton] = useState(false);
   const [selectedHearts, setSelectedHearts] = useState([]);
+
+  const [favoritesList, setFavoritesList] = useState(true);
 
   const [visible, setVisible] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
@@ -193,6 +197,7 @@ const Nutrition: React.FC = () => {
   // Simple Query testing API: https://api.nal.usda.gov/fdc/v1/foods/search?api_key=DEMO_KEY&query=Cheddar%20Cheese
   const apiUrl = `https://api.nal.usda.gov/fdc/v1/foods/search?query=${foodName}&pageSize=${params.pageSize}&pageNumber=${params.pageNumber}&api_key=${params.api_key}&dataType=${params.dataType}`;
   const handleSearch = async () => {
+    setFavoritesList(false);
     try {
       const response = await fetch(apiUrl);
       const data = await response.json();
@@ -486,64 +491,65 @@ const Nutrition: React.FC = () => {
           }
           keyExtractor={(item) => item.id.toString()}
         />
-
-        <Card className="h-2/5 rounded-3xl m-3 overflow-hidden">
-          <Card.Content className="">
-            <Text
-              style={{ color: primary_color }}
-              className="font-bold pl-4 pb-2 text-xl"
-            >
-              Favorites
-            </Text>
-            {favorites.length > 0 ? (
-              <FlatList
-                data={favorites}
-                keyExtractor={(item) => item.fav_id.toString()}
-                renderItem={({ item: favorite }) => (
-                  <View key={favorite.fav_id} className="p-2 pt-3">
-                    <View className="flex flex-row  mt-0">
-                      <View className="flex flex-col">
-                        <Card.Content>
-                          <Text
-                            style={{ color: primary_color }}
-                            className="font-extrabold"
-                            variant="titleLarge"
-                          >
-                            {favorite.description}
-                          </Text>
-                          <Text style={{ color: primary_color }}>
-                            Calories: {favorite.Calories}
-                          </Text>
-                        </Card.Content>
-                      </View>
-                      <View className="flex flex-col ml-auto">
-                        <PlusCircleIcon color={primary_color} />
+        {favoritesList && (
+          <Card className="h-2/5 rounded-3xl m-3 overflow-hidden">
+            <Card.Content className="">
+              <Text
+                style={{ color: primary_color }}
+                className="font-bold pl-4 pb-2 text-xl"
+              >
+                Favorites
+              </Text>
+              {favorites.length > 0 ? (
+                <FlatList
+                  data={favorites}
+                  keyExtractor={(item) => item.fav_id.toString()}
+                  renderItem={({ item: favorite }) => (
+                    <View key={favorite.fav_id} className="p-2 pt-3">
+                      <View className="flex flex-row  mt-0">
+                        <View className="flex flex-col">
+                          <Card.Content>
+                            <Text
+                              style={{ color: primary_color }}
+                              className="font-extrabold"
+                              variant="titleLarge"
+                            >
+                              {favorite.description}
+                            </Text>
+                            <Text style={{ color: primary_color }}>
+                              Calories: {favorite.Calories}
+                            </Text>
+                          </Card.Content>
+                        </View>
+                        <View className="flex flex-col ml-auto">
+                          <PlusCircleIcon color={primary_color} />
+                        </View>
                       </View>
                     </View>
-                  </View>
-                )}
-              />
-            ) : (
-              <View>
-                <Text
-                  style={{ color: primary_color }}
-                  className="pt-4 pl-4 capitalize"
-                  variant="titleLarge"
-                >
-                  No favorite selected
-                </Text>
-                <Text
-                  style={{ color: primary_color }}
-                  className="pt-4 pl-4 italic"
-                  variant="bodyMedium"
-                >
-                  Please heart a food option to display here for quick
-                  selections.
-                </Text>
-              </View>
-            )}
-          </Card.Content>
-        </Card>
+                  )}
+                />
+              ) : (
+                <View>
+                  <Text
+                    style={{ color: primary_color }}
+                    className="pt-4 pl-4 capitalize"
+                    variant="titleLarge"
+                  >
+                    No favorite selected
+                  </Text>
+                  <Text
+                    style={{ color: primary_color }}
+                    className="pt-4 pl-4 italic"
+                    variant="bodyMedium"
+                  >
+                    Please heart a food option to display here for quick
+                    selections.
+                  </Text>
+                </View>
+              )}
+            </Card.Content>
+          </Card>
+        )}
       </View>
     </Provider>
   );
