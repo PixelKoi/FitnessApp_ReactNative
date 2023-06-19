@@ -9,13 +9,7 @@ const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
 const SumDonutGraph = (
 	props,
-	{
-		radius = 70,
-		strokeWidth = 25,
-		duration = 500,
-		color = "#E07594",
-		delay = 0,
-	}
+	{ radius = 70, strokeWidth = 25, duration = 500, delay = 0 }
 ) => {
 	const animatedValue = React.useRef(new Animated.Value(0)).current;
 	const { colors } = useAppSelector((state) => state.theme);

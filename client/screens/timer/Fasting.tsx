@@ -19,6 +19,7 @@ const Fasting = () => {
 	const { startDate, endDate, maxTime, elapsedPercentage } = useAppSelector(
 		(state) => state.fasting
 	);
+	const { colors } = useAppSelector((state) => state.theme);
 	const dispatch = useAppDispatch();
 
 	//fasting component states
@@ -95,11 +96,15 @@ const Fasting = () => {
 
 	//Todo: put tailwind css in state and update icon fonts + checkmark fonts
 	return (
-		<View className="mt-auto flex flex-col justify-center bg-background ">
+		<View
+			style={{ backgroundColor: colors.background }}
+			className="mt-auto flex flex-col justify-center">
 			{/* Clock section */}
 			<View className="mt-auto mb-14">
 				<View className="z-10">
-					<View className="bg-secondary h-8 w-52 self-center rounded-xl">
+					<View
+						style={{ backgroundColor: colors.secondary }}
+						className="h-8 w-52 self-center rounded-xl">
 						<TouchableOpacity
 							className="flex-row h-8 w-52"
 							onPress={() =>
@@ -107,12 +112,14 @@ const Fasting = () => {
 									? setShowTimerList(true)
 									: setShowTimerList(false)
 							}>
-							<Text className="ml-4 text-center my-auto text-primary">
+							<Text
+								style={{ color: colors.primary }}
+								className="ml-4 text-center my-auto">
 								{fasting}
 							</Text>
 							<Icon
 								style={{
-									color: "#E07594",
+									color: colors.primary,
 									marginLeft: "auto",
 									marginRight: 20,
 									marginTop: "auto",
@@ -126,7 +133,9 @@ const Fasting = () => {
 					</View>
 
 					{showTimerList === true && (
-						<Surface className="w-52 bg-background rounded-xl self-center mt-12 absolute z-10">
+						<Surface
+							style={{ backgroundColor: colors.background }}
+							className="w-52 rounded-xl self-center mt-12 absolute z-10">
 							<TouchableOpacity
 								className="flex-row h-8 w-52"
 								onPress={() => {
@@ -134,12 +143,18 @@ const Fasting = () => {
 									dispatch(setMaxTime(16));
 									setShowTimerList(false);
 								}}>
-								<Text className="my-auto text-xs ml-4 text-primary">
+								<Text
+									style={{ color: colors.primary }}
+									className="my-auto text-xs ml-4">
 									16/8 Intermittent Fast
 								</Text>
 								{maxTime === 16 && (
-									<Text className="text-primary ml-auto my-auto mr-2">
-										<Ionicons size={15} name={"ios-checkmark-circle-outline"} />
+									<Text className="ml-auto my-auto mr-2">
+										<Ionicons
+											color={colors.primary}
+											size={15}
+											name={"ios-checkmark-circle-outline"}
+										/>
 									</Text>
 								)}
 							</TouchableOpacity>
@@ -150,12 +165,18 @@ const Fasting = () => {
 									dispatch(setMaxTime(18));
 									setShowTimerList(false);
 								}}>
-								<Text className="my-auto text-xs ml-4 text-primary">
+								<Text
+									style={{ color: colors.primary }}
+									className="my-auto text-xs ml-4">
 									18/6 Intermittent Fast
 								</Text>
 								{maxTime === 18 && (
-									<Text className="text-primary ml-auto my-auto mr-2">
-										<Ionicons size={15} name={"ios-checkmark-circle-outline"} />
+									<Text className="ml-auto my-auto mr-2">
+										<Ionicons
+											color={colors.primary}
+											size={15}
+											name={"ios-checkmark-circle-outline"}
+										/>
 									</Text>
 								)}
 							</TouchableOpacity>
@@ -166,12 +187,18 @@ const Fasting = () => {
 									dispatch(setMaxTime(24));
 									setShowTimerList(false);
 								}}>
-								<Text className="my-auto text-xs ml-4 text-primary">
+								<Text
+									style={{ color: colors.primary }}
+									className="my-auto text-xs ml-4">
 									24/hr Fast
 								</Text>
 								{maxTime === 24 && (
-									<Text className="text-primary ml-auto my-auto mr-2">
-										<Ionicons size={15} name={"ios-checkmark-circle-outline"} />
+									<Text className="ml-auto my-auto mr-2">
+										<Ionicons
+											color={colors.primary}
+											size={15}
+											name={"ios-checkmark-circle-outline"}
+										/>
 									</Text>
 								)}
 							</TouchableOpacity>
@@ -183,7 +210,9 @@ const Fasting = () => {
 					<FastingTimer />
 				</View>
 
-				<Text className="text-SM text-center mt-4 text-primary font-bold">
+				<Text
+					style={{ color: colors.primary }}
+					className="text-SM text-center mt-4 font-bold">
 					Elapsed: [{elapsedPercentage}]%
 				</Text>
 			</View>
@@ -192,37 +221,50 @@ const Fasting = () => {
 			<View className="mb-8">
 				<View className="flex flex-row justify-center mb-2">
 					<View className="w-32">
-						<Text className="text-xs text-center text-primary mb-2 font-bold">
+						<Text
+							style={{ color: colors.primary }}
+							className="text-xs text-center mb-2 font-bold">
 							START
 						</Text>
 						{startTime !== null ? (
-							<Text className="text-sm text-center text-primary opacity-60	">
+							<Text
+								style={{ color: colors.primary }}
+								className="text-sm text-center  opacity-60	">
 								{getDate(startTime)}
 							</Text>
 						) : (
-							<Text className="text-sm text-center text-primary opacity-60	">
+							<Text
+								style={{ color: colors.primary }}
+								className="text-sm text-center opacity-60	">
 								.........
 							</Text>
 						)}
 					</View>
 
 					<View className=" w-32">
-						<Text className="text-xs text-center text-primary mb-2 font-bold">
+						<Text
+							style={{ color: colors.primary }}
+							className="text-xs text-center  mb-2 font-bold">
 							END
 						</Text>
 						{endTime !== null ? (
-							<Text className="text-sm text-center text-primary opacity-60	">
+							<Text
+								style={{ color: colors.primary }}
+								className="text-sm text-center opacity-60	">
 								{getDate(endTime)}
 							</Text>
 						) : (
-							<Text className="text-sm text-center text-primary opacity-60	">
+							<Text
+								style={{ color: colors.primary }}
+								className="text-sm text-centeropacity-60	">
 								.........
 							</Text>
 						)}
 					</View>
 				</View>
 				<Button
-					className="my-4 w-60 mx-auto bg-primary "
+					style={{ backgroundColor: colors.primary }}
+					className="my-4 w-60 mx-auto  "
 					icon="clock"
 					mode="contained"
 					onPress={clicked === false ? handleStartFast : handleEndFast}>
