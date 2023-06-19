@@ -6,14 +6,11 @@ import { useAppSelector } from "../../../redux-manager/hooks";
 //Graph Animations
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
-const MedDonutGraph = ({
-	radius = 130,
-	strokeWidth = 40,
-	color = "#E07594",
-}) => {
+const MedDonutGraph = ({ radius = 130, strokeWidth = 40 }) => {
 	const { countdown, maxTime, percentageComplete } = useAppSelector(
 		(state) => state.meditation
 	);
+	const { colors } = useAppSelector((state) => state.theme);
 
 	const circleRef = useRef(null);
 	const halfCircle = radius + strokeWidth;
@@ -39,7 +36,7 @@ const MedDonutGraph = ({
 					<Circle
 						cx="50%"
 						cy="50%"
-						stroke={color}
+						stroke={colors.primary}
 						strokeWidth={strokeWidth}
 						r={radius}
 						fill="transparent"
@@ -48,7 +45,7 @@ const MedDonutGraph = ({
 					<Circle
 						cx="50%"
 						cy="50%"
-						stroke={color}
+						stroke={colors.primary}
 						strokeWidth={20}
 						r={radius}
 						fill="transparent"
@@ -58,7 +55,7 @@ const MedDonutGraph = ({
 						ref={circleRef}
 						cx="50%"
 						cy="50%"
-						stroke={color}
+						stroke={colors.primary}
 						strokeWidth={20}
 						r={radius}
 						fill="transparent"
@@ -69,7 +66,9 @@ const MedDonutGraph = ({
 				</G>
 			</Svg>
 			{countdown ? (
-				<Text className="text-3xl text-center absolute text-primary">
+				<Text
+					style={{ color: colors.primary }}
+					className="text-3xl text-center absolute">
 					{countdown}
 				</Text>
 			) : (

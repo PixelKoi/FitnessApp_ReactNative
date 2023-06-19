@@ -41,6 +41,7 @@ const Meditation = () => {
 	const { maxTime, medStreak, percentageComplete } = useAppSelector(
 		(state) => state.meditation
 	);
+	const { colors } = useAppSelector((state) => state.theme);
 	const dispatch = useAppDispatch();
 
 	//fasting states
@@ -81,11 +82,15 @@ const Meditation = () => {
 	};
 
 	return (
-		<View className="mt-auto flex flex-col justify-center bg-background ">
+		<View
+			style={{ backgroundColor: colors.background }}
+			className="mt-auto flex flex-col justify-center">
 			{/* Clock section */}
 			<View className="mt-auto mb-4 -top-2">
 				<View className="z-10">
-					<View className="bg-secondary h-8 w-52 self-center rounded-xl">
+					<View
+						style={{ backgroundColor: colors.secondary }}
+						className="h-8 w-52 self-center rounded-xl">
 						<TouchableOpacity
 							className="flex-row h-8 w-52"
 							onPress={() =>
@@ -93,12 +98,14 @@ const Meditation = () => {
 									? setShowTimerList(true)
 									: setShowTimerList(false)
 							}>
-							<Text className="ml-4 text-center my-auto text-primary">
+							<Text
+								style={{ color: colors.primary }}
+								className="ml-4 text-center my-auto ">
 								{fasting}
 							</Text>
 							<Icon
 								style={{
-									color: "#E07594",
+									color: colors.primary,
 									marginLeft: "auto",
 									marginRight: 20,
 									marginTop: "auto",
@@ -112,7 +119,9 @@ const Meditation = () => {
 					</View>
 
 					{showTimerList === true && (
-						<Surface className="w-52 bg-background rounded-xl self-center mt-12 absolute z-10">
+						<Surface
+							style={{ backgroundColor: colors.background }}
+							className="w-52 rounded-xl self-center mt-12 absolute z-10">
 							<TouchableOpacity
 								className="flex-row h-8 w-52"
 								onPress={() => {
@@ -120,13 +129,15 @@ const Meditation = () => {
 									dispatch(setMaxTime(5));
 									setShowTimerList(false);
 								}}>
-								<Text className="my-auto text-xs ml-2 text-primary">
+								<Text
+									style={{ color: colors.primary }}
+									className="my-auto text-xs ml-2">
 									5 minutes
 								</Text>
 								{maxTime === 5 && (
 									<CheckMark
 										style={{
-											color: "#E07594",
+											color: colors.primary,
 											marginLeft: "auto",
 											marginTop: "auto",
 											marginBottom: "auto",
@@ -144,13 +155,15 @@ const Meditation = () => {
 									dispatch(setMaxTime(10));
 									setShowTimerList(false);
 								}}>
-								<Text className="my-auto text-xs ml-2 text-primary">
+								<Text
+									style={{ color: colors.primary }}
+									className="my-auto text-xs ml-2 ">
 									10 minutes
 								</Text>
 								{maxTime === 10 && (
 									<CheckMark
 										style={{
-											color: "#E07594",
+											color: colors.primary,
 											marginLeft: "auto",
 											marginTop: "auto",
 											marginBottom: "auto",
@@ -168,13 +181,15 @@ const Meditation = () => {
 									dispatch(setMaxTime(15));
 									setShowTimerList(false);
 								}}>
-								<Text className="my-auto text-xs ml-2 text-primary">
+								<Text
+									style={{ color: colors.primary }}
+									className="my-auto text-xs ml-2 ">
 									15 minutes
 								</Text>
 								{maxTime === 15 && (
 									<CheckMark
 										style={{
-											color: "#E07594",
+											color: colors.primary,
 											marginLeft: "auto",
 											marginTop: "auto",
 											marginBottom: "auto",
@@ -192,13 +207,15 @@ const Meditation = () => {
 									dispatch(setMaxTime(20));
 									setShowTimerList(false);
 								}}>
-								<Text className="my-auto text-xs ml-2 text-primary">
+								<Text
+									style={{ color: colors.primary }}
+									className="my-auto text-xs ml-2 ">
 									20 minutes
 								</Text>
 								{maxTime === 20 && (
 									<CheckMark
 										style={{
-											color: "#E07594",
+											color: colors.primary,
 											marginLeft: "auto",
 											marginTop: "auto",
 											marginBottom: "auto",
@@ -216,13 +233,15 @@ const Meditation = () => {
 									dispatch(setMaxTime(30));
 									setShowTimerList(false);
 								}}>
-								<Text className="my-auto text-xs ml-2 text-primary">
+								<Text
+									style={{ color: colors.primary }}
+									className="my-auto text-xs ml-2 ">
 									30 minutes
 								</Text>
 								{maxTime === 30 && (
 									<CheckMark
 										style={{
-											color: "#E07594",
+											color: colors.primary,
 											marginLeft: "auto",
 											marginTop: "auto",
 											marginBottom: "auto",
@@ -241,15 +260,22 @@ const Meditation = () => {
 					<MedTimer />
 				</View>
 
-				<Text className="text-SM text-center mt-4 text-primary font-bold">
+				<Text
+					style={{ color: colors.primary }}
+					className="text-SM text-center mt-4 font-bold">
 					Elapsed: [{percentageComplete}]%
 				</Text>
 			</View>
 			<View className="mx-auto mb-10">
-				<MaterialCommunityIcons name="meditation" size={60} color="#E07594" />
+				<MaterialCommunityIcons
+					name="meditation"
+					size={60}
+					color={colors.primary}
+				/>
 			</View>
 			<Button
-				className="mt-auto mb-12 w-60 mx-auto bg-primary"
+				style={{ backgroundColor: colors.primary }}
+				className="mt-auto mb-12 w-60 mx-auto "
 				icon="brain"
 				mode="contained"
 				onPress={clicked === false ? handleStartFast : handleEndFast}>
