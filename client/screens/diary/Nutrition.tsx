@@ -320,12 +320,38 @@ const Nutrition: React.FC = () => {
                 />
               </View>
               {/*Favorite Modal Body with scrollview */}
-              <View className="pt-12">
-                <ScrollView>
-                  <Text>TEXT HERE</Text>
-                  <Text>TEXT HERE</Text>
-                  <Text>TEXT HERE</Text>
-                </ScrollView>
+              <View className="">
+                {favorites.length > 0 ? (
+                  <FlatList
+                    data={favorites}
+                    keyExtractor={(item) => item.fav_id.toString()}
+                    renderItem={({ item }) => (
+                      <View key={item.fav_id} className=" mt-4 px-1">
+                        <View className="flex flex-row mt-0">
+                          <View className="flex flex-col">
+                            <Card.Content>
+                              <Text
+                                style={{ color: primary_color }}
+                                className="font-extrabold"
+                                variant="titleLarge"
+                              >
+                                <Text>{item.description}</Text>
+                              </Text>
+                              <Text style={{ color: primary_color }}>
+                                Calories: {item.Calories}
+                              </Text>
+                            </Card.Content>
+                          </View>
+                          <View className="flex flex-col ml-auto">
+                            <PlusCircleIcon color={primary_color} />
+                          </View>
+                        </View>
+                      </View>
+                    )}
+                  />
+                ) : (
+                  <View></View>
+                )}
               </View>
             </View>
           </Modal>
