@@ -126,26 +126,28 @@ const Nutrition: React.FC = () => {
 
   const leftSwipe = (progress, dragX) => {
     const scale = dragX.interpolate({
-      inputRange: [-100, 0],
+      inputRange: [0, 100],
       outputRange: [1, 0],
       extrapolate: "clamp",
     });
 
     return (
-      <>
-        <View style={{ backgroundColor: "red", justifyContent: "center" }}>
-          <Animated.Text
-            style={{
-              color: "white",
-              paddingHorizontal: 10,
-              fontWeight: "600",
-              transform: [{ scale }],
-            }}
-          >
-            Delete
-          </Animated.Text>
-        </View>
-      </>
+      <View
+        className=""
+        style={{ backgroundColor: "red", justifyContent: "center" }}
+      >
+        <Animated.Text
+          className="items-start"
+          style={{
+            color: "white",
+            paddingHorizontal: 20,
+            fontWeight: "600",
+            transform: [{ scale }],
+          }}
+        >
+          Delete
+        </Animated.Text>
+      </View>
     );
   };
 
@@ -347,17 +349,15 @@ const Nutrition: React.FC = () => {
                 />
               </View>
               {/*Favorite Modal Body with scrollview */}
-              <View className="px-4">
+              <View className="">
                 {favorites.length > 0 ? (
                   <FlatList
+                    className="pt-8"
                     data={favorites}
                     keyExtractor={(item) => item.fav_id.toString()}
                     renderItem={({ item, index }) => (
-                      <Swipeable
-                        leftThreshold={30}
-                        renderRightActions={leftSwipe}
-                      >
-                        <View key={item.fav_id} className=" mt-4 px-1">
+                      <View key={item.fav_id}>
+                        <Swipeable renderRightActions={leftSwipe}>
                           <View className="flex flex-row mt-0">
                             <View className="flex flex-col">
                               <Card.Content>
@@ -380,12 +380,11 @@ const Nutrition: React.FC = () => {
                               style={{
                                 borderBottomWidth: 1,
                                 borderBottomColor: secondary_color,
-                                marginVertical: 10,
                               }}
                             />
                           )}
-                        </View>
-                      </Swipeable>
+                        </Swipeable>
+                      </View>
                     )}
                   />
                 ) : (
