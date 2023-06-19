@@ -1,29 +1,44 @@
 import React, { useState } from "react";
-import {
-	View,
-	Text,
-	Image,
-	Modal,
-	FlatList,
-	TouchableOpacity,
-} from "react-native";
+import { View, Text, Image, Modal } from "react-native";
 import headerIMG from "../../../assets/images/weight_lifting.png";
 import person from "../../../assets/images/male_person.png";
 import { Picker } from "@react-native-picker/picker";
-
-import { Button, Surface } from "react-native-paper";
+import { Button, Surface, Switch } from "react-native-paper";
 import { useAppDispatch, useAppSelector } from "../../../redux-manager/hooks";
 import { changeWeight } from "../../../redux-manager/redux-slice/user-slice";
 
 const WeightPickerModal = (props) => {
+	//redux imports
 	const { colors } = useAppSelector((state) => state.theme);
 	const { weight } = useAppSelector((state) => state.user);
 	const dispatch = useAppDispatch();
 
-	const [newWeight, setNewWeight] = useState(weight.toString());
+	//weight picker hooks
+	const [metric, setMetric] = useState("kg");
+	const [newWeight, setNewWeight] = useState(weight);
 
 	const weightKG = Array.from({ length: 150 }, (_, index) => index + 1);
 	const weightLB = Array.from({ length: 330 }, (_, index) => index + 1);
+
+	function convertKgToLbs(kg) {
+		return kg * 2.20462;
+	}
+
+	function convertPoundsToKilograms(pounds) {
+		return pounds * 0.45359237;
+	}
+
+	const [isSwitchOn, setIsSwitchOn] = React.useState(false);
+	const onToggleSwitch = () => {
+		setIsSwitchOn(!isSwitchOn);
+		if (isSwitchOn === false) {
+			setMetric("lbs");
+			setNewWeight(Math.round(convertKgToLbs(newWeight)));
+		} else {
+			setMetric("kg");
+			setNewWeight(Math.round(convertPoundsToKilograms(newWeight)));
+		}
+	};
 
 	return (
 		<Modal visible={props.showWeightModal}>
@@ -46,10 +61,12 @@ const WeightPickerModal = (props) => {
 
 					<View className="flex-row justify-center">
 						<Image className="mt-10 mr-10" source={person} />
-						<Text className="self-center text-3xl font-bold">{weight} kg</Text>
+						<Text className="self-center text-3xl font-bold">
+							{newWeight} {metric}
+						</Text>
 					</View>
 
-					<View className="mx-auto">
+					<View className="flex-row items-center justify-center gap-4">
 						<Picker
 							style={{ marginTop: 20 }}
 							itemStyle={{
@@ -60,16 +77,30 @@ const WeightPickerModal = (props) => {
 							onValueChange={(itemValue, itemIndex) => {
 								setNewWeight(itemValue);
 							}}>
-							{weightKG.map((item) => (
-								<Picker.Item label={item.toString()} value={item} />
-							))}
+							{metric === "kg"
+								? weightKG.map((item) => (
+										<Picker.Item label={item.toString()} value={item} />
+								  ))
+								: weightLB.map((item) => (
+										<Picker.Item label={item.toString()} value={item} />
+								  ))}
 						</Picker>
+						<View className="self-center flex-row gap-2">
+							<Text className="self-center">kg</Text>
+							<Switch
+								value={isSwitchOn}
+								onValueChange={onToggleSwitch}
+								color={colors.primary}
+							/>
+							<Text className="self-center">lbs</Text>
+						</View>
 					</View>
 
 					<View className="flex-row justify-center mt-12">
 						<Button
 							onPress={() => {
 								props.setShowWeightModal(false);
+								setNewWeight(weight);
 							}}
 							style={{ backgroundColor: colors.primary }}
 							className="w-24 mr-4"
@@ -77,7 +108,11 @@ const WeightPickerModal = (props) => {
 							Cancel
 						</Button>
 						<Button
-							onPress={() => {}}
+							onPress={async () => {
+								await dispatch(changeWeight(newWeight));
+								setNewWeight(weight);
+								props.setShowWeightModal(false);
+							}}
 							style={{ backgroundColor: colors.primary }}
 							className=" w-24"
 							mode="contained">
