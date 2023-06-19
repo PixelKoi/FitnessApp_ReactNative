@@ -34,6 +34,7 @@ const UserBioInput = () => {
 		bmr,
 		dailyCal,
 	} = useAppSelector((state) => state.user);
+	const { colors } = useAppSelector((state) => state.theme);
 	const dispatch = useAppDispatch();
 
 	//Edit Profile Hooks
@@ -118,13 +119,15 @@ const UserBioInput = () => {
 		navigation.setOptions({
 			title: showEditProfile === false ? "Quick Settings" : "Edit Profile",
 			headerStyle: {
-				backgroundColor: showEditProfile === false ? "#E07594" : "#F6E6EB",
+				backgroundColor:
+					showEditProfile === false ? colors.primary : colors.secondary,
 				shadowColor: "transparent",
 				elevation: 0,
 				shadowOpacity: 0,
 				borderBottomWidth: 0,
 			},
-			headerTintColor: showEditProfile === false ? "#fff" : "#E07594",
+			headerTintColor:
+				showEditProfile === false ? colors.secondary : colors.primary,
 			headerTitleStyle: {
 				fontWeight: "bold",
 			},
@@ -134,21 +137,27 @@ const UserBioInput = () => {
 				showEditProfile === false && (
 					<View>
 						<Button
-							className="mr-8 bg-white"
+							style={{ backgroundColor: colors.background }}
+							className="mr-8"
 							onPress={() => setEditProfile(true)}>
-							<Text className="text-primary">Edit</Text>
+							<Text style={{ color: colors.primary }}>Edit</Text>
 						</Button>
 					</View>
 				),
 			headerLeft: () =>
 				showEditProfile === false ? (
 					<Button
-						className="bg-primary ml-5"
+						style={{ backgroundColor: colors.primary }}
+						className="ml-5"
 						mode="elevated"
 						onPress={() => {
 							navigation.navigate("History");
 						}}>
-						<Icon name="angle-left" style={{ color: "#ffff" }} size={20} />
+						<Icon
+							name="angle-left"
+							style={{ color: colors.background }}
+							size={20}
+						/>
 					</Button>
 				) : (
 					<Button
@@ -157,112 +166,163 @@ const UserBioInput = () => {
 						onPress={() => {
 							setEditProfile(false);
 						}}>
-						<Icon name="angle-left" style={{ color: "#ffff" }} size={20} />
+						<Icon
+							name="angle-left"
+							style={{ color: colors.background }}
+							size={20}
+						/>
 					</Button>
 				),
 		});
 	}, [showEditProfile]);
 
+	const [showActivityModal, setShowActivityModal] = useState(false);
+
 	useEffect(() => {
 		calAlgo(calParams, dispatch);
-	}, [showEditProfile === false]);
-
-	const [showActivityModal, setShowActivityModal] = useState(false);
+	}, [showActivityModal === false]);
 
 	//Profile Screen
 	const profile = () => {
 		return (
 			<View className="flex-1 ">
-				<View className="flex bg-primary items-center  pb-6 w-full rounded-b-full absolute z-10">
+				<View
+					style={{ backgroundColor: colors.primary }}
+					className="flex items-center  pb-6 w-full rounded-b-full absolute z-10">
 					<UserCircleIcon name="ios-add" size={50} color={"white"} />
 					<Text className="text-white my-2">{name}</Text>
 					<Text className="text-white">{email}</Text>
 				</View>
-				<Surface className="mx-8 py-8 pb-12 mt-24 rounded-b-3xl bg-background">
+				<Surface
+					style={{ backgroundColor: colors.background }}
+					className="mx-8 py-8 pb-12 mt-24 rounded-b-3xl">
 					<View className="mx-8">
-						<View className="flex flex-row border-solid border-b-2 py-4 border-secondary">
-							<Text className="text-primary text-xs">Workout Plan</Text>
+						<View
+							style={{ borderColor: colors.secondary }}
+							className="flex flex-row border-solid border-b-2 py-4">
+							<Text style={{ color: colors.primary }} className="text-xs">
+								Workout Plan
+							</Text>
 							<View className="ml-auto flex-row self-center">
 								<MaterialCommunityIcons
+									style={{ color: colors.primary }}
 									name="pencil-outline"
 									size={15}
-									color={"#E07594"}
 								/>
 							</View>
 						</View>
 
-						<View className="flex flex-row border-solid border-b-2 py-4 border-secondary">
-							<Text className="text-primary text-xs">Diet Plan</Text>
+						<View
+							style={{ borderColor: colors.secondary }}
+							className="flex flex-row border-solid border-b-2 py-4">
+							<Text style={{ color: colors.primary }} className="text-xs">
+								Diet Plan
+							</Text>
 							<View className="ml-auto flex-row self-center">
 								<MaterialCommunityIcons
+									style={{ color: colors.primary }}
 									name="pencil-outline"
 									size={15}
-									color={"#E07594"}
 								/>
 							</View>
 						</View>
 
-						<View className="flex flex-row border-solid border-b-2 py-4 border-secondary">
-							<Text className="text-primary text-xs">Theme</Text>
+						<View
+							style={{ borderColor: colors.secondary }}
+							className="flex flex-row border-solid border-b-2 py-4">
+							<Text style={{ color: colors.primary }} className="text-xs">
+								Theme
+							</Text>
 
-							<Text className="ml-auto mr-2 text-primary opacity-60 text-xs">
+							<Text
+								style={{ color: colors.primary }}
+								className="ml-auto mr-2 opacity-60 text-xs">
 								Bubble Gum
 							</Text>
 							<MaterialCommunityIcons
+								style={{ color: colors.primary }}
 								name="pencil-outline"
 								size={15}
-								color={"#E07594"}
 							/>
 						</View>
 
-						<View className="flex flex-row border-solid border-b-2 py-4 border-secondary">
-							<Text className="text-primary text-xs">Weight (kg)</Text>
-							<Text className="ml-auto mr-2 text-primary opacity-60 text-xs">
+						<View
+							style={{ borderColor: colors.secondary }}
+							className="flex flex-row border-solid border-b-2 py-4">
+							<Text style={{ color: colors.primary }} className="text-xs">
+								Weight (kg)
+							</Text>
+							<Text
+								style={{ color: colors.primary }}
+								className="ml-auto mr-2 opacity-60 text-xs">
 								{weight} kg
 							</Text>
 							<MaterialCommunityIcons
+								style={{ color: colors.primary }}
 								name="pencil-outline"
 								size={15}
-								color={"#E07594"}
 							/>
 						</View>
 
 						<TouchableOpacity
+							style={{ borderColor: colors.secondary }}
 							onPress={() => setShowActivityModal(true)}
-							className="flex flex-row border-solid border-b-2 py-4 border-secondary">
-							<Text className="text-primary text-xs">Activity Level</Text>
-							<Text className="ml-auto mr-2 text-primary opacity-60 text-xs">
+							className="flex flex-row border-solid border-b-2 py-4">
+							<Text style={{ color: colors.primary }} className="text-xs">
+								Activity Level
+							</Text>
+							<Text
+								style={{ color: colors.primary }}
+								className="ml-auto mr-2 opacity-60 text-xs">
 								{activity}
 							</Text>
 							<MaterialCommunityIcons
+								style={{ color: colors.primary }}
 								name="pencil-outline"
 								size={15}
-								color={"#E07594"}
 							/>
 						</TouchableOpacity>
 
-						<View className="flex flex-row border-solid border-b-2 py-4 border-secondary">
-							<Text className="text-primary text-xs">Weekly Goal:</Text>
-							<Text className="ml-auto mr-2 text-primary opacity-60 text-xs">
+						<View
+							style={{ borderColor: colors.secondary }}
+							className="flex flex-row border-solid border-b-2 py-4">
+							<Text style={{ color: colors.primary }} className="text-xs">
+								Weekly Goal:
+							</Text>
+							<Text
+								style={{ color: colors.primary }}
+								className="ml-auto mr-2  opacity-60 text-xs">
 								{goal} lb/s
 							</Text>
 							<MaterialCommunityIcons
+								style={{ color: colors.primary }}
 								name="pencil-outline"
 								size={15}
-								color={"#E07594"}
 							/>
 						</View>
 
-						<View className="flex flex-row border-solid border-b-2 py-4 border-secondary">
-							<Text className="text-primary text-xs">BMR:</Text>
-							<Text className="ml-auto text-primary opacity-60 text-xs">
+						<View
+							style={{ borderColor: colors.secondary }}
+							className="flex flex-row border-solid border-b-2 py-4">
+							<Text style={{ color: colors.primary }} className="text-xs">
+								BMR:
+							</Text>
+							<Text
+								style={{ color: colors.primary }}
+								className="ml-auto opacity-60 text-xs">
 								{bmr} cal
 							</Text>
 						</View>
 
-						<View className="flex flex-row border-solid border-b-2 py-4 border-secondary">
-							<Text className="text-primary text-xs">Daily Calorie Needs:</Text>
-							<Text className="ml-auto text-primary opacity-60 text-xs">
+						<View
+							style={{ borderColor: colors.secondary }}
+							className="flex flex-row border-solid border-b-2 py-4">
+							<Text style={{ color: colors.primary }} className="text-xs">
+								Daily Calorie Needs:
+							</Text>
+							<Text
+								style={{ color: colors.primary }}
+								className="ml-auto opacity-60 text-xs">
 								{dailyCal} cal
 							</Text>
 						</View>
@@ -270,7 +330,8 @@ const UserBioInput = () => {
 				</Surface>
 				<Button
 					onPress={signOut}
-					className="w-40 mx-auto mt-4 bg-primary"
+					style={{ backgroundColor: colors.primary }}
+					className="w-40 mx-auto mt-4 "
 					mode="contained">
 					Sign Out
 				</Button>
@@ -284,7 +345,7 @@ const UserBioInput = () => {
 	};
 
 	return (
-		<View className="flex-1 bg-secondary">
+		<View style={{ backgroundColor: colors.secondary }} className="flex-1">
 			{showEditProfile === false ? profile() : <EditProfile />}
 		</View>
 	);
