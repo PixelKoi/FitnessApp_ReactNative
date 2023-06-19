@@ -15,12 +15,12 @@ interface FastingDonutGraphProps {
 const FastingDonutGraph: React.FC<FastingDonutGraphProps> = ({
 	radius = 130,
 	strokeWidth = 40,
-	color = "#E07594",
 }) => {
 	//initiate fasting redux states
 	const { countdown, elapsedPercentage, maxTime } = useAppSelector(
 		(state) => state.fasting
 	);
+	const { colors } = useAppSelector((state) => state.theme);
 
 	const circleRef = useRef(null);
 	const halfCircle = radius + strokeWidth;
@@ -46,7 +46,7 @@ const FastingDonutGraph: React.FC<FastingDonutGraphProps> = ({
 					<Circle
 						cx="50%"
 						cy="50%"
-						stroke={color}
+						stroke={colors.primary}
 						strokeWidth={strokeWidth}
 						r={radius}
 						fill="transparent"
@@ -55,7 +55,7 @@ const FastingDonutGraph: React.FC<FastingDonutGraphProps> = ({
 					<Circle
 						cx="50%"
 						cy="50%"
-						stroke={color}
+						stroke={colors.primary}
 						strokeWidth={20}
 						r={radius}
 						fill="transparent"
@@ -65,7 +65,7 @@ const FastingDonutGraph: React.FC<FastingDonutGraphProps> = ({
 						ref={circleRef}
 						cx="50%"
 						cy="50%"
-						stroke={color}
+						stroke={colors.primary}
 						strokeWidth={20}
 						r={radius}
 						fill="transparent"
@@ -76,7 +76,9 @@ const FastingDonutGraph: React.FC<FastingDonutGraphProps> = ({
 				</G>
 			</Svg>
 
-			<Text className="text-3xl text-center absolute text-primary">
+			<Text
+				style={{ color: colors.primary }}
+				className="text-3xl text-center absolute">
 				{countdown}
 			</Text>
 		</View>
