@@ -16,6 +16,7 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 
 import ActivityPickerModal from "./modals/ActivityPickerModal";
 import WeightPickerModal from "./modals/WeightPickerModal";
+import WeeklyGoalModal from "./modals/WeeklyGoalModal";
 
 const UserBioInput = () => {
 	const database = useDatabase();
@@ -40,7 +41,9 @@ const UserBioInput = () => {
 
 	//Edit Profile Hooks
 	const [showEditProfile, setEditProfile] = useState<boolean>(false);
-
+	const [showActivityModal, setShowActivityModal] = useState(false);
+	const [showWeightModal, setShowWeightModal] = useState(false);
+	const [showGoalModal, setShowGoalModal] = useState(false);
 	//Create Calorie Param object for calAlgo function
 	const calParams = {
 		age: age,
@@ -176,9 +179,6 @@ const UserBioInput = () => {
 		});
 	}, [showEditProfile]);
 
-	const [showActivityModal, setShowActivityModal] = useState(false);
-	const [showWeightModal, setShowWeightModal] = useState(false);
-
 	useEffect(() => {
 		calAlgo(calParams, dispatch);
 	}, [showActivityModal === false]);
@@ -285,7 +285,8 @@ const UserBioInput = () => {
 							/>
 						</TouchableOpacity>
 
-						<View
+						<TouchableOpacity
+							onPress={() => setShowGoalModal(true)}
 							style={{ borderColor: colors.secondary }}
 							className="flex flex-row border-solid border-b-2 py-4">
 							<Text style={{ color: colors.primary }} className="text-xs">
@@ -301,7 +302,7 @@ const UserBioInput = () => {
 								name="pencil-outline"
 								size={15}
 							/>
-						</View>
+						</TouchableOpacity>
 
 						<View
 							style={{ borderColor: colors.secondary }}
@@ -346,6 +347,10 @@ const UserBioInput = () => {
 				<WeightPickerModal
 					showWeightModal={showWeightModal}
 					setShowWeightModal={setShowWeightModal}
+				/>
+				<WeeklyGoalModal
+					showGoalModal={showGoalModal}
+					setShowGoalModal={setShowGoalModal}
 				/>
 			</View>
 		);
