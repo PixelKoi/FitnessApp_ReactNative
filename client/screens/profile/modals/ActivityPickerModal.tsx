@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, Image, Modal } from "react-native";
 import headerIMG from "../../../assets/images/weight_lifting.png";
-import { Button } from "react-native-paper";
+import { Button, Surface } from "react-native-paper";
 import { useAppDispatch, useAppSelector } from "../../../redux-manager/hooks";
 import { changeActivity } from "../../../redux-manager/redux-slice/user-slice";
 
@@ -27,7 +27,7 @@ const ActivityPickerModal = (props) => {
 				className="flex-1 items-center">
 				<Image className="mt-10" source={headerIMG} />
 
-				<View
+				<Surface
 					style={{
 						borderTopLeftRadius: 60,
 						borderTopRightRadius: 60,
@@ -84,7 +84,7 @@ const ActivityPickerModal = (props) => {
 							Save
 						</Button>
 					</View>
-				</View>
+				</Surface>
 			</View>
 		</Modal>
 	);

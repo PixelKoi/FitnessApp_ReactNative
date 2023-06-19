@@ -138,8 +138,7 @@ const UserBioInput = () => {
 					<View>
 						<Button
 							style={{ backgroundColor: colors.background }}
-							className="mr-8"
-							onPress={() => setEditProfile(true)}>
+							className="mr-8">
 							<Text style={{ color: colors.primary }}>Edit</Text>
 						</Button>
 					</View>
