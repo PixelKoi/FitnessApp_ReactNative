@@ -75,17 +75,22 @@ const WeightPickerModal = (props) => {
 						<Text className="self-center text-base font-bold">lbs</Text>
 					</View> */}
 
-					<Picker
-						style={{ marginTop: 20 }}
-						itemStyle={{ color: "black" }}
-						selectedValue={newWeight}
-						onValueChange={(itemValue, itemIndex) => {
-							setNewWeight(itemValue);
-						}}>
-						{weightKG.map((item) => (
-							<Picker.Item label={item.toString()} value={item} />
-						))}
-					</Picker>
+					<View className="mx-auto">
+						<Picker
+							style={{ marginTop: 20 }}
+							itemStyle={{
+								color: "black",
+								width: 200,
+							}}
+							selectedValue={newWeight}
+							onValueChange={(itemValue, itemIndex) => {
+								setNewWeight(itemValue);
+							}}>
+							{weightKG.map((item) => (
+								<Picker.Item label={item.toString()} value={item} />
+							))}
+						</Picker>
+					</View>
 
 					{/* <FlatList
 						horizontal
