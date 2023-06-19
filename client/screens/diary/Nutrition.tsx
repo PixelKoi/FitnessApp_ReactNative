@@ -303,7 +303,7 @@ const Nutrition: React.FC = () => {
                   className="text-center text-2xl font-bold"
                   style={{ color: primary_color }}
                 >
-                  Favorite
+                  Favorites
                 </Text>
               </View>
               <View className="absolute top-0 right-0 p-4">
@@ -337,7 +337,7 @@ const Nutrition: React.FC = () => {
                               </Text>
                             </Card.Content>
                           </View>
-                          <View className="flex flex-col ml-auto">
+                          <View className="flex flex-col ml-auto justify-center">
                             <PlusCircleIcon color={primary_color} />
                           </View>
                         </View>
@@ -453,14 +453,15 @@ const Nutrition: React.FC = () => {
           }
           keyExtractor={(item) => item.id.toString()}
         />
-        <Text
-          style={{ color: primary_color }}
-          className="font-extrabold pl-4 pb-2 text-xl"
-        >
-          Favorite
-        </Text>
+
         <Card className="h-2/5 rounded-3xl m-3">
           <Card.Content className="">
+            <Text
+              style={{ color: primary_color }}
+              className="font-bold pl-4 pb-2 text-xl"
+            >
+              Favorites
+            </Text>
             {favorites.length > 0 ? (
               <FlatList
                 data={favorites}
