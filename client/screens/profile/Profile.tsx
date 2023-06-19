@@ -15,6 +15,7 @@ import { supabase } from "../../utils/supabase_authentication/supabase";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 import ActivityPickerModal from "./modals/ActivityPickerModal";
+import WeightPickerModal from "./modals/WeightPickerModal";
 
 const UserBioInput = () => {
 	const database = useDatabase();
@@ -176,6 +177,7 @@ const UserBioInput = () => {
 	}, [showEditProfile]);
 
 	const [showActivityModal, setShowActivityModal] = useState(false);
+	const [showWeightModal, setShowWeightModal] = useState(false);
 
 	useEffect(() => {
 		calAlgo(calParams, dispatch);
@@ -245,8 +247,9 @@ const UserBioInput = () => {
 							/>
 						</View>
 
-						<View
+						<TouchableOpacity
 							style={{ borderColor: colors.secondary }}
+							onPress={() => setShowWeightModal(true)}
 							className="flex flex-row border-solid border-b-2 py-4">
 							<Text style={{ color: colors.primary }} className="text-xs">
 								Weight (kg)
@@ -261,7 +264,7 @@ const UserBioInput = () => {
 								name="pencil-outline"
 								size={15}
 							/>
-						</View>
+						</TouchableOpacity>
 
 						<TouchableOpacity
 							style={{ borderColor: colors.secondary }}
@@ -335,9 +338,14 @@ const UserBioInput = () => {
 					Sign Out
 				</Button>
 
+				{/* Modals */}
 				<ActivityPickerModal
 					showActivityModal={showActivityModal}
 					setShowActivityModal={setShowActivityModal}
+				/>
+				<WeightPickerModal
+					showWeightModal={showWeightModal}
+					setShowWeightModal={setShowWeightModal}
 				/>
 			</View>
 		);
