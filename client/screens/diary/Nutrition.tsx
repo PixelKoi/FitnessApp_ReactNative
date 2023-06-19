@@ -126,26 +126,26 @@ const Nutrition: React.FC = () => {
 
   const leftSwipe = (progress, dragX) => {
     const scale = dragX.interpolate({
-      inputRange: [0, 100],
-      outputRange: [0, 1],
+      inputRange: [-100, 0],
+      outputRange: [1, 0],
       extrapolate: "clamp",
     });
 
     return (
-      <Animated.View
-        style={{ flex: 1, backgroundColor: "red", justifyContent: "center" }}
-      >
-        <Animated.Text
-          style={{
-            color: "white",
-            paddingHorizontal: 10,
-            fontWeight: "600",
-            transform: [{ scale }],
-          }}
-        >
-          Delete
-        </Animated.Text>
-      </Animated.View>
+      <>
+        <View style={{ backgroundColor: "red", justifyContent: "center" }}>
+          <Animated.Text
+            style={{
+              color: "white",
+              paddingHorizontal: 10,
+              fontWeight: "600",
+              transform: [{ scale }],
+            }}
+          >
+            Delete
+          </Animated.Text>
+        </View>
+      </>
     );
   };
 
@@ -353,7 +353,10 @@ const Nutrition: React.FC = () => {
                     data={favorites}
                     keyExtractor={(item) => item.fav_id.toString()}
                     renderItem={({ item, index }) => (
-                      <Swipeable renderLeftActions={leftSwipe}>
+                      <Swipeable
+                        leftThreshold={30}
+                        renderRightActions={leftSwipe}
+                      >
                         <View key={item.fav_id} className=" mt-4 px-1">
                           <View className="flex flex-row mt-0">
                             <View className="flex flex-col">
