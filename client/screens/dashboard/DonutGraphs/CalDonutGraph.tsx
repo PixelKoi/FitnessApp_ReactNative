@@ -18,6 +18,7 @@ const CalDonutGraph = (
 ) => {
 	//Initiate User Redux State
 	const { dailyCal } = useAppSelector((state) => state.user);
+	const { colors } = useAppSelector((state) => state.theme);
 
 	const animatedValue = React.useRef(new Animated.Value(0)).current;
 	// const [elapsed, setElapsed] = useState(0);
@@ -46,7 +47,7 @@ const CalDonutGraph = (
 					<Circle
 						cx="50%"
 						cy="50%"
-						stroke={color}
+						stroke={colors.primary}
 						strokeWidth={strokeWidth}
 						r={radius}
 						fill="transparent"
@@ -56,7 +57,7 @@ const CalDonutGraph = (
 						ref={circleRef}
 						cx="50%"
 						cy="50%"
-						stroke={color}
+						stroke={colors.primary}
 						strokeWidth={20}
 						r={radius}
 						fill="transparent"
@@ -67,10 +68,14 @@ const CalDonutGraph = (
 				</G>
 			</Svg>
 			<View className="absolute self-center">
-				<Text className="text-center text-primary font-bold text-2xl">
+				<Text
+					style={{ color: colors.primary }}
+					className="text-center  font-bold text-2xl">
 					{dailyCal}
 				</Text>
-				<Text className="text-center top-1 text-primary text-xs">
+				<Text
+					style={{ color: colors.primary }}
+					className="text-center top-1text-xs">
 					remaining
 				</Text>
 			</View>

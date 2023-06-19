@@ -6,12 +6,9 @@ import { useAppSelector } from "../../../redux-manager/hooks";
 //Graph Animations
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
-const FastingDonutGraph = (
-	props,
-	{ radius = 70, strokeWidth = 25, color = "#E07594" }
-) => {
+const FastingDonutGraph = (props, { radius = 70, strokeWidth = 25 }) => {
 	const fastingInfo = useAppSelector((state) => state.fasting);
-
+	const { colors } = useAppSelector((state) => state.theme);
 	const circleRef = useRef(null);
 	const halfCircle = radius + strokeWidth;
 	const circleCircumference = 2 * Math.PI * radius;
@@ -76,7 +73,7 @@ const FastingDonutGraph = (
 					<Circle
 						cx="50%"
 						cy="50%"
-						stroke={color}
+						stroke={colors.primary}
 						strokeWidth={strokeWidth}
 						r={radius}
 						fill="transparent"
@@ -86,7 +83,7 @@ const FastingDonutGraph = (
 						ref={circleRef}
 						cx="50%"
 						cy="50%"
-						stroke={color}
+						stroke={colors.primary}
 						strokeWidth={25}
 						r={radius}
 						fill="transparent"
@@ -97,11 +94,13 @@ const FastingDonutGraph = (
 				</G>
 			</Svg>
 			<View className="absolute self-center">
-				<Text className="text-2xl text-center text-primary font-bold">
+				<Text
+					style={{ color: colors.primary }}
+					className="text-2xl text-center font-bold">
 					{fastingInfo.elapsedPercentage}%
 				</Text>
 
-				<Text className="text-xs text-center  text-primary">
+				<Text style={{ color: colors.primary }} className="text-xs text-center">
 					{fastingInfo.countdown}
 				</Text>
 			</View>

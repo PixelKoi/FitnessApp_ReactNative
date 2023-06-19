@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { View, Text, Animated, TextInput } from "react-native";
 import Svg, { G, Circle } from "react-native-svg";
 import { FontAwesome5 } from "@expo/vector-icons";
+import { useAppSelector } from "../../../redux-manager/hooks";
 
 //Graph Animations
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
@@ -17,6 +18,8 @@ const SumDonutGraph = (
 	}
 ) => {
 	const animatedValue = React.useRef(new Animated.Value(0)).current;
+	const { colors } = useAppSelector((state) => state.theme);
+
 	// const [elapsed, setElapsed] = useState(0);
 
 	const circleRef = useRef(null);
@@ -43,7 +46,7 @@ const SumDonutGraph = (
 					<Circle
 						cx="50%"
 						cy="50%"
-						stroke={color}
+						stroke={colors.primary}
 						strokeWidth={strokeWidth}
 						r={radius}
 						fill="transparent"
@@ -53,7 +56,7 @@ const SumDonutGraph = (
 						ref={circleRef}
 						cx="50%"
 						cy="50%"
-						stroke={color}
+						stroke={colors.primary}
 						strokeWidth={25}
 						r={radius}
 						fill="transparent"
