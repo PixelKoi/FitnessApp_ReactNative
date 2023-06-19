@@ -269,10 +269,10 @@ const Nutrition: React.FC = () => {
     // console.log("food.quantity", food.quantity, index);
     // console.log("STATE", foodArray);
     return (
-      <View className="p-2 ">
+      <View className="mx-2 py-2 rounded-3xl">
         <Card>
-          <Card.Content>
-            <View className="flex flex-row items-center mt-0">
+          <Card.Content style={{ paddingVertical: 8 }}>
+            <View className="flex flex-row items-center ">
               <View className="flex flex-col">
                 <Text style={{ color: primary_color }} className="font-bold">
                   {food.food.description}
@@ -294,7 +294,7 @@ const Nutrition: React.FC = () => {
               <View className="flex flex-col ml-auto">
                 <TouchableOpacity
                   onPress={() => handlePlus(foodArray, index)}
-                  className="rounded-full p-2"
+                  className="px-2"
                 >
                   <ChevronUpIcon size={24} color={primary_color} />
                 </TouchableOpacity>
@@ -310,13 +310,13 @@ const Nutrition: React.FC = () => {
                 />
                 <TouchableOpacity
                   onPress={() => handleMinus(foodArray, index)}
-                  className="rounded-full p-2"
+                  className="px-2"
                 >
                   <ChevronDownIcon size={24} color={primary_color} />
                 </TouchableOpacity>
                 <TouchableOpacity
                   onPress={() => handleFavoriteToggle(index, foodArray)}
-                  className="rounded-full p-2 text-primary"
+                  className="rounded-full px-2 text-primary pt-1"
                 >
                   {selectedHearts[index] ? (
                     <FilledHeartIcon size={24} color={primary_color} />
