@@ -178,7 +178,7 @@ const Nutrition: React.FC = () => {
       headerRight: () => (
         // <TouchableOpacity onPress={() => setSaveButton(true)}>
         <View>
-          <TouchableOpacity onPress={() => checkOption()}>
+          <TouchableOpacity>
             <AntIcon
               name="book"
               size={24}
@@ -233,6 +233,7 @@ const Nutrition: React.FC = () => {
       updatedFoodArray[index] = updatedFood;
       setFoodArray(updatedFoodArray);
     }
+    console.log("FOOD ARRAY ****", foodArray);
   };
 
   const handleMinus = (foodArray, index) => {
@@ -565,6 +566,18 @@ const Nutrition: React.FC = () => {
                 <Text variant="titleLarge">Card title</Text>
                 <Text variant="bodyMedium">Card content</Text>
               </Card.Content>
+              <View>
+                <FlatList
+                  data={foodArray}
+                  renderItem={({ item, index }) => (
+                    <View>
+                      <Text>{item.description}</Text>
+                    </View>
+                  )}
+                  keyExtractor={(item) => item.id.toString()}
+                />
+              </View>
+
               <View className="flex-row justify-between items-center px-8">
                 <View>
                   <Text style={{ color: background }}>Total</Text>
@@ -583,6 +596,7 @@ const Nutrition: React.FC = () => {
               <View className="items-center py-2">
                 <Card.Actions>
                   <AntIcon
+                    onPress={() => checkOption()}
                     name="pluscircle"
                     size={24}
                     color={background}
