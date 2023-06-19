@@ -178,7 +178,7 @@ const Nutrition: React.FC = () => {
         <View>
           <TouchableOpacity onPress={() => checkOption()}>
             <AntIcon
-              name="pluscircle"
+              name="book"
               size={24}
               color={primary_color}
               style={{ marginRight: 10 }}
@@ -491,7 +491,7 @@ const Nutrition: React.FC = () => {
           }
           keyExtractor={(item) => item.id.toString()}
         />
-        {favoritesList && (
+        {favoritesList ? (
           <Card className="h-2/5 rounded-3xl m-3 overflow-hidden">
             <Card.Content className="">
               <Text
@@ -548,6 +548,40 @@ const Nutrition: React.FC = () => {
                 </View>
               )}
             </Card.Content>
+          </Card>
+        ) : (
+          <Card
+            className="rounded-3xl"
+            style={{
+              borderBottomLeftRadius: 0,
+              borderBottomRightRadius: 0,
+              backgroundColor: primary_color,
+            }}
+          >
+            <View>
+              <Card.Content>
+                <Text variant="titleLarge">Card title</Text>
+                <Text variant="bodyMedium">Card content</Text>
+              </Card.Content>
+              <View className="flex flex-row items-center mt-0">
+                <View className="flex flex-col">
+                  <Text>Total</Text>
+                </View>
+                <View className="flex flex-col">
+                  <Text>Calories</Text>
+                </View>
+              </View>
+              <View className="items-center">
+                <Card.Actions>
+                  <AntIcon
+                    name="pluscircle"
+                    size={24}
+                    color={background}
+                    style={{ marginRight: 10 }}
+                  />
+                </Card.Actions>
+              </View>
+            </View>
           </Card>
         )}
       </View>
