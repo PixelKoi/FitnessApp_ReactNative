@@ -68,6 +68,8 @@ const styles = StyleSheet.create({
 const Nutrition: React.FC = () => {
   const dispatch = useAppDispatch();
   const { colors } = useAppSelector((state) => state.theme);
+  const { dailyCal } = useAppSelector((state) => state.user);
+  console.log("PROFILE CALS: ", dailyCal);
   console.log("colors:", colors.primary);
   // ACCESS THEME COLORS
   // const primary_color = colors.primary;
@@ -563,12 +565,12 @@ const Nutrition: React.FC = () => {
                 <Text variant="titleLarge">Card title</Text>
                 <Text variant="bodyMedium">Card content</Text>
               </Card.Content>
-              <View className="flex flex-row items-center mt-0">
-                <View className="flex flex-col">
-                  <Text>Total</Text>
+              <View className="flex-row justify-between items-center px-4">
+                <View>
+                  <Text style={{ color: background }}>Total</Text>
                 </View>
-                <View className="flex flex-col">
-                  <Text>Calories</Text>
+                <View>
+                  <Text style={{ color: background }}>{dailyCal}</Text>
                 </View>
               </View>
               <View className="items-center">
