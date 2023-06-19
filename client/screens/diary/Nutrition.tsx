@@ -565,7 +565,7 @@ const Nutrition: React.FC = () => {
                 <Text variant="titleLarge">Card title</Text>
                 <Text variant="bodyMedium">Card content</Text>
               </Card.Content>
-              <View className="flex-row justify-between items-center px-4">
+              <View className="flex-row justify-between items-center px-8">
                 <View>
                   <Text style={{ color: background }}>Total</Text>
                 </View>
@@ -573,7 +573,14 @@ const Nutrition: React.FC = () => {
                   <Text style={{ color: background }}>{dailyCal}</Text>
                 </View>
               </View>
-              <View className="items-center">
+              <View
+                className="mx-7 py-2"
+                style={{
+                  borderBottomWidth: 1,
+                  borderBottomColor: background,
+                }}
+              />
+              <View className="items-center py-2">
                 <Card.Actions>
                   <AntIcon
                     name="pluscircle"
