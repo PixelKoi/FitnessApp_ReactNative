@@ -30,7 +30,6 @@ import {
   Menu,
   Provider,
   Portal,
-  PaperProvider,
 } from "react-native-paper";
 import Icon from "react-native-vector-icons/Ionicons";
 import AntIcon from "react-native-vector-icons/AntDesign";
@@ -39,6 +38,7 @@ import { addFavorite } from "../../redux-manager/redux-slice/favorite-slice";
 import { setTheme } from "../../redux-manager/redux-slice/theme-slice";
 import { useAppSelector, useAppDispatch } from "../../redux-manager/hooks";
 import Swipeable from "react-native-gesture-handler/Swipeable";
+import { RectButton } from "react-native-gesture-handler";
 
 const styles = StyleSheet.create({
   container: {
@@ -531,20 +531,23 @@ const Nutrition: React.FC = () => {
                 )}
               />
             ) : (
-              <Card>
-                <Card.Content>
-                  <Text
-                    style={{ color: primary_color }}
-                    className="pb-4"
-                    variant="titleLarge"
-                  >
-                    No favorite selected
-                  </Text>
-                  <Text style={{ color: primary_color }} variant="bodyMedium">
-                    Please select a favorite to display here.
-                  </Text>
-                </Card.Content>
-              </Card>
+              <View>
+                <Text
+                  style={{ color: primary_color }}
+                  className="pt-4 pl-4 capitalize"
+                  variant="titleLarge"
+                >
+                  No favorite selected
+                </Text>
+                <Text
+                  style={{ color: primary_color }}
+                  className="pt-4 pl-4 italic"
+                  variant="bodyMedium"
+                >
+                  Please heart a food option to display here for quick
+                  selections.
+                </Text>
+              </View>
             )}
           </Card.Content>
         </Card>
