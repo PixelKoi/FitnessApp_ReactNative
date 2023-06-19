@@ -93,7 +93,7 @@ const WeightPickerModal = (props) => {
 					<View className="flex-col items-center justify-center mt-10">
 						<Text
 							style={{ color: colors.primary }}
-							className="self-center text-3xl font-bold">
+							className="self-center text-2xl font-bold">
 							{newWeight} {metric}
 						</Text>
 						<View className="self-center flex-row gap-2 mt-4">
