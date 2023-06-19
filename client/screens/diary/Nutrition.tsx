@@ -163,6 +163,7 @@ const Nutrition: React.FC = () => {
   React.useLayoutEffect(() => {
     tabNavigation.setOptions({
       title: "Nutrition",
+      headerTintColor: primary_color,
       headerLeft: () => (
         <View>
           <TouchableOpacity onPress={handleFavoritePress}>
@@ -178,7 +179,7 @@ const Nutrition: React.FC = () => {
       headerRight: () => (
         // <TouchableOpacity onPress={() => setSaveButton(true)}>
         <View>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => tabNavigation.navigate("Diary")}>
             <AntIcon
               name="book"
               size={24}

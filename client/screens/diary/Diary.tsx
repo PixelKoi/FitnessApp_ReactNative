@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import { Divider, Text, Card, Button } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { useDatabase } from "@nozbe/watermelondb/hooks";
@@ -7,14 +7,39 @@ import { Q } from "@nozbe/watermelondb";
 import completeDiary from "../../database/models/Food";
 import { useAppSelector } from "../../redux-manager/hooks";
 // import { RootState } from "../../redux-manager/store";
-
 import Food from "../../database/models/Food";
+import Icon from "react-native-vector-icons/FontAwesome";
 const Diary = (props) => {
   const tabNavigation = useNavigation();
   const database = useDatabase();
   const profileInfo = useAppSelector((state) => state.user);
   console.log("PROFILE INFO: ", profileInfo);
   console.log("PROFILE CALS: ", profileInfo.dailyCal);
+  const { colors } = useAppSelector((state) => state.theme);
+  let primary_color = colors.primary;
+
+  React.useLayoutEffect(() => {
+    tabNavigation.setOptions({
+      title: "Diary",
+      headerTintColor: primary_color,
+      headerLeft: () => (
+        <Button
+          style={{ backgroundColor: colors.primary }}
+          className="ml-5"
+          mode="elevated"
+          onPress={() => {
+            tabNavigation.navigate("Nutrition");
+          }}
+        >
+          <Icon
+            name="angle-left"
+            style={{ color: colors.background }}
+            size={20}
+          />
+        </Button>
+      ),
+    });
+  });
 
   const diaryButton = async () => {
     const food_instance = database.get("foods");
