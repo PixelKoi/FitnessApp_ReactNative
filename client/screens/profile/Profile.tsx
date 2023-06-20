@@ -206,13 +206,13 @@ const UserBioInput = () => {
 				</View>
 
 				<Svg
-					style={{ position: "absolute", zIndex: 10, top: 24 }}
+					style={{ position: "absolute", zIndex: 10, top: 20 }}
 					width={screenWidth}
-					height={150}>
+					height={160}>
 					<Path
-						d={`M0,${150 / 2} C${screenWidth / 4},${150 * (3 / 4)} ${
+						d={`M0,${160 / 2} C${screenWidth / 4},${160 * (3 / 4)} ${
 							screenWidth * (3 / 4)
-						},${150 * (3 / 4)} ${screenWidth},${150 / 2}`}
+						},${160 * (3 / 4)} ${screenWidth},${160 / 2}`}
 						stroke={colors.primary}
 						fill={colors.primary}
 					/>
@@ -220,7 +220,7 @@ const UserBioInput = () => {
 
 				<Surface
 					style={{ backgroundColor: colors.background }}
-					className="mx-8 py-8 pb-12 mt-24 rounded-b-3xl">
+					className="mx-8 py-8 pb-12 mt-28 rounded-b-3xl">
 					<View className="mx-8">
 						<View
 							style={{ borderColor: colors.secondary }}
