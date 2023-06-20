@@ -78,7 +78,7 @@ const Nutrition: React.FC = () => {
   let background = colors.background;
   // ENDOF THEME COLORS
   const { favorites } = useAppSelector((state) => state.favorite);
-  console.log("VALUES", favorites);
+  // console.log("VALUES", favorites);
   function updateFavoriteList(data) {
     const favoriteItem = {
       Calories: data.food.Calories,
@@ -103,6 +103,9 @@ const Nutrition: React.FC = () => {
   const handleFavoritePress = () => {
     setIsModalVisible(!isModalVisible);
   };
+
+  // Food Inventory: Keeps track of food we plan on adding to the Diary
+  const [foodInventory, setFoodInventory] = useState([]);
 
   const tabNavigation = useNavigation();
   const [foodName, setFoodName] = useState("");
@@ -234,7 +237,9 @@ const Nutrition: React.FC = () => {
       updatedFoodArray[index] = updatedFood;
       setFoodArray(updatedFoodArray);
     }
-    console.log("FOOD ARRAY ****", foodArray);
+    const loggedFoods = foodArray.filter((food) => food.quantity > 0);
+    setFoodInventory(loggedFoods);
+    console.log("FOOD ARRAY ****", loggedFoods);
   };
 
   const handleMinus = (foodArray, index) => {

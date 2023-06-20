@@ -9,6 +9,8 @@ import { useAppSelector } from "../../redux-manager/hooks";
 // import { RootState } from "../../redux-manager/store";
 import Food from "../../database/models/Food";
 import Icon from "react-native-vector-icons/FontAwesome";
+import AntIcon from "react-native-vector-icons/AntDesign";
+import { UserCircleIcon } from "react-native-heroicons/outline";
 const Diary = (props) => {
   const tabNavigation = useNavigation();
   const database = useDatabase();
@@ -30,6 +32,18 @@ const Diary = (props) => {
           }}
         >
           <Icon name="angle-left" style={{ color: primary_color }} size={24} />
+        </TouchableOpacity>
+      ),
+      headerRight: () => (
+        // <TouchableOpacity onPress={() => setSaveButton(true)}>
+        <TouchableOpacity
+          style={{ backgroundColor: colors.primary }}
+          className="mr-8  rounded-full"
+          onPress={() => {
+            tabNavigation.navigate("Profile");
+          }}
+        >
+          <UserCircleIcon name="ios-add" size={30} color={"white"} />
         </TouchableOpacity>
       ),
     });
