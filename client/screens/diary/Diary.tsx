@@ -263,12 +263,9 @@ const Diary = (props) => {
   return (
     <View className="flex-1 items-center">
       <View className="justify-center">
-        <Card className="px-4">
-          <Text className="pt-4">
+        <Card className="px-4 my-2">
+          <Text className="my-4">
             Total calories - {caloriesConsumed} = calories remaining
-          </Text>
-          <Text className="text-white text font-bold">
-            Goal - Food = Remaining
           </Text>
         </Card>
       </View>

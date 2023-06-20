@@ -567,17 +567,7 @@ const Nutrition: React.FC = () => {
                 <Text variant="titleLarge">Card title</Text>
                 <Text variant="bodyMedium">Card content</Text>
               </Card.Content>
-              <View>
-                <FlatList
-                  data={foodArray}
-                  renderItem={({ item, index }) => (
-                    <View>
-                      <Text>{item.description}</Text>
-                    </View>
-                  )}
-                  keyExtractor={(item) => item.id.toString()}
-                />
-              </View>
+              <View></View>
 
               <View className="flex-row justify-between items-center px-8">
                 <View>
