@@ -23,20 +23,14 @@ const Diary = (props) => {
       title: "Diary",
       headerTintColor: primary_color,
       headerLeft: () => (
-        <Button
-          style={{ backgroundColor: colors.primary }}
-          className="ml-5"
-          mode="elevated"
+        <TouchableOpacity
+          className="pl-4"
           onPress={() => {
             tabNavigation.navigate("Nutrition");
           }}
         >
-          <Icon
-            name="angle-left"
-            style={{ color: colors.background }}
-            size={20}
-          />
-        </Button>
+          <Icon name="angle-left" style={{ color: primary_color }} size={24} />
+        </TouchableOpacity>
       ),
     });
   });
