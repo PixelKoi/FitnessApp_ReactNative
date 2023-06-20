@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, Alert, TouchableOpacity } from "react-native";
+import {
+	View,
+	Text,
+	Alert,
+	TouchableOpacity,
+	StyleSheet,
+	Dimensions,
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Button, Surface } from "react-native-paper";
 //Import redux
@@ -18,6 +25,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import ActivityPickerModal from "./modals/ActivityPickerModal";
 import WeightPickerModal from "./modals/WeightPickerModal";
 import WeeklyGoalModal from "./modals/WeeklyGoalModal";
+import { Svg, Path } from "react-native-svg";
 
 const UserBioInput = () => {
 	const database = useDatabase();
@@ -182,17 +190,34 @@ const UserBioInput = () => {
 		calAlgo(calParams, dispatch);
 	}, [showActivityModal === false]);
 
+	const screenWidth = Dimensions.get("screen").width;
+	const screenHeight = Dimensions.get("screen").height;
+
 	//Profile Screen
 	const profile = () => {
 		return (
 			<View className="flex-1 ">
 				<View
 					style={{ backgroundColor: colors.primary }}
-					className="flex items-center  pb-6 w-full rounded-b-full absolute z-10">
+					className="flex items-center  w-full  absolute z-10">
 					<UserCircleIcon name="ios-add" size={50} color={"white"} />
 					<Text className="text-white my-2">{name}</Text>
 					<Text className="text-white">{email}</Text>
 				</View>
+
+				<Svg
+					style={{ position: "absolute", zIndex: 10, top: 24 }}
+					width={screenWidth}
+					height={150}>
+					<Path
+						d={`M0,${150 / 2} C${screenWidth / 4},${150 * (3 / 4)} ${
+							screenWidth * (3 / 4)
+						},${150 * (3 / 4)} ${screenWidth},${150 / 2}`}
+						stroke={colors.primary}
+						fill={colors.primary}
+					/>
+				</Svg>
+
 				<Surface
 					style={{ backgroundColor: colors.background }}
 					className="mx-8 py-8 pb-12 mt-24 rounded-b-3xl">
@@ -373,3 +398,22 @@ export default UserBioInput;
 //   selectedActivity,
 //   Number(selectedGoal)
 // );
+
+const styles = StyleSheet.create({
+	container: {
+		width: "100%",
+		height: 75,
+		borderRadius: 12,
+		backgroundColor: "blue",
+	},
+	curvedLine: {
+		width: "20%",
+		height: 100,
+		position: "absolute",
+		bottom: -25,
+		left: "40%",
+		borderRadius: 35,
+		backgroundColor: "black",
+		transform: [{ scaleX: 5 }, { scaleY: 1 }],
+	},
+});
