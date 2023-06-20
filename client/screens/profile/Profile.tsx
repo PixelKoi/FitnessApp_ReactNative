@@ -190,8 +190,8 @@ const UserBioInput = () => {
 		calAlgo(calParams, dispatch);
 	}, [showActivityModal === false]);
 
+	//Used for the svg path line
 	const screenWidth = Dimensions.get("screen").width;
-	const screenHeight = Dimensions.get("screen").height;
 
 	//Profile Screen
 	const profile = () => {
@@ -203,24 +203,23 @@ const UserBioInput = () => {
 					<UserCircleIcon name="ios-add" size={50} color={"white"} />
 					<Text className="text-white my-2">{name}</Text>
 					<Text className="text-white">{email}</Text>
+					<Svg
+						style={{ position: "absolute", zIndex: 10, top: 20 }}
+						width={screenWidth}
+						height={160}>
+						<Path
+							d={`M0,${160 / 2} C${screenWidth / 4},${160 * (3 / 4)} ${
+								screenWidth * (3 / 4)
+							},${160 * (3 / 4)} ${screenWidth},${160 / 2}`}
+							stroke={colors.primary}
+							fill={colors.primary}
+						/>
+					</Svg>
 				</View>
-
-				<Svg
-					style={{ position: "absolute", zIndex: 10, top: 20 }}
-					width={screenWidth}
-					height={160}>
-					<Path
-						d={`M0,${160 / 2} C${screenWidth / 4},${160 * (3 / 4)} ${
-							screenWidth * (3 / 4)
-						},${160 * (3 / 4)} ${screenWidth},${160 / 2}`}
-						stroke={colors.primary}
-						fill={colors.primary}
-					/>
-				</Svg>
 
 				<Surface
 					style={{ backgroundColor: colors.background }}
-					className="mx-8 py-8 pb-12 mt-28 rounded-b-3xl">
+					className="mx-8 py-8 pb-12 mt-24 rounded-b-3xl">
 					<View className="mx-8">
 						<View
 							style={{ borderColor: colors.secondary }}
@@ -355,13 +354,13 @@ const UserBioInput = () => {
 						</View>
 					</View>
 				</Surface>
-				{/* <Button
+				<Button
 					onPress={signOut}
 					style={{ backgroundColor: colors.primary }}
 					className="w-40 mx-auto mt-4 "
 					mode="contained">
 					Sign Out
-				</Button> */}
+				</Button>
 
 				{/* Modals */}
 				<ActivityPickerModal

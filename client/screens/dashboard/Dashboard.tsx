@@ -27,7 +27,7 @@ const Dashboard = (props: Props) => {
 
 	React.useLayoutEffect(() => {
 		navigation.setOptions({
-			title: "History",
+			title: "Dashboard",
 			headerStyle: {
 				shadowColor: "transparent",
 			},
@@ -91,7 +91,7 @@ const Dashboard = (props: Props) => {
 						/>
 						<Text
 							style={{ color: colors.primary }}
-							className="ml-1 my-auto text-xs self-auto">
+							className="ml-1 my-auto text-xs	 self-auto">
 							Fasting
 						</Text>
 						{/* <FontAwesome5 name="award" size={14} color="black" /> */}

@@ -63,14 +63,15 @@ const Fasting = () => {
 	//End fast
 	const handleEndFast = () => {
 		setClicked((prevClick) => !prevClick);
-		setStartTime("");
-		setEndTime("");
-		// dispatch(
-		// 	setTimerStates({
-		// 		startDate: "",
-		// 		endDate: "",
-		// 	})
-		// );
+		setStartTime(null);
+		setEndTime(null);
+		dispatch(
+			setTimerStates({
+				startDate: null,
+				endDate: null,
+				countdown: "00:00:00",
+			})
+		);
 	};
 
 	//Get day for start and end time for timer
@@ -241,7 +242,7 @@ const Fasting = () => {
 						)}
 					</View>
 
-					<View className=" w-32">
+					<View className="w-32">
 						<Text
 							style={{ color: colors.primary }}
 							className="text-xs text-center  mb-2 font-bold">
@@ -256,7 +257,7 @@ const Fasting = () => {
 						) : (
 							<Text
 								style={{ color: colors.primary }}
-								className="text-sm text-centeropacity-60	">
+								className="text-sm text-center opacity-60	">
 								.........
 							</Text>
 						)}
@@ -276,14 +277,3 @@ const Fasting = () => {
 };
 
 export default Fasting;
-
-{
-	/* <View className="flex-row justify-center gap-15">
-					<Ionicons
-						name="reload-circle"
-						size={60}
-						style={{ color: "#E07594" }}
-					/>
-					<Ionicons name="play-circle" size={60} style={{ color: "#E07594" }} />
-				</View> */
-}
