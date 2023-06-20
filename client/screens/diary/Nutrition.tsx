@@ -5,7 +5,6 @@ import {
   FlatList,
   TouchableOpacity,
   Text,
-  ScrollView,
   Animated,
 } from "react-native";
 import { USDA_API_KEY } from "../../config";
@@ -39,6 +38,7 @@ import { setTheme } from "../../redux-manager/redux-slice/theme-slice";
 import { useAppSelector, useAppDispatch } from "../../redux-manager/hooks";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import MealPicker from "../../utils/nutrition/meal-picker/MealPicker";
+import { BlurView } from "expo-blur";
 
 const styles = StyleSheet.create({
   container: {
@@ -668,7 +668,7 @@ const Nutrition: React.FC = () => {
                   <AntIcon
                     // TODO: Refactor old meal-picker to use react-native-meal-picker
                     // onPress={() => checkOption()}
-                    onPress={handleIconPress}
+                    onPress={() => handleIconPress()}
                     name="pluscircle"
                     size={24}
                     color={background}
@@ -676,11 +676,12 @@ const Nutrition: React.FC = () => {
                   />
                   <Portal>
                     <Dialog
-                      style={{ backgroundColor: background }}
+                      onBackdropPress={handlePickerClose}
                       visible={isPickerVisible}
-                      onClose={handlePickerClose}
+                      onDismiss={handlePickerClose}
                     >
                       <MealPicker
+                        onBackdropPress={handlePickerClose}
                         color={primary_color}
                         selectedValue={selectedLanguage}
                         onValueChange={handleLanguageChange}

@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
   picker: {
     backgroundColor: "white",
     color: "white",
-    borderRadius: 20,
+    borderRadius: 30,
   },
   pickerItem: {
     fontWeight: "bold",
