@@ -574,9 +574,12 @@ const Nutrition: React.FC = () => {
                   <FlatList
                     data={foodInventory}
                     renderItem={({ item }) => (
-                      <View>
+                      <View className="pt-2">
                         <Text style={{ color: background }}>
                           Description: {item.food.description}
+                        </Text>
+                        <Text style={{ color: background }}>
+                          Description: {item.quantity}
                         </Text>
                       </View>
                     )}
@@ -588,15 +591,6 @@ const Nutrition: React.FC = () => {
                 )}
               </Card.Content>
               <View></View>
-
-              <View className="flex-row justify-between items-center px-8">
-                <View>
-                  <Text style={{ color: background }}>Total</Text>
-                </View>
-                <View>
-                  <Text style={{ color: background }}>{dailyCal}</Text>
-                </View>
-              </View>
               <View
                 className="mx-7 py-2"
                 style={{
@@ -604,6 +598,17 @@ const Nutrition: React.FC = () => {
                   borderBottomColor: background,
                 }}
               />
+              <View className="flex-row justify-between items-center px-8 pt-2">
+                <View>
+                  <Text className="font-bold" style={{ color: background }}>
+                    Total
+                  </Text>
+                </View>
+                <View>
+                  <Text style={{ color: background }}>{dailyCal}</Text>
+                </View>
+              </View>
+
               <View className="items-center py-2">
                 <Card.Actions>
                   <AntIcon
