@@ -38,8 +38,6 @@ import { addFavorite } from "../../redux-manager/redux-slice/favorite-slice";
 import { setTheme } from "../../redux-manager/redux-slice/theme-slice";
 import { useAppSelector, useAppDispatch } from "../../redux-manager/hooks";
 import Swipeable from "react-native-gesture-handler/Swipeable";
-import { GestureDetector } from "react-native-gesture-handler";
-import { RectButton } from "react-native-gesture-handler";
 
 const styles = StyleSheet.create({
   container: {
@@ -62,8 +60,6 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
 });
-
-// TODO: Add delete color to bubble_gum theme?
 
 const Nutrition: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -144,7 +140,7 @@ const Nutrition: React.FC = () => {
     return (
       <View
         className=""
-        style={{ backgroundColor: "#E691A9", justifyContent: "center" }}
+        style={{ backgroundColor: primary_color, justifyContent: "center" }}
       >
         <Animated.Text
           className="items-start"
