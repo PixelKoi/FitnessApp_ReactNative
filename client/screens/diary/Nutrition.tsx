@@ -579,38 +579,41 @@ const Nutrition: React.FC = () => {
                     data={foodInventory}
                     renderItem={({ item }) => (
                       <View className="flex flex-row justify-between px-4 pt-2">
-                        <View className="flex flex-col mt-2">
-                          <Text style={{ color: background, flexWrap: "wrap" }}>
+                        <View className="flex flex-col mt-2 w-2/3">
+                          <Text style={{ color: background }}>
                             {item.food.description}
                           </Text>
                         </View>
-                        <View className="flex flex-col rounded-2xl mt-1 items-center">
+                        <View className="flex flex-col mt-1 justify-center">
                           <View className="flex flex-row">
-                            <View className="bg-white flex flex-row">
+                            <View className="bg-white flex flex-row rounded-2xl mr-2 items-center">
                               <AntIcon
                                 name="minuscircle"
-                                size={20}
+                                size={22}
                                 color={secondary_color}
                               />
                               <Text
                                 style={{
                                   color: primary_color,
                                   alignItems: "center",
+                                  paddingHorizontal: 5,
                                 }}
                               >
                                 {item.quantity}
                               </Text>
                               <AntIcon
                                 name="pluscircle"
-                                size={20}
+                                size={22}
                                 color={primary_color}
                               />
                             </View>
-                            <FontIcon
-                              name="trash"
-                              size={20}
-                              color={background}
-                            />
+                            <View className="justify-center">
+                              <FontIcon
+                                name="trash"
+                                size={18}
+                                color={background}
+                              />
+                            </View>
                           </View>
                         </View>
                       </View>
