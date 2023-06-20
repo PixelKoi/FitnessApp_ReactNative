@@ -583,10 +583,25 @@ const Nutrition: React.FC = () => {
                             {item.food.description}
                           </Text>
                         </View>
-                        <View className="pt-2">
-                          <Text style={{ color: background }}>
+                        <View className="flex-row bg-white rounded-2xl mt-1 justify-center items-center">
+                          <AntIcon
+                            name="minuscircle"
+                            size={24}
+                            color={secondary_color}
+                          />
+                          <Text
+                            style={{
+                              color: primary_color,
+                              alignItems: "center",
+                            }}
+                          >
                             {item.quantity}
                           </Text>
+                          <AntIcon
+                            name="pluscircle"
+                            size={24}
+                            color={primary_color}
+                          />
                         </View>
                       </View>
                     )}
