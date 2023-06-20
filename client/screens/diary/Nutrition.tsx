@@ -681,6 +681,7 @@ const Nutrition: React.FC = () => {
                       onClose={handlePickerClose}
                     >
                       <MealPicker
+                        color={primary_color}
                         selectedValue={selectedLanguage}
                         onValueChange={handleLanguageChange}
                       />
