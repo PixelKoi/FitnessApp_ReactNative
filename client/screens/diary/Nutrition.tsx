@@ -19,7 +19,6 @@ import {
   PlusCircleIcon,
 } from "react-native-heroicons/outline";
 import { HeartIcon as FilledHeartIcon } from "react-native-heroicons/solid";
-// import {handleMinus, handlePlus} from "../../counter/logCounter";
 import { params } from "../../constants";
 import { useNavigation } from "@react-navigation/native";
 import {
@@ -39,6 +38,7 @@ import { addFavorite } from "../../redux-manager/redux-slice/favorite-slice";
 import { setTheme } from "../../redux-manager/redux-slice/theme-slice";
 import { useAppSelector, useAppDispatch } from "../../redux-manager/hooks";
 import Swipeable from "react-native-gesture-handler/Swipeable";
+import MealPicker from "../../utils/nutrition/meal-picker/MealPicker";
 
 const styles = StyleSheet.create({
   container: {
@@ -156,6 +156,21 @@ const Nutrition: React.FC = () => {
         </Animated.Text>
       </View>
     );
+  };
+
+  const [selectedLanguage, setSelectedLanguage] = useState<string>("java");
+  const [isPickerVisible, setIsPickerVisible] = useState<boolean>(false);
+
+  const handleLanguageChange = (itemValue: string, itemIndex: number) => {
+    setSelectedLanguage(itemValue);
+  };
+
+  const handleIconPress = () => {
+    setIsPickerVisible(true);
+  };
+
+  const handlePickerClose = () => {
+    setIsPickerVisible(false);
   };
 
   const clearTextInput = () => {
@@ -368,6 +383,7 @@ const Nutrition: React.FC = () => {
               <View className="">
                 {favorites.length > 0 ? (
                   <FlatList
+                    indicatorStyle="black"
                     className="pt-8"
                     data={favorites}
                     keyExtractor={(item) => item.fav_id.toString()}
@@ -513,6 +529,7 @@ const Nutrition: React.FC = () => {
               </Text>
               {favorites.length > 0 ? (
                 <FlatList
+                  indicatorStyle="black"
                   data={favorites}
                   keyExtractor={(item) => item.fav_id.toString()}
                   renderItem={({ item: favorite }) => (
@@ -649,12 +666,26 @@ const Nutrition: React.FC = () => {
               <View className="items-center py-2">
                 <Card.Actions>
                   <AntIcon
-                    onPress={() => checkOption()}
+                    // TODO: Refactor old meal-picker to use react-native-meal-picker
+                    // onPress={() => checkOption()}
+                    onPress={handleIconPress}
                     name="pluscircle"
                     size={24}
                     color={background}
                     style={{ marginRight: 10 }}
                   />
+                  <Portal>
+                    <Dialog
+                      style={{ backgroundColor: background }}
+                      visible={isPickerVisible}
+                      onClose={handlePickerClose}
+                    >
+                      <MealPicker
+                        selectedValue={selectedLanguage}
+                        onValueChange={handleLanguageChange}
+                      />
+                    </Dialog>
+                  </Portal>
                 </Card.Actions>
               </View>
             </View>
