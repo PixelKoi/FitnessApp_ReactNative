@@ -100,6 +100,9 @@ const Nutrition: React.FC = () => {
   const handleFavoritePress = () => {
     setIsModalVisible(!isModalVisible);
   };
+  const closeFavoriteModal = () => {
+    setIsModalVisible(false);
+  };
 
   // Food Inventory: Keeps track of food we plan on adding to the Diary
   const [foodInventory, setFoodInventory] = useState([]);
@@ -287,9 +290,6 @@ const Nutrition: React.FC = () => {
 
   const handleInputChange = (text, food) => {};
   const renderFoodItem = (food, index, foodArray) => {
-    // only create objects when the component renders
-    // console.log("food.quantity", food.quantity, index);
-    // console.log("STATE", foodArray);
     return (
       <View className="mx-2 py-2 rounded-3xl">
         <Card>
@@ -361,6 +361,7 @@ const Nutrition: React.FC = () => {
             className="m-8 overflow-hidden"
             visible={isModalVisible}
             animationType="fade"
+            onDismiss={closeFavoriteModal}
           >
             <View className="flex flex-col items-center justify-start h-full bg-white rounded-3xl">
               <View className="flex items-center justify-center mt-4 py-4">
@@ -639,7 +640,11 @@ const Nutrition: React.FC = () => {
                   />
                 ) : (
                   // Code to be executed when foodInventory is empty
-                  <Text>Food Inventory is empty</Text>
+                  <View className="pt-4 items-center">
+                    <Text className="font-bold" style={{ color: background }}>
+                      Food Inventory is empty
+                    </Text>
+                  </View>
                 )}
               </Card.Content>
               <View></View>
