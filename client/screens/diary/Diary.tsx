@@ -34,6 +34,7 @@ const Diary = (props) => {
           <Icon name="angle-left" style={{ color: primary_color }} size={24} />
         </TouchableOpacity>
       ),
+      //TODO: When we navigate to Profile and press the back button, go one back not to Dashboard
       headerRight: () => (
         // <TouchableOpacity onPress={() => setSaveButton(true)}>
         <TouchableOpacity
