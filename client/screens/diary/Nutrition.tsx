@@ -569,8 +569,23 @@ const Nutrition: React.FC = () => {
           >
             <View>
               <Card.Content>
-                <Text variant="titleLarge">Card title</Text>
-                <Text variant="bodyMedium">Card content</Text>
+                {foodInventory.length > 0 ? (
+                  // Code to be executed when foodInventory has items
+                  <FlatList
+                    data={foodInventory}
+                    renderItem={({ item }) => (
+                      <View>
+                        <Text style={{ color: background }}>
+                          Description: {item.food.description}
+                        </Text>
+                      </View>
+                    )}
+                    keyExtractor={(item) => item.id.toString()}
+                  />
+                ) : (
+                  // Code to be executed when foodInventory is empty
+                  <Text>Food Inventory is empty</Text>
+                )}
               </Card.Content>
               <View></View>
 
