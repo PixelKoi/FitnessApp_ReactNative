@@ -243,7 +243,7 @@ const Nutrition: React.FC = () => {
     const inventory_calories = loggedFoods
       .map((item) => item.food.Calories * item.quantity)
       .reduce((acc, curr) => acc + curr, 0);
-    setFoodInventoryCalories();
+    setFoodInventoryCalories(inventory_calories);
     console.log("FOOD ARRAY ****", loggedFoods);
   };
 
@@ -614,7 +614,9 @@ const Nutrition: React.FC = () => {
                   </Text>
                 </View>
                 <View>
-                  <Text style={{ color: background }}>{dailyCal}</Text>
+                  <Text style={{ color: background }}>
+                    {foodInventoryCalories}
+                  </Text>
                 </View>
               </View>
 
