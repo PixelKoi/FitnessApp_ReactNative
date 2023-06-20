@@ -167,7 +167,7 @@ const Nutrition: React.FC = () => {
   const handleLanguageChange = (itemValue: string, itemIndex: number) => {
     setSelectedLanguage(itemValue);
     setTimeout(() => {
-      handlePickerClose();
+      if (itemValue != "select") handlePickerClose();
     }, 200); // Delay of 1000 milliseconds (1 second)
   };
 
