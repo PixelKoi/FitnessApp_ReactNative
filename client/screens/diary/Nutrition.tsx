@@ -561,7 +561,7 @@ const Nutrition: React.FC = () => {
           </Card>
         ) : (
           <Card
-            className="rounded-3xl"
+            className="rounded-3xl overflow-hidden"
             style={{
               borderBottomLeftRadius: 0,
               borderBottomRightRadius: 0,
@@ -573,6 +573,8 @@ const Nutrition: React.FC = () => {
                 {foodInventory.length > 0 ? (
                   // Code to be executed when foodInventory has items
                   <FlatList
+                    style={{ maxHeight: 150 }}
+                    indicatorStyle="white"
                     data={foodInventory}
                     renderItem={({ item }) => (
                       <View className="flex flex-row justify-between px-4 pt-2">
