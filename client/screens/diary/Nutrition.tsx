@@ -106,6 +106,7 @@ const Nutrition: React.FC = () => {
 
   // Food Inventory: Keeps track of food we plan on adding to the Diary
   const [foodInventory, setFoodInventory] = useState([]);
+  const [foodInventoryCalories, setFoodInventoryCalories] = useState([]);
 
   const tabNavigation = useNavigation();
   const [foodName, setFoodName] = useState("");
@@ -239,6 +240,10 @@ const Nutrition: React.FC = () => {
     }
     const loggedFoods = foodArray.filter((food) => food.quantity > 0);
     setFoodInventory(loggedFoods);
+    const inventory_calories = loggedFoods
+      .map((item) => item.food.Calories * item.quantity)
+      .reduce((acc, curr) => acc + curr, 0);
+    setFoodInventoryCalories();
     console.log("FOOD ARRAY ****", loggedFoods);
   };
 
@@ -574,13 +579,17 @@ const Nutrition: React.FC = () => {
                   <FlatList
                     data={foodInventory}
                     renderItem={({ item }) => (
-                      <View className="pt-2">
-                        <Text style={{ color: background }}>
-                          Description: {item.food.description}
-                        </Text>
-                        <Text style={{ color: background }}>
-                          Description: {item.quantity}
-                        </Text>
+                      <View className="flex flex-row justify-between px-4 pt-2">
+                        <View className="pt-2 ">
+                          <Text style={{ color: background }}>
+                            {item.food.description}
+                          </Text>
+                        </View>
+                        <View className="pt-2">
+                          <Text style={{ color: background }}>
+                            {item.quantity}
+                          </Text>
+                        </View>
                       </View>
                     )}
                     keyExtractor={(item) => item.id.toString()}
