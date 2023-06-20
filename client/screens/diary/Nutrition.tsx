@@ -33,6 +33,7 @@ import {
 } from "react-native-paper";
 import Icon from "react-native-vector-icons/Ionicons";
 import AntIcon from "react-native-vector-icons/AntDesign";
+import FontIcon from "react-native-vector-icons/FontAwesome5";
 import { StyleSheet } from "react-native";
 import { addFavorite } from "../../redux-manager/redux-slice/favorite-slice";
 import { setTheme } from "../../redux-manager/redux-slice/theme-slice";
@@ -578,30 +579,39 @@ const Nutrition: React.FC = () => {
                     data={foodInventory}
                     renderItem={({ item }) => (
                       <View className="flex flex-row justify-between px-4 pt-2">
-                        <View className="pt-2 ">
-                          <Text style={{ color: background }}>
+                        <View className="flex flex-col mt-2">
+                          <Text style={{ color: background, flexWrap: "wrap" }}>
                             {item.food.description}
                           </Text>
                         </View>
-                        <View className="flex-row bg-white rounded-2xl mt-1 justify-center items-center">
-                          <AntIcon
-                            name="minuscircle"
-                            size={24}
-                            color={secondary_color}
-                          />
-                          <Text
-                            style={{
-                              color: primary_color,
-                              alignItems: "center",
-                            }}
-                          >
-                            {item.quantity}
-                          </Text>
-                          <AntIcon
-                            name="pluscircle"
-                            size={24}
-                            color={primary_color}
-                          />
+                        <View className="flex flex-col rounded-2xl mt-1 items-center">
+                          <View className="flex flex-row">
+                            <View className="bg-white flex flex-row">
+                              <AntIcon
+                                name="minuscircle"
+                                size={20}
+                                color={secondary_color}
+                              />
+                              <Text
+                                style={{
+                                  color: primary_color,
+                                  alignItems: "center",
+                                }}
+                              >
+                                {item.quantity}
+                              </Text>
+                              <AntIcon
+                                name="pluscircle"
+                                size={20}
+                                color={primary_color}
+                              />
+                            </View>
+                            <FontIcon
+                              name="trash"
+                              size={20}
+                              color={background}
+                            />
+                          </View>
                         </View>
                       </View>
                     )}
