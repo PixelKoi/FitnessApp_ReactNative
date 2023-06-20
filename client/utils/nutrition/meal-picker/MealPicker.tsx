@@ -25,15 +25,16 @@ const MealPicker: React.FC<PickerComponentProps> = ({
       style={styles.picker}
       itemStyle={pickerItemStyle}
     >
+      <Picker.Item color={"black"} label="Select a meal" value="select" />
       <Picker.Item
         color={selectedValue === "breakfast" ? pickerItemStyle.color : "black"}
         label="Breakfast"
         value="breakfast"
       />
       <Picker.Item
-        color={selectedValue === "lunch" ? pickerItemStyle.color : "black"}
-        label="Lunch"
         value="lunch"
+        label="Lunch"
+        color={selectedValue === "lunch" ? pickerItemStyle.color : "black"}
       />
       <Picker.Item
         color={selectedValue === "dinner" ? pickerItemStyle.color : "black"}
@@ -53,6 +54,7 @@ const styles = StyleSheet.create({
   picker: {
     backgroundColor: "white",
     color: "white",
+    borderRadius: 20,
   },
   pickerItem: {
     fontWeight: "bold",
