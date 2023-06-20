@@ -26,7 +26,7 @@ const Diary = (props) => {
       headerTintColor: primary_color,
       headerLeft: () => (
         <TouchableOpacity
-          className="pl-4"
+          className="ml-4"
           onPress={() => {
             tabNavigation.navigate("Nutrition");
           }}
@@ -37,13 +37,12 @@ const Diary = (props) => {
       headerRight: () => (
         // <TouchableOpacity onPress={() => setSaveButton(true)}>
         <TouchableOpacity
-          style={{ backgroundColor: colors.primary }}
-          className="mr-8  rounded-full"
+          className="mr-4"
           onPress={() => {
             tabNavigation.navigate("Profile");
           }}
         >
-          <UserCircleIcon name="ios-add" size={30} color={"white"} />
+          <UserCircleIcon name="ios-add" size={30} color={primary_color} />
         </TouchableOpacity>
       ),
     });
