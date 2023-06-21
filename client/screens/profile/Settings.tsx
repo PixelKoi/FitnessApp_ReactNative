@@ -100,7 +100,7 @@ const Settings = () => {
       </View>
       <View className="mx-8 mt-4">
         <View
-          style={{ borderColor: colors.primary }}
+          style={{ borderColor: colors.secondary }}
           className="flex flex-row border-solid border-b-2 py-4 items-center"
         >
           <Image
@@ -118,7 +118,7 @@ const Settings = () => {
         </View>
 
         <View
-          style={{ borderColor: colors.primary }}
+          style={{ borderColor: colors.secondary }}
           className="flex flex-row border-solid border-b-2 py-4 items-center"
         >
           <Image
@@ -136,7 +136,7 @@ const Settings = () => {
         </View>
 
         <View
-          style={{ borderColor: colors.primary }}
+          style={{ borderColor: colors.secondary }}
           className="flex flex-row border-solid border-b-2 py-4 items-center"
         >
           <Image
@@ -157,7 +157,7 @@ const Settings = () => {
         </View>
 
         <View
-          style={{ borderColor: colors.primary }}
+          style={{ borderColor: colors.secondary }}
           className="flex flex-row border-solid border-b-2 py-4 items-center"
         >
           <Image
@@ -178,7 +178,7 @@ const Settings = () => {
         </View>
 
         <View
-          style={{ borderColor: colors.primary }}
+          style={{ borderColor: colors.secondary }}
           className="flex flex-row border-solid border-b-2 py-4 items-center"
         >
           <Image
@@ -198,7 +198,7 @@ const Settings = () => {
         </View>
 
         <View
-          style={{ borderColor: colors.primary }}
+          style={{ borderColor: colors.secondary }}
           className="flex flex-row border-solid border-b-2 py-4 items-center"
         >
           <Image

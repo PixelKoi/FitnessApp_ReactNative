@@ -30,7 +30,7 @@ import {
 import Profile from "../../database/models/Profile";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import Ant from "react-native-vector-icons/AntDesign";
-import UserBioInput from "../../screens/profile/NewEditProfile";
+import UserBioInput from "../../screens/profile/EditProfile";
 
 const Navigation = ({ session }: { session: Session }) => {
   const [loading, setLoading] = useState(true);

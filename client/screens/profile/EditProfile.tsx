@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   Dimensions,
+  Image,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Button, Surface } from "react-native-paper";
@@ -136,7 +137,7 @@ const UserBioInput = () => {
           <TouchableOpacity
             className="ml-5 mt-2"
             onPress={() => {
-              navigation.navigate("History");
+              navigation.navigate("Settings");
             }}
           >
             <Icon
@@ -172,8 +173,11 @@ const UserBioInput = () => {
     return (
       <View className="flex-1" style={{ backgroundColor: colors.background }}>
         <View className="items-center my-8">
-          <UserCircleIcon name="ios-add" size={70} color={"black"} />
-          <Text className="text-black my-2">{name}NAME</Text>
+          <Image
+            style={{ width: 90, height: 90 }}
+            source={require("../../assets/images/settings/Profile.png")}
+          />
+          <Text className="text-black my-2 text-lg">{name}NAME</Text>
           <Text className="text-gray-500 italic">{email}EMAIL</Text>
         </View>
         <View className="mx-8 mt-4">
@@ -181,7 +185,7 @@ const UserBioInput = () => {
             style={{ borderColor: colors.secondary }}
             className="flex flex-row border-solid border-b-2 py-4"
           >
-            <Text className="text-xs">Workout Plan</Text>
+            <Text className="font-semibold">Workout Plan</Text>
             <View className="ml-auto flex-row self-center">
               <MaterialCommunityIcons
                 style={{ color: colors.primary }}
@@ -195,7 +199,7 @@ const UserBioInput = () => {
             style={{ borderColor: colors.secondary }}
             className="flex flex-row border-solid border-b-2 py-4"
           >
-            <Text className="text-xs">Diet Plan</Text>
+            <Text className="font-semibold">Diet Plan</Text>
             <View className="ml-auto flex-row self-center">
               <MaterialCommunityIcons
                 style={{ color: colors.primary }}
@@ -203,20 +207,6 @@ const UserBioInput = () => {
                 size={15}
               />
             </View>
-          </View>
-
-          <View
-            style={{ borderColor: colors.secondary }}
-            className="flex flex-row border-solid border-b-2 py-4"
-          >
-            <Text className="text-xs">Theme</Text>
-
-            <Text className="ml-auto mr-2 opacity-60 text-xs">Bubble Gum</Text>
-            <MaterialCommunityIcons
-              style={{ color: colors.primary }}
-              name="pencil-outline"
-              size={15}
-            />
           </View>
 
           <TouchableOpacity
@@ -224,7 +214,7 @@ const UserBioInput = () => {
             onPress={() => setShowWeightModal(true)}
             className="flex flex-row border-solid border-b-2 py-4"
           >
-            <Text className="text-xs">Weight (kg)</Text>
+            <Text className="font-semibold">Weight (kg)</Text>
             <Text className="ml-auto mr-2 opacity-60 text-xs">{weight} kg</Text>
             <MaterialCommunityIcons
               style={{ color: colors.primary }}
@@ -238,7 +228,7 @@ const UserBioInput = () => {
             onPress={() => setShowActivityModal(true)}
             className="flex flex-row border-solid border-b-2 py-4"
           >
-            <Text className="text-xs">Activity Level</Text>
+            <Text className="font-semibold">Activity Level</Text>
             <Text className="ml-auto mr-2 opacity-60 text-xs">{activity}</Text>
             <MaterialCommunityIcons
               style={{ color: colors.primary }}
@@ -252,7 +242,7 @@ const UserBioInput = () => {
             style={{ borderColor: colors.secondary }}
             className="flex flex-row border-solid border-b-2 py-4"
           >
-            <Text className="text-xs">Weekly Goal:</Text>
+            <Text className="font-semibold">Weekly Goal:</Text>
             <Text className="ml-auto mr-2  opacity-60 text-xs">
               {goal} lb/s
             </Text>
@@ -267,15 +257,7 @@ const UserBioInput = () => {
             style={{ borderColor: colors.secondary }}
             className="flex flex-row border-solid border-b-2 py-4"
           >
-            <Text className="text-xs">BMR:</Text>
-            <Text className="ml-auto opacity-60 text-xs">{bmr} cal</Text>
-          </View>
-
-          <View
-            style={{ borderColor: colors.secondary }}
-            className="flex flex-row border-solid border-b-2 py-4"
-          >
-            <Text className="text-xs">Daily Calorie Needs:</Text>
+            <Text className="font-semibold">Daily Calorie Needs:</Text>
             <Text className="ml-auto opacity-60 text-xs">{dailyCal} cal</Text>
           </View>
         </View>
