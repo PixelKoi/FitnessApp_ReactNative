@@ -485,16 +485,6 @@ const Nutrition: React.FC = () => {
             <MagnifyingGlassIcon color={primary_color}></MagnifyingGlassIcon>
           </TouchableOpacity>
         </View>
-        <View>
-          <Button
-            buttonColor={primary_color}
-            onPress={() => {
-              dispatch(setTheme("green_light"));
-            }}
-          >
-            THEME CHANGER
-          </Button>
-        </View>
         <FlatList
           data={foodArray}
           renderItem={({ item, index }) =>
