@@ -5,7 +5,7 @@ import {
   Alert,
   TouchableOpacity,
   StyleSheet,
-  Switch,
+  Dimensions,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Button, Surface } from "react-native-paper";
@@ -20,9 +20,12 @@ import calAlgo from "./cal-algo";
 import EditProfile from "./EditProfile";
 import { supabase } from "../../utils/supabase_authentication/supabase";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import Ionicons from "react-native-vector-icons/Ionicons";
+
 import ActivityPickerModal from "./modals/ActivityPickerModal";
 import WeightPickerModal from "./modals/WeightPickerModal";
 import WeeklyGoalModal from "./modals/WeeklyGoalModal";
+import { Svg, Path } from "react-native-svg";
 
 const UserBioInput = () => {
   const database = useDatabase();
@@ -59,16 +62,6 @@ const UserBioInput = () => {
     activity: activity,
     goal: goal,
   };
-
-  // Toggle switch push notifications
-  const [isPushEnabled, setIsPushEnabled] = useState(false);
-  const notificationsToggleSwitch = () =>
-    setIsPushEnabled((previousState) => !previousState);
-
-  // Toggle switch Dark Mode
-  const [isDarkEnabled, setIsDarkEnabled] = useState(false);
-  const darkToggleSwitch = () =>
-    setIsDarkEnabled((previousState) => !previousState);
 
   const [loading, setLoading] = useState(true);
   async function updateProfile(
@@ -179,136 +172,121 @@ const UserBioInput = () => {
   const profile = () => {
     return (
       <View className="flex-1" style={{ backgroundColor: colors.background }}>
-        <View className="items-center my-8 flex-row mx-8 justify-center">
-          <UserCircleIcon name="ios-add" size={85} color={"black"} />
-          <View className=" flex flex-col ml-6">
-            <Text className="text-black my-2">{name}Gerrard Nazarian</Text>
-            <Text className="text-gray-500 italic">
-              {email}garonazarian09@gmail.com
-            </Text>
-          </View>
-          <View className="flex ml-7 mb-5">
-            <Icon
-              size={18}
-              style={{ color: colors.primary }}
-              name="external-link"
-            ></Icon>
-          </View>
+        <View className="items-center my-8">
+          <UserCircleIcon name="ios-add" size={70} color={"black"} />
+          <Text className="text-black my-2">{name}NAME</Text>
+          <Text className="text-gray-500 italic">{email}EMAIL</Text>
         </View>
         <View className="mx-8 mt-4">
           <View
             style={{ borderColor: colors.secondary }}
-            className="flex flex-row border-solid border-b-2 py-4 items-center"
+            className="flex flex-row border-solid border-b-2 py-4"
           >
-            <UserCircleIcon name="ios-add" size={24} color={"black"} />
-
-            <Text className="text-lg font-bold pl-5">Avatar</Text>
+            <Text className="text-xs">Workout Plan</Text>
             <View className="ml-auto flex-row self-center">
-              <Icon
+              <MaterialCommunityIcons
                 style={{ color: colors.primary }}
-                name="chevron-right"
-                size={14}
+                name="pencil-outline"
+                size={15}
               />
             </View>
           </View>
 
           <View
             style={{ borderColor: colors.secondary }}
-            className="flex flex-row border-solid border-b-2 py-4 items-center"
+            className="flex flex-row border-solid border-b-2 py-4"
           >
-            <UserCircleIcon name="ios-add" size={24} color={"black"} />
-            <Text className="text-lg font-bold pl-5">Theme</Text>
+            <Text className="text-xs">Diet Plan</Text>
             <View className="ml-auto flex-row self-center">
-              <Icon
+              <MaterialCommunityIcons
                 style={{ color: colors.primary }}
-                name="chevron-right"
-                size={14}
+                name="pencil-outline"
+                size={15}
               />
             </View>
           </View>
 
           <View
             style={{ borderColor: colors.secondary }}
-            className="flex flex-row border-solid border-b-2 py-4 items-center"
+            className="flex flex-row border-solid border-b-2 py-4"
           >
-            <UserCircleIcon name="ios-add" size={24} color={"black"} />
-            <Text className="text-lg font-bold pl-5">Push Notification</Text>
-            <View className="ml-auto flex-row self-center">
-              <Switch
-                trackColor={{ false: "#767577", true: "#81b0ff" }}
-                thumbColor={isPushEnabled ? "#f5dd4b" : "#f4f3f4"}
-                ios_backgroundColor="#3e3e3e"
-                onValueChange={notificationsToggleSwitch}
-                value={isPushEnabled}
-              />
-            </View>
-          </View>
+            <Text className="text-xs">Theme</Text>
 
-          <View
-            style={{ borderColor: colors.secondary }}
-            className="flex flex-row border-solid border-b-2 py-4 items-center"
-          >
-            <UserCircleIcon name="ios-add" size={24} color={"black"} />
-            <Text className="text-lg font-bold pl-5">Dark Mode</Text>
-            <View className="ml-auto flex-row self-center">
-              <Switch
-                trackColor={{ false: "#767577", true: "#81b0ff" }}
-                thumbColor={isDarkEnabled ? "#f5dd4b" : "#f4f3f4"}
-                ios_backgroundColor="#3e3e3e"
-                onValueChange={darkToggleSwitch}
-                value={isDarkEnabled}
-              />
-            </View>
-          </View>
-
-          <View
-            style={{ borderColor: colors.secondary }}
-            className="flex flex-row border-solid border-b-2 py-4 items-center"
-          >
-            <UserCircleIcon name="ios-add" size={24} color={"black"} />
-            <Text className="text-lg font-bold pl-5">Sharing and Privary</Text>
-            <View className="ml-auto flex-row self-center">
-              <Icon
-                style={{ color: colors.primary }}
-                name="chevron-right"
-                size={14}
-              />
-            </View>
-          </View>
-
-          <View
-            style={{ borderColor: colors.secondary }}
-            className="flex flex-row border-solid border-b-2 py-4 items-center"
-          >
-            <UserCircleIcon name="ios-add" size={24} color={"black"} />
-            <Text className="text-lg font-bold pl-5">Go Premium Section</Text>
-            <View className="ml-auto flex-row self-center">
-              <Icon
-                style={{ color: colors.primary }}
-                name="chevron-right"
-                size={14}
-              />
-            </View>
-          </View>
-          <View
-            style={{ borderColor: colors.secondary }}
-            className="flex flex-row border-solid border-b-2 py-4 items-center"
-          >
-            <Text
+            <Text className="ml-auto mr-2 opacity-60 text-xs">Bubble Gum</Text>
+            <MaterialCommunityIcons
               style={{ color: colors.primary }}
-              className="text-lg font-extrabold items-center justify-center "
-            >
-              Logout
+              name="pencil-outline"
+              size={15}
+            />
+          </View>
+
+          <TouchableOpacity
+            style={{ borderColor: colors.secondary }}
+            onPress={() => setShowWeightModal(true)}
+            className="flex flex-row border-solid border-b-2 py-4"
+          >
+            <Text className="text-xs">Weight (kg)</Text>
+            <Text className="ml-auto mr-2 opacity-60 text-xs">{weight} kg</Text>
+            <MaterialCommunityIcons
+              style={{ color: colors.primary }}
+              name="pencil-outline"
+              size={15}
+            />
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={{ borderColor: colors.secondary }}
+            onPress={() => setShowActivityModal(true)}
+            className="flex flex-row border-solid border-b-2 py-4"
+          >
+            <Text className="text-xs">Activity Level</Text>
+            <Text className="ml-auto mr-2 opacity-60 text-xs">{activity}</Text>
+            <MaterialCommunityIcons
+              style={{ color: colors.primary }}
+              name="pencil-outline"
+              size={15}
+            />
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={() => setShowGoalModal(true)}
+            style={{ borderColor: colors.secondary }}
+            className="flex flex-row border-solid border-b-2 py-4"
+          >
+            <Text className="text-xs">Weekly Goal:</Text>
+            <Text className="ml-auto mr-2  opacity-60 text-xs">
+              {goal} lb/s
             </Text>
-            <View className="ml-auto flex-row self-center">
-              <Icon
-                style={{ color: colors.primary }}
-                name="chevron-right"
-                size={14}
-              />
-            </View>
+            <MaterialCommunityIcons
+              style={{ color: colors.primary }}
+              name="pencil-outline"
+              size={15}
+            />
+          </TouchableOpacity>
+
+          <View
+            style={{ borderColor: colors.secondary }}
+            className="flex flex-row border-solid border-b-2 py-4"
+          >
+            <Text className="text-xs">BMR:</Text>
+            <Text className="ml-auto opacity-60 text-xs">{bmr} cal</Text>
+          </View>
+
+          <View
+            style={{ borderColor: colors.secondary }}
+            className="flex flex-row border-solid border-b-2 py-4"
+          >
+            <Text className="text-xs">Daily Calorie Needs:</Text>
+            <Text className="ml-auto opacity-60 text-xs">{dailyCal} cal</Text>
           </View>
         </View>
+        {/* <Button
+					onPress={signOut}
+					style={{ backgroundColor: colors.primary }}
+					className="w-40 mx-auto mt-4 "
+					mode="contained">
+					Sign Out
+				</Button> */}
 
         {/* Modals */}
         <ActivityPickerModal
