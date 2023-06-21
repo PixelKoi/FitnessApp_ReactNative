@@ -13,9 +13,11 @@ const Timer = () => {
 	return (
 		<View className="flex-1 justify-center bg-background">
 			<View className="flex-row justify-center gap-4 mt-20">
+				{/* Fasting Button*/}
 				<Button
 					onPress={() => setMode("fasting")}
 					style={{
+						borderRadius: 10,
 						backgroundColor:
 							mode === "fasting" ? colors.primary : colors.secondary,
 					}}
@@ -32,6 +34,7 @@ const Timer = () => {
 						Fasting
 					</Text>
 				</Button>
+				{/* Meditation Button*/}
 				<Button
 					onPress={() => setMode("meditation")}
 					icon="brain"
@@ -39,6 +42,7 @@ const Timer = () => {
 						color: mode === "meditation" ? colors.background : colors.primary,
 					}}
 					style={{
+						borderRadius: 10,
 						backgroundColor:
 							mode === "meditation" ? colors.primary : colors.secondary,
 					}}

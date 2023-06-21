@@ -29,8 +29,6 @@ const Fasting = () => {
 
 	//handle fasting mode selector
 	const [fasting, setFasting] = useState<String>("16/8 Intermittent Fast");
-	const [expandList, setExpandList] = useState<boolean>(false);
-
 	const [showTimerList, setShowTimerList] = useState(false);
 
 	//Check if fasting redux for startDate. If there is a startDate update local start and end states
@@ -103,35 +101,36 @@ const Fasting = () => {
 			{/* Clock section */}
 			<View className="mt-auto mb-14">
 				<View className="z-10">
-					<View
-						style={{ backgroundColor: colors.secondary }}
-						className="h-8 w-52 self-center rounded-xl">
-						<TouchableOpacity
-							className="flex-row h-8 w-52"
-							onPress={() =>
-								showTimerList === false
-									? setShowTimerList(true)
-									: setShowTimerList(false)
-							}>
-							<Text
-								style={{ color: colors.primary }}
-								className="ml-4 text-center my-auto">
-								{fasting}
-							</Text>
-							<Icon
-								style={{
-									color: colors.primary,
-									marginLeft: "auto",
-									marginRight: 20,
-									marginTop: "auto",
-									marginBottom: "auto",
-								}}
-								name={showTimerList === true ? "caret-up" : "caret-down"}
-								size={15}
-								color="black"
-							/>
-						</TouchableOpacity>
-					</View>
+					<TouchableOpacity
+						style={{
+							backgroundColor: colors.secondary,
+							borderRadius: 10,
+							height: 40,
+						}}
+						className="flex-row w-52 mx-auto"
+						onPress={() =>
+							showTimerList === false
+								? setShowTimerList(true)
+								: setShowTimerList(false)
+						}>
+						<Text
+							style={{ color: colors.primary }}
+							className="ml-4 text-center my-auto">
+							{fasting}
+						</Text>
+						<Icon
+							style={{
+								color: colors.primary,
+								marginLeft: "auto",
+								marginRight: 20,
+								marginTop: "auto",
+								marginBottom: "auto",
+							}}
+							name={showTimerList === true ? "caret-up" : "caret-down"}
+							size={15}
+							color="black"
+						/>
+					</TouchableOpacity>
 
 					{showTimerList === true && (
 						<Surface

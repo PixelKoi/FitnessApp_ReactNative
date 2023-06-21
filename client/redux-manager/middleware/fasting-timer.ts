@@ -16,6 +16,7 @@ startFastingTimer.startListening({
 			const state = listenerApi.getState();
 			const endDate = state.fasting.endDate;
 
+			//Todo: save fasting time to db
 			if (endDate === null) {
 				clearInterval(interval); // Clear the interval when endDate is null
 				console.log("Countdown has been canceled!");
@@ -25,6 +26,7 @@ startFastingTimer.startListening({
 			const endTime = new Date(endDate).getTime();
 			let timeRemaining = endTime - Date.now();
 
+			//Todo: save fasting time to db
 			if (timeRemaining <= 0) {
 				clearInterval(interval);
 				console.log("Countdown has finished!");

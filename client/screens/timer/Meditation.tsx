@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Button, Surface } from "react-native-paper";
 import { add } from "date-fns";
@@ -16,7 +16,7 @@ import { useAppDispatch, useAppSelector } from "../../redux-manager/hooks";
 import Icon from "react-native-vector-icons/FontAwesome";
 import CheckMark from "react-native-vector-icons/Ionicons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-
+import GirlMeditating from "../../assets/meditation_timer/GirlMeditating.png";
 //Todo: Add lotus icon above start meditating button
 const Meditation = () => {
 	//Top left nav button - removed top nav
@@ -38,7 +38,7 @@ const Meditation = () => {
 	};
 
 	//Call to fasting redux
-	const { maxTime, medStreak, percentageComplete } = useAppSelector(
+	const { maxTime, medStreak, percentageComplete, countdown } = useAppSelector(
 		(state) => state.meditation
 	);
 	const { colors } = useAppSelector((state) => state.theme);
@@ -84,10 +84,51 @@ const Meditation = () => {
 	return (
 		<View
 			style={{ backgroundColor: colors.background }}
-			className="mt-auto flex flex-col justify-center">
+			className="flex-1  justify-center">
 			{/* Clock section */}
-			<View className="mt-auto mb-4 -top-2">
-				<View className="z-10">
+			<View className="my-auto">
+				<View className="items-center">
+					<Image source={GirlMeditating} />
+				</View>
+
+				{/* <View className="mt-6 z-0">
+					<MedTimer />
+				</View> */}
+
+				<Text
+					style={{ color: colors.primary }}
+					className="text-center text-3xl">
+					{countdown}
+				</Text>
+				<Text
+					style={{ color: colors.primary }}
+					className="text-SM text-center mt-4 font-bold">
+					Elapsed: [{percentageComplete}]%
+				</Text>
+			</View>
+			{/* <View className="mx-auto mb-10">
+				<MaterialCommunityIcons
+					name="meditation"
+					size={60}
+					color={colors.primary}
+				/>
+			</View> */}
+			<Button
+				style={{ backgroundColor: colors.primary }}
+				className="mt-auto mb-12 w-60 mx-auto "
+				icon="brain"
+				mode="contained"
+				onPress={clicked === false ? handleStartFast : handleEndFast}>
+				{clicked === false ? "Start Meditating" : "End Meditating"}
+			</Button>
+		</View>
+	);
+};
+
+export default Meditation;
+
+{
+	/* <View className="z-10">
 					<View
 						style={{ backgroundColor: colors.secondary }}
 						className="h-8 w-52 self-center rounded-xl">
@@ -254,35 +295,5 @@ const Meditation = () => {
 							</TouchableOpacity>
 						</Surface>
 					)}
-				</View>
-
-				<View className="mt-6 z-0">
-					<MedTimer />
-				</View>
-
-				<Text
-					style={{ color: colors.primary }}
-					className="text-SM text-center mt-4 font-bold">
-					Elapsed: [{percentageComplete}]%
-				</Text>
-			</View>
-			<View className="mx-auto mb-10">
-				<MaterialCommunityIcons
-					name="meditation"
-					size={60}
-					color={colors.primary}
-				/>
-			</View>
-			<Button
-				style={{ backgroundColor: colors.primary }}
-				className="mt-auto mb-12 w-60 mx-auto "
-				icon="brain"
-				mode="contained"
-				onPress={clicked === false ? handleStartFast : handleEndFast}>
-				{clicked === false ? "Start Meditating" : "End Meditating"}
-			</Button>
-		</View>
-	);
-};
-
-export default Meditation;
+				</View> */
+}
