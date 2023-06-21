@@ -3,7 +3,7 @@ import { Alert, View, ActivityIndicator, StyleSheet } from "react-native";
 //Screen imports
 import Account from "../../screens/account/Account";
 import Nutrition from "../../screens/diary/Nutrition";
-import ProfileScreen from "../../screens/profile/Profile";
+import Settings from "../../screens/profile/Settings";
 import Diary from "../../screens/diary/Diary";
 import Dashboard from "../../screens/dashboard/Dashboard";
 import Timer from "../../screens/timer/Timer";
@@ -178,7 +178,7 @@ const Navigation = ({ session }: { session: Session }) => {
         />
         <Stack.Screen
           name="Profile"
-          component={ProfileScreen}
+          component={Settings}
           options={{ headerShown: true }}
         />
       </Stack.Navigator>

@@ -1,0 +1,228 @@
+import React, { useState, useEffect } from "react";
+import {
+  View,
+  Text,
+  Alert,
+  TouchableOpacity,
+  StyleSheet,
+  Switch,
+} from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { Button, Surface } from "react-native-paper";
+import { useAppDispatch, useAppSelector } from "../../redux-manager/hooks";
+import { useDatabase } from "@nozbe/watermelondb/hooks";
+import Icon from "react-native-vector-icons/FontAwesome";
+import { UserCircleIcon } from "react-native-heroicons/outline";
+import EditProfile from "./EditProfile";
+import { supabase } from "../../utils/supabase_authentication/supabase";
+
+const Settings = () => {
+  const database = useDatabase();
+  const navigation = useNavigation();
+
+  //Initiate user redux states
+  const {
+    sessionID,
+    email,
+    gender,
+    weight,
+    height,
+    age,
+    name,
+    activity,
+    goal,
+  } = useAppSelector((state) => state.user);
+  const { colors } = useAppSelector((state) => state.theme);
+  const dispatch = useAppDispatch();
+
+  //Edit Profile Hooks
+  const [showEditProfile, setEditProfile] = useState<boolean>(false);
+  const [showActivityModal, setShowActivityModal] = useState(false);
+
+  // Toggle switch push notifications
+  const [isPushEnabled, setIsPushEnabled] = useState(false);
+  const notificationsToggleSwitch = () =>
+    setIsPushEnabled((previousState) => !previousState);
+
+  // Toggle switch Dark Mode
+  const [isDarkEnabled, setIsDarkEnabled] = useState(false);
+  const darkToggleSwitch = () =>
+    setIsDarkEnabled((previousState) => !previousState);
+
+  //Sign out of profile
+  const signOut = async () => {
+    try {
+      const { error } = await supabase.auth.signOut();
+
+      if (error) {
+        console.log(error);
+      }
+    } catch (error) {
+      console.error("Error updating email:", error.message);
+    }
+  };
+
+  //Top Nav on Edit Profile Screen
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      title: "Settings",
+      headerTintColor: colors.primary,
+      headerLeft: () => (
+        <TouchableOpacity
+          className="ml-5 mt-2"
+          onPress={() => {
+            navigation.navigate("History");
+          }}
+        >
+          <Icon name="angle-left" style={{ color: colors.primary }} size={24} />
+        </TouchableOpacity>
+      ),
+    });
+  }, [showEditProfile]);
+
+  return (
+    <View className="flex-1" style={{ backgroundColor: colors.background }}>
+      <View className="items-center my-8 flex-row mx-8 justify-center">
+        <UserCircleIcon name="ios-add" size={85} color={"black"} />
+        <View className=" flex flex-col ml-6">
+          <Text className="text-black my-2">{name}Gerrard Nazarian</Text>
+          <Text className="text-gray-500 italic">
+            {email}garonazarian09@gmail.com
+          </Text>
+        </View>
+        <View className="flex ml-7 mb-5">
+          <Icon
+            size={18}
+            style={{ color: colors.primary }}
+            name="external-link"
+          ></Icon>
+        </View>
+      </View>
+      <View className="flex flex-row pl-8">
+        <Text className="text-gray-400">Settings</Text>
+      </View>
+      <View className="mx-8 mt-4">
+        <View
+          style={{ borderColor: colors.secondary }}
+          className="flex flex-row border-solid border-b-2 py-4 items-center"
+        >
+          <UserCircleIcon name="ios-add" size={36} color={"black"} />
+
+          <Text className="text-lg font-semibold pl-5">Avatar</Text>
+          <View className="ml-auto flex-row self-center">
+            <Icon
+              style={{ color: colors.primary }}
+              name="chevron-right"
+              size={14}
+            />
+          </View>
+        </View>
+
+        <View
+          style={{ borderColor: colors.secondary }}
+          className="flex flex-row border-solid border-b-2 py-4 items-center"
+        >
+          <UserCircleIcon name="ios-add" size={36} color={"black"} />
+          <Text className="text-lg font-semibold pl-5">Theme</Text>
+          <View className="ml-auto flex-row self-center">
+            <Icon
+              style={{ color: colors.primary }}
+              name="chevron-right"
+              size={14}
+            />
+          </View>
+        </View>
+
+        <View
+          style={{ borderColor: colors.secondary }}
+          className="flex flex-row border-solid border-b-2 py-4 items-center"
+        >
+          <UserCircleIcon name="ios-add" size={36} color={"black"} />
+          <Text className="text-lg font-semibold pl-5">Push Notification</Text>
+          <View className="ml-auto flex-row self-center">
+            <Switch
+              trackColor={{ false: "#767577", true: "#81b0ff" }}
+              thumbColor={isPushEnabled ? "#f5dd4b" : "#f4f3f4"}
+              ios_backgroundColor="#3e3e3e"
+              onValueChange={notificationsToggleSwitch}
+              value={isPushEnabled}
+            />
+          </View>
+        </View>
+
+        <View
+          style={{ borderColor: colors.secondary }}
+          className="flex flex-row border-solid border-b-2 py-4 items-center"
+        >
+          <UserCircleIcon name="ios-add" size={36} color={"black"} />
+          <Text className="text-lg font-semibold pl-5">Dark Mode</Text>
+          <View className="ml-auto flex-row self-center">
+            <Switch
+              trackColor={{ false: "#767577", true: "#81b0ff" }}
+              thumbColor={isDarkEnabled ? "#f5dd4b" : "#f4f3f4"}
+              ios_backgroundColor="#3e3e3e"
+              onValueChange={darkToggleSwitch}
+              value={isDarkEnabled}
+            />
+          </View>
+        </View>
+
+        <View
+          style={{ borderColor: colors.secondary }}
+          className="flex flex-row border-solid border-b-2 py-4 items-center"
+        >
+          <UserCircleIcon name="ios-add" size={36} color={"black"} />
+          <Text className="text-lg font-semibold pl-5">
+            Sharing and Privary
+          </Text>
+          <View className="ml-auto flex-row self-center">
+            <Icon
+              style={{ color: colors.primary }}
+              name="chevron-right"
+              size={14}
+            />
+          </View>
+        </View>
+
+        <View
+          style={{ borderColor: colors.secondary }}
+          className="flex flex-row border-solid border-b-2 py-4 items-center"
+        >
+          <UserCircleIcon name="ios-add" size={36} color={"black"} />
+          <Text className="text-lg font-semibold pl-5">Go Premium Section</Text>
+          <View className="ml-auto flex-row self-center">
+            <Icon
+              style={{ color: colors.primary }}
+              name="chevron-right"
+              size={14}
+            />
+          </View>
+        </View>
+        <View
+          style={{ borderColor: colors.secondary }}
+          className="flex flex-row border-solid border-b-2 py-4 items-center"
+        >
+          <View className="flex flex-col">
+            <Text className="text-gray-400">My account</Text>
+            <Text
+              style={{ color: colors.primary }}
+              className="text-lg font-extrabold items-center justify-center "
+            >
+              Logout
+            </Text>
+          </View>
+
+          <View className="ml-auto flex-row self-center mt-4">
+            <Icon
+              style={{ color: colors.primary }}
+              name="chevron-right"
+              size={14}
+            />
+          </View>
+        </View>
+      </View>
+    </View>
+  );
+};
+
+export default Settings;
