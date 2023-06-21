@@ -67,7 +67,8 @@ const Fasting = () => {
 			setTimerStates({
 				startDate: null,
 				endDate: null,
-				countdown: "00:00:00",
+				countdown: "00:00::00",
+				elapsedPercentage: 0,
 			})
 		);
 	};

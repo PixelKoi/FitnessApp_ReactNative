@@ -87,6 +87,7 @@ const Meditation = () => {
 				startDate: null,
 				endDate: null,
 				countdown: "00:00:00",
+				percentageComplete: 0,
 			})
 		);
 	};
