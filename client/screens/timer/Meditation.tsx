@@ -105,12 +105,11 @@ const Meditation = () => {
 				{/* <View className="mt-6 z-0">
 					<MedTimer />
 				</View> */}
-
-				<Text
-					style={{ color: colors.primary }}
-					className="text-center text-3xl">
-					{countdown}
-				</Text>
+				<View style={{ width: 126 }} className=" mx-auto ">
+					<Text style={{ color: colors.primary }} className="text-3xl">
+						{countdown}
+					</Text>
+				</View>
 				<Text
 					style={{ color: colors.primary }}
 					className="text-SM text-center mt-4 font-bold">
