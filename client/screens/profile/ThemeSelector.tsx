@@ -15,6 +15,7 @@ import { useDatabase } from "@nozbe/watermelondb/hooks";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { UserCircleIcon } from "react-native-heroicons/outline";
 import { supabase } from "../../utils/supabase_authentication/supabase";
+import { setTheme } from "../../redux-manager/redux-slice/theme-slice";
 
 const ThemeSelector = () => {
   const database = useDatabase();
@@ -29,16 +30,13 @@ const ThemeSelector = () => {
   const [showEditProfile, setEditProfile] = useState<boolean>(false);
   const [showActivityModal, setShowActivityModal] = useState(false);
 
-  // Toggle switch push notifications
-  const [isPushEnabled, setIsPushEnabled] = useState(false);
-  const notificationsToggleSwitch = () =>
-    setIsPushEnabled((previousState) => !previousState);
+  // Toggle switch Theme selector (only one at a time
+  const [selectedTheme, setSelectedTheme] = useState(null);
 
-  // Toggle switch Dark Mode
-  const [isDarkEnabled, setIsDarkEnabled] = useState(false);
-  const darkToggleSwitch = () =>
-    setIsDarkEnabled((previousState) => !previousState);
-
+  const toggleTheme = (theme) => {
+    setSelectedTheme(theme);
+    dispatch(setTheme(theme));
+  };
   //Sign out of profile
   const signOut = async () => {
     try {
@@ -85,10 +83,16 @@ const ThemeSelector = () => {
           <View className="ml-auto flex-row self-center">
             <Switch
               trackColor={{ false: "#767577", true: "#81b0ff" }}
-              thumbColor={isPushEnabled ? "#f5dd4b" : "#f4f3f4"}
+              thumbColor={
+                selectedTheme === "bubble_gum" ? "#f5dd4b" : "#f4f3f4"
+              }
               ios_backgroundColor="#3e3e3e"
-              onValueChange={notificationsToggleSwitch}
-              value={isPushEnabled}
+              onValueChange={() => {
+                if (selectedTheme !== "bubble_gum") {
+                  toggleTheme("bubble_gum");
+                }
+              }}
+              value={selectedTheme === "bubble_gum"}
               style={{ transform: [{ scaleX: 0.8 }, { scaleY: 0.8 }] }}
             />
           </View>
@@ -106,10 +110,16 @@ const ThemeSelector = () => {
           <View className="ml-auto flex-row self-center">
             <Switch
               trackColor={{ false: "#767577", true: "#81b0ff" }}
-              thumbColor={isDarkEnabled ? "#f5dd4b" : "#f4f3f4"}
+              thumbColor={
+                selectedTheme === "green_light" ? "#f5dd4b" : "#f4f3f4"
+              }
               ios_backgroundColor="#3e3e3e"
-              onValueChange={darkToggleSwitch}
-              value={isDarkEnabled}
+              onValueChange={() => {
+                if (selectedTheme !== "green_light") {
+                  toggleTheme("green_light");
+                }
+              }}
+              value={selectedTheme === "green_light"}
               style={{ transform: [{ scaleX: 0.8 }, { scaleY: 0.8 }] }}
             />
           </View>
