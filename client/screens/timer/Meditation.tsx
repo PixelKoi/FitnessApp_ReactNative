@@ -66,19 +66,29 @@ const Meditation = () => {
 		const currentDay = dayOfWeekMap[dayOfWeek];
 		dispatch(updateMedStreak({ day: currentDay, completed: true }));
 
+		setStartTime(currentDate);
+		setEndTime(endTime);
+		setClicked((prevClicked) => !prevClicked);
+
 		dispatch(
 			setTimerStates({
 				startDate: currentDate.toString(),
 				endDate: endTime.toString(),
 			})
 		);
-		setStartTime(currentDate);
-		setEndTime(endTime);
-		setClicked((prevClicked) => !prevClicked);
 	};
 
 	const handleEndFast = () => {
 		setClicked((prevClicked) => !prevClicked);
+		setStartTime(null);
+		setEndTime(null);
+		dispatch(
+			setTimerStates({
+				startDate: null,
+				endDate: null,
+				countdown: "00:00:00",
+			})
+		);
 	};
 
 	return (
