@@ -195,14 +195,17 @@ const UserBioInput = () => {
             ></Icon>
           </View>
         </View>
+        <View className="flex flex-row pl-8">
+          <Text className="text-gray-400">Settings</Text>
+        </View>
         <View className="mx-8 mt-4">
           <View
             style={{ borderColor: colors.secondary }}
             className="flex flex-row border-solid border-b-2 py-4 items-center"
           >
-            <UserCircleIcon name="ios-add" size={24} color={"black"} />
+            <UserCircleIcon name="ios-add" size={36} color={"black"} />
 
-            <Text className="text-lg font-bold pl-5">Avatar</Text>
+            <Text className="text-lg font-semibold pl-5">Avatar</Text>
             <View className="ml-auto flex-row self-center">
               <Icon
                 style={{ color: colors.primary }}
@@ -216,8 +219,8 @@ const UserBioInput = () => {
             style={{ borderColor: colors.secondary }}
             className="flex flex-row border-solid border-b-2 py-4 items-center"
           >
-            <UserCircleIcon name="ios-add" size={24} color={"black"} />
-            <Text className="text-lg font-bold pl-5">Theme</Text>
+            <UserCircleIcon name="ios-add" size={36} color={"black"} />
+            <Text className="text-lg font-semibold pl-5">Theme</Text>
             <View className="ml-auto flex-row self-center">
               <Icon
                 style={{ color: colors.primary }}
@@ -231,8 +234,10 @@ const UserBioInput = () => {
             style={{ borderColor: colors.secondary }}
             className="flex flex-row border-solid border-b-2 py-4 items-center"
           >
-            <UserCircleIcon name="ios-add" size={24} color={"black"} />
-            <Text className="text-lg font-bold pl-5">Push Notification</Text>
+            <UserCircleIcon name="ios-add" size={36} color={"black"} />
+            <Text className="text-lg font-semibold pl-5">
+              Push Notification
+            </Text>
             <View className="ml-auto flex-row self-center">
               <Switch
                 trackColor={{ false: "#767577", true: "#81b0ff" }}
@@ -248,8 +253,8 @@ const UserBioInput = () => {
             style={{ borderColor: colors.secondary }}
             className="flex flex-row border-solid border-b-2 py-4 items-center"
           >
-            <UserCircleIcon name="ios-add" size={24} color={"black"} />
-            <Text className="text-lg font-bold pl-5">Dark Mode</Text>
+            <UserCircleIcon name="ios-add" size={36} color={"black"} />
+            <Text className="text-lg font-semibold pl-5">Dark Mode</Text>
             <View className="ml-auto flex-row self-center">
               <Switch
                 trackColor={{ false: "#767577", true: "#81b0ff" }}
@@ -265,8 +270,10 @@ const UserBioInput = () => {
             style={{ borderColor: colors.secondary }}
             className="flex flex-row border-solid border-b-2 py-4 items-center"
           >
-            <UserCircleIcon name="ios-add" size={24} color={"black"} />
-            <Text className="text-lg font-bold pl-5">Sharing and Privary</Text>
+            <UserCircleIcon name="ios-add" size={36} color={"black"} />
+            <Text className="text-lg font-semibold pl-5">
+              Sharing and Privary
+            </Text>
             <View className="ml-auto flex-row self-center">
               <Icon
                 style={{ color: colors.primary }}
@@ -280,8 +287,10 @@ const UserBioInput = () => {
             style={{ borderColor: colors.secondary }}
             className="flex flex-row border-solid border-b-2 py-4 items-center"
           >
-            <UserCircleIcon name="ios-add" size={24} color={"black"} />
-            <Text className="text-lg font-bold pl-5">Go Premium Section</Text>
+            <UserCircleIcon name="ios-add" size={36} color={"black"} />
+            <Text className="text-lg font-semibold pl-5">
+              Go Premium Section
+            </Text>
             <View className="ml-auto flex-row self-center">
               <Icon
                 style={{ color: colors.primary }}
