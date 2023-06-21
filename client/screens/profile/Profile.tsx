@@ -303,13 +303,17 @@ const UserBioInput = () => {
             style={{ borderColor: colors.secondary }}
             className="flex flex-row border-solid border-b-2 py-4 items-center"
           >
-            <Text
-              style={{ color: colors.primary }}
-              className="text-lg font-extrabold items-center justify-center "
-            >
-              Logout
-            </Text>
-            <View className="ml-auto flex-row self-center">
+            <View className="flex flex-col">
+              <Text className="text-gray-400">My account</Text>
+              <Text
+                style={{ color: colors.primary }}
+                className="text-lg font-extrabold items-center justify-center "
+              >
+                Logout
+              </Text>
+            </View>
+
+            <View className="ml-auto flex-row self-center mt-4">
               <Icon
                 style={{ color: colors.primary }}
                 name="chevron-right"
