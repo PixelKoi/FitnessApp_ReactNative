@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   Switch,
+  Image,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Button, Surface } from "react-native-paper";
@@ -21,17 +22,7 @@ const Settings = () => {
   const navigation = useNavigation();
 
   //Initiate user redux states
-  const {
-    sessionID,
-    email,
-    gender,
-    weight,
-    height,
-    age,
-    name,
-    activity,
-    goal,
-  } = useAppSelector((state) => state.user);
+  const { email, name } = useAppSelector((state) => state.user);
   const { colors } = useAppSelector((state) => state.theme);
   const dispatch = useAppDispatch();
 
@@ -83,9 +74,14 @@ const Settings = () => {
   return (
     <View className="flex-1" style={{ backgroundColor: colors.background }}>
       <View className="items-center my-8 flex-row mx-8 justify-center">
-        <UserCircleIcon name="ios-add" size={85} color={"black"} />
+        <Image
+          style={{ width: 90, height: 90 }}
+          source={require("../../assets/images/settings/Profile.png")}
+        />
         <View className=" flex flex-col ml-6">
-          <Text className="text-black my-2">{name}Gerrard Nazarian</Text>
+          <Text className="text-black my-2 font-bold text-lg">
+            {name}Gerrard Nazarian
+          </Text>
           <Text className="text-gray-500 italic">
             {email}garonazarian09@gmail.com
           </Text>
@@ -106,8 +102,10 @@ const Settings = () => {
           style={{ borderColor: colors.secondary }}
           className="flex flex-row border-solid border-b-2 py-4 items-center"
         >
-          <UserCircleIcon name="ios-add" size={36} color={"black"} />
-
+          <Image
+            style={{ width: 42, height: 42 }}
+            source={require("../../assets/images/settings/Avatar.png")}
+          />
           <Text className="text-lg font-semibold pl-5">Avatar</Text>
           <View className="ml-auto flex-row self-center">
             <Icon
@@ -122,7 +120,10 @@ const Settings = () => {
           style={{ borderColor: colors.secondary }}
           className="flex flex-row border-solid border-b-2 py-4 items-center"
         >
-          <UserCircleIcon name="ios-add" size={36} color={"black"} />
+          <Image
+            style={{ width: 42, height: 42 }}
+            source={require("../../assets/images/settings/Theme.png")}
+          />
           <Text className="text-lg font-semibold pl-5">Theme</Text>
           <View className="ml-auto flex-row self-center">
             <Icon
@@ -137,7 +138,10 @@ const Settings = () => {
           style={{ borderColor: colors.secondary }}
           className="flex flex-row border-solid border-b-2 py-4 items-center"
         >
-          <UserCircleIcon name="ios-add" size={36} color={"black"} />
+          <Image
+            style={{ width: 42, height: 42 }}
+            source={require("../../assets/images/settings/Push.png")}
+          />
           <Text className="text-lg font-semibold pl-5">Push Notification</Text>
           <View className="ml-auto flex-row self-center">
             <Switch
@@ -154,7 +158,10 @@ const Settings = () => {
           style={{ borderColor: colors.secondary }}
           className="flex flex-row border-solid border-b-2 py-4 items-center"
         >
-          <UserCircleIcon name="ios-add" size={36} color={"black"} />
+          <Image
+            style={{ width: 42, height: 42 }}
+            source={require("../../assets/images/settings/DarkMode.png")}
+          />
           <Text className="text-lg font-semibold pl-5">Dark Mode</Text>
           <View className="ml-auto flex-row self-center">
             <Switch
@@ -171,7 +178,10 @@ const Settings = () => {
           style={{ borderColor: colors.secondary }}
           className="flex flex-row border-solid border-b-2 py-4 items-center"
         >
-          <UserCircleIcon name="ios-add" size={36} color={"black"} />
+          <Image
+            style={{ width: 42, height: 42 }}
+            source={require("../../assets/images/settings/Sharing.png")}
+          />
           <Text className="text-lg font-semibold pl-5">
             Sharing and Privary
           </Text>
@@ -188,7 +198,10 @@ const Settings = () => {
           style={{ borderColor: colors.secondary }}
           className="flex flex-row border-solid border-b-2 py-4 items-center"
         >
-          <UserCircleIcon name="ios-add" size={36} color={"black"} />
+          <Image
+            style={{ width: 42, height: 42 }}
+            source={require("../../assets/images/settings/Premium.png")}
+          />
           <Text className="text-lg font-semibold pl-5">Go Premium Section</Text>
           <View className="ml-auto flex-row self-center">
             <Icon

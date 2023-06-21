@@ -129,7 +129,11 @@ const Navigation = ({ session }: { session: Session }) => {
           component={Dashboard}
           options={{
             tabBarIcon: ({ color, size }) => (
-              <Ant name="dashboard" size={24} color={primary_color} />
+              <Icon
+                name="view-dashboard-outline"
+                size={24}
+                color={primary_color}
+              />
             ),
             tabBarLabel: "", // Set tabBarLabel to an empty string
           }}
