@@ -27,24 +27,24 @@ const MealPicker: React.FC<PickerComponentProps> = ({
     >
       <Picker.Item color={"black"} label="Select a meal" value="select" />
       <Picker.Item
-        color={selectedValue === "breakfast" ? pickerItemStyle.color : "black"}
+        color={selectedValue === "Breakfast" ? pickerItemStyle.color : "black"}
         label="Breakfast"
-        value="breakfast"
+        value="Breakfast"
       />
       <Picker.Item
-        value="lunch"
+        value="Lunch"
         label="Lunch"
-        color={selectedValue === "lunch" ? pickerItemStyle.color : "black"}
+        color={selectedValue === "Lunch" ? pickerItemStyle.color : "black"}
       />
       <Picker.Item
-        color={selectedValue === "dinner" ? pickerItemStyle.color : "black"}
+        color={selectedValue === "Lunch" ? pickerItemStyle.color : "black"}
         label="Dinner"
-        value="dinner"
+        value="Dinner"
       />
       <Picker.Item
-        color={selectedValue === "snack" ? pickerItemStyle.color : "black"}
+        color={selectedValue === "Snacks" ? pickerItemStyle.color : "black"}
         label="Snack"
-        value="snack"
+        value="Snacks"
       />
     </Picker>
   );

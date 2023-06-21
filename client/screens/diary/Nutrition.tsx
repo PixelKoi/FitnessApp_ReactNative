@@ -166,6 +166,7 @@ const Nutrition: React.FC = () => {
 
   const handleLanguageChange = (itemValue: string, itemIndex: number) => {
     setSelectedLanguage(itemValue);
+    handleOptionSelect(itemValue);
     setTimeout(() => {
       if (itemValue != "select") handlePickerClose();
     }, 200); // Delay of 1000 milliseconds (1 second)
@@ -449,7 +450,7 @@ const Nutrition: React.FC = () => {
             onDismiss={closeMenu}
             anchor={
               <View className="flex flex-row justify-center align-middle px-4">
-                <TouchableOpacity onPress={openMenu}>
+                <TouchableOpacity onPress={() => handleIconPress()}>
                   <Text
                     style={{ color: primary_color }}
                     className="font-bold px-2"
@@ -457,33 +458,12 @@ const Nutrition: React.FC = () => {
                     {selectedOption || "Select a meal"}
                   </Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={openMenu}>
+                <TouchableOpacity onPress={() => handleIconPress()}>
                   <ChevronDownIcon size={18} color={primary_color} />
                 </TouchableOpacity>
               </View>
             }
-          >
-            <Menu.Item
-              color={primary_color}
-              onPress={() => handleOptionSelect("Breakfast")}
-              title="Breakfast"
-            />
-            <Menu.Item
-              color={primary_color}
-              onPress={() => handleOptionSelect("Lunch")}
-              title="Lunch"
-            />
-            <Menu.Item
-              color={primary_color}
-              onPress={() => handleOptionSelect("Dinner")}
-              title="Dinner"
-            />
-            <Menu.Item
-              color={primary_color}
-              onPress={() => handleOptionSelect("Snacks")}
-              title="Snacks"
-            />
-          </Menu>
+          ></Menu>
           <TextInput
             style={styles.searchInput}
             value={foodName}

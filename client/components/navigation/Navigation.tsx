@@ -3,7 +3,8 @@ import { Alert, View, ActivityIndicator, StyleSheet } from "react-native";
 //Screen imports
 import Account from "../../screens/account/Account";
 import Nutrition from "../../screens/diary/Nutrition";
-import ProfileScreen from "../../screens/profile/Profile";
+import Settings from "../../screens/profile/Settings";
+import ThemeSelector from "../../screens/profile/ThemeSelector";
 import Diary from "../../screens/diary/Diary";
 import Dashboard from "../../screens/dashboard/Dashboard";
 import Timer from "../../screens/timer/Timer";
@@ -30,6 +31,7 @@ import {
 import Profile from "../../database/models/Profile";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import Ant from "react-native-vector-icons/AntDesign";
+import UserBioInput from "../../screens/profile/EditProfile";
 
 const Navigation = ({ session }: { session: Session }) => {
   const [loading, setLoading] = useState(true);
@@ -125,11 +127,15 @@ const Navigation = ({ session }: { session: Session }) => {
         }}
       >
         <Tab.Screen
-          name="History"
+          name="Dashboard"
           component={Dashboard}
           options={{
             tabBarIcon: ({ color, size }) => (
-              <Ant name="dashboard" size={24} color={primary_color} />
+              <Icon
+                name="view-dashboard-outline"
+                size={24}
+                color={primary_color}
+              />
             ),
             tabBarLabel: "", // Set tabBarLabel to an empty string
           }}
@@ -177,8 +183,18 @@ const Navigation = ({ session }: { session: Session }) => {
           options={{ headerShown: false }}
         />
         <Stack.Screen
+          name="Settings"
+          component={Settings}
+          options={{ headerShown: true }}
+        />
+        <Stack.Screen
           name="Profile"
-          component={ProfileScreen}
+          component={UserBioInput}
+          options={{ headerShown: true }}
+        />
+        <Stack.Screen
+          name="Theme"
+          component={ThemeSelector}
           options={{ headerShown: true }}
         />
       </Stack.Navigator>
