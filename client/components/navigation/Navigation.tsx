@@ -4,6 +4,7 @@ import { Alert, View, ActivityIndicator, StyleSheet } from "react-native";
 import Account from "../../screens/account/Account";
 import Nutrition from "../../screens/diary/Nutrition";
 import Settings from "../../screens/profile/Settings";
+import ThemeSelector from "../../screens/profile/ThemeSelector";
 import Diary from "../../screens/diary/Diary";
 import Dashboard from "../../screens/dashboard/Dashboard";
 import Timer from "../../screens/timer/Timer";
@@ -189,6 +190,11 @@ const Navigation = ({ session }: { session: Session }) => {
         <Stack.Screen
           name="Profile"
           component={UserBioInput}
+          options={{ headerShown: true }}
+        />
+        <Stack.Screen
+          name="Theme"
+          component={ThemeSelector}
           options={{ headerShown: true }}
         />
       </Stack.Navigator>

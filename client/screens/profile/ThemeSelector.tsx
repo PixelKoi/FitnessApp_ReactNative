@@ -16,7 +16,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import { UserCircleIcon } from "react-native-heroicons/outline";
 import { supabase } from "../../utils/supabase_authentication/supabase";
 
-const Settings = () => {
+const ThemeSelector = () => {
   const database = useDatabase();
   const navigation = useNavigation();
 
@@ -55,13 +55,13 @@ const Settings = () => {
   //Top Nav on Edit Profile Screen
   React.useLayoutEffect(() => {
     navigation.setOptions({
-      title: "Settings",
+      title: "Themes",
       headerTintColor: colors.primary,
       headerLeft: () => (
         <TouchableOpacity
           className="ml-5 mt-2"
           onPress={() => {
-            navigation.navigate("Dashboard");
+            navigation.navigate("Settings");
           }}
         >
           <Icon name="angle-left" style={{ color: colors.primary }} size={24} />
@@ -72,81 +72,16 @@ const Settings = () => {
 
   return (
     <View className="flex-1" style={{ backgroundColor: colors.background }}>
-      <View className="items-center my-8 flex-row mx-8 justify-center">
-        <Image
-          style={{ width: 90, height: 90 }}
-          source={require("../../assets/images/settings/Profile.png")}
-        />
-        <View className=" flex flex-col ml-6">
-          <Text className="text-black my-2 font-bold text-lg">
-            {name}Gerrard Nazarian
-          </Text>
-          <Text className="text-gray-500 italic">
-            {email}garonazarian09@gmail.com
-          </Text>
-        </View>
-        <View className="flex ml-7 mb-5">
-          <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
-            <Icon
-              size={18}
-              style={{ color: colors.primary }}
-              name="external-link"
-            ></Icon>
-          </TouchableOpacity>
-        </View>
-      </View>
-      <View className="flex flex-row pl-8">
-        <Text className="text-gray-400">Settings</Text>
-      </View>
-      <View className="mx-8 mt-4">
+      <View className="mx-8 mt-8">
         <View
           style={{ borderColor: colors.secondary }}
-          className="flex flex-row border-solid border-b-2 py-4 items-center"
+          className="flex flex-row border-solid border-b-2 py-6 items-center"
         >
           <Image
             style={{ width: 42, height: 42 }}
-            source={require("../../assets/images/settings/Avatar.png")}
+            source={require("../../assets/images/ThemeSelector/Pink.png")}
           />
-          <Text className="text-lg font-semibold pl-5">Avatar</Text>
-          <View className="ml-auto flex-row self-center">
-            <Icon
-              style={{ color: colors.primary }}
-              name="chevron-right"
-              size={14}
-            />
-          </View>
-        </View>
-
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate("Theme");
-          }}
-          style={{ borderColor: colors.secondary }}
-          className="flex flex-row border-solid border-b-2 py-4 items-center"
-        >
-          <Image
-            style={{ width: 42, height: 42 }}
-            source={require("../../assets/images/settings/Theme.png")}
-          />
-          <Text className="text-lg font-semibold pl-5">Theme</Text>
-          <View className="ml-auto flex-row self-center">
-            <Icon
-              style={{ color: colors.primary }}
-              name="chevron-right"
-              size={14}
-            />
-          </View>
-        </TouchableOpacity>
-
-        <View
-          style={{ borderColor: colors.secondary }}
-          className="flex flex-row border-solid border-b-2 py-4 items-center"
-        >
-          <Image
-            style={{ width: 42, height: 42 }}
-            source={require("../../assets/images/settings/Push.png")}
-          />
-          <Text className="text-lg font-semibold pl-5">Push Notification</Text>
+          <Text className="text-lg font-semibold pl-5">Pink</Text>
           <View className="ml-auto flex-row self-center">
             <Switch
               trackColor={{ false: "#767577", true: "#81b0ff" }}
@@ -161,13 +96,13 @@ const Settings = () => {
 
         <View
           style={{ borderColor: colors.secondary }}
-          className="flex flex-row border-solid border-b-2 py-4 items-center"
+          className="flex flex-row border-solid border-b-2 py-6 items-center"
         >
           <Image
             style={{ width: 42, height: 42 }}
-            source={require("../../assets/images/settings/DarkMode.png")}
+            source={require("../../assets/images/ThemeSelector/Green.png")}
           />
-          <Text className="text-lg font-semibold pl-5">Dark Mode</Text>
+          <Text className="text-lg font-semibold pl-5">Green</Text>
           <View className="ml-auto flex-row self-center">
             <Switch
               trackColor={{ false: "#767577", true: "#81b0ff" }}
@@ -179,56 +114,86 @@ const Settings = () => {
             />
           </View>
         </View>
-
         <View
           style={{ borderColor: colors.secondary }}
-          className="flex flex-row border-solid border-b-2 py-4 items-center"
+          className="flex flex-row border-solid border-b-2 items-center py-2"
         >
           <Image
             style={{ width: 42, height: 42 }}
-            source={require("../../assets/images/settings/Sharing.png")}
+            source={require("../../assets/images/ThemeSelector/Blue.png")}
           />
-          <Text className="text-lg font-semibold pl-5">
-            Sharing and Privary
-          </Text>
+          <Text className="text-lg font-semibold pl-5">Blue</Text>
           <View className="ml-auto flex-row self-center">
-            <Icon
-              style={{ color: colors.primary }}
-              name="chevron-right"
-              size={14}
+            <Image
+              style={{
+                width: 60,
+                height: 80,
+                transform: [{ scaleX: 0.4 }, { scaleY: 0.4 }],
+              }}
+              source={require("../../assets/images/ThemeSelector/Lock.png")}
             />
           </View>
         </View>
 
         <View
           style={{ borderColor: colors.secondary }}
-          className="flex flex-row border-solid border-b-2 py-4 items-center"
+          className="flex flex-row border-solid border-b-2  items-center"
         >
           <Image
             style={{ width: 42, height: 42 }}
-            source={require("../../assets/images/settings/Premium.png")}
+            source={require("../../assets/images/ThemeSelector/Lemonade.png")}
           />
-          <Text className="text-lg font-semibold pl-5">Go Premium Section</Text>
+          <Text className="text-lg font-semibold pl-5">Lemonade</Text>
           <View className="ml-auto flex-row self-center">
-            <Icon
-              style={{ color: colors.primary }}
-              name="chevron-right"
-              size={14}
+            <Image
+              style={{
+                width: 100,
+                height: 100,
+                transform: [{ scaleX: 0.6 }, { scaleY: 0.6 }],
+              }}
+              source={require("../../assets/images/ThemeSelector/Premium.png")}
+            />
+          </View>
+        </View>
+
+        <View
+          style={{ borderColor: colors.secondary }}
+          className="flex flex-row border-solid border-b-2 items-center"
+        >
+          <Image
+            style={{ width: 42, height: 42 }}
+            source={require("../../assets/images/ThemeSelector/Pink.png")}
+          />
+          <Text className="text-lg font-semibold pl-5">Bubble Gum</Text>
+          <View className="ml-auto flex-row self-center">
+            <Image
+              style={{
+                width: 100,
+                height: 100,
+                transform: [{ scaleX: 0.6 }, { scaleY: 0.6 }],
+              }}
+              source={require("../../assets/images/ThemeSelector/Premium.png")}
             />
           </View>
         </View>
         <View
           style={{ borderColor: colors.secondary }}
-          className="flex flex-row border-solid py-4 items-center"
+          className="flex flex-row border-solid border-b-2 items-center"
         >
-          <View className="flex flex-col">
-            <Text className="text-gray-400">My account</Text>
-            <Text
-              style={{ color: colors.primary }}
-              className="text-lg font-extrabold items-center justify-center "
-            >
-              Logout
-            </Text>
+          <Image
+            style={{ width: 42, height: 42 }}
+            source={require("../../assets/images/ThemeSelector/Pink.png")}
+          />
+          <Text className="text-lg font-semibold pl-5">SunFlower</Text>
+          <View className="ml-auto flex-row self-center">
+            <Image
+              style={{
+                width: 100,
+                height: 100,
+                transform: [{ scaleX: 0.6 }, { scaleY: 0.6 }],
+              }}
+              source={require("../../assets/images/ThemeSelector/Premium.png")}
+            />
           </View>
         </View>
       </View>
@@ -236,4 +201,4 @@ const Settings = () => {
   );
 };
 
-export default Settings;
+export default ThemeSelector;
