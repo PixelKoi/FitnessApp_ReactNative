@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, Image } from "react-native";
 // import {`[Calendar](#calendar), [CalendarList](#calendarlist), [Agenda](#agenda)`} from 'react-native-calendars';
 import { CalendarProvider, ExpandableCalendar } from "react-native-calendars";
 import SumGraph from "./DonutGraphs/SumDonutGraph";
@@ -53,10 +53,15 @@ const Dashboard = (props: Props) => {
         </View>
       ),
       headerLeft: () => (
-        <View>
-          <Text style={{ color: colors.primary }} className="ml-8 rounded-full">
-            <MaterialCommunityIcons name="trophy" size={32} />
-          </Text>
+        <View className="ml-4">
+          <Image
+            style={{
+              width: 60,
+              height: 80,
+              transform: [{ scaleX: 0.4 }, { scaleY: 0.4 }],
+            }}
+            source={require("../../assets/images/dashboard/trophy.png")}
+          />
         </View>
       ),
     });
