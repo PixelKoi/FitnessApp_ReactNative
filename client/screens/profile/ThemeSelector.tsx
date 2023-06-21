@@ -21,6 +21,8 @@ const ThemeSelector = () => {
     colors_primary === "#E07594"
   );
 
+  // TODO: Diagnose Re-rendering from theme change Memoization: Utilize the React.memo higher-order component or the useMemo hook to memoize components that depend on the theme state. This ensures that a component only re-renders when its dependencies change. By memoizing components, you can prevent unnecessary re-rendering of unaffected components.
+
   const toggleGreen = (value) => {
     setGreenSwitch(value);
     setBubbleSwitch(!value);
