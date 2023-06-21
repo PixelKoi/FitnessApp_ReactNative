@@ -17,7 +17,6 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import { UserCircleIcon } from "react-native-heroicons/outline";
 import Profile from "../../database/models/Profile";
 import calAlgo from "./cal-algo";
-import EditProfile from "./EditProfile";
 import { supabase } from "../../utils/supabase_authentication/supabase";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Ionicons from "react-native-vector-icons/Ionicons";

@@ -10,6 +10,7 @@ import { useAppSelector } from "../../redux-manager/hooks";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { useNavigation } from "@react-navigation/native";
 import { UserCircleIcon } from "react-native-heroicons/outline";
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 const Dashboard = (props: Props) => {
   const navigation = useNavigation();
@@ -35,25 +36,25 @@ const Dashboard = (props: Props) => {
       headerTitleStyle: {
         fontWeight: "bold",
       },
-      headerLeft: () => (
+      headerRight: () => (
         <View>
           <TouchableOpacity
-            style={{ backgroundColor: colors.primary }}
-            className="ml-8  rounded-full"
+            className="mr-8  rounded-full"
             onPress={() => {
-              navigation.navigate("Profile");
+              navigation.navigate("Settings");
             }}
           >
-            <UserCircleIcon name="ios-add" size={30} color={"white"} />
+            <Ionicons
+              name="ios-settings-sharp"
+              size={30}
+              color={colors.primary}
+            />
           </TouchableOpacity>
         </View>
       ),
-      headerRight: () => (
+      headerLeft: () => (
         <View>
-          <Text
-            style={{ color: colors.primary }}
-            className="ml-8 rounded-full mr-8"
-          >
+          <Text style={{ color: colors.primary }} className="ml-8 rounded-full">
             <MaterialCommunityIcons name="trophy" size={32} />
           </Text>
         </View>

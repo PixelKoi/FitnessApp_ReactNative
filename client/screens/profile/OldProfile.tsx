@@ -17,7 +17,6 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import { UserCircleIcon } from "react-native-heroicons/outline";
 import Profile from "../../database/models/Profile";
 import calAlgo from "./cal-algo";
-import EditProfile from "./EditProfile";
 import { supabase } from "../../utils/supabase_authentication/supabase";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -131,7 +130,7 @@ const UserBioInput = () => {
   //Top Nav on Edit Profile Screen
   React.useLayoutEffect(() => {
     navigation.setOptions({
-      title: showEditProfile === false ? "Quick Settings" : "Edit Profile",
+      title: "Edit Profile",
       headerStyle: {
         backgroundColor:
           showEditProfile === false ? colors.primary : colors.secondary,
@@ -155,37 +154,22 @@ const UserBioInput = () => {
             </TouchableOpacity>
           </View>
         ),
-      headerLeft: () =>
-        showEditProfile === false ? (
-          <Button
-            style={{ backgroundColor: colors.primary }}
-            className="ml-5"
-            mode="elevated"
-            onPress={() => {
-              navigation.navigate("History");
-            }}
-          >
-            <Icon
-              name="angle-left"
-              style={{ color: colors.background }}
-              size={20}
-            />
-          </Button>
-        ) : (
-          <Button
-            className="bg-primary ml-5"
-            mode="elevated"
-            onPress={() => {
-              setEditProfile(false);
-            }}
-          >
-            <Icon
-              name="angle-left"
-              style={{ color: colors.background }}
-              size={20}
-            />
-          </Button>
-        ),
+      headerLeft: () => (
+        <Button
+          style={{ backgroundColor: colors.primary }}
+          className="ml-5"
+          mode="elevated"
+          onPress={() => {
+            navigation.navigate("Settings");
+          }}
+        >
+          <Icon
+            name="angle-left"
+            style={{ color: colors.background }}
+            size={20}
+          />
+        </Button>
+      ),
     });
   }, [showEditProfile]);
 

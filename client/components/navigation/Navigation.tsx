@@ -30,6 +30,7 @@ import {
 import Profile from "../../database/models/Profile";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import Ant from "react-native-vector-icons/AntDesign";
+import UserBioInput from "../../screens/profile/OldProfile";
 
 const Navigation = ({ session }: { session: Session }) => {
   const [loading, setLoading] = useState(true);
@@ -181,8 +182,13 @@ const Navigation = ({ session }: { session: Session }) => {
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="Profile"
+          name="Settings"
           component={Settings}
+          options={{ headerShown: true }}
+        />
+        <Stack.Screen
+          name="Profile"
+          component={UserBioInput}
           options={{ headerShown: true }}
         />
       </Stack.Navigator>

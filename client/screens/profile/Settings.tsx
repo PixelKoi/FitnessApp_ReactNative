@@ -14,7 +14,6 @@ import { useAppDispatch, useAppSelector } from "../../redux-manager/hooks";
 import { useDatabase } from "@nozbe/watermelondb/hooks";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { UserCircleIcon } from "react-native-heroicons/outline";
-import EditProfile from "./EditProfile";
 import { supabase } from "../../utils/supabase_authentication/supabase";
 
 const Settings = () => {
@@ -87,11 +86,13 @@ const Settings = () => {
           </Text>
         </View>
         <View className="flex ml-7 mb-5">
-          <Icon
-            size={18}
-            style={{ color: colors.primary }}
-            name="external-link"
-          ></Icon>
+          <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
+            <Icon
+              size={18}
+              style={{ color: colors.primary }}
+              name="external-link"
+            ></Icon>
+          </TouchableOpacity>
         </View>
       </View>
       <View className="flex flex-row pl-8">
