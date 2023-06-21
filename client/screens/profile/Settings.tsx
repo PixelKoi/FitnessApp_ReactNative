@@ -62,7 +62,7 @@ const Settings = () => {
         <TouchableOpacity
           className="ml-5 mt-2"
           onPress={() => {
-            navigation.navigate("History");
+            navigation.navigate("Dashboard");
           }}
         >
           <Icon name="angle-left" style={{ color: colors.primary }} size={24} />
@@ -99,7 +99,7 @@ const Settings = () => {
       </View>
       <View className="mx-8 mt-4">
         <View
-          style={{ borderColor: colors.secondary }}
+          style={{ borderColor: colors.primary }}
           className="flex flex-row border-solid border-b-2 py-4 items-center"
         >
           <Image
@@ -117,7 +117,7 @@ const Settings = () => {
         </View>
 
         <View
-          style={{ borderColor: colors.secondary }}
+          style={{ borderColor: colors.primary }}
           className="flex flex-row border-solid border-b-2 py-4 items-center"
         >
           <Image
@@ -135,7 +135,7 @@ const Settings = () => {
         </View>
 
         <View
-          style={{ borderColor: colors.secondary }}
+          style={{ borderColor: colors.primary }}
           className="flex flex-row border-solid border-b-2 py-4 items-center"
         >
           <Image
@@ -150,12 +150,13 @@ const Settings = () => {
               ios_backgroundColor="#3e3e3e"
               onValueChange={notificationsToggleSwitch}
               value={isPushEnabled}
+              style={{ transform: [{ scaleX: 0.8 }, { scaleY: 0.8 }] }}
             />
           </View>
         </View>
 
         <View
-          style={{ borderColor: colors.secondary }}
+          style={{ borderColor: colors.primary }}
           className="flex flex-row border-solid border-b-2 py-4 items-center"
         >
           <Image
@@ -170,12 +171,13 @@ const Settings = () => {
               ios_backgroundColor="#3e3e3e"
               onValueChange={darkToggleSwitch}
               value={isDarkEnabled}
+              style={{ transform: [{ scaleX: 0.8 }, { scaleY: 0.8 }] }}
             />
           </View>
         </View>
 
         <View
-          style={{ borderColor: colors.secondary }}
+          style={{ borderColor: colors.primary }}
           className="flex flex-row border-solid border-b-2 py-4 items-center"
         >
           <Image
@@ -195,7 +197,7 @@ const Settings = () => {
         </View>
 
         <View
-          style={{ borderColor: colors.secondary }}
+          style={{ borderColor: colors.primary }}
           className="flex flex-row border-solid border-b-2 py-4 items-center"
         >
           <Image
@@ -213,7 +215,7 @@ const Settings = () => {
         </View>
         <View
           style={{ borderColor: colors.secondary }}
-          className="flex flex-row border-solid border-b-2 py-4 items-center"
+          className="flex flex-row border-solid py-4 items-center"
         >
           <View className="flex flex-col">
             <Text className="text-gray-400">My account</Text>
@@ -223,14 +225,6 @@ const Settings = () => {
             >
               Logout
             </Text>
-          </View>
-
-          <View className="ml-auto flex-row self-center mt-4">
-            <Icon
-              style={{ color: colors.primary }}
-              name="chevron-right"
-              size={14}
-            />
           </View>
         </View>
       </View>
