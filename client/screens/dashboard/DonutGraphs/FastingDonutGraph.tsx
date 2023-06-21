@@ -93,16 +93,17 @@ const FastingDonutGraph = (props, { radius = 70, strokeWidth = 25 }) => {
 					/>
 				</G>
 			</Svg>
-			<View className="absolute self-center">
+			<View className="absolute">
 				<Text
 					style={{ color: colors.primary }}
 					className="text-2xl text-center font-bold">
 					{fastingInfo.elapsedPercentage}%
 				</Text>
-
-				<Text style={{ color: colors.primary }} className="text-xs text-center">
-					{fastingInfo.countdown}
-				</Text>
+				<View style={{ width: 53 }}>
+					<Text style={{ color: colors.primary }} className="text-xs">
+						{fastingInfo.countdown}
+					</Text>
+				</View>
 			</View>
 		</View>
 	);
