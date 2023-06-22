@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import { View, Text, Image, Modal, Alert } from "react-native";
-import headerIMG from "../../../../../assets/images/weight_lifting.png";
 import { Button, Surface, DefaultTheme } from "react-native-paper";
+import { TextInput } from "react-native-paper";
+//Images
+import headerIMG from "../../../../../assets/images/weight_lifting.png";
+//Import supabase
+import { supabase } from "../../../../supabase_authentication/supabase";
+//Import redux hooks
 import {
 	useAppDispatch,
 	useAppSelector,
 } from "../../../../../redux-manager/hooks";
-import { TextInput } from "react-native-paper";
-import { supabase } from "../../../../supabase_authentication/supabase";
 
 const SignInModal = (props) => {
 	//Import redux
@@ -17,9 +20,18 @@ const SignInModal = (props) => {
 	//Sign Up Hooks
 	const [email, setEmail] = useState<string>("");
 	const [password, setPassword] = useState<string>("");
-	const [showPassword, setShowPassword] = useState(!showPassword);
+	const [showPassword, setShowPassword] = useState<boolean>(!showPassword);
 	const [loading, setLoading] = useState(false);
 
+	//Paper theme
+	const theme = {
+		...DefaultTheme,
+		colors: {
+			surfaceVariant: colors.secondary,
+		},
+	};
+
+	//Sign into Supabase
 	async function signInWithEmail() {
 		setLoading(true);
 		const { error } = await supabase.auth.signInWithPassword({
@@ -33,13 +45,6 @@ const SignInModal = (props) => {
 		}
 		setLoading(false);
 	}
-
-	const theme = {
-		...DefaultTheme,
-		colors: {
-			surfaceVariant: colors.secondary,
-		},
-	};
 
 	return (
 		<Modal visible={props.showSignInModal}>
@@ -112,7 +117,6 @@ const SignInModal = (props) => {
 									Forgot password?
 								</Text>
 							</View>
-							{/* <TextInput style={{ height: 40, borderRadius: 10 }} /> */}
 						</View>
 					</View>
 					<View className="flex-row justify-center mt-12">

@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 import { View, Text, Image, Modal, Alert } from "react-native";
-import headerIMG from "../../../../../assets/images/weight_lifting.png";
 import { Button, Surface, DefaultTheme } from "react-native-paper";
+import { TextInput } from "react-native-paper";
+import { TouchableOpacity } from "react-native-gesture-handler";
+//Images
+import headerIMG from "../../../../../assets/images/weight_lifting.png";
+//Import supabase
+import { supabase } from "../../../../supabase_authentication/supabase";
+//Import redux hooks
 import {
 	useAppDispatch,
 	useAppSelector,
 } from "../../../../../redux-manager/hooks";
-import { TextInput } from "react-native-paper";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import { supabase } from "../../../../supabase_authentication/supabase";
 
 const SignUpModal = (props) => {
 	//Import redux
@@ -22,6 +25,7 @@ const SignUpModal = (props) => {
 	const [showPassword, setShowPassword] = useState(!showPassword);
 	const [loading, setLoading] = useState(false);
 
+	//Paper theme
 	const theme = {
 		...DefaultTheme,
 		colors: {
@@ -29,6 +33,7 @@ const SignUpModal = (props) => {
 		},
 	};
 
+	//Sign up with supabase auth
 	async function signUpWithEmail() {
 		setLoading(true);
 		const { error } = await supabase.auth.signUp({
@@ -55,12 +60,9 @@ const SignUpModal = (props) => {
 					}}
 					className=" h-screen w-screen">
 					<View className="mx-14 mt-6">
-						<Text
-							// style={{ color: colors.primary }}
-							className="text-2xl font-bold">
-							Sign Up
-						</Text>
-						{/* Display Activity Buttons */}
+						<Text className="text-2xl font-bold">Sign Up</Text>
+
+						{/* Input Account information */}
 						<View className="gap-5 mt-4">
 							<View>
 								<Text style={{ color: "#9B9B99" }} className="font-bold">
@@ -129,11 +131,13 @@ const SignUpModal = (props) => {
 									Password must be atleast 6 characters
 								</Text>
 							</View>
-							{/* <TextInput style={{ height: 40, borderRadius: 10 }} /> */}
 						</View>
 					</View>
+
+					{/* Sign up Account */}
 					<View className="flex-row justify-center mt-12">
 						<Button
+							disabled={loading}
 							onPress={() => {
 								props.setShowActivityModal(false);
 							}}
