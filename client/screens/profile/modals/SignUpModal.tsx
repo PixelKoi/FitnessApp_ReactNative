@@ -11,10 +11,16 @@ const SignUpModal = (props) => {
 	const { colors } = useAppSelector((state) => state.theme);
 	const dispatch = useAppDispatch();
 
+	const [showPassword, setShowPassword] = useState(!showPassword);
+
 	const theme = {
 		...DefaultTheme,
-		roundness: 15,
+		roundness: 50,
 		borderRadius: 10,
+		...DefaultTheme,
+		colors: {
+			// surfaceVariant: colors.secondary,
+		},
 	};
 
 	return (
@@ -56,7 +62,7 @@ const SignUpModal = (props) => {
 									style={{
 										height: 40,
 										marginTop: 15,
-										borderRadius: 10,
+
 										borderWidth: 0,
 									}}
 								/>
@@ -88,8 +94,14 @@ const SignUpModal = (props) => {
 									Password
 								</Text>
 								<TextInput
+									secureTextEntry={showPassword ? true : false}
 									left={<TextInput.Icon icon={"lock-outline"} />}
-									right={<TextInput.Icon icon={"eye-off"} />}
+									right={
+										<TextInput.Icon
+											icon={showPassword ? "eye-off" : "eye"}
+											onPress={() => setShowPassword(!showPassword)}
+										/>
+									}
 									contentStyle={{
 										backgroundColor: colors.secondary,
 										borderRadius: 10,
