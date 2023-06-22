@@ -92,8 +92,8 @@ const Settings = () => {
 					</TouchableOpacity>
 				</View>
 			</View>
-			<SignInModal />
-			{/* <SignUpModal /> */}
+			{/* <SignInModal /> */}
+			<SignUpModal />
 			{/* <GenderModal /> */}
 			<View className="flex flex-row pl-8">
 				<Text className="text-gray-400">Settings</Text>
