@@ -117,6 +117,7 @@ const SignInModal = (props) => {
 					</View>
 					<View className="flex-row justify-center mt-12">
 						<Button
+							disabled={loading}
 							onPress={() => {
 								signInWithEmail();
 							}}

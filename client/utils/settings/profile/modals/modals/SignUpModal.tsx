@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, Image, Modal } from "react-native";
+import { View, Text, Image, Modal, Alert } from "react-native";
 import headerIMG from "../../../../../assets/images/weight_lifting.png";
 import { Button, Surface, DefaultTheme } from "react-native-paper";
 import {
@@ -8,6 +8,7 @@ import {
 } from "../../../../../redux-manager/hooks";
 import { TextInput } from "react-native-paper";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { supabase } from "../../../../supabase_authentication/supabase";
 
 const SignUpModal = (props) => {
 	//Import redux
@@ -15,10 +16,11 @@ const SignUpModal = (props) => {
 	const dispatch = useAppDispatch();
 
 	//Sign Up Hooks
-	const [username, setUsername] = useState<String>("");
-	const [email, setEmail] = useState<String>("");
-	const [password, setPassword] = useState<String>("");
+	const [username, setUsername] = useState<string>("");
+	const [email, setEmail] = useState<string>("");
+	const [password, setPassword] = useState<string>("");
 	const [showPassword, setShowPassword] = useState(!showPassword);
+	const [loading, setLoading] = useState(false);
 
 	const theme = {
 		...DefaultTheme,
@@ -27,8 +29,19 @@ const SignUpModal = (props) => {
 		},
 	};
 
+	async function signUpWithEmail() {
+		setLoading(true);
+		const { error } = await supabase.auth.signUp({
+			email: email,
+			password: password,
+		});
+
+		if (error) Alert.alert(error.message);
+		setLoading(false);
+	}
+
 	return (
-		<Modal visible={true}>
+		<Modal visible={props.showSignUpModal}>
 			<View
 				style={{ backgroundColor: colors.secondary }}
 				className="flex-1 items-center">
