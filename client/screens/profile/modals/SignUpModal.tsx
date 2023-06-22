@@ -33,15 +33,18 @@ const SignUpModal = (props) => {
 					className=" h-screen w-screen">
 					<View className="mx-14 mt-6">
 						<Text
-							style={{ color: colors.primary }}
+							// style={{ color: colors.primary }}
 							className="text-2xl font-bold">
 							Sign Up
 						</Text>
 						{/* Display Activity Buttons */}
 						<View className="gap-5 mt-4">
 							<View>
-								<Text>Your Name</Text>
+								<Text style={{ color: "#9B9B99" }} className="font-bold">
+									Your Name
+								</Text>
 								<TextInput
+									left={<TextInput.Icon icon={"account"} />}
 									contentStyle={{
 										backgroundColor: colors.secondary,
 										borderRadius: 10,
@@ -59,8 +62,11 @@ const SignUpModal = (props) => {
 								/>
 							</View>
 							<View>
-								<Text>Email Address</Text>
+								<Text style={{ color: "#9B9B99" }} className="font-bold">
+									Email Address
+								</Text>
 								<TextInput
+									left={<TextInput.Icon icon={"email-outline"} />}
 									contentStyle={{
 										backgroundColor: colors.secondary,
 										borderRadius: 10,
@@ -78,8 +84,12 @@ const SignUpModal = (props) => {
 								/>
 							</View>
 							<View>
-								<Text>Password</Text>
+								<Text style={{ color: "#9B9B99" }} className="font-bold">
+									Password
+								</Text>
 								<TextInput
+									left={<TextInput.Icon icon={"lock-outline"} />}
+									right={<TextInput.Icon icon={"eye-off"} />}
 									contentStyle={{
 										backgroundColor: colors.secondary,
 										borderRadius: 10,
@@ -95,6 +105,11 @@ const SignUpModal = (props) => {
 										borderWidth: 0,
 									}}
 								/>
+								<Text
+									className="ml-auto mt-2"
+									style={{ color: "#9B9B99", fontSize: 11 }}>
+									Password must be atleast 6 characters
+								</Text>
 							</View>
 							{/* <TextInput style={{ height: 40, borderRadius: 10 }} /> */}
 						</View>
@@ -114,6 +129,10 @@ const SignUpModal = (props) => {
 						style={{ lineHeight: 20 }}>
 						By signing up, you agree to Terms of Service, {`\n`} Privacy Policy,
 						and Cookie Policy.
+					</Text>
+
+					<Text className="text-center text-xs mt-4" style={{ lineHeight: 20 }}>
+						Already a member? Log in
 					</Text>
 				</Surface>
 			</View>
