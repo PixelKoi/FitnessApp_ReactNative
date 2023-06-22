@@ -91,7 +91,7 @@ const Settings = () => {
 					</TouchableOpacity>
 				</View>
 			</View>
-			<SignInModal />
+			{/* <SignInModal /> */}
 			{/* <SignUpModal /> */}
 			{/* <GenderModal /> */}
 			<View className="flex flex-row pl-8">
@@ -213,14 +213,14 @@ const Settings = () => {
 				<View
 					style={{ borderColor: colors.secondary }}
 					className="flex flex-row border-solid py-4 items-center">
-					<View className="flex flex-col">
+					<TouchableOpacity onPress={signOut} className="flex flex-col">
 						<Text className="text-gray-400">My account</Text>
 						<Text
 							style={{ color: colors.primary }}
 							className="text-lg font-extrabold items-center justify-center ">
 							Logout
 						</Text>
-					</View>
+					</TouchableOpacity>
 				</View>
 			</View>
 		</View>

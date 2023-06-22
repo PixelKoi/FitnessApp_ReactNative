@@ -1,15 +1,19 @@
 import React, { useState } from "react";
 import { Alert, StyleSheet, View, Image, Text } from "react-native";
 import { supabase } from "../../utils/supabase_authentication/supabase";
-import { Button, Input } from "react-native-elements";
+import { Button } from "react-native-paper";
 import { TextInput } from "react-native-paper";
 import HeaderIMG from "../../assets/images/weight_lifting.png";
+import Running from "../../assets/images/home/HomeScreen_Running.png";
+import { useAppSelector } from "../../redux-manager/hooks";
 
 const Auth = () => {
 	//hooks
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [loading, setLoading] = useState(false);
+
+	const { colors } = useAppSelector((state) => state.theme);
 
 	async function signInWithEmail() {
 		setLoading(true);
@@ -37,10 +41,24 @@ const Auth = () => {
 	}
 
 	return (
-		<View style={styles.container}>
-			<Text className="text-2xl font-bold">Sign In</Text>
+		<View className="flex-1 mx-8 justify-center self-center">
+			<View className="bottom-10">
+				<Text className="" style={{ fontSize: 30 }}>
+					Welcome to
+				</Text>
+				<Text style={{ fontSize: 30 }} className="font-bold">
+					Sum +
+				</Text>
+			</View>
 
-			<View style={[styles.verticallySpaced, styles.mt20]}>
+			<View className="items-center">
+				<Image source={Running} />
+			</View>
+			<Text className="text-center" style={{ fontSize: 14 }}>
+				Register now to gain access to {"\n"} SUM
+			</Text>
+
+			{/* <View style={[styles.verticallySpaced, styles.mt20]}>
 				<Input
 					label="Email"
 					leftIcon={{ type: "font-awesome", name: "envelope" }}
@@ -50,7 +68,6 @@ const Auth = () => {
 					autoCapitalize={"none"}
 				/>
 			</View>
-
 			<View style={styles.verticallySpaced}>
 				<Input
 					label="Password"
@@ -61,20 +78,32 @@ const Auth = () => {
 					placeholder="Password"
 					autoCapitalize={"none"}
 				/>
-			</View>
-			<View style={[styles.verticallySpaced, styles.mt20]}>
-				<Button
-					title="Sign in"
-					disabled={loading}
-					onPress={() => signInWithEmail()}
-				/>
-			</View>
-			<View style={styles.verticallySpaced}>
-				<Button
-					title="Sign up"
-					disabled={loading}
-					onPress={() => signUpWithEmail()}
-				/>
+			</View> */}
+
+			<View className="mt-4 top-14">
+				<View className="items-center gap-3">
+					<Button
+						style={{ backgroundColor: colors.primary, width: 214 }}
+						disabled={loading}
+						onPress={() => signInWithEmail()}>
+						<Text
+							className="font-bold"
+							style={{ color: "#ffff", fontSize: 18 }}>
+							Sign up for free
+						</Text>
+					</Button>
+
+					<Button
+						style={{ backgroundColor: colors.primary, width: 214 }}
+						disabled={loading}
+						onPress={() => signInWithEmail()}>
+						<Text
+							className="font-bold"
+							style={{ color: "#ffff", fontSize: 18 }}>
+							Sign In
+						</Text>
+					</Button>
+				</View>
 			</View>
 		</View>
 	);
