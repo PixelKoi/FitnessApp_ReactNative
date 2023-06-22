@@ -74,9 +74,7 @@ const Auth = () => {
 						style={{ backgroundColor: colors.primary, width: 214 }}
 						disabled={loading}
 						onPress={() => signInWithEmail()}>
-						<Text
-							className="font-bold"
-							style={{ color: "#ffff", fontSize: 18 }}>
+						<Text className="font-bold" style={{ color: "#ffff" }}>
 							Sign up for free
 						</Text>
 					</Button>
@@ -85,9 +83,7 @@ const Auth = () => {
 						style={{ backgroundColor: colors.primary, width: 214 }}
 						disabled={loading}
 						onPress={() => setShowSignInModal(true)}>
-						<Text
-							className="font-bold"
-							style={{ color: "#ffff", fontSize: 18 }}>
+						<Text className="font-bold" style={{ color: "#ffff" }}>
 							Sign In
 						</Text>
 					</Button>

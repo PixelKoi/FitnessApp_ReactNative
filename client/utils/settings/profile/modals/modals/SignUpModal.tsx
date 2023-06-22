@@ -126,7 +126,7 @@ const SignUpModal = (props) => {
 							}}
 							style={{ backgroundColor: colors.primary, width: 214 }}
 							mode="contained">
-							Sign Up
+							<Text className="font-bold">Sign Up</Text>
 						</Button>
 					</View>
 					<Text

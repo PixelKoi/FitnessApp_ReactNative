@@ -107,7 +107,7 @@ const SignInModal = (props) => {
 									}}
 								/>
 								<Text
-									className="ml-auto mt-4"
+									className="ml-auto mt-4 font-bold"
 									style={{ color: "#9B9B99", fontSize: 14 }}>
 									Forgot password?
 								</Text>
@@ -122,7 +122,7 @@ const SignInModal = (props) => {
 							}}
 							style={{ backgroundColor: colors.primary, width: 214 }}
 							mode="contained">
-							Sign In
+							<Text className="font-bold"> Sign in</Text>
 						</Button>
 					</View>
 					<Text className="text-center mt-4" style={{ lineHeight: 20 }}>
@@ -134,7 +134,7 @@ const SignInModal = (props) => {
 							onPress={() => {}}
 							style={{ backgroundColor: colors.primary, width: 250 }}
 							mode="contained">
-							Continue with Google
+							<Text className="font-bold">Continue with Google</Text>
 						</Button>
 					</View>
 					<View className="flex-row justify-center mt-4">
@@ -142,7 +142,7 @@ const SignInModal = (props) => {
 							onPress={() => {}}
 							style={{ backgroundColor: colors.primary, width: 250 }}
 							mode="contained">
-							Continue with Facebook
+							<Text className="font-bold"> Continue with Facebook</Text>
 						</Button>
 					</View>
 				</Surface>
