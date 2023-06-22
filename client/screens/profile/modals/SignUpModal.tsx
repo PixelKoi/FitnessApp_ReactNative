@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, Image, Modal, TouchableOpacity } from "react-native";
 import headerIMG from "../../../assets/images/weight_lifting.png";
-import { Button, Surface } from "react-native-paper";
+import { Button, Surface, DefaultTheme } from "react-native-paper";
 import { useAppDispatch, useAppSelector } from "../../../redux-manager/hooks";
 import { changeGender } from "../../../redux-manager/redux-slice/user-slice";
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -10,6 +10,12 @@ import { TextInput } from "react-native-paper";
 const SignUpModal = (props) => {
 	const { colors } = useAppSelector((state) => state.theme);
 	const dispatch = useAppDispatch();
+
+	const theme = {
+		...DefaultTheme,
+		roundness: 15,
+		borderRadius: 10,
+	};
 
 	return (
 		<Modal visible={true}>
@@ -36,28 +42,58 @@ const SignUpModal = (props) => {
 							<View>
 								<Text>Your Name</Text>
 								<TextInput
+									contentStyle={{
+										backgroundColor: colors.secondary,
+										borderRadius: 10,
+									}}
+									theme={theme}
 									selectionColor={"black"}
 									underlineColor={"transparent"}
 									activeUnderlineColor={"transparent"}
-									style={{ height: 40, marginTop: 15 }}
+									style={{
+										height: 40,
+										marginTop: 15,
+										borderRadius: 10,
+										borderWidth: 0,
+									}}
 								/>
 							</View>
 							<View>
 								<Text>Email Address</Text>
 								<TextInput
+									contentStyle={{
+										backgroundColor: colors.secondary,
+										borderRadius: 10,
+									}}
+									theme={theme}
 									selectionColor={"black"}
 									underlineColor={"transparent"}
 									activeUnderlineColor={"transparent"}
-									style={{ height: 40, marginTop: 15 }}
+									style={{
+										height: 40,
+										marginTop: 15,
+										borderRadius: 10,
+										borderWidth: 0,
+									}}
 								/>
 							</View>
 							<View>
 								<Text>Password</Text>
 								<TextInput
+									contentStyle={{
+										backgroundColor: colors.secondary,
+										borderRadius: 10,
+									}}
+									theme={theme}
 									selectionColor={"black"}
 									underlineColor={"transparent"}
 									activeUnderlineColor={"transparent"}
-									style={{ height: 40, marginTop: 15 }}
+									style={{
+										height: 40,
+										marginTop: 15,
+										borderRadius: 10,
+										borderWidth: 0,
+									}}
 								/>
 							</View>
 							{/* <TextInput style={{ height: 40, borderRadius: 10 }} /> */}
