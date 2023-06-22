@@ -69,7 +69,7 @@ const SignInModal = (props) => {
 						{/* Display Activity Buttons */}
 						<View className="gap-5 mt-4">
 							<View>
-								<Text style={{ color: "#9B9B99" }} className="font-bold">
+								<Text style={{ color: "#9B9B99" }} className="font-semibold">
 									Email Address
 								</Text>
 								<TextInput
@@ -87,7 +87,7 @@ const SignInModal = (props) => {
 								/>
 							</View>
 							<View>
-								<Text style={{ color: "#9B9B99" }} className="font-bold">
+								<Text style={{ color: "#9B9B99" }} className="font-semibold">
 									Password
 								</Text>
 								<TextInput

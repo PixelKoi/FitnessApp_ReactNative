@@ -12,11 +12,15 @@ import {
 	useAppDispatch,
 	useAppSelector,
 } from "../../../../../redux-manager/hooks";
+import { useDatabase } from "@nozbe/watermelondb/hooks";
 
 const SignUpModal = (props) => {
 	//Import redux
 	const { colors } = useAppSelector((state) => state.theme);
 	const dispatch = useAppDispatch();
+
+	//watermelonDB
+	const database = useDatabase();
 
 	//Sign Up Hooks
 	const [username, setUsername] = useState<string>("");
@@ -33,6 +37,39 @@ const SignUpModal = (props) => {
 		},
 	};
 
+	// async function updateProfile(
+	//   username: string,
+	// ) {
+	//   try {
+	//     setLoading(true);
+	//     const updates = {
+	//       user_id: sessionID,
+	//       username,
+	//       updated_at: new Date(),
+	//     };
+	//     console.log(updates);
+	//     const profile_data = await database.write(async () => {
+	//       await database.get<Profile>("profiles").create((profile) => {
+	//         profile.completeProfile(
+	//           (profile.username = username)
+	//         );
+	//       });
+	//     });
+	//     if (profile_data) {
+	//       console.log("Successfully created food post");
+	//       const all_profiles = await database.get("profiles").query().fetch();
+	//       console.log("food saved in DB!:", all_profiles);
+	//     }
+	//   } catch (error) {
+	//     if (error instanceof Error) {
+	//       Alert.alert(error.message);
+	//     }
+	//   } finally {
+	//     setLoading(false);
+	//   }
+	// }
+
+	//Todo: update user profile when signing up
 	//Sign up with supabase auth
 	async function signUpWithEmail() {
 		setLoading(true);
@@ -83,7 +120,7 @@ const SignUpModal = (props) => {
 								/>
 							</View>
 							<View>
-								<Text style={{ color: "#9B9B99" }} className="font-semibold	">
+								<Text style={{ color: "#9B9B99" }} className="font-semibold">
 									Email Address
 								</Text>
 								<TextInput
@@ -139,7 +176,7 @@ const SignUpModal = (props) => {
 						<Button
 							disabled={loading}
 							onPress={() => {
-								props.setShowActivityModal(false);
+								signUpWithEmail();
 							}}
 							style={{ backgroundColor: colors.primary, width: 214 }}
 							mode="contained">

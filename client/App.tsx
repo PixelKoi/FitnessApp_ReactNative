@@ -45,11 +45,13 @@ export default function App() {
 					</Provider>
 				</DatabaseProvider>
 			) : (
-				<GestureHandlerRootView style={{ flex: 1 }}>
-					<Provider store={store}>
-						<Auth />
-					</Provider>
-				</GestureHandlerRootView>
+				<DatabaseProvider database={database}>
+					<GestureHandlerRootView style={{ flex: 1 }}>
+						<Provider store={store}>
+							<Auth />
+						</Provider>
+					</GestureHandlerRootView>
+				</DatabaseProvider>
 			)}
 		</>
 	);
