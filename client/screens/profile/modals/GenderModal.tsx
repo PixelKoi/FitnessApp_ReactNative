@@ -13,7 +13,7 @@ const GenderModal = (props) => {
 	const { colors } = useAppSelector((state) => state.theme);
 	const dispatch = useAppDispatch();
 
-	const genderList = ["male", "female", "male-female"];
+	const genderList = ["female", "male", "male-female"];
 
 	return (
 		<Modal visible={true}>
@@ -50,7 +50,7 @@ const GenderModal = (props) => {
 											color={
 												currentIndex === index ? colors.primary : "#9B9B99"
 											}
-											size={60}
+											size={65}
 										/>
 									</TouchableOpacity>
 								))}

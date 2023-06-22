@@ -15,7 +15,7 @@ import { useDatabase } from "@nozbe/watermelondb/hooks";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { UserCircleIcon } from "react-native-heroicons/outline";
 import { supabase } from "../../utils/supabase_authentication/supabase";
-import GenderModal from "./modals/GenderModal";
+import SignUpModal from "./modals/SignUpModal";
 
 const Settings = () => {
 	const database = useDatabase();
@@ -90,7 +90,7 @@ const Settings = () => {
 					</TouchableOpacity>
 				</View>
 			</View>
-			<GenderModal />
+			<SignUpModal />
 			<View className="flex flex-row pl-8">
 				<Text className="text-gray-400">Settings</Text>
 			</View>
