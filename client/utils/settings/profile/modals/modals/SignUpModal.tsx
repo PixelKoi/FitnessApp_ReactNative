@@ -65,7 +65,7 @@ const SignUpModal = (props) => {
 						{/* Input Account information */}
 						<View className="gap-5 mt-4">
 							<View>
-								<Text style={{ color: "#9B9B99" }} className="font-bold">
+								<Text style={{ color: "#9B9B99" }} className="font-semibold">
 									Your Name
 								</Text>
 								<TextInput
@@ -83,7 +83,7 @@ const SignUpModal = (props) => {
 								/>
 							</View>
 							<View>
-								<Text style={{ color: "#9B9B99" }} className="font-bold">
+								<Text style={{ color: "#9B9B99" }} className="font-semibold	">
 									Email Address
 								</Text>
 								<TextInput
@@ -101,7 +101,7 @@ const SignUpModal = (props) => {
 								/>
 							</View>
 							<View>
-								<Text style={{ color: "#9B9B99" }} className="font-bold">
+								<Text style={{ color: "#9B9B99" }} className="font-semibold">
 									Password
 								</Text>
 								<TextInput
@@ -126,7 +126,7 @@ const SignUpModal = (props) => {
 									}}
 								/>
 								<Text
-									className="ml-auto mt-2"
+									className="ml-auto mt-2 font-semibold"
 									style={{ color: "#9B9B99", fontSize: 11 }}>
 									Password must be atleast 6 characters
 								</Text>
