@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, Image, Modal } from "react-native";
+import { View, Text, Image, Modal, Alert } from "react-native";
 import headerIMG from "../../../../../assets/images/weight_lifting.png";
 import { Button, Surface, DefaultTheme } from "react-native-paper";
 import {
@@ -7,7 +7,7 @@ import {
 	useAppSelector,
 } from "../../../../../redux-manager/hooks";
 import { TextInput } from "react-native-paper";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { supabase } from "../../../../supabase_authentication/supabase";
 
 const SignInModal = (props) => {
 	//Import redux
@@ -15,10 +15,24 @@ const SignInModal = (props) => {
 	const dispatch = useAppDispatch();
 
 	//Sign Up Hooks
-	const [username, setUsername] = useState<String>("");
-	const [email, setEmail] = useState<String>("");
-	const [password, setPassword] = useState<String>("");
+	const [email, setEmail] = useState<string>("");
+	const [password, setPassword] = useState<string>("");
 	const [showPassword, setShowPassword] = useState(!showPassword);
+	const [loading, setLoading] = useState(false);
+
+	async function signInWithEmail() {
+		setLoading(true);
+		const { error } = await supabase.auth.signInWithPassword({
+			email: email,
+			password: password,
+		});
+
+		if (!error) {
+		} else {
+			Alert.alert(error.message);
+		}
+		setLoading(false);
+	}
 
 	const theme = {
 		...DefaultTheme,
@@ -28,7 +42,7 @@ const SignInModal = (props) => {
 	};
 
 	return (
-		<Modal visible={true}>
+		<Modal visible={props.showSignInModal}>
 			<View
 				style={{ backgroundColor: colors.secondary }}
 				className="flex-1 items-center">
@@ -104,7 +118,7 @@ const SignInModal = (props) => {
 					<View className="flex-row justify-center mt-12">
 						<Button
 							onPress={() => {
-								props.setShowActivityModal(false);
+								signInWithEmail();
 							}}
 							style={{ backgroundColor: colors.primary, width: 214 }}
 							mode="contained">
@@ -117,9 +131,7 @@ const SignInModal = (props) => {
 
 					<View className="flex-row justify-center mt-4">
 						<Button
-							onPress={() => {
-								props.setShowActivityModal(false);
-							}}
+							onPress={() => {}}
 							style={{ backgroundColor: colors.primary, width: 250 }}
 							mode="contained">
 							Continue with Google
@@ -127,9 +139,7 @@ const SignInModal = (props) => {
 					</View>
 					<View className="flex-row justify-center mt-4">
 						<Button
-							onPress={() => {
-								props.setShowActivityModal(false);
-							}}
+							onPress={() => {}}
 							style={{ backgroundColor: colors.primary, width: 250 }}
 							mode="contained">
 							Continue with Facebook

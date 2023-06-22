@@ -45,9 +45,11 @@ export default function App() {
 					</Provider>
 				</DatabaseProvider>
 			) : (
-				<Provider store={store}>
-					<Auth />
-				</Provider>
+				<GestureHandlerRootView style={{ flex: 1 }}>
+					<Provider store={store}>
+						<Auth />
+					</Provider>
+				</GestureHandlerRootView>
 			)}
 		</>
 	);

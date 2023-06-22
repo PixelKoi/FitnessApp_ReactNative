@@ -2,32 +2,20 @@ import React, { useState } from "react";
 import { Alert, StyleSheet, View, Image, Text } from "react-native";
 import { supabase } from "../../utils/supabase_authentication/supabase";
 import { Button } from "react-native-paper";
-import { TextInput } from "react-native-paper";
-import HeaderIMG from "../../assets/images/weight_lifting.png";
 import Running from "../../assets/images/home/HomeScreen_Running.png";
 import { useAppSelector } from "../../redux-manager/hooks";
+import SignUp from "../../utils/settings/profile/modals/modals/SignUpModal";
+import SignIn from "../../utils/settings/profile/modals/modals/SignInModal";
 
 const Auth = () => {
 	//hooks
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [loading, setLoading] = useState(false);
+	const [showSignInModal, setShowSignInModal] = useState(false);
+	const [showSignOutModal, setShowSignOutModal] = useState(false);
 
 	const { colors } = useAppSelector((state) => state.theme);
-
-	async function signInWithEmail() {
-		setLoading(true);
-		const { error } = await supabase.auth.signInWithPassword({
-			email: email,
-			password: password,
-		});
-
-		if (!error) {
-		} else {
-			Alert.alert(error.message);
-		}
-		setLoading(false);
-	}
 
 	async function signUpWithEmail() {
 		setLoading(true);
@@ -96,7 +84,7 @@ const Auth = () => {
 					<Button
 						style={{ backgroundColor: colors.primary, width: 214 }}
 						disabled={loading}
-						onPress={() => signInWithEmail()}>
+						onPress={() => setShowSignInModal(true)}>
 						<Text
 							className="font-bold"
 							style={{ color: "#ffff", fontSize: 18 }}>
@@ -105,6 +93,11 @@ const Auth = () => {
 					</Button>
 				</View>
 			</View>
+			<SignIn
+				showSignInModal={showSignInModal}
+				setShowSignInModal={setShowSignInModal}
+			/>
+			{/* <SignUp /> */}
 		</View>
 	);
 };
