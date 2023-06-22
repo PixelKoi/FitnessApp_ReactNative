@@ -34,29 +34,29 @@ const SignUpModal = (props) => {
 						{/* Display Activity Buttons */}
 						<View className="gap-5 mt-4">
 							<View>
-								<Text className="text-base">Your Name</Text>
+								<Text>Your Name</Text>
 								<TextInput
-									underlineColor={"none"}
-									underlineStyle={{ borderWidth: 0, borderColor: "red" }}
-									outlineStyle={{ borderRadius: 0, borderColor: "red" }}
+									selectionColor={"black"}
+									underlineColor={"transparent"}
+									activeUnderlineColor={"transparent"}
 									style={{ height: 40, marginTop: 15 }}
 								/>
 							</View>
 							<View>
-								<Text className="text-base">Email Address</Text>
+								<Text>Email Address</Text>
 								<TextInput
-									underlineColor={"none"}
-									underlineStyle={{ borderWidth: 0, borderColor: "red" }}
-									outlineStyle={{ borderRadius: 0, borderColor: "red" }}
+									selectionColor={"black"}
+									underlineColor={"transparent"}
+									activeUnderlineColor={"transparent"}
 									style={{ height: 40, marginTop: 15 }}
 								/>
 							</View>
 							<View>
-								<Text className="text-base">Password</Text>
+								<Text>Password</Text>
 								<TextInput
-									underlineColor={"none"}
-									underlineStyle={{ borderWidth: 0, borderColor: "red" }}
-									outlineStyle={{ borderRadius: 0, borderColor: "red" }}
+									selectionColor={"black"}
+									underlineColor={"transparent"}
+									activeUnderlineColor={"transparent"}
 									style={{ height: 40, marginTop: 15 }}
 								/>
 							</View>
