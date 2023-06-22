@@ -16,6 +16,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import { UserCircleIcon } from "react-native-heroicons/outline";
 import { supabase } from "../../utils/supabase_authentication/supabase";
 import SignUpModal from "./modals/SignUpModal";
+import SignInModal from "./modals/SignInModal";
 import GenderModal from "./modals/GenderModal";
 
 const Settings = () => {
@@ -91,8 +92,9 @@ const Settings = () => {
 					</TouchableOpacity>
 				</View>
 			</View>
+			<SignInModal />
 			{/* <SignUpModal /> */}
-			<GenderModal />
+			{/* <GenderModal /> */}
 			<View className="flex flex-row pl-8">
 				<Text className="text-gray-400">Settings</Text>
 			</View>
