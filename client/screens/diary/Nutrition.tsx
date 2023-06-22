@@ -497,7 +497,7 @@ const Nutrition: React.FC = () => {
             <Card.Content className="">
               <Text
                 style={{ color: primary_color }}
-                className="font-bold pl-4 pb-2 text-xl"
+                className="font-bold pb-2 text-xl"
               >
                 Favorites
               </Text>
@@ -507,21 +507,19 @@ const Nutrition: React.FC = () => {
                   data={favorites}
                   keyExtractor={(item) => item.fav_id.toString()}
                   renderItem={({ item: favorite }) => (
-                    <View key={favorite.fav_id} className="p-2 pt-3">
-                      <View className="flex flex-row  mt-0">
-                        <View className="flex flex-col">
-                          <Card.Content>
-                            <Text
-                              style={{ color: primary_color }}
-                              className="font-extrabold"
-                              variant="titleLarge"
-                            >
-                              {favorite.description}
-                            </Text>
-                            <Text style={{ color: primary_color }}>
-                              Calories: {favorite.Calories}
-                            </Text>
-                          </Card.Content>
+                    <View key={favorite.fav_id} className="pt-3">
+                      <View className="flex flex-row mt-0">
+                        <View className="flex flex-col mr-8 pl-0">
+                          <Text
+                            style={{ color: primary_color }}
+                            className="font-extrabold"
+                            variant="titleLarge"
+                          >
+                            {favorite.description}
+                          </Text>
+                          <Text style={{ color: primary_color }}>
+                            Calories: {favorite.Calories}
+                          </Text>
                         </View>
                         <View className="flex flex-col ml-auto">
                           <PlusCircleIcon color={primary_color} />
