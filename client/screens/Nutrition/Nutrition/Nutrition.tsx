@@ -7,9 +7,7 @@ import {
   Text,
   Animated,
 } from "react-native";
-import { USDA_API_KEY } from "../../../config";
 import {
-  CheckCircleIcon,
   HeartIcon,
   XCircleIcon,
   MagnifyingGlassIcon,
@@ -34,7 +32,6 @@ import AntIcon from "react-native-vector-icons/AntDesign";
 import FontIcon from "react-native-vector-icons/FontAwesome5";
 import { StyleSheet } from "react-native";
 import { addFavorite } from "../../../redux-manager/redux-slice/favorite-slice";
-import { setTheme } from "../../../redux-manager/redux-slice/theme-slice";
 import { useAppSelector, useAppDispatch } from "../../../redux-manager/hooks";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import MealPicker from "../../../utils/nutrition/meal-picker/MealPicker";
