@@ -1,16 +1,20 @@
 import React, { useState } from "react";
-import { View, Text, Image, Modal, TouchableOpacity } from "react-native";
+import { View, Text, Image, Modal } from "react-native";
 import headerIMG from "../../../assets/images/weight_lifting.png";
 import { Button, Surface, DefaultTheme } from "react-native-paper";
 import { useAppDispatch, useAppSelector } from "../../../redux-manager/hooks";
-import { changeGender } from "../../../redux-manager/redux-slice/user-slice";
-import Ionicons from "react-native-vector-icons/Ionicons";
 import { TextInput } from "react-native-paper";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const SignUpModal = (props) => {
+	//Import redux
 	const { colors } = useAppSelector((state) => state.theme);
 	const dispatch = useAppDispatch();
 
+	//Sign Up Hooks
+	const [username, setUsername] = useState<String>("");
+	const [email, setEmail] = useState<String>("");
+	const [password, setPassword] = useState<String>("");
 	const [showPassword, setShowPassword] = useState(!showPassword);
 
 	const theme = {
@@ -47,7 +51,8 @@ const SignUpModal = (props) => {
 									Your Name
 								</Text>
 								<TextInput
-									left={<TextInput.Icon icon={"account"} size={20} />}
+									onChangeText={(text) => setUsername(text)}
+									left={<TextInput.Icon icon={"account"} size={18} />}
 									theme={theme}
 									selectionColor={"black"}
 									underlineColor={"transparent"}
@@ -64,7 +69,8 @@ const SignUpModal = (props) => {
 									Email Address
 								</Text>
 								<TextInput
-									left={<TextInput.Icon icon={"email-outline"} size={20} />}
+									onChangeText={(text) => setEmail(text)}
+									left={<TextInput.Icon icon={"email-outline"} size={18} />}
 									theme={theme}
 									selectionColor={"black"}
 									underlineColor={"transparent"}
@@ -81,12 +87,13 @@ const SignUpModal = (props) => {
 									Password
 								</Text>
 								<TextInput
+									onChangeText={(text) => setPassword(text)}
 									secureTextEntry={showPassword ? true : false}
-									left={<TextInput.Icon icon={"lock-outline"} size={20} />}
+									left={<TextInput.Icon icon={"lock-outline"} size={18} />}
 									right={
 										<TextInput.Icon
 											icon={showPassword ? "eye-off" : "eye"}
-											size={20}
+											size={18}
 											onPress={() => setShowPassword(!showPassword)}
 										/>
 									}
@@ -126,9 +133,16 @@ const SignUpModal = (props) => {
 						and Cookie Policy.
 					</Text>
 
-					<Text className="text-center text-xs mt-4" style={{ lineHeight: 20 }}>
-						Already a member? Log in
-					</Text>
+					<View className="flex-row items-center justify-center mt-4">
+						<Text className=" text-xs" style={{ lineHeight: 20 }}>
+							Already a member?{" "}
+						</Text>
+						<TouchableOpacity className="">
+							<Text className="text-xs" style={{ lineHeight: 20 }}>
+								Log in
+							</Text>
+						</TouchableOpacity>
+					</View>
 				</Surface>
 			</View>
 		</Modal>
