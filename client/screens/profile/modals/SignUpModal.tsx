@@ -15,11 +15,8 @@ const SignUpModal = (props) => {
 
 	const theme = {
 		...DefaultTheme,
-		roundness: 50,
-		borderRadius: 10,
-		...DefaultTheme,
 		colors: {
-			// surfaceVariant: colors.secondary,
+			surfaceVariant: colors.secondary,
 		},
 	};
 
@@ -50,11 +47,7 @@ const SignUpModal = (props) => {
 									Your Name
 								</Text>
 								<TextInput
-									left={<TextInput.Icon icon={"account"} />}
-									contentStyle={{
-										backgroundColor: colors.secondary,
-										borderRadius: 10,
-									}}
+									left={<TextInput.Icon icon={"account"} size={20} />}
 									theme={theme}
 									selectionColor={"black"}
 									underlineColor={"transparent"}
@@ -62,8 +55,7 @@ const SignUpModal = (props) => {
 									style={{
 										height: 40,
 										marginTop: 15,
-
-										borderWidth: 0,
+										borderRadius: 3,
 									}}
 								/>
 							</View>
@@ -72,11 +64,7 @@ const SignUpModal = (props) => {
 									Email Address
 								</Text>
 								<TextInput
-									left={<TextInput.Icon icon={"email-outline"} />}
-									contentStyle={{
-										backgroundColor: colors.secondary,
-										borderRadius: 10,
-									}}
+									left={<TextInput.Icon icon={"email-outline"} size={20} />}
 									theme={theme}
 									selectionColor={"black"}
 									underlineColor={"transparent"}
@@ -84,8 +72,7 @@ const SignUpModal = (props) => {
 									style={{
 										height: 40,
 										marginTop: 15,
-										borderRadius: 10,
-										borderWidth: 0,
+										borderRadius: 3,
 									}}
 								/>
 							</View>
@@ -95,17 +82,14 @@ const SignUpModal = (props) => {
 								</Text>
 								<TextInput
 									secureTextEntry={showPassword ? true : false}
-									left={<TextInput.Icon icon={"lock-outline"} />}
+									left={<TextInput.Icon icon={"lock-outline"} size={20} />}
 									right={
 										<TextInput.Icon
 											icon={showPassword ? "eye-off" : "eye"}
+											size={20}
 											onPress={() => setShowPassword(!showPassword)}
 										/>
 									}
-									contentStyle={{
-										backgroundColor: colors.secondary,
-										borderRadius: 10,
-									}}
 									theme={theme}
 									selectionColor={"black"}
 									underlineColor={"transparent"}
@@ -113,8 +97,7 @@ const SignUpModal = (props) => {
 									style={{
 										height: 40,
 										marginTop: 15,
-										borderRadius: 10,
-										borderWidth: 0,
+										borderRadius: 3,
 									}}
 								/>
 								<Text
