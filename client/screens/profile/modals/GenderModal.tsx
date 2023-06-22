@@ -31,7 +31,7 @@ const GenderModal = (props) => {
 					className=" h-screen w-screen">
 					<View className="mx-14 mt-6">
 						<Text
-							style={{ color: colors.primary }}
+							// style={{ color: colors.primary }}
 							className="text-2xl font-bold">
 							How do you identify?
 						</Text>
@@ -62,10 +62,14 @@ const GenderModal = (props) => {
 							onPress={() => {
 								props.setShowActivityModal(false);
 							}}
-							style={{ backgroundColor: colors.primary }}
-							className=" w-24"
+							style={{
+								backgroundColor: colors.primary,
+								width: 214,
+							}}
 							mode="contained">
-							Save
+							<Text style={{ fontSize: 18 }} className="font-bold">
+								Next
+							</Text>
 						</Button>
 					</View>
 				</Surface>
