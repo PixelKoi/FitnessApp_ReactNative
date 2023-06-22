@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 // supabase AUTH
 import { supabase } from "./utils/supabase_authentication/supabase";
-import Auth from "./screens/account/Auth";
+import Auth from "./screens/Account/Auth";
 import { Session } from "@supabase/supabase-js";
 import { View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";

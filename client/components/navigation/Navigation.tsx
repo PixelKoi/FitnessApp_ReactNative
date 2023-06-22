@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Alert, View, ActivityIndicator, StyleSheet } from "react-native";
 //Screen imports
-import Account from "../../screens/account/Account";
-import Nutrition from "../../screens/diary/Nutrition";
-import Settings from "../../screens/profile/Settings";
-import ThemeSelector from "../../screens/profile/ThemeSelector";
-import Diary from "../../screens/diary/Diary";
-import Dashboard from "../../screens/dashboard/Dashboard";
-import Timer from "../../screens/timer/Timer";
+import Account from "../../screens/Account/Account";
+import Nutrition from "../../screens/Nutrition/Nutrition/Nutrition";
+import Settings from "../../screens/Settings/Settings";
+import ThemeSelector from "../../screens/Settings/Theme/ThemeSelector";
+import Diary from "../../screens/Nutrition/Diary/Diary";
+import Dashboard from "../../screens/Dashboard/Dashboard";
+import Timer from "../../screens/Timers/Timer";
 //nav imports
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
@@ -31,7 +31,7 @@ import {
 import Profile from "../../database/models/Profile";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import Ant from "react-native-vector-icons/AntDesign";
-import UserBioInput from "../../screens/profile/EditProfile";
+import UserBioInput from "../../screens/Settings/Profile/EditProfile";
 
 const Navigation = ({ session }: { session: Session }) => {
   const [loading, setLoading] = useState(true);
@@ -44,7 +44,7 @@ const Navigation = ({ session }: { session: Session }) => {
   const MainStack = createNativeStackNavigator();
   const Tab = createBottomTabNavigator();
 
-  //Update redux states for profile
+  //Update redux states for Settings
   async function updateReduxUserStates(data) {
     await dispatch(
       setUserStates({

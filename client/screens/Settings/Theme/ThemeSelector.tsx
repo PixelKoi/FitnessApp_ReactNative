@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, Switch, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { useAppDispatch, useAppSelector } from "../../redux-manager/hooks";
+import { useAppDispatch, useAppSelector } from "../../../redux-manager/hooks";
 import { useDatabase } from "@nozbe/watermelondb/hooks";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { supabase } from "../../utils/supabase_authentication/supabase";
-import { setTheme } from "../../redux-manager/redux-slice/theme-slice";
+import { supabase } from "../../../utils/supabase_authentication/supabase";
+import { setTheme } from "../../../redux-manager/redux-slice/theme-slice";
 
 const ThemeSelector = () => {
   const navigation = useNavigation();
@@ -21,7 +21,7 @@ const ThemeSelector = () => {
     colors_primary === "#E07594"
   );
 
-  // TODO: Diagnose Re-rendering from theme change Memoization: Utilize the React.memo higher-order component or the useMemo hook to memoize components that depend on the theme state. This ensures that a component only re-renders when its dependencies change. By memoizing components, you can prevent unnecessary re-rendering of unaffected components.
+  // TODO: Diagnose Re-rendering from Theme change Memoization: Utilize the React.memo higher-order component or the useMemo hook to memoize components that depend on the Theme state. This ensures that a component only re-renders when its dependencies change. By memoizing components, you can prevent unnecessary re-rendering of unaffected components.
 
   const toggleGreen = (value) => {
     setGreenSwitch(value);
@@ -62,7 +62,7 @@ const ThemeSelector = () => {
         >
           <Image
             style={{ width: 42, height: 42 }}
-            source={require("../../assets/images/ThemeSelector/Pink.png")}
+            source={require("../../../assets/images/ThemeSelector/Pink.png")}
           />
           <Text className="text-lg font-semibold pl-5">Pink</Text>
           <View className="ml-auto flex-row self-center">
@@ -83,7 +83,7 @@ const ThemeSelector = () => {
         >
           <Image
             style={{ width: 42, height: 42 }}
-            source={require("../../assets/images/ThemeSelector/Green.png")}
+            source={require("../../../assets/images/ThemeSelector/Green.png")}
           />
           <Text className="text-lg font-semibold pl-5">Green</Text>
           <View className="ml-auto flex-row self-center">
@@ -103,7 +103,7 @@ const ThemeSelector = () => {
         >
           <Image
             style={{ width: 42, height: 42 }}
-            source={require("../../assets/images/ThemeSelector/Blue.png")}
+            source={require("../../../assets/images/ThemeSelector/Blue.png")}
           />
           <Text className="text-lg font-semibold pl-5">Blue</Text>
           <View className="ml-auto flex-row self-center">
@@ -113,7 +113,7 @@ const ThemeSelector = () => {
                 height: 80,
                 transform: [{ scaleX: 0.4 }, { scaleY: 0.4 }],
               }}
-              source={require("../../assets/images/ThemeSelector/Lock.png")}
+              source={require("../../../assets/images/ThemeSelector/Lock.png")}
             />
           </View>
         </View>
@@ -124,7 +124,7 @@ const ThemeSelector = () => {
         >
           <Image
             style={{ width: 42, height: 42 }}
-            source={require("../../assets/images/ThemeSelector/Lemonade.png")}
+            source={require("../../../assets/images/ThemeSelector/Lemonade.png")}
           />
           <Text className="text-lg font-semibold pl-5">Lemonade</Text>
           <View className="ml-auto flex-row self-center">
@@ -134,7 +134,7 @@ const ThemeSelector = () => {
                 height: 100,
                 transform: [{ scaleX: 0.6 }, { scaleY: 0.6 }],
               }}
-              source={require("../../assets/images/ThemeSelector/Premium.png")}
+              source={require("../../../assets/images/ThemeSelector/Premium.png")}
             />
           </View>
         </View>
@@ -145,7 +145,7 @@ const ThemeSelector = () => {
         >
           <Image
             style={{ width: 42, height: 42 }}
-            source={require("../../assets/images/ThemeSelector/Pink.png")}
+            source={require("../../../assets/images/ThemeSelector/Pink.png")}
           />
           <Text className="text-lg font-semibold pl-5">Bubble Gum</Text>
           <View className="ml-auto flex-row self-center">
@@ -155,7 +155,7 @@ const ThemeSelector = () => {
                 height: 100,
                 transform: [{ scaleX: 0.6 }, { scaleY: 0.6 }],
               }}
-              source={require("../../assets/images/ThemeSelector/Premium.png")}
+              source={require("../../../assets/images/ThemeSelector/Premium.png")}
             />
           </View>
         </View>
@@ -165,7 +165,7 @@ const ThemeSelector = () => {
         >
           <Image
             style={{ width: 42, height: 42 }}
-            source={require("../../assets/images/ThemeSelector/Pink.png")}
+            source={require("../../../assets/images/ThemeSelector/Pink.png")}
           />
           <Text className="text-lg font-semibold pl-5">SunFlower</Text>
           <View className="ml-auto flex-row self-center">
@@ -175,7 +175,7 @@ const ThemeSelector = () => {
                 height: 100,
                 transform: [{ scaleX: 0.6 }, { scaleY: 0.6 }],
               }}
-              source={require("../../assets/images/ThemeSelector/Premium.png")}
+              source={require("../../../assets/images/ThemeSelector/Premium.png")}
             />
           </View>
         </View>

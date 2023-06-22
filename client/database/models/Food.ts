@@ -23,7 +23,7 @@ export default class Food extends Model {
       console.log("FOOD WRITER:", newDiary);
       return newDiary;
     } catch (error) {
-      console.error("Error creating diary entry:", error);
+      console.error("Error creating Nutrition entry:", error);
       throw error; // Rethrow the error or handle it as per your application's requirements
     }
   }

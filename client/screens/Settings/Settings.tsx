@@ -14,9 +14,9 @@ import { useDatabase } from "@nozbe/watermelondb/hooks";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { UserCircleIcon } from "react-native-heroicons/outline";
 import { supabase } from "../../utils/supabase_authentication/supabase";
-import SignUpModal from "./modals/SignUpModal";
-import SignInModal from "./modals/SignInModal";
-import GenderModal from "./modals/GenderModal";
+import SignUpModal from "../../utils/settings/profile/modals/modals/SignUpModal";
+import SignInModal from "../../utils/settings/profile/modals/modals/SignInModal";
+import GenderModal from "../../utils/settings/profile/modals/modals/GenderModal";
 
 const Settings = () => {
   const database = useDatabase();
@@ -41,7 +41,7 @@ const Settings = () => {
   const darkToggleSwitch = () =>
     setIsDarkEnabled((previousState) => !previousState);
 
-  //Sign out of profile
+  //Sign out of Settings
   const signOut = async () => {
     try {
       const { error } = await supabase.auth.signOut();

@@ -7,7 +7,7 @@ import {
   Text,
   Animated,
 } from "react-native";
-import { USDA_API_KEY } from "../../config";
+import { USDA_API_KEY } from "../../../config";
 import {
   CheckCircleIcon,
   HeartIcon,
@@ -18,7 +18,7 @@ import {
   PlusCircleIcon,
 } from "react-native-heroicons/outline";
 import { HeartIcon as FilledHeartIcon } from "react-native-heroicons/solid";
-import { params } from "../../constants";
+import { params } from "../../../constants";
 import { useNavigation } from "@react-navigation/native";
 import {
   Dialog,
@@ -33,11 +33,11 @@ import Icon from "react-native-vector-icons/Ionicons";
 import AntIcon from "react-native-vector-icons/AntDesign";
 import FontIcon from "react-native-vector-icons/FontAwesome5";
 import { StyleSheet } from "react-native";
-import { addFavorite } from "../../redux-manager/redux-slice/favorite-slice";
-import { setTheme } from "../../redux-manager/redux-slice/theme-slice";
-import { useAppSelector, useAppDispatch } from "../../redux-manager/hooks";
+import { addFavorite } from "../../../redux-manager/redux-slice/favorite-slice";
+import { setTheme } from "../../../redux-manager/redux-slice/theme-slice";
+import { useAppSelector, useAppDispatch } from "../../../redux-manager/hooks";
 import Swipeable from "react-native-gesture-handler/Swipeable";
-import MealPicker from "../../utils/nutrition/meal-picker/MealPicker";
+import MealPicker from "../../../utils/nutrition/meal-picker/MealPicker";
 import { BlurView } from "expo-blur";
 
 const styles = StyleSheet.create({

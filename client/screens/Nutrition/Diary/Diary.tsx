@@ -4,10 +4,10 @@ import { Divider, Text, Card, Button } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { useDatabase } from "@nozbe/watermelondb/hooks";
 import { Q } from "@nozbe/watermelondb";
-import completeDiary from "../../database/models/Food";
-import { useAppSelector } from "../../redux-manager/hooks";
+import completeDiary from "../../../database/models/Food";
+import { useAppSelector } from "../../../redux-manager/hooks";
 // import { RootState } from "../../redux-manager/store";
-import Food from "../../database/models/Food";
+import Food from "../../../database/models/Food";
 import Icon from "react-native-vector-icons/FontAwesome";
 import AntIcon from "react-native-vector-icons/AntDesign";
 import { UserCircleIcon } from "react-native-heroicons/outline";
@@ -176,7 +176,7 @@ const Diary = (props) => {
   const selectedObject = props.route;
   const selectedFoods = props.route.params.selectedFoods;
   const selectedOption = props.route.params.selectedOption;
-  // TODO: set a global state for totalCalories and pass to diary
+  // TODO: set a global state for totalCalories and pass to Nutrition
   const object = props.route.params;
   interface Category {
     name: string;

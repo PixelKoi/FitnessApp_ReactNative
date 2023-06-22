@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { View, Text, Image, Modal } from "react-native";
-import headerIMG from "../../../assets/images/weight_lifting.png";
-import person from "../../../assets/images/male_person.png";
+import headerIMG from "../../../../../assets/images/weight_lifting.png";
+import person from "../../../../../assets/images/male_person.png";
 import { Picker } from "@react-native-picker/picker";
 import { Button, Surface, Switch } from "react-native-paper";
-import { useAppDispatch, useAppSelector } from "../../../redux-manager/hooks";
-import { changeWeight } from "../../../redux-manager/redux-slice/user-slice";
+import {
+  useAppDispatch,
+  useAppSelector,
+} from "../../../../../redux-manager/hooks";
+import { changeWeight } from "../../../../../redux-manager/redux-slice/user-slice";
 
 const WeightPickerModal = (props) => {
   //redux imports
