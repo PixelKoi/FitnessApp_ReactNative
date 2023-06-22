@@ -120,7 +120,7 @@ const SignInModal = (props) => {
 							onPress={() => {
 								props.setShowActivityModal(false);
 							}}
-							style={{ backgroundColor: colors.primary, width: 214 }}
+							style={{ backgroundColor: colors.primary, width: 250 }}
 							mode="contained">
 							Continue with Google
 						</Button>
@@ -130,7 +130,7 @@ const SignInModal = (props) => {
 							onPress={() => {
 								props.setShowActivityModal(false);
 							}}
-							style={{ backgroundColor: colors.primary, width: 214 }}
+							style={{ backgroundColor: colors.primary, width: 250 }}
 							mode="contained">
 							Continue with Facebook
 						</Button>
