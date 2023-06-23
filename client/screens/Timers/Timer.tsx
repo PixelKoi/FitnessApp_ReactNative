@@ -1,64 +1,78 @@
 import React, { useState } from "react";
-import { View, Text } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import { Button } from "react-native-paper";
 import Fasting from "./Fasting/Fasting";
 import Meditation from "./Meditation/Meditation";
 import MeditationDash from "./Meditation/MeditationDash";
 import { useAppSelector } from "../../redux-manager/hooks";
+import { useNavigation } from "@react-navigation/native";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import TimerCard from "./TimerDash/TimerCard";
 
 //Todo: get tailwind Theme primary and secondary colors set to states and put it inside the labelStyle prop
 const Timer = () => {
+	const navigation = useNavigation();
+
+	// import redux
 	const { colors } = useAppSelector((state) => state.theme);
 
+	// import hooks
 	const [mode, setMode] = useState("fasting");
+
+	React.useLayoutEffect(() => {
+		navigation.setOptions({
+			title: "Timer",
+			headerStyle: {
+				shadowColor: "transparent",
+			},
+			headerTintColor: colors.primary,
+			headerTitleStyle: {
+				fontWeight: "bold",
+			},
+			headerLeft: () => (
+				<View>
+					<TouchableOpacity className="ml-8  rounded-full" onPress={() => {}}>
+						<Ionicons
+							name="ios-settings-sharp"
+							size={30}
+							color={colors.primary}
+						/>
+					</TouchableOpacity>
+				</View>
+			),
+		});
+	}, []);
+
 	return (
 		<View className="flex-1 justify-center bg-background">
-			<View className="flex-row justify-center gap-4 mt-20">
+			<View className="flex-row justify-center">
 				{/* Fasting Button*/}
-				<Button
-					onPress={() => setMode("fasting")}
-					style={{
-						borderRadius: 10,
-						backgroundColor:
-							mode === "fasting" ? colors.primary : colors.secondary,
-					}}
-					className={`text-center w-40 text-base`}
-					icon="clock"
-					labelStyle={{
-						color: mode === "fasting" ? colors.background : colors.primary,
-					}}
-					mode="contained">
-					<Text
-						style={{
-							color: mode === "fasting" ? colors.background : colors.primary,
-						}}>
-						Fasting
-					</Text>
-				</Button>
-				{/* Meditation Button*/}
-				<Button
-					onPress={() => setMode("meditation")}
-					icon="brain"
-					labelStyle={{
-						color: mode === "meditation" ? colors.background : colors.primary,
-					}}
-					style={{
-						borderRadius: 10,
-						backgroundColor:
-							mode === "meditation" ? colors.primary : colors.secondary,
-					}}
-					className={`text-center  w-40 text-base`}
-					mode="contained">
-					<Text
-						style={{
-							color: mode === "meditation" ? colors.background : colors.primary,
-						}}>
-						Meditation
-					</Text>
-				</Button>
+				<View>
+					<TimerCard
+						title={"Fasting"}
+						description={"Begin timer now!"}
+						textColor={colors.primary}
+						buttonBackgroundColor={colors.primary}
+						cardBackgroundColor={colors.secondary}
+					/>
+
+					<TimerCard
+						title={"Meditation"}
+						description={"Begin timer now!"}
+						textColor={colors.primary}
+						buttonBackgroundColor={colors.primary}
+						cardBackgroundColor={colors.secondary}
+					/>
+
+					<TimerCard
+						title={"Interval"}
+						description={"Begin timer now!"}
+						textColor={colors.primary}
+						buttonBackgroundColor={colors.primary}
+						cardBackgroundColor={colors.secondary}
+					/>
+				</View>
 			</View>
-			{mode === "fasting" && <Fasting />}
-			{mode === "meditation" && <MeditationDash />}
 		</View>
 	);
 };
