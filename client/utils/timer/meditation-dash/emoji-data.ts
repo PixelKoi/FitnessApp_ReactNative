@@ -1,4 +1,8 @@
 import happy from "../../../assets/images/meditation/emoji/happy.png";
+import calm from "../../../assets/images/meditation/emoji/calm.png";
+import relax from "../../../assets/images/meditation/emoji/relax.png";
+import sad from "../../../assets/images/meditation/emoji/sad.png";
+import sick from "../../../assets/images/meditation/emoji/sick.png";
 
 const emoji = [
 	{
@@ -6,19 +10,19 @@ const emoji = [
 		emotion: "Happy",
 	},
 	{
-		img: happy,
+		img: calm,
 		emotion: "Calm",
 	},
 	{
-		img: happy,
+		img: relax,
 		emotion: "Relax",
 	},
 	{
-		img: happy,
+		img: sad,
 		emotion: "Sad",
 	},
 	{
-		img: happy,
+		img: sick,
 		emotion: "Sick",
 	},
 ];
