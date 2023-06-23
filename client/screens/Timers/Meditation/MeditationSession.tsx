@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+import { useNavigation } from "@react-navigation/native";
 
 interface SessionProps {
 	title: string;
@@ -12,8 +13,11 @@ interface SessionProps {
 }
 
 const MeditationSession = (props: SessionProps) => {
+	const navigation = useNavigation();
+
 	return (
 		<TouchableOpacity
+			onPress={() => navigation.navigate("MeditationTimer")}
 			className="flex justify-center mr-4"
 			style={{
 				height: 161,

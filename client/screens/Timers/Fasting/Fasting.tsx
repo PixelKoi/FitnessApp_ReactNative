@@ -15,6 +15,8 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 const Fasting = () => {
+	const navigation = useNavigation();
+
 	//initiate fasting redux states
 	const { startDate, endDate, maxTime, elapsedPercentage } = useAppSelector(
 		(state) => state.fasting
@@ -85,6 +87,18 @@ const Fasting = () => {
 		};
 		return getWeekday(event) + " " + getTimeStringWithoutSeconds(event);
 	};
+
+	React.useLayoutEffect(() => {
+		navigation.setOptions({
+			headerStyle: {
+				shadowColor: "transparent",
+			},
+			headerTintColor: colors.primary,
+			headerTitleStyle: {
+				fontWeight: "bold",
+			},
+		});
+	}, []);
 
 	//Todo: put tailwind css in state and update icon fonts + checkmark fonts
 	return (
@@ -199,6 +213,7 @@ const Fasting = () => {
 					)}
 				</View>
 
+				{/* Fasting Donut Graph */}
 				<View className="mt-6 z-0">
 					<FastingTimer />
 				</View>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { Button } from "react-native-paper";
 import Fasting from "./Fasting/Fasting";
-import Meditation from "./Meditation/Meditation";
+import Meditation from "./Meditation/MeditationTimer";
 import MeditationDash from "./Meditation/MeditationDash";
 import { useAppSelector } from "../../redux-manager/hooks";
 import { useNavigation } from "@react-navigation/native";
@@ -66,7 +66,8 @@ const Timer = () => {
 						/>
 					</TouchableOpacity>
 					{/* Meditation Timer */}
-					<TouchableOpacity onPress={() => navigation.navigate("Meditation")}>
+					<TouchableOpacity
+						onPress={() => navigation.navigate("MeditationDash")}>
 						<TimerCard
 							height={104}
 							width={107}
