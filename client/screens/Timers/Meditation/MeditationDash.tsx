@@ -7,6 +7,7 @@ import medSessionData from "../session-data";
 
 import { TouchableOpacity } from "react-native-gesture-handler";
 import MeditationSession from "./MeditationSession";
+import MeditationEmoji from "./MeditationEmoji";
 
 //Todo: get tailwind Theme primary and secondary colors set to states and put it inside the labelStyle prop
 const MeditationDash = () => {
@@ -25,21 +26,18 @@ const MeditationDash = () => {
 				{/* Emoji List */}
 				<View className="flex-row">
 					{emojiData.map((emoji, index) => (
-						<TouchableOpacity key={index} className="mr-5 mt-2">
-							<Image className="w-10 h-10" source={emoji.img} />
-							<Text
-								className="self-center mt-1"
-								style={{ fontSize: 10, color: "#9B9B99" }}>
-								{emoji.emotion}
-							</Text>
-						</TouchableOpacity>
+						<MeditationEmoji
+							index={index}
+							emotion={emoji.emotion}
+							img={emoji.img}
+						/>
 					))}
 				</View>
 			</View>
 
+			{/* Meditation Session List */}
 			<View className="mt-8">
 				<Text className="font-bold">Choose meditation session</Text>
-
 				<View className="mt-8">
 					{medSessionData.map((data, index) => (
 						<MeditationSession
