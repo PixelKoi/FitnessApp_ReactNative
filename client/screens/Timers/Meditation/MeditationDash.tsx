@@ -1,14 +1,45 @@
 import React, { useState } from "react";
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, TouchableOpacity } from "react-native";
 import { useAppSelector } from "../../../redux-manager/hooks";
 import emojiData from "../../../utils/timer/meditation-dash/emoji-data";
 import medSessionData from "../../../utils/timer/meditation-dash/session-data";
 import MeditationSession from "./MeditationSession";
 import MeditationEmoji from "./MeditationEmoji";
+import { useNavigation } from "@react-navigation/native";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import FontAwesome from "react-native-vector-icons/FontAwesome5";
 
 //Todo: get tailwind Theme primary and secondary colors set to states and put it inside the labelStyle prop
 const MeditationDash = () => {
+	const navigation = useNavigation();
+
 	const { name } = useAppSelector((state) => state.user);
+	const { colors } = useAppSelector((state) => state.theme);
+
+	// top Navigation
+	React.useLayoutEffect(() => {
+		navigation.setOptions({
+			title: "Meditation",
+			headerStyle: {
+				shadowColor: "transparent",
+			},
+			headerTintColor: colors.primary,
+			headerTitleStyle: {
+				fontWeight: "bold",
+			},
+			headerLeft: () => (
+				<View>
+					<TouchableOpacity
+						className="ml-4  rounded-full"
+						onPress={() => {
+							navigation.goBack();
+						}}>
+						<FontAwesome name="angle-left" size={30} color={colors.primary} />
+					</TouchableOpacity>
+				</View>
+			),
+		});
+	}, []);
 
 	return (
 		<View className="flex-1 px-8  bg-background">

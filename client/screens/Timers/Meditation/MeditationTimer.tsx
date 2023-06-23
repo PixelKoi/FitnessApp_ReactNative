@@ -13,7 +13,7 @@ import {
 import { useAppDispatch, useAppSelector } from "../../../redux-manager/hooks";
 //import icons
 import GirlMeditating from "../../../assets/meditation_timer/GirlMeditating.png";
-import Ionicons from "react-native-vector-icons/Ionicons";
+import FontAwesome from "react-native-vector-icons/FontAwesome5";
 //Todo: Add lotus icon above start meditating button
 const MeditationTimer = () => {
 	//Top left nav button - removed top nav
@@ -82,13 +82,24 @@ const MeditationTimer = () => {
 		navigation.setOptions({
 			title: "",
 			headerStyle: {
-				backgroundColor: "#03174C",
 				shadowColor: "transparent",
+				backgroundColor: "#03174C",
 			},
 			headerTintColor: colors.primary,
 			headerTitleStyle: {
 				fontWeight: "bold",
 			},
+			headerLeft: () => (
+				<View>
+					<TouchableOpacity
+						className="ml-4  rounded-full"
+						onPress={() => {
+							navigation.goBack();
+						}}>
+						<FontAwesome name="angle-left" size={30} color={"#ffff"} />
+					</TouchableOpacity>
+				</View>
+			),
 		});
 	}, []);
 

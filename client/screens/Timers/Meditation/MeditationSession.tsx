@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
+import BreathTransitionModal from "./components/BreathTransitionModal";
 
 interface SessionProps {
 	title: string;
@@ -12,6 +13,7 @@ interface SessionProps {
 	buttonTextColor: string;
 }
 
+//Todo: use timeout effect to present breath in modal before show med timer
 const MeditationSession = (props: SessionProps) => {
 	const navigation = useNavigation();
 
