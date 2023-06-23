@@ -1,22 +1,10 @@
 import React, { useState, useEffect } from "react";
-import {
-	View,
-	Text,
-	Alert,
-	TouchableOpacity,
-	StyleSheet,
-	Switch,
-	Image,
-} from "react-native";
+import { View, Text, TouchableOpacity, Switch, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useAppDispatch, useAppSelector } from "../../redux-manager/hooks";
 import { useDatabase } from "@nozbe/watermelondb/hooks";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { UserCircleIcon } from "react-native-heroicons/outline";
 import { supabase } from "../../utils/supabase_authentication/supabase";
-import SignUpModal from "../../utils/settings/profile/modals/modals/SignUpModal";
-import SignInModal from "../../utils/settings/profile/modals/modals/SignInModal";
-import GenderModal from "../../utils/settings/profile/modals/modals/GenderModal";
 
 const Settings = () => {
 	const database = useDatabase();
@@ -91,9 +79,7 @@ const Settings = () => {
 					</TouchableOpacity>
 				</View>
 			</View>
-			{/* <SignInModal /> */}
-			{/* <SignUpModal /> */}
-			{/* <GenderModal /> */}
+
 			<View className="flex flex-row pl-8">
 				<Text className="text-gray-400">Settings</Text>
 			</View>

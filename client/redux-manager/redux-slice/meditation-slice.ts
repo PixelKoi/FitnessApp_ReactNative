@@ -22,7 +22,7 @@ const initialState: MedState = {
 	maxTime: 5,
 	startDate: "",
 	endDate: "",
-	countdown: "00:00",
+	countdown: "00:00:00",
 	medStreak: {
 		Sun: false,
 		Mon: false,
