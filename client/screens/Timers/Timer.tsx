@@ -65,7 +65,7 @@ const Timer = () => {
 						/>
 					</TouchableOpacity>
 
-					<TouchableOpacity>
+					<TouchableOpacity onPress={() => navigation.navigate("Meditation")}>
 						<TimerCard
 							height={104}
 							width={107}

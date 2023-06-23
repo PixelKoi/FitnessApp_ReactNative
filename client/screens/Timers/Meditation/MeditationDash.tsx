@@ -11,8 +11,8 @@ const MeditationDash = () => {
 	const { name } = useAppSelector((state) => state.user);
 
 	return (
-		<View className="flex-1 mx-8 mt-10 bg-background">
-			<View className="gap-2">
+		<View className="flex-1 px-8  bg-background">
+			<View className="gap-2 mt-14">
 				<Text className="font-bold" style={{ fontSize: 14 }}>
 					Hello, <Text className="uppercase">{name}!</Text>
 				</Text>
