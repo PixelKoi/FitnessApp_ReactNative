@@ -14,6 +14,8 @@ import {
 } from "../../../../../redux-manager/hooks";
 import { useDatabase } from "@nozbe/watermelondb/hooks";
 
+//Todo: update user profile when signing up
+//Sign up with supabase auth
 const SignUpModal = (props) => {
 	//Import redux
 	const { colors } = useAppSelector((state) => state.theme);

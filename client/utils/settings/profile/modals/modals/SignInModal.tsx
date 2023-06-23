@@ -12,6 +12,9 @@ import {
 	useAppSelector,
 } from "../../../../../redux-manager/hooks";
 
+//Todo:
+// Add  google / facebook sign in
+// Allow user to go to sign up page?
 const SignInModal = (props) => {
 	//Import redux
 	const { colors } = useAppSelector((state) => state.theme);
