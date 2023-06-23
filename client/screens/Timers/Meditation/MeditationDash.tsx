@@ -38,7 +38,7 @@ const MeditationDash = () => {
 			{/* Meditation Session List */}
 			<View className="mt-8">
 				<Text className="font-bold">Choose meditation session</Text>
-				<View className="mt-8">
+				<View className="mt-8 flex-row">
 					{medSessionData.map((data, index) => (
 						<MeditationSession
 							title={data.title}

@@ -5,7 +5,7 @@ import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 const MeditationSession = (props) => {
 	return (
 		<TouchableOpacity
-			className="flex justify-center items-center"
+			className="flex justify-center items-center mr-4"
 			style={{
 				height: 161,
 				width: 135,
