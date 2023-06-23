@@ -1,7 +1,12 @@
 import React from "react";
 import { TouchableOpacity, View, Image, Text } from "react-native";
 
-const MeditationEmoji = (props) => {
+interface EmojiProps {
+	emotion: string;
+	img: any;
+}
+
+const MeditationEmoji = (props: EmojiProps) => {
 	return (
 		<TouchableOpacity className="mr-5 mt-2">
 			<Image className="w-10 h-10" source={props.img} />

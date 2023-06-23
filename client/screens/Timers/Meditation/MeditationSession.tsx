@@ -2,7 +2,16 @@ import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
-const MeditationSession = (props) => {
+interface SessionProps {
+	title: string;
+	cardColor: string;
+	textColor: string;
+	time: string;
+	buttonBackgroundColor: string;
+	buttonTextColor: string;
+}
+
+const MeditationSession = (props: SessionProps) => {
 	return (
 		<TouchableOpacity
 			className="flex justify-center mr-4"
