@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { View, Text } from "react-native";
 import { Button } from "react-native-paper";
 import { useAppSelector } from "../../../redux-manager/hooks";
+import emojiData from "../emoji-data";
 
 //Todo: get tailwind Theme primary and secondary colors set to states and put it inside the labelStyle prop
 const MeditationDash = () => {
@@ -16,6 +17,15 @@ const MeditationDash = () => {
 				<Text style={{ color: "#9B9B99", fontSize: 10 }}>
 					How are you feeling today?
 				</Text>
+				<View className="flex-row">
+					{emojiData.map((emoji, index) => (
+						<View key={index} className="mr-4">
+							<Text style={{ fontSize: 10, color: "#9B9B99" }}>
+								{emoji.emotion}
+							</Text>
+						</View>
+					))}
+				</View>
 			</View>
 
 			<View className="mt-8">
