@@ -17,7 +17,7 @@ const MeditationDash = () => {
 		<View className="flex-1 mx-8 mt-10 bg-background">
 			<View className="gap-2">
 				<Text className="font-bold" style={{ fontSize: 14 }}>
-					Hello, <Text className="uppercase">{name}</Text>
+					Hello, <Text className="uppercase">{name}!</Text>
 				</Text>
 				<Text style={{ color: "#9B9B99", fontSize: 10 }}>
 					How are you feeling today?
