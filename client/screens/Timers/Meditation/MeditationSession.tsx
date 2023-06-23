@@ -2,7 +2,6 @@ import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
-import BreathTransitionModal from "./components/BreathTransitionModal";
 //Redux imports
 import { setMaxTime } from "../../../redux-manager/redux-slice/meditation-slice";
 import { useAppDispatch, useAppSelector } from "../../../redux-manager/hooks";
@@ -16,7 +15,6 @@ interface SessionProps {
 	buttonTextColor: string;
 }
 
-//Todo: use timeout effect to present breath in modal before show med timer
 const MeditationSession = (props: SessionProps) => {
 	//navgiation
 	const navigation = useNavigation();
@@ -27,7 +25,7 @@ const MeditationSession = (props: SessionProps) => {
 	return (
 		<TouchableOpacity
 			onPress={async () => {
-				dispatch(setMaxTime(Number(props.time)));
+				await dispatch(setMaxTime(Number(props.time)));
 				navigation.navigate("MeditationTimer");
 			}}
 			className="flex justify-center mr-4"

@@ -34,10 +34,9 @@ const MeditationTimer = () => {
 	const { colors } = useAppSelector((state) => state.theme);
 	const dispatch = useAppDispatch();
 
-	//fasting states
+	//Meditation states
 	const [startTime, setStartTime] = useState(null);
 	const [endTime, setEndTime] = useState(null);
-	const [fasting, setFasting] = useState<String>("5 minutes");
 
 	//Keep track of starting / ending fast button
 	const [clicked, setClicked] = useState(false);

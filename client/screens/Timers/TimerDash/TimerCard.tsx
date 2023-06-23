@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text, TouchableOpacity, Image } from "react-native";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import { Surface } from "react-native-paper";
 
 interface CardProps {
@@ -40,7 +41,7 @@ const TimerCard = (props: CardProps) => {
 						</View>
 					</View>
 					<View className="p-5 bottom-3">
-						<TouchableOpacity
+						<View
 							style={{
 								width: 60,
 								height: 30,
@@ -52,7 +53,7 @@ const TimerCard = (props: CardProps) => {
 								className="font-semibold my-auto text-center">
 								Start
 							</Text>
-						</TouchableOpacity>
+						</View>
 					</View>
 				</View>
 
