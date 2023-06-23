@@ -27,7 +27,7 @@ const MeditationSession = (props: SessionProps) => {
 	return (
 		<TouchableOpacity
 			onPress={async () => {
-				dispatch(setMaxTime(props.time));
+				dispatch(setMaxTime(Number(props.time)));
 				navigation.navigate("MeditationTimer");
 			}}
 			className="flex justify-center mr-4"
