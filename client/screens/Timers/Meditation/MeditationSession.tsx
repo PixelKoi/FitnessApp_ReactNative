@@ -5,18 +5,18 @@ import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 const MeditationSession = (props) => {
 	return (
 		<TouchableOpacity
-			className="flex justify-center items-center mr-4"
+			className="flex justify-center mr-4"
 			style={{
 				height: 161,
 				width: 135,
 				backgroundColor: props.cardColor,
 				borderRadius: 10,
 			}}>
-			<View className="flex-col justify-center  mt-14">
+			<View className="flex-col mt-14 ml-4">
 				<Text className="font-bold" style={{ color: props.textColor }}>
 					{props.title}
 				</Text>
-				<Text className="font-medium" style={{ color: props.textColor }}>
+				<Text className="font-medium mt-1" style={{ color: props.textColor }}>
 					Course
 				</Text>
 			</View>
