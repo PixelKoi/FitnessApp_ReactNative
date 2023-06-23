@@ -1,27 +1,25 @@
+import happy from "../../assets/images/meditation/emoji/happy.png";
+
 const emoji = [
 	{
-		img: null,
+		img: happy,
 		emotion: "Happy",
 	},
 	{
-		img: null,
+		img: happy,
 		emotion: "Calm",
 	},
 	{
-		img: null,
+		img: happy,
 		emotion: "Relax",
 	},
 	{
-		img: null,
+		img: happy,
 		emotion: "Sad",
 	},
 	{
-		img: null,
+		img: happy,
 		emotion: "Sick",
-	},
-	{
-		img: null,
-		emotion: "Depressed",
 	},
 ];
 
