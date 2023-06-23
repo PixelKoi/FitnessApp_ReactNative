@@ -1,4 +1,4 @@
-import happy from "../../assets/images/meditation/emoji/happy.png";
+import happy from "../../../assets/images/meditation/emoji/happy.png";
 
 const medSessionData = [
 	{

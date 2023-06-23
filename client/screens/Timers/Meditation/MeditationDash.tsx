@@ -27,7 +27,7 @@ const MeditationDash = () => {
 				<View className="flex-row">
 					{emojiData.map((emoji, index) => (
 						<MeditationEmoji
-							index={index}
+							key={index}
 							emotion={emoji.emotion}
 							img={emoji.img}
 						/>
@@ -41,6 +41,7 @@ const MeditationDash = () => {
 				<View className="mt-8 flex-row">
 					{medSessionData.map((data, index) => (
 						<MeditationSession
+							key={index}
 							title={data.title}
 							time={data.time}
 							index={index}
