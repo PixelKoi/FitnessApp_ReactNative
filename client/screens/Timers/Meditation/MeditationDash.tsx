@@ -3,6 +3,8 @@ import { View, Text, Image } from "react-native";
 import { Button } from "react-native-paper";
 import { useAppSelector } from "../../../redux-manager/hooks";
 import emojiData from "../emoji-data";
+import medSessionData from "../session-data";
+
 import { TouchableOpacity } from "react-native-gesture-handler";
 import MeditationSession from "./MeditationSession";
 
@@ -26,7 +28,7 @@ const MeditationDash = () => {
 						<TouchableOpacity key={index} className="mr-5 mt-2">
 							<Image className="w-10 h-10" source={emoji.img} />
 							<Text
-								className="self-center"
+								className="self-center mt-1"
 								style={{ fontSize: 10, color: "#9B9B99" }}>
 								{emoji.emotion}
 							</Text>
@@ -39,7 +41,17 @@ const MeditationDash = () => {
 				<Text className="font-bold">Choose meditation session</Text>
 
 				<View className="mt-8">
-					<MeditationSession />
+					{medSessionData.map((data, index) => (
+						<MeditationSession
+							title={data.title}
+							time={data.time}
+							index={index}
+							cardColor={data.cardColor}
+							textColor={data.textColor}
+							butttonBackgroundColor={data.buttonBackgroundColor}
+							buttonTextColor={data.buttonTextColor}
+						/>
+					))}
 				</View>
 			</View>
 		</View>
