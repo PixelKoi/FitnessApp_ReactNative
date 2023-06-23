@@ -9,6 +9,7 @@ import Diary from "../../screens/Nutrition/Diary/Diary";
 import Dashboard from "../../screens/Dashboard/Dashboard";
 import Timer from "../../screens/Timers/Timer";
 import MeditationDash from "../../screens/Timers/Meditation/MeditationDash";
+import Fasting from "../../screens/Timers/Fasting/Fasting";
 //nav imports
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
@@ -200,6 +201,11 @@ const Navigation = ({ session }: { session: Session }) => {
 				<Stack.Screen
 					name="Meditation"
 					component={MeditationDash}
+					options={{ headerShown: true }}
+				/>
+				<Stack.Screen
+					name="Fasting"
+					component={Fasting}
 					options={{ headerShown: true }}
 				/>
 			</Stack.Navigator>

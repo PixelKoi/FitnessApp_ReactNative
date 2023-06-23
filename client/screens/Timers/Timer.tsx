@@ -52,7 +52,8 @@ const Timer = () => {
 			<View className="flex-row justify-center">
 				{/* Fasting Button*/}
 				<View>
-					<TouchableOpacity>
+					{/* Fasting timer */}
+					<TouchableOpacity onPress={() => navigation.navigate("Fasting")}>
 						<TimerCard
 							img={FastingCard}
 							height={90}
@@ -64,7 +65,7 @@ const Timer = () => {
 							cardBackgroundColor={colors.secondary}
 						/>
 					</TouchableOpacity>
-
+					{/* Meditation Timer */}
 					<TouchableOpacity onPress={() => navigation.navigate("Meditation")}>
 						<TimerCard
 							height={104}
@@ -77,7 +78,7 @@ const Timer = () => {
 							cardBackgroundColor={colors.secondary}
 						/>
 					</TouchableOpacity>
-
+					{/* Interval Training */}
 					<TouchableOpacity>
 						<TimerCard
 							img={FastingCard}
