@@ -40,12 +40,8 @@ const ForgotPasswordModal = (props) => {
 					}}
 					className=" h-screen w-screen">
 					<View className="mx-14 mt-6">
-						<Text
-							// style={{ color: colors.primary }}
-							className="text-2xl font-bold">
-							Forgot Password
-						</Text>
-						{/* Display Activity Buttons */}
+						<Text className="text-2xl font-bold">Forgot Password</Text>
+
 						<View className="gap-5 mt-4">
 							<View>
 								<Text style={{ color: "#9B9B99" }} className="font-semibold">
@@ -70,9 +66,7 @@ const ForgotPasswordModal = (props) => {
 					<View className="flex-row justify-center mt-12">
 						<Button
 							disabled={loading}
-							onPress={() => {
-								signInWithEmail();
-							}}
+							onPress={() => {}}
 							style={{ backgroundColor: colors.primary, width: 214 }}
 							mode="contained">
 							<Text className="font-bold">Submit</Text>

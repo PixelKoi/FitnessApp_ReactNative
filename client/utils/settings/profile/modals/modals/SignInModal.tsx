@@ -61,12 +61,8 @@ const SignInModal = (props) => {
 					}}
 					className=" h-screen w-screen">
 					<View className="mx-14 mt-6">
-						<Text
-							// style={{ color: colors.primary }}
-							className="text-2xl font-bold">
-							Sign In
-						</Text>
-						{/* Display Activity Buttons */}
+						<Text className="text-2xl font-bold">Sign In</Text>
+						{/* Account input */}
 						<View className="gap-5 mt-4">
 							<View>
 								<Text style={{ color: "#9B9B99" }} className="font-semibold">

@@ -57,7 +57,11 @@ const Auth = () => {
 			</View>
 			{/* Sign Up/In Modals */}
 			<SignIn showSignInModal={showSignInModal} />
-			<SignUp showSignUpModal={showSignUpModal} />
+			<SignUp
+				showSignUpModal={showSignUpModal}
+				setShowSignUpModal={setShowSignUpModal}
+				setShowSignInModal={setShowSignInModal}
+			/>
 		</View>
 	);
 };

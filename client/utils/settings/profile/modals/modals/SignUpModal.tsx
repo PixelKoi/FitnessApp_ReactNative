@@ -194,7 +194,12 @@ const SignUpModal = (props) => {
 						<Text className=" text-xs" style={{ lineHeight: 20 }}>
 							Already a member?{" "}
 						</Text>
-						<TouchableOpacity className="">
+						<TouchableOpacity
+							onPress={async () => {
+								await props.setShowSignInModal(true);
+								props.setShowSignUpModal(false);
+							}}
+							className="">
 							<Text
 								className="text-xs font-bold"
 								style={{ lineHeight: 20, color: colors.primary }}>
