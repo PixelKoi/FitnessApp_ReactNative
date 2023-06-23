@@ -3,8 +3,11 @@ import { View, Text, TouchableOpacity } from "react-native";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 //Redux imports
-import { setMaxTime } from "../../../redux-manager/redux-slice/meditation-slice";
-import { useAppDispatch, useAppSelector } from "../../../redux-manager/hooks";
+import { setMaxTime } from "../../../../redux-manager/redux-slice/meditation-slice";
+import {
+	useAppDispatch,
+	useAppSelector,
+} from "../../../../redux-manager/hooks";
 
 interface SessionProps {
 	title: string;
