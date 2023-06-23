@@ -103,29 +103,29 @@ const MeditationTimer = () => {
 	}, []);
 
 	return (
-		<View
-			style={{ backgroundColor: "#03174C" }}
-			className="flex-1  justify-center">
+		<View style={{ backgroundColor: "#03174C" }} className="flex-1">
 			{/* Clock section */}
-			<View className="my-auto">
+			<View className="mt-24">
 				<View className="items-center">
 					<Image source={GirlMeditating} />
 				</View>
 
 				<View style={{ width: 126 }} className=" mx-auto ">
-					<Text style={{ color: "#ffff" }} className="text-3xl">
+					<Text style={{ color: "#fff" }} className="text-3xl">
 						{countdown}
 					</Text>
 				</View>
 			</View>
 
 			<Button
-				style={{ backgroundColor: colors.primary }}
-				className="mt-auto mb-12 w-60 mx-auto "
+				style={{ backgroundColor: "#fff" }}
+				className="mt-32 w-60 mx-auto "
 				icon="brain"
 				mode="contained"
 				onPress={clicked === false ? handleStartFast : handleEndFast}>
-				{clicked === false ? "Start Meditating" : "End Meditating"}
+				<Text style={{ color: "black" }}>
+					{clicked === false ? "Start Meditating" : "End Meditating"}
+				</Text>
 			</Button>
 		</View>
 	);
