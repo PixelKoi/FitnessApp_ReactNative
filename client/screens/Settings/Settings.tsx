@@ -4,6 +4,8 @@ import { useNavigation } from "@react-navigation/native";
 import { useAppDispatch, useAppSelector } from "../../redux-manager/hooks";
 import { useDatabase } from "@nozbe/watermelondb/hooks";
 import Icon from "react-native-vector-icons/FontAwesome";
+import Icon2 from "react-native-vector-icons/FontAwesome5";
+
 import { supabase } from "../../utils/supabase_authentication/supabase";
 
 const Settings = () => {
@@ -49,11 +51,15 @@ const Settings = () => {
 			headerTintColor: colors.primary,
 			headerLeft: () => (
 				<TouchableOpacity
-					className="ml-5 mt-2"
+					className="ml-4"
 					onPress={() => {
 						navigation.navigate("Dashboard");
 					}}>
-					<Icon name="angle-left" style={{ color: colors.primary }} size={24} />
+					<Icon2
+						name="angle-left"
+						style={{ color: colors.primary }}
+						size={30}
+					/>
 				</TouchableOpacity>
 			),
 		});
