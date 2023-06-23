@@ -1,6 +1,5 @@
 import React from "react";
 import { View, Text, TouchableOpacity, Image } from "react-native";
-import FastingCard from "../../../assets/images/timer-dash/FastingCard.png";
 import { Surface } from "react-native-paper";
 
 interface CardProps {
@@ -10,11 +9,13 @@ interface CardProps {
 	buttonBackgroundColor: string;
 	textColor: string;
 	cardBackgroundColor: string;
+	height: number;
+	width: number;
 }
 
 const TimerCard = (props: CardProps) => {
 	return (
-		<TouchableOpacity className="pb-4">
+		<View className="pb-5">
 			<Surface
 				className="flex-row"
 				style={{
@@ -23,7 +24,7 @@ const TimerCard = (props: CardProps) => {
 					backgroundColor: props.cardBackgroundColor,
 					borderRadius: 20,
 				}}>
-				<View>
+				<View style={{ width: 150 }}>
 					<View className="flex-col  p-6 ">
 						<View className="">
 							<Text
@@ -55,13 +56,13 @@ const TimerCard = (props: CardProps) => {
 					</View>
 				</View>
 
-				<View className="ml-10 self-center">
+				<View style={{ width: 150 }} className=" items-center self-center">
 					<Image
-						style={{ height: 90, width: 107 }}
-						source={FastingCard}></Image>
+						style={{ height: props.height, width: props.width }}
+						source={props.img}></Image>
 				</View>
 			</Surface>
-		</TouchableOpacity>
+		</View>
 	);
 };
 
