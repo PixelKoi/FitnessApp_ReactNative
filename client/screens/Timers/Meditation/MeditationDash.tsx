@@ -23,7 +23,6 @@ const MeditationDash = () => {
 			headerStyle: {
 				shadowColor: "transparent",
 			},
-			headerTintColor: colors.primary,
 			headerTitleStyle: {
 				fontWeight: "bold",
 			},
@@ -34,7 +33,7 @@ const MeditationDash = () => {
 						onPress={() => {
 							navigation.goBack();
 						}}>
-						<FontAwesome name="angle-left" size={30} color={colors.primary} />
+						<FontAwesome name="angle-left" size={30} />
 					</TouchableOpacity>
 				</View>
 			),

@@ -13,6 +13,7 @@ import {
 //import icons
 import Icon from "react-native-vector-icons/FontAwesome";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import FontAwesome from "react-native-vector-icons/FontAwesome5";
 
 const Fasting = () => {
 	const navigation = useNavigation();
@@ -90,6 +91,7 @@ const Fasting = () => {
 
 	React.useLayoutEffect(() => {
 		navigation.setOptions({
+			title: "Fasting",
 			headerStyle: {
 				shadowColor: "transparent",
 			},
@@ -97,6 +99,17 @@ const Fasting = () => {
 			headerTitleStyle: {
 				fontWeight: "bold",
 			},
+			headerLeft: () => (
+				<View>
+					<TouchableOpacity
+						className="ml-4  rounded-full"
+						onPress={() => {
+							navigation.goBack();
+						}}>
+						<FontAwesome name="angle-left" size={30} color={colors.primary} />
+					</TouchableOpacity>
+				</View>
+			),
 		});
 	}, []);
 
