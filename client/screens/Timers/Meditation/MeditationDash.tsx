@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { View, Text, Image } from "react-native";
 import { Button } from "react-native-paper";
 import { useAppSelector } from "../../../redux-manager/hooks";
-import emojiData from "../emoji-data";
-import medSessionData from "../session-data";
+import emojiData from "../../../utils/timer/meditation-dash/emoji-data";
+import medSessionData from "../../../utils/timer/meditation-dash/session-data";
 
 import { TouchableOpacity } from "react-native-gesture-handler";
 import MeditationSession from "./MeditationSession";
