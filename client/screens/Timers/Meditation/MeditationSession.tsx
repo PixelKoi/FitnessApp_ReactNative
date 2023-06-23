@@ -44,7 +44,7 @@ const MeditationSession = (props: SessionProps) => {
 						style={{
 							width: 45,
 							height: 20,
-							backgroundColor: props.butttonBackgroundColor,
+							backgroundColor: props.buttonBackgroundColor,
 							borderRadius: 10,
 						}}>
 						<Text

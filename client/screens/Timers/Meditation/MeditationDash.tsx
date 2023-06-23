@@ -47,7 +47,7 @@ const MeditationDash = () => {
 							index={index}
 							cardColor={data.cardColor}
 							textColor={data.textColor}
-							butttonBackgroundColor={data.buttonBackgroundColor}
+							buttonBackgroundColor={data.buttonBackgroundColor}
 							buttonTextColor={data.buttonTextColor}
 						/>
 					))}
