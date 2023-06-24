@@ -23,6 +23,9 @@ const Diary = (props) => {
   React.useLayoutEffect(() => {
     tabNavigation.setOptions({
       title: "Diary",
+      headerStyle: {
+        shadowColor: "transparent",
+      },
       headerTintColor: primary_color,
       headerLeft: () => (
         <TouchableOpacity
@@ -75,7 +78,7 @@ const Diary = (props) => {
 
   if (props.route.params == undefined) {
     return (
-      <View className="flex-1 items-center">
+      <View className="flex-1 items-center bg-white">
         <View className="justify-center">
           <Card className="px-4 my-4">
             <Text className="py-4">

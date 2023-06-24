@@ -25,7 +25,7 @@ const reducers = combineReducers({
   fasting: fastingReducer,
   meditation: meditationReducer,
   favorite: favSlice,
-  nutrition: nutritionSlice,
+  inventory: nutritionSlice,
   theme: themeSlice,
 });
 

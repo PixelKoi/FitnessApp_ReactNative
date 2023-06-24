@@ -32,11 +32,12 @@ const nutritionSlice = createSlice({
       const itemIndex = state.inventory.findIndex(
         (item) => item.id === action.payload.id
       );
-
-      if (itemIndex !== -1 && action.payload.quantity > 0) {
-        state.inventory[itemIndex].quantity += action.payload.quantity;
-      } else if (itemIndex === -1) {
+      // Item does not exist in the inventory, add it
+      if (itemIndex === -1) {
         state.inventory.push(action.payload);
+      } else {
+        // Item already exists, update its quantity
+        state.inventory[itemIndex].quantity = action.payload.quantity;
       }
     },
     reduceInventory: (state, action: PayloadAction<number>) => {
@@ -65,5 +66,6 @@ const nutritionSlice = createSlice({
   },
 });
 
-export const { addInventory } = nutritionSlice.actions;
+export const { addInventory, reduceInventory, deleteInventory } =
+  nutritionSlice.actions;
 export default nutritionSlice.reducer;

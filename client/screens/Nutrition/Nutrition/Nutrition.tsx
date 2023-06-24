@@ -32,6 +32,11 @@ import AntIcon from "react-native-vector-icons/AntDesign";
 import FontIcon from "react-native-vector-icons/FontAwesome5";
 import { StyleSheet } from "react-native";
 import { addFavorite } from "../../../redux-manager/redux-slice/favorite-slice";
+import {
+  addInventory,
+  deleteInventory,
+  reduceInventory,
+} from "../../../redux-manager/redux-slice/nutrition-slice";
 import { useAppSelector, useAppDispatch } from "../../../redux-manager/hooks";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import MealPicker from "../../../utils/nutrition/meal-picker/MealPicker";
@@ -71,6 +76,11 @@ const Nutrition: React.FC = () => {
   let secondary_color = colors.secondary;
   let background = colors.background;
   // ENDOF THEME COLORS
+
+  // INVENTORY FOOD LIST
+  const { inventory } = useAppSelector((state) => state.inventory);
+  console.log("inventory: ", inventory);
+  // FAVORITE FOOD LIST
   const { favorites } = useAppSelector((state) => state.favorite);
   // console.log("VALUES", favorites);
   function updateFavoriteList(data) {
@@ -184,6 +194,10 @@ const Nutrition: React.FC = () => {
     tabNavigation.setOptions({
       title: "Nutrition",
       headerTintColor: primary_color,
+
+      headerStyle: {
+        shadowColor: "transparent",
+      },
       headerLeft: () => (
         <View>
           <TouchableOpacity onPress={handleFavoritePress}>
@@ -246,13 +260,28 @@ const Nutrition: React.FC = () => {
       console.error(error);
     }
   };
+
   const handlePlus = (foodArray, index) => {
+    let data = foodArray[index];
     const updatedFoodArray = [...foodArray];
     const updatedFood = { ...updatedFoodArray[index] };
     if (updatedFood.quantity < 20) {
       updatedFood.quantity += 1;
       updatedFoodArray[index] = updatedFood;
       setFoodArray(updatedFoodArray);
+      // console.log("updatedFoodArray: ", updatedFoodArray);
+      let quantity = updatedFood.quantity;
+      const InventoryItem = {
+        Calories: data.food.Calories,
+        Carbs: data.food.Carbs,
+        Fat: data.food.Fat,
+        Protein: data.food.Protein,
+        description: data.food.description,
+        id: data.id,
+        quantity: quantity,
+      };
+      console.log("InventoryItem", InventoryItem);
+      dispatch(addInventory(InventoryItem));
     }
     const loggedFoods = foodArray.filter((food) => food.quantity > 0);
     setFoodInventory(loggedFoods);
@@ -356,16 +385,16 @@ const Nutrition: React.FC = () => {
   };
   return (
     <Provider>
-      <View className="flex-1">
+      <View className="flex-1 bg-white">
         <Portal>
           <Modal
-            className="m-8 overflow-hidden"
+            className="h-full"
             visible={isModalVisible}
             animationType="fade"
             onDismiss={closeFavoriteModal}
           >
-            <View className="flex flex-col items-center justify-start h-full bg-white rounded-3xl">
-              <View className="flex items-center justify-center mt-4 py-4">
+            <View className="flex-col bg-white">
+              <View className="py-4">
                 <Text
                   className="text-center text-2xl font-bold"
                   style={{ color: primary_color }}
