@@ -283,14 +283,14 @@ const Nutrition: React.FC = () => {
       console.log("InventoryItem", InventoryItem);
       dispatch(addInventory(InventoryItem));
     }
-    const loggedFoods = foodArray.filter((food) => food.quantity > 0);
-    setFoodInventory(loggedFoods);
-    const inventory_calories = loggedFoods
-      .map((item) => item.food.Calories * item.quantity)
+  };
+  useEffect(() => {
+    let loggedFoods = inventory.filter((food) => food.quantity > 0);
+    let inventory_calories = loggedFoods
+      .map((item) => item.Calories * item.quantity)
       .reduce((acc, curr) => acc + curr, 0);
     setFoodInventoryCalories(inventory_calories);
-    // console.log("FOOD ARRAY ****", loggedFoods);
-  };
+  }, [inventory]);
 
   const handleMinus = (foodArray, index) => {
     let data = foodArray[index];
@@ -599,17 +599,17 @@ const Nutrition: React.FC = () => {
           >
             <View>
               <Card.Content>
-                {foodInventory.length > 0 ? (
+                {inventory.length > 0 ? (
                   // Code to be executed when foodInventory has items
                   <FlatList
                     style={{ maxHeight: 150 }}
                     indicatorStyle="white"
-                    data={foodInventory}
+                    data={inventory}
                     renderItem={({ item }) => (
                       <View className="flex flex-row justify-between px-4 pt-2">
                         <View className="flex flex-col mt-2 w-2/3">
                           <Text style={{ color: background }}>
-                            {item.food.description}
+                            {item.description}
                           </Text>
                         </View>
                         <View className="flex flex-col mt-1 justify-center">
