@@ -4,6 +4,8 @@ import { useNavigation } from "@react-navigation/native";
 import { Button, Surface } from "react-native-paper";
 import { format, add, getDay } from "date-fns";
 import FastingTimer from "../components/FastingDonutGraph";
+import FastingTimer2 from "../components/FastingDonutGraph2";
+
 //Redux imports
 import { useAppDispatch, useAppSelector } from "../../../redux-manager/hooks";
 import {
@@ -228,7 +230,7 @@ const Fasting = () => {
 
 				{/* Fasting Donut Graph */}
 				<View className="mt-6 z-0">
-					<FastingTimer />
+					<FastingTimer2 />
 				</View>
 
 				<Text
