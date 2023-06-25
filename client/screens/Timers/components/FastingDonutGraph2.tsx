@@ -32,8 +32,8 @@ const FastingDonutGraph: React.FC<FastingDonutGraphProps> = ({
 	const progress2 = useSharedValue(1);
 
 	useEffect(() => {
-		progress.value = withTiming(1, { duration: 4000, easing: Easing.linear });
-	}, [progress]);
+		progress.value = elapsedPercentage / 100;
+	}, [elapsedPercentage]);
 
 	const reanimatedStyle = useAnimatedStyle(() => {
 		return { opacity: progress.value };
@@ -50,13 +50,18 @@ const FastingDonutGraph: React.FC<FastingDonutGraphProps> = ({
 	return (
 		<View className="flex justify-center items-center mx">
 			<Svg width="370" height="370" viewBox="-100 -100 300 210">
+				<Path
+					d={path}
+					strokeWidth={15}
+					stroke={colors.secondary}
+					fill="transparent"
+					strokeLinecap="round"
+				/>
 				<AnimatedStroke progress={progress} d={path} />
 			</Svg>
 
 			<Animated.View style={{ width: 200 }} className=" absolute items-center">
-				<Animated.Text
-					style={[{ color: colors.primary }, reanimatedStyle]}
-					className="text-xl">
+				<Animated.Text style={{ color: colors.primary }} className="text-xl">
 					{countdown}
 				</Animated.Text>
 			</Animated.View>

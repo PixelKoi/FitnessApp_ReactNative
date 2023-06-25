@@ -17,7 +17,7 @@ const AnimatedStroke = ({ d, progress }: AnimatedStateProps) => {
 	const [length, setLength] = useState(0);
 	const ref = useRef<Path>(null);
 	const animatedProps = useAnimatedProps(() => ({
-		strokeDashoffset: length - length * progress.value,
+		strokeDashoffset: length + length * progress.value,
 	}));
 	return (
 		<AnimatedPath
