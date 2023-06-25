@@ -272,11 +272,10 @@ const Nutrition: React.FC = () => {
     let data = foodArray[index];
     const updatedFoodArray = [...foodArray];
     const updatedFood = { ...updatedFoodArray[index] };
-    if (updatedFood.quantity < 20) {
+    if (updatedFood.quantity < 1) {
       updatedFood.quantity += 1;
       updatedFoodArray[index] = updatedFood;
       setFoodArray(updatedFoodArray);
-      // console.log("updatedFoodArray: ", updatedFoodArray);
       let quantity = updatedFood.quantity;
       const InventoryItem = {
         Calories: data.Calories,
@@ -287,7 +286,6 @@ const Nutrition: React.FC = () => {
         id: data.id,
         quantity: quantity,
       };
-      console.log("InventoryItem", InventoryItem);
       dispatch(addInventory(InventoryItem));
     }
   };
@@ -298,29 +296,6 @@ const Nutrition: React.FC = () => {
       .reduce((acc, curr) => acc + curr, 0);
     setFoodInventoryCalories(inventory_calories);
   }, [inventory]);
-
-  const handleMinus = (foodArray, index) => {
-    let data = foodArray[index];
-    const updatedFoodArray = [...foodArray];
-    const updatedFood = { ...updatedFoodArray[index] };
-    if (updatedFood.quantity > 0) {
-      updatedFood.quantity -= 1;
-      updatedFoodArray[index] = updatedFood;
-      setFoodArray(updatedFoodArray);
-      let quantity = updatedFood.quantity;
-      const InventoryItem = {
-        Calories: data.Calories,
-        Carbs: data.Carbs,
-        Fat: data.Fat,
-        Protein: data.Protein,
-        description: data.description,
-        id: data.id,
-        quantity: quantity,
-      };
-      console.log("REDUCE InventoryItem", InventoryItem);
-      dispatch(reduceInventory(InventoryItem));
-    }
-  };
 
   useEffect(() => {
     if (saveButton) {
@@ -338,7 +313,6 @@ const Nutrition: React.FC = () => {
     tabNavigation.navigate("Diary", { selectedFoods, selectedOption });
   };
 
-  const handleInputChange = (text, food) => {};
   const renderFoodItem = (food, index, foodArray) => {
     return (
       <View className="mx-2 py-2 rounded-3xl">
@@ -362,21 +336,39 @@ const Nutrition: React.FC = () => {
               </View>
 
               <View className="flex flex-col ml-auto">
-                <TouchableOpacity
-                  onPress={() => add_inventory_item(foodArray, index)}
-                  className="px-2 pb-4"
-                >
-                  <AntIcon size={24} name="pluscircle" color={primary_color} />
-                </TouchableOpacity>
+                {food.quantity > 0 ? (
+                  <TouchableOpacity className="pl-1.5 pb-4">
+                    <Icon
+                      size={24}
+                      name="checkmark-circle-sharp"
+                      color={primary_color}
+                    />
+                  </TouchableOpacity>
+                ) : (
+                  <TouchableOpacity
+                    onPress={() => add_inventory_item(foodArray, index)}
+                    className="px-1.5 pb-4"
+                  >
+                    <Icon
+                      size={24}
+                      name="ios-add-circle-sharp"
+                      color={primary_color}
+                    />
+                  </TouchableOpacity>
+                )}
 
                 <TouchableOpacity
                   onPress={() => handleFavoriteToggle(index, foodArray)}
-                  className="rounded-full px-2 text-primary pt-1"
+                  className="rounded-full px-1.5 text-primary "
                 >
                   {selectedHearts[index] ? (
-                    <FilledHeartIcon size={24} color={primary_color} />
+                    <Icon size={24} name="heart" color={primary_color} />
                   ) : (
-                    <HeartIcon size={24} color={primary_color} />
+                    <Icon
+                      name="heart-outline"
+                      color={primary_color}
+                      size={24}
+                    />
                   )}
                 </TouchableOpacity>
               </View>
@@ -580,8 +572,10 @@ const Nutrition: React.FC = () => {
           </Card>
         ) : (
           <Card
-            className="rounded-3xl overflow-hidden"
+            className="overflow-hidden"
             style={{
+              borderTopLeftRadius: 0,
+              borderTopRightRadius: 0,
               borderBottomLeftRadius: 0,
               borderBottomRightRadius: 0,
               backgroundColor: primary_color,
