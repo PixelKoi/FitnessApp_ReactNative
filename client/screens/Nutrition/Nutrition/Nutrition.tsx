@@ -85,11 +85,11 @@ const Nutrition: React.FC = () => {
   // console.log("VALUES", favorites);
   function updateFavoriteList(data) {
     const favoriteItem = {
-      Calories: data.food.Calories,
-      Carbs: data.food.Carbs,
-      Fat: data.food.Fat,
-      Protein: data.food.Protein,
-      description: data.food.description,
+      Calories: data.Calories,
+      Carbs: data.Carbs,
+      Fat: data.Fat,
+      Protein: data.Protein,
+      description: data.description,
       id: data.id,
     };
     console.log("DISPATCH", favoriteItem);
@@ -112,7 +112,6 @@ const Nutrition: React.FC = () => {
   };
 
   // Food Inventory: Keeps track of food we plan on adding to the Diary
-  const [foodInventory, setFoodInventory] = useState([]);
   const [foodInventoryCalories, setFoodInventoryCalories] = useState([]);
 
   const tabNavigation = useNavigation();
@@ -259,7 +258,15 @@ const Nutrition: React.FC = () => {
     }
   };
 
-  const increment_inventory_item = (item) => {};
+  const increment_inventory_item = (item) => {
+    const updatedItem = { ...item, quantity: item.quantity + 1 };
+    dispatch(addInventory(updatedItem));
+  };
+
+  const decrement_inventory_item = (item) => {
+    const updatedItem = { ...item, quantity: item.quantity - 1 };
+    dispatch(reduceInventory(updatedItem));
+  };
 
   const add_inventory_item = (foodArray, index) => {
     let data = foodArray[index];
@@ -272,11 +279,11 @@ const Nutrition: React.FC = () => {
       // console.log("updatedFoodArray: ", updatedFoodArray);
       let quantity = updatedFood.quantity;
       const InventoryItem = {
-        Calories: data.food.Calories,
-        Carbs: data.food.Carbs,
-        Fat: data.food.Fat,
-        Protein: data.food.Protein,
-        description: data.food.description,
+        Calories: data.Calories,
+        Carbs: data.Carbs,
+        Fat: data.Fat,
+        Protein: data.Protein,
+        description: data.description,
         id: data.id,
         quantity: quantity,
       };
@@ -302,11 +309,11 @@ const Nutrition: React.FC = () => {
       setFoodArray(updatedFoodArray);
       let quantity = updatedFood.quantity;
       const InventoryItem = {
-        Calories: data.food.Calories,
-        Carbs: data.food.Carbs,
-        Fat: data.food.Fat,
-        Protein: data.food.Protein,
-        description: data.food.description,
+        Calories: data.Calories,
+        Carbs: data.Carbs,
+        Fat: data.Fat,
+        Protein: data.Protein,
+        description: data.description,
         id: data.id,
         quantity: quantity,
       };
@@ -600,9 +607,7 @@ const Nutrition: React.FC = () => {
                             <View className="bg-white flex flex-row rounded-2xl mr-2 items-center">
                               <TouchableOpacity
                                 onPress={() => {
-                                  console.log("ADD INVENTORY ITEM?", item);
-
-                                  // dispatch(reduceInventory(item));
+                                  decrement_inventory_item(item);
                                 }}
                               >
                                 <AntIcon
@@ -623,8 +628,7 @@ const Nutrition: React.FC = () => {
                               </Text>
                               <TouchableOpacity
                                 onPress={() => {
-                                  console.log("ADD INVENTORY ITEM?", item);
-                                  // dispatch(addInventory(item));
+                                  increment_inventory_item(item);
                                 }}
                               >
                                 <AntIcon

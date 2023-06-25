@@ -29,9 +29,11 @@ const nutritionSlice = createSlice({
   initialState,
   reducers: {
     addInventory: (state, action: PayloadAction<Nutrition>) => {
+      console.log("DEOS IT RN");
       const itemIndex = state.inventory.findIndex(
         (item) => item.id === action.payload.id
       );
+      console.log(itemIndex, action.payload);
       // Item does not exist in the inventory, add it
       if (itemIndex === -1) {
         state.inventory.push(action.payload);
