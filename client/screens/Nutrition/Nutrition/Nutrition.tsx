@@ -245,13 +245,11 @@ const Nutrition: React.FC = () => {
           quantity: 0,
           isSelected: false,
           id: item.fdcId,
-          food: {
-            description: item.description,
-            Protein: item.foodNutrients[0].value,
-            Fat: item.foodNutrients[1].value,
-            Carbs: item.foodNutrients[2].value,
-            Calories: item.foodNutrients[3].value,
-          },
+          description: item.description,
+          Protein: item.foodNutrients[0].value,
+          Fat: item.foodNutrients[1].value,
+          Carbs: item.foodNutrients[2].value,
+          Calories: item.foodNutrients[3].value,
         };
         tempArray.push(foodLog);
       });
@@ -261,7 +259,9 @@ const Nutrition: React.FC = () => {
     }
   };
 
-  const handlePlus = (foodArray, index) => {
+  const increment_inventory_item = (item) => {};
+
+  const add_inventory_item = (foodArray, index) => {
     let data = foodArray[index];
     const updatedFoodArray = [...foodArray];
     const updatedFood = { ...updatedFoodArray[index] };
@@ -340,45 +340,28 @@ const Nutrition: React.FC = () => {
             <View className="flex flex-row items-center ">
               <View className="flex flex-col">
                 <Text style={{ color: primary_color }} className="font-bold">
-                  {food.food.description}
+                  {food.description}
                 </Text>
                 <Text style={{ color: primary_color }}>
-                  {food.food.Protein}g Protein
+                  {food.Protein}g Protein
                 </Text>
+                <Text style={{ color: primary_color }}>{food.Fat}g Fat</Text>
                 <Text style={{ color: primary_color }}>
-                  {food.food.Fat}g Fat
-                </Text>
-                <Text style={{ color: primary_color }}>
-                  {food.food.Carbs}g Carbs
+                  {food.Carbs}g Carbs
                 </Text>
                 <Text style={{ color: primary_color }} className="font-bold">
-                  {food.food.Calories} Calories
+                  {food.Calories} Calories
                 </Text>
               </View>
 
               <View className="flex flex-col ml-auto">
                 <TouchableOpacity
-                  onPress={() => handlePlus(foodArray, index)}
-                  className="px-2"
+                  onPress={() => add_inventory_item(foodArray, index)}
+                  className="px-2 pb-4"
                 >
-                  <ChevronUpIcon size={24} color={primary_color} />
+                  <AntIcon size={24} name="pluscircle" color={primary_color} />
                 </TouchableOpacity>
-                <TextInput
-                  value={food.quantity.toString()}
-                  onChangeText={(text) => handleInputChange(text, food)}
-                  keyboardType="numeric"
-                  className="rounded"
-                  style={{
-                    color: primary_color,
-                    textAlign: "center",
-                  }}
-                />
-                <TouchableOpacity
-                  onPress={() => handleMinus(foodArray, index)}
-                  className="px-2"
-                >
-                  <ChevronDownIcon size={24} color={primary_color} />
-                </TouchableOpacity>
+
                 <TouchableOpacity
                   onPress={() => handleFavoriteToggle(index, foodArray)}
                   className="rounded-full px-2 text-primary pt-1"
@@ -615,11 +598,20 @@ const Nutrition: React.FC = () => {
                         <View className="flex flex-col mt-1 justify-center">
                           <View className="flex flex-row">
                             <View className="bg-white flex flex-row rounded-2xl mr-2 items-center">
-                              <AntIcon
-                                name="minuscircle"
-                                size={22}
-                                color={secondary_color}
-                              />
+                              <TouchableOpacity
+                                onPress={() => {
+                                  console.log("ADD INVENTORY ITEM?", item);
+
+                                  // dispatch(reduceInventory(item));
+                                }}
+                              >
+                                <AntIcon
+                                  name="minuscircle"
+                                  size={22}
+                                  color={secondary_color}
+                                />
+                              </TouchableOpacity>
+
                               <Text
                                 style={{
                                   color: primary_color,
@@ -629,11 +621,18 @@ const Nutrition: React.FC = () => {
                               >
                                 {item.quantity}
                               </Text>
-                              <AntIcon
-                                name="pluscircle"
-                                size={22}
-                                color={primary_color}
-                              />
+                              <TouchableOpacity
+                                onPress={() => {
+                                  console.log("ADD INVENTORY ITEM?", item);
+                                  // dispatch(addInventory(item));
+                                }}
+                              >
+                                <AntIcon
+                                  name="pluscircle"
+                                  size={22}
+                                  color={primary_color}
+                                />
+                              </TouchableOpacity>
                             </View>
                             <View className="justify-center">
                               <TouchableOpacity
