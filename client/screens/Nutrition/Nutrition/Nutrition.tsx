@@ -62,6 +62,13 @@ const styles = StyleSheet.create({
     backgroundColor: "blue",
     alignSelf: "center",
   },
+  cardShadow: {
+    elevation: 2, // Add a lighter elevation for Android
+    shadowColor: "rgba(0, 0, 0, 0.1)", // Use a lighter shadow color for iOS
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.5, // Reduce the opacity for a lighter effect
+    shadowRadius: 2,
+  },
 });
 
 const Nutrition: React.FC = () => {
@@ -315,8 +322,8 @@ const Nutrition: React.FC = () => {
 
   const renderFoodItem = (food, index, foodArray) => {
     return (
-      <View className="mx-2 py-2 rounded-3xl">
-        <Card>
+      <View className="mx-2 py-2">
+        <Card style={styles.cardShadow}>
           <Card.Content style={{ paddingVertical: 8 }}>
             <View className="flex flex-row items-center ">
               <View className="flex flex-col">
@@ -351,7 +358,7 @@ const Nutrition: React.FC = () => {
                   >
                     <Icon
                       size={24}
-                      name="ios-add-circle-sharp"
+                      name="add-circle-outline"
                       color={primary_color}
                     />
                   </TouchableOpacity>
