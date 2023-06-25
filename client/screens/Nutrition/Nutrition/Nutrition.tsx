@@ -636,11 +636,17 @@ const Nutrition: React.FC = () => {
                               />
                             </View>
                             <View className="justify-center">
-                              <FontIcon
-                                name="trash"
-                                size={18}
-                                color={background}
-                              />
+                              <TouchableOpacity
+                                onPress={() => {
+                                  dispatch(deleteInventory(item));
+                                }}
+                              >
+                                <FontIcon
+                                  name="trash"
+                                  size={18}
+                                  color={background}
+                                />
+                              </TouchableOpacity>
                             </View>
                           </View>
                         </View>
