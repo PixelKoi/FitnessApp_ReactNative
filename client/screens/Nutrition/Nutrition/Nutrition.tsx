@@ -289,16 +289,29 @@ const Nutrition: React.FC = () => {
       .map((item) => item.food.Calories * item.quantity)
       .reduce((acc, curr) => acc + curr, 0);
     setFoodInventoryCalories(inventory_calories);
-    console.log("FOOD ARRAY ****", loggedFoods);
+    // console.log("FOOD ARRAY ****", loggedFoods);
   };
 
   const handleMinus = (foodArray, index) => {
+    let data = foodArray[index];
     const updatedFoodArray = [...foodArray];
     const updatedFood = { ...updatedFoodArray[index] };
     if (updatedFood.quantity > 0) {
       updatedFood.quantity -= 1;
       updatedFoodArray[index] = updatedFood;
       setFoodArray(updatedFoodArray);
+      let quantity = updatedFood.quantity;
+      const InventoryItem = {
+        Calories: data.food.Calories,
+        Carbs: data.food.Carbs,
+        Fat: data.food.Fat,
+        Protein: data.food.Protein,
+        description: data.food.description,
+        id: data.id,
+        quantity: quantity,
+      };
+      console.log("REDUCE InventoryItem", InventoryItem);
+      dispatch(reduceInventory(InventoryItem));
     }
   };
 

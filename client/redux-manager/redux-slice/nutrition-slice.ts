@@ -42,18 +42,19 @@ const nutritionSlice = createSlice({
     },
     reduceInventory: (state, action: PayloadAction<number>) => {
       const itemIndex = state.inventory.findIndex(
-        (item) => item.id === action.payload
+        (item) => item.id === action.payload.id
       );
-
+      console.log("RUN REDUCER?");
+      console.log("QUANTITY?", itemIndex);
       if (itemIndex !== -1 && state.inventory[itemIndex].quantity > 1) {
-        state.inventory[itemIndex].quantity -= 1;
-      } else if (
-        itemIndex !== -1 &&
-        state.inventory[itemIndex].quantity === 1
-      ) {
+        console.log("RUNS WHEN REUDCING?", action.payload.quantity);
+        state.inventory[itemIndex].quantity = action.payload.quantity;
+      } else if (itemIndex !== -1) {
+        console.log("REMOVING ITEM?");
         state.inventory.splice(itemIndex, 1);
       }
     },
+    // This deleteInventory is for the InventoryManager NOT(handleMinu/handlePlus)
     deleteInventory: (state, action: PayloadAction<number>) => {
       const itemIndex = state.inventory.findIndex(
         (item) => item.id === action.payload
