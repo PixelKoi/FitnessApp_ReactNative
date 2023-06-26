@@ -21,6 +21,8 @@ const Diary = (props) => {
   const { colors } = useAppSelector((state) => state.theme);
   let primary_color = colors.primary;
 
+  // TODO: ADD react-native-chart-kit daily calories
+  // TODO: ADD react-native-calendars, block off from accessing days before registration and don't allow modifying older dates
   React.useLayoutEffect(() => {
     tabNavigation.setOptions({
       title: "Diary",
@@ -89,7 +91,10 @@ const Diary = (props) => {
         </View>
         {/* other content */}
         <View className="w-full">
-          <Text className="pl-2 font-bold" style={{ color: colors.primary }}>
+          <Text
+            className="pl-4 font-bold text-2xl"
+            style={{ color: colors.primary }}
+          >
             Daily Intake
           </Text>
           <Card
@@ -97,7 +102,7 @@ const Diary = (props) => {
             style={{ backgroundColor: colors.secondary }}
           >
             <View className="flex flex-row start-0 px-4 items-center">
-              <View className="flex flex-col mr-6">
+              <View className="flex flex-col mr-10">
                 <Image
                   style={{ width: 75, height: 70 }}
                   source={require("../../../assets/images/Diary/breakfast.png")}
@@ -127,7 +132,7 @@ const Diary = (props) => {
             className="m-4 p-4 rounded-2xl"
           >
             <View className="flex flex-row start-0 px-4 items-center">
-              <View className="flex flex-col mr-6">
+              <View className="flex flex-col mr-10">
                 <Image
                   style={{ width: 75, height: 70 }}
                   source={require("../../../assets/images/Diary/Lunch.png")}
@@ -156,7 +161,7 @@ const Diary = (props) => {
             className="m-4 p-4 rounded-2xl"
           >
             <View className="flex flex-row start-0 px-4 items-center">
-              <View className="flex flex-col mr-6">
+              <View className="flex flex-col mr-10">
                 <Image
                   style={{ width: 75, height: 70 }}
                   source={require("../../../assets/images/Diary/dinner.png")}
@@ -190,7 +195,7 @@ const Diary = (props) => {
             className="m-4 p-4 rounded-2xl"
           >
             <View className="flex flex-row start-0 px-4 items-center">
-              <View className="flex flex-col mr-6">
+              <View className="flex flex-col mr-10">
                 <Image
                   style={{ width: 75, height: 70 }}
                   source={require("../../../assets/images/Diary/Coffee.png")}
