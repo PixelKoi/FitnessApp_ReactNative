@@ -16,6 +16,11 @@ import {
 } from "../../redux-manager/redux-slice/user-slice";
 import { setSession } from "../../redux-manager/redux-slice/session-slice";
 import { useNavigation } from "@react-navigation/native";
+import GenderModal from "../../utils/settings/profile/modals/modals/GenderModal";
+import ActivityPickerModal from "../../utils/settings/profile/modals/modals/ActivityPickerModal";
+import WeightPickerModal from "../../utils/settings/profile/modals/modals/WeightPickerModal";
+import WeeklyGoalModal from "../../utils/settings/profile/modals/modals/WeeklyGoalModal";
+import { Switch } from "react-native-elements/dist/switch/switch";
 
 export default function Account({ session }: { session: Session }) {
 	const [modalVisible, setModalVisible] = useState(false);
@@ -33,6 +38,9 @@ export default function Account({ session }: { session: Session }) {
 	const created = true;
 
 	const dispatch = useAppDispatch();
+
+	const [page, setPage] = useState(1);
+	const [showGenderModal, setShowGenderModal] = useState(true);
 
 	//update component and global states
 	function updateReduxUserStates(data, sessionID) {
@@ -62,6 +70,23 @@ export default function Account({ session }: { session: Session }) {
 
 	const navigateToTabNavigator = () => {
 		navigation.navigate("TabNavigator");
+	};
+
+	const AccountSetup = (page) => {
+		switch (page) {
+			case 1:
+				return (
+					<GenderModal
+						showGenderModal={showGenderModal}
+						setShowGenderModal={setShowGenderModal}
+						setPage={setPage}
+					/>
+				);
+			case 2:
+				return <ActivityPickerModal />;
+			default:
+				return <GenderModal />;
+		}
 	};
 
 	async function getProfile() {
@@ -144,73 +169,6 @@ export default function Account({ session }: { session: Session }) {
 
 	return (
 		<View style={styles.container}>
-			<Modal
-				animationType="slide"
-				transparent={true}
-				visible={modalVisible}
-				onRequestClose={() => {
-					Alert.alert("Modal has been closed.");
-					setModalVisible(!modalVisible);
-				}}>
-				<View style={styles.centeredView}>
-					<View style={styles.modalView}>
-						<Text style={styles.modalText}>
-							Fill out your profile to get started!
-						</Text>
-						<Pressable
-							style={[styles.button, styles.buttonClose]}
-							onPress={() => setModalVisible(!modalVisible)}>
-							<Text style={styles.textStyle}>Close</Text>
-						</Pressable>
-					</View>
-				</View>
-			</Modal>
-			<View style={styles.verticallySpaced}>
-				<Input
-					label="Username"
-					value={username || ""}
-					onChangeText={(text) => setUsername(text)}
-				/>
-			</View>
-			<View style={styles.verticallySpaced}>
-				<Input label="Age" value={age} onChangeText={(text) => setAge(text)} />
-			</View>
-			<View style={styles.verticallySpaced}>
-				<Input
-					label="Gender"
-					value={gender}
-					onChangeText={(text) => setGender(text)}
-				/>
-			</View>
-			<View style={styles.verticallySpaced}>
-				<Input
-					label="Height"
-					value={height || ""}
-					onChangeText={(text) => setHeight(text)}
-				/>
-			</View>
-			<View style={styles.verticallySpaced}>
-				<Input
-					label="Weight"
-					value={weight || ""}
-					onChangeText={(text) => setWeight(text)}
-				/>
-			</View>
-			<View style={styles.verticallySpaced}>
-				<Input
-					label="Activity Level 0-10"
-					value={activity || ""}
-					onChangeText={(text) => setActivity(text)}
-				/>
-			</View>
-			<View style={styles.verticallySpaced}>
-				<Input
-					label="Goal Weight"
-					value={goal || ""}
-					onChangeText={(text) => setGoal(text)}
-				/>
-			</View>
-
 			<View style={[styles.verticallySpaced, styles.mt20]}>
 				<Button
 					title={loading ? "Loading ..." : "Create Profile"}
@@ -233,6 +191,7 @@ export default function Account({ session }: { session: Session }) {
 			<View style={styles.verticallySpaced}>
 				<Button title="Sign Out" onPress={() => supabase.auth.signOut()} />
 			</View>
+			{AccountSetup(page)}
 		</View>
 	);
 }

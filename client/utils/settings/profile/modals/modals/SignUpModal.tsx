@@ -8,6 +8,7 @@ import headerIMG from "../../../../../assets/images/weight_lifting.png";
 //Import supabase
 import { supabase } from "../../../../supabase_authentication/supabase";
 //Import redux hooks
+import { changeName } from "../../../../../redux-manager/redux-slice/user-slice";
 import {
 	useAppDispatch,
 	useAppSelector,
@@ -19,6 +20,7 @@ import { useDatabase } from "@nozbe/watermelondb/hooks";
 const SignUpModal = (props) => {
 	//Import redux
 	const { colors } = useAppSelector((state) => state.theme);
+	const { name } = useAppSelector((state) => state.user);
 	const dispatch = useAppDispatch();
 
 	//watermelonDB
@@ -38,38 +40,6 @@ const SignUpModal = (props) => {
 			surfaceVariant: colors.secondary,
 		},
 	};
-
-	// async function updateProfile(
-	//   username: string,
-	// ) {
-	//   try {
-	//     setLoading(true);
-	//     const updates = {
-	//       user_id: sessionID,
-	//       username,
-	//       updated_at: new Date(),
-	//     };
-	//     console.log(updates);
-	//     const profile_data = await database.write(async () => {
-	//       await database.get<Profile>("profiles").create((profile) => {
-	//         profile.completeProfile(
-	//           (profile.username = username)
-	//         );
-	//       });
-	//     });
-	//     if (profile_data) {
-	//       console.log("Successfully created food post");
-	//       const all_profiles = await database.get("profiles").query().fetch();
-	//       console.log("food saved in DB!:", all_profiles);
-	//     }
-	//   } catch (error) {
-	//     if (error instanceof Error) {
-	//       Alert.alert(error.message);
-	//     }
-	//   } finally {
-	//     setLoading(false);
-	//   }
-	// }
 
 	//Todo: update user profile when signing up
 	//Sign up with supabase auth
@@ -177,7 +147,8 @@ const SignUpModal = (props) => {
 					<View className="flex-row justify-center mt-12">
 						<Button
 							disabled={loading}
-							onPress={() => {
+							onPress={async () => {
+								await dispatch(changeName(username));
 								signUpWithEmail();
 							}}
 							style={{ backgroundColor: colors.primary, width: 214 }}

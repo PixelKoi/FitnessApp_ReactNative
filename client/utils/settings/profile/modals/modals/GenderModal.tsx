@@ -19,7 +19,7 @@ const GenderModal = (props) => {
 	const genderList = ["female", "male", "male-female"];
 
 	return (
-		<Modal visible={true}>
+		<Modal visible={props.showGenderModal}>
 			<View
 				style={{ backgroundColor: colors.secondary }}
 				className="flex-1 items-center">
@@ -31,7 +31,7 @@ const GenderModal = (props) => {
 						borderTopRightRadius: 60,
 						backgroundColor: colors.background,
 					}}
-					className=" h-screen w-screen">
+					className="flex-1 h-screen w-screen">
 					<View className="mx-14 mt-6">
 						<Text
 							// style={{ color: colors.primary }}
@@ -60,10 +60,10 @@ const GenderModal = (props) => {
 							</View>
 						</View>
 					</View>
-					<View className="flex-row justify-center mt-12">
+					<View className="flex-1 self-center justify-end mb-16">
 						<Button
 							onPress={() => {
-								props.setShowActivityModal(false);
+								props.setPage(2);
 							}}
 							style={{
 								backgroundColor: colors.primary,

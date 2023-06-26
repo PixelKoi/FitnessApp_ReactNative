@@ -7,11 +7,12 @@ import Animated, { useAnimatedProps } from "react-native-reanimated";
 interface AnimatedStateProps {
 	d: string;
 	progress: Animated.SharedValue<number>;
+	markerEnd: string;
 }
 
 const AnimatedPath = Animated.createAnimatedComponent(Path);
 
-const AnimatedStroke = ({ d, progress }: AnimatedStateProps) => {
+const AnimatedStroke = ({ d, progress, markerEnd }: AnimatedStateProps) => {
 	const { colors } = useAppSelector((state) => state.theme);
 
 	const [length, setLength] = useState(0);
@@ -27,7 +28,7 @@ const AnimatedStroke = ({ d, progress }: AnimatedStateProps) => {
 			ref={ref}
 			stroke={colors.primary}
 			fill="none"
-			strokeWidth={15}
+			strokeWidth={18}
 			strokeDasharray={length}
 			strokeLinecap="round"
 		/>

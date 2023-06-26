@@ -122,7 +122,12 @@ const Fasting = () => {
 			className="flex-1 flex-col justify-center">
 			{/* Clock section */}
 			<View className="mb-14">
-				<View className="z-10">
+				{/* Fasting Donut Graph */}
+				<View className="mt-6 z-0">
+					<FastingTimer2 />
+				</View>
+
+				{/* <View className="z-10">
 					<TouchableOpacity
 						style={{
 							backgroundColor: colors.secondary,
@@ -226,12 +231,7 @@ const Fasting = () => {
 							</TouchableOpacity>
 						</Surface>
 					)}
-				</View>
-
-				{/* Fasting Donut Graph */}
-				<View className="mt-6 z-0">
-					<FastingTimer2 />
-				</View>
+				</View> */}
 
 				<Text
 					style={{ color: colors.primary }}
