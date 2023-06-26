@@ -5,8 +5,12 @@ import { TextInput } from "react-native-paper";
 //Images
 import headerIMG from "../../assets/images/weight_lifting.png";
 import { useAppDispatch, useAppSelector } from "../../redux-manager/hooks";
+import { supabase } from "../../utils/supabase_authentication/supabase";
+import { useNavigation } from "@react-navigation/native";
+import * as Linking from "expo-linking";
 
 const ForgotPass = () => {
+	const navigation = useNavigation();
 	const [loading, setLoading] = useState(false);
 	const [email, setEmail] = useState<string>("");
 
@@ -22,16 +26,14 @@ const ForgotPass = () => {
 		},
 	};
 
-	// const resetPassword = async (email) => {
-	//     try {
-	//       await supabase.auth.resetPasswordForEmail(email, {
-	//         redirectTo: 'http://example.com/account/update-password',
-	//       });
-	//       // Password reset email sent successfully
-	//     } catch (error) {
-	//       // Handle error
-	//     }
-	//   };
+	const resetPassword = async (email: string) => {
+		const { error } = await supabase.auth.resetPasswordForEmail(email);
+		if (error) {
+			console.log(error);
+		} else {
+			navigation.navigate("UpdatePass");
+		}
+	};
 
 	return (
 		<View
@@ -73,7 +75,9 @@ const ForgotPass = () => {
 				<View className="flex-row justify-center mt-12">
 					<Button
 						disabled={loading}
-						onPress={() => {}}
+						onPress={() => {
+							resetPassword(email);
+						}}
 						style={{ backgroundColor: colors.primary, width: 214 }}
 						mode="contained">
 						<Text className="font-bold">Submit</Text>

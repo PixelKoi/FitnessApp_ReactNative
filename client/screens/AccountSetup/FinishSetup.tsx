@@ -14,10 +14,15 @@ import {
 import { supabase } from "../../utils/supabase_authentication/supabase";
 
 const FinishSetup = ({ session }: { session: Session }) => {
+	//Import nav
 	const navigation = useNavigation();
 
+	//Setup hooks
 	const [loading, setLoading] = useState(true);
+
+	// Set profile created to true when finishing initial setup
 	const created = true;
+
 	//Import redux
 	const { colors } = useAppSelector((state) => state.theme);
 	const { email, name, gender, age, height, weight, activity, goal } =

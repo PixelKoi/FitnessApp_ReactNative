@@ -1,17 +1,10 @@
 import React, { useState } from "react";
-import {
-	View,
-	Text,
-	Image,
-	Modal,
-	Alert,
-	TouchableOpacity,
-} from "react-native";
+import { View, Text, Image, Alert, TouchableOpacity } from "react-native";
 import { Button, Surface, DefaultTheme } from "react-native-paper";
 import { TextInput } from "react-native-paper";
 //Images
 import headerIMG from "../../assets/images/weight_lifting.png";
-import { useDatabase } from "@nozbe/watermelondb/hooks";
+//Import redux
 import { useAppDispatch, useAppSelector } from "../../redux-manager/hooks";
 import { supabase } from "../../utils/supabase_authentication/supabase";
 import { useNavigation } from "@react-navigation/native";

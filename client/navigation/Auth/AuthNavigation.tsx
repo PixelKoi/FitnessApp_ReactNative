@@ -7,6 +7,7 @@ import Auth from "../../screens/Account/Auth";
 import SignUp from "../../screens/Account/SignUp";
 import SignIn from "../../screens/Account/SignIn";
 import ForgotPass from "../../screens/Account/ForgotPass";
+import UpdatePass from "../../screens/Account/UpdatePass";
 
 const AuthNavigation = () => {
 	const AuthNavStack = createNativeStackNavigator();
@@ -32,6 +33,11 @@ const AuthNavigation = () => {
 					options={{ headerShown: false }}
 					name="ForgotPass"
 					component={ForgotPass}
+				/>
+				<AuthNavStack.Screen
+					options={{ headerShown: false }}
+					name="UpdatePass"
+					component={UpdatePass}
 				/>
 			</AuthNavStack.Navigator>
 		);

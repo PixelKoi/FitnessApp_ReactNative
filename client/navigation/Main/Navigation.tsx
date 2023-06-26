@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Alert, View, ActivityIndicator, StyleSheet } from "react-native";
+import { Alert } from "react-native";
 //Screen imports
 import Settings from "../../screens/Settings/Settings";
 import ThemeSelector from "../../screens/Settings/Theme/ThemeSelector";
