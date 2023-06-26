@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { View, Text, Image, Modal, Alert } from "react-native";
+import {
+	View,
+	Text,
+	Image,
+	Modal,
+	Alert,
+	TouchableOpacity,
+} from "react-native";
 import { Button, Surface, DefaultTheme } from "react-native-paper";
 import { TextInput } from "react-native-paper";
 //Images
@@ -109,11 +116,14 @@ const SignIn = (props) => {
 									borderRadius: 3,
 								}}
 							/>
-							<Text
-								className="ml-auto mt-4 font-bold"
-								style={{ color: "#9B9B99", fontSize: 14 }}>
-								Forgot password?
-							</Text>
+							<TouchableOpacity
+								onPress={() => navigation.navigate("ForgotPass")}>
+								<Text
+									className="ml-auto mt-4 font-bold"
+									style={{ color: "#9B9B99", fontSize: 14 }}>
+									Forgot password?
+								</Text>
+							</TouchableOpacity>
 						</View>
 					</View>
 				</View>
