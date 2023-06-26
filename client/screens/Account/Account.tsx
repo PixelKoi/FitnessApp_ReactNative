@@ -72,23 +72,6 @@ export default function Account({ session }: { session: Session }) {
 		navigation.navigate("TabNavigator");
 	};
 
-	const AccountSetup = (page) => {
-		switch (page) {
-			case 1:
-				return (
-					<GenderModal
-						showGenderModal={showGenderModal}
-						setShowGenderModal={setShowGenderModal}
-						setPage={setPage}
-					/>
-				);
-			case 2:
-				return <ActivityPickerModal />;
-			default:
-				return <GenderModal />;
-		}
-	};
-
 	async function getProfile() {
 		try {
 			setLoading(true);

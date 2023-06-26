@@ -12,7 +12,7 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 
 //navigation
-import Navigation from "./components/navigation/Navigation";
+import Navigation from "./navigation/Navigation";
 import "react-native-gesture-handler";
 
 // Watermelon

@@ -1,20 +1,22 @@
 import React from "react";
 //Screen imports
-import Nutrition from "../../screens/Nutrition/Nutrition/Nutrition";
-import Diary from "../../screens/Nutrition/Diary/Diary";
-import Dashboard from "../../screens/Dashboard/Dashboard";
-import Timer from "../../screens/Timers/Timer";
+import Nutrition from "../screens/Nutrition/Nutrition/Nutrition";
+import Diary from "../screens/Nutrition/Diary/Diary";
+import Dashboard from "../screens/Dashboard/Dashboard";
+import Timer from "../screens/Timers/Timer";
 //redux imports
 import { ClockIcon } from "react-native-heroicons/outline";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import Ant from "react-native-vector-icons/AntDesign";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { useAppSelector } from "../../redux-manager/hooks";
+import { useAppSelector } from "../redux-manager/hooks";
 
 const BottomTab = () => {
-	const { colors } = useAppSelector((state) => state.theme);
-
+	//Set navigation instace
 	const BottomTab = createBottomTabNavigator();
+
+	//Import redux states
+	const { colors } = useAppSelector((state) => state.theme);
 
 	return (
 		<BottomTab.Navigator

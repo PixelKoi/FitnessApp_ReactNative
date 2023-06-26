@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, Image, Modal, TouchableOpacity } from "react-native";
+import { View, Text, Image, TouchableOpacity } from "react-native";
 import headerIMG from "../../assets/images/weight_lifting.png";
 import { Button, Surface } from "react-native-paper";
 import { useAppDispatch, useAppSelector } from "../../redux-manager/hooks";

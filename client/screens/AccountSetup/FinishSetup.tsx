@@ -1,18 +1,76 @@
 import React, { useState } from "react";
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, Alert } from "react-native";
 import headerIMG from "../../assets/images/weight_lifting.png";
 import { Button, Surface } from "react-native-paper";
-import { useAppDispatch, useAppSelector } from "../../redux-manager/hooks";
+
 import { useNavigation } from "@react-navigation/native";
 import { Session } from "@supabase/supabase-js";
+// Import redux
+import { useAppDispatch, useAppSelector } from "../../redux-manager/hooks";
+import {
+	setSessionID,
+	setUserStates,
+} from "../../redux-manager/redux-slice/user-slice";
+import { supabase } from "../../utils/supabase_authentication/supabase";
 
 const FinishSetup = ({ session }: { session: Session }) => {
 	const navigation = useNavigation();
 
+	const [loading, setLoading] = useState(true);
+	const created = true;
 	//Import redux
 	const { colors } = useAppSelector((state) => state.theme);
-	const { name, age, weight } = useAppSelector((state) => state.user);
+	const { email, name, gender, age, height, weight, activity, goal } =
+		useAppSelector((state) => state.user);
 	const dispatch = useAppDispatch();
+
+	async function updateProfile({
+		username,
+		age,
+		gender,
+		height,
+		weight,
+		activity,
+		goal,
+		created,
+	}: {
+		username: string;
+		age: number;
+		gender: string;
+		height: number;
+		weight: number;
+		activity: string;
+		goal: number;
+		created: boolean;
+	}) {
+		try {
+			setLoading(true);
+			if (!session?.user) throw new Error("No redux-slice on the session!");
+
+			const updates = {
+				user_id: session?.user.id,
+				username,
+				age,
+				gender,
+				height,
+				weight,
+				activity,
+				goal,
+				created,
+				updated_at: new Date(),
+			};
+			let { error } = await supabase.from("profile").upsert(updates);
+			if (error) {
+				throw error;
+			}
+		} catch (error) {
+			if (error instanceof Error) {
+				Alert.alert(error.message);
+			}
+		} finally {
+			setLoading(false);
+		}
+	}
 
 	return (
 		<View
@@ -38,6 +96,16 @@ const FinishSetup = ({ session }: { session: Session }) => {
 				<View className="flex-1 self-center justify-end mb-16">
 					<Button
 						onPress={async () => {
+							await updateProfile({
+								username,
+								age,
+								gender,
+								height,
+								weight,
+								activity,
+								goal,
+								created,
+							});
 							await navigation.navigate("NavGroup");
 						}}
 						style={{
