@@ -8,14 +8,11 @@ import {
   Animated,
 } from "react-native";
 import {
-  HeartIcon,
   XCircleIcon,
   MagnifyingGlassIcon,
   ChevronDownIcon,
-  ChevronUpIcon,
   PlusCircleIcon,
 } from "react-native-heroicons/outline";
-import { HeartIcon as FilledHeartIcon } from "react-native-heroicons/solid";
 import { params } from "../../../constants";
 import { useNavigation } from "@react-navigation/native";
 import {
@@ -38,8 +35,9 @@ import {
   reduceInventory,
 } from "../../../redux-manager/redux-slice/nutrition-slice";
 import { useAppSelector, useAppDispatch } from "../../../redux-manager/hooks";
-import Swipeable from "react-native-gesture-handler/Swipeable";
 import MealPicker from "../../../utils/nutrition/meal-picker/MealPicker";
+import FavoritesModal from "./modals/FavoriteModal";
+import { Dimensions } from "react-native";
 import { BlurView } from "expo-blur";
 
 const styles = StyleSheet.create({
@@ -68,6 +66,13 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.5, // Reduce the opacity for a lighter effect
     shadowRadius: 2,
+  },
+  favoriteModal: {
+    backgroundColor: "white",
+    padding: 16,
+  },
+  overlay: {
+    backgroundColor: "transparent", // Set overlay background color to transparent
   },
 });
 
@@ -111,8 +116,8 @@ const Nutrition: React.FC = () => {
   };
 
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const handleFavoritePress = () => {
-    setIsModalVisible(!isModalVisible);
+  const openFavoriteModal = () => {
+    setIsModalVisible(true);
   };
   const closeFavoriteModal = () => {
     setIsModalVisible(false);
@@ -147,33 +152,6 @@ const Nutrition: React.FC = () => {
     setVisible(false);
   };
 
-  const leftSwipe = (progress, dragX) => {
-    const scale = dragX.interpolate({
-      inputRange: [0, 100],
-      outputRange: [1, 0],
-      extrapolate: "clamp",
-    });
-
-    return (
-      <View
-        className=""
-        style={{ backgroundColor: primary_color, justifyContent: "center" }}
-      >
-        <Animated.Text
-          className="items-start"
-          style={{
-            color: "white",
-            paddingHorizontal: 20,
-            fontWeight: "600",
-            transform: [{ scale }],
-          }}
-        >
-          Delete
-        </Animated.Text>
-      </View>
-    );
-  };
-
   const [selectedLanguage, setSelectedLanguage] = useState<string>("java");
   const [isPickerVisible, setIsPickerVisible] = useState<boolean>(false);
 
@@ -206,7 +184,7 @@ const Nutrition: React.FC = () => {
       },
       headerLeft: () => (
         <View>
-          <TouchableOpacity onPress={handleFavoritePress}>
+          <TouchableOpacity onPress={openFavoriteModal}>
             <Icon
               name="heart"
               color={primary_color}
@@ -322,143 +300,75 @@ const Nutrition: React.FC = () => {
 
   const renderFoodItem = (food, index, foodArray) => {
     return (
-      <View className="mx-2 py-2">
-        <Card style={styles.cardShadow}>
-          <Card.Content style={{ paddingVertical: 8 }}>
-            <View className="flex flex-row items-center ">
-              <View className="flex flex-col">
-                <Text style={{ color: primary_color }} className="font-bold">
-                  {food.description}
-                </Text>
-                <Text style={{ color: primary_color }}>
-                  {food.Protein}g Protein
-                </Text>
-                <Text style={{ color: primary_color }}>{food.Fat}g Fat</Text>
-                <Text style={{ color: primary_color }}>
-                  {food.Carbs}g Carbs
-                </Text>
-                <Text style={{ color: primary_color }} className="font-bold">
-                  {food.Calories} Calories
-                </Text>
-              </View>
+      <>
+        <View className="mx-2 py-2">
+          <Card style={styles.cardShadow}>
+            <Card.Content style={{ paddingVertical: 8 }}>
+              <View className="flex flex-row items-center ">
+                <View className="flex flex-col">
+                  <Text style={{ color: primary_color }} className="font-bold">
+                    {food.description}
+                  </Text>
+                  <Text style={{ color: primary_color }}>
+                    {food.Protein}g Protein
+                  </Text>
+                  <Text style={{ color: primary_color }}>{food.Fat}g Fat</Text>
+                  <Text style={{ color: primary_color }}>
+                    {food.Carbs}g Carbs
+                  </Text>
+                  <Text style={{ color: primary_color }} className="font-bold">
+                    {food.Calories} Calories
+                  </Text>
+                </View>
 
-              <View className="flex flex-col ml-auto">
-                {food.quantity > 0 ? (
-                  <TouchableOpacity className="pl-1.5 pb-4">
-                    <Icon
-                      size={24}
-                      name="checkmark-circle-sharp"
-                      color={primary_color}
-                    />
-                  </TouchableOpacity>
-                ) : (
-                  <TouchableOpacity
-                    onPress={() => add_inventory_item(foodArray, index)}
-                    className="px-1.5 pb-4"
-                  >
-                    <Icon
-                      size={24}
-                      name="add-circle-outline"
-                      color={primary_color}
-                    />
-                  </TouchableOpacity>
-                )}
-
-                <TouchableOpacity
-                  onPress={() => handleFavoriteToggle(index, foodArray)}
-                  className="rounded-full px-1.5 text-primary "
-                >
-                  {selectedHearts[index] ? (
-                    <Icon size={24} name="heart" color={primary_color} />
+                <View className="flex flex-col ml-auto">
+                  {food.quantity > 0 ? (
+                    <TouchableOpacity className="pl-1.5 pb-4">
+                      <Icon
+                        size={24}
+                        name="checkmark-circle-sharp"
+                        color={primary_color}
+                      />
+                    </TouchableOpacity>
                   ) : (
-                    <Icon
-                      name="heart-outline"
-                      color={primary_color}
-                      size={24}
-                    />
+                    <TouchableOpacity
+                      onPress={() => add_inventory_item(foodArray, index)}
+                      className="px-1.5 pb-4"
+                    >
+                      <Icon
+                        size={24}
+                        name="add-circle-outline"
+                        color={primary_color}
+                      />
+                    </TouchableOpacity>
                   )}
-                </TouchableOpacity>
+
+                  <TouchableOpacity
+                    onPress={() => handleFavoriteToggle(index, foodArray)}
+                    className="rounded-full px-1.5 text-primary "
+                  >
+                    {selectedHearts[index] ? (
+                      <Icon size={24} name="heart" color={primary_color} />
+                    ) : (
+                      <Icon
+                        name="heart-outline"
+                        color={primary_color}
+                        size={24}
+                      />
+                    )}
+                  </TouchableOpacity>
+                </View>
               </View>
-            </View>
-          </Card.Content>
-        </Card>
-      </View>
+            </Card.Content>
+          </Card>
+        </View>
+      </>
     );
   };
+
   return (
     <Provider>
       <View className="flex-1 bg-white">
-        <Portal>
-          <Modal
-            className="h-full"
-            visible={isModalVisible}
-            animationType="fade"
-            onDismiss={closeFavoriteModal}
-          >
-            <View className="flex-col bg-white">
-              <View className="py-4">
-                <Text
-                  className="text-center text-2xl font-bold"
-                  style={{ color: primary_color }}
-                >
-                  Favorites
-                </Text>
-              </View>
-              <View className="absolute top-0 right-0 p-4">
-                <AntIcon
-                  name="closecircle"
-                  color={primary_color}
-                  size={24}
-                  onPress={handleFavoritePress}
-                />
-              </View>
-              {/*Favorite Modal Body with scrollview */}
-              <View className="">
-                {favorites.length > 0 ? (
-                  <FlatList
-                    indicatorStyle="black"
-                    className="pt-8"
-                    data={favorites}
-                    keyExtractor={(item) => item.fav_id.toString()}
-                    renderItem={({ item, index }) => (
-                      <View key={item.fav_id} className="p-1">
-                        <Swipeable renderRightActions={leftSwipe}>
-                          <View className="flex flex-row mt-0">
-                            <View className="flex flex-col">
-                              <Card.Content>
-                                <Text
-                                  style={{ color: primary_color }}
-                                  className="font-bold"
-                                  variant="titleLarge"
-                                >
-                                  <Text>{item.description}</Text>
-                                </Text>
-                                <Text style={{ color: primary_color }}>
-                                  Calories: {item.Calories}
-                                </Text>
-                              </Card.Content>
-                            </View>
-                          </View>
-                          {index !== favorites.length - 1 && (
-                            <View
-                              className="mx-4"
-                              style={{
-                                borderBottomWidth: 1,
-                                borderBottomColor: secondary_color,
-                              }}
-                            />
-                          )}
-                        </Swipeable>
-                      </View>
-                    )}
-                  />
-                ) : (
-                  <View></View>
-                )}
-              </View>
-            </View>
-          </Modal>
-        </Portal>
         <Portal>
           <Dialog visible={mealError} onDismiss={hideErrorDialog}>
             <Dialog.Title>Error</Dialog.Title>
