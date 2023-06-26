@@ -13,6 +13,7 @@ import { PersistGate } from "redux-persist/integration/react";
 
 //navigation
 import Navigation from "./navigation/Navigation";
+import AuthNavigation from "./navigation/Auth/AuthNavigation";
 import "react-native-gesture-handler";
 
 // Watermelon
@@ -48,7 +49,7 @@ export default function App() {
 				<DatabaseProvider database={database}>
 					<GestureHandlerRootView style={{ flex: 1 }}>
 						<Provider store={store}>
-							<Auth />
+							<AuthNavigation />
 						</Provider>
 					</GestureHandlerRootView>
 				</DatabaseProvider>

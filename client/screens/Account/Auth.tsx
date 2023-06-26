@@ -8,8 +8,10 @@ import { useAppSelector } from "../../redux-manager/hooks";
 //Import Modals
 import SignUp from "../../utils/settings/profile/modals/modals/SignUpModal";
 import SignIn from "../../utils/settings/profile/modals/modals/SignInModal";
+import { useNavigation } from "@react-navigation/native";
 
 const Auth = () => {
+	const navigation = useNavigation();
 	//Show modal hooks
 	const [showSignInModal, setShowSignInModal] = useState(false);
 	const [showSignUpModal, setShowSignUpModal] = useState(false);
@@ -40,7 +42,7 @@ const Auth = () => {
 				<View className="items-center gap-3">
 					<Button
 						style={{ backgroundColor: colors.primary, width: 214 }}
-						onPress={() => setShowSignUpModal(true)}>
+						onPress={() => navigation.navigate("SignUp")}>
 						<Text className="font-bold" style={{ color: "#ffff" }}>
 							Sign up for free
 						</Text>
@@ -48,20 +50,13 @@ const Auth = () => {
 
 					<Button
 						style={{ backgroundColor: colors.primary, width: 214 }}
-						onPress={() => setShowSignInModal(true)}>
+						onPress={() => navigation.navigate("SignIn")}>
 						<Text className="font-bold" style={{ color: "#ffff" }}>
 							Sign in
 						</Text>
 					</Button>
 				</View>
 			</View>
-			{/* Sign Up/In Modals */}
-			<SignIn showSignInModal={showSignInModal} />
-			<SignUp
-				showSignUpModal={showSignUpModal}
-				setShowSignUpModal={setShowSignUpModal}
-				setShowSignInModal={setShowSignInModal}
-			/>
 		</View>
 	);
 };

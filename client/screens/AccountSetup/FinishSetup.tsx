@@ -96,16 +96,16 @@ const FinishSetup = ({ session }: { session: Session }) => {
 				<View className="flex-1 self-center justify-end mb-16">
 					<Button
 						onPress={async () => {
-							await updateProfile({
-								username,
-								age,
-								gender,
-								height,
-								weight,
-								activity,
-								goal,
-								created,
-							});
+							// await updateProfile({
+							// 	username,
+							// 	age,
+							// 	gender,
+							// 	height,
+							// 	weight,
+							// 	activity,
+							// 	goal,
+							// 	created,
+							// });
 							await navigation.navigate("NavGroup");
 						}}
 						style={{

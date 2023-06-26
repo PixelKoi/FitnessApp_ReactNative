@@ -174,7 +174,6 @@ export default function Account({ session }: { session: Session }) {
 			<View style={styles.verticallySpaced}>
 				<Button title="Sign Out" onPress={() => supabase.auth.signOut()} />
 			</View>
-			{AccountSetup(page)}
 		</View>
 	);
 }
