@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { TouchableOpacity, View } from "react-native";
+import { Image, TouchableOpacity, View } from "react-native";
 import { Divider, Text, Card, Button } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { useDatabase } from "@nozbe/watermelondb/hooks";
@@ -11,6 +11,7 @@ import Food from "../../../database/models/Food";
 import Icon from "react-native-vector-icons/FontAwesome";
 import AntIcon from "react-native-vector-icons/AntDesign";
 import { UserCircleIcon } from "react-native-heroicons/outline";
+import { backgroundColor } from "react-native-calendars/src/style";
 const Diary = (props) => {
   const tabNavigation = useNavigation();
   const database = useDatabase();
@@ -43,7 +44,7 @@ const Diary = (props) => {
         <TouchableOpacity
           className="mr-4"
           onPress={() => {
-            tabNavigation.navigate("Profile");
+            tabNavigation.navigate("Settings");
           }}
         >
           <UserCircleIcon name="ios-add" size={30} color={primary_color} />
@@ -88,77 +89,127 @@ const Diary = (props) => {
         </View>
         {/* other content */}
         <View className="w-full">
-          <Card className="m-2 pb-4">
-            <Card.Title
-              title="Breakfast"
-              titleStyle={{ fontSize: 20, fontWeight: "bold" }}
-            />
-            <Divider className="mb-4" />
-            <View className="flex-row start-0">
-              <Button
-                icon="plus"
-                mode="text"
-                onPress={() => tabNavigation.navigate("Nutrition")}
-              >
-                Add Food
-              </Button>
+          <Text className="pl-2 font-bold" style={{ color: colors.primary }}>
+            Daily Intake
+          </Text>
+          <Card
+            className="m-4 p-4 rounded-2xl"
+            style={{ backgroundColor: colors.secondary }}
+          >
+            <View className="flex flex-row start-0 px-4 items-center">
+              <View className="flex flex-col mr-6">
+                <Image
+                  style={{ width: 75, height: 70 }}
+                  source={require("../../../assets/images/Diary/breakfast.png")}
+                />
+              </View>
+              <View className="flex flex-col">
+                <Text
+                  style={{ color: colors.primary }}
+                  className="font-bold text-2xl"
+                >
+                  Breakfast
+                </Text>
+                <Text
+                  className="font-semibold"
+                  style={{ color: colors.primary }}
+                >
+                  CALORIES
+                </Text>
+              </View>
             </View>
           </Card>
         </View>
         <Divider />
         <View className="w-full">
-          <Card className="m-2 pb-4">
-            <Card.Title
-              title="Lunch"
-              titleStyle={{ fontSize: 20, fontWeight: "bold" }}
-            />
-            <Divider />
-            <View className="flex-row start-0">
-              <Button
-                icon="plus"
-                mode="text"
-                onPress={() => tabNavigation.navigate("Nutrition")}
-              >
-                Add Food
-              </Button>
+          <Card
+            style={{ backgroundColor: colors.secondary }}
+            className="m-4 p-4 rounded-2xl"
+          >
+            <View className="flex flex-row start-0 px-4 items-center">
+              <View className="flex flex-col mr-6">
+                <Image
+                  style={{ width: 75, height: 70 }}
+                  source={require("../../../assets/images/Diary/Lunch.png")}
+                />
+              </View>
+              <View className="flex flex-col">
+                <Text
+                  style={{ color: colors.primary }}
+                  className="font-bold text-2xl"
+                >
+                  Lunch
+                </Text>
+                <Text
+                  className="font-semibold"
+                  style={{ color: colors.primary }}
+                >
+                  CALORIES
+                </Text>
+              </View>
             </View>
           </Card>
         </View>
-        <Divider />
         <View className="w-full">
-          <Card className="m-2 pb-4">
-            <Card.Title
-              title="Dinner"
-              titleStyle={{ fontSize: 20, fontWeight: "bold" }}
-            />
-            <Divider />
-            <View className="flex-row start-0">
-              <Button
-                icon="plus"
-                mode="text"
-                onPress={() => tabNavigation.navigate("Nutrition")}
-              >
-                Add Food
-              </Button>
+          <Card
+            style={{ backgroundColor: colors.secondary }}
+            className="m-4 p-4 rounded-2xl"
+          >
+            <View className="flex flex-row start-0 px-4 items-center">
+              <View className="flex flex-col mr-6">
+                <Image
+                  style={{ width: 75, height: 70 }}
+                  source={require("../../../assets/images/Diary/dinner.png")}
+                />
+              </View>
+              <View className="flex flex-col">
+                <Text
+                  style={{ color: colors.primary }}
+                  className="font-bold text-2xl"
+                >
+                  Dinner
+                </Text>
+                <Text
+                  className="font-semibold"
+                  style={{ color: colors.primary }}
+                >
+                  CALORIES
+                </Text>
+              </View>
             </View>
           </Card>
         </View>
-        <Divider />
+        {/*<Button*/}
+        {/*    icon="plus"*/}
+        {/*    mode="text"*/}
+        {/*    onPress={() => tabNavigation.navigate("Nutrition")}*/}
+        {/*>*/}
         <View className="w-full">
-          <Card className="m-2 pb-4">
-            <Card.Title
-              title="Snacks"
-              titleStyle={{ fontSize: 20, fontWeight: "bold" }}
-            />
-            <Divider />
-            <View className="flex-row start-0">
-              <Button
-                icon="plus"
-                mode="text"
-                onPress={() => tabNavigation.navigate("Nutrition")}
-              >
-                Add Food
-              </Button>
+          <Card
+            style={{ backgroundColor: colors.secondary }}
+            className="m-4 p-4 rounded-2xl"
+          >
+            <View className="flex flex-row start-0 px-4 items-center">
+              <View className="flex flex-col mr-6">
+                <Image
+                  style={{ width: 75, height: 70 }}
+                  source={require("../../../assets/images/Diary/Coffee.png")}
+                />
+              </View>
+              <View className="flex flex-col">
+                <Text
+                  style={{ color: colors.primary }}
+                  className="font-bold text-2xl"
+                >
+                  Snacks
+                </Text>
+                <Text
+                  className="font-semibold"
+                  style={{ color: colors.primary }}
+                >
+                  CALORIES
+                </Text>
+              </View>
             </View>
           </Card>
         </View>
