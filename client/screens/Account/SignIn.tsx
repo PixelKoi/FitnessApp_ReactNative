@@ -11,7 +11,6 @@ import { Button, Surface, DefaultTheme } from "react-native-paper";
 import { TextInput } from "react-native-paper";
 //Images
 import headerIMG from "../../assets/images/weight_lifting.png";
-
 import { useDatabase } from "@nozbe/watermelondb/hooks";
 import { useAppDispatch, useAppSelector } from "../../redux-manager/hooks";
 import { supabase } from "../../utils/supabase_authentication/supabase";

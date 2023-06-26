@@ -6,7 +6,7 @@ import { TextInput } from "react-native-paper";
 import headerIMG from "../../assets/images/weight_lifting.png";
 import { useAppDispatch, useAppSelector } from "../../redux-manager/hooks";
 
-const ForgotPass = () => {
+const UpdatePass = () => {
 	const [loading, setLoading] = useState(false);
 	const [email, setEmail] = useState<string>("");
 
@@ -84,4 +84,4 @@ const ForgotPass = () => {
 	);
 };
 
-export default ForgotPass;
+export default UpdatePass;
