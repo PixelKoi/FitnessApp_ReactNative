@@ -11,10 +11,8 @@ import SignIn from "../../utils/settings/profile/modals/modals/SignInModal";
 import { useNavigation } from "@react-navigation/native";
 
 const Auth = () => {
+	// Import nav
 	const navigation = useNavigation();
-	//Show modal hooks
-	const [showSignInModal, setShowSignInModal] = useState(false);
-	const [showSignUpModal, setShowSignUpModal] = useState(false);
 
 	//Redux theme
 	const { colors } = useAppSelector((state) => state.theme);

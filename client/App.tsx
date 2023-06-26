@@ -12,7 +12,7 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 
 //navigation
-import Navigation from "./navigation/Navigation";
+import Navigation from "./navigation/Main/Navigation";
 import AuthNavigation from "./navigation/Auth/AuthNavigation";
 import "react-native-gesture-handler";
 

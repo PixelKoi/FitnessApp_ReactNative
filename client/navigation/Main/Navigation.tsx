@@ -1,24 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { Alert, View, ActivityIndicator, StyleSheet } from "react-native";
 //Screen imports
-import Settings from "../screens/Settings/Settings";
-import ThemeSelector from "../screens/Settings/Theme/ThemeSelector";
-import MeditationDash from "../screens/Timers/Meditation/MeditationDash";
-import MeditationTimer from "../screens/Timers/Meditation/MeditationTimer";
-import Fasting from "../screens/Timers/Fasting/Fasting";
+import Settings from "../../screens/Settings/Settings";
+import ThemeSelector from "../../screens/Settings/Theme/ThemeSelector";
+import MeditationDash from "../../screens/Timers/Meditation/MeditationDash";
+import MeditationTimer from "../../screens/Timers/Meditation/MeditationTimer";
+import Fasting from "../../screens/Timers/Fasting/Fasting";
+import DefaultSpinner from "../../components/Loaders/DefaultSpinner";
 //nav imports
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 //Supabse imports
 import { Session } from "@supabase/supabase-js";
-import { supabase } from "../utils/supabase_authentication/supabase";
+import { supabase } from "../../utils/supabase_authentication/supabase";
 //redux imports
-import { useAppDispatch, useAppSelector } from "../redux-manager/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux-manager/hooks";
 import {
 	setSessionID,
 	setUserStates,
-} from "../redux-manager/redux-slice/user-slice";
-import UserBioInput from "../screens/Settings/Profile/EditProfile";
+} from "../../redux-manager/redux-slice/user-slice";
+import UserBioInput from "../../screens/Settings/Profile/EditProfile";
 // Import nav
 import AccountSetupStack from "./AccountSetupStack";
 import BottomTab from "./BottomTab";
@@ -144,9 +145,7 @@ function Navigation({ session }: { session: Session }) {
 	return (
 		<NavigationContainer>
 			{loading === true ? (
-				<View style={[styles.container, styles.horizontal]}>
-					<ActivityIndicator size="large" color={colors.primary} />
-				</View>
+				<DefaultSpinner />
 			) : loading === false && userData === false ? (
 				<InitialSetup session={session} />
 			) : (
@@ -157,15 +156,3 @@ function Navigation({ session }: { session: Session }) {
 }
 
 export default Navigation;
-
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		justifyContent: "center",
-	},
-	horizontal: {
-		flexDirection: "row",
-		justifyContent: "space-evenly", // Change this to "space-evenly" for equal spacing
-		padding: 10,
-	},
-});

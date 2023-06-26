@@ -6,13 +6,12 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 //Images
 import headerIMG from "../../assets/images/weight_lifting.png";
 //Import supabase
-
+import { supabase } from "../../utils/supabase_authentication/supabase";
 //Import redux hooks
 import { changeName } from "../../redux-manager/redux-slice/user-slice";
-
 import { useDatabase } from "@nozbe/watermelondb/hooks";
 import { useAppDispatch, useAppSelector } from "../../redux-manager/hooks";
-import { supabase } from "../../utils/supabase_authentication/supabase";
+//Import nav
 import { useNavigation } from "@react-navigation/native";
 
 //Todo: update user profile when signing up

@@ -36,7 +36,7 @@ const ForgotPass = () => {
 				}}
 				className="flex-1 h-screen w-screen">
 				<View className="mx-14 mt-6">
-					<Text className="text-2xl font-bold">Forgot Password</Text>
+					<Text className="text-2xl font-bold">Forgot password?</Text>
 					{/* Account input */}
 					<View className="gap-5 mt-4">
 						<View>
