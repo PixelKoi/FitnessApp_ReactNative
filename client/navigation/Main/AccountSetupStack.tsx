@@ -8,6 +8,7 @@ import ChooseGender from "../../screens/AccountSetup/ChooseGender";
 import ChooseActivity from "../../screens/AccountSetup/ChooseActivity";
 import ChooseWeight from "../../screens/AccountSetup/ChooseWeight";
 import ChooseGoal from "../../screens/AccountSetup/ChooseGoal";
+import ChooseHeight from "../../screens/AccountSetup/ChooseHeight";
 import FinishSetup from "../../screens/AccountSetup/FinishSetup";
 
 const AccountSetupStack = ({ session }: { session: Session }) => {
@@ -25,6 +26,11 @@ const AccountSetupStack = ({ session }: { session: Session }) => {
 				options={{ headerShown: false }}
 				name="ChooseActivity"
 				component={ChooseActivity}
+			/>
+			<AccountSetupStack.Screen
+				options={{ headerShown: false }}
+				name="ChooseHeight"
+				component={ChooseHeight}
 			/>
 			<AccountSetupStack.Screen
 				options={{ headerShown: false }}

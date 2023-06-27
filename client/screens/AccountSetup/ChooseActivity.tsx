@@ -73,7 +73,7 @@ const ActivityPickerModal = (props) => {
 					<Button
 						onPress={() => {
 							dispatch(changeActivity(activity));
-							navigation.navigate("ChooseWeight");
+							navigation.navigate("ChooseHeight");
 						}}
 						style={{
 							backgroundColor: colors.primary,

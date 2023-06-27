@@ -99,6 +99,10 @@ const FinishSetup = ({ session }: { session: Session }) => {
 					{/* Display Activity Buttons */}
 				</View>
 				<View className="flex-1 self-center justify-end mb-16">
+					<Text>{weight}</Text>
+					<Text>{height}</Text>
+					<Text>{activity}</Text>
+					<Text>{goal}</Text>
 					<Button
 						onPress={async () => {
 							// await updateProfile({

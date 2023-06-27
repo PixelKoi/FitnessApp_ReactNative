@@ -5,7 +5,7 @@ import person from "../../assets/images/male_person.png";
 import { Picker } from "@react-native-picker/picker";
 import { Button, Surface, Switch } from "react-native-paper";
 import { useAppDispatch, useAppSelector } from "../../redux-manager/hooks";
-import { changeWeight } from "../../redux-manager/redux-slice/user-slice";
+import { changeHeight } from "../../redux-manager/redux-slice/user-slice";
 import { useNavigation } from "@react-navigation/native";
 
 const ChooseHeight = () => {
@@ -16,12 +16,12 @@ const ChooseHeight = () => {
 	const dispatch = useAppDispatch();
 
 	//weight meal-picker hooks
-	const [metric, setMetric] = useState("kg");
-	const [weight, setWeight] = useState(60);
+	const [metric, setMetric] = useState("cm");
+	const [height, setHeight] = useState(150);
 
 	//Populates kg and lb arrays
-	const weightKG = Array.from({ length: 150 }, (_, index) => index + 1);
-	const weightLB = Array.from({ length: 330 }, (_, index) => index + 1);
+	const heightCM = Array.from({ length: 200 }, (_, index) => index + 1);
+	// const weightLB = Array.from({ length: 330 }, (_, index) => index + 1);
 
 	//Converts kg to lbs
 	function convertKgToLbs(kg) {
@@ -39,10 +39,10 @@ const ChooseHeight = () => {
 		setIsSwitchOn(!isSwitchOn);
 		if (isSwitchOn === false) {
 			setMetric("lbs");
-			setWeight(Math.round(convertKgToLbs(weight)));
+			setHeight(Math.round(convertKgToLbs(height)));
 		} else {
 			setMetric("kg");
-			setWeight(Math.round(convertPoundsToKilograms(weight)));
+			setHeight(Math.round(convertPoundsToKilograms(height)));
 		}
 	};
 
@@ -77,15 +77,15 @@ const ChooseHeight = () => {
 							color: colors.primary,
 							width: 180,
 						}}
-						selectedValue={weight}
+						selectedValue={height}
 						onValueChange={(itemValue, itemIndex) => {
-							setWeight(itemValue);
+							setHeight(itemValue);
 						}}>
 						{metric === "kg"
-							? weightKG.map((item) => (
+							? heightCM.map((item) => (
 									<Picker.Item label={item.toString()} value={item} />
 							  ))
-							: weightLB.map((item) => (
+							: heightCM.map((item) => (
 									<Picker.Item label={item.toString()} value={item} />
 							  ))}
 					</Picker>
@@ -95,7 +95,7 @@ const ChooseHeight = () => {
 					<Text
 						style={{ color: colors.primary }}
 						className="self-center text-2xl font-bold">
-						{weight} {metric}
+						{height} {metric}
 					</Text>
 					<View className="self-center flex-row gap-2 mt-4">
 						<Text
@@ -127,8 +127,8 @@ const ChooseHeight = () => {
 				<View className="flex-1 self-center justify-end mb-16">
 					<Button
 						onPress={async () => {
-							await dispatch(changeWeight(weight));
-							navigation.navigate("ChooseGoal");
+							await dispatch(changeHeight(height));
+							navigation.navigate("ChooseWeight");
 						}}
 						style={{
 							backgroundColor: colors.primary,

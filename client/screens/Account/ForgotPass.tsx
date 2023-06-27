@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, Image, Modal, Alert } from "react-native";
 import { Button, Surface, DefaultTheme } from "react-native-paper";
 import { TextInput } from "react-native-paper";
@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from "../../redux-manager/hooks";
 import { supabase } from "../../utils/supabase_authentication/supabase";
 import { useNavigation } from "@react-navigation/native";
 import * as Linking from "expo-linking";
+import { User } from "@supabase/supabase-js";
 
 const ForgotPass = () => {
 	const navigation = useNavigation();
@@ -18,6 +19,12 @@ const ForgotPass = () => {
 	const { colors } = useAppSelector((state) => state.theme);
 	const dispatch = useAppDispatch();
 
+	// Reference
+	// https://blog.theodo.com/2023/03/supabase-reset-password-rn/
+	// Package = expo-linking
+	// https://docs.expo.dev/versions/latest/sdk/linking/
+	// add "scheme" : "client" to app.json
+
 	//Paper theme
 	const theme = {
 		...DefaultTheme,
@@ -27,13 +34,31 @@ const ForgotPass = () => {
 	};
 
 	const resetPassword = async (email: string) => {
-		const { error } = await supabase.auth.resetPasswordForEmail(email);
-		if (error) {
-			console.log(error);
-		} else {
-			navigation.navigate("UpdatePass");
-		}
+		//setup backend end point
+		const resetPasswordURL = Linking.createURL("/ResetPassword");
+
+		const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
+			redirectTo: resetPasswordURL,
+		});
+
+		return { data, error };
 	};
+
+	useEffect(() => {
+		supabase.auth.onAuthStateChange(async (event, session) => {
+			if (event == "PASSWORD_RECOVERY") {
+				const newPassword = prompt(
+					"What would you like your new password to be?"
+				);
+				const { data, error } = await supabase.auth.updateUser({
+					password: newPassword,
+				});
+
+				if (data) alert("Password updated successfully!");
+				if (error) alert("There was an error updating your password.");
+			}
+		});
+	}, []);
 
 	return (
 		<View
