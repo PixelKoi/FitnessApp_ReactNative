@@ -34,9 +34,9 @@ const calAlgo: CalAlgoFn = (params, dispatch) => {
 	const { age, gender, weight, height, activity, goal } = params;
 
 	let calBMR = 0;
-	if (gender === "Male") {
+	if (gender === "male") {
 		calBMR = 88.3 + 14.4 * weight + 4.8 * height - 5.7 * age;
-	} else if (gender === "Female") {
+	} else if (gender === "female") {
 		calBMR = 447.6 + 9.2 * weight + 3.1 * height - 4.3 * age;
 	}
 

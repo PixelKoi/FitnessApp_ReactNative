@@ -3,6 +3,7 @@ import { TouchableOpacity, View, Text, Image } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import MaterialIcons from "react-native-vector-icons/FontAwesome";
 import headerIMG from "../../assets/images/weight_lifting.png";
+import { changeAge } from "../../redux-manager/redux-slice/user-slice";
 import { Surface, Button } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { useAppDispatch, useAppSelector } from "../../redux-manager/hooks";
@@ -60,7 +61,7 @@ const ChooseAge = (props) => {
 					<Text
 						// style={{ color: colors.primary }}
 						className="text-2xl font-bold">
-						Your age?
+						Your age? {age}
 					</Text>
 					{/* Display Activity Buttons */}
 				</View>
@@ -84,7 +85,8 @@ const ChooseAge = (props) => {
 				<View className="flex-1 self-center justify-end mb-16">
 					<Button
 						onPress={async () => {
-							await navigation.navigate("ChooseGender");
+							await dispatch(changeAge(age));
+							navigation.navigate("ChooseGender");
 						}}
 						style={{
 							backgroundColor: colors.primary,
