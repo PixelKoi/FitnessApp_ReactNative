@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, Image, TouchableOpacity } from "react-native";
+import { View, Text, Image, TouchableOpacity, Alert } from "react-native";
 import headerIMG from "../../assets/images/weight_lifting.png";
 import { Button, Surface } from "react-native-paper";
 import { useAppDispatch, useAppSelector } from "../../redux-manager/hooks";
@@ -59,8 +59,12 @@ const ChooseGender = (props) => {
 				<View className="flex-1 self-center justify-end mb-16">
 					<Button
 						onPress={async () => {
-							await dispatch(changeGender(gender));
-							navigation.navigate("ChooseActivity");
+							if (!gender) {
+								Alert.alert("Please choose a gender");
+							} else {
+								await dispatch(changeGender(gender));
+								navigation.navigate("ChooseActivity");
+							}
 						}}
 						style={{
 							backgroundColor: colors.primary,

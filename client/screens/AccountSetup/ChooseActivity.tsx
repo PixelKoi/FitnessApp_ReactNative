@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, Image, Modal } from "react-native";
+import { View, Text, Image, Modal, Alert } from "react-native";
 import headerIMG from "../../assets/images/weight_lifting.png";
 import { Button, Surface } from "react-native-paper";
 import { useAppDispatch, useAppSelector } from "../../redux-manager/hooks";
@@ -71,9 +71,13 @@ const ActivityPickerModal = (props) => {
 				</View>
 				<View className="flex-1 self-center justify-end mb-16">
 					<Button
-						onPress={() => {
-							dispatch(changeActivity(activity));
-							navigation.navigate("ChooseHeight");
+						onPress={async () => {
+							if (!activity) {
+								Alert.alert("Please choose your fitness level.");
+							} else {
+								await dispatch(changeActivity(activity));
+								navigation.navigate("ChooseHeight");
+							}
 						}}
 						style={{
 							backgroundColor: colors.primary,

@@ -12,6 +12,7 @@ import {
 	setUserStates,
 } from "../../redux-manager/redux-slice/user-slice";
 import { supabase } from "../../utils/supabase_authentication/supabase";
+import calAlgo from "../../utils/calAlgo/cal-algo";
 
 const FinishSetup = ({ session }: { session: Session }) => {
 	//Import nav
@@ -25,12 +26,21 @@ const FinishSetup = ({ session }: { session: Session }) => {
 
 	//Import redux
 	const { colors } = useAppSelector((state) => state.theme);
-	const { email, name, gender, age, height, weight, activity, goal } =
+	const { email, name, gender, age, height, weight, activity, goal, dailyCal } =
 		useAppSelector((state) => state.user);
 	const dispatch = useAppDispatch();
 
+	const calObject = {
+		age: age,
+		gender: gender,
+		weight: weight,
+		height: height,
+		activity: activity,
+		goal: goal,
+	};
+
 	useEffect(() => {
-		console.log(session.user.email);
+		calAlgo(calObject, dispatch);
 	}, []);
 
 	async function updateProfile({
@@ -101,6 +111,9 @@ const FinishSetup = ({ session }: { session: Session }) => {
 						Daily calorie needs?
 					</Text>
 					{/* Display Activity Buttons */}
+				</View>
+				<View className="mt-20">
+					<Text className="text-center text-2xl">{dailyCal}</Text>
 				</View>
 				<View className="flex-1 self-center justify-end mb-16">
 					<Text>{session.user.email}</Text>

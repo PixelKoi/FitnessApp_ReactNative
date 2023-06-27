@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 //Supabse imports
 import { Session } from "@supabase/supabase-js";
 // Account setup imports
+import ChooseAge from "../../screens/AccountSetup/ChooseAge";
 import ChooseGender from "../../screens/AccountSetup/ChooseGender";
 import ChooseActivity from "../../screens/AccountSetup/ChooseActivity";
 import ChooseWeight from "../../screens/AccountSetup/ChooseWeight";
@@ -17,6 +18,11 @@ const AccountSetupStack = ({ session }: { session: Session }) => {
 
 	return (
 		<AccountSetupStack.Navigator>
+			<AccountSetupStack.Screen
+				options={{ headerShown: false }}
+				name="ChooseAge"
+				component={ChooseAge}
+			/>
 			<AccountSetupStack.Screen
 				options={{ headerShown: false }}
 				name="ChooseGender"
