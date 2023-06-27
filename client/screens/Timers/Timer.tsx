@@ -36,11 +36,11 @@ const Timer = () => {
 			headerLeft: () => (
 				<View>
 					<TouchableOpacity className="ml-8  rounded-full" onPress={() => {}}>
-						<Ionicons
+						{/* <Ionicons
 							name="ios-settings-sharp"
 							size={30}
 							color={colors.primary}
-						/>
+						/> */}
 					</TouchableOpacity>
 				</View>
 			),
