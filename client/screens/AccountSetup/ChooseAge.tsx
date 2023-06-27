@@ -67,7 +67,9 @@ const ChooseAge = (props) => {
 				</View>
 				<View className="mt-20"></View>
 
-				<View className="flex bg-primary mt-auto h-60">
+				<View
+					style={{ backgroundColor: colors.primary }}
+					className="flexmt-auto h-60">
 					<TouchableOpacity
 						className="py-2"
 						onPress={() => props.setShowDatePicker(false)}>
