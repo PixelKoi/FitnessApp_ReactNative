@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, Image, Alert } from "react-native";
 import headerIMG from "../../assets/images/weight_lifting.png";
 import { Button, Surface } from "react-native-paper";
@@ -28,6 +28,10 @@ const FinishSetup = ({ session }: { session: Session }) => {
 	const { email, name, gender, age, height, weight, activity, goal } =
 		useAppSelector((state) => state.user);
 	const dispatch = useAppDispatch();
+
+	useEffect(() => {
+		console.log(session.user.email);
+	}, []);
 
 	async function updateProfile({
 		username,
@@ -99,6 +103,7 @@ const FinishSetup = ({ session }: { session: Session }) => {
 					{/* Display Activity Buttons */}
 				</View>
 				<View className="flex-1 self-center justify-end mb-16">
+					<Text>{session.user.email}</Text>
 					<Text>{weight}</Text>
 					<Text>{height}</Text>
 					<Text>{activity}</Text>
