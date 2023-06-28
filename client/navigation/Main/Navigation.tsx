@@ -5,6 +5,7 @@ import Settings from "../../screens/Settings/Settings";
 import ThemeSelector from "../../screens/Settings/Theme/ThemeSelector";
 import MeditationDash from "../../screens/Timers/Meditation/MeditationDash";
 import MeditationTimer from "../../screens/Timers/Meditation/MeditationTimer";
+import FastingDash from "../../screens/Timers/Fasting/FastingDash";
 import Fasting from "../../screens/Timers/Fasting/Fasting";
 import DefaultSpinner from "../../components/Loaders/DefaultSpinner";
 //nav imports
@@ -130,6 +131,11 @@ function Navigation({ session }: { session: Session }) {
 				<Stack.Screen
 					name="MeditationTimer"
 					component={MeditationTimer}
+					options={{ headerShown: true }}
+				/>
+				<Stack.Screen
+					name="FastingDash"
+					component={FastingDash}
 					options={{ headerShown: true }}
 				/>
 				<Stack.Screen

@@ -53,7 +53,7 @@ const Timer = () => {
 				{/* Fasting Button*/}
 				<View>
 					{/* Fasting timer */}
-					<TouchableOpacity onPress={() => navigation.navigate("Fasting")}>
+					<TouchableOpacity onPress={() => navigation.navigate("FastingDash")}>
 						<TimerCard
 							img={FastingCard}
 							height={90}
