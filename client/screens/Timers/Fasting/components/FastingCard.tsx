@@ -29,15 +29,21 @@ const FastingCard = (props) => {
 									16:8 Intermittent
 								</Text>
 							</View>
-							<View
-								className="opacity-60"
-								style={{ backgroundColor: colors.primary }}>
-								<Text style={{ color: "#ffff" }}>20 HOURS</Text>
-							</View>
-							<View
-								className="opacity-60"
-								style={{ backgroundColor: colors.primary }}>
-								<Text style={{ color: "#ffff" }}>4 HOURS</Text>
+							<View className="gap-1">
+								<View
+									className="opacity-60 rounded-full"
+									style={{ backgroundColor: colors.primary, width: 80 }}>
+									<Text style={{ color: "#ffff" }} className="self-center">
+										20 HOURS
+									</Text>
+								</View>
+								<View
+									className="opacity-60 rounded-full"
+									style={{ backgroundColor: colors.primary, width: 80 }}>
+									<Text style={{ color: "#ffff" }} className="self-center">
+										4 HOURS
+									</Text>
+								</View>
 							</View>
 						</View>
 					</View>
