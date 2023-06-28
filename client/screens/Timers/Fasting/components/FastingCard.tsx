@@ -14,8 +14,8 @@ const FastingCard = (props) => {
 			<Surface
 				className="flex-row items-center justify-center"
 				style={{
-					height: 130,
-					width: 300,
+					height: 150,
+					width: 320,
 					backgroundColor: colors.secondary,
 					borderRadius: 20,
 				}}>
@@ -26,7 +26,7 @@ const FastingCard = (props) => {
 						<Text
 							style={{ fontSize: 18, color: colors.primary }}
 							className="font-bold">
-							16:8 Intermittent
+							{props.title}
 						</Text>
 					</View>
 					<View className="gap-2 mt-1">
@@ -50,7 +50,7 @@ const FastingCard = (props) => {
 								<Text
 									style={{ color: "#ffff", fontSize: 10 }}
 									className="self-center my-auto">
-									20 HOURS
+									{props.fastingTime} HOURS
 								</Text>
 							</View>
 						</View>
@@ -78,7 +78,7 @@ const FastingCard = (props) => {
 								<Text
 									style={{ color: "#ffff", fontSize: 10 }}
 									className="self-center my-auto">
-									4 HOURS
+									{props.eatingTime} HOURS
 								</Text>
 							</View>
 						</View>
