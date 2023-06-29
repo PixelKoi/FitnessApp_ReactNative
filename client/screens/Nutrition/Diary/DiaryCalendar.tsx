@@ -14,12 +14,19 @@ const DiaryCalendar = () => {
 
   return (
     <View>
-      <CalendarProvider date="2022-08-28">
-        <ExpandableCalendar
-          style={{ overflow: "hidden", flex: 1 }}
-          horizontal={false}
-          showClosingKnob={true}
-          hideKnob={false}
+      <CalendarProvider date="2023-06-28">
+        <WeekCalendar
+          disableAllTouchEventsForDisabledDays
+          animateScroll={false}
+          allowSelectionOutOfRange={false}
+          allowShadow={false}
+          // maxDate={format(new Date(), "YYYY-MM-DD")}
+          //
+          bounces={false}
+          bouncesZoom={false}
+          alwaysBounceHorizontal={false}
+          alwaysBounceVertical={false}
+          //
         />
       </CalendarProvider>
     </View>
