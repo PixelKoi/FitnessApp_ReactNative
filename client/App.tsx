@@ -29,6 +29,7 @@ export default function App() {
 		});
 
 		supabase.auth.onAuthStateChange((_event, session) => {
+			console.log(_event);
 			setSession(session);
 		});
 	}, []);
@@ -47,11 +48,9 @@ export default function App() {
 				</DatabaseProvider>
 			) : (
 				<DatabaseProvider database={database}>
-					<GestureHandlerRootView style={{ flex: 1 }}>
-						<Provider store={store}>
-							<AuthNavigation />
-						</Provider>
-					</GestureHandlerRootView>
+					<Provider store={store}>
+						<AuthNavigation session={session} />
+					</Provider>
 				</DatabaseProvider>
 			)}
 		</>

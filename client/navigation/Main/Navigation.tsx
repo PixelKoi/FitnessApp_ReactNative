@@ -50,11 +50,15 @@ function Navigation({ session }: { session: Session }) {
 		);
 	}
 
+	useEffect(() => {
+		if (session) getProfile();
+	}, [session]);
+
 	//Get redux-slice data from supabase and update redux
 	async function getProfile() {
 		try {
 			setLoading(true);
-			if (!session?.user) throw new Error("No redux-slice on the session!");
+			if (!session?.user) throw new Error("No user on the session!");
 
 			let { data, error, status } = await supabase
 				.from("profile")
@@ -79,10 +83,6 @@ function Navigation({ session }: { session: Session }) {
 			setLoading(false);
 		}
 	}
-
-	useEffect(() => {
-		getProfile();
-	}, []);
 
 	//Home Navigation
 	const InitialSetup = ({ session }: { session: Session }) => {

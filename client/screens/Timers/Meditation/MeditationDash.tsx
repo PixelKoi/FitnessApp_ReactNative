@@ -19,7 +19,7 @@ const MeditationDash = () => {
 	// top Navigation
 	React.useLayoutEffect(() => {
 		navigation.setOptions({
-			title: "Meditation",
+			title: "Meditation Dashboard",
 			headerStyle: {
 				shadowColor: "transparent",
 			},

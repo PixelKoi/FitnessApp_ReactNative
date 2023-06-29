@@ -18,7 +18,7 @@ const FastingDash = () => {
 
 	React.useLayoutEffect(() => {
 		navigation.setOptions({
-			title: "Fasting Time",
+			title: "Choose Time",
 			headerStyle: {
 				shadowColor: "transparent",
 			},

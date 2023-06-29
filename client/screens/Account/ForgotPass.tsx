@@ -10,7 +10,7 @@ import { useNavigation } from "@react-navigation/native";
 import * as Linking from "expo-linking";
 import { User } from "@supabase/supabase-js";
 
-const ForgotPass = () => {
+const ForgotPass = ({ session }: { session: Session }) => {
 	const navigation = useNavigation();
 	const [loading, setLoading] = useState(false);
 	const [email, setEmail] = useState<string>("");
@@ -33,32 +33,23 @@ const ForgotPass = () => {
 		},
 	};
 
-	const resetPassword = async (email: string) => {
-		//setup backend end point
-		const resetPasswordURL = Linking.createURL("/ResetPassword");
-
-		const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
-			redirectTo: resetPasswordURL,
-		});
-
-		return { data, error };
+	const openEmailClient = async () => {
+		try {
+			await Linking.openURL("message:");
+		} catch (error) {
+			// Handle the error here
+			console.error("Failed to open email client:", error);
+		}
 	};
 
-	useEffect(() => {
-		supabase.auth.onAuthStateChange(async (event, session) => {
-			if (event == "PASSWORD_RECOVERY") {
-				const newPassword = prompt(
-					"What would you like your new password to be?"
-				);
-				const { data, error } = await supabase.auth.updateUser({
-					password: newPassword,
-				});
-
-				if (data) alert("Password updated successfully!");
-				if (error) alert("There was an error updating your password.");
-			}
-		});
-	}, []);
+	const resetPassword = async (email: string) => {
+		const { error } = await supabase.auth.resetPasswordForEmail(email);
+		if (error) {
+			console.log(error);
+		} else {
+			navigation.navigate("UpdatePass");
+		}
+	};
 
 	return (
 		<View

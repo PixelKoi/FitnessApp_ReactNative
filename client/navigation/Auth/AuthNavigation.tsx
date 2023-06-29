@@ -8,8 +8,9 @@ import SignUp from "../../screens/Account/SignUp";
 import SignIn from "../../screens/Account/SignIn";
 import ForgotPass from "../../screens/Account/ForgotPass";
 import UpdatePass from "../../screens/Account/UpdatePass";
+import { Session } from "@supabase/supabase-js";
 
-const AuthNavigation = () => {
+const AuthNavigation = ({ session }: { session: Session }) => {
 	const AuthNavStack = createNativeStackNavigator();
 	const AuthNavigation = () => {
 		return (

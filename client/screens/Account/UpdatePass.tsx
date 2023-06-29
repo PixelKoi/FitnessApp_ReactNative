@@ -8,6 +8,9 @@ import { useAppDispatch, useAppSelector } from "../../redux-manager/hooks";
 
 const UpdatePass = () => {
 	const [loading, setLoading] = useState(false);
+	const [password, setPassword] = useState<string>("");
+	const [showPassword, setShowPassword] = useState<boolean>(!showPassword);
+
 	const [email, setEmail] = useState<string>("");
 
 	//Import redux
@@ -47,7 +50,7 @@ const UpdatePass = () => {
 				}}
 				className="flex-1 h-screen w-screen">
 				<View className="mx-14 mt-6">
-					<Text className="text-2xl font-bold">Forgot password?</Text>
+					<Text className="text-2xl font-bold">Update password</Text>
 					{/* Account input */}
 					<View className="gap-5 mt-4">
 						<View>
@@ -57,6 +60,58 @@ const UpdatePass = () => {
 							<TextInput
 								onChangeText={(text) => setEmail(text)}
 								left={<TextInput.Icon icon={"email-outline"} size={18} />}
+								theme={theme}
+								selectionColor={"black"}
+								underlineColor={"transparent"}
+								activeUnderlineColor={"transparent"}
+								style={{
+									height: 40,
+									marginTop: 15,
+									borderRadius: 3,
+								}}
+							/>
+						</View>
+						<View>
+							<Text style={{ color: "#9B9B99" }} className="font-semibold">
+								New Password
+							</Text>
+							<TextInput
+								onChangeText={(text) => setPassword(text)}
+								secureTextEntry={showPassword ? true : false}
+								left={<TextInput.Icon icon={"lock-outline"} size={18} />}
+								right={
+									<TextInput.Icon
+										icon={showPassword ? "eye-off" : "eye"}
+										size={18}
+										onPress={() => setShowPassword(!showPassword)}
+									/>
+								}
+								theme={theme}
+								selectionColor={"black"}
+								underlineColor={"transparent"}
+								activeUnderlineColor={"transparent"}
+								style={{
+									height: 40,
+									marginTop: 15,
+									borderRadius: 3,
+								}}
+							/>
+						</View>
+						<View>
+							<Text style={{ color: "#9B9B99" }} className="font-semibold">
+								Repeat Password
+							</Text>
+							<TextInput
+								onChangeText={(text) => setPassword(text)}
+								secureTextEntry={showPassword ? true : false}
+								left={<TextInput.Icon icon={"lock-outline"} size={18} />}
+								right={
+									<TextInput.Icon
+										icon={showPassword ? "eye-off" : "eye"}
+										size={18}
+										onPress={() => setShowPassword(!showPassword)}
+									/>
+								}
 								theme={theme}
 								selectionColor={"black"}
 								underlineColor={"transparent"}
