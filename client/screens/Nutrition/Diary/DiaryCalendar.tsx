@@ -8,13 +8,22 @@ import {
 } from "react-native-calendars";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { View } from "react-native";
+import { useAppSelector } from "../../../redux-manager/hooks";
+import { todayTextColor } from "react-native-calendars/src/style";
 
 const DiaryCalendar = () => {
-  const [selected, setSelected] = useState("");
+  const currentDate = new Date();
+  const year = currentDate.getFullYear();
+  const month = String(currentDate.getMonth() + 1).padStart(2, "0"); // Adding 1 and zero-padding the month
+  const day = String(currentDate.getDate()).padStart(2, "0"); // Zero-padding the day
+  const formattedDate = `${year}-${month}-${day}`;
+
+  const [selected, setSelected] = useState(null);
+  const { colors } = useAppSelector((state) => state.theme);
 
   return (
     <View>
-      <CalendarProvider date="2023-06-28">
+      <CalendarProvider date={formattedDate}>
         <WeekCalendar
           disableAllTouchEventsForDisabledDays
           animateScroll={false}
@@ -22,10 +31,34 @@ const DiaryCalendar = () => {
           allowShadow={false}
           // maxDate={format(new Date(), "YYYY-MM-DD")}
           //
+          onDayPress={(day) => {
+            setSelected(day);
+            console.log("selected day", day);
+          }}
+          markedDates={{
+            formattedDate: {
+              selected: true,
+              marked: true,
+            },
+            selected: {
+              selected: true,
+              marked: true,
+            },
+          }}
+          markingType={"dot"}
           bounces={false}
           bouncesZoom={false}
           alwaysBounceHorizontal={false}
           alwaysBounceVertical={false}
+          theme={{
+            backgroundColor: colors.secondary,
+            calendarBackground: "#ffffff",
+            textSectionTitleColor: "#b6c1cd",
+            selectedDayBackgroundColor: colors.primary,
+            selectedDayTextColor: "#ffffff",
+            todayTextColor: colors.primary,
+            dayTextColor: "#2d4150",
+          }}
           //
         />
       </CalendarProvider>
