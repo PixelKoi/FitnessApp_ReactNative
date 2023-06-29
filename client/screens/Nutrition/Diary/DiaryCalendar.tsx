@@ -38,6 +38,11 @@ const DiaryCalendar = () => {
           markedDates={{
             [formattedDate]: {
               marked: true,
+              customContainerStyle: {
+                borderRadius: 0,
+                borderTopLeftRadius: 17,
+                borderBottomLeftRadius: 17,
+              },
             },
             [selected]: {
               selected: true,
