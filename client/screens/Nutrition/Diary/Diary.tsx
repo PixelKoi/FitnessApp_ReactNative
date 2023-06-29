@@ -11,7 +11,7 @@ import Food from "../../../database/models/Food";
 import Icon from "react-native-vector-icons/FontAwesome";
 import AntIcon from "react-native-vector-icons/AntDesign";
 import { UserCircleIcon } from "react-native-heroicons/outline";
-import { backgroundColor } from "react-native-calendars/src/style";
+import DiaryCalendar from "./DiaryCalendar";
 const Diary = (props) => {
   const tabNavigation = useNavigation();
   const database = useDatabase();
@@ -82,6 +82,7 @@ const Diary = (props) => {
   if (props.route.params == undefined) {
     return (
       <View className="flex-1 items-center bg-white">
+        <DiaryCalendar />
         <View className="justify-center">
           <Card className="px-4 my-4">
             <Text className="py-4">
