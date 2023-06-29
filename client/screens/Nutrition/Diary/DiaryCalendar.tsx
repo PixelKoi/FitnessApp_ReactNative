@@ -36,22 +36,22 @@ const DiaryCalendar = () => {
             console.log("selected day", day);
           }}
           markedDates={{
-            formattedDate: {
-              selected: true,
+            [formattedDate]: {
               marked: true,
             },
-            selected: {
+            [selected]: {
               selected: true,
               marked: true,
             },
           }}
-          markingType={"dot"}
+          markingType={"custom"}
           bounces={false}
           bouncesZoom={false}
           alwaysBounceHorizontal={false}
           alwaysBounceVertical={false}
           theme={{
             backgroundColor: colors.secondary,
+            selectedDotColor: colors.secondary,
             calendarBackground: "#ffffff",
             textSectionTitleColor: "#b6c1cd",
             selectedDayBackgroundColor: colors.primary,
