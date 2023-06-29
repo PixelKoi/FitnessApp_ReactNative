@@ -19,7 +19,7 @@ const FastingCard = (props) => {
 					backgroundColor: colors.secondary,
 					borderRadius: 20,
 				}}>
-				<Image source={CircadianChicken} className="mr-3" />
+				<Image source={props.chickenIMG} className="mr-3" />
 
 				<View className="">
 					<View className="">

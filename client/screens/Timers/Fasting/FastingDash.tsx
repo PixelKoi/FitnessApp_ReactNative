@@ -5,6 +5,10 @@ import FontAwesome from "react-native-vector-icons/FontAwesome5";
 import { useAppDispatch, useAppSelector } from "../../../redux-manager/hooks";
 import { useNavigation } from "@react-navigation/native";
 import { setMaxTime } from "../../../redux-manager/redux-slice/fasting-slice";
+import CircadianChicken from "../../../assets/images/fasting-dash/CircadianChicken.png";
+import SixteenByEightChicken from "../../../assets/images/fasting-dash/168Chicken.png";
+import EighteenByFourChicken from "../../../assets/images/fasting-dash/184Chicken.png";
+import TwentyByfourChicken from "../../../assets/images/fasting-dash/204Chicken.png";
 
 const FastingDash = () => {
 	const navigation = useNavigation();
@@ -45,6 +49,7 @@ const FastingDash = () => {
 						navigation.navigate("Fasting");
 					}}>
 					<FastingCard
+						chickenIMG={CircadianChicken}
 						title={"Circadian Rhythm"}
 						fastingTime={13}
 						eatingTime={11}
@@ -56,6 +61,7 @@ const FastingDash = () => {
 						navigation.navigate("Fasting");
 					}}>
 					<FastingCard
+						chickenIMG={SixteenByEightChicken}
 						title={"16:8 Intermittent"}
 						fastingTime={16}
 						eatingTime={8}
@@ -67,6 +73,7 @@ const FastingDash = () => {
 						navigation.navigate("Fasting");
 					}}>
 					<FastingCard
+						chickenIMG={EighteenByFourChicken}
 						title={"18:6 Intermittent"}
 						fastingTime={18}
 						eatingTime={6}
@@ -78,6 +85,7 @@ const FastingDash = () => {
 						navigation.navigate("Fasting");
 					}}>
 					<FastingCard
+						chickenIMG={TwentyByfourChicken}
 						title={"20:4 Intermittent"}
 						fastingTime={20}
 						eatingTime={4}
