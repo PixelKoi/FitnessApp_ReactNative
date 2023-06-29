@@ -8,13 +8,8 @@ import FastingTimer2 from "../components/FastingDonutGraph2";
 
 //Redux imports
 import { useAppDispatch, useAppSelector } from "../../../redux-manager/hooks";
-import {
-	setMaxTime,
-	setTimerStates,
-} from "../../../redux-manager/redux-slice/fasting-slice";
+import { setTimerStates } from "../../../redux-manager/redux-slice/fasting-slice";
 //import icons
-import Icon from "react-native-vector-icons/FontAwesome";
-import Ionicons from "react-native-vector-icons/Ionicons";
 import FontAwesome from "react-native-vector-icons/FontAwesome5";
 
 const Fasting = () => {
@@ -31,10 +26,6 @@ const Fasting = () => {
 	const [startTime, setStartTime] = useState<Date | null>(null);
 	const [endTime, setEndTime] = useState<Date | null>(null);
 	const [clicked, setClicked] = useState(false);
-
-	//handle fasting mode selector
-	const [fasting, setFasting] = useState<String>("16/8 Intermittent Fast");
-	const [showTimerList, setShowTimerList] = useState(false);
 
 	//Check if fasting redux for startDate. If there is a startDate update local start and end states
 	//ToDo: Check if end date has passed and then reset start and end date to ""
@@ -126,112 +117,6 @@ const Fasting = () => {
 				<View className="mt-6 z-0">
 					<FastingTimer2 />
 				</View>
-
-				{/* <View className="z-10">
-					<TouchableOpacity
-						style={{
-							backgroundColor: colors.secondary,
-							borderRadius: 10,
-							height: 40,
-						}}
-						className="flex-row w-52 mx-auto"
-						onPress={() =>
-							showTimerList === false
-								? setShowTimerList(true)
-								: setShowTimerList(false)
-						}>
-						<Text
-							style={{ color: colors.primary }}
-							className="ml-4 text-center my-auto">
-							{fasting}
-						</Text>
-						<Icon
-							style={{
-								color: colors.primary,
-								marginLeft: "auto",
-								marginRight: 20,
-								marginTop: "auto",
-								marginBottom: "auto",
-							}}
-							name={showTimerList === true ? "caret-up" : "caret-down"}
-							size={15}
-							color="black"
-						/>
-					</TouchableOpacity>
-
-					{showTimerList === true && (
-						<Surface
-							style={{ backgroundColor: colors.background }}
-							className="w-52 rounded-xl self-center mt-12 absolute z-10">
-							<TouchableOpacity
-								className="flex-row h-8 w-52"
-								onPress={() => {
-									setFasting("16/8 Intermittent Fast");
-									dispatch(setMaxTime(16));
-									setShowTimerList(false);
-								}}>
-								<Text
-									style={{ color: colors.primary }}
-									className="my-auto text-xs ml-4">
-									16/8 Intermittent Fast
-								</Text>
-								{maxTime === 16 && (
-									<Text className="ml-auto my-auto mr-2">
-										<Ionicons
-											color={colors.primary}
-											size={15}
-											name={"ios-checkmark-circle-outline"}
-										/>
-									</Text>
-								)}
-							</TouchableOpacity>
-							<TouchableOpacity
-								className="flex-row h-8 w-52"
-								onPress={() => {
-									setFasting("18/6 Intermittent Fast");
-									dispatch(setMaxTime(18));
-									setShowTimerList(false);
-								}}>
-								<Text
-									style={{ color: colors.primary }}
-									className="my-auto text-xs ml-4">
-									18/6 Intermittent Fast
-								</Text>
-								{maxTime === 18 && (
-									<Text className="ml-auto my-auto mr-2">
-										<Ionicons
-											color={colors.primary}
-											size={15}
-											name={"ios-checkmark-circle-outline"}
-										/>
-									</Text>
-								)}
-							</TouchableOpacity>
-							<TouchableOpacity
-								className="flex-row h-8 w-52"
-								onPress={() => {
-									setFasting("24hr Fast");
-									dispatch(setMaxTime(24));
-									setShowTimerList(false);
-								}}>
-								<Text
-									style={{ color: colors.primary }}
-									className="my-auto text-xs ml-4">
-									24/hr Fast
-								</Text>
-								{maxTime === 24 && (
-									<Text className="ml-auto my-auto mr-2">
-										<Ionicons
-											color={colors.primary}
-											size={15}
-											name={"ios-checkmark-circle-outline"}
-										/>
-									</Text>
-								)}
-							</TouchableOpacity>
-						</Surface>
-					)}
-				</View> */}
 
 				<Text
 					style={{ color: colors.primary }}

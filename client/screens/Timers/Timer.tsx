@@ -27,28 +27,17 @@ const Timer = () => {
 		navigation.setOptions({
 			title: "Timer",
 			headerStyle: {
-				shadowColor: "transparent",
+				// shadowColor: "transparent",
 			},
 			headerTintColor: colors.primary,
 			headerTitleStyle: {
 				fontWeight: "bold",
 			},
-			headerLeft: () => (
-				<View>
-					<TouchableOpacity className="ml-8  rounded-full" onPress={() => {}}>
-						{/* <Ionicons
-							name="ios-settings-sharp"
-							size={30}
-							color={colors.primary}
-						/> */}
-					</TouchableOpacity>
-				</View>
-			),
 		});
 	}, []);
 
 	return (
-		<View className="flex-1 justify-center bg-background">
+		<View className="flex-1 -mt-32 justify-center bg-background">
 			<View className="flex-row justify-center">
 				{/* Fasting Button*/}
 				<View>

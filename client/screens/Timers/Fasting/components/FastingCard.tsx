@@ -14,7 +14,7 @@ const FastingCard = (props) => {
 			<Surface
 				className="flex-row items-center justify-center"
 				style={{
-					height: 150,
+					height: 140,
 					width: 320,
 					backgroundColor: colors.secondary,
 					borderRadius: 20,

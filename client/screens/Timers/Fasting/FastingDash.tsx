@@ -18,7 +18,7 @@ const FastingDash = () => {
 
 	React.useLayoutEffect(() => {
 		navigation.setOptions({
-			title: "Fasting Overview",
+			title: "Fasting Time",
 			headerStyle: {
 				shadowColor: "transparent",
 			},
@@ -41,7 +41,7 @@ const FastingDash = () => {
 	}, []);
 
 	return (
-		<View className="flex-1 justify-center bg-background">
+		<View className="flex-1 -mt-20 justify-center bg-background">
 			<View className="flex-col items-center justify-center">
 				<TouchableOpacity
 					onPress={async () => {
@@ -91,6 +91,7 @@ const FastingDash = () => {
 						chickenIMG={TwentyByfourChicken}
 						title={"20:4 Intermittent"}
 						description={"A 20 hours fast with an 4 hours feeding window"}
+						fastingTime={20}
 						eatingTime={4}
 					/>
 				</TouchableOpacity>
