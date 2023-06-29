@@ -21,7 +21,7 @@ const FastingCard = (props) => {
 				}}>
 				<Image source={props.chickenIMG} className="mr-3" />
 
-				<View className="">
+				<View className="gap-3 ml-1">
 					<View className="">
 						<Text
 							style={{ fontSize: 18, color: colors.primary }}
@@ -29,73 +29,24 @@ const FastingCard = (props) => {
 							{props.title}
 						</Text>
 					</View>
-					<View className="gap-2 mt-1">
-						<View className="flex-row">
-							<View
-								className="my-auto"
-								style={{
-									backgroundColor: "transparent",
-									width: 20,
-									height: 20,
-								}}>
-								<Image source={ClockFast} style={{ width: 20 }} />
-							</View>
-							<View
-								className="ml-1 opacity-50 rounded-full"
-								style={{
-									backgroundColor: colors.primary,
-									width: 70,
-									height: 20,
-								}}>
-								<Text
-									style={{ color: "#ffff", fontSize: 10 }}
-									className="self-center my-auto">
-									{props.fastingTime} HOURS
-								</Text>
-							</View>
-						</View>
-						<View className="flex-row">
-							<View
-								className="my-auto"
-								style={{
-									backgroundColor: "transparent",
-									width: 20,
-									height: 20,
-								}}>
-								<Image
-									source={BurgerFast}
-									className="my-auto"
-									style={{ width: 20 }}
-								/>
-							</View>
-							<View
-								className="ml-1 opacity-50 rounded-full"
-								style={{
-									backgroundColor: colors.primary,
-									width: 70,
-									height: 20,
-								}}>
-								<Text
-									style={{ color: "#ffff", fontSize: 10 }}
-									className="self-center my-auto">
-									{props.eatingTime} HOURS
-								</Text>
-							</View>
-						</View>
+
+					<View className="flex-row">
+						<Text style={{ width: 170, fontSize: 12 }}>
+							{props.description}
+						</Text>
 					</View>
-				</View>
-				<View className="top-10 right-1">
+
 					<View
+						className="opacity-50 rounded-full"
 						style={{
-							width: 50,
-							height: 20,
 							backgroundColor: colors.primary,
-						}}
-						className="rounded-full">
+							width: 70,
+							height: 20,
+						}}>
 						<Text
 							style={{ color: "#ffff", fontSize: 10 }}
-							className="font-semibold my-auto text-center">
-							Start
+							className="self-center my-auto">
+							{props.fastingTime} HOURS
 						</Text>
 					</View>
 				</View>

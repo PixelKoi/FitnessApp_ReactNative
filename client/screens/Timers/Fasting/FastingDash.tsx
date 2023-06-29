@@ -51,6 +51,7 @@ const FastingDash = () => {
 					<FastingCard
 						chickenIMG={CircadianChicken}
 						title={"Circadian Rhythm"}
+						description={"This fast starts at sunset and lasts to morning"}
 						fastingTime={13}
 						eatingTime={11}
 					/>
@@ -63,6 +64,7 @@ const FastingDash = () => {
 					<FastingCard
 						chickenIMG={SixteenByEightChicken}
 						title={"16:8 Intermittent"}
+						description={"A 16 hours fast with an 8 hours feeding window"}
 						fastingTime={16}
 						eatingTime={8}
 					/>
@@ -75,6 +77,7 @@ const FastingDash = () => {
 					<FastingCard
 						chickenIMG={EighteenByFourChicken}
 						title={"18:6 Intermittent"}
+						description={"A 18 hours fast with an 6 hours feeding window"}
 						fastingTime={18}
 						eatingTime={6}
 					/>
@@ -87,7 +90,7 @@ const FastingDash = () => {
 					<FastingCard
 						chickenIMG={TwentyByfourChicken}
 						title={"20:4 Intermittent"}
-						fastingTime={20}
+						description={"A 20 hours fast with an 4 hours feeding window"}
 						eatingTime={4}
 					/>
 				</TouchableOpacity>
