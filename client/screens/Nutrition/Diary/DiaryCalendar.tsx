@@ -24,16 +24,21 @@ const DiaryCalendar = () => {
   return (
     <CalendarProvider
       style={{
-        height: 100,
+        height: 60,
         flex: 0,
         backgroundColor: colors.secondary,
+        borderRadius: 10,
+        elevation: 4,
+        margin: 5,
       }}
       date={formattedDate}
     >
       <WeekCalendar
         style={{
-          height: 0,
+          height: 50,
           backgroundColor: colors.secondary,
+          borderRadius: 10,
+          elevation: 4,
         }}
         disableAllTouchEventsForDisabledDays
         animateScroll={false}
@@ -48,18 +53,23 @@ const DiaryCalendar = () => {
         markedDates={{
           [formattedDate]: {
             marked: true,
-            customContainerStyle: {
-              borderRadius: 0,
-              borderTopLeftRadius: 17,
-              borderBottomLeftRadius: 17,
-              borderWidth: 2,
-              borderColor: "red",
-              borderBottomRightRadius: 8,
+            customStyles: {
+              container: {
+                backgroundColor: colors.primary,
+                height: 40, // Adjust the desired height value
+                borderRadius: 10, // Adjust the desired border radius value
+              },
             },
           },
           [selected]: {
             selected: true,
             marked: true,
+            customStyles: {
+              container: {
+                backgroundColor: colors.primary,
+                borderRadius: 0,
+              },
+            },
           },
         }}
         markingType={"custom"}
@@ -68,6 +78,7 @@ const DiaryCalendar = () => {
         alwaysBounceHorizontal={false}
         alwaysBounceVertical={false}
         theme={{
+          weekVerticalMargin: 0,
           backgroundColor: colors.secondary,
           selectedDotColor: colors.secondary,
           calendarBackground: "#ffffff",
