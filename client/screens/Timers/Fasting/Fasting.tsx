@@ -113,9 +113,10 @@ const Fasting = () => {
 			className="flex-1 flex-col justify-center">
 			{/* Clock section */}
 			<View className="mb-14">
+				<Text className="text-xl font-bold text-center">Circadian Rythm</Text>
 				{/* Fasting Donut Graph */}
 				<View className="mt-6 z-0">
-					<FastingTimer2 />
+					<FastingTimer />
 				</View>
 
 				<Text

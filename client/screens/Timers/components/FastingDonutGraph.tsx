@@ -76,8 +76,10 @@ const FastingDonutGraph: React.FC<FastingDonutGraphProps> = ({
 				</G>
 			</Svg>
 
-			<View style={{ width: 126 }} className=" mx-auto absolute ">
-				<Text style={{ color: colors.primary }} className="text-3xl">
+			<View style={{ width: 130 }} className=" mx-auto absolute ">
+				<Text
+					style={{ color: colors.primary }}
+					className="text-center text-3xl">
 					{countdown}
 				</Text>
 			</View>
