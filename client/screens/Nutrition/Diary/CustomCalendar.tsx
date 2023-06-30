@@ -62,6 +62,14 @@ const CustomCalendar = () => {
       fontWeight: "bold",
       color: "white",
     },
+    futureDayOfWeek: {
+      fontSize: 12,
+      color: "grey",
+    },
+    futureDayOfMonth: {
+      fontSize: 12,
+      color: "grey",
+    },
   };
 
   return (
