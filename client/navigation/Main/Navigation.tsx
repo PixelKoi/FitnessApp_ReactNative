@@ -70,7 +70,7 @@ function Navigation({ session }: { session: Session }) {
 			}
 
 			if (data) {
-				console.log(data);
+				// console.log(data);
 				updateReduxUserStates(data);
 				dispatch(setSessionID(data.user_id));
 				setUserData(data.created);

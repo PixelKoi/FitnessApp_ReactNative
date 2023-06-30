@@ -19,6 +19,15 @@ const medSessionData = [
 		buttonBackgroundColor: "#3F414E",
 		buttonTextColor: "#FEFFFE",
 	},
+	{
+		img: happy,
+		title: "Panic Attacks",
+		time: "5",
+		cardColor: "#FFC97E",
+		textColor: "#3F414E",
+		buttonBackgroundColor: "#3F414E",
+		buttonTextColor: "#FEFFFE",
+	},
 ];
 
 export default medSessionData;

@@ -8,7 +8,7 @@ import { useAppDispatch, useAppSelector } from "../../redux-manager/hooks";
 import { supabase } from "../../utils/supabase_authentication/supabase";
 import { useNavigation } from "@react-navigation/native";
 import * as Linking from "expo-linking";
-import { User } from "@supabase/supabase-js";
+import { Session, User } from "@supabase/supabase-js";
 
 const ForgotPass = ({ session }: { session: Session }) => {
 	const navigation = useNavigation();
@@ -43,13 +43,21 @@ const ForgotPass = ({ session }: { session: Session }) => {
 	};
 
 	const resetPassword = async (email: string) => {
-		const { error } = await supabase.auth.resetPasswordForEmail(email);
+		setLoading(true);
+		const { data, error } = await supabase.auth.resetPasswordForEmail(email);
+		setLoading(false);
 		if (error) {
 			console.log(error);
 		} else {
-			navigation.navigate("UpdatePass");
+			// navigation.navigate("UpdatePass");
 		}
 	};
+
+	useEffect(() => {
+		supabase.auth.onAuthStateChange((_event, session) => {
+			console.log(_event);
+		});
+	}, []);
 
 	return (
 		<View

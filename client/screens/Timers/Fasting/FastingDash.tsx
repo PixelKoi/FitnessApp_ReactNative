@@ -21,11 +21,15 @@ const FastingDash = () => {
 			title: "Choose Time",
 			headerStyle: {
 				shadowColor: "transparent",
+				borderBottomColor: "transparent",
+				borderBottomWidth: 0,
+				shadowOpacity: 0,
 			},
 			headerTintColor: colors.primary,
 			headerTitleStyle: {
 				fontWeight: "bold",
 			},
+			headerHideShadow: true,
 			headerLeft: () => (
 				<View>
 					<TouchableOpacity

@@ -30,11 +30,9 @@ const AuthNavigation = ({ session }: { session: Session }) => {
 					name="SignUp"
 					component={SignUp}
 				/>
-				<AuthNavStack.Screen
-					options={{ headerShown: false }}
-					name="ForgotPass"
-					component={ForgotPass}
-				/>
+				<AuthNavStack.Screen options={{ headerShown: false }} name="ForgotPass">
+					{(props) => <ForgotPass {...props} session={session} />}
+				</AuthNavStack.Screen>
 				<AuthNavStack.Screen
 					options={{ headerShown: false }}
 					name="UpdatePass"

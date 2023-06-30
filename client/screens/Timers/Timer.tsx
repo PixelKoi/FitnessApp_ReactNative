@@ -27,7 +27,8 @@ const Timer = () => {
 		navigation.setOptions({
 			title: "Timer",
 			headerStyle: {
-				// shadowColor: "transparent",
+				shadowColor: "transparent",
+				borderBottomWidth: 0,
 			},
 			headerTintColor: colors.primary,
 			headerTitleStyle: {

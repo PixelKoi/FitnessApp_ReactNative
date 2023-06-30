@@ -42,7 +42,7 @@ const MeditationDash = () => {
 
 	return (
 		<View className="flex-1 px-8  bg-background">
-			<View className="gap-2 mt-14">
+			<View className="gap-2 mt-2">
 				<Text className="font-bold" style={{ fontSize: 14 }}>
 					Hello, <Text className="uppercase">{name}!</Text>
 				</Text>
@@ -64,7 +64,25 @@ const MeditationDash = () => {
 
 			{/* Meditation Session List */}
 			<View className="mt-8">
-				<Text className="font-bold">Choose meditation session</Text>
+				<Text className="font-bold">Choose Time</Text>
+				<View className="mt-8 flex-row">
+					{medSessionData.map((data, index) => (
+						<MeditationSession
+							key={index}
+							title={data.title}
+							time={data.time}
+							cardColor={data.cardColor}
+							textColor={data.textColor}
+							buttonBackgroundColor={data.buttonBackgroundColor}
+							buttonTextColor={data.buttonTextColor}
+						/>
+					))}
+				</View>
+			</View>
+
+			{/* Meditation Session List */}
+			<View className="mt-8">
+				<Text className="font-bold">Choose Course</Text>
 				<View className="mt-8 flex-row">
 					{medSessionData.map((data, index) => (
 						<MeditationSession

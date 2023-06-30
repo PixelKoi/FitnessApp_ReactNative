@@ -13,6 +13,7 @@ import {
 } from "../../redux-manager/redux-slice/user-slice";
 import { supabase } from "../../utils/supabase_authentication/supabase";
 import calAlgo from "../../utils/calAlgo/cal-algo";
+import DonutGraph from "./component/FastingDonutGraph";
 
 const FinishSetup = ({ session }: { session: Session }) => {
 	//Import nav
@@ -113,14 +114,9 @@ const FinishSetup = ({ session }: { session: Session }) => {
 					{/* Display Activity Buttons */}
 				</View>
 				<View className="mt-20">
-					<Text className="text-center text-2xl">{dailyCal}</Text>
+					<DonutGraph calories={dailyCal} />
 				</View>
 				<View className="flex-1 self-center justify-end mb-16">
-					<Text>{session.user.email}</Text>
-					<Text>{weight}</Text>
-					<Text>{height}</Text>
-					<Text>{activity}</Text>
-					<Text>{goal}</Text>
 					<Button
 						onPress={async () => {
 							// await updateProfile({
