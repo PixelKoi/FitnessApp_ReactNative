@@ -5,18 +5,23 @@ import { useAppSelector } from "../../../redux-manager/hooks";
 const CustomCalendar = () => {
   const { colors } = useAppSelector((state) => state.theme);
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const currentDay = selectedDate.getDate();
   const weekDays = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
   const currentWeek = [];
-  const isFutureDate = (date) => {
+
+  function isPreviousDate(inputDate) {
     const today = new Date();
-    return date > today;
-  };
+    today.setHours(0, 0, 0, 0); // reset the time of today to 00:00:00
+
+    const givenDate = new Date(inputDate);
+    givenDate.setHours(0, 0, 0, 0); // reset the time of the given date to 00:00:00
+
+    return givenDate.getTime() <= today.getTime();
+  }
 
   // Determine the range of days to display (e.g., 3 days before current day, current day, and 3 days after)
   for (let i = -3; i <= 3; i++) {
-    const day = new Date();
-    day.setDate(currentDay + i);
+    const day = new Date(selectedDate);
+    day.setDate(day.getDate() + i);
     currentWeek.push(day);
   }
 
@@ -78,22 +83,22 @@ const CustomCalendar = () => {
           day.getDate() === selectedDate.getDate() &&
           day.getMonth() === selectedDate.getMonth() &&
           day.getFullYear() === selectedDate.getFullYear();
-        const isFuture = isFutureDate(day);
+        const isTodayOrBefore = isPreviousDate(day);
         return (
           <TouchableOpacity
             key={index}
             style={[
               styles.dayContainer,
               isSelected && styles.currentDayContainer,
-              isFuture && styles.futureDayContainer, // Apply styles for future days
+              !isTodayOrBefore && styles.futureDayContainer, // Apply styles for future days
             ]}
-            onPress={() => !isFuture && setSelectedDate(day)} // Disable the onPress action for future days
+            onPress={() => isTodayOrBefore && setSelectedDate(day)} // Disable the onPress action for future days
           >
             <Text
               style={
                 isSelected
                   ? styles.currentDayOfWeek
-                  : isFuture
+                  : !isTodayOrBefore
                   ? styles.futureDayOfWeek // Apply styles for future days
                   : styles.dayOfWeek
               }
@@ -104,7 +109,7 @@ const CustomCalendar = () => {
               style={
                 isSelected
                   ? styles.currentDayOfMonth
-                  : isFuture
+                  : !isTodayOrBefore
                   ? styles.futureDayOfMonth // Apply styles for future days
                   : styles.dayOfMonth
               }
