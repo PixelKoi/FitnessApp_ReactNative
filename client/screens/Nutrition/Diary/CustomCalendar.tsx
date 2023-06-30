@@ -18,6 +18,17 @@ const CustomCalendar = () => {
     return givenDate.getTime() <= today.getTime();
   }
 
+  function isWithinTwoWeeks(inputDate) {
+    const twoWeeksAgo = new Date();
+    twoWeeksAgo.setDate(twoWeeksAgo.getDate() - 14); // set the date to two weeks ago
+    twoWeeksAgo.setHours(0, 0, 0, 0); // reset the time to 00:00:00
+
+    const givenDate = new Date(inputDate);
+    givenDate.setHours(0, 0, 0, 0); // reset the time of the given date to 00:00:00
+
+    return givenDate.getTime() >= twoWeeksAgo.getTime();
+  }
+
   // Determine the range of days to display (e.g., 3 days before current day, current day, and 3 days after)
   for (let i = -3; i <= 3; i++) {
     const day = new Date(selectedDate);
@@ -84,6 +95,7 @@ const CustomCalendar = () => {
           day.getMonth() === selectedDate.getMonth() &&
           day.getFullYear() === selectedDate.getFullYear();
         const isTodayOrBefore = isPreviousDate(day);
+        const withinTwoWeeks = isWithinTwoWeeks(day);
         return (
           <TouchableOpacity
             key={index}
@@ -92,7 +104,9 @@ const CustomCalendar = () => {
               isSelected && styles.currentDayContainer,
               !isTodayOrBefore && styles.futureDayContainer, // Apply styles for future days
             ]}
-            onPress={() => isTodayOrBefore && setSelectedDate(day)} // Disable the onPress action for future days
+            onPress={() =>
+              isTodayOrBefore && withinTwoWeeks && setSelectedDate(day)
+            } // Disable the onPress action for future days and dates more than two weeks ago
           >
             <Text
               style={
