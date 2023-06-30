@@ -20,26 +20,28 @@ const CustomCalendar = () => {
     container: {
       flexDirection: "row",
       justifyContent: "space-between",
-      paddingHorizontal: 16,
-      paddingTop: 16,
-      paddingBottom: 8,
       backgroundColor: colors.secondary, // Use secondary color from the theme
+      marginTop: 10,
     },
     dayContainer: {
+      paddingHorizontal: 16,
       alignItems: "center",
+      justifyContent: "center",
     },
     currentDayContainer: {
-      backgroundColor: colors.primary, // Use primary color from the theme
-      borderRadius: 4,
+      backgroundColor: colors.primary,
+      borderRadius: 10,
+      paddingVertical: 15,
+      marginTop: -10, // Adjust the value based on your needs
+      marginBottom: -10, // Adjust the value based on your needs
     },
+
     dayOfWeek: {
       fontSize: 16,
-      fontWeight: "bold",
       color: colors.primary, // Use text color from the theme
     },
     dayOfMonth: {
-      fontSize: 24,
-      fontWeight: "bold",
+      fontSize: 16,
       color: colors.primary, // Use secondary color from the theme
     },
     currentDayOfWeek: {
@@ -48,7 +50,7 @@ const CustomCalendar = () => {
       color: "white", // Set the text color for the current day to white
     },
     currentDayOfMonth: {
-      fontSize: 24,
+      fontSize: 16,
       fontWeight: "bold",
       color: "white", // Set the date color for the current day to white
     },
