@@ -84,11 +84,11 @@ const Diary = (props) => {
   if (props.route.params == undefined) {
     return (
       <View className="flex-1 items-center bg-white">
-        <SafeAreaProvider>
+        <View className="flex">
           <DiaryCalendar />
-        </SafeAreaProvider>
-        <View className="justify-center mt-10">
-          <Card className="px-4 my-4">
+        </View>
+        <View className="justify-center">
+          <Card className="px-4 mt-4">
             <Text className="py-4">
               {profileInfo.dailyCal} - caloriesConsumed = calories remaining
             </Text>

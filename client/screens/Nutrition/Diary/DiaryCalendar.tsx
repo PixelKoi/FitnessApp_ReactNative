@@ -24,14 +24,17 @@ const DiaryCalendar = () => {
   return (
     <CalendarProvider
       style={{
-        height: 8,
-        backgroundColor: colors.secondary,
+        height: 100,
         flex: 0,
-        marginBottom: 14,
+        backgroundColor: colors.secondary,
       }}
       date={formattedDate}
     >
       <WeekCalendar
+        style={{
+          height: 0,
+          backgroundColor: colors.secondary,
+        }}
         disableAllTouchEventsForDisabledDays
         animateScroll={false}
         allowSelectionOutOfRange={false}
