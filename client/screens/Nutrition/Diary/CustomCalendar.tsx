@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, Dimensions } from "react-native";
 import { useAppSelector } from "../../../redux-manager/hooks";
 
 const CustomCalendar = () => {
@@ -16,12 +16,15 @@ const CustomCalendar = () => {
     currentWeek.push(day);
   }
 
+  const screenWidth = Dimensions.get("window").width;
+
   const styles = {
     container: {
       flexDirection: "row",
       justifyContent: "space-between",
-      backgroundColor: colors.secondary, // Use secondary color from the theme
+      backgroundColor: colors.secondary,
       marginTop: 10,
+      flexGrow: 1, // Make the container take up the whole width dynamically
     },
     dayContainer: {
       paddingHorizontal: 16,
@@ -30,40 +33,40 @@ const CustomCalendar = () => {
     },
     currentDayContainer: {
       backgroundColor: colors.primary,
-      borderRadius: 10,
-      paddingVertical: 15,
-      marginTop: -10, // Adjust the value based on your needs
-      marginBottom: -10, // Adjust the value based on your needs
+      borderRadius: 12,
+      paddingVertical: 16,
+      paddingHorizontal: 14,
+      marginTop: -10,
+      marginBottom: -10,
     },
-
     dayOfWeek: {
       fontSize: 16,
-      color: colors.primary, // Use text color from the theme
+      color: colors.primary,
     },
     dayOfMonth: {
       fontSize: 16,
-      color: colors.primary, // Use secondary color from the theme
+      color: colors.primary,
     },
     currentDayOfWeek: {
-      fontSize: 16,
+      fontSize: 18,
       fontWeight: "bold",
-      color: "white", // Set the text color for the current day to white
+      color: "white",
     },
     currentDayOfMonth: {
       fontSize: 16,
       fontWeight: "bold",
-      color: "white", // Set the date color for the current day to white
+      color: "white",
     },
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { width: screenWidth }]}>
       {currentWeek.map((day, index) => (
         <View
           key={index}
           style={[
             styles.dayContainer,
-            index === 3 && styles.currentDayContainer, // Apply different styling for the current day
+            index === 3 && styles.currentDayContainer,
           ]}
         >
           <Text

@@ -44,17 +44,17 @@ const Diary = (props) => {
         </TouchableOpacity>
       ),
       //TODO: When we navigate to Profile and press the back button, go one back not to Dashboard
-      headerRight: () => (
-        // <TouchableOpacity onPress={() => setSaveButton(true)}>
-        <TouchableOpacity
-          className="mr-4"
-          onPress={() => {
-            tabNavigation.navigate("Settings");
-          }}
-        >
-          <UserCircleIcon name="ios-add" size={30} color={primary_color} />
-        </TouchableOpacity>
-      ),
+      // headerRight: () => (
+      //   // <TouchableOpacity onPress={() => setSaveButton(true)}>
+      //   <TouchableOpacity
+      //     className="mr-4"
+      //     onPress={() => {
+      //       tabNavigation.navigate("Settings");
+      //     }}
+      //   >
+      //     <UserCircleIcon name="ios-add" size={30} color={primary_color} />
+      //   </TouchableOpacity>
+      // ),
     });
   });
 
@@ -85,7 +85,7 @@ const Diary = (props) => {
   if (props.route.params == undefined) {
     return (
       <View className="flex-1 items-center bg-white">
-        <View className="flex">
+        <View className="flex-row">
           <CustomCalendar />
         </View>
         <View className="justify-center">
