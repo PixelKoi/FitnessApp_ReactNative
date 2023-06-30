@@ -12,6 +12,8 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import AntIcon from "react-native-vector-icons/AntDesign";
 import { UserCircleIcon } from "react-native-heroicons/outline";
 import DiaryCalendar from "./DiaryCalendar";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+
 const Diary = (props) => {
   const tabNavigation = useNavigation();
   const database = useDatabase();
@@ -82,8 +84,10 @@ const Diary = (props) => {
   if (props.route.params == undefined) {
     return (
       <View className="flex-1 items-center bg-white">
-        <DiaryCalendar />
-        <View className="justify-center">
+        <SafeAreaProvider>
+          <DiaryCalendar />
+        </SafeAreaProvider>
+        <View className="justify-center mt-10">
           <Card className="px-4 my-4">
             <Text className="py-4">
               {profileInfo.dailyCal} - caloriesConsumed = calories remaining

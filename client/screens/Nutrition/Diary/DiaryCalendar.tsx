@@ -22,52 +22,61 @@ const DiaryCalendar = () => {
   const { colors } = useAppSelector((state) => state.theme);
 
   return (
-    <View>
-      <CalendarProvider date={formattedDate}>
-        <WeekCalendar
-          disableAllTouchEventsForDisabledDays
-          animateScroll={false}
-          allowSelectionOutOfRange={false}
-          allowShadow={false}
-          // maxDate={format(new Date(), "YYYY-MM-DD")}
-          //
-          onDayPress={(day) => {
-            setSelected(day);
-            console.log("selected day", day);
-          }}
-          markedDates={{
-            [formattedDate]: {
-              marked: true,
-              customContainerStyle: {
-                borderRadius: 0,
-                borderTopLeftRadius: 17,
-                borderBottomLeftRadius: 17,
-              },
+    <CalendarProvider
+      style={{
+        height: 8,
+        backgroundColor: colors.secondary,
+        flex: 0,
+        marginBottom: 14,
+      }}
+      date={formattedDate}
+    >
+      <WeekCalendar
+        disableAllTouchEventsForDisabledDays
+        animateScroll={false}
+        allowSelectionOutOfRange={false}
+        allowShadow={false}
+        // maxDate={format(new Date(), "YYYY-MM-DD")}
+        //
+        onDayPress={(day) => {
+          setSelected(day);
+          console.log("selected day", day);
+        }}
+        markedDates={{
+          [formattedDate]: {
+            marked: true,
+            customContainerStyle: {
+              borderRadius: 0,
+              borderTopLeftRadius: 17,
+              borderBottomLeftRadius: 17,
+              borderWidth: 2,
+              borderColor: "red",
+              borderBottomRightRadius: 8,
             },
-            [selected]: {
-              selected: true,
-              marked: true,
-            },
-          }}
-          markingType={"custom"}
-          bounces={false}
-          bouncesZoom={false}
-          alwaysBounceHorizontal={false}
-          alwaysBounceVertical={false}
-          theme={{
-            backgroundColor: colors.secondary,
-            selectedDotColor: colors.secondary,
-            calendarBackground: "#ffffff",
-            textSectionTitleColor: "#b6c1cd",
-            selectedDayBackgroundColor: colors.primary,
-            selectedDayTextColor: "#ffffff",
-            todayTextColor: colors.primary,
-            dayTextColor: "#2d4150",
-          }}
-          //
-        />
-      </CalendarProvider>
-    </View>
+          },
+          [selected]: {
+            selected: true,
+            marked: true,
+          },
+        }}
+        markingType={"custom"}
+        bounces={false}
+        bouncesZoom={false}
+        alwaysBounceHorizontal={false}
+        alwaysBounceVertical={false}
+        theme={{
+          backgroundColor: colors.secondary,
+          selectedDotColor: colors.secondary,
+          calendarBackground: "#ffffff",
+          textSectionTitleColor: "#b6c1cd",
+          selectedDayBackgroundColor: colors.primary,
+          selectedDayTextColor: "#ffffff",
+          todayTextColor: colors.primary,
+          dayTextColor: "#2d4150",
+        }}
+        //
+      />
+    </CalendarProvider>
   );
 };
 
