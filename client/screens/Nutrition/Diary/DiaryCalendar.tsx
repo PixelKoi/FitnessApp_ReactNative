@@ -25,21 +25,20 @@ const DiaryCalendar = () => {
     <CalendarProvider
       style={{
         height: 60,
-        flex: 0,
         backgroundColor: colors.secondary,
-        borderRadius: 10,
         elevation: 4,
-        margin: 5,
+        flex: 0,
       }}
       date={formattedDate}
+      className="justify-center mb-5"
     >
       <WeekCalendar
         style={{
-          height: 50,
           backgroundColor: colors.secondary,
           borderRadius: 10,
           elevation: 4,
         }}
+        className="items-center"
         disableAllTouchEventsForDisabledDays
         animateScroll={false}
         allowSelectionOutOfRange={false}
@@ -82,11 +81,11 @@ const DiaryCalendar = () => {
           backgroundColor: colors.secondary,
           selectedDotColor: colors.secondary,
           calendarBackground: "#ffffff",
-          textSectionTitleColor: "#b6c1cd",
+          textSectionTitleColor: colors.primary,
           selectedDayBackgroundColor: colors.primary,
           selectedDayTextColor: "#ffffff",
           todayTextColor: colors.primary,
-          dayTextColor: "#2d4150",
+          dayTextColor: colors.primary,
         }}
         //
       />

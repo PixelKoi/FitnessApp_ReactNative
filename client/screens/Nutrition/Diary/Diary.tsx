@@ -12,6 +12,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import AntIcon from "react-native-vector-icons/AntDesign";
 import { UserCircleIcon } from "react-native-heroicons/outline";
 import DiaryCalendar from "./DiaryCalendar";
+import CustomCalendar from "./CustomCalendar";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 const Diary = (props) => {
@@ -85,7 +86,7 @@ const Diary = (props) => {
     return (
       <View className="flex-1 items-center bg-white">
         <View className="flex">
-          <DiaryCalendar />
+          <CustomCalendar />
         </View>
         <View className="justify-center">
           <Card className="px-4 mt-4">
