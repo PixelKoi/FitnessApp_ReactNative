@@ -369,6 +369,14 @@ const Nutrition: React.FC = () => {
   return (
     <Provider>
       <View className="flex-1 bg-white">
+        <FavoritesModal
+          isModalVisible={isModalVisible}
+          closeFavoriteModal={() => setIsModalVisible(false)}
+          handleFavoritePress={() => console.log("Favorite button pressed")}
+          favorites={favorites} // Pass your favorites array here
+          primary_color="yourPrimaryColor" // Pass your primary color here
+          secondary_color="yourSecondaryColor" // Pass your secondary color here
+        />
         <Portal>
           <Dialog visible={mealError} onDismiss={hideErrorDialog}>
             <Dialog.Title>Error</Dialog.Title>

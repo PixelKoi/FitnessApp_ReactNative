@@ -78,12 +78,14 @@ const CustomCalendar = () => {
       color: "white",
     },
     futureDayOfWeek: {
-      fontSize: 12,
+      fontSize: 16,
       color: "grey",
+      opacity: 0.4,
     },
     futureDayOfMonth: {
-      fontSize: 12,
+      fontSize: 16,
       color: "grey",
+      opacity: 0.4,
     },
   };
 
