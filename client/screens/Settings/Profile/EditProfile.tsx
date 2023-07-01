@@ -132,7 +132,7 @@ const UserBioInput = () => {
 	//Top Nav on Edit Profile Screen
 	React.useLayoutEffect(() => {
 		navigation.setOptions({
-			title: "Settings",
+			title: "Edit Profile",
 			headerTintColor: colors.primary,
 			headerLeft: () =>
 				showEditProfile === false ? (
@@ -255,13 +255,6 @@ const UserBioInput = () => {
 						<Text className="ml-auto opacity-60 text-xs">{dailyCal} cal</Text>
 					</View>
 				</View>
-				{/* <Button
-					onPress={signOut}
-					style={{ backgroundColor: colors.primary }}
-					className="w-40 mx-auto mt-4 "
-					mode="contained">
-					Sign Out
-				</Button> */}
 
 				{/* Modals */}
 				<ActivityPickerModal

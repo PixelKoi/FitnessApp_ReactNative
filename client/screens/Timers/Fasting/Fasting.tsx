@@ -4,13 +4,13 @@ import { useNavigation } from "@react-navigation/native";
 import { Button, Surface } from "react-native-paper";
 import { format, add, getDay } from "date-fns";
 import FastingTimer from "../components/FastingDonutGraph";
-import FastingTimer2 from "../components/FastingDonutGraph2";
 
 //Redux imports
 import { useAppDispatch, useAppSelector } from "../../../redux-manager/hooks";
 import { setTimerStates } from "../../../redux-manager/redux-slice/fasting-slice";
 //import icons
 import FontAwesome from "react-native-vector-icons/FontAwesome5";
+import CongratulationsModal from "../../../components/Modals/CongratulationsModal";
 
 const Fasting = ({ route }) => {
 	const { title } = route.params;
@@ -25,6 +25,7 @@ const Fasting = ({ route }) => {
 	const dispatch = useAppDispatch();
 
 	//fasting component states
+	const [showCongratsModal, setShowCongratsModal] = useState(false);
 	const [startTime, setStartTime] = useState<Date | null>(null);
 	const [endTime, setEndTime] = useState<Date | null>(null);
 	const [clicked, setClicked] = useState(false);
@@ -86,7 +87,7 @@ const Fasting = ({ route }) => {
 
 	React.useLayoutEffect(() => {
 		navigation.setOptions({
-			title: "Fasting",
+			title: title,
 			headerStyle: {
 				shadowColor: "transparent",
 			},
@@ -115,24 +116,24 @@ const Fasting = ({ route }) => {
 			className="flex-1 flex-col justify-center">
 			{/* Clock section */}
 			<View className="mb-14">
-				<Text
+				{/* <Text
 					className="text-xl font-bold text-center bottom-10"
 					style={{ color: colors.primary }}>
 					{title}
-				</Text>
-				<Surface
+				</Text> */}
+				<View
 					style={{
 						backgroundColor: colors.secondary,
 						borderWidth: 2,
 						borderColor: colors.primary,
 					}}
-					className="ml-auto h-12 w-12 rounded-full mr-14">
+					className="ml-auto h-12 w-12 rounded-full mr-16 top-4">
 					<Text
 						style={{ fontSize: 12, color: colors.primary }}
 						className="self-center my-auto font-bold">
 						{maxTime}hrs
 					</Text>
-				</Surface>
+				</View>
 				{/* Fasting Donut Graph */}
 				<View className="mt-6 z-0">
 					<FastingTimer />
@@ -199,6 +200,10 @@ const Fasting = ({ route }) => {
 					{clicked === false ? "Start Fast" : "End Fast Now"}
 				</Button>
 			</View>
+			<CongratulationsModal
+				showCongratsModal={showCongratsModal}
+				setShowCongratsModal={setShowCongratsModal}
+			/>
 		</View>
 	);
 };
