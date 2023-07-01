@@ -117,7 +117,7 @@ const FinishSetup = ({ session }: { session: Session }) => {
 				<View className="mt-20">
 					<DonutGraph calories={dailyCal} />
 				</View>
-				<View className="flex-row gap-2  justify-center  mt-8">
+				<View className="flex-row gap-2  justify-center items-end  mt-8">
 					<View
 						style={{
 							backgroundColor: colors.primary,
