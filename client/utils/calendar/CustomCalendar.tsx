@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View, Text, Dimensions, TouchableOpacity } from "react-native";
-import { useAppSelector } from "../../../redux-manager/hooks";
+import { useAppSelector } from "../../redux-manager/hooks";
 
 const CustomCalendar = () => {
   const { colors } = useAppSelector((state) => state.theme);

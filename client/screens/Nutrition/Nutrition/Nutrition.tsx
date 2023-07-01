@@ -36,7 +36,7 @@ import {
 } from "../../../redux-manager/redux-slice/nutrition-slice";
 import { useAppSelector, useAppDispatch } from "../../../redux-manager/hooks";
 import MealPicker from "../../../utils/nutrition/meal-picker/MealPicker";
-import FavoritesModal from "./modals/FavoriteModal";
+import FavoritesModal from "../../../utils/nutrition/modals/FavoriteModal";
 import { Dimensions } from "react-native";
 import { BlurView } from "expo-blur";
 
