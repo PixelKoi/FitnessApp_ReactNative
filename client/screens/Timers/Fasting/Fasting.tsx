@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { Button, Surface } from "react-native-paper";
+import { Button } from "react-native-paper";
 import { format, add, getDay } from "date-fns";
 import FastingTimer from "../components/FastingDonutGraph";
 import FastingTimer2 from "../components/FastingDonutGraph2";
@@ -113,7 +113,11 @@ const Fasting = () => {
 			className="flex-1 flex-col justify-center">
 			{/* Clock section */}
 			<View className="mb-14">
-				<Text className="text-xl font-bold text-center">Circadian Rythm</Text>
+				<Text
+					className="text-xl font-bold text-center"
+					style={{ color: colors.primary }}>
+					Circadian Rythm
+				</Text>
 				{/* Fasting Donut Graph */}
 				<View className="mt-6 z-0">
 					<FastingTimer />

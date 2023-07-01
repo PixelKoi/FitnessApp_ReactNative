@@ -14,6 +14,7 @@ import {
 import { supabase } from "../../utils/supabase_authentication/supabase";
 import calAlgo from "../../utils/calAlgo/cal-algo";
 import DonutGraph from "./component/FastingDonutGraph";
+import Icons from "react-native-vector-icons/FontAwesome5";
 
 const FinishSetup = ({ session }: { session: Session }) => {
 	//Import nav
@@ -115,6 +116,238 @@ const FinishSetup = ({ session }: { session: Session }) => {
 				</View>
 				<View className="mt-20">
 					<DonutGraph calories={dailyCal} />
+				</View>
+				<View className="flex-row gap-2  justify-center  mt-8">
+					<View
+						style={{
+							backgroundColor: colors.primary,
+							borderStyle: "solid",
+							width: 2,
+							height: 20,
+							borderColor: colors.primary,
+						}}
+					/>
+					<View
+						style={{
+							backgroundColor: colors.primary,
+							borderStyle: "solid",
+							width: 2,
+							height: 20,
+							borderColor: colors.primary,
+						}}
+					/>
+					<View
+						style={{
+							backgroundColor: colors.primary,
+							borderStyle: "solid",
+							width: 2,
+							height: 40,
+							borderColor: colors.primary,
+						}}
+					/>
+					<View
+						style={{
+							backgroundColor: colors.primary,
+							borderStyle: "solid",
+							width: 2,
+							height: 20,
+							borderColor: colors.primary,
+						}}
+					/>
+					<View
+						style={{
+							backgroundColor: colors.primary,
+							borderStyle: "solid",
+							width: 2,
+							height: 20,
+							borderColor: colors.primary,
+						}}
+					/>
+					<View
+						style={{
+							backgroundColor: colors.primary,
+							borderStyle: "solid",
+							width: 2,
+							height: 20,
+							borderColor: colors.primary,
+						}}
+					/>
+					<View
+						style={{
+							backgroundColor: colors.primary,
+							borderStyle: "solid",
+							width: 2,
+							height: 20,
+							borderColor: colors.primary,
+						}}
+					/>
+					<View
+						style={{
+							backgroundColor: colors.primary,
+							borderStyle: "solid",
+							width: 2,
+							height: 30,
+							borderColor: colors.primary,
+						}}
+					/>
+					<View
+						style={{
+							backgroundColor: colors.primary,
+							borderStyle: "solid",
+							width: 2,
+							height: 20,
+							borderColor: colors.primary,
+						}}
+					/>
+					<View
+						style={{
+							backgroundColor: colors.primary,
+							borderStyle: "solid",
+							width: 2,
+							height: 20,
+							borderColor: colors.primary,
+						}}
+					/>
+					<View
+						style={{
+							backgroundColor: colors.primary,
+							borderStyle: "solid",
+							width: 2,
+							height: 20,
+							borderColor: colors.primary,
+						}}
+					/>
+					<View
+						style={{
+							backgroundColor: colors.primary,
+							borderStyle: "solid",
+							width: 2,
+							height: 20,
+							borderColor: colors.primary,
+						}}
+					/>
+
+					<View
+						style={{
+							backgroundColor: colors.primary,
+							borderStyle: "solid",
+							width: 2,
+							height: 40,
+							borderColor: colors.primary,
+						}}
+					/>
+					<View
+						style={{
+							backgroundColor: colors.primary,
+							borderStyle: "solid",
+							width: 2,
+							height: 20,
+							borderColor: colors.primary,
+						}}
+					/>
+					<View
+						style={{
+							backgroundColor: colors.primary,
+							borderStyle: "solid",
+							width: 2,
+							height: 20,
+							borderColor: colors.primary,
+						}}
+					/>
+					<View
+						style={{
+							backgroundColor: colors.primary,
+							borderStyle: "solid",
+							width: 2,
+							height: 20,
+							borderColor: colors.primary,
+						}}
+					/>
+					<View
+						style={{
+							backgroundColor: colors.primary,
+							borderStyle: "solid",
+							width: 2,
+							height: 20,
+							borderColor: colors.primary,
+						}}
+					/>
+
+					<View
+						style={{
+							backgroundColor: colors.primary,
+							borderStyle: "solid",
+							width: 2,
+							height: 30,
+							borderColor: colors.primary,
+						}}
+					/>
+					<View
+						style={{
+							backgroundColor: colors.primary,
+							borderStyle: "solid",
+							width: 2,
+							height: 20,
+							borderColor: colors.primary,
+						}}
+					/>
+					<View
+						style={{
+							backgroundColor: colors.primary,
+							borderStyle: "solid",
+							width: 2,
+							height: 20,
+							borderColor: colors.primary,
+						}}
+					/>
+					<View
+						style={{
+							backgroundColor: colors.primary,
+							borderStyle: "solid",
+							width: 2,
+							height: 20,
+							borderColor: colors.primary,
+						}}
+					/>
+					<View
+						style={{
+							backgroundColor: colors.primary,
+							borderStyle: "solid",
+							width: 2,
+							height: 20,
+							borderColor: colors.primary,
+						}}
+					/>
+					<View
+						style={{
+							backgroundColor: colors.primary,
+							borderStyle: "solid",
+							width: 2,
+							height: 40,
+							borderColor: colors.primary,
+						}}
+					/>
+					<View
+						style={{
+							backgroundColor: colors.primary,
+							borderStyle: "solid",
+							width: 2,
+							height: 20,
+							borderColor: colors.primary,
+						}}
+					/>
+					<View
+						style={{
+							backgroundColor: colors.primary,
+							borderStyle: "solid",
+							width: 2,
+							height: 20,
+							borderColor: colors.primary,
+						}}
+					/>
+				</View>
+				<View className="items-center mt-2">
+					<Icons name="caret-up" size={30} color={colors.primary} />
 				</View>
 				<View className="flex-1 self-center justify-end mb-16">
 					<Button
