@@ -57,7 +57,7 @@ const FavoritesModal = React.memo(
             backgroundColor: "white",
             height: Dimensions.get("window").height * 0.45,
             borderRadius: 20,
-            margin: 15,
+            margin: 12,
           }}
           visible={isModalVisible}
           animationType="none"
@@ -94,7 +94,7 @@ const FavoritesModal = React.memo(
               />
             </View>
             {/* Favorite Modal Body with ScrollView */}
-            <View className="">
+            {favorites.length > 0 ? (
               <FlatList
                 style={{
                   height: Dimensions.get("window").height * 0.4,
@@ -136,7 +136,30 @@ const FavoritesModal = React.memo(
                   </View>
                 )}
               />
-            </View>
+            ) : (
+              <View
+                style={{
+                  height: Dimensions.get("window").height * 0.4,
+                  padding: 10,
+                }}
+              >
+                <Text
+                  style={{ color: primary_color }}
+                  className="pt-4 pl-4 capitalize"
+                  variant="titleLarge"
+                >
+                  No favorite selected
+                </Text>
+                <Text
+                  style={{ color: primary_color }}
+                  className="pt-4 pl-4 italic"
+                  variant="bodyMedium"
+                >
+                  Please heart a food option to display here for quick
+                  selections.
+                </Text>
+              </View>
+            )}
           </View>
         </Modal>
       </Portal>
