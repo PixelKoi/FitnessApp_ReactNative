@@ -54,20 +54,20 @@ const FavoritesModal = React.memo(
             right: 0,
             overflow: "hidden",
             backgroundColor: "white",
-            padding: 16, // Added padding instead of paddingTop
             height: Dimensions.get("window").height * 0.45,
           }}
           visible={isModalVisible}
           animationType="none"
           onDismiss={closeFavoriteModal}
         >
-          <View className="bg-white">
+          <View className="" style={{ backgroundColor: secondary_color }}>
             <View
               style={{
                 flexDirection: "row",
                 justifyContent: "space-between",
                 alignItems: "center",
-                paddingTop: 16,
+                marginTop: 24,
+                marginBottom: 10,
               }}
             >
               <Text
@@ -77,6 +77,7 @@ const FavoritesModal = React.memo(
                   fontSize: 24,
                   fontWeight: "bold",
                   color: primary_color,
+                  paddingLeft: 16,
                 }}
               >
                 Favorites
@@ -86,11 +87,16 @@ const FavoritesModal = React.memo(
                 color={primary_color}
                 size={24}
                 onPress={handleFavoritePress}
+                style={{ paddingRight: 16 }}
               />
             </View>
             {/* Favorite Modal Body with ScrollView */}
             <View className="">
               <FlatList
+                style={{
+                  height: Dimensions.get("window").height * 0.45,
+                  padding: 10,
+                }}
                 indicatorStyle="black"
                 className="pt-8"
                 data={favorites}
