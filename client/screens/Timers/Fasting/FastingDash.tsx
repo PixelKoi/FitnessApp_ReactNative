@@ -50,7 +50,7 @@ const FastingDash = () => {
 				<TouchableOpacity
 					onPress={async () => {
 						await dispatch(setMaxTime(13));
-						navigation.navigate("Fasting");
+						navigation.navigate("Fasting", { title: "Circadian Rythm" });
 					}}>
 					<FastingCard
 						chickenIMG={CircadianChicken}
@@ -63,7 +63,7 @@ const FastingDash = () => {
 				<TouchableOpacity
 					onPress={async () => {
 						await dispatch(setMaxTime(16));
-						navigation.navigate("Fasting");
+						navigation.navigate("Fasting", { title: "16:8 Intermittent" });
 					}}>
 					<FastingCard
 						chickenIMG={SixteenByEightChicken}
@@ -76,7 +76,7 @@ const FastingDash = () => {
 				<TouchableOpacity
 					onPress={async () => {
 						await dispatch(setMaxTime(18));
-						navigation.navigate("Fasting");
+						navigation.navigate("Fasting", { title: "18:6 Intermittent" });
 					}}>
 					<FastingCard
 						chickenIMG={EighteenByFourChicken}
@@ -89,7 +89,7 @@ const FastingDash = () => {
 				<TouchableOpacity
 					onPress={async () => {
 						await dispatch(setMaxTime(20));
-						navigation.navigate("Fasting");
+						navigation.navigate("Fasting", { title: "20:4 Intermittent" });
 					}}>
 					<FastingCard
 						chickenIMG={TwentyByfourChicken}

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { Button } from "react-native-paper";
+import { Button, Surface } from "react-native-paper";
 import { format, add, getDay } from "date-fns";
 import FastingTimer from "../components/FastingDonutGraph";
 import FastingTimer2 from "../components/FastingDonutGraph2";
@@ -12,7 +12,9 @@ import { setTimerStates } from "../../../redux-manager/redux-slice/fasting-slice
 //import icons
 import FontAwesome from "react-native-vector-icons/FontAwesome5";
 
-const Fasting = () => {
+const Fasting = ({ route }) => {
+	const { title } = route.params;
+
 	const navigation = useNavigation();
 
 	//initiate fasting redux states
@@ -114,10 +116,23 @@ const Fasting = () => {
 			{/* Clock section */}
 			<View className="mb-14">
 				<Text
-					className="text-xl font-bold text-center"
+					className="text-xl font-bold text-center bottom-10"
 					style={{ color: colors.primary }}>
-					Circadian Rythm
+					{title}
 				</Text>
+				<Surface
+					style={{
+						backgroundColor: colors.secondary,
+						borderWidth: 2,
+						borderColor: colors.primary,
+					}}
+					className="ml-auto h-12 w-12 rounded-full mr-14">
+					<Text
+						style={{ fontSize: 12, color: colors.primary }}
+						className="self-center my-auto font-bold">
+						{maxTime}hrs
+					</Text>
+				</Surface>
 				{/* Fasting Donut Graph */}
 				<View className="mt-6 z-0">
 					<FastingTimer />
