@@ -8,7 +8,7 @@ import {
 } from "react-native-calendars";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { View } from "react-native";
-import { useAppSelector } from "../../../redux-manager/hooks";
+import { useAppSelector } from "../../redux-manager/hooks";
 import { todayTextColor } from "react-native-calendars/src/style";
 
 const DiaryCalendar = () => {

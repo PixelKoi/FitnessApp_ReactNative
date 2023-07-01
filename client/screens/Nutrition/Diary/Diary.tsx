@@ -11,7 +11,7 @@ import Food from "../../../database/models/Food";
 import Icon from "react-native-vector-icons/FontAwesome";
 import AntIcon from "react-native-vector-icons/AntDesign";
 import { UserCircleIcon } from "react-native-heroicons/outline";
-import DiaryCalendar from "./DiaryCalendar";
+import DiaryCalendar from "../../../utils/calendar/DiaryCalendar";
 import CustomCalendar from "../../../utils/calendar/CustomCalendar";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 

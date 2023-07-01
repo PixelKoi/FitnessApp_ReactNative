@@ -23,7 +23,6 @@ const FavoritesModal = React.memo(
 
       return (
         <View
-          className=""
           style={{ backgroundColor: primary_color, justifyContent: "center" }}
         >
           <Animated.Text
@@ -43,33 +42,45 @@ const FavoritesModal = React.memo(
     return (
       <Portal>
         <Modal
+          theme={{
+            colors: { backdrop: "transparent" },
+          }}
           style={{
             flex: 1,
             zIndex: 10,
-            marginBottom: 0,
-            overflow: "hidden",
-            backgroundColor: "white",
-            paddingTop: 16,
-            height: Dimensions.get("window").height * 0.5,
             position: "absolute",
-            top: 0,
+            top: -60,
             left: 0,
             right: 0,
+            overflow: "hidden",
+            backgroundColor: "white",
+            padding: 16, // Added padding instead of paddingTop
+            height: Dimensions.get("window").height * 0.45,
           }}
           visible={isModalVisible}
           animationType="none"
           onDismiss={closeFavoriteModal}
         >
-          <View className="flex-col bg-white">
-            <View className="py-4">
+          <View className="bg-white">
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+                paddingTop: 16,
+              }}
+            >
               <Text
-                className="text-center text-2xl font-bold"
-                style={{ color: primary_color }}
+                style={{
+                  flex: 1,
+                  textAlign: "center",
+                  fontSize: 24,
+                  fontWeight: "bold",
+                  color: primary_color,
+                }}
               >
                 Favorites
               </Text>
-            </View>
-            <View className="absolute top-0 right-0 p-4">
               <AntIcon
                 name="closecircle"
                 color={primary_color}
@@ -77,7 +88,7 @@ const FavoritesModal = React.memo(
                 onPress={handleFavoritePress}
               />
             </View>
-            {/*Favorite Modal Body with scrollview */}
+            {/* Favorite Modal Body with ScrollView */}
             <View className="">
               <FlatList
                 indicatorStyle="black"
@@ -91,11 +102,12 @@ const FavoritesModal = React.memo(
                         <View className="flex flex-col">
                           <Card.Content>
                             <Text
-                              style={{ color: primary_color }}
-                              className="font-bold"
-                              variant="titleLarge"
+                              style={{
+                                color: primary_color,
+                                fontWeight: "bold", // Changed className to fontWeight
+                              }}
                             >
-                              <Text>{item.description}</Text>
+                              {item.description}
                             </Text>
                             <Text style={{ color: primary_color }}>
                               Calories: {item.Calories}

@@ -374,8 +374,8 @@ const Nutrition: React.FC = () => {
           closeFavoriteModal={() => setIsModalVisible(false)}
           handleFavoritePress={() => console.log("Favorite button pressed")}
           favorites={favorites} // Pass your favorites array here
-          primary_color="yourPrimaryColor" // Pass your primary color here
-          secondary_color="yourSecondaryColor" // Pass your secondary color here
+          primary_color={primary_color} // Pass your primary color here
+          secondary_color={secondary_color} // Pass your secondary color here
         />
         <Portal>
           <Dialog visible={mealError} onDismiss={hideErrorDialog}>
