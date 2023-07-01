@@ -1,20 +1,31 @@
 // Favorites Modal
 import React from "react";
 import { Card, Modal, Portal } from "react-native-paper";
-import { Animated, Dimensions, FlatList, Text, View } from "react-native";
+import {
+  Animated,
+  Dimensions,
+  FlatList,
+  Text,
+  View,
+  TouchableOpacity,
+} from "react-native";
 import AntIcon from "react-native-vector-icons/AntDesign";
 import Swipeable from "react-native-gesture-handler/Swipeable";
+import { removeFavorite } from "../../../redux-manager/redux-slice/favorite-slice";
+import { useAppSelector, useAppDispatch } from "../../../redux-manager/hooks";
 
 const FavoritesModal = React.memo(
   ({
     isModalVisible,
     closeFavoriteModal,
-    handleFavoritePress,
     favorites,
     primary_color,
     secondary_color,
   }) => {
-    const leftSwipe = (progress, dragX) => {
+    const dispatch = useAppDispatch();
+
+    // Creating a higher-order function where outer function takes `item` from flatlist
+    const leftSwipe = (item) => (progress, dragX) => {
       const scale = dragX.interpolate({
         inputRange: [0, 100],
         outputRange: [1, 0],
@@ -25,17 +36,23 @@ const FavoritesModal = React.memo(
         <View
           style={{ backgroundColor: primary_color, justifyContent: "center" }}
         >
-          <Animated.Text
-            className="items-start"
-            style={{
-              color: "white",
-              paddingHorizontal: 20,
-              fontWeight: "600",
-              transform: [{ scale }],
+          <TouchableOpacity
+            onPress={() => {
+              dispatch(removeFavorite(item));
             }}
           >
-            Delete
-          </Animated.Text>
+            <Animated.Text
+              className="items-start"
+              style={{
+                color: "white",
+                paddingHorizontal: 20,
+                fontWeight: "600",
+                transform: [{ scale }],
+              }}
+            >
+              Delete
+            </Animated.Text>
+          </TouchableOpacity>
         </View>
       );
     };
@@ -105,7 +122,7 @@ const FavoritesModal = React.memo(
                 keyExtractor={(item) => item.fav_id.toString()}
                 renderItem={({ item, index }) => (
                   <View key={item.fav_id} className="p-1">
-                    <Swipeable renderRightActions={leftSwipe}>
+                    <Swipeable renderRightActions={leftSwipe(item)}>
                       <View className="flex flex-row mt-0">
                         <View className="flex flex-col">
                           <Card.Content>

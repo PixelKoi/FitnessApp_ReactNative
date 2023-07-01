@@ -36,8 +36,17 @@ const favSlice = createSlice({
         });
       }
     },
+    removeFavorite: (state, action: PayloadAction<Favorite>) => {
+      const itemIndex = state.favorites.findIndex(
+        (item) => item.id === action.payload.id
+      );
+      // if item already exists, don't allow adding multiple times
+      if (itemIndex !== -1) {
+        state.favorites.splice(itemIndex, 1);
+      }
+    },
   },
 });
 
-export const { addFavorite } = favSlice.actions;
+export const { addFavorite, removeFavorite } = favSlice.actions;
 export default favSlice.reducer;
