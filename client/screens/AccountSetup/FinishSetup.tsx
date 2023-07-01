@@ -137,10 +137,11 @@ const FinishSetup = ({ session }: { session: Session }) => {
 						}}
 					/>
 					<View
+						className="rounded-full"
 						style={{
 							backgroundColor: colors.primary,
 							borderStyle: "solid",
-							width: 2,
+							width: 4,
 							height: 40,
 							borderColor: colors.primary,
 						}}
@@ -228,10 +229,11 @@ const FinishSetup = ({ session }: { session: Session }) => {
 					/>
 
 					<View
+						className="rounded-full"
 						style={{
 							backgroundColor: colors.primary,
 							borderStyle: "solid",
-							width: 2,
+							width: 4,
 							height: 40,
 							borderColor: colors.primary,
 						}}
@@ -319,10 +321,11 @@ const FinishSetup = ({ session }: { session: Session }) => {
 						}}
 					/>
 					<View
+						className="rounded-full"
 						style={{
 							backgroundColor: colors.primary,
 							borderStyle: "solid",
-							width: 2,
+							width: 4,
 							height: 40,
 							borderColor: colors.primary,
 						}}
