@@ -25,10 +25,16 @@ const favSlice = createSlice({
   initialState,
   reducers: {
     addFavorite: (state, action: PayloadAction<Favorite>) => {
-      state.favorites.push({
-        fav_id: state.favorites.length + 1,
-        ...action.payload,
-      });
+      const itemIndex = state.favorites.findIndex(
+        (item) => item.id === action.payload.id
+      );
+      // if item already exists, don't allow adding multiple times
+      if (itemIndex === -1) {
+        state.favorites.push({
+          fav_id: state.favorites.length + 1,
+          ...action.payload,
+        });
+      }
     },
   },
 });
