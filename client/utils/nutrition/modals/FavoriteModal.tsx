@@ -55,6 +55,8 @@ const FavoritesModal = React.memo(
             overflow: "hidden",
             backgroundColor: "white",
             height: Dimensions.get("window").height * 0.45,
+            borderRadius: 20,
+            margin: 15,
           }}
           visible={isModalVisible}
           animationType="none"
@@ -66,7 +68,7 @@ const FavoritesModal = React.memo(
                 flexDirection: "row",
                 justifyContent: "space-between",
                 alignItems: "center",
-                marginTop: 24,
+                marginTop: 30,
                 marginBottom: 10,
               }}
             >
