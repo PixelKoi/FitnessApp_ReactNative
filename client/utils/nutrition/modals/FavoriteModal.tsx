@@ -42,6 +42,7 @@ const FavoritesModal = React.memo(
     return (
       <Portal>
         <Modal
+          dismissable={false}
           theme={{
             colors: { backdrop: "transparent" },
           }}
@@ -88,7 +89,7 @@ const FavoritesModal = React.memo(
                 name="closecircle"
                 color={primary_color}
                 size={24}
-                onPress={handleFavoritePress}
+                onPress={closeFavoriteModal}
                 style={{ paddingRight: 16 }}
               />
             </View>
@@ -96,11 +97,10 @@ const FavoritesModal = React.memo(
             <View className="">
               <FlatList
                 style={{
-                  height: Dimensions.get("window").height * 0.45,
+                  height: Dimensions.get("window").height * 0.4,
                   padding: 10,
                 }}
                 indicatorStyle="black"
-                className="pt-8"
                 data={favorites}
                 keyExtractor={(item) => item.fav_id.toString()}
                 renderItem={({ item, index }) => (
