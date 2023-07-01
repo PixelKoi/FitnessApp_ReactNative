@@ -438,204 +438,145 @@ const Nutrition: React.FC = () => {
           }
           keyExtractor={(item) => item.id.toString()}
         />
-        {favoritesList ? (
-          <Card className="h-2/5 rounded-3xl m-3 overflow-hidden">
-            <Card.Content className="">
-              <Text
-                style={{ color: primary_color }}
-                className="font-bold pb-2 text-xl"
-              >
-                Favorites
-              </Text>
-              {favorites.length > 0 ? (
+        <Card
+          className="overflow-hidden"
+          style={{
+            borderTopLeftRadius: 0,
+            borderTopRightRadius: 0,
+            borderBottomLeftRadius: 0,
+            borderBottomRightRadius: 0,
+            backgroundColor: primary_color,
+          }}
+        >
+          <View>
+            <Card.Content>
+              {inventory.length > 0 ? (
+                // Code to be executed when foodInventory has items
                 <FlatList
-                  indicatorStyle="black"
-                  data={favorites}
-                  keyExtractor={(item) => item.fav_id.toString()}
-                  renderItem={({ item: favorite }) => (
-                    <View key={favorite.fav_id} className="pt-3">
-                      <View className="flex flex-row mt-0">
-                        <View className="flex flex-col mr-8 pl-0">
-                          <Text
-                            style={{ color: primary_color }}
-                            className="font-extrabold"
-                            variant="titleLarge"
-                          >
-                            {favorite.description}
-                          </Text>
-                          <Text style={{ color: primary_color }}>
-                            Calories: {favorite.Calories}
-                          </Text>
-                        </View>
-                        <View className="flex flex-col ml-auto">
-                          <PlusCircleIcon color={primary_color} />
+                  style={{ maxHeight: 150 }}
+                  indicatorStyle="white"
+                  data={inventory}
+                  renderItem={({ item }) => (
+                    <View className="flex flex-row justify-between px-4 pt-2">
+                      <View className="flex flex-col mt-2 w-2/3">
+                        <Text style={{ color: background }}>
+                          {item.description}
+                        </Text>
+                      </View>
+                      <View className="flex flex-col mt-1 justify-center">
+                        <View className="flex flex-row">
+                          <View className="bg-white flex flex-row rounded-2xl mr-2 items-center">
+                            <TouchableOpacity
+                              onPress={() => {
+                                decrement_inventory_item(item);
+                              }}
+                            >
+                              <AntIcon
+                                name="minuscircle"
+                                size={22}
+                                color={secondary_color}
+                              />
+                            </TouchableOpacity>
+
+                            <Text
+                              style={{
+                                color: primary_color,
+                                alignItems: "center",
+                                paddingHorizontal: 5,
+                              }}
+                            >
+                              {item.quantity}
+                            </Text>
+                            <TouchableOpacity
+                              onPress={() => {
+                                increment_inventory_item(item);
+                              }}
+                            >
+                              <AntIcon
+                                name="pluscircle"
+                                size={22}
+                                color={primary_color}
+                              />
+                            </TouchableOpacity>
+                          </View>
+                          <View className="justify-center">
+                            <TouchableOpacity
+                              onPress={() => {
+                                dispatch(deleteInventory(item));
+                              }}
+                            >
+                              <FontIcon
+                                name="trash"
+                                size={18}
+                                color={background}
+                              />
+                            </TouchableOpacity>
+                          </View>
                         </View>
                       </View>
                     </View>
                   )}
+                  keyExtractor={(item) => item.id.toString()}
                 />
               ) : (
-                <View>
-                  <Text
-                    style={{ color: primary_color }}
-                    className="pt-4 pl-4 capitalize"
-                    variant="titleLarge"
-                  >
-                    No favorite selected
-                  </Text>
-                  <Text
-                    style={{ color: primary_color }}
-                    className="pt-4 pl-4 italic"
-                    variant="bodyMedium"
-                  >
-                    Please heart a food option to display here for quick
-                    selections.
+                // Code to be executed when foodInventory is empty
+                <View className="pt-4 items-center">
+                  <Text className="font-bold" style={{ color: background }}>
+                    Food Inventory is empty
                   </Text>
                 </View>
               )}
             </Card.Content>
-          </Card>
-        ) : (
-          <Card
-            className="overflow-hidden"
-            style={{
-              borderTopLeftRadius: 0,
-              borderTopRightRadius: 0,
-              borderBottomLeftRadius: 0,
-              borderBottomRightRadius: 0,
-              backgroundColor: primary_color,
-            }}
-          >
-            <View>
-              <Card.Content>
-                {inventory.length > 0 ? (
-                  // Code to be executed when foodInventory has items
-                  <FlatList
-                    style={{ maxHeight: 150 }}
-                    indicatorStyle="white"
-                    data={inventory}
-                    renderItem={({ item }) => (
-                      <View className="flex flex-row justify-between px-4 pt-2">
-                        <View className="flex flex-col mt-2 w-2/3">
-                          <Text style={{ color: background }}>
-                            {item.description}
-                          </Text>
-                        </View>
-                        <View className="flex flex-col mt-1 justify-center">
-                          <View className="flex flex-row">
-                            <View className="bg-white flex flex-row rounded-2xl mr-2 items-center">
-                              <TouchableOpacity
-                                onPress={() => {
-                                  decrement_inventory_item(item);
-                                }}
-                              >
-                                <AntIcon
-                                  name="minuscircle"
-                                  size={22}
-                                  color={secondary_color}
-                                />
-                              </TouchableOpacity>
-
-                              <Text
-                                style={{
-                                  color: primary_color,
-                                  alignItems: "center",
-                                  paddingHorizontal: 5,
-                                }}
-                              >
-                                {item.quantity}
-                              </Text>
-                              <TouchableOpacity
-                                onPress={() => {
-                                  increment_inventory_item(item);
-                                }}
-                              >
-                                <AntIcon
-                                  name="pluscircle"
-                                  size={22}
-                                  color={primary_color}
-                                />
-                              </TouchableOpacity>
-                            </View>
-                            <View className="justify-center">
-                              <TouchableOpacity
-                                onPress={() => {
-                                  dispatch(deleteInventory(item));
-                                }}
-                              >
-                                <FontIcon
-                                  name="trash"
-                                  size={18}
-                                  color={background}
-                                />
-                              </TouchableOpacity>
-                            </View>
-                          </View>
-                        </View>
-                      </View>
-                    )}
-                    keyExtractor={(item) => item.id.toString()}
-                  />
-                ) : (
-                  // Code to be executed when foodInventory is empty
-                  <View className="pt-4 items-center">
-                    <Text className="font-bold" style={{ color: background }}>
-                      Food Inventory is empty
-                    </Text>
-                  </View>
-                )}
-              </Card.Content>
-              <View></View>
-              <View
-                className="mx-7 py-2"
-                style={{
-                  borderBottomWidth: 1,
-                  borderBottomColor: background,
-                }}
-              />
-              <View className="flex-row justify-between items-center px-8 pt-2">
-                <View>
-                  <Text className="font-bold" style={{ color: background }}>
-                    Total
-                  </Text>
-                </View>
-                <View>
-                  <Text style={{ color: background }}>
-                    {foodInventoryCalories}
-                  </Text>
-                </View>
+            <View></View>
+            <View
+              className="mx-7 py-2"
+              style={{
+                borderBottomWidth: 1,
+                borderBottomColor: background,
+              }}
+            />
+            <View className="flex-row justify-between items-center px-8 pt-2">
+              <View>
+                <Text className="font-bold" style={{ color: background }}>
+                  Total
+                </Text>
               </View>
-
-              <View className="items-center py-2">
-                <Card.Actions>
-                  <AntIcon
-                    // TODO: Refactor old meal-picker to use react-native-meal-picker
-                    // onPress={() => checkOption()}
-                    onPress={() => handleIconPress()}
-                    name="pluscircle"
-                    size={24}
-                    color={background}
-                    style={{ marginRight: 10 }}
-                  />
-                  <Portal>
-                    <Dialog
-                      onBackdropPress={handlePickerClose}
-                      visible={isPickerVisible}
-                      onDismiss={handlePickerClose}
-                    >
-                      <MealPicker
-                        onBackdropPress={handlePickerClose}
-                        color={primary_color}
-                        selectedValue={selectedLanguage}
-                        onValueChange={handleLanguageChange}
-                      />
-                    </Dialog>
-                  </Portal>
-                </Card.Actions>
+              <View>
+                <Text style={{ color: background }}>
+                  {foodInventoryCalories}
+                </Text>
               </View>
             </View>
-          </Card>
-        )}
+
+            <View className="items-center py-2">
+              <Card.Actions>
+                <AntIcon
+                  // TODO: Refactor old meal-picker to use react-native-meal-picker
+                  // onPress={() => checkOption()}
+                  onPress={() => handleIconPress()}
+                  name="pluscircle"
+                  size={24}
+                  color={background}
+                  style={{ marginRight: 10 }}
+                />
+                <Portal>
+                  <Dialog
+                    onBackdropPress={handlePickerClose}
+                    visible={isPickerVisible}
+                    onDismiss={handlePickerClose}
+                  >
+                    <MealPicker
+                      onBackdropPress={handlePickerClose}
+                      color={primary_color}
+                      selectedValue={selectedLanguage}
+                      onValueChange={handleLanguageChange}
+                    />
+                  </Dialog>
+                </Portal>
+              </Card.Actions>
+            </View>
+          </View>
+        </Card>
       </View>
     </Provider>
   );
