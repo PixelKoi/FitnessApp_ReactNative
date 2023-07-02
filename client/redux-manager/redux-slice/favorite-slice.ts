@@ -8,7 +8,7 @@ interface Favorite {
   Protein: number;
   description: string;
   id: number;
-  fav_id: number;
+  quantity: number;
 }
 
 // Our FavoriteState is going to have a list of Favorites
@@ -31,7 +31,6 @@ const favSlice = createSlice({
       // if item already exists, don't allow adding multiple times
       if (itemIndex === -1) {
         state.favorites.push({
-          fav_id: state.favorites.length + 1,
           ...action.payload,
         });
       }

@@ -13,7 +13,7 @@ import AntIcon from "react-native-vector-icons/AntDesign";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import { removeFavorite } from "../../../redux-manager/redux-slice/favorite-slice";
 import { addInventory } from "../../../redux-manager/redux-slice/nutrition-slice";
-import { useAppSelector, useAppDispatch } from "../../../redux-manager/hooks";
+import { useAppDispatch } from "../../../redux-manager/hooks";
 import Icon from "react-native-vector-icons/Ionicons";
 
 const FavoritesModal = React.memo(
@@ -121,9 +121,9 @@ const FavoritesModal = React.memo(
                 }}
                 indicatorStyle="black"
                 data={favorites}
-                keyExtractor={(item) => item.fav_id.toString()}
+                keyExtractor={(item) => item.id.toString()}
                 renderItem={({ item, index }) => (
-                  <View key={item.fav_id} className="p-1">
+                  <View key={item.id} className="p-1">
                     <Swipeable renderRightActions={leftSwipe(item)}>
                       <View
                         style={{
@@ -148,7 +148,15 @@ const FavoritesModal = React.memo(
                           </Card.Content>
                         </View>
                         <View style={{ justifyContent: "center" }}>
-                          <TouchableOpacity>
+                          <TouchableOpacity
+                            onPress={() => {
+                              const updatedItem = {
+                                ...item,
+                                quantity: 1,
+                              };
+                              dispatch(addInventory(updatedItem));
+                            }}
+                          >
                             <Icon
                               size={24}
                               name="add-circle-outline"
