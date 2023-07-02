@@ -35,7 +35,9 @@ const FavoritesModal = React.memo(
       });
 
       return (
-        <View style={{ backgroundColor: "white", justifyContent: "center" }}>
+        <View
+          style={{ backgroundColor: primary_color, justifyContent: "center" }}
+        >
           <TouchableOpacity
             onPress={() => {
               dispatch(removeFavorite(item));
@@ -44,7 +46,7 @@ const FavoritesModal = React.memo(
             <Animated.Text
               className="items-start"
               style={{
-                color: "white",
+                color: secondary_color,
                 paddingHorizontal: 20,
                 fontWeight: "600",
                 transform: [{ scale }],

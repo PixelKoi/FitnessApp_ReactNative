@@ -153,7 +153,7 @@ const Nutrition: React.FC = () => {
     setVisible(false);
   };
 
-  const [selectedLanguage, setSelectedLanguage] = useState<string>("java");
+  const [selectedLanguage, setSelectedLanguage] = useState<string>("select");
   const [isPickerVisible, setIsPickerVisible] = useState<boolean>(false);
 
   const handleLanguageChange = (itemValue: string, itemIndex: number) => {
@@ -556,15 +556,33 @@ const Nutrition: React.FC = () => {
 
             <View className="items-center py-2">
               <Card.Actions>
-                <AntIcon
-                  // TODO: Refactor old meal-picker to use react-native-meal-picker
-                  // onPress={() => checkOption()}
-                  onPress={() => handleIconPress()}
-                  name="pluscircle"
-                  size={24}
-                  color={background}
-                  style={{ marginRight: 10 }}
-                />
+                {selectedLanguage === "select" ? (
+                  <AntIcon
+                    onPress={() => handleIconPress()}
+                    name="pluscircle"
+                    size={24}
+                    color={background}
+                    style={{ marginRight: 10 }}
+                  />
+                ) : (
+                  <Button
+                    style={{
+                      borderRadius: 20,
+                      backgroundColor: colors.secondary,
+                      borderWidth: 0,
+                    }}
+                    className={`text-center w-30`}
+                  >
+                    <Text
+                      className="font-extrabold"
+                      style={{
+                        color: colors.primary,
+                      }}
+                    >
+                      Add to Diary
+                    </Text>
+                  </Button>
+                )}
                 <Portal>
                   <Dialog
                     onBackdropPress={handlePickerClose}
