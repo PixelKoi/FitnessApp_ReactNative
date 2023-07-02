@@ -323,26 +323,27 @@ const Nutrition: React.FC = () => {
                 </View>
 
                 <View className="flex flex-col ml-auto">
-                  {food.quantity > 0 ? (
-                    <TouchableOpacity className="pl-1.5 pb-4">
-                      <Icon
-                        size={24}
-                        name="checkmark-circle-sharp"
-                        color={primary_color}
-                      />
-                    </TouchableOpacity>
-                  ) : (
-                    <TouchableOpacity
-                      onPress={() => add_inventory_item(foodArray, index)}
-                      className="px-1.5 pb-4"
-                    >
-                      <Icon
-                        size={24}
-                        name="add-circle-outline"
-                        color={primary_color}
-                      />
-                    </TouchableOpacity>
-                  )}
+                  {/*TODO: Place back animation checkmark after selection*/}
+                  {/*{food.quantity > 0 ? (*/}
+                  {/*  <TouchableOpacity className="pl-1.5 pb-4">*/}
+                  {/*    <Icon*/}
+                  {/*      size={24}*/}
+                  {/*      name="checkmark-circle-sharp"*/}
+                  {/*      color={primary_color}*/}
+                  {/*    />*/}
+                  {/*  </TouchableOpacity>*/}
+                  {/*) : (*/}
+                  <TouchableOpacity
+                    onPress={() => add_inventory_item(foodArray, index)}
+                    className="px-1.5 pb-4"
+                  >
+                    <Icon
+                      size={24}
+                      name="add-circle-outline"
+                      color={primary_color}
+                    />
+                  </TouchableOpacity>
+                  {/*)}*/}
 
                   <TouchableOpacity
                     onPress={() => handleFavoriteToggle(index, foodArray)}
