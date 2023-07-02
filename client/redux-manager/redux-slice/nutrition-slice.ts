@@ -29,7 +29,6 @@ const nutritionSlice = createSlice({
   initialState,
   reducers: {
     addFavoriteToInventory: (state, action: PayloadAction<Nutrition>) => {
-      console.log("Adding Favorite to inventory ");
       const itemIndex = state.inventory.findIndex(
         (item) => item.id === action.payload.id
       );

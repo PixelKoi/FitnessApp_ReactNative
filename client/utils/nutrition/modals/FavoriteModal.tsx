@@ -59,7 +59,6 @@ const FavoritesModal = React.memo(
     return (
       <Portal>
         <Modal
-          dismissable={false}
           theme={{
             colors: { backdrop: "transparent" },
           }}

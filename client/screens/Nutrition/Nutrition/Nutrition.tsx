@@ -336,9 +336,9 @@ const Nutrition: React.FC = () => {
                   {/*  </TouchableOpacity>*/}
                   {/*) : (*/}
                   <TouchableOpacity
-                    onPress={() =>
-                      dispatch(addFavoriteToInventory(foodArray[index]))
-                    }
+                    onPress={() => {
+                      dispatch(addFavoriteToInventory(foodArray[index]));
+                    }}
                     className="px-1.5 pb-4"
                   >
                     <Icon
