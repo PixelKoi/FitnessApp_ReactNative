@@ -33,6 +33,7 @@ import {
   addInventory,
   deleteInventory,
   reduceInventory,
+  addFavoriteToInventory,
 } from "../../../redux-manager/redux-slice/nutrition-slice";
 import { useAppSelector, useAppDispatch } from "../../../redux-manager/hooks";
 import MealPicker from "../../../utils/nutrition/meal-picker/MealPicker";
@@ -255,6 +256,7 @@ const Nutrition: React.FC = () => {
   };
 
   const add_inventory_item = (foodArray, index) => {
+    console.log("WHAT THE FUCK IS THIS INDEX", index);
     let data = foodArray[index];
     const updatedFoodArray = [...foodArray];
     const updatedFood = { ...updatedFoodArray[index] };
@@ -334,7 +336,9 @@ const Nutrition: React.FC = () => {
                   {/*  </TouchableOpacity>*/}
                   {/*) : (*/}
                   <TouchableOpacity
-                    onPress={() => add_inventory_item(foodArray, index)}
+                    onPress={() =>
+                      dispatch(addFavoriteToInventory(foodArray[index]))
+                    }
                     className="px-1.5 pb-4"
                   >
                     <Icon
