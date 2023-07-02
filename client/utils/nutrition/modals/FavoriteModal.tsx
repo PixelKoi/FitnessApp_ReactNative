@@ -12,7 +12,7 @@ import {
 import AntIcon from "react-native-vector-icons/AntDesign";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import { removeFavorite } from "../../../redux-manager/redux-slice/favorite-slice";
-import { addInventory } from "../../../redux-manager/redux-slice/nutrition-slice";
+import { addFavoriteToInventory } from "../../../redux-manager/redux-slice/nutrition-slice";
 import { useAppDispatch } from "../../../redux-manager/hooks";
 import Icon from "react-native-vector-icons/Ionicons";
 
@@ -35,9 +35,7 @@ const FavoritesModal = React.memo(
       });
 
       return (
-        <View
-          style={{ backgroundColor: primary_color, justifyContent: "center" }}
-        >
+        <View style={{ backgroundColor: "white", justifyContent: "center" }}>
           <TouchableOpacity
             onPress={() => {
               dispatch(removeFavorite(item));
@@ -150,11 +148,7 @@ const FavoritesModal = React.memo(
                         <View style={{ justifyContent: "center" }}>
                           <TouchableOpacity
                             onPress={() => {
-                              const updatedItem = {
-                                ...item,
-                                quantity: 1,
-                              };
-                              dispatch(addInventory(updatedItem));
+                              dispatch(addFavoriteToInventory(item));
                             }}
                           >
                             <Icon

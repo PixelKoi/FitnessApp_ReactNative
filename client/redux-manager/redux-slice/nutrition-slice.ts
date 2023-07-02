@@ -28,8 +28,19 @@ const nutritionSlice = createSlice({
   name: "inventory",
   initialState,
   reducers: {
+    addFavoriteToInventory: (state, action: PayloadAction<Nutrition>) => {
+      console.log("Adding Favorite to inventory ");
+      const itemIndex = state.inventory.findIndex(
+        (item) => item.id === action.payload.id
+      );
+      console.log(itemIndex, action.payload);
+      // Item does not exist in the inventory, add it
+      if (itemIndex === -1) {
+        const newItem = { ...action.payload, quantity: 1 };
+        state.inventory.push(newItem);
+      }
+    },
     addInventory: (state, action: PayloadAction<Nutrition>) => {
-      console.log("DEOS IT RN");
       const itemIndex = state.inventory.findIndex(
         (item) => item.id === action.payload.id
       );
@@ -38,6 +49,7 @@ const nutritionSlice = createSlice({
       if (itemIndex === -1) {
         state.inventory.push(action.payload);
       } else {
+        console.log("ALREADY EXISTS BOOM");
         // Item already exists, update its quantity
         state.inventory[itemIndex].quantity = action.payload.quantity;
       }
@@ -66,6 +78,10 @@ const nutritionSlice = createSlice({
   },
 });
 
-export const { addInventory, reduceInventory, deleteInventory } =
-  nutritionSlice.actions;
+export const {
+  addInventory,
+  reduceInventory,
+  deleteInventory,
+  addFavoriteToInventory,
+} = nutritionSlice.actions;
 export default nutritionSlice.reducer;

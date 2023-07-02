@@ -11,7 +11,7 @@ const themes = {
   steel: {
     colors: {
       primary: "#454545",
-      secondary: "#6A6A6A",
+      secondary: "#000000",
       background: "#FFFFFF",
     },
   },

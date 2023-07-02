@@ -244,6 +244,7 @@ const Nutrition: React.FC = () => {
   };
 
   const increment_inventory_item = (item) => {
+    console.log("increment_inventory_item RUNNING");
     const updatedItem = { ...item, quantity: item.quantity + 1 };
     dispatch(addInventory(updatedItem));
   };
