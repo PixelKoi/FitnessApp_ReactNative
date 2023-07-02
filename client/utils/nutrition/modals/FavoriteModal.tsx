@@ -12,7 +12,9 @@ import {
 import AntIcon from "react-native-vector-icons/AntDesign";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import { removeFavorite } from "../../../redux-manager/redux-slice/favorite-slice";
+import { addInventory } from "../../../redux-manager/redux-slice/nutrition-slice";
 import { useAppSelector, useAppDispatch } from "../../../redux-manager/hooks";
+import Icon from "react-native-vector-icons/Ionicons";
 
 const FavoritesModal = React.memo(
   ({
@@ -123,13 +125,19 @@ const FavoritesModal = React.memo(
                 renderItem={({ item, index }) => (
                   <View key={item.fav_id} className="p-1">
                     <Swipeable renderRightActions={leftSwipe(item)}>
-                      <View className="flex flex-row mt-0">
-                        <View className="flex flex-col">
+                      <View
+                        style={{
+                          flexDirection: "row",
+                          marginTop: 0,
+                          paddingRight: 10,
+                        }}
+                      >
+                        <View style={{ flex: 1 }}>
                           <Card.Content>
                             <Text
                               style={{
                                 color: primary_color,
-                                fontWeight: "bold", // Changed className to fontWeight
+                                fontWeight: "bold",
                               }}
                             >
                               {item.description}
@@ -139,7 +147,17 @@ const FavoritesModal = React.memo(
                             </Text>
                           </Card.Content>
                         </View>
+                        <View style={{ justifyContent: "center" }}>
+                          <TouchableOpacity>
+                            <Icon
+                              size={24}
+                              name="add-circle-outline"
+                              color={primary_color}
+                            />
+                          </TouchableOpacity>
+                        </View>
                       </View>
+
                       {index !== favorites.length - 1 && (
                         <View
                           className="mx-4"
