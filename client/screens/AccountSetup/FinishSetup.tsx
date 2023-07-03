@@ -28,7 +28,7 @@ const FinishSetup = ({ session }: { session: Session }) => {
 
 	//Import redux
 	const { colors } = useAppSelector((state) => state.theme);
-	const { email, name, gender, age, height, weight, activity, goal, dailyCal } =
+	const { name, gender, age, height, weight, activity, goal, dailyCal } =
 		useAppSelector((state) => state.user);
 	const dispatch = useAppDispatch();
 
@@ -355,16 +355,16 @@ const FinishSetup = ({ session }: { session: Session }) => {
 				<View className="flex-1 self-center justify-end mb-16">
 					<Button
 						onPress={async () => {
-							// await updateProfile({
-							// 	username,
-							// 	age,
-							// 	gender,
-							// 	height,
-							// 	weight,
-							// 	activity,
-							// 	goal,
-							// 	created,
-							// });
+							await updateProfile({
+								name,
+								age,
+								gender,
+								height,
+								weight,
+								activity,
+								goal,
+								created,
+							});
 							await navigation.navigate("NavGroup");
 						}}
 						style={{

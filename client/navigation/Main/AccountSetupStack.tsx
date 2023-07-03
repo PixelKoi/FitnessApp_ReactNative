@@ -11,6 +11,7 @@ import ChooseWeight from "../../screens/AccountSetup/ChooseWeight";
 import ChooseGoal from "../../screens/AccountSetup/ChooseGoal";
 import ChooseHeight from "../../screens/AccountSetup/ChooseHeight";
 import FinishSetup from "../../screens/AccountSetup/FinishSetup";
+import ChooseName from "../../screens/AccountSetup/ChooseName";
 
 const AccountSetupStack = ({ session }: { session: Session }) => {
 	//Set navigation isntance
@@ -18,6 +19,11 @@ const AccountSetupStack = ({ session }: { session: Session }) => {
 
 	return (
 		<AccountSetupStack.Navigator>
+			<AccountSetupStack.Screen
+				options={{ headerShown: false }}
+				name="ChooseName"
+				component={ChooseName}
+			/>
 			<AccountSetupStack.Screen
 				options={{ headerShown: false }}
 				name="ChooseAge"
