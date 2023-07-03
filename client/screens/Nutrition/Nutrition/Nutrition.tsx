@@ -32,6 +32,7 @@ import {
   reduceInventory,
   addFavoriteToInventory,
   changeCategory,
+  setCategory,
 } from "../../../redux-manager/redux-slice/nutrition-slice";
 import { useAppSelector, useAppDispatch } from "../../../redux-manager/hooks";
 import MealPicker from "../../../utils/nutrition/meal-picker/MealPicker";
@@ -89,6 +90,19 @@ const Nutrition: React.FC = () => {
 
   // INVENTORY FOOD LIST
   const { inventory } = useAppSelector((state) => state.inventory);
+  const { breakfast, lunch, dinner, snacks } = useAppSelector(
+    (state) => state.inventory
+  );
+  console.log(
+    "breakfast",
+    breakfast,
+    "lunch",
+    lunch,
+    "dinner",
+    dinner,
+    "snacks",
+    snacks
+  );
   console.log("inventory: ", inventory);
   // FAVORITE FOOD LIST
   const { favorites } = useAppSelector((state) => state.favorite);
@@ -253,28 +267,6 @@ const Nutrition: React.FC = () => {
     dispatch(reduceInventory(updatedItem));
   };
 
-  const add_inventory_item = (foodArray, index) => {
-    console.log("WHAT THE FUCK IS THIS INDEX", index);
-    let data = foodArray[index];
-    const updatedFoodArray = [...foodArray];
-    const updatedFood = { ...updatedFoodArray[index] };
-    if (updatedFood.quantity < 1) {
-      updatedFood.quantity += 1;
-      updatedFoodArray[index] = updatedFood;
-      setFoodArray(updatedFoodArray);
-      let quantity = updatedFood.quantity;
-      const InventoryItem = {
-        Calories: data.Calories,
-        Carbs: data.Carbs,
-        Fat: data.Fat,
-        Protein: data.Protein,
-        description: data.description,
-        id: data.id,
-        quantity: quantity,
-      };
-      dispatch(addInventory(InventoryItem));
-    }
-  };
   useEffect(() => {
     let loggedFoods = inventory.filter((food) => food.quantity > 0);
     let inventory_calories = loggedFoods
@@ -563,7 +555,11 @@ const Nutrition: React.FC = () => {
                     style={{ marginRight: 10 }}
                   />
                 ) : (
-                  <TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => {
+                      dispatch(setCategory(selectedOption));
+                    }}
+                  >
                     <Button
                       style={{
                         borderRadius: 20,

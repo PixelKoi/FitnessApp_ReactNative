@@ -15,10 +15,18 @@ interface Nutrition {
 // Our FavoriteState is going to have a list of Favorites
 interface InventoryState {
   inventory: Nutrition[];
+  breakfast: Nutrition[];
+  lunch: Nutrition[];
+  dinner: Nutrition[];
+  snacks: Nutrition[];
 }
 
 const initialState: InventoryState = {
   inventory: [],
+  breakfast: [],
+  lunch: [],
+  dinner: [],
+  snacks: [],
 };
 
 // REDUCERS
@@ -78,6 +86,20 @@ const nutritionSlice = createSlice({
     changeCategory: (state, action: PayloadAction<string>) => {
       state.inventory.forEach((item) => (item.category = action.payload));
     },
+    setCategory: (state, action: PayloadAction<string>) => {
+      const newCategory = action.payload.toLowerCase();
+
+      // Check if newCategory is valid
+      if (!["breakfast", "lunch", "dinner", "snacks"].includes(newCategory)) {
+        // newCategory is not valid, so we don't do anything
+        console.error(`Invalid category: ${newCategory}`);
+        return;
+      }
+
+      // newCategory is valid, so we proceed as before
+      state[newCategory].push(...state.inventory);
+      state.inventory = [];
+    },
   },
 });
 
@@ -87,5 +109,6 @@ export const {
   deleteInventory,
   addFavoriteToInventory,
   changeCategory,
+  setCategory,
 } = nutritionSlice.actions;
 export default nutritionSlice.reducer;
