@@ -147,6 +147,7 @@ const Nutrition: React.FC = () => {
   }, [selectedOption, handleOptionSelect]);
   const handleOptionSelect = (option) => {
     setSelectedOption(option);
+    dispatch(changeCategory(option));
     setVisible(false);
   };
 
@@ -562,9 +563,7 @@ const Nutrition: React.FC = () => {
                     style={{ marginRight: 10 }}
                   />
                 ) : (
-                  <TouchableOpacity
-                    onPress={dispatch(changeCategory(selectedLanguage))}
-                  >
+                  <TouchableOpacity>
                     <Button
                       style={{
                         borderRadius: 20,
