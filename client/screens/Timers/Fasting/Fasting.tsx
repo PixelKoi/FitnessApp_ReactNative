@@ -100,7 +100,11 @@ const Fasting = ({ route }) => {
 					<TouchableOpacity
 						className="ml-4  rounded-full"
 						onPress={() => {
-							navigation.goBack();
+							if (startDate === null) {
+								navigation.goBack();
+							} else {
+								navigation.navigate("Timer");
+							}
 						}}>
 						<FontAwesome name="angle-left" size={30} color={colors.primary} />
 					</TouchableOpacity>

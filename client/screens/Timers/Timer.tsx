@@ -18,6 +18,7 @@ const Timer = () => {
 
 	// import redux
 	const { colors } = useAppSelector((state) => state.theme);
+	const { startDate } = useAppSelector((state) => state.fasting);
 
 	// import hooks
 	const [mode, setMode] = useState("fasting");
@@ -43,7 +44,14 @@ const Timer = () => {
 				{/* Fasting Button*/}
 				<View>
 					{/* Fasting timer */}
-					<TouchableOpacity onPress={() => navigation.navigate("FastingDash")}>
+					<TouchableOpacity
+						onPress={() => {
+							if (startDate === null) {
+								navigation.navigate("FastingDash");
+							} else {
+								navigation.navigate("Fasting", { title: "Fasting Timer" });
+							}
+						}}>
 						<TimerCard
 							img={FastingCard}
 							height={90}
