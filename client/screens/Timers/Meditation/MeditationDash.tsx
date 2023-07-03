@@ -13,7 +13,7 @@ import FontAwesome from "react-native-vector-icons/FontAwesome5";
 const MeditationDash = () => {
 	const navigation = useNavigation();
 
-	const { name } = useAppSelector((state) => state.user);
+	const { username } = useAppSelector((state) => state.user);
 	const { colors } = useAppSelector((state) => state.theme);
 
 	// top Navigation
@@ -44,7 +44,7 @@ const MeditationDash = () => {
 		<View className="flex-1 px-8  bg-background">
 			<View className="gap-2 mt-2">
 				<Text className="font-bold" style={{ fontSize: 14 }}>
-					Hello, <Text className="uppercase">{name}!</Text>
+					Hello, <Text className="uppercase">{username}!</Text>
 				</Text>
 				<Text style={{ color: "#9B9B99", fontSize: 10 }}>
 					How are you feeling today?

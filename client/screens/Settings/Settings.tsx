@@ -13,7 +13,7 @@ const Settings = () => {
 	const navigation = useNavigation();
 
 	//Initiate user redux states
-	const { email, name } = useAppSelector((state) => state.user);
+	const { email, username } = useAppSelector((state) => state.user);
 	const { colors } = useAppSelector((state) => state.theme);
 	const dispatch = useAppDispatch();
 
@@ -73,7 +73,7 @@ const Settings = () => {
 					source={require("../../assets/images/settings/Profile.png")}
 				/>
 				<View className=" flex flex-col ml-6">
-					<Text className="text-black my-2 font-bold text-lg">{name}</Text>
+					<Text className="text-black my-2 font-bold text-lg">{username}</Text>
 					<Text className="text-gray-500 italic">{email}</Text>
 				</View>
 				<View className="flex ml-7 mb-5">

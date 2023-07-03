@@ -7,7 +7,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 
 const CongratulationsModal = (props) => {
 	const { colors } = useAppSelector((state) => state.theme);
-	const { name } = useAppSelector((state) => state.user);
+	const { username } = useAppSelector((state) => state.user);
 
 	return (
 		<Modal visible={props.showComgratsModal}>
@@ -25,7 +25,7 @@ const CongratulationsModal = (props) => {
 					<Text
 						style={{ color: colors.primary }}
 						className="self-center font-bold text-xl">
-						Well done {name}!
+						Well done {username}!
 					</Text>
 					<Text
 						style={{ color: colors.primary }}

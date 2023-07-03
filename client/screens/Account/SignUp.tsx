@@ -1,8 +1,14 @@
 import React, { useState } from "react";
-import { View, Text, Image, Modal, Alert } from "react-native";
+import {
+	View,
+	Text,
+	Image,
+	Modal,
+	Alert,
+	TouchableOpacity,
+} from "react-native";
 import { Button, Surface, DefaultTheme } from "react-native-paper";
 import { TextInput } from "react-native-paper";
-import { TouchableOpacity } from "react-native-gesture-handler";
 //Images
 import headerIMG from "../../assets/images/weight_lifting.png";
 //Import supabase

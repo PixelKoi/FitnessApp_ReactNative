@@ -28,7 +28,7 @@ const FinishSetup = ({ session }: { session: Session }) => {
 
 	//Import redux
 	const { colors } = useAppSelector((state) => state.theme);
-	const { name, gender, age, height, weight, activity, goal, dailyCal } =
+	const { username, gender, age, height, weight, activity, goal, dailyCal } =
 		useAppSelector((state) => state.user);
 	const dispatch = useAppDispatch();
 
@@ -43,6 +43,7 @@ const FinishSetup = ({ session }: { session: Session }) => {
 
 	useEffect(() => {
 		calAlgo(calObject, dispatch);
+		console.log(session?.user.id);
 	}, []);
 
 	async function updateProfile({
@@ -349,6 +350,7 @@ const FinishSetup = ({ session }: { session: Session }) => {
 						}}
 					/>
 				</View>
+
 				<View className="items-center mt-2">
 					<Icons name="caret-up" size={30} color={colors.primary} />
 				</View>
@@ -356,7 +358,7 @@ const FinishSetup = ({ session }: { session: Session }) => {
 					<Button
 						onPress={async () => {
 							await updateProfile({
-								name,
+								username,
 								age,
 								gender,
 								height,

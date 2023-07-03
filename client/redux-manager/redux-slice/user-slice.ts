@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface UserState {
 	sessionID: string;
-	name: string;
+	username: string;
 	age: number;
 	gender: string;
 	weight: number;
@@ -17,7 +17,7 @@ interface UserState {
 
 const initialState: UserState = {
 	sessionID: "",
-	name: "",
+	username: "",
 	age: 0,
 	gender: "",
 	weight: 0,
@@ -38,7 +38,7 @@ const userSlice = createSlice({
 			state.sessionID = action.payload;
 		},
 		changeName(state, action: PayloadAction<string>) {
-			state.name = action.payload;
+			state.username = action.payload;
 		},
 		changeAge(state, action: PayloadAction<number>) {
 			state.age = action.payload;
