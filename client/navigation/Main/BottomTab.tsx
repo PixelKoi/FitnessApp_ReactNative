@@ -3,6 +3,7 @@ import React from "react";
 import Nutrition from "../../screens/Nutrition/Nutrition/Nutrition";
 import Diary from "../../screens/Nutrition/Diary/Diary";
 import Dashboard from "../../screens/Dashboard/Dashboard";
+import Dashboard2 from "../../screens/Dashboard/Dashboard2";
 import Timer from "../../screens/Timers/Timer";
 //redux imports
 import { ClockIcon } from "react-native-heroicons/outline";
@@ -33,7 +34,7 @@ const BottomTab = () => {
 			}}>
 			<BottomTab.Screen
 				name="Dashboard"
-				component={Dashboard}
+				component={Dashboard2}
 				options={{
 					tabBarIcon: ({ color, size }) => (
 						<Icon
