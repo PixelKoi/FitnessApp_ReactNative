@@ -5,19 +5,16 @@ import {
   FlatList,
   TouchableOpacity,
   Text,
-  Animated,
 } from "react-native";
 import {
   XCircleIcon,
   MagnifyingGlassIcon,
   ChevronDownIcon,
-  PlusCircleIcon,
 } from "react-native-heroicons/outline";
 import { params } from "../../../constants";
 import { useNavigation } from "@react-navigation/native";
 import {
   Dialog,
-  Modal,
   Button,
   Card,
   Menu,
@@ -34,11 +31,11 @@ import {
   deleteInventory,
   reduceInventory,
   addFavoriteToInventory,
+  changeCategory,
 } from "../../../redux-manager/redux-slice/nutrition-slice";
 import { useAppSelector, useAppDispatch } from "../../../redux-manager/hooks";
 import MealPicker from "../../../utils/nutrition/meal-picker/MealPicker";
 import FavoritesModal from "../../../utils/nutrition/modals/FavoriteModal";
-import { Dimensions } from "react-native";
 import { BlurView } from "expo-blur";
 
 const styles = StyleSheet.create({
@@ -565,7 +562,9 @@ const Nutrition: React.FC = () => {
                     style={{ marginRight: 10 }}
                   />
                 ) : (
-                  <TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={dispatch(changeCategory(selectedLanguage))}
+                  >
                     <Button
                       style={{
                         borderRadius: 20,

@@ -75,17 +75,8 @@ const nutritionSlice = createSlice({
         state.inventory.splice(itemIndex, 1);
       }
     },
-    changeCategory: (
-      state,
-      action: PayloadAction<{ id: number; category: string }>
-    ) => {
-      const itemIndex = state.inventory.findIndex(
-        (item) => item.id === action.payload.id
-      );
-      // Item exists in the inventory, change its category
-      if (itemIndex !== -1) {
-        state.inventory[itemIndex].category = action.payload.category;
-      }
+    changeCategory: (state, action: PayloadAction<string>) => {
+      state.inventory.forEach((item) => (item.category = action.payload));
     },
   },
 });
