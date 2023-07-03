@@ -13,11 +13,13 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import { useNavigation } from "@react-navigation/native";
 import { UserCircleIcon } from "react-native-heroicons/outline";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
 const Dashboard2 = (props: Props) => {
 	const navigation = useNavigation();
 	//intiate meditation redux states
 	const { medStreak } = useAppSelector((state) => state.meditation);
+	const { countdown } = useAppSelector((state) => state.fasting);
 	const { dailyCal } = useAppSelector((state) => state.user);
 	const { colors } = useAppSelector((state) => state.theme);
 
@@ -84,11 +86,11 @@ const Dashboard2 = (props: Props) => {
 
 			<Text
 				style={{ color: colors.primary, fontSize: 14 }}
-				className="ml-8 mt-4 font-bold">
+				className="ml-8 my-4 font-bold">
 				Activity
 			</Text>
 
-			<View className="flex-row justify-center">
+			<View className="flex-row justify-center gap-5">
 				<Surface
 					style={{
 						backgroundColor: colors.background,
@@ -116,7 +118,7 @@ const Dashboard2 = (props: Props) => {
 					</View>
 				</Surface>
 
-				<View className="flex-col">
+				<View style={{ height: 196 }} className="flex-col mt-4 items-center">
 					<TouchableOpacity>
 						<Surface
 							style={{
@@ -124,31 +126,67 @@ const Dashboard2 = (props: Props) => {
 								width: 174,
 								height: 87,
 							}}
-							className="flex mt-4 ml-6 py-4 rounded-2xl">
-							<View className=" flex-col">
-								<Text
-									className="font-bold ml-2"
-									style={{ color: colors.primary }}>
-									Fasting
-								</Text>
+							className="flex rounded-2xl">
+							<View className="flex-col">
+								<View className="flex-row ml-4 mt-3">
+									<FontAwesome5 name="clock" size={15} color={colors.primary} />
+									<Text
+										className="font-bold ml-2"
+										style={{ color: colors.primary }}>
+										Fasting
+									</Text>
+								</View>
+								<View className="mt-4 ml-4">
+									<Text className="font-bold" style={{ color: colors.primary }}>
+										{countdown}
+									</Text>
+								</View>
+							</View>
+							<View
+								style={{ backgroundColor: colors.primary }}
+								className="bottom-1 ml-auto mr-4 p-1 px-2 rounded-full">
+								<Text style={{ fontSize: 10, color: "#fff" }}>Details</Text>
 							</View>
 						</Surface>
 					</TouchableOpacity>
 
-					<TouchableOpacity>
+					<TouchableOpacity className="mt-auto">
 						<Surface
 							style={{
 								backgroundColor: colors.background,
 								width: 174,
 								height: 87,
 							}}
-							className="flex mt-5 ml-6 py-4 rounded-2xl">
-							<View className=" flex-col">
-								<Text
-									className="font-bold ml-2"
-									style={{ color: colors.primary }}>
-									Meditation
-								</Text>
+							className="flex rounded-2xl">
+							<View className=" lex-col">
+								<View className="flex-row ml-4 mt-3">
+									<FontAwesome5 name="brain" size={15} color={colors.primary} />
+									<Text
+										className="font-bold ml-2"
+										style={{ color: colors.primary }}>
+										Meditation
+									</Text>
+								</View>
+								<View className="flex-row ml-4 mt-4">
+									<View className="flex-row">
+										<Text
+											className="self-center"
+											style={{ fontSize: 25, color: colors.primary }}>
+											5
+										</Text>
+										<Text
+											className="self-center"
+											style={{ fontSize: 14, color: colors.primary }}>
+											{" "}
+											hours
+										</Text>
+									</View>
+									<View
+										style={{ backgroundColor: colors.primary }}
+										className="mt-3 ml-auto mr-4 p-1 px-2 rounded-full">
+										<Text style={{ fontSize: 10, color: "#fff" }}>Details</Text>
+									</View>
+								</View>
 							</View>
 						</Surface>
 					</TouchableOpacity>
