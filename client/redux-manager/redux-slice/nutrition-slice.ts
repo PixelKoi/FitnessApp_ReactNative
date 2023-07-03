@@ -9,6 +9,7 @@ interface Nutrition {
   description: string;
   id: number;
   quantity: number;
+  category: string;
 }
 
 // Our FavoriteState is going to have a list of Favorites
@@ -74,6 +75,18 @@ const nutritionSlice = createSlice({
         state.inventory.splice(itemIndex, 1);
       }
     },
+    changeCategory: (
+      state,
+      action: PayloadAction<{ id: number; category: string }>
+    ) => {
+      const itemIndex = state.inventory.findIndex(
+        (item) => item.id === action.payload.id
+      );
+      // Item exists in the inventory, change its category
+      if (itemIndex !== -1) {
+        state.inventory[itemIndex].category = action.payload.category;
+      }
+    },
   },
 });
 
@@ -82,5 +95,6 @@ export const {
   reduceInventory,
   deleteInventory,
   addFavoriteToInventory,
+  changeCategory,
 } = nutritionSlice.actions;
 export default nutritionSlice.reducer;

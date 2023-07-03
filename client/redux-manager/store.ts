@@ -34,8 +34,7 @@ const persistConfig = {
   version: 1,
   storage: AsyncStorage,
   // whitelist: ["favorite", "theme"], // Specify the reducer to persist
-  whitelist: ["favorite"], // Specify the reducer to persist
-  // whitelist: ["theme"], // Specify the reducer to persist
+  whitelist: ["favorite", "theme"], // Specify the reducer to persist
 };
 
 // Persist https://redux-toolkit.js.org/usage/usage-guide#use-with-redux-persist

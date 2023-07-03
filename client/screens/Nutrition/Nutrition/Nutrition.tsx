@@ -565,23 +565,25 @@ const Nutrition: React.FC = () => {
                     style={{ marginRight: 10 }}
                   />
                 ) : (
-                  <Button
-                    style={{
-                      borderRadius: 20,
-                      backgroundColor: colors.secondary,
-                      borderWidth: 0,
-                    }}
-                    className={`text-center w-30`}
-                  >
-                    <Text
-                      className="font-extrabold"
+                  <TouchableOpacity>
+                    <Button
                       style={{
-                        color: colors.primary,
+                        borderRadius: 20,
+                        backgroundColor: colors.secondary,
+                        borderWidth: 0,
                       }}
+                      className={`text-center w-30`}
                     >
-                      Add to Diary
-                    </Text>
-                  </Button>
+                      <Text
+                        className="font-extrabold"
+                        style={{
+                          color: colors.primary,
+                        }}
+                      >
+                        Add to Diary
+                      </Text>
+                    </Button>
+                  </TouchableOpacity>
                 )}
                 <Portal>
                   <Dialog
