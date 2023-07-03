@@ -56,8 +56,11 @@ const SignUp = (props) => {
 			email: email,
 			password: password,
 		});
-
-		if (error) Alert.alert(error.message);
+		if (!error) {
+			Alert.alert("Email Sent", "Please check email for confirmation!", [
+				{ text: "OK", onPress: () => navigation.navigate("SignIn") },
+			]);
+		} else Alert.alert(error.message);
 		setLoading(false);
 	}
 
