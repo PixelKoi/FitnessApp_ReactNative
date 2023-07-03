@@ -86,6 +86,7 @@ export const {
 	changeWeight,
 	changeHeight,
 	changeActivity,
+	changeEmail,
 	changeGoal,
 	changeBMR,
 	changeDailyCal,

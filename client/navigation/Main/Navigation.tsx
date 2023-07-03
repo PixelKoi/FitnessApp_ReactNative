@@ -39,7 +39,7 @@ function Navigation({ session }: { session: Session }) {
 		await dispatch(
 			setUserStates({
 				email: data.email,
-				name: data.username,
+				username: data.username,
 				gender: data.gender,
 				age: data.age,
 				height: data.height,
@@ -49,10 +49,6 @@ function Navigation({ session }: { session: Session }) {
 			})
 		);
 	}
-
-	useEffect(() => {
-		if (session) getProfile();
-	}, [session]);
 
 	//Get redux-slice data from supabase and update redux
 	async function getProfile() {
@@ -70,7 +66,7 @@ function Navigation({ session }: { session: Session }) {
 			}
 
 			if (data) {
-				// console.log(data);
+				console.log(data);
 				updateReduxUserStates(data);
 				dispatch(setSessionID(data.user_id));
 				setUserData(data.created);
@@ -83,6 +79,10 @@ function Navigation({ session }: { session: Session }) {
 			setLoading(false);
 		}
 	}
+
+	useEffect(() => {
+		if (session) getProfile();
+	}, [session]);
 
 	//Home Navigation
 	const InitialSetup = ({ session }: { session: Session }) => {

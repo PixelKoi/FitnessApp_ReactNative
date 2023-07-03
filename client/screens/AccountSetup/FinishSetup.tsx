@@ -11,6 +11,7 @@ import {
 	setSessionID,
 	setUserStates,
 } from "../../redux-manager/redux-slice/user-slice";
+import { changeEmail } from "../../redux-manager/redux-slice/user-slice";
 import { supabase } from "../../utils/supabase_authentication/supabase";
 import calAlgo from "../../utils/calAlgo/cal-algo";
 import DonutGraph from "./component/FastingDonutGraph";
@@ -43,7 +44,6 @@ const FinishSetup = ({ session }: { session: Session }) => {
 
 	useEffect(() => {
 		calAlgo(calObject, dispatch);
-		console.log(session?.user.id);
 	}, []);
 
 	async function updateProfile({
@@ -72,6 +72,7 @@ const FinishSetup = ({ session }: { session: Session }) => {
 			const updates = {
 				user_id: session?.user.id,
 				username,
+				email: session?.user.email,
 				age,
 				gender,
 				height,
@@ -82,6 +83,9 @@ const FinishSetup = ({ session }: { session: Session }) => {
 				updated_at: new Date(),
 			};
 			let { error } = await supabase.from("profile").upsert(updates);
+			if (!error) {
+				dispatch(changeEmail(session?.user.email));
+			}
 			if (error) {
 				throw error;
 			}
