@@ -95,7 +95,7 @@ const Dashboard2 = () => {
 					className="flex mt-4 py-4 rounded-2xl">
 					<View className=" flex-col">
 						<Text
-							style={{ color: colors.primary, fontSize: 18 }}
+							style={{ color: colors.primary }}
 							className="text-base text-center font-bold">
 							Remaining
 						</Text>
