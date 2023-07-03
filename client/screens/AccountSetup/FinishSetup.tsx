@@ -7,10 +7,6 @@ import { useNavigation } from "@react-navigation/native";
 import { Session } from "@supabase/supabase-js";
 // Import redux
 import { useAppDispatch, useAppSelector } from "../../redux-manager/hooks";
-import {
-	setSessionID,
-	setUserStates,
-} from "../../redux-manager/redux-slice/user-slice";
 import { changeEmail } from "../../redux-manager/redux-slice/user-slice";
 import { supabase } from "../../utils/supabase_authentication/supabase";
 import calAlgo from "../../utils/calAlgo/cal-algo";

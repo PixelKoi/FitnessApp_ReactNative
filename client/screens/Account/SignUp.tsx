@@ -79,7 +79,7 @@ const SignUp = (props) => {
 
 					{/* Input Account information */}
 					<View className="gap-5 mt-4">
-						<View>
+						{/* <View>
 							<Text style={{ color: "#9B9B99" }} className="font-semibold">
 								Your Name
 							</Text>
@@ -96,7 +96,7 @@ const SignUp = (props) => {
 									borderRadius: 3,
 								}}
 							/>
-						</View>
+						</View> */}
 						<View>
 							<Text style={{ color: "#9B9B99" }} className="font-semibold">
 								Email Address
