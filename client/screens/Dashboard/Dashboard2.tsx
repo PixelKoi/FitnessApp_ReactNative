@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { View, Text, TouchableOpacity, Image } from "react-native";
+import { View, Text, TouchableOpacity, Image, Dimensions } from "react-native";
 // import {`[Calendar](#calendar), [CalendarList](#calendarlist), [Agenda](#agenda)`} from 'react-native-calendars';
 import { CalendarProvider, ExpandableCalendar } from "react-native-calendars";
 import SumGraph from "./DonutGraphs/SumDonutGraph";
@@ -14,8 +14,9 @@ import { useNavigation } from "@react-navigation/native";
 import { UserCircleIcon } from "react-native-heroicons/outline";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import WeightGraph from "./DonutGraphs/WeightGraph";
 
-const Dashboard2 = (props: Props) => {
+const Dashboard2 = () => {
 	const navigation = useNavigation();
 	//intiate meditation redux states
 	const { medStreak } = useAppSelector((state) => state.meditation);
@@ -28,8 +29,6 @@ const Dashboard2 = (props: Props) => {
 	const handleDateSelect = (date: string) => {
 		setSelected(date);
 	};
-
-	const { weekView } = props;
 
 	React.useLayoutEffect(() => {
 		navigation.setOptions({
@@ -78,11 +77,7 @@ const Dashboard2 = (props: Props) => {
 			{/* <CalendarProvider date={new Date()}>
 				<ExpandableCalendar firstDay={1} onDayPress={handleDateSelect} />
 			</CalendarProvider> */}
-			<Text
-				style={{ color: colors.primary, fontSize: 14 }}
-				className="ml-8 mt-4 font-bold">
-				Your Weight Progress
-			</Text>
+			<WeightGraph />
 
 			<Text
 				style={{ color: colors.primary, fontSize: 14 }}
