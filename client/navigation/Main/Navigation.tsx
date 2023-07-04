@@ -3,6 +3,7 @@ import { Alert } from "react-native";
 //Screen imports
 import Settings from "../../screens/Settings/Settings";
 import ThemeSelector from "../../screens/Settings/Theme/ThemeSelector";
+import Meal from "../../screens/Nutrition/Diary/Meal";
 import MeditationDash from "../../screens/Timers/Meditation/MeditationDash";
 import MeditationTimer from "../../screens/Timers/Meditation/MeditationTimer";
 import FastingDash from "../../screens/Timers/Fasting/FastingDash";
@@ -141,6 +142,11 @@ function Navigation({ session }: { session: Session }) {
         <Stack.Screen
           name="Theme"
           component={ThemeSelector}
+          options={{ headerShown: true }}
+        />
+        <Stack.Screen
+          name="Meal"
+          component={Meal}
           options={{ headerShown: true }}
         />
         <Stack.Screen

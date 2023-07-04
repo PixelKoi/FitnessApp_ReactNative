@@ -123,92 +123,110 @@ const Diary = (props) => {
           >
             Daily Intake
           </Text>
-          <Card
-            className="m-4 p-4 rounded-2xl"
-            style={{ backgroundColor: colors.secondary }}
+          <TouchableOpacity
+            onPress={() => {
+              tabNavigation.navigate("Meal");
+            }}
           >
-            <View className="flex flex-row start-0 px-4 items-center">
-              <View className="flex flex-col mr-10">
-                <Image
-                  style={{ width: 75, height: 70 }}
-                  source={require("../../../assets/images/Diary/breakfast.png")}
-                />
+            <Card
+              className="m-4 p-4 rounded-2xl"
+              style={{ backgroundColor: colors.secondary }}
+            >
+              <View className="flex flex-row start-0 px-4 items-center">
+                <View className="flex flex-col mr-10">
+                  <Image
+                    style={{ width: 75, height: 70 }}
+                    source={require("../../../assets/images/Diary/breakfast.png")}
+                  />
+                </View>
+                <View className="flex flex-col">
+                  <Text
+                    style={{ color: colors.primary }}
+                    className="font-bold text-2xl"
+                  >
+                    Breakfast
+                  </Text>
+                  <Text
+                    className="font-semibold"
+                    style={{ color: colors.primary }}
+                  >
+                    {breakfast_calories} CALORIES
+                  </Text>
+                </View>
               </View>
-              <View className="flex flex-col">
-                <Text
-                  style={{ color: colors.primary }}
-                  className="font-bold text-2xl"
-                >
-                  Breakfast
-                </Text>
-                <Text
-                  className="font-semibold"
-                  style={{ color: colors.primary }}
-                >
-                  {breakfast_calories} CALORIES
-                </Text>
-              </View>
-            </View>
-          </Card>
+            </Card>
+          </TouchableOpacity>
         </View>
         <Divider />
         <View className="w-full">
-          <Card
-            style={{ backgroundColor: colors.secondary }}
-            className="m-4 p-4 rounded-2xl"
+          <TouchableOpacity
+            onPress={() => {
+              tabNavigation.navigate("Meal");
+            }}
           >
-            <View className="flex flex-row start-0 px-4 items-center">
-              <View className="flex flex-col mr-10">
-                <Image
-                  style={{ width: 75, height: 70 }}
-                  source={require("../../../assets/images/Diary/Lunch.png")}
-                />
+            <Card
+              style={{ backgroundColor: colors.secondary }}
+              className="m-4 p-4 rounded-2xl"
+            >
+              <View className="flex flex-row start-0 px-4 items-center">
+                <View className="flex flex-col mr-10">
+                  <Image
+                    style={{ width: 75, height: 70 }}
+                    source={require("../../../assets/images/Diary/Lunch.png")}
+                  />
+                </View>
+                <View className="flex flex-col">
+                  <Text
+                    style={{ color: colors.primary }}
+                    className="font-bold text-2xl"
+                  >
+                    Lunch
+                  </Text>
+                  <Text
+                    className="font-semibold"
+                    style={{ color: colors.primary }}
+                  >
+                    {lunch_calories} CALORIES
+                  </Text>
+                </View>
               </View>
-              <View className="flex flex-col">
-                <Text
-                  style={{ color: colors.primary }}
-                  className="font-bold text-2xl"
-                >
-                  Lunch
-                </Text>
-                <Text
-                  className="font-semibold"
-                  style={{ color: colors.primary }}
-                >
-                  {lunch_calories} CALORIES
-                </Text>
-              </View>
-            </View>
-          </Card>
+            </Card>
+          </TouchableOpacity>
         </View>
         <View className="w-full">
-          <Card
-            style={{ backgroundColor: colors.secondary }}
-            className="m-4 p-4 rounded-2xl"
+          <TouchableOpacity
+            onPress={() => {
+              tabNavigation.navigate("Meal");
+            }}
           >
-            <View className="flex flex-row start-0 px-4 items-center">
-              <View className="flex flex-col mr-10">
-                <Image
-                  style={{ width: 75, height: 70 }}
-                  source={require("../../../assets/images/Diary/dinner.png")}
-                />
+            <Card
+              style={{ backgroundColor: colors.secondary }}
+              className="m-4 p-4 rounded-2xl"
+            >
+              <View className="flex flex-row start-0 px-4 items-center">
+                <View className="flex flex-col mr-10">
+                  <Image
+                    style={{ width: 75, height: 70 }}
+                    source={require("../../../assets/images/Diary/dinner.png")}
+                  />
+                </View>
+                <View className="flex flex-col">
+                  <Text
+                    style={{ color: colors.primary }}
+                    className="font-bold text-2xl"
+                  >
+                    Dinner
+                  </Text>
+                  <Text
+                    className="font-semibold"
+                    style={{ color: colors.primary }}
+                  >
+                    {dinner_calories} CALORIES
+                  </Text>
+                </View>
               </View>
-              <View className="flex flex-col">
-                <Text
-                  style={{ color: colors.primary }}
-                  className="font-bold text-2xl"
-                >
-                  Dinner
-                </Text>
-                <Text
-                  className="font-semibold"
-                  style={{ color: colors.primary }}
-                >
-                  {dinner_calories} CALORIES
-                </Text>
-              </View>
-            </View>
-          </Card>
+            </Card>
+          </TouchableOpacity>
         </View>
         {/*<Button*/}
         {/*    icon="plus"*/}
@@ -216,33 +234,39 @@ const Diary = (props) => {
         {/*    onPress={() => tabNavigation.navigate("Nutrition")}*/}
         {/*>*/}
         <View className="w-full">
-          <Card
-            style={{ backgroundColor: colors.secondary }}
-            className="m-4 p-4 rounded-2xl"
+          <TouchableOpacity
+            onPress={() => {
+              tabNavigation.navigate("Meal");
+            }}
           >
-            <View className="flex flex-row start-0 px-4 items-center">
-              <View className="flex flex-col mr-10">
-                <Image
-                  style={{ width: 75, height: 70 }}
-                  source={require("../../../assets/images/Diary/Coffee.png")}
-                />
+            <Card
+              style={{ backgroundColor: colors.secondary }}
+              className="m-4 p-4 rounded-2xl"
+            >
+              <View className="flex flex-row start-0 px-4 items-center">
+                <View className="flex flex-col mr-10">
+                  <Image
+                    style={{ width: 75, height: 70 }}
+                    source={require("../../../assets/images/Diary/Coffee.png")}
+                  />
+                </View>
+                <View className="flex flex-col">
+                  <Text
+                    style={{ color: colors.primary }}
+                    className="font-bold text-2xl"
+                  >
+                    Snacks
+                  </Text>
+                  <Text
+                    className="font-semibold"
+                    style={{ color: colors.primary }}
+                  >
+                    {snacks_calories} CALORIES
+                  </Text>
+                </View>
               </View>
-              <View className="flex flex-col">
-                <Text
-                  style={{ color: colors.primary }}
-                  className="font-bold text-2xl"
-                >
-                  Snacks
-                </Text>
-                <Text
-                  className="font-semibold"
-                  style={{ color: colors.primary }}
-                >
-                  {snacks_calories} CALORIES
-                </Text>
-              </View>
-            </View>
-          </Card>
+            </Card>
+          </TouchableOpacity>
         </View>
         <Divider />
         <View className="pt-8">
