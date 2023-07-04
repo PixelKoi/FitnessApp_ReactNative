@@ -10,6 +10,9 @@ function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
+// TODO: Add Delete button for each Card
+// TODO: Add Food button should go to Nutrition Page with given page as `select a meal`
+
 const Meal = (props) => {
   const navigation = useNavigation();
 
