@@ -152,7 +152,9 @@ const Dashboard2 = () => {
 						</Surface>
 					</TouchableOpacity>
 
-					<TouchableOpacity className="mt-auto">
+					<TouchableOpacity
+						className="mt-auto"
+						onPress={() => navigation.navigate("MeditationTimer")}>
 						<Surface
 							style={{
 								backgroundColor: colors.background,
