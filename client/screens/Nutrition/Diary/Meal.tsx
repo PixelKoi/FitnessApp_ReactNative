@@ -120,13 +120,25 @@ const Meal = (props) => {
           );
         })}
       </View>
-      <View className="flex-row start-0 pt-2">
+      <View className="mt-8 items-center">
         <Button
-          icon="plus"
-          mode="text"
+          style={{
+            borderRadius: 20,
+            backgroundColor: colors.primary,
+            borderWidth: 0,
+            width: 150,
+          }}
+          className={`text-center w-30`}
           onPress={() => tabNavigation.navigate("Nutrition")}
         >
-          Add Food
+          <Text
+            className="font-extrabold"
+            style={{
+              color: colors.background,
+            }}
+          >
+            Add Food
+          </Text>
         </Button>
       </View>
     </View>
