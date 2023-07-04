@@ -7,8 +7,8 @@ import Meal from "../../screens/Nutrition/Diary/Meal";
 import MeditationDash from "../../screens/Timers/Meditation/MeditationDash";
 import MeditationTimer from "../../screens/Timers/Meditation/MeditationTimer";
 import FastingDash from "../../screens/Timers/Fasting/FastingDash";
+import DefaultSpinner from "../../components/loaders/DefaultSpinner";
 import Fasting from "../../screens/Timers/Fasting/Fasting";
-// import DefaultSpinner from "../../components/Loaders/DefaultSpinner";
 //nav imports
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -176,13 +176,13 @@ function Navigation({ session }: { session: Session }) {
   // If user exists go straight to NavGroup
   return (
     <NavigationContainer>
-      {/*{loading === true ? (*/}
-      {/*  <DefaultSpinner />*/}
-      {/*) : loading === false && userData === false ? (*/}
-      {/*<InitialSetup session={session} />*/}
-      {/*) : (*/}
-      <NavGroup />
-      {/*)}*/}
+      {loading === true ? (
+        <DefaultSpinner />
+      ) : loading === false && userData === false ? (
+        <InitialSetup session={session} />
+      ) : (
+        <NavGroup />
+      )}
     </NavigationContainer>
   );
 }
