@@ -164,7 +164,7 @@ const MeditationTimer = () => {
 			<TouchableOpacity
 				className="items-center justify-center mt-10"
 				onPress={() => {
-					playSound;
+					playSound();
 					setClicked(!clicked);
 				}}>
 				<View className="self-center my-auto">
