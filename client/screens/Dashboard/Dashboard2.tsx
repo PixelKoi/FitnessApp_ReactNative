@@ -114,7 +114,7 @@ const Dashboard2 = () => {
 				</Surface>
 
 				<View style={{ height: 196 }} className="flex-col mt-4 items-center">
-					<TouchableOpacity>
+					<TouchableOpacity onPress={() => navigation.navigate("FastingDash")}>
 						<Surface
 							style={{
 								backgroundColor: colors.background,

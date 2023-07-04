@@ -13,21 +13,16 @@ import {
 import { useAppDispatch, useAppSelector } from "../../../redux-manager/hooks";
 //import icons
 import GirlMeditating from "../../../assets/meditation_timer/GirlMeditating.png";
+import Icon from "react-native-vector-icons/Ionicons";
 import FontAwesome from "react-native-vector-icons/FontAwesome5";
+// Audio
+import { Audio } from "expo-av";
+import hourStrom from "../../../assets/audio/hourStorm.mp3";
+
 //Todo: Add lotus icon above start meditating button
 const MeditationTimer = () => {
 	//Top left nav button - removed top nav
 	const navigation = useNavigation();
-
-	const dayOfWeekMap = {
-		0: "Sun",
-		1: "Mon",
-		2: "Tue",
-		3: "Wed",
-		4: "Thu",
-		5: "Fri",
-		6: "Sat",
-	};
 
 	//Call to fasting redux
 	const { maxTime, countdown } = useAppSelector((state) => state.meditation);
@@ -77,6 +72,44 @@ const MeditationTimer = () => {
 		);
 	};
 
+	//play music
+	const [sound, setSound] = React.useState<Audio.Sound | null>(null);
+
+	async function playSound() {
+		await Audio.setAudioModeAsync({
+			staysActiveInBackground: true,
+			shouldDuckAndroid: false,
+			playThroughEarpieceAndroid: false,
+			allowsRecordingIOS: false,
+			playsInSilentModeIOS: true,
+		});
+		try {
+			console.log("Loading Sound");
+			const sound = new Audio.Sound();
+
+			const { sound: soundObject, status } = await Audio.Sound.createAsync(
+				require("../../../assets/audio/hourStorm.mp3"),
+				{
+					shouldPlay: true,
+				}
+			);
+			await sound.playAsync();
+
+			await sound.unloadAsync();
+		} catch (error) {
+			// An error occurred!
+		}
+	}
+
+	React.useEffect(() => {
+		return sound
+			? () => {
+					console.log("Unloading Sound");
+					sound.unloadAsync();
+			  }
+			: undefined;
+	}, [sound]);
+
 	React.useLayoutEffect(() => {
 		navigation.setOptions({
 			title: "",
@@ -117,7 +150,7 @@ const MeditationTimer = () => {
 				</View>
 			</View>
 
-			<Button
+			{/* <Button
 				style={{ backgroundColor: "#fff" }}
 				className="mt-32 w-60 mx-auto "
 				icon="brain"
@@ -126,7 +159,24 @@ const MeditationTimer = () => {
 				<Text style={{ color: "black" }}>
 					{clicked === false ? "Start Meditating" : "End Meditating"}
 				</Text>
-			</Button>
+			</Button> */}
+
+			<TouchableOpacity
+				className="items-center justify-center mt-10"
+				onPress={() => {
+					playSound;
+					setClicked(!clicked);
+				}}>
+				<View className="self-center my-auto">
+					<Icon
+						name={
+							clicked === true ? "play-circle-outline" : "stop-circle-outline"
+						}
+						color={"white"}
+						size={80}
+					/>
+				</View>
+			</TouchableOpacity>
 		</View>
 	);
 };
