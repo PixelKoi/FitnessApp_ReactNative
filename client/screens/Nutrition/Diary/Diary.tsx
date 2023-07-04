@@ -63,18 +63,6 @@ const Diary = (props) => {
           <Icon name="angle-left" style={{ color: primary_color }} size={24} />
         </TouchableOpacity>
       ),
-      //TODO: When we navigate to Profile and press the back button, go one back not to Dashboard
-      // headerRight: () => (
-      //   // <TouchableOpacity onPress={() => setSaveButton(true)}>
-      //   <TouchableOpacity
-      //     className="mr-4"
-      //     onPress={() => {
-      //       tabNavigation.navigate("Settings");
-      //     }}
-      //   >
-      //     <UserCircleIcon name="ios-add" size={30} color={primary_color} />
-      //   </TouchableOpacity>
-      // ),
     });
   });
 
@@ -102,251 +90,184 @@ const Diary = (props) => {
     // }
   };
 
-  if (props.route.params == undefined) {
-    return (
-      <View className="flex-1 items-center bg-white">
-        <View className="flex-row">
-          <CustomCalendar />
-        </View>
-        <View className="justify-center">
-          <Card className="px-4 mt-4">
-            <Text className="py-4">
-              {profileInfo.dailyCal} - caloriesConsumed = calories remaining
-            </Text>
-          </Card>
-        </View>
-        {/* other content */}
-        <View className="w-full">
-          <Text
-            className="pl-4 font-bold text-2xl"
-            style={{ color: colors.primary }}
-          >
-            Daily Intake
-          </Text>
-          <TouchableOpacity
-            onPress={() => {
-              tabNavigation.navigate("Meal");
-            }}
-          >
-            <Card
-              className="m-4 p-4 rounded-2xl"
-              style={{ backgroundColor: colors.secondary }}
-            >
-              <View className="flex flex-row start-0 px-4 items-center">
-                <View className="flex flex-col mr-10">
-                  <Image
-                    style={{ width: 75, height: 70 }}
-                    source={require("../../../assets/images/Diary/breakfast.png")}
-                  />
-                </View>
-                <View className="flex flex-col">
-                  <Text
-                    style={{ color: colors.primary }}
-                    className="font-bold text-2xl"
-                  >
-                    Breakfast
-                  </Text>
-                  <Text
-                    className="font-semibold"
-                    style={{ color: colors.primary }}
-                  >
-                    {breakfast_calories} CALORIES
-                  </Text>
-                </View>
-              </View>
-            </Card>
-          </TouchableOpacity>
-        </View>
-        <Divider />
-        <View className="w-full">
-          <TouchableOpacity
-            onPress={() => {
-              tabNavigation.navigate("Meal");
-            }}
-          >
-            <Card
-              style={{ backgroundColor: colors.secondary }}
-              className="m-4 p-4 rounded-2xl"
-            >
-              <View className="flex flex-row start-0 px-4 items-center">
-                <View className="flex flex-col mr-10">
-                  <Image
-                    style={{ width: 75, height: 70 }}
-                    source={require("../../../assets/images/Diary/Lunch.png")}
-                  />
-                </View>
-                <View className="flex flex-col">
-                  <Text
-                    style={{ color: colors.primary }}
-                    className="font-bold text-2xl"
-                  >
-                    Lunch
-                  </Text>
-                  <Text
-                    className="font-semibold"
-                    style={{ color: colors.primary }}
-                  >
-                    {lunch_calories} CALORIES
-                  </Text>
-                </View>
-              </View>
-            </Card>
-          </TouchableOpacity>
-        </View>
-        <View className="w-full">
-          <TouchableOpacity
-            onPress={() => {
-              tabNavigation.navigate("Meal");
-            }}
-          >
-            <Card
-              style={{ backgroundColor: colors.secondary }}
-              className="m-4 p-4 rounded-2xl"
-            >
-              <View className="flex flex-row start-0 px-4 items-center">
-                <View className="flex flex-col mr-10">
-                  <Image
-                    style={{ width: 75, height: 70 }}
-                    source={require("../../../assets/images/Diary/dinner.png")}
-                  />
-                </View>
-                <View className="flex flex-col">
-                  <Text
-                    style={{ color: colors.primary }}
-                    className="font-bold text-2xl"
-                  >
-                    Dinner
-                  </Text>
-                  <Text
-                    className="font-semibold"
-                    style={{ color: colors.primary }}
-                  >
-                    {dinner_calories} CALORIES
-                  </Text>
-                </View>
-              </View>
-            </Card>
-          </TouchableOpacity>
-        </View>
-        {/*<Button*/}
-        {/*    icon="plus"*/}
-        {/*    mode="text"*/}
-        {/*    onPress={() => tabNavigation.navigate("Nutrition")}*/}
-        {/*>*/}
-        <View className="w-full">
-          <TouchableOpacity
-            onPress={() => {
-              tabNavigation.navigate("Meal");
-            }}
-          >
-            <Card
-              style={{ backgroundColor: colors.secondary }}
-              className="m-4 p-4 rounded-2xl"
-            >
-              <View className="flex flex-row start-0 px-4 items-center">
-                <View className="flex flex-col mr-10">
-                  <Image
-                    style={{ width: 75, height: 70 }}
-                    source={require("../../../assets/images/Diary/Coffee.png")}
-                  />
-                </View>
-                <View className="flex flex-col">
-                  <Text
-                    style={{ color: colors.primary }}
-                    className="font-bold text-2xl"
-                  >
-                    Snacks
-                  </Text>
-                  <Text
-                    className="font-semibold"
-                    style={{ color: colors.primary }}
-                  >
-                    {snacks_calories} CALORIES
-                  </Text>
-                </View>
-              </View>
-            </Card>
-          </TouchableOpacity>
-        </View>
-        <Divider />
-        <View className="pt-8">
-          <Button
-            className="bg-green-950"
-            icon="book"
-            mode="text"
-            onPress={() => console.log("log it ")}
-          >
-            Complete Diary
-          </Button>
-        </View>
+  return (
+    <View className="flex-1 items-center bg-white">
+      <View className="flex-row">
+        <CustomCalendar />
       </View>
-    );
-  }
-  const selectedObject = props.route;
-  const selectedFoods = props.route.params.selectedFoods;
-  const selectedOption = props.route.params.selectedOption;
-  // TODO: set a global state for totalCalories and pass to Nutrition
-  const object = props.route.params;
-  interface Category {
-    name: string;
-    items: FoodItem[];
-  }
-  interface FoodItem {
-    food: {
-      Calories: number;
-      Carbs: number;
-      Fat: number;
-      Protein: number;
-      description: string;
-    };
-    id: number;
-    isSelected: boolean;
-    quantity: number;
-  }
-  const categories: Category[] = [
-    { name: "Snacks", items: [] },
-    { name: "Breakfast", items: [] },
-    { name: "Lunch", items: [] },
-    { name: "Dinner", items: [] },
-  ];
-  const [selectedFud, setSelectedFud] = useState();
-  const [isLoaded, setIsLoaded] = useState(false);
-  const caloriesConsumed = Object.keys(selectedFoods).reduce(
-    (total, foodId) => {
-      const food = selectedFoods[foodId];
-      return total + food.food.Calories * food.quantity;
-    },
-    0
+      <View className="justify-center">
+        <Card className="px-4 mt-4">
+          <Text className="py-4">
+            {profileInfo.dailyCal} - caloriesConsumed = calories remaining
+          </Text>
+        </Card>
+      </View>
+      {/* other content */}
+      <View className="w-full">
+        <Text
+          className="pl-4 font-bold text-2xl"
+          style={{ color: colors.primary }}
+        >
+          Daily Intake
+        </Text>
+        <TouchableOpacity
+          onPress={() => {
+            tabNavigation.navigate("Meal", { breakfast: breakfast });
+          }}
+        >
+          <Card
+            className="m-4 p-4 rounded-2xl"
+            style={{ backgroundColor: colors.secondary }}
+          >
+            <View className="flex flex-row start-0 px-4 items-center">
+              <View className="flex flex-col mr-10">
+                <Image
+                  style={{ width: 75, height: 70 }}
+                  source={require("../../../assets/images/Diary/breakfast.png")}
+                />
+              </View>
+              <View className="flex flex-col">
+                <Text
+                  style={{ color: colors.primary }}
+                  className="font-bold text-2xl"
+                >
+                  Breakfast
+                </Text>
+                <Text
+                  className="font-semibold"
+                  style={{ color: colors.primary }}
+                >
+                  {breakfast_calories} CALORIES
+                </Text>
+              </View>
+            </View>
+          </Card>
+        </TouchableOpacity>
+      </View>
+      <Divider />
+      <View className="w-full">
+        <TouchableOpacity
+          onPress={() => {
+            tabNavigation.navigate("Meal", { lunch: lunch });
+          }}
+        >
+          <Card
+            style={{ backgroundColor: colors.secondary }}
+            className="m-4 p-4 rounded-2xl"
+          >
+            <View className="flex flex-row start-0 px-4 items-center">
+              <View className="flex flex-col mr-10">
+                <Image
+                  style={{ width: 75, height: 70 }}
+                  source={require("../../../assets/images/Diary/Lunch.png")}
+                />
+              </View>
+              <View className="flex flex-col">
+                <Text
+                  style={{ color: colors.primary }}
+                  className="font-bold text-2xl"
+                >
+                  Lunch
+                </Text>
+                <Text
+                  className="font-semibold"
+                  style={{ color: colors.primary }}
+                >
+                  {lunch_calories} CALORIES
+                </Text>
+              </View>
+            </View>
+          </Card>
+        </TouchableOpacity>
+      </View>
+      <View className="w-full">
+        <TouchableOpacity
+          onPress={() => {
+            tabNavigation.navigate("Meal", { dinner: dinner });
+          }}
+        >
+          <Card
+            style={{ backgroundColor: colors.secondary }}
+            className="m-4 p-4 rounded-2xl"
+          >
+            <View className="flex flex-row start-0 px-4 items-center">
+              <View className="flex flex-col mr-10">
+                <Image
+                  style={{ width: 75, height: 70 }}
+                  source={require("../../../assets/images/Diary/dinner.png")}
+                />
+              </View>
+              <View className="flex flex-col">
+                <Text
+                  style={{ color: colors.primary }}
+                  className="font-bold text-2xl"
+                >
+                  Dinner
+                </Text>
+                <Text
+                  className="font-semibold"
+                  style={{ color: colors.primary }}
+                >
+                  {dinner_calories} CALORIES
+                </Text>
+              </View>
+            </View>
+          </Card>
+        </TouchableOpacity>
+      </View>
+      {/*<Button*/}
+      {/*    icon="plus"*/}
+      {/*    mode="text"*/}
+      {/*    onPress={() => tabNavigation.navigate("Nutrition")}*/}
+      {/*>*/}
+      <View className="w-full">
+        <TouchableOpacity
+          onPress={() => {
+            tabNavigation.navigate("Meal", { snacks: snacks });
+          }}
+        >
+          <Card
+            style={{ backgroundColor: colors.secondary }}
+            className="m-4 p-4 rounded-2xl"
+          >
+            <View className="flex flex-row start-0 px-4 items-center">
+              <View className="flex flex-col mr-10">
+                <Image
+                  style={{ width: 75, height: 70 }}
+                  source={require("../../../assets/images/Diary/Coffee.png")}
+                />
+              </View>
+              <View className="flex flex-col">
+                <Text
+                  style={{ color: colors.primary }}
+                  className="font-bold text-2xl"
+                >
+                  Snacks
+                </Text>
+                <Text
+                  className="font-semibold"
+                  style={{ color: colors.primary }}
+                >
+                  {snacks_calories} CALORIES
+                </Text>
+              </View>
+            </View>
+          </Card>
+        </TouchableOpacity>
+      </View>
+      <Divider />
+      <View className="pt-8">
+        <Button
+          className="bg-green-950"
+          icon="book"
+          mode="text"
+          onPress={() => console.log("log it ")}
+        >
+          Complete Diary
+        </Button>
+      </View>
+    </View>
   );
-  useEffect(() => {
-    const categoryIndex = categories.findIndex(
-      (category) => category.name === selectedOption
-    );
-    if (categoryIndex >= 0) {
-      categories[categoryIndex].items.push(...selectedFoods);
-      const populatedCategories = categories.filter(
-        (category) => category.items.length > 0
-      );
-
-      for (const obj of populatedCategories) {
-        // loop through each object in the array
-        const items = obj.items; // get the "items" array property from the current object
-        const option = obj.name;
-        console.log("option", option);
-        for (const item of items) {
-          // loop through each item object in the "items" array
-          const food = item.food; // get the "food" object property from the current item object
-          console.log("food", food); // target the "food" object and log it to the console
-        }
-      }
-
-      setSelectedFud(populatedCategories);
-    }
-  }, [props]);
-
-  useEffect(() => {
-    setIsLoaded(true);
-  }, [selectedFud]);
 
   const displaySelectedFud = (mealTime) => {
     console.log("selectedFud", selectedFud);
@@ -382,73 +303,6 @@ const Diary = (props) => {
       </>
     );
   };
-
-  return (
-    <View className="flex-1 items-center">
-      <View className="justify-center">
-        <Card className="px-4 my-2">
-          <Text className="my-4">
-            Total calories - {caloriesConsumed} = calories remaining
-          </Text>
-        </Card>
-      </View>
-      {/* other content */}
-      <View className="w-full">
-        <Card className="m-2 pb-4">
-          <Card.Title
-            title="Breakfast"
-            titleStyle={{ fontSize: 20, fontWeight: "bold" }}
-          />
-          <Divider className="mb-4" />
-          {isLoaded && displaySelectedFud("Breakfast")}
-        </Card>
-      </View>
-      <Divider />
-      <View className="w-full">
-        <Card className="m-2 pb-4">
-          <Card.Title
-            title="Lunch"
-            titleStyle={{ fontSize: 20, fontWeight: "bold" }}
-          />
-          <Divider />
-          {isLoaded && displaySelectedFud("Lunch")}
-        </Card>
-      </View>
-      <Divider />
-      <View className="w-full">
-        <Card className="m-2 pb-4">
-          <Card.Title
-            title="Dinner"
-            titleStyle={{ fontSize: 20, fontWeight: "bold" }}
-          />
-          <Divider />
-          {isLoaded && displaySelectedFud("Dinner")}
-        </Card>
-      </View>
-      <Divider />
-      <View className="w-full">
-        <Card className="m-2 pb-4">
-          <Card.Title
-            title="Snacks"
-            titleStyle={{ fontSize: 20, fontWeight: "bold" }}
-          />
-          <Divider />
-          {isLoaded && displaySelectedFud("Snacks")}
-        </Card>
-      </View>
-      <Divider />
-      <View className="pt-8">
-        <Button
-          className="bg-green-950"
-          icon="book"
-          mode="text"
-          onPress={() => diaryButton()}
-        >
-          Complete Diary
-        </Button>
-      </View>
-    </View>
-  );
 };
 
 export default Diary;
