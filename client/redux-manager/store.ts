@@ -25,7 +25,7 @@ const reducers = combineReducers({
   fasting: fastingReducer,
   meditation: meditationReducer,
   favorite: favSlice,
-  nutrition: nutritionSlice,
+  inventory: nutritionSlice,
   theme: themeSlice,
 });
 
@@ -33,7 +33,8 @@ const persistConfig = {
   key: "root",
   version: 1,
   storage: AsyncStorage,
-  whitelist: ["favorite", "theme"], // Specify the reducer to persist
+  // whitelist: ["favorite", "theme"], // Specify the reducer to persist
+  whitelist: ["favorite", "theme", "inventory"], // Specify the reducer to persist
 };
 
 // Persist https://redux-toolkit.js.org/usage/usage-guide#use-with-redux-persist
