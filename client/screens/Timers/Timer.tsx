@@ -14,84 +14,86 @@ import MeditationCard from "../../assets/images/timer-dash/MeditationCard.png";
 
 //Todo: get tailwind Theme primary and secondary colors set to states and put it inside the labelStyle prop
 const Timer = () => {
-	const navigation = useNavigation();
+  const navigation = useNavigation();
 
-	// import redux
-	const { colors } = useAppSelector((state) => state.theme);
-	const { startDate } = useAppSelector((state) => state.fasting);
+  // import redux
+  const { colors } = useAppSelector((state) => state.theme);
+  const { startDate } = useAppSelector((state) => state.fasting);
 
-	// import hooks
-	const [mode, setMode] = useState("fasting");
+  // import hooks
+  const [mode, setMode] = useState("fasting");
 
-	// top Navigation
-	React.useLayoutEffect(() => {
-		navigation.setOptions({
-			title: "Timer",
-			headerStyle: {
-				shadowColor: "transparent",
-				borderBottomWidth: 0,
-			},
-			headerTintColor: colors.primary,
-			headerTitleStyle: {
-				fontWeight: "bold",
-			},
-		});
-	}, []);
+  // top Navigation
+  React.useLayouftEffect(() => {
+    navigation.setOptions({
+      title: "Timer",
+      headerStyle: {
+        shadowColor: "transparent",
+        borderBottomWidth: 0,
+      },
+      headerTintColor: colors.primary,
+      headerTitleStyle: {
+        fontWeight: "bold",
+      },
+    });
+  }, []);
 
-	return (
-		<View className="flex-1 -mt-32 justify-center bg-background">
-			<View className="flex-row justify-center">
-				{/* Fasting Button*/}
-				<View>
-					{/* Fasting timer */}
-					<TouchableOpacity
-						onPress={() => {
-							if (startDate === null) {
-								navigation.navigate("FastingDash");
-							} else {
-								navigation.navigate("Fasting", { title: "Fasting Timer" });
-							}
-						}}>
-						<TimerCard
-							img={FastingCard}
-							height={90}
-							width={107}
-							title={"Fasting"}
-							description={"Begin timer now!"}
-							textColor={colors.primary}
-							buttonBackgroundColor={colors.primary}
-							cardBackgroundColor={colors.secondary}
-						/>
-					</TouchableOpacity>
-					{/* Meditation Timer */}
-					<TouchableOpacity
-						onPress={() => navigation.navigate("MeditationDash")}>
-						<TimerCard
-							height={104}
-							width={107}
-							img={MeditationCard}
-							title={"Meditation"}
-							description={"Begin timer now!"}
-							textColor={colors.primary}
-							buttonBackgroundColor={colors.primary}
-							cardBackgroundColor={colors.secondary}
-						/>
-					</TouchableOpacity>
-					{/* Interval Training */}
-					<TouchableOpacity>
-						<TimerCard
-							img={FastingCard}
-							title={"Interval"}
-							description={"Begin timer now!"}
-							textColor={colors.primary}
-							buttonBackgroundColor={colors.primary}
-							cardBackgroundColor={colors.secondary}
-						/>
-					</TouchableOpacity>
-				</View>
-			</View>
-		</View>
-	);
+  return (
+    <View className="flex-1 -mt-32 justify-center bg-background">
+      <View className="flex-row justify-center">
+        {/* Fasting Button*/}
+        <View>
+          {/* Fasting timer */}
+          <TouchableOpacity
+            onPress={() => {
+              if (startDate === null) {
+                navigation.navigate("FastingDash");
+              } else {
+                navigation.navigate("Fasting", { title: "Fasting Timer" });
+              }
+            }}
+          >
+            <TimerCard
+              img={FastingCard}
+              height={90}
+              width={107}
+              title={"Fasting"}
+              description={"Begin timer now!"}
+              textColor={colors.primary}
+              buttonBackgroundColor={colors.primary}
+              cardBackgroundColor={colors.secondary}
+            />
+          </TouchableOpacity>
+          {/* Meditation Timer */}
+          <TouchableOpacity
+            onPress={() => navigation.navigate("MeditationDash")}
+          >
+            <TimerCard
+              height={104}
+              width={107}
+              img={MeditationCard}
+              title={"Meditation"}
+              description={"Begin timer now!"}
+              textColor={colors.primary}
+              buttonBackgroundColor={colors.primary}
+              cardBackgroundColor={colors.secondary}
+            />
+          </TouchableOpacity>
+          {/* Interval Training */}
+          <TouchableOpacity>
+            <TimerCard
+              img={FastingCard}
+              title={"Interval"}
+              description={"Begin timer now!"}
+              textColor={colors.primary}
+              buttonBackgroundColor={colors.primary}
+              cardBackgroundColor={colors.secondary}
+            />
+          </TouchableOpacity>
+        </View>
+      </View>
+    </View>
+  );
 };
 
 export default Timer;
