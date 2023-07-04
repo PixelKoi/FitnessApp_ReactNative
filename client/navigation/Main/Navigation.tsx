@@ -24,6 +24,8 @@ import UserBioInput from "../../screens/Settings/Profile/EditProfile";
 // Import nav
 import AccountSetupStack from "./AccountSetupStack";
 import BottomTab from "./BottomTab";
+import CongratulationsModal from "../../components/Modals/CongratulationsModal";
+import calAlgo from "../../utils/calAlgo/cal-algo";
 
 function Navigation({ session }: { session: Session }) {
 	// Create navigator stack instance
@@ -33,6 +35,24 @@ function Navigation({ session }: { session: Session }) {
 	const [userData, setUserData] = useState(false);
 	const dispatch = useAppDispatch();
 	const { colors } = useAppSelector((state) => state.theme);
+
+	//Get daily cal
+	const { gender, age, height, weight, activity, goal } = useAppSelector(
+		(state) => state.user
+	);
+
+	const calObject = {
+		age: age,
+		gender: gender,
+		weight: weight,
+		height: height,
+		activity: activity,
+		goal: goal,
+	};
+
+	useEffect(() => {
+		calAlgo(calObject, dispatch);
+	}, []);
 
 	//Update redux states for Settings
 	async function updateReduxUserStates(data) {

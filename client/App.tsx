@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { supabase } from "./utils/supabase_authentication/supabase";
 import Auth from "./screens/Account/Auth";
 import { Session } from "@supabase/supabase-js";
-import { View } from "react-native";
+import { SafeAreaView, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 // REDUX toolkit
@@ -19,6 +19,8 @@ import "react-native-gesture-handler";
 // Watermelon
 import DatabaseProvider from "@nozbe/watermelondb/DatabaseProvider";
 import { database } from "./database/index";
+
+import CongratulationsModal from "./components/Modals/CongratulationsModal";
 
 export default function App() {
 	const [session, setSession] = useState<Session | null>(null);
