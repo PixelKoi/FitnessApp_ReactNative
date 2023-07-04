@@ -103,7 +103,7 @@ const Fasting = ({ route }) => {
 							if (startDate === null) {
 								navigation.goBack();
 							} else {
-								navigation.navigate("Timer");
+								navigation.navigate("Dashboard");
 							}
 						}}>
 						<FontAwesome name="angle-left" size={30} color={colors.primary} />
