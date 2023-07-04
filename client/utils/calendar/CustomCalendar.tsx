@@ -41,17 +41,19 @@ const CustomCalendar = () => {
   const styles = {
     container: {
       flexDirection: "row",
-      justifyContent: "space-between",
+      justifyContent: "space-evenly",
       backgroundColor: colors.secondary,
       marginTop: 10,
       flexGrow: 1, // Make the container take up the whole width dynamically
     },
     dayContainer: {
+      width: 70, // or another suitable value
       paddingHorizontal: 14,
       alignItems: "center",
       justifyContent: "center",
     },
     currentDayContainer: {
+      width: 70, // or another suitable value
       backgroundColor: colors.primary,
       borderRadius: 14,
       paddingVertical: 16,
