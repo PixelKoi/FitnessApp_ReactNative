@@ -20,7 +20,7 @@ const Dashboard2 = () => {
 	const navigation = useNavigation();
 	//intiate meditation redux states
 	const { medStreak } = useAppSelector((state) => state.meditation);
-	const { countdown } = useAppSelector((state) => state.fasting);
+	const { countdown, endDate } = useAppSelector((state) => state.fasting);
 	const { dailyCal } = useAppSelector((state) => state.user);
 	const { colors } = useAppSelector((state) => state.theme);
 
@@ -114,7 +114,14 @@ const Dashboard2 = () => {
 				</Surface>
 
 				<View style={{ height: 196 }} className="flex-col mt-4 items-center">
-					<TouchableOpacity onPress={() => navigation.navigate("FastingDash")}>
+					<TouchableOpacity
+						onPress={() => {
+							if (endDate === null) {
+								navigation.navigate("FastingDash");
+							} else {
+								navigation.navigate("Fasting", { title: "Fasting Timer" });
+							}
+						}}>
 						<Surface
 							style={{
 								backgroundColor: colors.background,
