@@ -12,7 +12,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import DiaryCalendar from "../../../utils/calendar/DiaryCalendar";
 import CustomCalendar from "../../../utils/calendar/CustomCalendar";
 
-const Diary = (props) => {
+const Diary = () => {
   // const dispatch = useAppDispatch();
   const tabNavigation = useNavigation();
   const database = useDatabase();
@@ -215,11 +215,6 @@ const Diary = (props) => {
           </Card>
         </TouchableOpacity>
       </View>
-      {/*<Button*/}
-      {/*    icon="plus"*/}
-      {/*    mode="text"*/}
-      {/*    onPress={() => tabNavigation.navigate("Nutrition")}*/}
-      {/*>*/}
       <View className="w-full">
         <TouchableOpacity
           onPress={() => {
@@ -268,41 +263,6 @@ const Diary = (props) => {
       </View>
     </View>
   );
-
-  const displaySelectedFud = (mealTime) => {
-    console.log("selectedFud", selectedFud);
-    return (
-      <>
-        {selectedFud.map((obj) => {
-          const items = obj.items;
-          const option = obj.name;
-          return (
-            <Card.Content key={option}>
-              {option === mealTime ? (
-                items.map((item) => (
-                  <Text key={item.id}>
-                    {item.food.description} - {item.quantity} Quantity {"| "}
-                    {item.food.Calories * item.quantity} Calories
-                  </Text>
-                ))
-              ) : (
-                <Text></Text>
-              )}
-              <View className="flex-row start-0 pt-2">
-                <Button
-                  icon="plus"
-                  mode="text"
-                  onPress={() => tabNavigation.navigate("Nutrition")}
-                >
-                  Add Food
-                </Button>
-              </View>
-            </Card.Content>
-          );
-        })}
-      </>
-    );
-  };
 };
 
 export default Diary;
