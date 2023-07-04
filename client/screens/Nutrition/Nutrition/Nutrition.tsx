@@ -285,10 +285,8 @@ const Nutrition: React.FC = () => {
     setSelectedHearts(Array(foodArray.length).fill(false));
   }, [foodArray]);
   const saveToDiary = () => {
-    const selectedFoods = foodArray.filter((food) => food.quantity > 0);
-    // console.log("Selected FOODS: ", selectedFoods);
-    setSaveButton(false);
-    tabNavigation.navigate("Diary", { selectedFoods, selectedOption });
+    dispatch(setCategory(selectedOption));
+    tabNavigation.navigate("Diary");
   };
 
   const renderFoodItem = (food, index, foodArray) => {
@@ -557,13 +555,13 @@ const Nutrition: React.FC = () => {
                 ) : (
                   <TouchableOpacity
                     onPress={() => {
-                      dispatch(setCategory(selectedOption));
+                      saveToDiary();
                     }}
                   >
                     <Button
                       style={{
                         borderRadius: 20,
-                        backgroundColor: colors.secondary,
+                        backgroundColor: colors.background,
                         borderWidth: 0,
                       }}
                       className={`text-center w-30`}

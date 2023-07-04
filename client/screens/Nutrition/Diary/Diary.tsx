@@ -5,17 +5,15 @@ import { useNavigation } from "@react-navigation/native";
 import { useDatabase } from "@nozbe/watermelondb/hooks";
 import { Q } from "@nozbe/watermelondb";
 import completeDiary from "../../../database/models/Food";
-import { useAppSelector } from "../../../redux-manager/hooks";
+import { useAppSelector, useAppDispatch } from "../../../redux-manager/hooks";
 // import { RootState } from "../../redux-manager/store";
 import Food from "../../../database/models/Food";
 import Icon from "react-native-vector-icons/FontAwesome";
-import AntIcon from "react-native-vector-icons/AntDesign";
-import { UserCircleIcon } from "react-native-heroicons/outline";
 import DiaryCalendar from "../../../utils/calendar/DiaryCalendar";
 import CustomCalendar from "../../../utils/calendar/CustomCalendar";
-import { SafeAreaProvider } from "react-native-safe-area-context";
 
 const Diary = (props) => {
+  // const dispatch = useAppDispatch();
   const tabNavigation = useNavigation();
   const database = useDatabase();
   const profileInfo = useAppSelector((state) => state.user);
@@ -23,6 +21,28 @@ const Diary = (props) => {
   console.log("PROFILE CALS: ", profileInfo.dailyCal);
   const { colors } = useAppSelector((state) => state.theme);
   let primary_color = colors.primary;
+
+  const { breakfast, lunch, dinner, snacks } = useAppSelector(
+    (state) => state.inventory
+  );
+  console.log("Breakfast:", breakfast);
+  console.log("lunch:", lunch);
+  console.log("dinner:", dinner);
+  console.log("snacks:", snacks);
+
+  function calculateTotalCalories(foodItems) {
+    const caloriesArray = foodItems.map((item) => item.Calories);
+    const totalCalories = caloriesArray.reduce(
+      (accumulator, currentValue) => accumulator + currentValue,
+      0
+    );
+    return totalCalories;
+  }
+
+  const breakfast_calories = calculateTotalCalories(breakfast);
+  const lunch_calories = calculateTotalCalories(lunch);
+  const dinner_calories = calculateTotalCalories(dinner);
+  const snacks_calories = calculateTotalCalories(snacks);
 
   // TODO: ADD react-native-chart-kit daily calories
   // TODO: ADD react-native-calendars, block off from accessing days before registration and don't allow modifying older dates
@@ -125,7 +145,7 @@ const Diary = (props) => {
                   className="font-semibold"
                   style={{ color: colors.primary }}
                 >
-                  CALORIES
+                  {breakfast_calories} CALORIES
                 </Text>
               </View>
             </View>
@@ -155,7 +175,7 @@ const Diary = (props) => {
                   className="font-semibold"
                   style={{ color: colors.primary }}
                 >
-                  CALORIES
+                  {lunch_calories} CALORIES
                 </Text>
               </View>
             </View>
@@ -184,7 +204,7 @@ const Diary = (props) => {
                   className="font-semibold"
                   style={{ color: colors.primary }}
                 >
-                  CALORIES
+                  {dinner_calories} CALORIES
                 </Text>
               </View>
             </View>
@@ -218,7 +238,7 @@ const Diary = (props) => {
                   className="font-semibold"
                   style={{ color: colors.primary }}
                 >
-                  CALORIES
+                  {snacks_calories} CALORIES
                 </Text>
               </View>
             </View>
