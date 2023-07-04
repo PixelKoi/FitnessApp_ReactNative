@@ -147,7 +147,7 @@ const Dashboard2 = () => {
 							<View
 								style={{ backgroundColor: colors.primary }}
 								className="bottom-1 ml-auto mr-4 p-1 px-2 rounded-full">
-								<Text style={{ fontSize: 10, color: "#fff" }}>Details</Text>
+								<Text style={{ fontSize: 10, color: "#fff" }}>Start</Text>
 							</View>
 						</Surface>
 					</TouchableOpacity>
@@ -188,7 +188,7 @@ const Dashboard2 = () => {
 									<View
 										style={{ backgroundColor: colors.primary }}
 										className="mt-3 ml-auto mr-4 p-1 px-2 rounded-full">
-										<Text style={{ fontSize: 10, color: "#fff" }}>Details</Text>
+										<Text style={{ fontSize: 10, color: "#fff" }}>Start</Text>
 									</View>
 								</View>
 							</View>
