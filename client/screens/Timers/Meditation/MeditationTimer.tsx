@@ -94,6 +94,11 @@ const MeditationTimer = () => {
 		await sound.playAsync();
 	}
 
+	async function stopSound() {
+		console.log("Unloading Sound");
+		sound.unloadAsync();
+	}
+
 	React.useEffect(() => {
 		return sound
 			? () => {
@@ -157,8 +162,13 @@ const MeditationTimer = () => {
 			<TouchableOpacity
 				className="items-center justify-center mt-10"
 				onPress={() => {
-					playSound();
-					setClicked(true);
+					if (clicked === false) {
+						playSound();
+						setClicked(true);
+					} else {
+						stopSound();
+						setClicked(false);
+					}
 				}}>
 				<View className="self-center my-auto">
 					<Icon
