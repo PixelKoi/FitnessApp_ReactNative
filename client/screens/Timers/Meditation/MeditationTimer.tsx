@@ -7,6 +7,7 @@ import { add } from "date-fns";
 import MedTimer from "../components/MedDonutGraph";
 //Redux imports
 import {
+	setPLayAudio,
 	setTimerStates,
 	updateMedStreak,
 } from "../../../redux-manager/redux-slice/meditation-slice";
@@ -25,7 +26,9 @@ const MeditationTimer = () => {
 	const navigation = useNavigation();
 
 	//Call to fasting redux
-	const { maxTime, countdown } = useAppSelector((state) => state.meditation);
+	const { maxTime, countdown, playAudio } = useAppSelector(
+		(state) => state.meditation
+	);
 	const { colors } = useAppSelector((state) => state.theme);
 	const dispatch = useAppDispatch();
 
@@ -99,14 +102,14 @@ const MeditationTimer = () => {
 		sound.unloadAsync();
 	}
 
-	React.useEffect(() => {
-		return sound
-			? () => {
-					console.log("Unloading Sound");
-					sound.unloadAsync();
-			  }
-			: undefined;
-	}, [sound]);
+	// React.useEffect(() => {
+	// 	return sound
+	// 		? () => {
+	// 				console.log("Unloading Sound");
+	// 				sound.unloadAsync();
+	// 		  }
+	// 		: undefined;
+	// }, [sound]);
 
 	React.useLayoutEffect(() => {
 		navigation.setOptions({
@@ -162,18 +165,20 @@ const MeditationTimer = () => {
 			<TouchableOpacity
 				className="items-center justify-center mt-10"
 				onPress={() => {
-					if (clicked === false) {
+					if (playAudio === false) {
 						playSound();
-						setClicked(true);
+						dispatch(setPLayAudio(true));
 					} else {
 						stopSound();
-						setClicked(false);
+						dispatch(setPLayAudio(false));
 					}
 				}}>
 				<View className="self-center my-auto">
 					<Icon
 						name={
-							clicked === false ? "play-circle-outline" : "stop-circle-outline"
+							playAudio === false
+								? "play-circle-outline"
+								: "stop-circle-outline"
 						}
 						color={"white"}
 						size={80}

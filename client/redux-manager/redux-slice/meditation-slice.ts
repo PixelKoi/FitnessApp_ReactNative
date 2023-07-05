@@ -6,6 +6,7 @@ interface MedState {
 	startDate: string;
 	endDate: string;
 	countdown: string;
+	playAudio: boolean;
 	medStreak: {
 		Mon: boolean;
 		Tue: boolean;
@@ -18,6 +19,7 @@ interface MedState {
 }
 
 const initialState: MedState = {
+	playAudio: false,
 	percentageComplete: 0,
 	maxTime: 5,
 	startDate: "",
@@ -38,6 +40,9 @@ const medSlice = createSlice({
 	name: "meditation",
 	initialState,
 	reducers: {
+		setPLayAudio(state, action) {
+			state.playAudio = action.payload;
+		},
 		setPercentageComplete(state, action: PayloadAction<number>) {
 			state.percentageComplete = action.payload;
 		},
@@ -64,6 +69,7 @@ const medSlice = createSlice({
 });
 
 export const {
+	setPLayAudio,
 	setTimerStates,
 	setCountdown,
 	setMaxTime,
