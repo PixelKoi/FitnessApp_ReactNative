@@ -5,6 +5,8 @@ import { useAppDispatch, useAppSelector } from "../../../redux-manager/hooks";
 import { useDatabase } from "@nozbe/watermelondb/hooks";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { Button, Card } from "react-native-paper";
+import { BarChart } from "react-native-chart-kit/dist";
+import { Dimensions } from "react-native";
 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -25,6 +27,27 @@ const Meal = (props) => {
   const foods = food_object[food_name];
   console.log("PROPS:", foods);
 
+  function calculateTotalMacros(foodItems) {
+    const proteinArray = foodItems.map((item) => item.Protein);
+    const fatArray = foodItems.map((item) => item.Fat);
+    const carbsArray = foodItems.map((item) => item.Carbs);
+    const totalProteins = proteinArray.reduce(
+      (accumulator, currentValue) => accumulator + currentValue,
+      0
+    );
+    const totalCarbs = carbsArray.reduce(
+      (accumulator, currentValue) => accumulator + currentValue,
+      0
+    );
+    const totalFats = fatArray.reduce(
+      (accumulator, currentValue) => accumulator + currentValue,
+      0
+    );
+    return { totalProteins, totalCarbs, totalFats };
+  }
+
+  const { totalProteins, totalCarbs, totalFats } = calculateTotalMacros(foods);
+
   //Top Nav on Edit Profile Screen
   React.useLayoutEffect(() => {
     navigation.setOptions({
@@ -42,6 +65,26 @@ const Meal = (props) => {
       ),
     });
   });
+  const chartConfig = {
+    backgroundGradientFrom: "#eff3ff",
+    backgroundGradientTo: "#efefef",
+    color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+    style: {
+      borderRadius: 16,
+    },
+  };
+
+  const chartStyle = {
+    // Customize the chart container style
+  };
+  const data = {
+    labels: ["Proteins", "Carbs", "Fats"],
+    datasets: [
+      {
+        data: [totalProteins, totalCarbs, totalFats],
+      },
+    ],
+  };
 
   return (
     <View className="flex-1" style={{ backgroundColor: colors.background }}>
@@ -49,6 +92,18 @@ const Meal = (props) => {
         <Text style={{ color: colors.primary }} className="font-bold text-3xl">
           {title_name}
         </Text>
+        <BarChart
+          data={data}
+          width={300}
+          height={220}
+          chartConfig={chartConfig}
+          horizontal={true}
+          style={{
+            marginVertical: 8,
+            borderRadius: 16,
+          }}
+        />
+
         {foods.map((obj) => {
           return (
             <Card
@@ -132,7 +187,7 @@ const Meal = (props) => {
             width: 150,
           }}
           className={`text-center w-30`}
-          onPress={() => tabNavigation.navigate("Nutrition")}
+          onPress={() => console.log("ADD TO Exact meal")}
         >
           <Text
             className="font-extrabold"
