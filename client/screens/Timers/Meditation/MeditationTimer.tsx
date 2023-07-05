@@ -73,7 +73,9 @@ const MeditationTimer = () => {
 	};
 
 	//play music
-	const [sound, setSound] = React.useState<Audio.Sound | null>(null);
+	// const [sound, setSound] = React.useState<Audio.Sound | null>(null);
+
+	const [sound, setSound] = React.useState<Audio.Sound>();
 
 	async function playSound() {
 		await Audio.setAudioModeAsync({
@@ -83,22 +85,13 @@ const MeditationTimer = () => {
 			allowsRecordingIOS: false,
 			playsInSilentModeIOS: true,
 		});
-		try {
-			console.log("Loading Sound");
-			const sound = new Audio.Sound();
-
-			const { sound: soundObject, status } = await Audio.Sound.createAsync(
-				require("../../../assets/audio/hourStorm.mp3"),
-				{
-					shouldPlay: true,
-				}
-			);
-			await sound.playAsync();
-
-			await sound.unloadAsync();
-		} catch (error) {
-			// An error occurred!
-		}
+		console.log("Loading Sound");
+		const { sound } = await Audio.Sound.createAsync(
+			require("../../../assets/audio/hourStorm.mp3")
+		);
+		setSound(sound);
+		console.log("Playing Sound");
+		await sound.playAsync();
 	}
 
 	React.useEffect(() => {
@@ -165,12 +158,12 @@ const MeditationTimer = () => {
 				className="items-center justify-center mt-10"
 				onPress={() => {
 					playSound();
-					setClicked(!clicked);
+					setClicked(true);
 				}}>
 				<View className="self-center my-auto">
 					<Icon
 						name={
-							clicked === true ? "play-circle-outline" : "stop-circle-outline"
+							clicked === false ? "play-circle-outline" : "stop-circle-outline"
 						}
 						color={"white"}
 						size={80}
