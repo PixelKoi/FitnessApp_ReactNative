@@ -66,13 +66,15 @@ const Diary = () => {
   };
 
   const chartConfig = {
-    backgroundColor: "transparent",
-    barRadius: 10,
+    barRadius: 5,
     barPercentage: 0.5,
-    backgroundGradientTo: "white",
     backgroundGradientFromOpacity: 0,
     backgroundGradientToOpacity: 0,
     color: (opacity = 1) => primary_color,
+    propsForLabels: {
+      fontSize: 14, // optional, default 12
+      fontWeight: "bold", // optional, default 'normal'
+    },
   };
 
   function calculateTotalCalories(foodItems) {
@@ -148,13 +150,14 @@ const Diary = () => {
             verticalLabelRotation={270}
             withInnerLines={false}
             flatColor={true}
-            width={200}
-            height={200}
+            width={180}
+            height={300}
             chartConfig={chartConfig}
             horizontal={true}
             withHorizontalLabels={false}
             fromZero={true}
             showBarTops={false}
+            xLabelsOffset={40}
             style={{
               transform: [{ rotate: "90deg" }],
             }}
