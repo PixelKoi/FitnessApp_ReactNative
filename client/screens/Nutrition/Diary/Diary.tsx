@@ -67,15 +67,11 @@ const Diary = () => {
 
   const chartConfig = {
     backgroundColor: "transparent",
+    barRadius: 15,
     backgroundGradientTo: "white",
     backgroundGradientFromOpacity: 0,
-    backgroundGradientFrom: "white",
     backgroundGradientToOpacity: 0,
     color: (opacity = 1) => primary_color,
-
-    style: {
-      borderRadius: 16,
-    },
   };
 
   function calculateTotalCalories(foodItems) {
@@ -148,18 +144,20 @@ const Diary = () => {
           <BarChart
             data={data}
             withCustomBarColorFromData={true}
+            verticalLabelRotation={270}
+            withInnerLines={false}
             flatColor={true}
-            width={300}
-            height={220}
+            width={200}
+            height={200}
             chartConfig={chartConfig}
             horizontal={true}
             withHorizontalLabels={false}
             fromZero={true}
             showBarTops={false}
-            showValuesOnTopOfBars={true}
             style={{
               marginVertical: 8,
-              borderRadius: 16,
+              transform: [{ rotate: "90deg" }],
+              margin: 5,
             }}
           />
           <ProgressChart
