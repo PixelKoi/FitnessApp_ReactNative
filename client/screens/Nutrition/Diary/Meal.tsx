@@ -66,8 +66,8 @@ const Meal = (props) => {
     });
   });
   const chartConfig = {
-    backgroundGradientFrom: "#eff3ff",
-    backgroundGradientTo: "#efefef",
+    backgroundGradientFrom: "purple",
+    backgroundGradientTo: "orange",
     color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
     style: {
       borderRadius: 16,

@@ -11,7 +11,7 @@ import Food from "../../../database/models/Food";
 import Icon from "react-native-vector-icons/FontAwesome";
 import DiaryCalendar from "../../../utils/calendar/DiaryCalendar";
 import CustomCalendar from "../../../utils/calendar/CustomCalendar";
-import { BarChart } from "react-native-chart-kit/dist";
+import { BarChart, ProgressChart } from "react-native-chart-kit/dist";
 
 const Diary = () => {
   // const dispatch = useAppDispatch();
@@ -61,8 +61,8 @@ const Diary = () => {
   };
 
   const chartConfig = {
-    backgroundGradientFrom: "#eff3ff",
-    backgroundGradientTo: "#efefef",
+    backgroundGradientFrom: "orange",
+    backgroundGradientTo: "purple",
     color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
     style: {
       borderRadius: 16,
@@ -147,6 +147,26 @@ const Diary = () => {
               borderRadius: 16,
             }}
           />
+          <ProgressChart
+            data={[0.4]}
+            width={300}
+            height={220}
+            chartConfig={{
+              backgroundColor: "#1cc910",
+              backgroundGradientFrom: "#eff3ff",
+              backgroundGradientTo: "#efefef",
+              decimalPlaces: 2,
+              color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+              style: {
+                borderRadius: 16,
+              },
+            }}
+            style={{
+              marginVertical: 8,
+              borderRadius: 16,
+            }}
+          />
+
           <Text className="py-4">
             {profileInfo.dailyCal} - caloriesConsumed = calories remaining
           </Text>
