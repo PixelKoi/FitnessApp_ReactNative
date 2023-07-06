@@ -71,7 +71,7 @@ const Diary = () => {
     backgroundGradientFromOpacity: 0,
     backgroundGradientFrom: "white",
     backgroundGradientToOpacity: 0,
-    color: (opacity = 1) => `#FFFFFF`,
+    color: (opacity = 1) => primary_color,
 
     style: {
       borderRadius: 16,
