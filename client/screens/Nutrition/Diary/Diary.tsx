@@ -67,7 +67,8 @@ const Diary = () => {
 
   const chartConfig = {
     backgroundColor: "transparent",
-    barRadius: 15,
+    barRadius: 10,
+    barPercentage: 0.5,
     backgroundGradientTo: "white",
     backgroundGradientFromOpacity: 0,
     backgroundGradientToOpacity: 0,
@@ -155,9 +156,7 @@ const Diary = () => {
             fromZero={true}
             showBarTops={false}
             style={{
-              marginVertical: 8,
               transform: [{ rotate: "90deg" }],
-              margin: 5,
             }}
           />
           <ProgressChart
