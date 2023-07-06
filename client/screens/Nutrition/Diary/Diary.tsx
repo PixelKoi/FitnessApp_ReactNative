@@ -56,14 +56,23 @@ const Diary = () => {
     datasets: [
       {
         data: [totalProteins, totalCarbs, totalFats],
+        colors: [
+          (opacity = 1) => `pink`,
+          (opacity = 1) => `blue`,
+          (opacity = 1) => `orange`,
+        ],
       },
     ],
   };
 
   const chartConfig = {
-    backgroundGradientFrom: "orange",
-    backgroundGradientTo: "purple",
-    color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+    backgroundColor: "transparent",
+    backgroundGradientTo: "white",
+    backgroundGradientFromOpacity: 0,
+    backgroundGradientFrom: "white",
+    backgroundGradientToOpacity: 0,
+    color: (opacity = 1) => `#FFFFFF`,
+
     style: {
       borderRadius: 16,
     },
@@ -138,10 +147,16 @@ const Diary = () => {
         <Card className="px-4 mt-4">
           <BarChart
             data={data}
+            withCustomBarColorFromData={true}
+            flatColor={true}
             width={300}
             height={220}
             chartConfig={chartConfig}
             horizontal={true}
+            withHorizontalLabels={false}
+            fromZero={true}
+            showBarTops={false}
+            showValuesOnTopOfBars={true}
             style={{
               marginVertical: 8,
               borderRadius: 16,
@@ -153,7 +168,7 @@ const Diary = () => {
             height={220}
             chartConfig={{
               backgroundColor: "#1cc910",
-              backgroundGradientFrom: "#eff3ff",
+              backgroundGradientFrom: "",
               backgroundGradientTo: "#efefef",
               decimalPlaces: 2,
               color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
