@@ -11,6 +11,7 @@ import Food from "../../../database/models/Food";
 import Icon from "react-native-vector-icons/FontAwesome";
 import DiaryCalendar from "../../../utils/calendar/DiaryCalendar";
 import CustomCalendar from "../../../utils/calendar/CustomCalendar";
+import { BarChart } from "react-native-chart-kit/dist";
 
 const Diary = () => {
   // const dispatch = useAppDispatch();
@@ -25,10 +26,48 @@ const Diary = () => {
   const { breakfast, lunch, dinner, snacks } = useAppSelector(
     (state) => state.inventory
   );
-  console.log("Breakfast:", breakfast);
-  console.log("lunch:", lunch);
-  console.log("dinner:", dinner);
-  console.log("snacks:", snacks);
+
+  function calculateTotalMacros(foodItems) {
+    const proteinArray = foodItems.map((item) => item.Protein);
+    const fatArray = foodItems.map((item) => item.Fat);
+    const carbsArray = foodItems.map((item) => item.Carbs);
+    const totalProteins = proteinArray.reduce(
+      (accumulator, currentValue) => accumulator + currentValue,
+      0
+    );
+    const totalCarbs = carbsArray.reduce(
+      (accumulator, currentValue) => accumulator + currentValue,
+      0
+    );
+    const totalFats = fatArray.reduce(
+      (accumulator, currentValue) => accumulator + currentValue,
+      0
+    );
+    return { totalProteins, totalCarbs, totalFats };
+  }
+
+  const allFoodItems = [...breakfast, ...lunch, ...dinner, ...snacks];
+
+  const { totalProteins, totalCarbs, totalFats } =
+    calculateTotalMacros(allFoodItems);
+
+  const data = {
+    labels: ["Proteins", "Carbs", "Fats"],
+    datasets: [
+      {
+        data: [totalProteins, totalCarbs, totalFats],
+      },
+    ],
+  };
+
+  const chartConfig = {
+    backgroundGradientFrom: "#eff3ff",
+    backgroundGradientTo: "#efefef",
+    color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+    style: {
+      borderRadius: 16,
+    },
+  };
 
   function calculateTotalCalories(foodItems) {
     const caloriesArray = foodItems.map((item) => item.Calories);
@@ -97,6 +136,17 @@ const Diary = () => {
       </View>
       <View className="justify-center">
         <Card className="px-4 mt-4">
+          <BarChart
+            data={data}
+            width={300}
+            height={220}
+            chartConfig={chartConfig}
+            horizontal={true}
+            style={{
+              marginVertical: 8,
+              borderRadius: 16,
+            }}
+          />
           <Text className="py-4">
             {profileInfo.dailyCal} - caloriesConsumed = calories remaining
           </Text>
