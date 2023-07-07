@@ -11,7 +11,7 @@ import Food from "../../../database/models/Food";
 import Icon from "react-native-vector-icons/FontAwesome";
 import DiaryCalendar from "../../../utils/calendar/DiaryCalendar";
 import CustomCalendar from "../../../utils/calendar/CustomCalendar";
-import { BarChart, ProgressChart } from "react-native-chart-kit/dist";
+import { StackedBarChart } from "react-native-svg-charts";
 
 const Diary = () => {
   // const dispatch = useAppDispatch();
@@ -51,20 +51,6 @@ const Diary = () => {
   const { totalProteins, totalCarbs, totalFats } =
     calculateTotalMacros(allFoodItems);
 
-  const data = {
-    labels: ["Proteins", "Carbs", "Fats"],
-    datasets: [
-      {
-        data: [totalProteins, totalCarbs, totalFats],
-        colors: [
-          (opacity = 1) => `pink`,
-          (opacity = 1) => `blue`,
-          (opacity = 1) => `orange`,
-        ],
-      },
-    ],
-  };
-
   const chartConfig = {
     barRadius: 5,
     barPercentage: 0.5,
@@ -90,8 +76,9 @@ const Diary = () => {
   const lunch_calories = calculateTotalCalories(lunch);
   const dinner_calories = calculateTotalCalories(dinner);
   const snacks_calories = calculateTotalCalories(snacks);
+  const total_cals =
+    breakfast_calories + lunch_calories + dinner_calories + snacks_calories;
 
-  // TODO: ADD react-native-chart-kit daily calories
   // TODO: ADD react-native-calendars, block off from accessing days before registration and don't allow modifying older dates
   React.useLayoutEffect(() => {
     tabNavigation.setOptions({
@@ -144,46 +131,8 @@ const Diary = () => {
       </View>
       <View className="justify-center">
         <Card className="px-4 mt-4">
-          <BarChart
-            data={data}
-            withCustomBarColorFromData={true}
-            verticalLabelRotation={270}
-            withInnerLines={false}
-            flatColor={true}
-            width={180}
-            height={300}
-            chartConfig={chartConfig}
-            horizontal={true}
-            withHorizontalLabels={false}
-            fromZero={true}
-            showBarTops={false}
-            xLabelsOffset={40}
-            style={{
-              transform: [{ rotate: "90deg" }],
-            }}
-          />
-          <ProgressChart
-            data={[0.4]}
-            width={300}
-            height={220}
-            chartConfig={{
-              backgroundColor: "#1cc910",
-              backgroundGradientFrom: "",
-              backgroundGradientTo: "#efefef",
-              decimalPlaces: 2,
-              color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-              style: {
-                borderRadius: 16,
-              },
-            }}
-            style={{
-              marginVertical: 8,
-              borderRadius: 16,
-            }}
-          />
-
           <Text className="py-4">
-            {profileInfo.dailyCal} - caloriesConsumed = calories remaining
+            {profileInfo.dailyCal} - {total_cals} = calories remaining
           </Text>
         </Card>
       </View>

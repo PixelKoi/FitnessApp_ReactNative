@@ -24,7 +24,7 @@ const Timer = () => {
   const [mode, setMode] = useState("fasting");
 
   // top Navigation
-  React.useLayouftEffect(() => {
+  React.useLayoutEffect(() => {
     navigation.setOptions({
       title: "Timer",
       headerStyle: {
