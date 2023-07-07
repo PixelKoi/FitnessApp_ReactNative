@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Button } from "react-native-paper";
@@ -10,6 +10,7 @@ import {
 	setPLayAudio,
 	setTimerStates,
 	updateMedStreak,
+	setSound,
 } from "../../../redux-manager/redux-slice/meditation-slice";
 import { useAppDispatch, useAppSelector } from "../../../redux-manager/hooks";
 //import icons
@@ -19,96 +20,99 @@ import FontAwesome from "react-native-vector-icons/FontAwesome5";
 // Audio
 import { Audio } from "expo-av";
 import hourStrom from "../../../assets/audio/hourStorm.mp3";
+//Music Player
+import { setupPlayer, addTrack } from "../../../musicPlayerServices";
+import { SafeAreaView } from "react-native-safe-area-context";
+import DefaultSpinner from "../../../components/Loaders/DefaultSpinner";
+import TrackPlayer, {
+	Event,
+	Track,
+	useTrackPlayerEvents,
+} from "react-native-track-player";
+import { playListData } from "../../../constants";
+import ControlCenter from "../../../components/Audio/ControlCenter";
+import SongInfo from "../../../components/Audio/SongInfo";
+import MusicPlayer from "./components/MusicPlayer";
 
 //Todo: Add lotus icon above start meditating button
 const MeditationTimer = () => {
+	//Track states
+	const [isPlayerReady, setIsPlayerReady] = useState(false);
+
+	async function setup() {
+		let isSetup = await setupPlayer();
+
+		if (isSetup === true) {
+			await addTrack();
+		}
+
+		setIsPlayerReady(isSetup);
+	}
+
+	useEffect(() => {
+		setup();
+	}, []);
+
+	// if (!isPlayerReady) {
+	// 	return (
+	// 		<SafeAreaView>
+	// 			<DefaultSpinner />
+	// 		</SafeAreaView>
+	// 	);
+	// }
+
 	//Top left nav button - removed top nav
 	const navigation = useNavigation();
 
-	//Call to fasting redux
-	const { maxTime, countdown, playAudio } = useAppSelector(
-		(state) => state.meditation
-	);
+	// //Call to fasting redux
+	// const { maxTime, countdown, playAudio } = useAppSelector(
+	// 	(state) => state.meditation
+	// );
 	const { colors } = useAppSelector((state) => state.theme);
-	const dispatch = useAppDispatch();
+	// const dispatch = useAppDispatch();
 
-	//Meditation states
-	const [startTime, setStartTime] = useState(null);
-	const [endTime, setEndTime] = useState(null);
+	// //Meditation states
+	// const [startTime, setStartTime] = useState(null);
+	// const [endTime, setEndTime] = useState(null);
 
-	//Keep track of starting / ending fast button
-	const [clicked, setClicked] = useState(false);
+	// //Keep track of starting / ending fast button
+	// const [clicked, setClicked] = useState(false);
 
-	//start fast function
-	const handleStartFast = () => {
-		const currentDate = new Date();
-		const duration = maxTime; // in hours
-		const endTime = add(currentDate, { minutes: duration });
+	//This sets the audio mode for ios and andoird
+	//Without this you will hear no audio (especially if playInSilentModeIos isn't set to true)
+	// useEffect(() => {
+	// 	Audio.setAudioModeAsync({
+	// 		staysActiveInBackground: true,
+	// 		shouldDuckAndroid: false,
+	// 		playThroughEarpieceAndroid: false,
+	// 		allowsRecordingIOS: false,
+	// 		playsInSilentModeIOS: true,
+	// 	});
+	// }, []);
 
-		const dayOfWeek = new Date().getDay();
-		const currentDay = dayOfWeekMap[dayOfWeek];
-		dispatch(updateMedStreak({ day: currentDay, completed: true }));
+	// async function playSound() {
+	// 	console.log("Loading Sound");
+	// 	const { sound } = await Audio.Sound.createAsync(
+	// 		require("../../../assets/audio/hourStorm.mp3")
+	// 	);
+	// 	// dispatch(setSound(sound));
+	// 	console.log("Playing Sound");
+	// 	await sound.playAsync();
+	// }
 
-		setStartTime(currentDate);
-		setEndTime(endTime);
-		setClicked((prevClicked) => !prevClicked);
-
-		dispatch(
-			setTimerStates({
-				startDate: currentDate.toString(),
-				endDate: endTime.toString(),
-			})
-		);
-	};
-
-	const handleEndFast = () => {
-		setClicked((prevClicked) => !prevClicked);
-		setStartTime(null);
-		setEndTime(null);
-		dispatch(
-			setTimerStates({
-				startDate: null,
-				endDate: null,
-				countdown: "00:00:00",
-				percentageComplete: 0,
-			})
-		);
-	};
-
-	//play music
-	// const [sound, setSound] = React.useState<Audio.Sound | null>(null);
-
-	const [sound, setSound] = React.useState<Audio.Sound>();
-
-	async function playSound() {
-		await Audio.setAudioModeAsync({
-			staysActiveInBackground: true,
-			shouldDuckAndroid: false,
-			playThroughEarpieceAndroid: false,
-			allowsRecordingIOS: false,
-			playsInSilentModeIOS: true,
-		});
-		console.log("Loading Sound");
-		const { sound } = await Audio.Sound.createAsync(
-			require("../../../assets/audio/hourStorm.mp3")
-		);
-		setSound(sound);
-		console.log("Playing Sound");
-		await sound.playAsync();
-	}
-
-	async function stopSound() {
-		console.log("Unloading Sound");
-		sound.unloadAsync();
-	}
+	// async function stopSound() {
+	// 	console.log("Unloading Sound");
+	// 	dispatch(setSound(null));
+	// 	sound.unloadAsync();
+	// }
 
 	// React.useEffect(() => {
-	// 	return sound
-	// 		? () => {
-	// 				console.log("Unloading Sound");
-	// 				sound.unloadAsync();
-	// 		  }
-	// 		: undefined;
+	// return sound
+	// 	? () => {
+	// 			console.log("Unloading Sound");
+	// 			sound.unloadAsync();
+	// 	  }
+	// 	: undefined;
 	// }, [sound]);
 
 	React.useLayoutEffect(() => {
@@ -143,50 +147,49 @@ const MeditationTimer = () => {
 				<View className="items-center">
 					<Image source={GirlMeditating} />
 				</View>
-
+				<MusicPlayer />
 				<View style={{ width: 126 }} className=" mx-auto ">
-					<Text style={{ color: "#fff" }} className="text-3xl">
-						{countdown}
-					</Text>
+					<Text style={{ color: "#fff" }} className="text-3xl"></Text>
 				</View>
 			</View>
-
-			{/* <Button
-				style={{ backgroundColor: "#fff" }}
-				className="mt-32 w-60 mx-auto "
-				icon="brain"
-				mode="contained"
-				onPress={clicked === false ? handleStartFast : handleEndFast}>
-				<Text style={{ color: "black" }}>
-					{clicked === false ? "Start Meditating" : "End Meditating"}
-				</Text>
-			</Button> */}
-
-			<TouchableOpacity
-				className="items-center justify-center mt-10"
-				onPress={() => {
-					if (playAudio === false) {
-						playSound();
-						dispatch(setPLayAudio(true));
-					} else {
-						stopSound();
-						dispatch(setPLayAudio(false));
-					}
-				}}>
-				<View className="self-center my-auto">
-					<Icon
-						name={
-							playAudio === false
-								? "play-circle-outline"
-								: "stop-circle-outline"
-						}
-						color={"white"}
-						size={80}
-					/>
-				</View>
-			</TouchableOpacity>
 		</View>
 	);
 };
 
 export default MeditationTimer;
+
+//start fast function
+// const handleStartFast = () => {
+// 	const currentDate = new Date();
+// 	const duration = maxTime; // in hours
+// 	const endTime = add(currentDate, { minutes: duration });
+
+// 	const dayOfWeek = new Date().getDay();
+// 	const currentDay = dayOfWeekMap[dayOfWeek];
+// 	dispatch(updateMedStreak({ day: currentDay, completed: true }));
+
+// 	setStartTime(currentDate);
+// 	setEndTime(endTime);
+// 	setClicked((prevClicked) => !prevClicked);
+
+// 	dispatch(
+// 		setTimerStates({
+// 			startDate: currentDate.toString(),
+// 			endDate: endTime.toString(),
+// 		})
+// 	);
+// };
+
+// const handleEndFast = () => {
+// 	setClicked((prevClicked) => !prevClicked);
+// 	setStartTime(null);
+// 	setEndTime(null);
+// 	dispatch(
+// 		setTimerStates({
+// 			startDate: null,
+// 			endDate: null,
+// 			countdown: "00:00:00",
+// 			percentageComplete: 0,
+// 		})
+// 	);
+// };

@@ -9,7 +9,6 @@ import CircadianChicken from "../../../assets/images/fasting-dash/CircadianChick
 import SixteenByEightChicken from "../../../assets/images/fasting-dash/168Chicken.png";
 import EighteenByFourChicken from "../../../assets/images/fasting-dash/184Chicken.png";
 import TwentyByfourChicken from "../../../assets/images/fasting-dash/204Chicken.png";
-import CongratulationsModal from "../../../components/Modals/CongratulationsModal";
 
 const FastingDash = () => {
 	const navigation = useNavigation();

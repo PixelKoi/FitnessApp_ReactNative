@@ -1,7 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { Audio } from "expo-av";
 
 interface MedState {
 	percentageComplete: number;
+	sound: Audio.Sound;
 	maxTime: number;
 	startDate: string;
 	endDate: string;
@@ -20,6 +22,7 @@ interface MedState {
 
 const initialState: MedState = {
 	playAudio: false,
+	sound: null,
 	percentageComplete: 0,
 	maxTime: 5,
 	startDate: "",
@@ -42,6 +45,9 @@ const medSlice = createSlice({
 	reducers: {
 		setPLayAudio(state, action) {
 			state.playAudio = action.payload;
+		},
+		setSound(state, action) {
+			state.sound = action.payload;
 		},
 		setPercentageComplete(state, action: PayloadAction<number>) {
 			state.percentageComplete = action.payload;
@@ -69,6 +75,7 @@ const medSlice = createSlice({
 });
 
 export const {
+	setSound,
 	setPLayAudio,
 	setTimerStates,
 	setCountdown,
