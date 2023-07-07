@@ -11,8 +11,7 @@ import Food from "../../../database/models/Food";
 import Icon from "react-native-vector-icons/FontAwesome";
 import DiaryCalendar from "../../../utils/calendar/DiaryCalendar";
 import CustomCalendar from "../../../utils/calendar/CustomCalendar";
-import { StackedBarChart } from "react-native-svg-charts";
-
+import DiaryBarChart from "../../../utils/charts/diary/barChart/DiaryBarChart";
 const Diary = () => {
   // const dispatch = useAppDispatch();
   const tabNavigation = useNavigation();
@@ -50,18 +49,6 @@ const Diary = () => {
 
   const { totalProteins, totalCarbs, totalFats } =
     calculateTotalMacros(allFoodItems);
-
-  const chartConfig = {
-    barRadius: 5,
-    barPercentage: 0.5,
-    backgroundGradientFromOpacity: 0,
-    backgroundGradientToOpacity: 0,
-    color: (opacity = 1) => primary_color,
-    propsForLabels: {
-      fontSize: 14, // optional, default 12
-      fontWeight: "bold", // optional, default 'normal'
-    },
-  };
 
   function calculateTotalCalories(foodItems) {
     const caloriesArray = foodItems.map((item) => item.Calories);
@@ -134,6 +121,7 @@ const Diary = () => {
           <Text className="py-4">
             {profileInfo.dailyCal} - {total_cals} = calories remaining
           </Text>
+          <DiaryBarChart />
         </Card>
       </View>
       {/* other content */}

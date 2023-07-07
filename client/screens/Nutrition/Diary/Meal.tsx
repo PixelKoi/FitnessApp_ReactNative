@@ -5,7 +5,6 @@ import { useAppDispatch, useAppSelector } from "../../../redux-manager/hooks";
 import { useDatabase } from "@nozbe/watermelondb/hooks";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { Button, Card } from "react-native-paper";
-import { BarChart } from "react-native-chart-kit/dist";
 import { Dimensions } from "react-native";
 
 function capitalizeFirstLetter(string) {
@@ -75,7 +74,7 @@ const Meal = (props) => {
   };
 
   const chartStyle = {
-    // Customize the chart container style
+    // Customize the charts container style
   };
   const data = {
     labels: ["Proteins", "Carbs", "Fats"],
@@ -92,17 +91,6 @@ const Meal = (props) => {
         <Text style={{ color: colors.primary }} className="font-bold text-3xl">
           {title_name}
         </Text>
-        <BarChart
-          data={data}
-          width={300}
-          height={220}
-          chartConfig={chartConfig}
-          horizontal={true}
-          style={{
-            marginVertical: 8,
-            borderRadius: 16,
-          }}
-        />
 
         {foods.map((obj) => {
           return (

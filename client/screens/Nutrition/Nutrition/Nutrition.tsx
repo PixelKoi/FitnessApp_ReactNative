@@ -6,11 +6,6 @@ import {
   TouchableOpacity,
   Text,
 } from "react-native";
-import {
-  XCircleIcon,
-  MagnifyingGlassIcon,
-  ChevronDownIcon,
-} from "react-native-heroicons/outline";
 import { params } from "../../../constants";
 import { useNavigation } from "@react-navigation/native";
 import {
@@ -23,6 +18,7 @@ import {
 } from "react-native-paper";
 import Icon from "react-native-vector-icons/Ionicons";
 import AntIcon from "react-native-vector-icons/AntDesign";
+import Entypo from "react-native-vector-icons/Entypo";
 import FontIcon from "react-native-vector-icons/FontAwesome5";
 import { StyleSheet } from "react-native";
 import { addFavorite } from "../../../redux-manager/redux-slice/favorite-slice";
@@ -399,7 +395,11 @@ const Nutrition: React.FC = () => {
                   </Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => handleIconPress()}>
-                  <ChevronDownIcon size={18} color={primary_color} />
+                  <FontIcon
+                    name="chevron-down"
+                    size={18}
+                    color={primary_color}
+                  />
                 </TouchableOpacity>
               </View>
             }
@@ -415,14 +415,18 @@ const Nutrition: React.FC = () => {
               onPress={clearTextInput}
               style={styles.clearButton}
             >
-              <XCircleIcon size={24} color={primary_color} />
+              <AntIcon name="AntDesign" size={24} color={primary_color} />
             </TouchableOpacity>
           )}
           <TouchableOpacity
             className="mt-3 mb-3 py-1 mx-4"
             onPress={handleSearch}
           >
-            <MagnifyingGlassIcon color={primary_color}></MagnifyingGlassIcon>
+            <Entypo
+              name="magnifying-glass"
+              size={20}
+              color={primary_color}
+            ></Entypo>
           </TouchableOpacity>
         </View>
         <FlatList
