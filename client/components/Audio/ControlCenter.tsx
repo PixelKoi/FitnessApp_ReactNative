@@ -24,7 +24,7 @@ const ControlCenter = () => {
 		const currentTrack = await TrackPlayer.getCurrentTrack();
 
 		if (currentTrack !== null) {
-			if (playback === State.Paused || State.Ready) {
+			if (playback === State.Paused || playback === State.Ready) {
 				await TrackPlayer.play();
 			} else {
 				await TrackPlayer.pause();
