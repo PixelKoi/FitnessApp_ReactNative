@@ -1,10 +1,14 @@
 import Slider from "@react-native-community/slider";
-import React from "react";
+import React, { useEffect } from "react";
 import { View, Text } from "react-native";
 import { useProgress } from "react-native-track-player";
 
 const SongSlider = () => {
 	const { position, duration } = useProgress();
+
+	useEffect(() => {
+		console.log(new Date(duration * 1000).toString());
+	}, []);
 
 	return (
 		<View>
@@ -18,13 +22,13 @@ const SongSlider = () => {
 			/>
 			<View style={{ width: 350 }} className="flex-row justify-between ">
 				<Text style={{ color: "#fff" }}>
-					{new Date(position * 1000).toISOString().substring(15, 19)}
+					{new Date(position * 1000).toISOString().substring(14, 19)}
 				</Text>
 
 				<Text style={{ color: "#fff" }}>
 					{new Date((duration - position) * 1000)
 						.toISOString()
-						.substring(15, 19)}
+						.substring(14, 19)}
 				</Text>
 			</View>
 		</View>
