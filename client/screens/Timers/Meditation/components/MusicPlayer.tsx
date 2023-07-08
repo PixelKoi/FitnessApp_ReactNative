@@ -32,7 +32,7 @@ const MusicPlayer = () => {
 	};
 
 	return (
-		<View className="flex flex-col">
+		<View className="flex items-center">
 			<FlatList
 				horizontal
 				data={playListData}

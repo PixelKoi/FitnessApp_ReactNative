@@ -14,12 +14,14 @@ const SongSlider = () => {
 				maximumValue={duration}
 				thumbTintColor="#ffff"
 				maximumTrackTintColor="#ffff"
+				style={{ marginTop: 25, width: 350, height: 40, flexDirection: "row" }}
 			/>
-			<View>
-				<Text>{new Date(position * 1000).toISOString().substring(15, 19)}</Text>
-			</View>
-			<View>
-				<Text>
+			<View style={{ width: 350 }} className="flex-row justify-between ">
+				<Text style={{ color: "#fff" }}>
+					{new Date(position * 1000).toISOString().substring(15, 19)}
+				</Text>
+
+				<Text style={{ color: "#fff" }}>
 					{new Date((duration - position) * 1000)
 						.toISOString()
 						.substring(15, 19)}

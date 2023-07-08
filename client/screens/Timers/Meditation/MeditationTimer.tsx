@@ -141,17 +141,21 @@ const MeditationTimer = () => {
 	}, []);
 
 	return (
-		<View style={{ backgroundColor: "#03174C" }} className="flex-1">
+		<View
+			style={{ backgroundColor: "#03174C" }}
+			className="flex-1 justify-center">
 			{/* Clock section */}
 			<View className="mt-24">
 				<View className="items-center">
 					<Image source={GirlMeditating} />
 				</View>
-				<MusicPlayer />
+
 				<View style={{ width: 126 }} className=" mx-auto ">
 					<Text style={{ color: "#fff" }} className="text-3xl"></Text>
 				</View>
 			</View>
+
+			<MusicPlayer />
 		</View>
 	);
 };

@@ -33,13 +33,15 @@ const ControlCenter = () => {
 	};
 
 	return (
-		<View className="flex-1">
+		<View className="flex-row justify-center items-center">
 			<Pressable onPress={skipToPrevious}>
 				<Icon name="skip-previous" size={40} />
 			</Pressable>
-			<Pressable onPress={() => togglePlayerback(playBackState)}>
+			<Pressable
+				style={{ marginHorizontal: 24 }}
+				onPress={() => togglePlayerback(playBackState)}>
 				<Icon
-					name={playBackState === State.Playing ? "pause" : "play"}
+					name={playBackState === State.Playing ? "pause" : "play-arrow"}
 					size={75}
 				/>
 			</Pressable>

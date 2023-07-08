@@ -8,18 +8,18 @@ type SongInfoProps = PropsWithChildren<{
 
 const SongInfo = ({ track }: SongInfoProps) => {
 	return (
-		<View>
+		<View className="flex justify-center items-center">
 			<View>
-				<Text>{track?.title}</Text>
+				<Text style={{ color: "#fff" }}>{track?.title}</Text>
 			</View>
 			<View>
-				<Text>{track?.name}</Text>
+				<Text style={{ color: "#fff" }}>{track?.name}</Text>
 			</View>
-			<View>
-				<Text>
+			{/* <View>
+				<Text style={{ color: "#fff" }}>
 					{track?.artists} . {track?.album}
 				</Text>
-			</View>
+			</View> */}
 		</View>
 	);
 };
