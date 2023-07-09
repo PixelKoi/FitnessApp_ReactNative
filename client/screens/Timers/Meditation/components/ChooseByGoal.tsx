@@ -1,8 +1,9 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, Image } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { sleepTracks, playListData } from "../../../../constants";
 import { useNavigation } from "@react-navigation/native";
+import sleepWell from "../../../../assets/meditation_timer/sleepWell.jpg";
 
 const ChooseByGoal = () => {
 	const navigation = useNavigation();
@@ -17,7 +18,9 @@ const ChooseByGoal = () => {
 							navigation.navigate("MeditationTimer", { track: playListData });
 						}}
 						style={{ backgroundColor: "red" }}
-						className="h-28 mr-2 rounded-xl"></TouchableOpacity>
+						className="h-28 mr-2 rounded-xl">
+						<Image className="w-full h-28 rounded-xl" source={sleepWell} />
+					</TouchableOpacity>
 					<Text style={{ fontSize: 13 }} className="mt-1 ml-2 font-bold">
 						Fall Asleep
 					</Text>
@@ -41,7 +44,7 @@ const ChooseByGoal = () => {
 						style={{ backgroundColor: "red" }}
 						className="h-28 mr-2 rounded-xl"></TouchableOpacity>
 					<Text style={{ fontSize: 13 }} className="mt-1 ml-2 font-bold">
-						Learn to meditate
+						Learn to Meditate
 					</Text>
 				</View>
 				<View className="w-1/2 h-28">

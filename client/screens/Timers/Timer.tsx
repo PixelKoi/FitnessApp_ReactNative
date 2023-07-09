@@ -49,11 +49,12 @@ const Timer = () => {
 					{/* Fasting timer */}
 					<TouchableOpacity
 						onPress={() => {
-							if (startDate === null) {
-								navigation.navigate("FastingDash");
-							} else {
-								navigation.navigate("Fasting", { title: "Fasting Timer" });
-							}
+							navigation.navigate("FastingDash");
+							// if (startDate === null) {
+							// 	navigation.navigate("FastingDash");
+							// } else {
+							// 	navigation.navigate("Fasting", { title: "Fasting Timer" });
+							// }
 						}}>
 						<TimerCard
 							img={FastingCard}
