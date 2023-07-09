@@ -43,7 +43,7 @@ const MeditationDash = () => {
 	}, []);
 
 	return (
-		<View style={{ backgroundColor: "#ffff" }} className="flex-1 px-5">
+		<View style={{ backgroundColor: "#D4EEFF" }} className="flex-1 px-5">
 			<View className=" mt-4">
 				<EmojiDropDown />
 			</View>
