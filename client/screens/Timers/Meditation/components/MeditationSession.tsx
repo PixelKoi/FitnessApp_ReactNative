@@ -1,5 +1,5 @@
-import React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import React, { useEffect } from "react";
+import { View, Text, TouchableOpacity, Pressable } from "react-native";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 //Redux imports
@@ -8,6 +8,9 @@ import {
 	useAppDispatch,
 	useAppSelector,
 } from "../../../../redux-manager/hooks";
+import { addTrack } from "../../../../musicPlayerServices";
+import { setupPlayer } from "../../../../musicPlayerServices";
+import TrackPlayer, { Track } from "react-native-track-player";
 
 interface SessionProps {
 	title: string;
@@ -16,6 +19,7 @@ interface SessionProps {
 	time: string;
 	buttonBackgroundColor: string;
 	buttonTextColor: string;
+	track: any;
 }
 
 const MeditationSession = (props: SessionProps) => {
@@ -29,7 +33,7 @@ const MeditationSession = (props: SessionProps) => {
 		<TouchableOpacity
 			onPress={async () => {
 				await dispatch(setMaxTime(Number(props.time)));
-				navigation.navigate("MeditationTimer");
+				navigation.navigate("MeditationTimer", { track: props.track });
 			}}
 			className="flex justify-center mr-4"
 			style={{
@@ -56,7 +60,7 @@ const MeditationSession = (props: SessionProps) => {
 					</Text>
 				</View>
 				<View style={{ width: 67.5 }}>
-					<TouchableWithoutFeedback
+					<View
 						className="self-center mr-2"
 						style={{
 							width: 45,
@@ -69,7 +73,7 @@ const MeditationSession = (props: SessionProps) => {
 							className="self-center my-auto font-semibold">
 							Start
 						</Text>
-					</TouchableWithoutFeedback>
+					</View>
 				</View>
 			</View>
 		</TouchableOpacity>

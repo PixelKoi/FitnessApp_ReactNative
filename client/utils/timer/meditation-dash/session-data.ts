@@ -1,4 +1,5 @@
 import happy from "../../../assets/images/meditation/emoji/happy.png";
+import { sleepTracks, playListData } from "../../../constants";
 
 const medSessionData = [
 	{
@@ -9,6 +10,7 @@ const medSessionData = [
 		textColor: "#FDEACD",
 		buttonBackgroundColor: "#EBEAEC",
 		buttonTextColor: "#545662",
+		track: sleepTracks,
 	},
 	{
 		img: happy,
@@ -18,15 +20,7 @@ const medSessionData = [
 		textColor: "#3F414E",
 		buttonBackgroundColor: "#3F414E",
 		buttonTextColor: "#FEFFFE",
-	},
-	{
-		img: happy,
-		title: "Panic Attacks",
-		time: "5",
-		cardColor: "#FFC97E",
-		textColor: "#3F414E",
-		buttonBackgroundColor: "#3F414E",
-		buttonTextColor: "#FEFFFE",
+		track: playListData,
 	},
 ];
 

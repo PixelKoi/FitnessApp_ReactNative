@@ -15,10 +15,21 @@ export const params = {
 	pageNumber: 5,
 };
 
+//Audio Tracks
+
 export const playListData: Track[] = [
 	{
 		id: 1,
 		title: "hour storm",
+		artist: "King",
+		url: require("./assets/audio/hourStorm.mp3"),
+	},
+];
+
+export const sleepTracks: Track[] = [
+	{
+		id: 1,
+		title: "Ambient Oceans",
 		artist: "King",
 		url: require("./assets/audio/hourStorm.mp3"),
 	},

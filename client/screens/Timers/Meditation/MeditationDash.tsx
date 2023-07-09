@@ -7,7 +7,9 @@ import MeditationSession from "./components/MeditationSession";
 import MeditationEmoji from "./components/MeditationEmoji";
 import { useNavigation } from "@react-navigation/native";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import FontAwesome from "react-native-vector-icons/FontAwesome5";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
+import EmojiDropDown from "./components/EmojiDropDown";
+import ChooseByGoal from "./components/ChooseByGoal";
 
 //Todo: get tailwind Theme primary and secondary colors set to states and put it inside the labelStyle prop
 const MeditationDash = () => {
@@ -19,7 +21,7 @@ const MeditationDash = () => {
 	// top Navigation
 	React.useLayoutEffect(() => {
 		navigation.setOptions({
-			title: "Meditation Dashboard",
+			title: "Discover",
 			headerStyle: {
 				shadowColor: "transparent",
 			},
@@ -29,7 +31,7 @@ const MeditationDash = () => {
 			headerLeft: () => (
 				<View>
 					<TouchableOpacity
-						className="ml-4  rounded-full"
+						className="ml-2  rounded-full"
 						onPress={() => {
 							navigation.goBack();
 						}}>
@@ -41,62 +43,30 @@ const MeditationDash = () => {
 	}, []);
 
 	return (
-		<View className="flex-1 px-8  bg-background">
-			<View className="gap-2 mt-2">
-				<Text className="font-bold" style={{ fontSize: 14 }}>
-					Hello, <Text className="uppercase">{username}!</Text>
-				</Text>
-				<Text style={{ color: "#9B9B99", fontSize: 10 }}>
-					How are you feeling today?
-				</Text>
-
-				{/* Emoji List */}
-				<View className="flex-row">
-					{emojiData.map((emoji, index) => (
-						<MeditationEmoji
-							key={index}
-							emotion={emoji.emotion}
-							img={emoji.img}
-						/>
-					))}
-				</View>
+		<View style={{ backgroundColor: "#ffff" }} className="flex-1 px-5">
+			<View className=" mt-4">
+				<EmojiDropDown />
 			</View>
-
-			{/* Meditation Session List */}
-			<View className="mt-8">
-				<Text className="font-bold">Choose Time</Text>
-				<View className="mt-8 flex-row">
-					{medSessionData.map((data, index) => (
+			<View className="mt-5">
+				<ChooseByGoal />
+			</View>
+			{/* Meditation Session List
+			<View className="mt-6">
+				<Text className="font-bold">Choose by Goal</Text>
+				<View className="items-center">
+					<View className="mt-4 flex-row">
 						<MeditationSession
-							key={index}
-							title={data.title}
-							time={data.time}
-							cardColor={data.cardColor}
-							textColor={data.textColor}
-							buttonBackgroundColor={data.buttonBackgroundColor}
-							buttonTextColor={data.buttonTextColor}
+							title={medSessionData[0].title}
+							time={medSessionData[0].time}
+							cardColor={medSessionData[0].cardColor}
+							textColor={medSessionData[0].textColor}
+							buttonBackgroundColor={medSessionData[0].buttonBackgroundColor}
+							buttonTextColor={medSessionData[0].buttonTextColor}
+							track={medSessionData[0].track}
 						/>
-					))}
+					</View>
 				</View>
-			</View>
-
-			{/* Meditation Session List */}
-			<View className="mt-8">
-				<Text className="font-bold">Choose Course</Text>
-				<View className="mt-8 flex-row">
-					{medSessionData.map((data, index) => (
-						<MeditationSession
-							key={index}
-							title={data.title}
-							time={data.time}
-							cardColor={data.cardColor}
-							textColor={data.textColor}
-							buttonBackgroundColor={data.buttonBackgroundColor}
-							buttonTextColor={data.buttonTextColor}
-						/>
-					))}
-				</View>
-			</View>
+			</View> */}
 		</View>
 	);
 };

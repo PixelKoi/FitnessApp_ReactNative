@@ -14,32 +14,8 @@ import { playListData } from "../../../../constants";
 const { width } = Dimensions.get("window");
 
 const MusicPlayer = () => {
-	const [track, setTrack] = useState<Track | null>();
-
-	useTrackPlayerEvents([Event.PlaybackTrackChanged], async (event) => {
-		switch (event.type) {
-			case Event.PlaybackTrackChanged:
-				const playingTrack = await TrackPlayer.getTrack(event.nextTrack);
-				setTrack(playingTrack);
-				break;
-			default:
-				break;
-		}
-	});
-
-	const renderArtWork = () => {
-		return <View></View>;
-	};
-
 	return (
 		<View className="flex items-center">
-			<FlatList
-				horizontal
-				data={playListData}
-				renderItem={renderArtWork}
-				keyExtractor={(song) => song.id.toString()}
-			/>
-			<SongInfo track={track} />
 			<SongSlider />
 			<ControlCenter />
 		</View>

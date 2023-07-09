@@ -1,5 +1,5 @@
 import TrackPlayer, { Event, RepeatMode } from "react-native-track-player";
-import { playListData } from "./constants";
+import { playListData, sleepTracks } from "./constants";
 
 export async function setupPlayer() {
 	let isSetup = false;
@@ -14,9 +14,9 @@ export async function setupPlayer() {
 	}
 }
 
-export async function addTrack() {
-	await TrackPlayer.add(playListData);
-	await TrackPlayer.setRepeatMode(RepeatMode.Queue);
+export async function addTrack(track) {
+	await TrackPlayer.add(track);
+	await TrackPlayer.setRepeatMode(RepeatMode.Off);
 }
 
 //pROVIDES ABILITY TO PLAY, PLAUSE ETC

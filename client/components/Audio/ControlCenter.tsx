@@ -1,23 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, Pressable } from "react-native";
 import TrackPlayer, {
 	usePlaybackState,
 	State,
+	useProgress,
 } from "react-native-track-player";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { playBackService } from "../../musicPlayerServices";
 
 const ControlCenter = () => {
 	const playBackState = usePlaybackState();
+	const [trackPosition, setTrackPosition] = useState<number>(0);
+	const { position, duration } = useProgress();
 
-	// next button
-	const skipToNext = async () => {
-		await TrackPlayer.skipToNext();
+	//go forward 15s
+	const skipForward = async () => {
+		await setTrackPosition(position);
+		await TrackPlayer.seekTo(trackPosition + 15);
 	};
 
-	//previous button
-	const skipToPrevious = async () => {
-		await TrackPlayer.skipToPrevious();
+	//go back 15s
+	const skipBackwards = async () => {
+		await setTrackPosition(position);
+		await TrackPlayer.seekTo(trackPosition - 15);
 	};
 
 	const togglePlayerback = async (playback: State) => {
@@ -34,7 +39,7 @@ const ControlCenter = () => {
 
 	return (
 		<View className="flex-row justify-center items-center">
-			<Pressable onPress={skipToPrevious}>
+			<Pressable onPress={skipBackwards}>
 				<Icon style={{ color: "#fff" }} name="skip-previous" size={40} />
 			</Pressable>
 			<Pressable
@@ -46,7 +51,7 @@ const ControlCenter = () => {
 					size={75}
 				/>
 			</Pressable>
-			<Pressable onPress={skipToNext}>
+			<Pressable onPress={skipForward}>
 				<Icon style={{ color: "#fff" }} name="skip-next" size={40} />
 			</Pressable>
 		</View>

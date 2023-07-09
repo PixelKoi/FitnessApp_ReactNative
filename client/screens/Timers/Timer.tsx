@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, Dimensions } from "react-native";
 import { Button } from "react-native-paper";
 import Fasting from "./Fasting/Fasting";
 import Meditation from "./Meditation/MeditationTimer";
@@ -11,6 +11,9 @@ import TimerCard from "./TimerDash/TimerCard";
 // Import card images
 import FastingCard from "../../assets/images/timer-dash/FastingCard.png";
 import MeditationCard from "../../assets/images/timer-dash/MeditationCard.png";
+import EmojiDropDown from "./Meditation/components/EmojiDropDown";
+
+const windowWidth = Dimensions.get("window").width;
 
 //Todo: get tailwind Theme primary and secondary colors set to states and put it inside the labelStyle prop
 const Timer = () => {
@@ -39,8 +42,8 @@ const Timer = () => {
 	}, []);
 
 	return (
-		<View className="flex-1 -mt-32 justify-center bg-background">
-			<View className="flex-row justify-center">
+		<View style={{ backgroundColor: "#fff" }} className="flex-1">
+			<View className="flex-col items-center mt-4">
 				{/* Fasting Button*/}
 				<View>
 					{/* Fasting timer */}

@@ -28,22 +28,37 @@ import TrackPlayer, {
 	Event,
 	Track,
 	useTrackPlayerEvents,
+	State,
 } from "react-native-track-player";
-import { playListData } from "../../../constants";
-import ControlCenter from "../../../components/Audio/ControlCenter";
-import SongInfo from "../../../components/Audio/SongInfo";
 import MusicPlayer from "./components/MusicPlayer";
 
 //Todo: Add lotus icon above start meditating button
-const MeditationTimer = () => {
+const MeditationTimer = ({ route }) => {
+	const { track } = route.params;
 	//Track states
 	const [isPlayerReady, setIsPlayerReady] = useState(false);
 
+	//Doesn't reload existing track
+	//Removes last track and plays next course
 	async function setup() {
 		let isSetup = await setupPlayer();
 
 		if (isSetup === true) {
-			await addTrack();
+			const queue = await TrackPlayer.getQueue();
+			const isEmpty = queue.length === 0;
+
+			if (isEmpty) {
+				await addTrack(track);
+			} else {
+				const track2 = await TrackPlayer.getTrack(0);
+				if (track[0].title === track2.title) {
+					return;
+				} else {
+					await addTrack(track);
+					await TrackPlayer.skipToNext();
+					await TrackPlayer.remove(0);
+				}
+			}
 		}
 
 		setIsPlayerReady(isSetup);
@@ -154,7 +169,9 @@ const MeditationTimer = () => {
 					<Text style={{ color: "#fff" }} className="text-3xl"></Text>
 				</View>
 			</View>
-
+			<Text style={{ color: "#ffff" }} className="text-center">
+				{track[0].title}
+			</Text>
 			<MusicPlayer />
 		</View>
 	);
