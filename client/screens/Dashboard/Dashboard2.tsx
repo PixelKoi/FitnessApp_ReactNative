@@ -16,6 +16,12 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import WeightGraph from "./DonutGraphs/WeightGraph";
 import Icons from "react-native-vector-icons/FontAwesome";
+//WatermelonDB
+import {
+	setWaterIntake,
+	getWaterEntries,
+} from "../../database/helpers/waterHelper";
+import { getAllTables } from "../../database/helpers/mainHelper";
 
 const screenWidth = Dimensions.get("window").width;
 
@@ -29,11 +35,18 @@ const Dashboard2 = () => {
 
 	//Water Counter hook
 	const [waterDrank, setWaterDrank] = useState(0);
+	const [glasses, setGlasses] = useState(0);
 	//Calendar date selector
 	const [selected, setSelected] = useState("");
 	const handleDateSelect = (date: string) => {
 		setSelected(date);
 	};
+
+	useEffect(() => {
+		//show all tables
+		// const getTables = getAllTables();
+		// console.log(getTables);
+	}, []);
 
 	React.useLayoutEffect(() => {
 		navigation.setOptions({
@@ -269,11 +282,14 @@ const Dashboard2 = () => {
 
 								<View className="mt-2 ml-auto">
 									<TouchableOpacity
-										onPress={() => {
+										onPress={async () => {
 											if (waterDrank === 0) {
 												return;
 											} else {
 												setWaterDrank(waterDrank - 1);
+												setGlasses(waterDrank - 1);
+												await getWaterEntries();
+												await setWaterIntake({ glasses });
 											}
 										}}
 										className=" ml-auto mr-4 p-2 px-2 rounded-full">
@@ -284,11 +300,14 @@ const Dashboard2 = () => {
 										/>
 									</TouchableOpacity>
 									<TouchableOpacity
-										onPress={() => {
+										onPress={async () => {
 											if (waterDrank === 5) {
 												return;
 											} else {
 												setWaterDrank(waterDrank + 1);
+												setGlasses(waterDrank + 1);
+												await getWaterEntries();
+												// await setWaterIntake({ glasses });
 											}
 										}}
 										className="ml-auto mr-4 p-2 px-2 top-1 rounded-full">

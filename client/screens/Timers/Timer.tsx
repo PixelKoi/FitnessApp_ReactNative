@@ -26,7 +26,6 @@ const Timer = () => {
 	// import hooks
 	const [mode, setMode] = useState("fasting");
 
-<<<<<<< HEAD
 	// top Navigation
 	React.useLayoutEffect(() => {
 		navigation.setOptions({
@@ -41,22 +40,6 @@ const Timer = () => {
 			},
 		});
 	}, []);
-=======
-  // top Navigation
-  React.useLayoutEffect(() => {
-    navigation.setOptions({
-      title: "Timer",
-      headerStyle: {
-        shadowColor: "transparent",
-        borderBottomWidth: 0,
-      },
-      headerTintColor: colors.primary,
-      headerTitleStyle: {
-        fontWeight: "bold",
-      },
-    });
-  }, []);
->>>>>>> charts
 
 	return (
 		<View style={{ backgroundColor: "#fff" }} className="flex-1">

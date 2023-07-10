@@ -51,12 +51,8 @@
     "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.4.2",
-<<<<<<< HEAD
-    "styled-components": "^5.3.11"
-=======
     "styled-components": "^5.3.11",
     "victory-native": "^36.6.11"
->>>>>>> charts
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
