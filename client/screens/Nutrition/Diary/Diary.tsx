@@ -121,51 +121,58 @@ const Diary = () => {
         <DiaryBarChartVictory propsA={remainder} />
       </View>
       {/* other content */}
-      <ScrollView>
-        <View className="">
-          <Text
-            className="pl-4 font-bold text-2xl"
-            style={{ color: colors.primary }}
-          >
-            Daily Intake
-          </Text>
-          <View className="flex flex-row">
-            <View>
-              <TouchableOpacity
-                onPress={() => {
-                  tabNavigation.navigate("Meal", { breakfast: breakfast });
-                }}
+      <View className="flex flex-row justify-between ">
+        <Text
+          className="mr-16 font-bold text-2xl"
+          style={{ color: colors.primary }}
+        >
+          Daily Intake
+        </Text>
+        <Button
+          style={{ backgroundColor: primary_color, borderRadius: 8 }}
+          className=""
+          mode="text"
+          onPress={() => console.log("log it ")}
+        >
+          <Text style={{ color: colors.background }}> Complete Diary</Text>
+        </Button>
+      </View>
+      <View className="flex flex-row">
+        <View className="flex flex-row">
+          <View>
+            <TouchableOpacity
+              onPress={() => {
+                tabNavigation.navigate("Meal", { breakfast: breakfast });
+              }}
+            >
+              <Card
+                className="m-4 p-4 rounded-2xl"
+                style={{ backgroundColor: colors.secondary }}
               >
-                <Card
-                  className="m-4 p-4 rounded-2xl"
-                  style={{ backgroundColor: colors.secondary }}
-                >
-                  <View className="flex flex-col px-4 items-center">
-                    <View className="flex flex-col">
-                      <Image
-                        style={{ width: 75, height: 70 }}
-                        source={require("../../../assets/images/Diary/breakfast.png")}
-                      />
-                    </View>
-                    <View className="flex flex-col">
-                      <Text
-                        style={{ color: colors.primary }}
-                        className="font-bold text-2xl"
-                      >
-                        Breakfast
-                      </Text>
-                      <Text
-                        className="font-semibold"
-                        style={{ color: colors.primary }}
-                      >
-                        {breakfast_calories} CALORIES
-                      </Text>
-                    </View>
+                <View className="flex flex-col px-4 items-center">
+                  <View className="flex flex-col">
+                    <Image
+                      style={{ width: 75, height: 70 }}
+                      source={require("../../../assets/images/Diary/breakfast.png")}
+                    />
                   </View>
-                </Card>
-              </TouchableOpacity>
-            </View>
-            <View></View>
+                  <View className="flex flex-col">
+                    <Text
+                      style={{ color: colors.primary }}
+                      className="font-bold text-2xl"
+                    >
+                      Breakfast
+                    </Text>
+                    <Text
+                      className="font-semibold"
+                      style={{ color: colors.primary }}
+                    >
+                      {breakfast_calories} CALORIES
+                    </Text>
+                  </View>
+                </View>
+              </Card>
+            </TouchableOpacity>
           </View>
         </View>
         <View>
@@ -203,7 +210,10 @@ const Diary = () => {
             </Card>
           </TouchableOpacity>
         </View>
-        <View className="w-full">
+      </View>
+
+      <View className="flex flex-row ">
+        <View className="">
           <TouchableOpacity
             onPress={() => {
               tabNavigation.navigate("Meal", { dinner: dinner });
@@ -238,7 +248,7 @@ const Diary = () => {
             </Card>
           </TouchableOpacity>
         </View>
-        <View className="w-full">
+        <View className="">
           <TouchableOpacity
             onPress={() => {
               tabNavigation.navigate("Meal", { snacks: snacks });
@@ -273,17 +283,8 @@ const Diary = () => {
             </Card>
           </TouchableOpacity>
         </View>
-        <View className="pt-8">
-          <Button
-            className="bg-green-950"
-            icon="book"
-            mode="text"
-            onPress={() => console.log("log it ")}
-          >
-            Complete Diary
-          </Button>
-        </View>
-      </ScrollView>
+      </View>
+      <View className="pt-4"></View>
     </View>
   );
 };
