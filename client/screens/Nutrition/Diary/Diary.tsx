@@ -6,12 +6,12 @@ import { useDatabase } from "@nozbe/watermelondb/hooks";
 import { Q } from "@nozbe/watermelondb";
 import completeDiary from "../../../database/models/Food";
 import { useAppSelector, useAppDispatch } from "../../../redux-manager/hooks";
+import DiaryBarChartVictory from "../../../utils/charts/diary/barChart/DiaryBarChartVictory";
 // import { RootState } from "../../redux-manager/store";
 import Food from "../../../database/models/Food";
 import Icon from "react-native-vector-icons/FontAwesome";
 import DiaryCalendar from "../../../utils/calendar/DiaryCalendar";
 import CustomCalendar from "../../../utils/calendar/CustomCalendar";
-import DiaryBarChart from "../../../utils/charts/diary/barChart/DiaryBarChart";
 const Diary = () => {
   // const dispatch = useAppDispatch();
   const tabNavigation = useNavigation();
@@ -121,8 +121,10 @@ const Diary = () => {
           <Text className="py-4">
             {profileInfo.dailyCal} - {total_cals} = calories remaining
           </Text>
-          <DiaryBarChart />
         </Card>
+      </View>
+      <View style={{ flexDirection: "row" }}>
+        <DiaryBarChartVictory />
       </View>
       {/* other content */}
       <View className="w-full">
