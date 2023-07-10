@@ -9,7 +9,7 @@ import FastingTimer from "../components/FastingDonutGraph";
 import { useAppDispatch, useAppSelector } from "../../../redux-manager/hooks";
 import { setTimerStates } from "../../../redux-manager/redux-slice/fasting-slice";
 //import icons
-import FontAwesome from "react-native-vector-icons/FontAwesome5";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
 import CongratulationsModal from "../../../components/Modals/CongratulationsModal";
 
 const Fasting = ({ route }) => {

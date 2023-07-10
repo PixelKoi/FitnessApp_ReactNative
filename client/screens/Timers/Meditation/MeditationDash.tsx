@@ -24,6 +24,7 @@ const MeditationDash = () => {
 			title: "Discover",
 			headerStyle: {
 				shadowColor: "transparent",
+				backgroundColor: "#D4EEFF",
 			},
 			headerTitleStyle: {
 				fontWeight: "bold",

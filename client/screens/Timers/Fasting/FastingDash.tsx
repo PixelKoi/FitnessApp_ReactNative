@@ -1,7 +1,7 @@
 import React from "react";
 import { View, TouchableOpacity } from "react-native";
 import FastingCard from "./components/FastingCard";
-import FontAwesome from "react-native-vector-icons/FontAwesome5";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { useAppDispatch, useAppSelector } from "../../../redux-manager/hooks";
 import { useNavigation } from "@react-navigation/native";
 import { setMaxTime } from "../../../redux-manager/redux-slice/fasting-slice";
