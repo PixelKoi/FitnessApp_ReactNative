@@ -12,7 +12,7 @@ const ChooseByGoal = () => {
 	const navigation = useNavigation();
 	return (
 		<View>
-			<Text className="font-bold">Choose by Goal</Text>
+			<Text className="font-bold">Browse by Goal</Text>
 
 			<View className="flex-row flex-wrap mt-4">
 				<View className="w-1/2 h-28 mb-10">

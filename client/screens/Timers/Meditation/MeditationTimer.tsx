@@ -16,7 +16,7 @@ import { useAppDispatch, useAppSelector } from "../../../redux-manager/hooks";
 //import icons
 import GirlMeditating from "../../../assets/meditation_timer/GirlMeditating.png";
 import Icon from "react-native-vector-icons/Ionicons";
-import FontAwesome from "react-native-vector-icons/FontAwesome5";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
 // Audio
 import { Audio } from "expo-av";
 import hourStrom from "../../../assets/audio/hourStorm.mp3";
@@ -160,7 +160,7 @@ const MeditationTimer = ({ route }) => {
 			style={{ backgroundColor: "#03174C" }}
 			className="flex-1 justify-center">
 			{/* Clock section */}
-			<View className="mt-24">
+			<View className="">
 				<View className="items-center">
 					<Image source={GirlMeditating} />
 				</View>
@@ -169,10 +169,12 @@ const MeditationTimer = ({ route }) => {
 					<Text style={{ color: "#fff" }} className="text-3xl"></Text>
 				</View>
 			</View>
-			<Text style={{ color: "#ffff" }} className="text-center">
-				{track[0].title}
-			</Text>
-			<MusicPlayer />
+			<View className="top-20">
+				<Text style={{ color: "#ffff" }} className="text-center">
+					{track[0].title}
+				</Text>
+				<MusicPlayer />
+			</View>
 		</View>
 	);
 };
