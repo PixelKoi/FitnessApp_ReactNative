@@ -65,7 +65,7 @@ const Diary = () => {
   const snacks_calories = calculateTotalCalories(snacks);
   const total_cals =
     breakfast_calories + lunch_calories + dinner_calories + snacks_calories;
-
+  const remainder = total_cals - profileInfo.dailyCal;
   // TODO: ADD react-native-calendars, block off from accessing days before registration and don't allow modifying older dates
   React.useLayoutEffect(() => {
     tabNavigation.setOptions({
@@ -116,15 +116,9 @@ const Diary = () => {
       <View className="flex-row">
         <CustomCalendar />
       </View>
-      <View className="justify-center">
-        <Card className="px-4 mt-4">
-          <Text className="py-4">
-            {profileInfo.dailyCal} - {total_cals} = calories remaining
-          </Text>
-        </Card>
-      </View>
-      <View style={{ flexDirection: "row" }}>
-        <DiaryBarChartVictory />
+
+      <View style={{ flexDirection: "row" }} className="px-4 mt-4">
+        <DiaryBarChartVictory propsA={remainder} />
       </View>
       {/* other content */}
       <View className="w-full">
