@@ -306,10 +306,6 @@ const Dashboard2 = () => {
 											setWaterDrank(waterDrank + 1);
 											setGlasses(waterDrank + 1);
 											await getWaterEntries();
-											const waterIntake = {
-												glasses: glasses,
-												createdAt: new Date(),
-											};
 											await createWaterIntakeRecord({ glasses });
 										}}
 										className="ml-auto mr-4 p-2 px-2 top-1 rounded-full">
