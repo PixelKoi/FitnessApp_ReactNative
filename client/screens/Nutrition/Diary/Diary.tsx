@@ -20,7 +20,7 @@ const Diary = () => {
 	console.log("PROFILE INFO: ", profileInfo);
 	console.log("PROFILE CALS: ", profileInfo.dailyCal);
 	const { colors } = useAppSelector((state) => state.theme);
-	let primary_color = colors.primary;
+	const primary_color = colors.primary;
 
 	const { breakfast, lunch, dinner, snacks } = useAppSelector(
 		(state) => state.inventory

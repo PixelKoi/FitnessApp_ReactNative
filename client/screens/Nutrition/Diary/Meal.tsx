@@ -18,7 +18,7 @@ const Meal = (props) => {
   const navigation = useNavigation();
 
   const { colors } = useAppSelector((state) => state.theme);
-  let colors_primary = colors.primary;
+  const colors_primary = colors.primary;
   console.log(colors_primary);
   const food_object = props.route.params;
   const food_name = Object.keys(food_object)[0];

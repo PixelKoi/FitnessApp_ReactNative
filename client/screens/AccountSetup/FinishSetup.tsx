@@ -78,7 +78,7 @@ const FinishSetup = ({ session }: { session: Session }) => {
 				created,
 				updated_at: new Date(),
 			};
-			let { error } = await supabase.from("profile").upsert(updates);
+			const { error } = await supabase.from("profile").upsert(updates);
 			if (!error) {
 				dispatch(changeEmail(session?.user.email));
 			}
