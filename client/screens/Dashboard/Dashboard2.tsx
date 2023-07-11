@@ -18,10 +18,12 @@ import WeightGraph from "./DonutGraphs/WeightGraph";
 import Icons from "react-native-vector-icons/FontAwesome";
 //WatermelonDB
 import {
-	setWaterIntake,
 	getWaterEntries,
+	createWaterIntakeRecord,
 } from "../../database/helpers/waterHelper";
+import { setWaterIntake } from "../../database/models/Water";
 import { getAllTables } from "../../database/helpers/mainHelper";
+import { database } from "../../database";
 
 const screenWidth = Dimensions.get("window").width;
 
@@ -289,7 +291,7 @@ const Dashboard2 = () => {
 												setWaterDrank(waterDrank - 1);
 												setGlasses(waterDrank - 1);
 												await getWaterEntries();
-												await setWaterIntake({ glasses });
+												// await createWaterIntakeRecord({ glasses });
 											}
 										}}
 										className=" ml-auto mr-4 p-2 px-2 rounded-full">
@@ -301,14 +303,14 @@ const Dashboard2 = () => {
 									</TouchableOpacity>
 									<TouchableOpacity
 										onPress={async () => {
-											if (waterDrank === 5) {
-												return;
-											} else {
-												setWaterDrank(waterDrank + 1);
-												setGlasses(waterDrank + 1);
-												await getWaterEntries();
-												// await setWaterIntake({ glasses });
-											}
+											setWaterDrank(waterDrank + 1);
+											setGlasses(waterDrank + 1);
+											await getWaterEntries();
+											const waterIntake = {
+												glasses: glasses,
+												createdAt: new Date(),
+											};
+											await createWaterIntakeRecord({ glasses });
 										}}
 										className="ml-auto mr-4 p-2 px-2 top-1 rounded-full">
 										<Icons
