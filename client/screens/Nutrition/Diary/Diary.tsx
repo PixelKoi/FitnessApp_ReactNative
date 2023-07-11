@@ -6,14 +6,11 @@ import { useDatabase } from "@nozbe/watermelondb/hooks";
 import { Q } from "@nozbe/watermelondb";
 import completeDiary from "../../../database/models/Food";
 import { useAppSelector, useAppDispatch } from "../../../redux-manager/hooks";
-import DiaryBarChartVictory from "../../../utils/charts/diary/barChart/DiaryBarChartVictory";
-// import { RootState } from "../../redux-manager/store";
 import Food from "../../../database/models/Food";
 import Icon from "react-native-vector-icons/FontAwesome";
-import DiaryCalendar from "../../../utils/calendar/DiaryCalendar";
+import DiaryBarChartVictory from "../../../utils/charts/diary/barChart/DiaryBarChartVictory";
 import CustomCalendar from "../../../utils/calendar/CustomCalendar";
 const Diary = () => {
-  // const dispatch = useAppDispatch();
   const tabNavigation = useNavigation();
   const database = useDatabase();
   const profileInfo = useAppSelector((state) => state.user);
@@ -118,7 +115,12 @@ const Diary = () => {
       </View>
 
       <View style={{ flexDirection: "row" }} className="px-4 mt-4">
-        <DiaryBarChartVictory propsA={remainder} />
+        <DiaryBarChartVictory
+          caloriesRemaining={remainder}
+          protein={totalProteins}
+          carbs={totalCarbs}
+          fats={totalFats}
+        />
       </View>
       {/* other content */}
       <View className="flex flex-row justify-between pb-2">

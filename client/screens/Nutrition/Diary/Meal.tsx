@@ -6,6 +6,7 @@ import { useDatabase } from "@nozbe/watermelondb/hooks";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { Button, Card } from "react-native-paper";
 import { Dimensions } from "react-native";
+import DiaryBarChartVictory from "../../../utils/charts/diary/barChart/DiaryBarChartVictory";
 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -91,80 +92,88 @@ const Meal = (props) => {
         <Text style={{ color: colors.primary }} className="font-bold text-3xl">
           {title_name}
         </Text>
-
-        {foods.map((obj) => {
-          return (
-            <Card
-              style={{ backgroundColor: colors.secondary }}
-              className="mt-4"
-            >
-              <Card.Content key={obj.id}>
-                <Text
-                  className="text-xl font-bold"
-                  style={{ color: colors.primary }}
-                >
-                  {obj.description}
-                </Text>
-                <Text style={{ color: colors.primary }}>
-                  {obj.Calories} Calories
-                </Text>
-                <View className="flex-row justify-between mt-4">
-                  <View className="flex-1">
-                    <Text
-                      style={{ color: colors.primary }}
-                      className="text-center font-bold"
-                    >
-                      {obj.Protein} G
-                    </Text>
+        <View>
+          <DiaryBarChartVictory
+            fats={totalFats}
+            carbs={totalCarbs}
+            protein={totalProteins}
+          />
+        </View>
+        <View>
+          {foods.map((obj) => {
+            return (
+              <Card
+                style={{ backgroundColor: colors.secondary }}
+                className="mt-4"
+              >
+                <Card.Content key={obj.id}>
+                  <Text
+                    className="text-xl font-bold"
+                    style={{ color: colors.primary }}
+                  >
+                    {obj.description}
+                  </Text>
+                  <Text style={{ color: colors.primary }}>
+                    {obj.Calories} Calories
+                  </Text>
+                  <View className="flex-row justify-between mt-4">
+                    <View className="flex-1">
+                      <Text
+                        style={{ color: colors.primary }}
+                        className="text-center font-bold"
+                      >
+                        {obj.Protein} G
+                      </Text>
+                    </View>
+                    <View className="flex-1">
+                      <Text
+                        style={{ color: colors.primary }}
+                        className="text-center font-bold"
+                      >
+                        {obj.Carbs} G
+                      </Text>
+                    </View>
+                    <View className="flex-1">
+                      <Text
+                        style={{ color: colors.primary }}
+                        className="text-center font-bold"
+                      >
+                        {obj.Fat} G
+                      </Text>
+                    </View>
                   </View>
-                  <View className="flex-1">
-                    <Text
-                      style={{ color: colors.primary }}
-                      className="text-center font-bold"
-                    >
-                      {obj.Carbs} G
-                    </Text>
+                  <View className="flex-row justify-between mt-1">
+                    <View className="flex-1">
+                      <Text
+                        style={{ color: colors.primary }}
+                        className="text-center opacity-70"
+                      >
+                        Protein
+                      </Text>
+                    </View>
+                    <View className="flex-1">
+                      <Text
+                        style={{ color: colors.primary }}
+                        className="text-center opacity-70"
+                      >
+                        Carbs
+                      </Text>
+                    </View>
+                    <View className="flex-1">
+                      <Text
+                        style={{ color: colors.primary }}
+                        className="text-center opacity-70"
+                      >
+                        Fat
+                      </Text>
+                    </View>
                   </View>
-                  <View className="flex-1">
-                    <Text
-                      style={{ color: colors.primary }}
-                      className="text-center font-bold"
-                    >
-                      {obj.Fat} G
-                    </Text>
-                  </View>
-                </View>
-                <View className="flex-row justify-between mt-1">
-                  <View className="flex-1">
-                    <Text
-                      style={{ color: colors.primary }}
-                      className="text-center opacity-70"
-                    >
-                      Protein
-                    </Text>
-                  </View>
-                  <View className="flex-1">
-                    <Text
-                      style={{ color: colors.primary }}
-                      className="text-center opacity-70"
-                    >
-                      Carbs
-                    </Text>
-                  </View>
-                  <View className="flex-1">
-                    <Text
-                      style={{ color: colors.primary }}
-                      className="text-center opacity-70"
-                    >
-                      Fat
-                    </Text>
-                  </View>
-                </View>
-                <Text></Text>
-              </Card.Content>
-            </Card>
-          );
-        })}
+                  <Text></Text>
+                </Card.Content>
+              </Card>
+            );
+          })}
+        </View>
       </View>
       <View className="mt-8 items-center">
         <Button

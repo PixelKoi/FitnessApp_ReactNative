@@ -10,11 +10,15 @@ import {
 import { Dimensions } from "react-native";
 import { useAppSelector } from "../../../../redux-manager/hooks";
 
-function DiaryBarChartVictory({ propsA }) {
+function DiaryBarChartVictory({ caloriesRemaining, protein, fats, carbs }) {
   const data = [
-    { category: "Protein:", amount: 50, color: "#FAAEF3" },
-    { category: "Fat:", amount: 30, color: "#FAB6AF" },
-    { category: "Carbs:", amount: 70, color: "#95A8E6" },
+    {
+      category: `${protein.toFixed(0)}g Protein:`,
+      amount: protein,
+      color: "#FAAEF3",
+    },
+    { category: `${fats.toFixed(0)}g Fat:`, amount: fats, color: "#FAB6AF" },
+    { category: "Carbs:", amount: carbs, color: "#95A8E6" },
   ];
   const styles = StyleSheet.create({
     chartContainer: {
@@ -71,8 +75,14 @@ function DiaryBarChartVictory({ propsA }) {
         height={200}
         padding={{ top: 20, bottom: 50, left: 50, right: 50 }}
       >
-        <VictoryAxis style={{ axis: { stroke: "transparent" } }} />
-
+        <VictoryAxis
+          dependentAxis
+          crossAxis
+          offsetX={200}
+          standalone={false}
+          tickValues={[]}
+          tickFormat={() => ""}
+        />
         <VictoryPie
           innerRadius={70}
           cornerRadius={5}
@@ -94,7 +104,7 @@ function DiaryBarChartVictory({ propsA }) {
             },
             { fontWeight: "400", fontSize: 15 },
           ]}
-          text={[`${propsA}`, "remaining"]}
+          text={[`${caloriesRemaining}`, "remaining"]}
         />
       </VictoryChart>
     </View>
