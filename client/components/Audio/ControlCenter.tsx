@@ -7,7 +7,10 @@ import TrackPlayer, {
 } from "react-native-track-player";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { playBackService } from "../../musicPlayerServices";
-import { incrementTimeSpentMeditating } from "../../redux-manager/redux-slice/meditation-slice";
+import {
+	incrementTimeSpentMeditating,
+	setMeditationTimer,
+} from "../../redux-manager/redux-slice/meditation-slice";
 import { useAppSelector, useAppDispatch } from "../../redux-manager/hooks";
 
 const ControlCenter = () => {
@@ -46,11 +49,9 @@ const ControlCenter = () => {
 	//Increments by 1second everytime audio is playing
 	useEffect(() => {
 		if (playBackState === State.Playing) {
-			const interval = setInterval(() => {
-				dispatch(incrementTimeSpentMeditating());
-			}, 1000);
-
-			return () => clearInterval(interval);
+			dispatch(setMeditationTimer(true));
+		} else {
+			dispatch(setMeditationTimer(false));
 		}
 	}, [playBackState]);
 
@@ -58,7 +59,7 @@ const ControlCenter = () => {
 		<View className="flex-row justify-center items-center">
 			<View>
 				<Text>Time Spent Meditating</Text>
-				<Text>{(timeSpentMeditating / 3600).toFixed(2)}hours</Text>
+				<Text>{timeSpentMeditating}hours</Text>
 			</View>
 			<Pressable onPress={skipBackwards}>
 				<Icon style={{ color: "#fff" }} name="skip-previous" size={40} />

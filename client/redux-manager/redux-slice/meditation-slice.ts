@@ -10,15 +10,8 @@ interface MedState {
 	countdown: string;
 	playAudio: boolean;
 	timeSpentMeditating: number;
-	medStreak: {
-		Mon: boolean;
-		Tue: boolean;
-		Wed: boolean;
-		Thu: boolean;
-		Fri: boolean;
-		Sat: boolean;
-		Sun: boolean;
-	};
+	startMeditationTimer: boolean;
+	timeSpentMeidtatingHours: string;
 }
 
 const initialState: MedState = {
@@ -30,15 +23,8 @@ const initialState: MedState = {
 	endDate: "",
 	countdown: "00:00:00",
 	timeSpentMeditating: 0,
-	medStreak: {
-		Sun: false,
-		Mon: false,
-		Tue: false,
-		Wed: false,
-		Thu: false,
-		Fri: false,
-		Sat: false,
-	},
+	startMeditationTimer: false,
+	timeSpentMeidtatingHours: "0.00",
 };
 
 const medSlice = createSlice({
@@ -48,11 +34,17 @@ const medSlice = createSlice({
 		setPLayAudio(state, action) {
 			state.playAudio = action.payload;
 		},
+		setMeditationTimer(state, action) {
+			state.startMeditationTimer = action.payload;
+		},
 		setSound(state, action) {
 			state.sound = action.payload;
 		},
 		incrementTimeSpentMeditating(state) {
 			state.timeSpentMeditating += 1;
+			state.timeSpentMeidtatingHours = (
+				state.timeSpentMeditating / 3600
+			).toFixed(2);
 		},
 		setPercentageComplete(state, action: PayloadAction<number>) {
 			state.percentageComplete = action.payload;
@@ -66,16 +58,6 @@ const medSlice = createSlice({
 		setTimerStates(state, action) {
 			return { ...state, ...action.payload };
 		},
-		updateMedStreak(
-			state,
-			action: PayloadAction<{
-				day: keyof MedState["medStreak"];
-				completed: boolean;
-			}>
-		) {
-			const { day, completed } = action.payload;
-			state.medStreak[day] = completed;
-		},
 	},
 });
 
@@ -88,6 +70,7 @@ export const {
 	updateMedStreak,
 	setPercentageComplete,
 	incrementTimeSpentMeditating,
+	setMeditationTimer,
 } = medSlice.actions;
 
 export default medSlice.reducer;

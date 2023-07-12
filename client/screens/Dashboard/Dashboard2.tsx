@@ -30,7 +30,8 @@ const screenWidth = Dimensions.get("window").width;
 const Dashboard2 = () => {
 	const navigation = useNavigation();
 	//intiate meditation redux states
-	const { medStreak } = useAppSelector((state) => state.meditation);
+	const { medStreak, timeSpentMeidtatingHours, timeSpentMeditating } =
+		useAppSelector((state) => state.meditation);
 	const { countdown, endDate } = useAppSelector((state) => state.fasting);
 	const { dailyCal } = useAppSelector((state) => state.user);
 	const { colors } = useAppSelector((state) => state.theme);
@@ -211,7 +212,7 @@ const Dashboard2 = () => {
 											<Text
 												className="self-center"
 												style={{ fontSize: 25, color: colors.primary }}>
-												5
+												{timeSpentMeidtatingHours}
 											</Text>
 											<Text
 												className="self-center"
@@ -335,7 +336,9 @@ const Dashboard2 = () => {
 								<View className="flex-row ml-4 mt-4">
 									<View className="flex-row">
 										<Text className="self-center" style={{ fontSize: 25 }}>
-											5
+											{timeSpentMeditating === 0
+												? "0.00"
+												: (timeSpentMeditating / 3600).toFixed(2)}
 										</Text>
 										<Text className="self-center" style={{ fontSize: 14 }}>
 											{" "}
