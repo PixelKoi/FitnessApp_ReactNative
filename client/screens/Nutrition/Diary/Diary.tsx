@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Image, TouchableOpacity, View, ScrollView } from "react-native";
-import { Divider, Text, Card, Button } from "react-native-paper";
+import { Text, Card, Button } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { useDatabase } from "@nozbe/watermelondb/hooks";
 import { Q } from "@nozbe/watermelondb";
@@ -16,6 +16,9 @@ const Diary = () => {
   const profileInfo = useAppSelector((state) => state.user);
   console.log("PROFILE INFO: ", profileInfo);
   console.log("PROFILE CALS: ", profileInfo.dailyCal);
+
+  const dispatch = useAppDispatch();
+
   const { colors } = useAppSelector((state) => state.theme);
   const primary_color = colors.primary;
 
