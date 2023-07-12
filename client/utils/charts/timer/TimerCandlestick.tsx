@@ -13,6 +13,11 @@ function TimerCandlestick({}) {
           style={{
             axis: { stroke: "transparent" },
             ticks: { stroke: "transparent" },
+            tickLabels: {
+              fontSize: 14,
+              padding: 5,
+              opacity: 0.5,
+            },
           }}
         />
         <VictoryAxis
@@ -21,6 +26,11 @@ function TimerCandlestick({}) {
           style={{
             axis: { stroke: "transparent" },
             ticks: { stroke: "transparent" },
+            tickLabels: {
+              fontSize: 14,
+              padding: 5,
+              textAnchor: "right",
+            },
           }}
         />
       </VictoryChart>
