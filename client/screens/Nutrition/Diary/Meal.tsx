@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, ScrollView } from "react-native";
+import { View, Text, TouchableOpacity, ScrollView, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useAppDispatch, useAppSelector } from "../../../redux-manager/hooks";
 import { useDatabase } from "@nozbe/watermelondb/hooks";
@@ -113,20 +113,31 @@ const Meal = (props) => {
             {foods.map((obj) => {
               return (
                 <Card
-                  style={{ backgroundColor: colors.secondary }}
-                  className="mt-4"
+                  style={{
+                    backgroundColor: colors.secondary,
+                    minHeight: 100,
+                    shadowColor: "transparent",
+                  }}
+                  className="my-2 rounded"
                   onPress={() => toggleExpandedCard(obj.id)}
                 >
                   <Card.Content key={obj.id}>
                     <Text
-                      className="text-xl font-bold"
+                      className="text-xl font-bold mb-2"
                       style={{ color: colors.primary }}
                     >
                       {obj.description}
                     </Text>
-                    <Text style={{ color: colors.primary }}>
-                      {obj.Calories} Calories
-                    </Text>
+                    <View
+                      style={{ color: colors.primary }}
+                      className="text-center flex-row items-end"
+                    >
+                      <Image
+                        style={{ width: 15, height: 20 }}
+                        source={require("../../../assets/images/Diary/fire.png")}
+                      />
+                      <Text className="mx-2"> {obj.Calories} Calories</Text>
+                    </View>
                     {expandedCards.includes(obj.id) && (
                       <>
                         <View className="flex-row justify-between mt-4">
