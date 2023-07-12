@@ -98,10 +98,37 @@ const Meal = (props) => {
 
   return (
     <View className="flex-1" style={{ backgroundColor: colors.background }}>
-      <View className="mx-4 mt-8">
-        <Text style={{ color: colors.primary }} className="font-bold text-3xl">
-          {title_name}
-        </Text>
+      <View className="mx-4 mt-8 flex">
+        <View className="flex-row justify-between">
+          <Text
+            style={{ color: colors.primary }}
+            className="font-bold text-3xl"
+          >
+            {title_name}
+          </Text>
+          <View className="items-start mt-0">
+            <Button
+              style={{
+                borderRadius: 10,
+                backgroundColor: colors.primary,
+                borderWidth: 0,
+                width: 150,
+              }}
+              className={`text-center w-30`}
+              onPress={() => console.log("ADD TO Exact meal")}
+            >
+              <Text
+                className="font-extrabold"
+                style={{
+                  color: colors.background,
+                }}
+              >
+                Add Food
+              </Text>
+            </Button>
+          </View>
+        </View>
+
         <View>
           <DiaryBarChartVictory
             fats={totalFats}
@@ -116,7 +143,7 @@ const Meal = (props) => {
                 <Card
                   style={{
                     backgroundColor: colors.secondary,
-                    minHeight: 105,
+                    minHeight: 130,
                     shadowColor: "transparent",
                   }}
                   className="my-2 rounded"
@@ -132,13 +159,15 @@ const Meal = (props) => {
                           {obj.description}
                         </Text>
                       </View>
-                      <View className="flex">
-                        <FontIcon
-                          name="trash"
-                          size={18}
-                          color={colors.primary}
-                        />
-                      </View>
+                      <TouchableOpacity>
+                        <View className="flex">
+                          <FontIcon
+                            name="trash"
+                            size={18}
+                            color={colors.primary}
+                          />
+                        </View>
+                      </TouchableOpacity>
                     </View>
 
                     <View
@@ -213,27 +242,6 @@ const Meal = (props) => {
             })}
           </ScrollView>
         </View>
-      </View>
-      <View className="mt-8 items-center">
-        <Button
-          style={{
-            borderRadius: 20,
-            backgroundColor: colors.primary,
-            borderWidth: 0,
-            width: 150,
-          }}
-          className={`text-center w-30`}
-          onPress={() => console.log("ADD TO Exact meal")}
-        >
-          <Text
-            className="font-extrabold"
-            style={{
-              color: colors.background,
-            }}
-          >
-            Add Food
-          </Text>
-        </Button>
       </View>
     </View>
   );
