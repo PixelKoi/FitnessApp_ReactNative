@@ -7,6 +7,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import { Button, Card, List } from "react-native-paper";
 import DiaryBarChartVictory from "../../../utils/charts/diary/barChart/DiaryBarChartVictory";
 import FontIcon from "react-native-vector-icons/FontAwesome5";
+import { deleteMealItem } from "../../../redux-manager/redux-slice/nutrition-slice";
 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -17,6 +18,7 @@ function capitalizeFirstLetter(string) {
 
 const Meal = (props) => {
   const navigation = useNavigation();
+  const dispatch = useAppDispatch();
 
   const { colors } = useAppSelector((state) => state.theme);
   const colors_primary = colors.primary;
@@ -75,30 +77,10 @@ const Meal = (props) => {
       ),
     });
   });
-  const chartConfig = {
-    backgroundGradientFrom: "purple",
-    backgroundGradientTo: "orange",
-    color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-    style: {
-      borderRadius: 16,
-    },
-  };
-
-  const chartStyle = {
-    // Customize the charts container style
-  };
-  const data = {
-    labels: ["Proteins", "Carbs", "Fats"],
-    datasets: [
-      {
-        data: [totalProteins, totalCarbs, totalFats],
-      },
-    ],
-  };
 
   return (
     <View className="flex-1" style={{ backgroundColor: colors.background }}>
-      <View className="mx-4 mt-8 flex">
+      <View className="mx-4 mt-8 flex-1">
         <View className="flex-row justify-between">
           <Text
             style={{ color: colors.primary }}
@@ -128,7 +110,6 @@ const Meal = (props) => {
             </Button>
           </View>
         </View>
-
         <View>
           <DiaryBarChartVictory
             fats={totalFats}
@@ -159,7 +140,13 @@ const Meal = (props) => {
                           {obj.description}
                         </Text>
                       </View>
-                      <TouchableOpacity>
+                      <TouchableOpacity
+                        onPress={() => {
+                          dispatch(
+                            deleteMealItem({ category: food_name, id: obj.id })
+                          );
+                        }}
+                      >
                         <View className="flex">
                           <FontIcon
                             name="trash"
@@ -178,7 +165,7 @@ const Meal = (props) => {
                         style={{ width: 15, height: 20 }}
                         source={require("../../../assets/images/Diary/fire.png")}
                       />
-                      <Text className="mx-2"> {obj.Calories} Calories</Text>
+                      <Text className="mx-1"> {obj.Calories} Calories</Text>
                     </View>
                     {expandedCards.includes(obj.id) && (
                       <>

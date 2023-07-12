@@ -83,6 +83,19 @@ const nutritionSlice = createSlice({
         state.inventory.splice(itemIndex, 1);
       }
     },
+    deleteMealItem: (
+      state,
+      action: PayloadAction<{ category: string; id: number }>
+    ) => {
+      const { category, id } = action.payload;
+      console.log("CATEGORY", category, "id", id);
+      const mealCategory = state[category];
+      const itemIndex = mealCategory.findIndex((item) => item.id === id);
+
+      if (itemIndex !== -1) {
+        mealCategory.splice(itemIndex, 1);
+      }
+    },
     changeCategory: (state, action: PayloadAction<string>) => {
       state.inventory.forEach((item) => (item.category = action.payload));
     },
@@ -110,5 +123,6 @@ export const {
   addFavoriteToInventory,
   changeCategory,
   setCategory,
+  deleteMealItem,
 } = nutritionSlice.actions;
 export default nutritionSlice.reducer;
