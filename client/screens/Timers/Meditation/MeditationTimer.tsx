@@ -103,15 +103,15 @@ const MeditationTimer = ({ route }) => {
 			className="flex-1 justify-center">
 			{/* Clock section */}
 			<View className="">
-				<View className="items-center">
+				{/* <View className="items-center">
 					<Image source={GirlMeditating} />
-				</View>
+				</View> */}
 
 				<View style={{ width: 126 }} className=" mx-auto ">
 					<Text style={{ color: "#fff" }} className="text-3xl"></Text>
 				</View>
 			</View>
-			<View className="top-20">
+			<View className="mt-auto mb-20">
 				<Text style={{ color: "#ffff" }} className="text-center">
 					{track[0].title}
 				</Text>

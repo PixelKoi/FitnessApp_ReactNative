@@ -7,7 +7,11 @@ import TrackPlayer, {
 } from "react-native-track-player";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { playBackService } from "../../musicPlayerServices";
-import TimeTracker from "../../screens/Timers/Meditation/components/TimeTracker";
+import {
+	setTimeSpentMeditating,
+	incrementMeditationTimer,
+} from "../../redux-manager/redux-slice/meditation-slice";
+import { useAppSelector, useAppDispatch } from "../../redux-manager/hooks";
 
 const ControlCenter = () => {
 	const [elapsedTime, setElapsedTime] = useState(0);
@@ -15,6 +19,10 @@ const ControlCenter = () => {
 	const [trackPosition, setTrackPosition] = useState<number>(0);
 	const { position, duration } = useProgress();
 	const [time, setTime] = useState(0);
+
+	//
+	const { timeSpentMeditating } = useAppSelector((state) => state.meditation);
+	const dispatch = useAppDispatch();
 
 	//go forward 15s
 	const skipForward = async () => {
@@ -40,9 +48,11 @@ const ControlCenter = () => {
 		}
 	};
 
+	//Increments by 1second everytime audio is playing
 	useEffect(() => {
 		if (playBackState === State.Playing) {
 			const interval = setInterval(() => {
+				dispatch(incrementMeditationTimer({ type: "increment" }));
 				setElapsedTime((prevElapsedTime) => prevElapsedTime + 1);
 			}, 1000);
 
@@ -51,7 +61,7 @@ const ControlCenter = () => {
 	}, [playBackState]);
 
 	useEffect(() => {
-		console.log(elapsedTime);
+		console.log(timeSpentMeditating);
 	}, [elapsedTime]);
 
 	return (

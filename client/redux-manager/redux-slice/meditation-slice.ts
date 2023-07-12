@@ -9,6 +9,7 @@ interface MedState {
 	endDate: string;
 	countdown: string;
 	playAudio: boolean;
+	timeSpentMeditating: number;
 	medStreak: {
 		Mon: boolean;
 		Tue: boolean;
@@ -28,6 +29,7 @@ const initialState: MedState = {
 	startDate: "",
 	endDate: "",
 	countdown: "00:00:00",
+	timeSpentMeditating: 0,
 	medStreak: {
 		Sun: false,
 		Mon: false,
@@ -48,6 +50,20 @@ const medSlice = createSlice({
 		},
 		setSound(state, action) {
 			state.sound = action.payload;
+		},
+		setTimeSpentMeditating(state, action) {
+			state.timeSpentMeditating = action.payload;
+		},
+		incrementMeditationTimer(state, action) {
+			switch (action.type) {
+				case "increment":
+					return {
+						...state,
+						timeSpentMeditating: state.timeSpentMeditating + 1,
+					};
+				default:
+					return state;
+			}
 		},
 		setPercentageComplete(state, action: PayloadAction<number>) {
 			state.percentageComplete = action.payload;
@@ -82,6 +98,8 @@ export const {
 	setMaxTime,
 	updateMedStreak,
 	setPercentageComplete,
+	setTimeSpentMeditating,
+	incrementMeditationTimer,
 } = medSlice.actions;
 
 export default medSlice.reducer;
