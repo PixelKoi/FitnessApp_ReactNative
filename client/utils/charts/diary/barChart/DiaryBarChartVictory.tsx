@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import {
   VictoryChart,
   VictoryBar,
@@ -46,6 +46,15 @@ function DiaryBarChartVictory({ caloriesRemaining, protein, fats, carbs }) {
         domainPadding={{ x: 40 }}
         padding={{ top: 20, bottom: 50, left: 20, right: 20 }}
       >
+        {data.map((datum, index) => (
+          <VictoryLabel
+            key={index}
+            x={20}
+            y={35 + index * 33} // adjust as needed
+            text={datum.category}
+          />
+        ))}
+
         <VictoryAxis offsetX={200} tickFormat={() => ""} />
         <VictoryBar
           animate={{
@@ -60,16 +69,6 @@ function DiaryBarChartVictory({ caloriesRemaining, protein, fats, carbs }) {
               after: (datum) => ({ opacity: 1, _y: datum._y }),
             },
           }}
-          labels={({ datum }) => `${datum.category}`}
-          labelComponent={
-            <VictoryLabel
-              dx={({ datum }) =>
-                Dimensions.get("window").width / 2 - datum._y * 1.5
-              }
-              textAnchor="end"
-              dy={-15}
-            />
-          }
           horizontal
           data={data}
           x="category"
