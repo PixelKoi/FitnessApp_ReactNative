@@ -5,7 +5,7 @@ import { VictoryChart, VictoryAxis } from "victory-native";
 function TimerCandlestick({}) {
   return (
     <View>
-      <VictoryChart domain={{ y: [0, 24] }} scale={{ x: "time", y: "linear" }}>
+      <VictoryChart domain={{ y: [24, 0] }} scale={{ x: "time", y: "linear" }}>
         <VictoryAxis
           tickValues={[24, 18, 12, 6, 0]}
           tickFormat={(t) => `${t}h`}
@@ -15,7 +15,6 @@ function TimerCandlestick({}) {
             ticks: { stroke: "transparent" },
             tickLabels: {
               fontSize: 14,
-              padding: 5,
               opacity: 0.5,
             },
           }}
@@ -28,7 +27,6 @@ function TimerCandlestick({}) {
             ticks: { stroke: "transparent" },
             tickLabels: {
               fontSize: 14,
-              padding: 5,
               textAnchor: "right",
             },
           }}
