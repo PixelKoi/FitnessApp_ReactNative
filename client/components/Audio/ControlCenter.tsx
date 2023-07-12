@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, Pressable } from "react-native";
 import TrackPlayer, {
 	usePlaybackState,
@@ -7,11 +7,14 @@ import TrackPlayer, {
 } from "react-native-track-player";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { playBackService } from "../../musicPlayerServices";
+import TimeTracker from "../../screens/Timers/Meditation/components/TimeTracker";
 
 const ControlCenter = () => {
+	const [elapsedTime, setElapsedTime] = useState(0);
 	const playBackState = usePlaybackState();
 	const [trackPosition, setTrackPosition] = useState<number>(0);
 	const { position, duration } = useProgress();
+	const [time, setTime] = useState(0);
 
 	//go forward 15s
 	const skipForward = async () => {
@@ -36,6 +39,20 @@ const ControlCenter = () => {
 			}
 		}
 	};
+
+	useEffect(() => {
+		if (playBackState === State.Playing) {
+			const interval = setInterval(() => {
+				setElapsedTime((prevElapsedTime) => prevElapsedTime + 1);
+			}, 1000);
+
+			return () => clearInterval(interval);
+		}
+	}, [playBackState]);
+
+	useEffect(() => {
+		console.log(elapsedTime);
+	}, [elapsedTime]);
 
 	return (
 		<View className="flex-row justify-center items-center">

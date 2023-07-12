@@ -68,67 +68,9 @@ const MeditationTimer = ({ route }) => {
 		setup();
 	}, []);
 
-	// if (!isPlayerReady) {
-	// 	return (
-	// 		<SafeAreaView>
-	// 			<DefaultSpinner />
-	// 		</SafeAreaView>
-	// 	);
-	// }
-
-	//Top left nav button - removed top nav
 	const navigation = useNavigation();
 
-	// //Call to fasting redux
-	// const { maxTime, countdown, playAudio } = useAppSelector(
-	// 	(state) => state.meditation
-	// );
 	const { colors } = useAppSelector((state) => state.theme);
-	// const dispatch = useAppDispatch();
-
-	// //Meditation states
-	// const [startTime, setStartTime] = useState(null);
-	// const [endTime, setEndTime] = useState(null);
-
-	// //Keep track of starting / ending fast button
-	// const [clicked, setClicked] = useState(false);
-
-	//This sets the audio mode for ios and andoird
-	//Without this you will hear no audio (especially if playInSilentModeIos isn't set to true)
-	// useEffect(() => {
-	// 	Audio.setAudioModeAsync({
-	// 		staysActiveInBackground: true,
-	// 		shouldDuckAndroid: false,
-	// 		playThroughEarpieceAndroid: false,
-	// 		allowsRecordingIOS: false,
-	// 		playsInSilentModeIOS: true,
-	// 	});
-	// }, []);
-
-	// async function playSound() {
-	// 	console.log("Loading Sound");
-	// 	const { sound } = await Audio.Sound.createAsync(
-	// 		require("../../../assets/audio/hourStorm.mp3")
-	// 	);
-	// 	// dispatch(setSound(sound));
-	// 	console.log("Playing Sound");
-	// 	await sound.playAsync();
-	// }
-
-	// async function stopSound() {
-	// 	console.log("Unloading Sound");
-	// 	dispatch(setSound(null));
-	// 	sound.unloadAsync();
-	// }
-
-	// React.useEffect(() => {
-	// return sound
-	// 	? () => {
-	// 			console.log("Unloading Sound");
-	// 			sound.unloadAsync();
-	// 	  }
-	// 	: undefined;
-	// }, [sound]);
 
 	React.useLayoutEffect(() => {
 		navigation.setOptions({
@@ -180,39 +122,3 @@ const MeditationTimer = ({ route }) => {
 };
 
 export default MeditationTimer;
-
-//start fast function
-// const handleStartFast = () => {
-// 	const currentDate = new Date();
-// 	const duration = maxTime; // in hours
-// 	const endTime = add(currentDate, { minutes: duration });
-
-// 	const dayOfWeek = new Date().getDay();
-// 	const currentDay = dayOfWeekMap[dayOfWeek];
-// 	dispatch(updateMedStreak({ day: currentDay, completed: true }));
-
-// 	setStartTime(currentDate);
-// 	setEndTime(endTime);
-// 	setClicked((prevClicked) => !prevClicked);
-
-// 	dispatch(
-// 		setTimerStates({
-// 			startDate: currentDate.toString(),
-// 			endDate: endTime.toString(),
-// 		})
-// 	);
-// };
-
-// const handleEndFast = () => {
-// 	setClicked((prevClicked) => !prevClicked);
-// 	setStartTime(null);
-// 	setEndTime(null);
-// 	dispatch(
-// 		setTimerStates({
-// 			startDate: null,
-// 			endDate: null,
-// 			countdown: "00:00:00",
-// 			percentageComplete: 0,
-// 		})
-// 	);
-// };

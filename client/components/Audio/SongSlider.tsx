@@ -6,9 +6,7 @@ import { useProgress } from "react-native-track-player";
 const SongSlider = () => {
 	const { position, duration } = useProgress();
 
-	useEffect(() => {
-		console.log(new Date(duration * 1000).toString());
-	}, []);
+	useEffect(() => {}, []);
 
 	return (
 		<View>
