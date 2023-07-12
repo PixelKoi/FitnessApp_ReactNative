@@ -51,10 +51,7 @@ const medSlice = createSlice({
 		setSound(state, action) {
 			state.sound = action.payload;
 		},
-		setTimeSpentMeditating(state, action) {
-			state.timeSpentMeditating = action.payload;
-		},
-		incrementMeditationTimer(state) {
+		incrementTimeSpentMeditating(state) {
 			state.timeSpentMeditating += 1;
 		},
 		setPercentageComplete(state, action: PayloadAction<number>) {
@@ -90,8 +87,7 @@ export const {
 	setMaxTime,
 	updateMedStreak,
 	setPercentageComplete,
-	setTimeSpentMeditating,
-	incrementMeditationTimer,
+	incrementTimeSpentMeditating,
 } = medSlice.actions;
 
 export default medSlice.reducer;

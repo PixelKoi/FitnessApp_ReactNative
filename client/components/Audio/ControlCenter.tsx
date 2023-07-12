@@ -7,18 +7,13 @@ import TrackPlayer, {
 } from "react-native-track-player";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { playBackService } from "../../musicPlayerServices";
-import {
-	setTimeSpentMeditating,
-	incrementMeditationTimer,
-} from "../../redux-manager/redux-slice/meditation-slice";
+import { incrementTimeSpentMeditating } from "../../redux-manager/redux-slice/meditation-slice";
 import { useAppSelector, useAppDispatch } from "../../redux-manager/hooks";
 
 const ControlCenter = () => {
-	const [elapsedTime, setElapsedTime] = useState(0);
 	const playBackState = usePlaybackState();
 	const [trackPosition, setTrackPosition] = useState<number>(0);
 	const { position, duration } = useProgress();
-	const [time, setTime] = useState(0);
 
 	//
 	const { timeSpentMeditating } = useAppSelector((state) => state.meditation);
@@ -52,17 +47,12 @@ const ControlCenter = () => {
 	useEffect(() => {
 		if (playBackState === State.Playing) {
 			const interval = setInterval(() => {
-				dispatch(incrementMeditationTimer({ type: "increment" }));
-				setElapsedTime((prevElapsedTime) => prevElapsedTime + 1);
+				dispatch(incrementTimeSpentMeditating());
 			}, 1000);
 
 			return () => clearInterval(interval);
 		}
 	}, [playBackState]);
-
-	useEffect(() => {
-		console.log(timeSpentMeditating);
-	}, [elapsedTime]);
 
 	return (
 		<View className="flex-row justify-center items-center">
