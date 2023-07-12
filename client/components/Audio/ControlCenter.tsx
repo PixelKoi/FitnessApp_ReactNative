@@ -15,7 +15,7 @@ const ControlCenter = () => {
 	const [trackPosition, setTrackPosition] = useState<number>(0);
 	const { position, duration } = useProgress();
 
-	//
+	//Initiate redux
 	const { timeSpentMeditating } = useAppSelector((state) => state.meditation);
 	const dispatch = useAppDispatch();
 
@@ -56,7 +56,10 @@ const ControlCenter = () => {
 
 	return (
 		<View className="flex-row justify-center items-center">
-			<Text>{timeSpentMeditating}</Text>
+			<View>
+				<Text>Time Spent Meditating</Text>
+				<Text>{(timeSpentMeditating / 3600).toFixed(2)}hours</Text>
+			</View>
 			<Pressable onPress={skipBackwards}>
 				<Icon style={{ color: "#fff" }} name="skip-previous" size={40} />
 			</Pressable>
