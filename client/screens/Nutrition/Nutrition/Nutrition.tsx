@@ -289,7 +289,7 @@ const Nutrition: React.FC = () => {
     return (
       <>
         <View className="mx-2 py-2">
-          <Card style={styles.cardShadow}>
+          <Card style={styles.cardShadow} className="rounded">
             <Card.Content style={{ paddingVertical: 8 }}>
               <View className="flex flex-row items-center ">
                 <View className="flex flex-col">
@@ -358,7 +358,10 @@ const Nutrition: React.FC = () => {
 
   return (
     <Provider>
-      <View className="flex-1 bg-white">
+      <View
+        style={{ backgroundColor: colors.dark }}
+        className="flex-1 bg-white"
+      >
         <FavoritesModal
           isModalVisible={isModalVisible}
           closeFavoriteModal={() => setIsModalVisible(false)}
