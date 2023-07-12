@@ -160,7 +160,7 @@ const Diary = () => {
                 <View className="flex flex-col">
                   <Text
                     style={{ color: colors.primary }}
-                    className="font-bold text-2xl"
+                    className="font-bold text-xl"
                   >
                     Breakfast
                   </Text>
@@ -195,7 +195,7 @@ const Diary = () => {
                 <View className="flex flex-col items-center">
                   <Text
                     style={{ color: colors.primary }}
-                    className="font-bold text-2xl"
+                    className="font-bold text-lg"
                   >
                     Lunch
                   </Text>
@@ -233,7 +233,7 @@ const Diary = () => {
                 <View className="flex flex-col items-center">
                   <Text
                     style={{ color: colors.primary }}
-                    className="font-bold text-2xl"
+                    className="font-bold text-lg"
                   >
                     Dinner
                   </Text>
@@ -268,7 +268,7 @@ const Diary = () => {
                 <View className="flex flex-col">
                   <Text
                     style={{ color: colors.primary }}
-                    className="font-bold text-2xl"
+                    className="font-bold text-lg"
                   >
                     Snacks
                   </Text>
