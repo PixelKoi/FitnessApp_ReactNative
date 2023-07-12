@@ -6,6 +6,7 @@ import { useDatabase } from "@nozbe/watermelondb/hooks";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { Button, Card, List } from "react-native-paper";
 import DiaryBarChartVictory from "../../../utils/charts/diary/barChart/DiaryBarChartVictory";
+import FontIcon from "react-native-vector-icons/FontAwesome5";
 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -97,7 +98,7 @@ const Meal = (props) => {
 
   return (
     <View className="flex-1" style={{ backgroundColor: colors.background }}>
-      <View className="mx-8 mt-8">
+      <View className="mx-4 mt-8">
         <Text style={{ color: colors.primary }} className="font-bold text-3xl">
           {title_name}
         </Text>
@@ -115,22 +116,34 @@ const Meal = (props) => {
                 <Card
                   style={{
                     backgroundColor: colors.secondary,
-                    minHeight: 100,
+                    minHeight: 105,
                     shadowColor: "transparent",
                   }}
                   className="my-2 rounded"
                   onPress={() => toggleExpandedCard(obj.id)}
                 >
                   <Card.Content key={obj.id}>
-                    <Text
-                      className="text-xl font-bold mb-2"
-                      style={{ color: colors.primary }}
-                    >
-                      {obj.description}
-                    </Text>
+                    <View className="flex-row justify-between mx-4 items-start">
+                      <View className="flex w-2/3">
+                        <Text
+                          className="text-xl font-bold mb-2"
+                          style={{ color: colors.primary }}
+                        >
+                          {obj.description}
+                        </Text>
+                      </View>
+                      <View className="flex">
+                        <FontIcon
+                          name="trash"
+                          size={18}
+                          color={colors.primary}
+                        />
+                      </View>
+                    </View>
+
                     <View
                       style={{ color: colors.primary }}
-                      className="text-center flex-row items-end"
+                      className="text-center flex-row items-end mx-4"
                     >
                       <Image
                         style={{ width: 15, height: 20 }}
