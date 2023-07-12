@@ -1,18 +1,10 @@
 import React, { useState, useEffect } from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Switch,
-  Image,
-  ScrollView,
-} from "react-native";
+import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useAppDispatch, useAppSelector } from "../../../redux-manager/hooks";
 import { useDatabase } from "@nozbe/watermelondb/hooks";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { Button, Card } from "react-native-paper";
-import { Dimensions } from "react-native";
+import { Button, Card, List } from "react-native-paper";
 import DiaryBarChartVictory from "../../../utils/charts/diary/barChart/DiaryBarChartVictory";
 
 function capitalizeFirstLetter(string) {
@@ -54,6 +46,16 @@ const Meal = (props) => {
   }
 
   const { totalProteins, totalCarbs, totalFats } = calculateTotalMacros(foods);
+
+  const [expandedCards, setExpandedCards] = useState([]);
+
+  const toggleExpandedCard = (cardId) => {
+    if (expandedCards.includes(cardId)) {
+      setExpandedCards(expandedCards.filter((id) => id !== cardId));
+    } else {
+      setExpandedCards([...expandedCards, cardId]);
+    }
+  };
 
   //Top Nav on Edit Profile Screen
   React.useLayoutEffect(() => {
@@ -113,6 +115,7 @@ const Meal = (props) => {
                 <Card
                   style={{ backgroundColor: colors.secondary }}
                   className="mt-4"
+                  onPress={() => toggleExpandedCard(obj.id)}
                 >
                   <Card.Content key={obj.id}>
                     <Text
@@ -124,59 +127,62 @@ const Meal = (props) => {
                     <Text style={{ color: colors.primary }}>
                       {obj.Calories} Calories
                     </Text>
-                    <View className="flex-row justify-between mt-4">
-                      <View className="flex-1">
-                        <Text
-                          style={{ color: colors.primary }}
-                          className="text-center font-bold"
-                        >
-                          {obj.Protein} G
-                        </Text>
-                      </View>
-                      <View className="flex-1">
-                        <Text
-                          style={{ color: colors.primary }}
-                          className="text-center font-bold"
-                        >
-                          {obj.Carbs} G
-                        </Text>
-                      </View>
-                      <View className="flex-1">
-                        <Text
-                          style={{ color: colors.primary }}
-                          className="text-center font-bold"
-                        >
-                          {obj.Fat} G
-                        </Text>
-                      </View>
-                    </View>
-                    <View className="flex-row justify-between mt-1">
-                      <View className="flex-1">
-                        <Text
-                          style={{ color: colors.primary }}
-                          className="text-center opacity-70"
-                        >
-                          Protein
-                        </Text>
-                      </View>
-                      <View className="flex-1">
-                        <Text
-                          style={{ color: colors.primary }}
-                          className="text-center opacity-70"
-                        >
-                          Carbs
-                        </Text>
-                      </View>
-                      <View className="flex-1">
-                        <Text
-                          style={{ color: colors.primary }}
-                          className="text-center opacity-70"
-                        >
-                          Fat
-                        </Text>
-                      </View>
-                    </View>
-                    <Text></Text>
+                    {expandedCards.includes(obj.id) && (
+                      <>
+                        <View className="flex-row justify-between mt-4">
+                          <View className="flex-1">
+                            <Text
+                              style={{ color: colors.primary }}
+                              className="text-center font-bold"
+                            >
+                              {obj.Protein} G
+                            </Text>
+                          </View>
+                          <View className="flex-1">
+                            <Text
+                              style={{ color: colors.primary }}
+                              className="text-center font-bold"
+                            >
+                              {obj.Carbs} G
+                            </Text>
+                          </View>
+                          <View className="flex-1">
+                            <Text
+                              style={{ color: colors.primary }}
+                              className="text-center font-bold"
+                            >
+                              {obj.Fat} G
+                            </Text>
+                          </View>
+                        </View>
+                        <View className="flex-row justify-between mt-1">
+                          <View className="flex-1">
+                            <Text
+                              style={{ color: colors.primary }}
+                              className="text-center opacity-70"
+                            >
+                              Protein
+                            </Text>
+                          </View>
+                          <View className="flex-1">
+                            <Text
+                              style={{ color: colors.primary }}
+                              className="text-center opacity-70"
+                            >
+                              Carbs
+                            </Text>
+                          </View>
+                          <View className="flex-1">
+                            <Text
+                              style={{ color: colors.primary }}
+                              className="text-center opacity-70"
+                            >
+                              Fat
+                            </Text>
+                          </View>
+                        </View>
+                      </>
+                    )}
                   </Card.Content>
                 </Card>
               );
