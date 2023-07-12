@@ -20,6 +20,7 @@ const themes = {
       primary: "#609966",
       secondary: "#EDF1D6",
       background: "#FFFFFF",
+      dark: "rgba(34,139,34,0.1)",
     },
   },
   navy: {

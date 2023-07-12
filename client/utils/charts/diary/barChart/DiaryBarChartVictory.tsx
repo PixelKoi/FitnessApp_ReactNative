@@ -1,20 +1,29 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import {
   VictoryChart,
   VictoryBar,
   VictoryAxis,
   VictoryPie,
   VictoryLabel,
+  VictoryPortal,
 } from "victory-native";
 import { Dimensions } from "react-native";
 import { useAppSelector } from "../../../../redux-manager/hooks";
 
-function DiaryBarChartVictory({ propsA }) {
+function DiaryBarChartVictory({ caloriesRemaining, protein, fats, carbs }) {
   const data = [
-    { category: "Protein:", amount: 50, color: "#FAAEF3" },
-    { category: "Fat:", amount: 30, color: "#FAB6AF" },
-    { category: "Carbs:", amount: 70, color: "#95A8E6" },
+    {
+      category: `${protein.toFixed(0)}g Protein`,
+      amount: protein,
+      color: "#FAAEF3",
+    },
+    { category: `${fats.toFixed(0)}g Fat`, amount: fats, color: "#FAB6AF" },
+    {
+      category: `${carbs.toFixed(0)}g Carbs`,
+      amount: carbs,
+      color: "#95A8E6",
+    },
   ];
   const styles = StyleSheet.create({
     chartContainer: {
@@ -35,15 +44,21 @@ function DiaryBarChartVictory({ propsA }) {
         width={Dimensions.get("window").width / 2}
         height={200}
         domainPadding={{ x: 40 }}
-        padding={{ top: 20, bottom: 50, left: 70, right: 20 }}
+        padding={{ top: 20, bottom: 50, left: 20, right: 20 }}
       >
-        <VictoryAxis
-          tickFormat={data.map((item) => item.category)}
-          style={{ axis: { stroke: "transparent" } }}
-        />
+        {data.map((datum, index) => (
+          <VictoryLabel
+            key={index}
+            x={20}
+            y={35 + index * 33} // adjust as needed
+            text={datum.category}
+          />
+        ))}
+
+        <VictoryAxis offsetX={200} tickFormat={() => ""} />
         <VictoryBar
           animate={{
-            animationWhitelist: ["style", "data"], // Try removing "size"
+            animationWhitelist: ["style", "data", "labels"],
             onExit: {
               duration: 500,
               before: () => ({ opacity: 0.3, _y: 0 }),
@@ -66,17 +81,24 @@ function DiaryBarChartVictory({ propsA }) {
           }}
         />
       </VictoryChart>
+
       <VictoryChart
         width={Dimensions.get("window").width / 2}
         height={200}
         padding={{ top: 20, bottom: 50, left: 50, right: 50 }}
       >
-        <VictoryAxis style={{ axis: { stroke: "transparent" } }} />
-
+        <VictoryAxis
+          dependentAxis
+          crossAxis
+          offsetX={200}
+          standalone={false}
+          tickValues={[]}
+          tickFormat={() => ""}
+        />
         <VictoryPie
-          innerRadius={70}
+          innerRadius={55}
           cornerRadius={5}
-          radius={50}
+          radius={40}
           labels={() => null}
           colorScale={[colors.primary, colors.secondary]} // "tomato" for filled part, "lightgray" for unfilled part
           data={[{ y: filledValue }, { y: total - filledValue }]}
@@ -94,7 +116,7 @@ function DiaryBarChartVictory({ propsA }) {
             },
             { fontWeight: "400", fontSize: 15 },
           ]}
-          text={[`${propsA}`, "remaining"]}
+          text={[`${caloriesRemaining}`, "remaining"]}
         />
       </VictoryChart>
     </View>

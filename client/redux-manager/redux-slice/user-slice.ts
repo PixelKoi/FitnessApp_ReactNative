@@ -67,10 +67,10 @@ const userSlice = createSlice({
 		changeEmail(state, action: PayloadAction<string>) {
 			state.email = action.payload;
 		},
-		loggedIn(state, action: PayloadAction<Boolean>) {
+		loggedIn(state, action: PayloadAction<boolean>) {
 			state.loggedIn = true;
 		},
-		loggedOff(state, action: PayloadAction<Boolean>) {
+		loggedOff(state, action: PayloadAction<boolean>) {
 			state.loggedIn = false;
 		},
 		setUserStates(state, action) {

@@ -11,7 +11,7 @@ const ThemeSelector = () => {
 	const navigation = useNavigation();
 
 	const { colors } = useAppSelector((state) => state.theme);
-	let colors_primary = colors.primary;
+	const colors_primary = colors.primary;
 	console.log(colors_primary);
 	const dispatch = useAppDispatch();
 

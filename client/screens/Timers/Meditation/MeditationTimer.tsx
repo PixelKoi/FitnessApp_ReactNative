@@ -41,7 +41,7 @@ const MeditationTimer = ({ route }) => {
 	//Doesn't reload existing track
 	//Removes last track and plays next course
 	async function setup() {
-		let isSetup = await setupPlayer();
+		const isSetup = await setupPlayer();
 
 		if (isSetup === true) {
 			const queue = await TrackPlayer.getQueue();

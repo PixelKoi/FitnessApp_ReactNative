@@ -61,7 +61,7 @@ const BottomTab = () => {
         component={Timer}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <Ant name="clockcircleo" size={24} color={colors.primary} />
+            <Icon name="timer-outline" size={24} color={colors.primary} />
           ),
           tabBarLabel: "",
         }}

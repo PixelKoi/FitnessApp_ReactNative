@@ -77,7 +77,7 @@ function Navigation({ session }: { session: Session }) {
 			setLoading(true);
 			if (!session?.user) throw new Error("No user on the session!");
 
-			let { data, error, status } = await supabase
+			const { data, error, status } = await supabase
 				.from("profile")
 				.select(`*`)
 				.eq("user_id", session?.user.id)

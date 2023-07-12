@@ -77,7 +77,7 @@ export default function Account({ session }: { session: Session }) {
 			setLoading(true);
 			if (!session?.user) throw new Error("No redux-slice on the session!");
 
-			let { data, error, status } = await supabase
+			const { data, error, status } = await supabase
 				.from("profile")
 				.select(`*`)
 				.eq("user_id", session?.user.id)
@@ -134,7 +134,7 @@ export default function Account({ session }: { session: Session }) {
 				updated_at: new Date(),
 			};
 
-			let { error } = await supabase.from("profile").upsert(updates);
+			const { error } = await supabase.from("profile").upsert(updates);
 
 			updateReduxUserStates(updates, session?.user.id);
 

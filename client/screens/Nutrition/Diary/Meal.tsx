@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, Switch, Image } from "react-native";
+import { View, Text, TouchableOpacity, ScrollView, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useAppDispatch, useAppSelector } from "../../../redux-manager/hooks";
 import { useDatabase } from "@nozbe/watermelondb/hooks";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { Button, Card } from "react-native-paper";
-import { Dimensions } from "react-native";
+import { Button, Card, List } from "react-native-paper";
+import DiaryBarChartVictory from "../../../utils/charts/diary/barChart/DiaryBarChartVictory";
+import FontIcon from "react-native-vector-icons/FontAwesome5";
+import { deleteMealItem } from "../../../redux-manager/redux-slice/nutrition-slice";
 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -16,15 +18,24 @@ function capitalizeFirstLetter(string) {
 
 const Meal = (props) => {
   const navigation = useNavigation();
+  const dispatch = useAppDispatch();
 
   const { colors } = useAppSelector((state) => state.theme);
-  let colors_primary = colors.primary;
+  const colors_primary = colors.primary;
   console.log(colors_primary);
   const food_object = props.route.params;
   const food_name = Object.keys(food_object)[0];
   const title_name = capitalizeFirstLetter(food_name);
-  const foods = food_object[food_name];
+  const foods = useAppSelector((state) => state.inventory[food_name]); // get the food data directly from the Redux store
   console.log("PROPS:", foods);
+
+  const { breakfast, lunch, dinner, snacks } = useAppSelector(
+    (state) => state.inventory
+  );
+
+  useEffect(() => {
+    console.log("PROPS RESET ?", props.route.params);
+  }, [props.route.params]);
 
   function calculateTotalMacros(foodItems) {
     const proteinArray = foodItems.map((item) => item.Protein);
@@ -47,6 +58,16 @@ const Meal = (props) => {
 
   const { totalProteins, totalCarbs, totalFats } = calculateTotalMacros(foods);
 
+  const [expandedCards, setExpandedCards] = useState([]);
+
+  const toggleExpandedCard = (cardId) => {
+    if (expandedCards.includes(cardId)) {
+      setExpandedCards(expandedCards.filter((id) => id !== cardId));
+    } else {
+      setExpandedCards([...expandedCards, cardId]);
+    }
+  };
+
   //Top Nav on Edit Profile Screen
   React.useLayoutEffect(() => {
     navigation.setOptions({
@@ -64,128 +85,158 @@ const Meal = (props) => {
       ),
     });
   });
-  const chartConfig = {
-    backgroundGradientFrom: "purple",
-    backgroundGradientTo: "orange",
-    color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-    style: {
-      borderRadius: 16,
-    },
-  };
-
-  const chartStyle = {
-    // Customize the charts container style
-  };
-  const data = {
-    labels: ["Proteins", "Carbs", "Fats"],
-    datasets: [
-      {
-        data: [totalProteins, totalCarbs, totalFats],
-      },
-    ],
-  };
 
   return (
     <View className="flex-1" style={{ backgroundColor: colors.background }}>
-      <View className="mx-8 mt-8">
-        <Text style={{ color: colors.primary }} className="font-bold text-3xl">
-          {title_name}
-        </Text>
-
-        {foods.map((obj) => {
-          return (
-            <Card
-              style={{ backgroundColor: colors.secondary }}
-              className="mt-4"
-            >
-              <Card.Content key={obj.id}>
-                <Text
-                  className="text-xl font-bold"
-                  style={{ color: colors.primary }}
-                >
-                  {obj.description}
-                </Text>
-                <Text style={{ color: colors.primary }}>
-                  {obj.Calories} Calories
-                </Text>
-                <View className="flex-row justify-between mt-4">
-                  <View className="flex-1">
-                    <Text
-                      style={{ color: colors.primary }}
-                      className="text-center font-bold"
-                    >
-                      {obj.Protein} G
-                    </Text>
-                  </View>
-                  <View className="flex-1">
-                    <Text
-                      style={{ color: colors.primary }}
-                      className="text-center font-bold"
-                    >
-                      {obj.Carbs} G
-                    </Text>
-                  </View>
-                  <View className="flex-1">
-                    <Text
-                      style={{ color: colors.primary }}
-                      className="text-center font-bold"
-                    >
-                      {obj.Fat} G
-                    </Text>
-                  </View>
-                </View>
-                <View className="flex-row justify-between mt-1">
-                  <View className="flex-1">
-                    <Text
-                      style={{ color: colors.primary }}
-                      className="text-center opacity-70"
-                    >
-                      Protein
-                    </Text>
-                  </View>
-                  <View className="flex-1">
-                    <Text
-                      style={{ color: colors.primary }}
-                      className="text-center opacity-70"
-                    >
-                      Carbs
-                    </Text>
-                  </View>
-                  <View className="flex-1">
-                    <Text
-                      style={{ color: colors.primary }}
-                      className="text-center opacity-70"
-                    >
-                      Fat
-                    </Text>
-                  </View>
-                </View>
-                <Text></Text>
-              </Card.Content>
-            </Card>
-          );
-        })}
-      </View>
-      <View className="mt-8 items-center">
-        <Button
-          style={{
-            borderRadius: 20,
-            backgroundColor: colors.primary,
-            borderWidth: 0,
-            width: 150,
-          }}
-          className={`text-center w-30`}
-          onPress={() => console.log("ADD TO Exact meal")}
-        >
+      <View className="mx-4 mt-8 flex-1">
+        <View className="flex-row justify-between">
           <Text
-            className="font-extrabold"
-            style={{
-              color: colors.background,
-            }}
+            style={{ color: colors.primary }}
+            className="font-bold text-3xl"
           >
-            Add Food
+            {title_name}
           </Text>
-        </Button>
+          <View className="items-start mt-0">
+            <Button
+              style={{
+                borderRadius: 10,
+                backgroundColor: colors.primary,
+                borderWidth: 0,
+                width: 150,
+              }}
+              className={`text-center w-30`}
+              onPress={() => console.log("ADD TO Exact meal")}
+            >
+              <Text
+                className="font-extrabold"
+                style={{
+                  color: colors.background,
+                }}
+              >
+                Add Food
+              </Text>
+            </Button>
+          </View>
+        </View>
+        <View>
+          <DiaryBarChartVictory
+            fats={totalFats}
+            carbs={totalCarbs}
+            protein={totalProteins}
+          />
+        </View>
+        <View>
+          <ScrollView>
+            {foods.map((obj) => {
+              return (
+                <Card
+                  style={{
+                    backgroundColor: colors.secondary,
+                    minHeight: 130,
+                    shadowColor: "transparent",
+                  }}
+                  className="my-2 rounded"
+                  onPress={() => toggleExpandedCard(obj.id)}
+                >
+                  <Card.Content key={obj.id}>
+                    <View className="flex-row justify-between mx-4 items-start">
+                      <View className="flex w-2/3">
+                        <Text
+                          className="text-xl font-bold mb-2"
+                          style={{ color: colors.primary }}
+                        >
+                          {obj.description}
+                        </Text>
+                      </View>
+                      <TouchableOpacity
+                        onPress={() => {
+                          dispatch(
+                            deleteMealItem({ category: food_name, id: obj.id })
+                          );
+                        }}
+                      >
+                        <View className="flex">
+                          <FontIcon
+                            name="trash"
+                            size={18}
+                            color={colors.primary}
+                          />
+                        </View>
+                      </TouchableOpacity>
+                    </View>
+
+                    <View
+                      style={{ color: colors.primary }}
+                      className="text-center flex-row items-end mx-4"
+                    >
+                      <Image
+                        style={{ width: 15, height: 20 }}
+                        source={require("../../../assets/images/Diary/fire.png")}
+                      />
+                      <Text className="mx-1"> {obj.Calories} Calories</Text>
+                    </View>
+                    {expandedCards.includes(obj.id) && (
+                      <>
+                        <View className="flex-row justify-between mt-4">
+                          <View className="flex-1">
+                            <Text
+                              style={{ color: colors.primary }}
+                              className="text-center font-bold"
+                            >
+                              {obj.Protein} G
+                            </Text>
+                          </View>
+                          <View className="flex-1">
+                            <Text
+                              style={{ color: colors.primary }}
+                              className="text-center font-bold"
+                            >
+                              {obj.Carbs} G
+                            </Text>
+                          </View>
+                          <View className="flex-1">
+                            <Text
+                              style={{ color: colors.primary }}
+                              className="text-center font-bold"
+                            >
+                              {obj.Fat} G
+                            </Text>
+                          </View>
+                        </View>
+                        <View className="flex-row justify-between mt-1">
+                          <View className="flex-1">
+                            <Text
+                              style={{ color: colors.primary }}
+                              className="text-center opacity-70"
+                            >
+                              Protein
+                            </Text>
+                          </View>
+                          <View className="flex-1">
+                            <Text
+                              style={{ color: colors.primary }}
+                              className="text-center opacity-70"
+                            >
+                              Carbs
+                            </Text>
+                          </View>
+                          <View className="flex-1">
+                            <Text
+                              style={{ color: colors.primary }}
+                              className="text-center opacity-70"
+                            >
+                              Fat
+                            </Text>
+                          </View>
+                        </View>
+                      </>
+                    )}
+                  </Card.Content>
+                </Card>
+              );
+            })}
+          </ScrollView>
+        </View>
       </View>
     </View>
   );

@@ -79,9 +79,9 @@ const Nutrition: React.FC = () => {
   console.log("colors:", colors.primary);
   // ACCESS THEME COLORS
   // const primary_color = colors.primary;
-  let primary_color = colors.primary;
-  let secondary_color = colors.secondary;
-  let background = colors.background;
+  const primary_color = colors.primary;
+  const secondary_color = colors.secondary;
+  const background = colors.background;
   // ENDOF THEME COLORS
 
   // INVENTORY FOOD LIST
@@ -231,8 +231,8 @@ const Nutrition: React.FC = () => {
     try {
       const response = await fetch(apiUrl);
       const data = await response.json();
-      let food = data.foods;
-      let tempArray = [];
+      const food = data.foods;
+      const tempArray = [];
       food.forEach((item) => {
         const foodLog = {
           quantity: 0,
@@ -264,8 +264,8 @@ const Nutrition: React.FC = () => {
   };
 
   useEffect(() => {
-    let loggedFoods = inventory.filter((food) => food.quantity > 0);
-    let inventory_calories = loggedFoods
+    const loggedFoods = inventory.filter((food) => food.quantity > 0);
+    const inventory_calories = loggedFoods
       .map((item) => item.Calories * item.quantity)
       .reduce((acc, curr) => acc + curr, 0);
     setFoodInventoryCalories(inventory_calories);
@@ -289,7 +289,7 @@ const Nutrition: React.FC = () => {
     return (
       <>
         <View className="mx-2 py-2">
-          <Card style={styles.cardShadow}>
+          <Card style={styles.cardShadow} className="rounded">
             <Card.Content style={{ paddingVertical: 8 }}>
               <View className="flex flex-row items-center ">
                 <View className="flex flex-col">
@@ -358,7 +358,10 @@ const Nutrition: React.FC = () => {
 
   return (
     <Provider>
-      <View className="flex-1 bg-white">
+      <View
+        style={{ backgroundColor: colors.dark }}
+        className="flex-1 bg-white"
+      >
         <FavoritesModal
           isModalVisible={isModalVisible}
           closeFavoriteModal={() => setIsModalVisible(false)}
