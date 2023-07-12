@@ -66,6 +66,7 @@ const ControlCenter = () => {
 
 	return (
 		<View className="flex-row justify-center items-center">
+			<Text>{timeSpentMeditating}</Text>
 			<Pressable onPress={skipBackwards}>
 				<Icon style={{ color: "#fff" }} name="skip-previous" size={40} />
 			</Pressable>

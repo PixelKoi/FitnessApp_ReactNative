@@ -54,16 +54,8 @@ const medSlice = createSlice({
 		setTimeSpentMeditating(state, action) {
 			state.timeSpentMeditating = action.payload;
 		},
-		incrementMeditationTimer(state, action) {
-			switch (action.type) {
-				case "increment":
-					return {
-						...state,
-						timeSpentMeditating: state.timeSpentMeditating + 1,
-					};
-				default:
-					return state;
-			}
+		incrementMeditationTimer(state) {
+			state.timeSpentMeditating += 1;
 		},
 		setPercentageComplete(state, action: PayloadAction<number>) {
 			state.percentageComplete = action.payload;
