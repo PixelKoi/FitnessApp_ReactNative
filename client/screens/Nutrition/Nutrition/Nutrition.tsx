@@ -572,7 +572,7 @@ const Nutrition: React.FC = (props) => {
                   >
                     <Button
                       style={{
-                        borderRadius: 20,
+                        borderRadius: 10,
                         backgroundColor: colors.background,
                         borderWidth: 0,
                       }}
