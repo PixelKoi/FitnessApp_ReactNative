@@ -71,12 +71,11 @@ const styles = StyleSheet.create({
   },
 });
 
-const Nutrition: React.FC = () => {
+const Nutrition: React.FC = (props) => {
   const dispatch = useAppDispatch();
   const { colors } = useAppSelector((state) => state.theme);
   const { dailyCal } = useAppSelector((state) => state.user);
-  console.log("PROFILE CALS: ", dailyCal);
-  console.log("colors:", colors.primary);
+
   // ACCESS THEME COLORS
   // const primary_color = colors.primary;
   const primary_color = colors.primary;
@@ -144,7 +143,6 @@ const Nutrition: React.FC = () => {
 
   const [visible, setVisible] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
-  const openMenu = () => setVisible(true);
   const closeMenu = () => setVisible(false);
   const [mealError, setMealError] = useState(false);
   // let redux-slice submit quick log when state selectedOption set
@@ -262,6 +260,13 @@ const Nutrition: React.FC = () => {
     const updatedItem = { ...item, quantity: item.quantity - 1 };
     dispatch(reduceInventory(updatedItem));
   };
+
+  useEffect(() => {
+    if (props.route && props.route.params && props.route.params.meal) {
+      console.log("MEAL: ", props.route.params.meal);
+      setSelectedOption(props.route.params.meal);
+    }
+  }, [props.route && props.route.params ? props.route.params.meal : undefined]);
 
   useEffect(() => {
     const loggedFoods = inventory.filter((food) => food.quantity > 0);
@@ -567,7 +572,7 @@ const Nutrition: React.FC = () => {
                   >
                     <Button
                       style={{
-                        borderRadius: 20,
+                        borderRadius: 10,
                         backgroundColor: colors.background,
                         borderWidth: 0,
                       }}

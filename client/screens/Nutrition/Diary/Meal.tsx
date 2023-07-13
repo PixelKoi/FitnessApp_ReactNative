@@ -22,20 +22,14 @@ const Meal = (props) => {
 
   const { colors } = useAppSelector((state) => state.theme);
   const colors_primary = colors.primary;
-  console.log(colors_primary);
   const food_object = props.route.params;
   const food_name = Object.keys(food_object)[0];
   const title_name = capitalizeFirstLetter(food_name);
   const foods = useAppSelector((state) => state.inventory[food_name]); // get the food data directly from the Redux store
-  console.log("PROPS:", foods);
 
   const { breakfast, lunch, dinner, snacks } = useAppSelector(
     (state) => state.inventory
   );
-
-  useEffect(() => {
-    console.log("PROPS RESET ?", props.route.params);
-  }, [props.route.params]);
 
   function calculateTotalMacros(foodItems) {
     const proteinArray = foodItems.map((item) => item.Protein);
@@ -105,7 +99,9 @@ const Meal = (props) => {
                 width: 150,
               }}
               className={`text-center w-30`}
-              onPress={() => console.log("ADD TO Exact meal")}
+              onPress={() => {
+                navigation.navigate("Nutrition", { meal: title_name });
+              }}
             >
               <Text
                 className="font-extrabold"

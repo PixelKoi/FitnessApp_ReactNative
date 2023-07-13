@@ -61,6 +61,7 @@ const FavoritesModal = React.memo(
     return (
       <Portal>
         <Modal
+          className="rounded pt-4"
           theme={{
             colors: { backdrop: "transparent" },
           }}
@@ -68,7 +69,7 @@ const FavoritesModal = React.memo(
             flex: 1,
             zIndex: 10,
             position: "absolute",
-            top: -60,
+            top: -50,
             left: 0,
             right: 0,
             overflow: "hidden",
