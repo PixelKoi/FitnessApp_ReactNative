@@ -5,8 +5,7 @@ import { CalendarProvider, ExpandableCalendar } from "react-native-calendars";
 import SumGraph from "./DonutGraphs/SumDonutGraph";
 import { Button, Surface } from "react-native-paper";
 import CalDonutGraph from "./DonutGraphs/CalDonutGraph";
-
-import CalDonutGraph2 from "./DonutGraphs/CalDonutGraph2";
+import VictoryCaloriePie from "../../utils/charts/dashboard/VictoryCaloriePie";
 import FastingDonutGraph from "./DonutGraphs/FastingDonutGraph";
 import { useAppSelector } from "../../redux-manager/hooks";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
@@ -130,18 +129,12 @@ const Dashboard2 = () => {
               >
                 Remaining
               </Text>
-              <CalDonutGraph2 />
+              <VictoryCaloriePie />
               <Text
                 style={{ color: colors.primary }}
                 className="text-center font-bold"
               >
                 Goal
-              </Text>
-              <Text
-                style={{ color: colors.primary }}
-                className="text-center mt-1"
-              >
-                {dailyCal} cals
               </Text>
             </View>
           </Surface>
