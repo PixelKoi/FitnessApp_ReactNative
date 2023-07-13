@@ -134,7 +134,7 @@ const Dashboard2 = () => {
                 style={{ color: colors.primary }}
                 className="text-center font-bold"
               >
-                Goal
+                Calories
               </Text>
             </View>
           </Surface>

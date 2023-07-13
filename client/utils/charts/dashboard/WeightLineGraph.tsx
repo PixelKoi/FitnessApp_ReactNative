@@ -55,6 +55,10 @@ function WeightLineGraph({ props }) {
           style={{ fill: "white", fontSize: 16, fontWeight: "500" }}
         />
         <VictoryLine
+          animate={{
+            duration: 2000,
+            onLoad: { duration: 1000 },
+          }}
           interpolation="natural"
           data={[
             { x: "Week 1", y: 240 },

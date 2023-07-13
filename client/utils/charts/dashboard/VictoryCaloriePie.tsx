@@ -46,7 +46,7 @@ const VictoryCaloriePie = (
           />
           <VictoryPie
             innerRadius={55}
-            cornerRadius={5}
+            cornerRadius={3}
             radius={40}
             labels={() => null}
             colorScale={[colors.primary, colors.secondary]} // "tomato" for filled part, "lightgray" for unfilled part
