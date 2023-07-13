@@ -48,6 +48,7 @@ const ControlCenter = () => {
 
 	//Increments by 1second everytime audio is playing
 	useEffect(() => {
+		console.log(playBackState);
 		if (playBackState === State.Playing) {
 			dispatch(setMeditationTimer(true));
 		} else {

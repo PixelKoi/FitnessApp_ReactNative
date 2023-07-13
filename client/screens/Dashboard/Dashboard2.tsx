@@ -7,11 +7,8 @@ import { Button, Surface } from "react-native-paper";
 import CalDonutGraph from "./DonutGraphs/CalDonutGraph";
 
 import CalDonutGraph2 from "./DonutGraphs/CalDonutGraph2";
-import FastingDonutGraph from "./DonutGraphs/FastingDonutGraph";
 import { useAppSelector } from "../../redux-manager/hooks";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { useNavigation } from "@react-navigation/native";
-import { UserCircleIcon } from "react-native-heroicons/outline";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import WeightGraph from "./DonutGraphs/WeightGraph";
@@ -21,17 +18,11 @@ import {
 	getWaterEntries,
 	createWaterIntakeRecord,
 } from "../../database/helpers/waterHelper";
-import { setWaterIntake } from "../../database/models/Water";
-import { getAllTables } from "../../database/helpers/mainHelper";
-import { database } from "../../database";
-
-const screenWidth = Dimensions.get("window").width;
 
 const Dashboard2 = () => {
 	const navigation = useNavigation();
 	//intiate meditation redux states
-	const { medStreak, timeSpentMeidtatingHours, timeSpentMeditating } =
-		useAppSelector((state) => state.meditation);
+	const { timeSpentMeditating } = useAppSelector((state) => state.meditation);
 	const { countdown, endDate } = useAppSelector((state) => state.fasting);
 	const { dailyCal } = useAppSelector((state) => state.user);
 	const { colors } = useAppSelector((state) => state.theme);
@@ -40,16 +31,6 @@ const Dashboard2 = () => {
 	const [waterDrank, setWaterDrank] = useState(0);
 	const [glasses, setGlasses] = useState(0);
 	//Calendar date selector
-	const [selected, setSelected] = useState("");
-	const handleDateSelect = (date: string) => {
-		setSelected(date);
-	};
-
-	useEffect(() => {
-		//show all tables
-		// const getTables = getAllTables();
-		// console.log(getTables);
-	}, []);
 
 	React.useLayoutEffect(() => {
 		navigation.setOptions({
@@ -95,9 +76,6 @@ const Dashboard2 = () => {
 		<View
 			style={{ backgroundColor: colors.background }}
 			className="flex-1 justify-center">
-			{/* <CalendarProvider date={new Date()}>
-				<ExpandableCalendar firstDay={1} onDayPress={handleDateSelect} />
-			</CalendarProvider> */}
 			<WeightGraph />
 
 			<View
@@ -183,78 +161,9 @@ const Dashboard2 = () => {
 								</View>
 							</Surface>
 						</TouchableOpacity>
-
-						<TouchableOpacity
-							className="mt-auto"
-							onPress={() => navigation.navigate("MeditationDash")}>
-							<Surface
-								style={{
-									backgroundColor: colors.background,
-									width: 174,
-									height: 87,
-								}}
-								className="flex rounded-2xl">
-								<View className=" lex-col">
-									<View className="flex-row ml-4 mt-3">
-										<FontAwesome5
-											name="brain"
-											size={15}
-											color={colors.primary}
-										/>
-										<Text
-											className="font-bold ml-2"
-											style={{ color: colors.primary }}>
-											Meditation
-										</Text>
-									</View>
-									<View className="flex-row ml-4 mt-4">
-										<View className="flex-row">
-											<Text
-												className="self-center"
-												style={{ fontSize: 25, color: colors.primary }}>
-												{timeSpentMeidtatingHours}
-											</Text>
-											<Text
-												className="self-center"
-												style={{ fontSize: 14, color: colors.primary }}>
-												{" "}
-												hours
-											</Text>
-										</View>
-										<View
-											style={{ backgroundColor: colors.primary }}
-											className="mt-3 ml-auto mr-4 p-1 px-2 rounded-full">
-											<Text style={{ fontSize: 10, color: "#fff" }}>Start</Text>
-										</View>
-									</View>
-								</View>
-							</Surface>
-						</TouchableOpacity>
 					</View>
 				</View>
 
-				{/* <Surface
-				style={{ backgroundColor: colors.background }}
-				className="flex justify-center mt-4 mx-6  py-4 rounded-2xl">
-				<View className="flex flex-row justify-center gap-8">
-					<View>
-						<Text
-							style={{ color: colors.primary }}
-							className="text-base mb-2 px-2 self-center font-bold">
-							Calories
-						</Text>
-						<CalDonutGraph />
-					</View>
-					<View>
-						<Text
-							style={{ color: colors.primary }}
-							className="text-base mb-2 px-2 self-center font-bold">
-							Fasting
-						</Text>
-						<FastingDonutGraph />
-					</View>
-				</View>
-			</Surface> */}
 				<View className="mt-4">
 					<View className="flex-row  gap-2 mx-4">
 						<Surface
@@ -338,7 +247,7 @@ const Dashboard2 = () => {
 										<Text className="self-center" style={{ fontSize: 25 }}>
 											{timeSpentMeditating === 0
 												? "0.00"
-												: (timeSpentMeditating / 3600).toFixed(2)}
+												: timeSpentMeditating / 3600}
 										</Text>
 										<Text className="self-center" style={{ fontSize: 14 }}>
 											{" "}

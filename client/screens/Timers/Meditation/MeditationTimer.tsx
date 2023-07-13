@@ -1,40 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, TouchableOpacity, Image } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { Button } from "react-native-paper";
-import { add } from "date-fns";
-//Graph import
-import MedTimer from "../components/MedDonutGraph";
-//Redux imports
-import {
-	setPLayAudio,
-	setTimerStates,
-	updateMedStreak,
-	setSound,
-} from "../../../redux-manager/redux-slice/meditation-slice";
-import { useAppDispatch, useAppSelector } from "../../../redux-manager/hooks";
-//import icons
-import GirlMeditating from "../../../assets/meditation_timer/GirlMeditating.png";
-import Icon from "react-native-vector-icons/Ionicons";
+import { useAppSelector } from "../../../redux-manager/hooks";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
-// Audio
-import { Audio } from "expo-av";
-import hourStrom from "../../../assets/audio/hourStorm.mp3";
 //Music Player
 import { setupPlayer, addTrack } from "../../../musicPlayerServices";
-import { SafeAreaView } from "react-native-safe-area-context";
-import DefaultSpinner from "../../../components/Loaders/DefaultSpinner";
-import TrackPlayer, {
-	Event,
-	Track,
-	useTrackPlayerEvents,
-	State,
-} from "react-native-track-player";
+import TrackPlayer from "react-native-track-player";
 import MusicPlayer from "./components/MusicPlayer";
 
 //Todo: Add lotus icon above start meditating button
 const MeditationTimer = ({ route }) => {
+	//navigation
+	const navigation = useNavigation();
 	const { track } = route.params;
+
+	//import redux
+	const { colors } = useAppSelector((state) => state.theme);
+
 	//Track states
 	const [isPlayerReady, setIsPlayerReady] = useState(false);
 
@@ -68,10 +50,6 @@ const MeditationTimer = ({ route }) => {
 		setup();
 	}, []);
 
-	const navigation = useNavigation();
-
-	const { colors } = useAppSelector((state) => state.theme);
-
 	React.useLayoutEffect(() => {
 		navigation.setOptions({
 			title: "",
@@ -101,12 +79,7 @@ const MeditationTimer = ({ route }) => {
 		<View
 			style={{ backgroundColor: "#03174C" }}
 			className="flex-1 justify-center">
-			{/* Clock section */}
 			<View className="">
-				{/* <View className="items-center">
-					<Image source={GirlMeditating} />
-				</View> */}
-
 				<View style={{ width: 126 }} className=" mx-auto ">
 					<Text style={{ color: "#fff" }} className="text-3xl"></Text>
 				</View>
