@@ -40,15 +40,20 @@ const theme = {
 function WeightLineGraph({ props }) {
   return (
     <View>
-      <VictoryChart theme={theme} height={250}>
+      <VictoryChart
+        domainPadding={{ x: 25 }}
+        minDomain={{ y: 0 }}
+        maxDomain={{ y: 20 }}
+        theme={theme}
+        height={250}
+      >
         <VictoryLine
           interpolation="natural"
           data={[
-            { x: 1, y: 2 },
-            { x: 2, y: 3 },
-            { x: 3, y: 5 },
-            { x: 4, y: 4 },
-            { x: 5, y: 6 },
+            { x: "Week 1", y: 10 },
+            { x: "Week 2", y: 8 },
+            { x: "Week 3", y: 12 },
+            { x: "Week 4", y: 8 },
           ]}
         />
       </VictoryChart>
