@@ -2,6 +2,7 @@ import React from "react";
 import { View } from "react-native";
 import { VictoryChart, VictoryAxis, VictoryCandlestick } from "victory-native";
 import { useAppSelector } from "../../../redux-manager/hooks";
+import Svg, { Rect } from "react-native-svg";
 
 function TimerCandlestick({}) {
   const { colors } = useAppSelector((state) => state.theme);
@@ -57,6 +58,8 @@ function TimerCandlestick({}) {
             data: {
               strokeWidth: 0,
               fill: colors.primary,
+              borderBottomRightRadius: 10,
+              borderBottomLeftRadius: 10,
             },
           }}
           data={sampleData}

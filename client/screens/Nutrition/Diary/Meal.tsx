@@ -105,7 +105,9 @@ const Meal = (props) => {
                 width: 150,
               }}
               className={`text-center w-30`}
-              onPress={() => console.log("ADD TO Exact meal")}
+              onPress={() => {
+                navigation.navigate("Nutrition", { meal: title_name });
+              }}
             >
               <Text
                 className="font-extrabold"

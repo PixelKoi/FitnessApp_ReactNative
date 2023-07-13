@@ -71,7 +71,14 @@ const styles = StyleSheet.create({
   },
 });
 
-const Nutrition: React.FC = () => {
+const Nutrition: React.FC = (props) => {
+  useEffect(() => {
+    if (props.route && props.route.params && props.route.params.meal) {
+      console.log("MEAL: ", props.route.params.meal);
+      setSelectedOption(props.route.params.meal);
+    }
+  }, [props.route && props.route.params ? props.route.params.meal : undefined]);
+
   const dispatch = useAppDispatch();
   const { colors } = useAppSelector((state) => state.theme);
   const { dailyCal } = useAppSelector((state) => state.user);
