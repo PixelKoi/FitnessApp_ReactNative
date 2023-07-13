@@ -41,19 +41,26 @@ function WeightLineGraph({ props }) {
   return (
     <View>
       <VictoryChart
-        domainPadding={{ x: 25 }}
-        minDomain={{ y: 0 }}
-        maxDomain={{ y: 20 }}
+        domainPadding={{ x: 40 }}
+        minDomain={{ y: 90 }}
+        maxDomain={{ y: 300 }}
         theme={theme}
         height={250}
+        padding={{ top: 55, bottom: 30, left: 40, right: 10 }}
       >
+        <VictoryLabel
+          x={20}
+          y={20}
+          text="Your Weight statistics"
+          style={{ fill: "white", fontSize: 16, fontWeight: "500" }}
+        />
         <VictoryLine
           interpolation="natural"
           data={[
-            { x: "Week 1", y: 10 },
-            { x: "Week 2", y: 8 },
-            { x: "Week 3", y: 12 },
-            { x: "Week 4", y: 8 },
+            { x: "Week 1", y: 240 },
+            { x: "Week 2", y: 210 },
+            { x: "Week 3", y: 231 },
+            { x: "Week 4", y: 205 },
           ]}
         />
       </VictoryChart>
