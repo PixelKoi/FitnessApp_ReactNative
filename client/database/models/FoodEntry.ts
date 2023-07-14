@@ -9,7 +9,7 @@ export default class FoodEntry extends Model {
   };
   @text("water") water;
 
-  static async FoodEntry(water) {
+  static async createFoodEntry(water) {
     try {
       const foodEntrys = await this.collections
         .get("foodEntrys")

@@ -12,7 +12,7 @@ export default class JournalEntry extends Model {
   @text("user_id") user_id;
   @date("date") date;
 
-  static async createEvent(user_id, date) {
+  static async createJournalEntry(user_id, date) {
     try {
       const newJournals = await this.collections
         .get("journals")

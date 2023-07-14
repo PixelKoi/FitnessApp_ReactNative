@@ -21,7 +21,14 @@ export default class InventoryItem extends Model {
   @text("quantity") quantity;
 
   @writer
-  async inventoryItem(calories, carbs, fat, protein, description, quantity) {
+  async createInventoryItem(
+    calories,
+    carbs,
+    fat,
+    protein,
+    description,
+    quantity
+  ) {
     try {
       const newItem = await this.collections.get("foods").create((item) => {
         item.calories = calories;
