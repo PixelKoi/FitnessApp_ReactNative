@@ -1,41 +1,28 @@
-// User(ID, Email, name, membershipStatus, weight, height)
-// JournalEntry(ID, UserID, Date, FoodEntryID, EventID)
-// FoodEntry(ID, JournalEntryID)
-// Meal(ID, MealCategory, FoodID)
-// MealInventoryItem(MealID, InventoryItemID)
-// InventoryItem(ID, Macros, Calories, Description, Quantity, Water)
-// Event(ID, JournalEntryID, startTime, endTime, duration, notes, mood, type)
-
 import { Model } from "@nozbe/watermelondb";
-import { field, text, relation, writer } from "@nozbe/watermelondb/decorators";
+import { relation } from "@nozbe/watermelondb/decorators";
 
-export default class InventoryItem extends Model {
-  static table = "foods";
+export default class MealInventoryItem extends Model {
+  static table = "mealInventoryItem";
+  static associations = {
+    meals: { type: "belongs_to", foreignKey: "meals_id" },
+    inventoryItem: { type: "has_many", foreignKey: "inventoryItem_id" },
+  };
 
-  @text("calories") calories;
-  @text("carbs") carbs;
-  @text("fat") fat;
-  @text("protein") protein;
-  @text("description") description;
-  @text("quantity") quantity;
-  @text("water") water;
+  @relation("meals", "meals_id") meal;
+  @relation("inventoryItem", "inventoryItem_id") inventory;
 
-  @writer
-  async completeDiary(calories, carbs, fat, protein, description, quantity) {
+  static async createMealInventoryItem(database, meals_id, inventoryItem_id) {
     try {
-      const newDiary = await this.collections.get("foods").create((food) => {
-        food.calories = calories;
-        food.carbs = carbs;
-        food.fat = fat;
-        food.protein = protein;
-        food.description = description;
-        food.quantity = quantity;
-        food.water = water;
-      });
-      console.log("FOOD WRITER:", newDiary);
-      return newDiary;
+      const newMealInventoryItem = await database.collections
+        .get("mealInventoryItem")
+        .create((mealInventoryItem) => {
+          mealInventoryItem.meals_id = meals_id;
+          mealInventoryItem.inventoryItem_id = inventoryItem_id;
+        });
+      console.log("mealInventoryItem WRITER:", newMealInventoryItem);
+      return newMealInventoryItem;
     } catch (error) {
-      console.error("Error creating Nutrition entry:", error);
+      console.error("Error creating mealInventoryItem entry:", error);
       throw error; // Rethrow the error or handle it as per your application's requirements
     }
   }
