@@ -71,6 +71,7 @@ const styles = StyleSheet.create({
   },
 });
 
+// TODO: BUG: Clicking Add Food in Diary doesn't change Nutrition bottom button.
 const Nutrition: React.FC = (props) => {
   const dispatch = useAppDispatch();
   const { colors } = useAppSelector((state) => state.theme);
