@@ -1,12 +1,3 @@
-// FoodEntry(ID, JournalEntryID)
-// User(ID, Email, name, membershipStatus, weight, height)
-// JournalEntry(ID, UserID, Date, FoodEntryID, EventID)
-// FoodEntry(ID, JournalEntryID)
-// Meal(ID, MealCategory, FoodID)
-// MealInventoryItem(MealID, InventoryItemID)
-// InventoryItem(ID, Macros, Calories, Description, Quantity, Water)
-// Event(ID, JournalEntryID, startTime, endTime, duration, notes, mood, type)
-
 import { Model } from "@nozbe/watermelondb";
 import { text } from "@nozbe/watermelondb/decorators";
 

@@ -20,11 +20,45 @@ export default appSchema({
       ],
     }),
     tableSchema({
-      name: "comments",
+      name: "events",
       columns: [
-        { name: "body", type: "string" },
-        { name: "post_id", type: "string", isIndexed: true },
+        { name: "startTime", type: "number" },
+        { name: "endTime", type: "number" },
+        { name: "duration", type: "number" },
+        { name: "notes", type: "string" },
+        { name: "mood", type: "string" },
+        { name: "type", type: "string" },
       ],
+    }),
+    tableSchema({
+      name: "inventoryItem",
+      columns: [
+        { name: "calories", type: "number" },
+        { name: "carbs", type: "number" },
+        { name: "fat", type: "number" },
+        { name: "protein", type: "number" },
+        { name: "description", type: "string" },
+        { name: "quantity", type: "number" },
+      ],
+    }),
+    tableSchema({
+      name: "journals",
+      columns: [
+        { name: "user_id", type: "number" },
+        { name: "date", type: "string" },
+      ],
+    }),
+    tableSchema({
+      name: "meals",
+      columns: [],
+    }),
+    tableSchema({
+      name: "foodEntrys",
+      columns: [{ name: "water", type: "number" }],
+    }),
+    tableSchema({
+      name: "mealInventoryItem",
+      columns: [],
     }),
     tableSchema({
       name: "water",

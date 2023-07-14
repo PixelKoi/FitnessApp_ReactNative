@@ -1,8 +1,6 @@
 import { Model } from "@nozbe/watermelondb";
 import { text, relation, date } from "@nozbe/watermelondb/decorators";
 
-// JournalEntry(ID, UserID, Date, FoodEntryID, EventID)
-
 export default class JournalEntry extends Model {
   static table = "journals";
   static associations = {
