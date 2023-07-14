@@ -6,6 +6,7 @@ import ThemeSelector from "../../screens/Settings/Theme/ThemeSelector";
 import Meal from "../../screens/Nutrition/Diary/Meal";
 import MeditationDash from "../../screens/Timers/Meditation/MeditationDash";
 import MeditationTimer from "../../screens/Timers/Meditation/MeditationTimer";
+import MeditationInterface from "../../screens/Timers/Meditation/MeditationInterface";
 import FastingDash from "../../screens/Timers/Fasting/FastingDash";
 import DefaultSpinner from "../../components/Loaders/DefaultSpinner";
 import Fasting from "../../screens/Timers/Fasting/Fasting";
@@ -151,7 +152,7 @@ function Navigation({ session }: { session: Session }) {
 				/>
 				<Stack.Screen
 					name="MeditationDash"
-					component={MeditationDash}
+					component={MeditationInterface}
 					options={{ headerShown: true }}
 				/>
 				<Stack.Screen

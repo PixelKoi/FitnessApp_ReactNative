@@ -105,7 +105,9 @@ const Dashboard2 = () => {
 					borderTopRightRadius: 50,
 				}}
 				className="flex-1  mt-4">
-				<Text style={{ fontSize: 14 }} className="ml-8 my-4 font-bold">
+				<Text
+					style={{ fontSize: 14, color: colors.primary }}
+					className="ml-8 my-4 font-bold">
 					Activity
 				</Text>
 
@@ -176,78 +178,9 @@ const Dashboard2 = () => {
 								</View>
 							</Surface>
 						</TouchableOpacity>
-
-						<TouchableOpacity
-							className="mt-auto"
-							onPress={() => navigation.navigate("MeditationDash")}>
-							<Surface
-								style={{
-									backgroundColor: colors.background,
-									width: 174,
-									height: 87,
-								}}
-								className="flex rounded">
-								<View className=" lex-col">
-									<View className="flex-row ml-4 mt-3">
-										<FontAwesome5
-											name="brain"
-											size={15}
-											color={colors.primary}
-										/>
-										<Text
-											className="font-bold ml-2"
-											style={{ color: colors.primary }}>
-											Meditation
-										</Text>
-									</View>
-									<View className="flex-row ml-4 mt-4">
-										<View className="flex-row">
-											<Text
-												className="self-center"
-												style={{ fontSize: 25, color: colors.primary }}>
-												{timeSpentMeidtatingHours}
-											</Text>
-											<Text
-												className="self-center"
-												style={{ fontSize: 14, color: colors.primary }}>
-												{" "}
-												hours
-											</Text>
-										</View>
-										<View
-											style={{ backgroundColor: colors.primary }}
-											className="mt-3 ml-auto mr-4 p-1 px-2 rounded">
-											<Text style={{ fontSize: 10, color: "#fff" }}>Start</Text>
-										</View>
-									</View>
-								</View>
-							</Surface>
-						</TouchableOpacity>
 					</View>
 				</View>
 
-				{/* <Surface
-				style={{ backgroundColor: colors.background }}
-				className="flex justify-center mt-4 mx-6  py-4 rounded-2xl">
-				<View className="flex flex-row justify-center gap-8">
-					<View>
-						<Text
-							style={{ color: colors.primary }}
-							className="text-base mb-2 px-2 self-center font-bold">
-							Calories
-						</Text>
-						<CalDonutGraph />
-					</View>
-					<View>
-						<Text
-							style={{ color: colors.primary }}
-							className="text-base mb-2 px-2 self-center font-bold">
-							Fasting
-						</Text>
-						<FastingDonutGraph />
-					</View>
-				</View>
-			</Surface> */}
 				<View className="mt-4">
 					<View className="flex-row  gap-2 mx-4">
 						<Surface
@@ -255,10 +188,14 @@ const Dashboard2 = () => {
 								backgroundColor: colors.background,
 								height: 100,
 							}}
-							className="flex-1 rounded">
+							className="flex-1 rounded-2xl">
 							<View className="flex-row">
 								<View className="flex-col">
-									<Text className="font-bold  ml-6  mt-3 ">Water Input</Text>
+									<Text
+										style={{ color: colors.primary }}
+										className="font-bold  ml-6  mt-3 ">
+										Water Input
+									</Text>
 									<Text
 										className="font-bold  ml-6  mt-2 "
 										style={{ fontSize: 10, color: "#9B9B99" }}>
@@ -269,7 +206,7 @@ const Dashboard2 = () => {
 										<View className="flex-row">
 											<Text
 												className="self-center font-bold"
-												style={{ fontSize: 18 }}>
+												style={{ fontSize: 18, color: colors.primary }}>
 												{waterDrank}/5
 											</Text>
 										</View>
@@ -292,6 +229,7 @@ const Dashboard2 = () => {
 										<Icons
 											name="minus"
 											size={20}
+											color={colors.primary}
 											// style={{ fontSize: 10, color: "#fff" }}
 										/>
 									</TouchableOpacity>
@@ -306,6 +244,7 @@ const Dashboard2 = () => {
 										<Icons
 											name="plus"
 											size={20}
+											color={colors.primary}
 											// style={{ fontSize: 10, color: "#fff" }}
 										/>
 									</TouchableOpacity>
@@ -318,22 +257,30 @@ const Dashboard2 = () => {
 								backgroundColor: colors.background,
 								height: 100,
 							}}
-							className="flex-1 rounded">
+							className="flex-1 rounded-2xl">
 							<TouchableOpacity
 								onPress={() => navigation.navigate("MeditationDash")}
 								className=" flex-col">
 								<View className="flex-row ml-4 mt-3">
-									<FontAwesome5 name="brain" size={15} />
-									<Text className="font-bold ml-2">Meditation</Text>
+									<FontAwesome5 name="brain" size={15} color={colors.primary} />
+									<Text
+										style={{ color: colors.primary }}
+										className="font-bold ml-2">
+										Meditation
+									</Text>
 								</View>
 								<View className="flex-row ml-4 mt-4">
 									<View className="flex-row">
-										<Text className="self-center" style={{ fontSize: 25 }}>
+										<Text
+											className="self-center"
+											style={{ fontSize: 25, color: colors.primary }}>
 											{timeSpentMeditating === 0
 												? "0.00"
 												: (timeSpentMeditating / 3600).toFixed(2)}
 										</Text>
-										<Text className="self-center" style={{ fontSize: 14 }}>
+										<Text
+											className="self-center"
+											style={{ fontSize: 14, color: colors.primary }}>
 											{" "}
 											hours
 										</Text>
