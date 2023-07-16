@@ -3,11 +3,13 @@ import { View, Text, TouchableOpacity, Switch } from "react-native";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import BinauralPicker from "./components/BinauralPicker";
+import BinauralInfoModal from "./info-modals/BinauralInfoModal";
 
 const BinauralBeatsMenu = () => {
 	const [beatsToggle, setBeatsToggle] = useState(false);
 	const [showBinauralPicker, setShowBinauralPicker] = useState(false);
 	const [selectBinaural, setSelectedBinaural] = useState("Select");
+	const [showInfo, setShowInfo] = useState(false);
 
 	return (
 		<View className="flex-col">
@@ -16,7 +18,9 @@ const BinauralBeatsMenu = () => {
 					Binaural Beat
 				</Text>
 
-				<TouchableOpacity className="ml-2 self-center">
+				<TouchableOpacity
+					onPress={() => setShowInfo(true)}
+					className="ml-2 self-center">
 					<MaterialIcons name="info-outline" size={18} />
 				</TouchableOpacity>
 				<Text style={{ fontSize: 12 }} className="ml-4 my-auto font-bold">
@@ -52,6 +56,7 @@ const BinauralBeatsMenu = () => {
 				selectBinaural={selectBinaural}
 				setSelectedBinaural={setSelectedBinaural}
 			/>
+			<BinauralInfoModal showInfo={showInfo} setShowInfo={setShowInfo} />
 		</View>
 	);
 };
