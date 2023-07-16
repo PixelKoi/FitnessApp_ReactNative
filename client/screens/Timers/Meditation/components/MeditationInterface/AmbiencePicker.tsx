@@ -1,20 +1,17 @@
-import React, { useState } from "react";
-import { View, Text, Modal, FlatList } from "react-native";
-import {} from "react-native-paper";
 import { Picker } from "@react-native-picker/picker";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import React from "react";
+import { TouchableOpacity, View, Text, Modal } from "react-native";
+import ambienceData from "../../../../../utils/meditation/ambienceData";
 import { useAppSelector } from "../../../../../redux-manager/hooks";
-import binauralData from "../../../../../utils/meditation/binauralData";
 
-const BinauralPicker = (props) => {
+const AmbiencePicker = (props) => {
 	const { colors } = useAppSelector((state) => state.theme);
-	const showData = binauralData.map((beat) => {
+	const showData = ambienceData.map((beat) => {
 		return <Picker.Item label={beat.type} value={beat.type} />;
 	});
-
 	return (
 		<Modal
-			visible={props.showBinauralPicker}
+			visible={props.showAmbiencePicker}
 			animationType="slide"
 			transparent={true}>
 			<View
@@ -23,15 +20,15 @@ const BinauralPicker = (props) => {
 				<View className="flex-row">
 					<TouchableOpacity
 						className="ml-auto p-4 mr-2 "
-						onPress={() => props.setShowBinauralPicker(false)}>
+						onPress={() => props.setShowAmbiencePicker(false)}>
 						<Text style={{ fontSize: 20 }}>Done</Text>
 					</TouchableOpacity>
 				</View>
 
 				<Picker
-					selectedValue={props.selectBinaural}
+					selectedValue={props.selectAmbience}
 					onValueChange={(itemValue, itemIndex) =>
-						props.setSelectedBinaural(itemValue)
+						props.setSelectedAmbience(itemValue)
 					}>
 					{showData}
 				</Picker>
@@ -40,4 +37,4 @@ const BinauralPicker = (props) => {
 	);
 };
 
-export default BinauralPicker;
+export default AmbiencePicker;

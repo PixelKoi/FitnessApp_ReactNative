@@ -1,28 +1,23 @@
 const binauralData = [
 	{
 		id: 1,
-		type: "Delta Waves",
-		property: "restorative sleep",
+		type: "Delta Waves - Sleep",
 	},
 	{
 		id: 2,
-		type: "Theta Waves",
-		property: "alleviate stress",
+		type: "Theta Waves - Stress",
 	},
 	{
 		id: 3,
-		type: "Alpha Waves",
-		property: "enhance focus",
+		type: "Alpha Waves - Focus",
 	},
 	{
 		id: 4,
-		type: "Beta Waves",
-		property: "enhance focus",
+		type: "Beta Waves - Alterness",
 	},
 	{
-		id: 3,
-		type: "Alpha Waves",
-		property: "enhance focus",
+		id: 5,
+		type: "Gamma Waves - Memory",
 	},
 ];
 

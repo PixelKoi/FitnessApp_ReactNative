@@ -3,7 +3,10 @@ import { View, Text, Switch, TouchableOpacity } from "react-native";
 import ChooseGoalMenu from "./components/MeditationInterface/ChooseGoalMenu";
 import { useNavigation } from "@react-navigation/native";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import BinauralPicker from "./components/MeditationInterface/BinauralPicker";
+import AmbiencePicker from "./components/MeditationInterface/AmbiencePicker";
+import FreqPicker from "./components/MeditationInterface/FreqPicker";
 
 const MeditationInterface = () => {
 	const navigation = useNavigation();
@@ -13,6 +16,12 @@ const MeditationInterface = () => {
 	const [freqToggle, setFreqToggle] = useState(false);
 
 	const [showBinauralPicker, setShowBinauralPicker] = useState(false);
+	const [showAmbiencePicker, setShowAmbiencePicker] = useState(false);
+	const [showFreqPicker, setShowFreqPicker] = useState(false);
+
+	const [selectBinaural, setSelectedBinaural] = useState("Select");
+	const [selectAmbience, setSelectedAmbience] = useState("Select");
+	const [selectFreq, setSelectedFreq] = useState("Select");
 
 	React.useLayoutEffect(() => {
 		navigation.setOptions({
@@ -43,19 +52,23 @@ const MeditationInterface = () => {
 			<View className="mx-4 mt-6">
 				<ChooseGoalMenu />
 
-				<View className="gap-4 mt-1">
+				<View className="gap-5 mt-1">
 					<View className="flex-col">
 						<View className="flex-row">
 							<Text style={{ fontSize: 18 }} className="font-bold">
 								Ambiance
 							</Text>
+							<TouchableOpacity className="ml-2 self-center">
+								<MaterialIcons name="info-outline" size={18} />
+							</TouchableOpacity>
 						</View>
 
 						<View className="flex-row mt-2">
 							<TouchableOpacity
+								onPress={() => setShowAmbiencePicker(true)}
 								style={{ backgroundColor: "#E6E6E6" }}
 								className="h-10 flex-1 flex-row rounded">
-								<Text className="my-auto ml-4">Accordian</Text>
+								<Text className="my-auto ml-4">{selectAmbience}</Text>
 								<View className="ml-auto mr-4 self-center">
 									<FontAwesome name="angle-down" size={24} />
 								</View>
@@ -77,7 +90,14 @@ const MeditationInterface = () => {
 					<View className="flex-col">
 						<View className="flex-row">
 							<Text style={{ fontSize: 18 }} className="font-bold">
-								Binaural Beat
+								Binaural Beat{" "}
+							</Text>
+
+							<TouchableOpacity className="ml-2 self-center">
+								<MaterialIcons name="info-outline" size={18} />
+							</TouchableOpacity>
+							<Text style={{ fontSize: 12 }} className="ml-4 my-auto font-bold">
+								Heaphones Required
 							</Text>
 						</View>
 
@@ -86,7 +106,7 @@ const MeditationInterface = () => {
 								onPress={() => setShowBinauralPicker(true)}
 								style={{ backgroundColor: "#E6E6E6" }}
 								className="h-10 flex-1 flex-row rounded">
-								<Text className="my-auto ml-4">Accordian</Text>
+								<Text className="my-auto ml-4">{selectBinaural}</Text>
 								<View className="ml-auto mr-4 self-center">
 									<FontAwesome name="angle-down" size={24} />
 								</View>
@@ -110,12 +130,16 @@ const MeditationInterface = () => {
 							<Text style={{ fontSize: 18 }} className="font-bold">
 								Healing Frequency
 							</Text>
+							<TouchableOpacity className="ml-2 self-center">
+								<MaterialIcons name="info-outline" size={18} />
+							</TouchableOpacity>
 						</View>
 						<View className="flex-row mt-2">
 							<TouchableOpacity
+								onPress={() => setShowFreqPicker(true)}
 								style={{ backgroundColor: "#E6E6E6" }}
 								className="h-10 flex-1 flex-row rounded">
-								<Text className="my-auto ml-4">Accordian</Text>
+								<Text className="my-auto ml-4">{selectFreq}</Text>
 								<View className="ml-auto mr-4 self-center">
 									<FontAwesome name="angle-down" size={24} />
 								</View>
@@ -138,6 +162,20 @@ const MeditationInterface = () => {
 			<BinauralPicker
 				showBinauralPicker={showBinauralPicker}
 				setShowBinauralPicker={setShowBinauralPicker}
+				selectBinaural={selectBinaural}
+				setSelectedBinaural={setSelectedBinaural}
+			/>
+			<AmbiencePicker
+				showAmbiencePicker={showAmbiencePicker}
+				setShowAmbiencePicker={setShowAmbiencePicker}
+				selectAmbience={selectAmbience}
+				setSelectedAmbience={setSelectedAmbience}
+			/>
+			<FreqPicker
+				showFreqPicker={showFreqPicker}
+				setShowFreqPicker={setShowFreqPicker}
+				selectFreq={selectFreq}
+				setSelectedFreq={setSelectedFreq}
 			/>
 		</View>
 	);
