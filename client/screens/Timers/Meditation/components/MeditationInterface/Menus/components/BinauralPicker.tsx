@@ -1,10 +1,9 @@
-import React, { useState } from "react";
-import { View, Text, Modal, FlatList } from "react-native";
-import {} from "react-native-paper";
+import React from "react";
+import { View, Text, Modal } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { useAppSelector } from "../../../../../redux-manager/hooks";
-import binauralData from "../../../../../utils/meditation/binauralData";
+import { useAppSelector } from "../../../../../../../redux-manager/hooks";
+import binauralData from "../../../../../../../utils/meditation/binauralData";
 
 const BinauralPicker = (props) => {
 	const { colors } = useAppSelector((state) => state.theme);

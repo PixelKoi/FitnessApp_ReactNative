@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, Pressable, Image } from "react-native";
-import { useAppSelector } from "../../../../../redux-manager/hooks";
-import emoji from "../../../../../utils/timer/meditation-dash/emoji-data";
+import { useAppSelector } from "../../../../../../redux-manager/hooks";
+import emoji from "../../../../../../utils/timer/meditation-dash/emoji-data";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/FontAwesome";
 

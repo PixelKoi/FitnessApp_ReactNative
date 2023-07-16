@@ -1,17 +1,17 @@
 import { Picker } from "@react-native-picker/picker";
 import React from "react";
-import { Modal, TouchableOpacity, View, Text } from "react-native";
-import { useAppSelector } from "../../../../../redux-manager/hooks";
-import frequencyData from "../../../../../utils/meditation/frequencyData";
+import { TouchableOpacity, View, Text, Modal } from "react-native";
+import ambienceData from "../../../../../../../utils/meditation/ambienceData";
+import { useAppSelector } from "../../../../../../../redux-manager/hooks";
 
-const FreqPicker = (props) => {
+const AmbiencePicker = (props) => {
 	const { colors } = useAppSelector((state) => state.theme);
-	const showData = frequencyData.map((beat) => {
+	const showData = ambienceData.map((beat) => {
 		return <Picker.Item label={beat.type} value={beat.type} />;
 	});
 	return (
 		<Modal
-			visible={props.showFreqPicker}
+			visible={props.showAmbiencePicker}
 			animationType="slide"
 			transparent={true}>
 			<View
@@ -20,15 +20,15 @@ const FreqPicker = (props) => {
 				<View className="flex-row">
 					<TouchableOpacity
 						className="ml-auto p-4 mr-2 "
-						onPress={() => props.setShowFreqPicker(false)}>
+						onPress={() => props.setShowAmbiencePicker(false)}>
 						<Text style={{ fontSize: 20 }}>Done</Text>
 					</TouchableOpacity>
 				</View>
 
 				<Picker
-					selectedValue={props.selectFreq}
+					selectedValue={props.selectAmbience}
 					onValueChange={(itemValue, itemIndex) =>
-						props.setSelectedFreq(itemValue)
+						props.setSelectedAmbience(itemValue)
 					}>
 					{showData}
 				</Picker>
@@ -37,4 +37,4 @@ const FreqPicker = (props) => {
 	);
 };
 
-export default FreqPicker;
+export default AmbiencePicker;
