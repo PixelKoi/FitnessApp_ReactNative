@@ -19,7 +19,7 @@ const AmbienceMenu = () => {
 			<View className="flex-row mt-2">
 				<TouchableOpacity
 					onPress={() => setShowAmbiencePicker(true)}
-					style={{ backgroundColor: "#E6E6E6" }}
+					style={{ backgroundColor: "#ffff" }}
 					className="h-10 flex-1 flex-row rounded">
 					<Text className="my-auto ml-4">{selectAmbience}</Text>
 					<View className="ml-auto mr-4 self-center">

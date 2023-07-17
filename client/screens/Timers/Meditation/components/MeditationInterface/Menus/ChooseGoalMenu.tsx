@@ -11,13 +11,15 @@ const ChooseGoalMenu = () => {
 			<TouchableOpacity
 				onPress={() => {}}
 				style={{
-					backgroundColor: "#E6E6E6",
+					backgroundColor: "#1F1C59",
 				}}
 				className="flex w-auto h-10 rounded">
 				<View className="flex-row my-auto">
-					<Text className="ml-4 my-auto">What is your goal?</Text>
+					<Text style={{ color: "#ffff" }} className="ml-4 my-auto">
+						How do you feel?
+					</Text>
 					<View className="ml-auto mr-4">
-						<Icon name="angle-down" size={24} />
+						<Icon name="angle-down" size={24} color={"#ffff"} />
 					</View>
 				</View>
 			</TouchableOpacity>

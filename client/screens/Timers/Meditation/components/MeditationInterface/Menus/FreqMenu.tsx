@@ -12,21 +12,25 @@ const FreqMenu = () => {
 	return (
 		<View>
 			<View className="flex-row">
-				<Text style={{ fontSize: 18 }} className="font-bold mb-1">
+				<Text
+					style={{ fontSize: 18, color: "#ffff" }}
+					className="font-bold mb-1">
 					Healing Frequency
 				</Text>
 				<TouchableOpacity className="ml-2 self-center">
-					<MaterialIcons name="info-outline" size={18} />
+					<MaterialIcons name="info-outline" size={18} color={"#ffff"} />
 				</TouchableOpacity>
 			</View>
 			<View className="flex-row mt-2">
 				<TouchableOpacity
 					onPress={() => setShowFreqPicker(true)}
-					style={{ backgroundColor: "#E6E6E6" }}
+					style={{ backgroundColor: "#1F1C59" }}
 					className="h-10 flex-1 flex-row rounded">
-					<Text className="my-auto ml-4">{selectFreq}</Text>
+					<Text style={{ color: "#ffff" }} className="my-auto ml-4">
+						{selectFreq}
+					</Text>
 					<View className="ml-auto mr-4 self-center">
-						<FontAwesome name="angle-down" size={24} />
+						<FontAwesome name="angle-down" size={24} color={"#ffff"} />
 					</View>
 				</TouchableOpacity>
 				<Switch
