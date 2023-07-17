@@ -33,7 +33,7 @@ const MeditationTimer = ({ route }) => {
 				await addTrack(track);
 			} else {
 				const track2 = await TrackPlayer.getTrack(0);
-				if (track[0].title === track2.title) {
+				if (track.title === track2.title) {
 					return;
 				} else {
 					await addTrack(track);

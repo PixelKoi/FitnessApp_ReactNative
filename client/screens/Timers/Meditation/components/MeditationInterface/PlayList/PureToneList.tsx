@@ -27,7 +27,7 @@ const PureToneList = () => {
 		<TouchableOpacity
 			onPress={async () => {
 				navigation.navigate("MeditationTimer", {
-					track: pureToneTracks[id - 1],
+					track: pureToneTracks[Number(id - 1)],
 				});
 			}}
 			style={{ backgroundColor: "red", height: 150, width: 160 }}
@@ -37,6 +37,9 @@ const PureToneList = () => {
 	);
 	return (
 		<View className="mt-5">
+			<Text className="mb-2 font-bold" style={{ fontSize: 18 }}>
+				Binaural Pure Tones
+			</Text>
 			<FlatList
 				horizontal={true}
 				data={DATA}

@@ -6,7 +6,6 @@ import FontAwesome from "react-native-vector-icons/FontAwesome";
 import BinauralBeatsMenu from "./components/MeditationInterface/Menus/BinauralBeatsMenu";
 import AmbienceMenu from "./components/MeditationInterface/Menus/AmbienceMenu";
 import FreqMenu from "./components/MeditationInterface/Menus/FreqMenu";
-import { pureToneTracks } from "../../../constants";
 import PureToneList from "./components/MeditationInterface/PlayList/PureToneList";
 
 const MeditationInterface = () => {
