@@ -3,6 +3,9 @@ import { text, writer } from "@nozbe/watermelondb/decorators";
 
 export default class InventoryItem extends Model {
   static table = "inventoryItem";
+  static associations = {
+    journals: { type: "belongs_to", key: "events_id" },
+  };
 
   @text("calories") calories;
   @text("carbs") carbs;
