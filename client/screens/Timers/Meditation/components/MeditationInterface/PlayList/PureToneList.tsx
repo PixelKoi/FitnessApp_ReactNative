@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
-import React from "react";
+import React, { useEffect } from "react";
 import { FlatList, TouchableOpacity, View, Text } from "react-native";
 import { pureToneTracks } from "../../../../../../constants";
 
@@ -19,6 +19,14 @@ const PureToneList = () => {
 			id: "3",
 			title: "Alpha Wave",
 		},
+		{
+			id: "4",
+			title: "Beta Wave",
+		},
+		{
+			id: "5",
+			title: "Gamma Wave",
+		},
 	];
 
 	type ItemProps = { title: string; id: string };
@@ -30,9 +38,9 @@ const PureToneList = () => {
 					track: pureToneTracks[Number(id - 1)],
 				});
 			}}
-			style={{ backgroundColor: "red", height: 150, width: 160 }}
+			style={{ backgroundColor: "#E6E6E6", height: 150, width: 160 }}
 			className="mr-4">
-			<Text className="">{title}</Text>
+			<Text className="p-3">{title}</Text>
 		</TouchableOpacity>
 	);
 	return (

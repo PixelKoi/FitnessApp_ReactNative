@@ -24,7 +24,7 @@ const BinauralBeatsMenu = () => {
 					<MaterialIcons name="info-outline" size={18} />
 				</TouchableOpacity>
 				<Text style={{ fontSize: 12 }} className="ml-4 my-auto font-bold">
-					Heaphones Required
+					Heaphones Suggested
 				</Text>
 			</View>
 

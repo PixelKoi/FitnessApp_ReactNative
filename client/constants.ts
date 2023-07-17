@@ -60,4 +60,10 @@ export const pureToneTracks: Track[] = [
 		url: require("./assets/audio/Binaural/PureTone/BetaWave_PureTone_20.mp3"),
 		tag: ["beta", "alertness", "pureTone"],
 	},
+	{
+		id: 5,
+		title: "Gamma Wave - Pure Tone (20hz)",
+		url: require("./assets/audio/Binaural/PureTone/BetaWave_PureTone_20.mp3"),
+		tag: ["beta", "alertness", "pureTone"],
+	},
 ];
