@@ -34,3 +34,30 @@ export const sleepTracks: Track[] = [
 		url: require("./assets/audio/hourStorm.mp3"),
 	},
 ];
+
+export const pureToneTracks: Track[] = [
+	{
+		id: 1,
+		title: "Delta Wave - Pure Tone (0.5hz)",
+		url: require("./assets/audio/Binaural/PureTone/DeltaWave_PureTone_0.5.mp3"),
+		tag: ["delta", "sleep", "pureTone"],
+	},
+	{
+		id: 2,
+		title: "Theta Wave - Pure Tone (7hz)",
+		url: require("./assets/audio/Binaural/PureTone/ThetaWave_PureTone_7.mp3"),
+		tag: ["theta", "relax", "pureTone"],
+	},
+	{
+		id: 3,
+		title: "Alpha Wave - Pure Tone (10hz)",
+		url: require("./assets/audio/Binaural/PureTone/AlphaWave_PureTone_10.mp3"),
+		tag: ["alpha", "focus", "pureTone"],
+	},
+	{
+		id: 4,
+		title: "Beta Wave - Pure Tone (20hz)",
+		url: require("./assets/audio/Binaural/PureTone/BetaWave_PureTone_20.mp3"),
+		tag: ["beta", "alertness", "pureTone"],
+	},
+];

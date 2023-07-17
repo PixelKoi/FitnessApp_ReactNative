@@ -47,6 +47,7 @@ const MeditationTimer = ({ route }) => {
 	}
 
 	useEffect(() => {
+		console.log(track);
 		setup();
 	}, []);
 
@@ -86,7 +87,7 @@ const MeditationTimer = ({ route }) => {
 			</View>
 			<View className="mt-auto mb-20">
 				<Text style={{ color: "#ffff" }} className="text-center">
-					{track[0].title}
+					{track.title}
 				</Text>
 				<MusicPlayer />
 			</View>
