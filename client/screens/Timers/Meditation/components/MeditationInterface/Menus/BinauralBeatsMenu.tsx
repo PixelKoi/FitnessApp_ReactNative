@@ -14,7 +14,7 @@ const BinauralBeatsMenu = () => {
 	return (
 		<View className="flex-col">
 			<View className="flex-row">
-				<Text style={{ fontSize: 18 }} className="font-bold">
+				<Text style={{ fontSize: 18 }} className="font-bold mb-1">
 					Binaural Beat
 				</Text>
 

@@ -12,7 +12,7 @@ const FreqMenu = () => {
 	return (
 		<View>
 			<View className="flex-row">
-				<Text style={{ fontSize: 18 }} className="font-bold">
+				<Text style={{ fontSize: 18 }} className="font-bold mb-1">
 					Healing Frequency
 				</Text>
 				<TouchableOpacity className="ml-2 self-center">

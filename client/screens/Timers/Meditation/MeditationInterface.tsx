@@ -40,9 +40,9 @@ const MeditationInterface = () => {
 				<ChooseGoalMenu />
 
 				<View className="gap-5 mt-1">
-					<View>
+					{/* <View>
 						<AmbienceMenu />
-					</View>
+					</View> */}
 					<View>
 						<BinauralBeatsMenu />
 					</View>

@@ -3,10 +3,12 @@ import { Modal, Text, View, TouchableOpacity } from "react-native";
 
 const BinauralInfoModal = (props) => {
 	return (
-		<Modal visible={props.showInfo}>
+		<Modal visible={props.showInfo} animationType="slide">
 			<View className="flex-1 mx-4">
 				<View className="mt-28">
-					<TouchableOpacity onPress={() => props.setShowInfo(false)}>
+					<TouchableOpacity
+						className="ml-auto"
+						onPress={() => props.setShowInfo(false)}>
 						<Text>Close</Text>
 					</TouchableOpacity>
 					<View>
@@ -15,6 +17,14 @@ const BinauralInfoModal = (props) => {
 						</Text>
 					</View>
 					<View className="gap-5 mt-2">
+						<Text>
+							Binaural beats occur when two tones with slightly different
+							frequencies are presented separately to each ear, resulting in the
+							brain perceiving a beat with a frequency equal to the difference
+							between the two tones. This phenomenon, known as the
+							frequency-following effect, can synchronize brain activity and be
+							used to entrain the mind to specific mental states.
+						</Text>
 						<Text>
 							Delta Waves: 0.5 to 4 Hz associated with deep sleep and
 							unconscious states. They are often used for relaxation, deep
