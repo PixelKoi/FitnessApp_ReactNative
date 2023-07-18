@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Image, TouchableOpacity, View, ScrollView } from "react-native";
 import { Text, Card, Button } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
@@ -7,6 +7,8 @@ import { Q } from "@nozbe/watermelondb";
 import completeDiary from "../../../database/models/Food";
 import { useAppSelector, useAppDispatch } from "../../../redux-manager/hooks";
 import Food from "../../../database/models/Food";
+import { getAllTables } from "../../../database/helpers/mainHelper";
+
 import Icon from "react-native-vector-icons/FontAwesome";
 import DiaryBarChartVictory from "../../../utils/charts/diary/barChart/DiaryBarChartVictory";
 import CustomCalendar from "../../../utils/calendar/CustomCalendar";
@@ -110,6 +112,12 @@ const Diary = () => {
     //   console.log("food saved in DB!:", all_food);
     // }
   };
+
+  useEffect(() => {
+    //show all tables
+    const getTables = getAllTables();
+    console.log("Tables: ", getTables);
+  }, []);
 
   return (
     <View className="items-center bg-white pb-4">
