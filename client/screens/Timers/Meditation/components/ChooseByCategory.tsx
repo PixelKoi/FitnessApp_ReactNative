@@ -8,11 +8,13 @@ import relax from "../../../../assets/meditation_timer/relax.jpg";
 import meditate from "../../../../assets/meditation_timer/meditate.jpg";
 import habit from "../../../../assets/meditation_timer/habit.jpg";
 
-const ChooseByGoal = () => {
+const ChooseByCategory = () => {
 	const navigation = useNavigation();
 	return (
 		<View>
-			<Text className="font-bold">Browse by Goal</Text>
+			<Text style={{ fontSize: 18 }} className="font-bold text-white">
+				Browse by Category
+			</Text>
 
 			<View className="flex-row flex-wrap mt-4">
 				<View className="w-1/2 h-28 mb-10">
@@ -20,12 +22,13 @@ const ChooseByGoal = () => {
 						onPress={async () => {
 							navigation.navigate("MeditationTimer", { track: playListData });
 						}}
-						style={{ backgroundColor: "red" }}
 						className="h-28 mr-2 rounded-xl">
 						<Image className="w-full h-28 rounded-xl" source={sleepWell} />
 					</TouchableOpacity>
-					<Text style={{ fontSize: 13 }} className="mt-2 ml-2 font-bold">
-						Fall Asleep
+					<Text
+						style={{ fontSize: 13 }}
+						className="mt-2 ml-2 font-bold text-white">
+						Nature Sounds
 					</Text>
 				</View>
 				<View className="w-1/2 h-28">
@@ -33,12 +36,13 @@ const ChooseByGoal = () => {
 						onPress={async () => {
 							navigation.navigate("MeditationTimer", { track: playListData });
 						}}
-						style={{ backgroundColor: "red" }}
 						className="h-28 ml-2 rounded-xl">
 						<Image className="w-full h-28 rounded-xl" source={relax} />
 					</TouchableOpacity>
-					<Text style={{ fontSize: 13 }} className="ml-3 mt-2 font-bold">
-						Reduce Stress & Anxiety
+					<Text
+						style={{ fontSize: 13 }}
+						className="ml-3 mt-2 font-bold text-white">
+						Ambience
 					</Text>
 				</View>
 				<View className="w-1/2 h-28">
@@ -46,12 +50,13 @@ const ChooseByGoal = () => {
 						onPress={async () => {
 							navigation.navigate("MeditationTimer", { track: playListData });
 						}}
-						style={{ backgroundColor: "red" }}
 						className="h-28 mr-2 rounded-xl">
 						<Image className="w-full h-28 rounded-xl" source={meditate} />
 					</TouchableOpacity>
-					<Text style={{ fontSize: 13 }} className="mt-2 ml-2 font-bold">
-						Learn to Meditate
+					<Text
+						style={{ fontSize: 13 }}
+						className="mt-2 ml-2 font-bold text-white">
+						Sacred Sounds
 					</Text>
 				</View>
 				<View className="w-1/2 h-28">
@@ -59,12 +64,13 @@ const ChooseByGoal = () => {
 						onPress={async () => {
 							navigation.navigate("MeditationTimer", { track: playListData });
 						}}
-						style={{ backgroundColor: "red" }}
 						className="h-28 ml-2 rounded-xl">
 						<Image className="w-full h-28 rounded-xl" source={habit} />
 					</TouchableOpacity>
-					<Text style={{ fontSize: 13 }} className="ml-3 mt-2 font-bold">
-						Buidly a Daily Habit
+					<Text
+						style={{ fontSize: 13 }}
+						className="ml-3 mt-2 font-bold text-white">
+						Guided Meditation
 					</Text>
 				</View>
 			</View>
@@ -72,4 +78,4 @@ const ChooseByGoal = () => {
 	);
 };
 
-export default ChooseByGoal;
+export default ChooseByCategory;

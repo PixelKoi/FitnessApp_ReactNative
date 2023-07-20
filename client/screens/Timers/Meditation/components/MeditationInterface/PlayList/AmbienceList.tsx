@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { FlatList, TouchableOpacity, View, Text } from "react-native";
 import { pureToneTracks } from "../../../../../../constants";
 
-const PureToneList = () => {
+const AmbienceList = () => {
 	const navigation = useNavigation();
 
 	const DATA = [
@@ -47,7 +47,7 @@ const PureToneList = () => {
 	return (
 		<View>
 			<Text className="mb-2 font-bold text-white" style={{ fontSize: 18 }}>
-				Binaural Pure Tones
+				Ambience
 			</Text>
 			<FlatList
 				horizontal={true}
@@ -59,4 +59,4 @@ const PureToneList = () => {
 	);
 };
 
-export default PureToneList;
+export default AmbienceList;

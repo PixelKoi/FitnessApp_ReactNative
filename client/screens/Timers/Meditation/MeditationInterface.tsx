@@ -1,21 +1,15 @@
 import React, { useEffect, useState } from "react";
-import {
-	View,
-	Text,
-	TouchableOpacity,
-	FlatList,
-	StyleSheet,
-	Image,
-} from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
 import ChooseGoalMenu from "./components/MeditationInterface/Menus/ChooseGoalMenu";
 import { useNavigation } from "@react-navigation/native";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import BinauralBeatsMenu from "./components/MeditationInterface/Menus/BinauralBeatsMenu";
-import AmbienceMenu from "./components/MeditationInterface/Menus/AmbienceMenu";
-import FreqMenu from "./components/MeditationInterface/Menus/FreqMenu";
 import PureToneList from "./components/MeditationInterface/PlayList/PureToneList";
+import AmbienceList from "./components/MeditationInterface/PlayList/AmbienceList";
 import { LinearGradient } from "expo-linear-gradient";
 import emoji from "../../../utils/timer/meditation-dash/emoji-data";
+import ChooseByGoal from "./components/ChooseByCategory";
+import Divider from "../../../components/Dividers/Divider";
 
 const MeditationInterface = () => {
 	const navigation = useNavigation();
@@ -39,13 +33,13 @@ const MeditationInterface = () => {
 						onPress={() => {
 							navigation.goBack();
 						}}>
-						<FontAwesome name="angle-left" size={30} />
+						<FontAwesome name="angle-left" size={30} color={"#ffff"} />
 					</TouchableOpacity>
 				</View>
 			),
 			headerRight: () => (
 				<View>
-					<Image source={emoji[0].img} style={{ width: 30, height: 30 }} />
+					<Image source={emoji[0].img} style={{ width: 25, height: 25 }} />
 				</View>
 			),
 		});
@@ -90,7 +84,25 @@ const MeditationInterface = () => {
 						</TouchableOpacity>
 					</View>
 
-					{beatsToggle && <PureToneList />}
+					<Divider lineColor={"#fff"} />
+
+					<View className="mt-4">
+						<AmbienceList />
+					</View>
+
+					<Divider lineColor={"#fff"} />
+
+					{!beatsToggle && (
+						<View className="mt-4">
+							<ChooseByGoal />
+						</View>
+					)}
+
+					{beatsToggle && (
+						<View className="mt-4">
+							<PureToneList />
+						</View>
+					)}
 				</View>
 			</View>
 		</View>

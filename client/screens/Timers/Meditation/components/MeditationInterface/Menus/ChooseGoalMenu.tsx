@@ -13,7 +13,7 @@ const ChooseGoalMenu = () => {
 				style={{
 					backgroundColor: "#1F1C59",
 				}}
-				className="flex w-auto h-10 rounded">
+				className="flex w-auto h-10 rounded-2xl">
 				<View className="flex-row my-auto">
 					<Text style={{ color: "#ffff" }} className="ml-4 my-auto">
 						How do you feel?

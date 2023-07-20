@@ -5,7 +5,7 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import BinauralPicker from "./components/BinauralPicker";
 import BinauralInfoModal from "./info-modals/BinauralInfoModal";
 
-const BinauralBeatsMenu = (props) => {
+const BinauralBeatsMenu = (props: any) => {
 	const [showBinauralPicker, setShowBinauralPicker] = useState(false);
 	const [selectBinaural, setSelectedBinaural] = useState("Select");
 	const [showInfo, setShowInfo] = useState(false);
@@ -44,6 +44,7 @@ const BinauralBeatsMenu = (props) => {
 					</View>
 				</TouchableOpacity>
 				<Switch
+					trackColor={{ false: "#1F1C59", true: "#1F1C59" }}
 					className="ml-4 self-center"
 					onValueChange={() => {
 						if (props.beatsToggle === false) {

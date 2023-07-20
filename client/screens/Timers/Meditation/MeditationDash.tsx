@@ -9,7 +9,7 @@ import { useNavigation } from "@react-navigation/native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import EmojiDropDown from "./components/EmojiDropDown";
-import ChooseByGoal from "./components/ChooseByGoal";
+import ChooseByGoal from "./components/ChooseByCategory";
 
 //Todo: get tailwind Theme primary and secondary colors set to states and put it inside the labelStyle prop
 const MeditationDash = () => {

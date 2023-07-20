@@ -5,7 +5,7 @@ const binauralData = [
 	},
 	{
 		id: 2,
-		type: "Theta Waves - Stress",
+		type: "Theta Waves - Relax",
 	},
 	{
 		id: 3,
