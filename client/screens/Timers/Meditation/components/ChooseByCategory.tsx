@@ -12,7 +12,7 @@ const ChooseByCategory = () => {
 	const navigation = useNavigation();
 	return (
 		<View>
-			<Text style={{ fontSize: 18 }} className="font-bold text-white">
+			<Text style={{ fontSize: 16 }} className="font-bold text-white">
 				Browse by Category
 			</Text>
 

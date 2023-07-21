@@ -1,11 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
+import {
+	View,
+	Text,
+	TouchableOpacity,
+	StyleSheet,
+	Image,
+	ScrollView,
+} from "react-native";
 import ChooseGoalMenu from "./components/MeditationInterface/Menus/ChooseGoalMenu";
 import { useNavigation } from "@react-navigation/native";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import BinauralBeatsMenu from "./components/MeditationInterface/Menus/BinauralBeatsMenu";
 import PureToneList from "./components/MeditationInterface/PlayList/PureToneList";
+import CollectionList from "./components/MeditationInterface/PlayList/CollectionList";
 import AmbienceList from "./components/MeditationInterface/PlayList/AmbienceList";
+import BinauralCollection from "./components/MeditationInterface/PlayList/BinauralCollection";
 import { LinearGradient } from "expo-linear-gradient";
 import emoji from "../../../utils/timer/meditation-dash/emoji-data";
 import ChooseByGoal from "./components/ChooseByCategory";
@@ -62,45 +71,50 @@ const MeditationInterface = () => {
 				<View className="mx-4 mt-6">
 					<ChooseGoalMenu />
 
-					<View className="gap-5 mt-1">
-						<View>
-							<BinauralBeatsMenu
-								beatsToggle={beatsToggle}
-								setBeatsToggle={setBeatsToggle}
-							/>
-						</View>
-					</View>
-
-					<View className="mt-4 flex-row">
-						<Text style={{ fontSize: 18 }} className="font-bold text-white	">
-							Suggested
-						</Text>
-						<TouchableOpacity className="ml-auto">
-							<Text
-								style={{ fontSize: 14 }}
-								className="mt-auto font-bold text-white	">
-								View All
-							</Text>
-						</TouchableOpacity>
-					</View>
-
-					<Divider lineColor={"#fff"} />
-
 					<View className="mt-4">
-						<AmbienceList />
+						<BinauralBeatsMenu
+							beatsToggle={beatsToggle}
+							setBeatsToggle={setBeatsToggle}
+						/>
 					</View>
+
+					{/* <View className="mt-4 flex-row">
+							<Text style={{ fontSize: 16 }} className="font-bold text-white	">
+								Suggested
+							</Text>
+							<TouchableOpacity className="ml-auto">
+								<Text
+									style={{ fontSize: 14 }}
+									className="mt-auto font-bold text-white	">
+									View All
+								</Text>
+							</TouchableOpacity>
+						</View>
+
+						<Divider lineColor={"#fff"} /> */}
 
 					<Divider lineColor={"#fff"} />
 
 					{!beatsToggle && (
 						<View className="mt-4">
+							<CollectionList />
+							<Divider lineColor={"#fff"} />
+						</View>
+					)}
+
+					{!beatsToggle && (
+						<View className="py-4 pb-8">
 							<ChooseByGoal />
 						</View>
 					)}
 
 					{beatsToggle && (
-						<View className="mt-4">
-							<PureToneList />
+						<View className="mt-4 ">
+							<BinauralCollection />
+							<Divider lineColor={"#fff"} />
+							<View className="mt-4">
+								<PureToneList />
+							</View>
 						</View>
 					)}
 				</View>
