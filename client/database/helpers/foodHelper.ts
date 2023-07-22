@@ -1,4 +1,4 @@
-import { database } from "./db";
+import { database } from "./../models/";
 
 // this is just an example, actual data will come from your application
 let exampleData = {
