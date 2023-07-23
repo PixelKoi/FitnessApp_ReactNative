@@ -13,7 +13,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 const MeditationPLayer = ({ route }) => {
 	//navigation
 	const navigation = useNavigation();
-	const { track, track_id } = route.params;
+	const { track, track_id, title } = route.params;
 
 	//import redux
 	const { colors } = useAppSelector((state) => state.theme);
@@ -82,9 +82,6 @@ const MeditationPLayer = ({ route }) => {
 				</View>
 			</View>
 			<View className="mt-auto mb-20">
-				<Text style={{ color: "#ffff" }} className="text-center">
-					{track.title}
-				</Text>
 				<MusicPlayer />
 			</View>
 		</View>

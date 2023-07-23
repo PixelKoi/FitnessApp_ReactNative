@@ -28,23 +28,25 @@ const CollectionList = () => {
 
 	type ItemProps = { title: string; id: string; img: any };
 	const Item = ({ title, id, img }: ItemProps) => (
-		<TouchableOpacity
-			onPress={async () => {
-				navigation.navigate("MeditationTimer", {
-					track: collectionTracks,
-					track_id: id - 1,
-				});
-			}}>
-			<View
-				className="mr-4 rounded"
-				style={{
-					height: 150,
-					width: 150,
+		<View className="flex-col">
+			<TouchableOpacity
+				onPress={async () => {
+					navigation.navigate("MeditationTimer", {
+						track: collectionTracks,
+						track_id: id - 1,
+						title: collectionTracks[id - 1].title,
+					});
 				}}>
-				<Image source={img} style={styles.backgroundImage} />
-			</View>
-			<Text className="mt-2 ml-1 text-white">{title}</Text>
-		</TouchableOpacity>
+				<View
+					className="mr-4 rounded"
+					style={{
+						width: 150,
+					}}>
+					<Image source={img} className="w-full h-40" />
+				</View>
+			</TouchableOpacity>
+			<Text className="mt-3 ml-1 text-white">{title}</Text>
+		</View>
 	);
 	return (
 		<View>
