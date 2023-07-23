@@ -10,6 +10,7 @@ import MeditationInterface from "../../screens/Timers/Meditation/MeditationInter
 import FastingDash from "../../screens/Timers/Fasting/FastingDash";
 import DefaultSpinner from "../../components/Loaders/DefaultSpinner";
 import Fasting from "../../screens/Timers/Fasting/Fasting";
+import ViewAll from "../../screens/Timers/Meditation/components/MeditationInterface/PlayList/components/ViewAll";
 //nav imports
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -153,6 +154,11 @@ function Navigation({ session }: { session: Session }) {
 				<Stack.Screen
 					name="MeditationDash"
 					component={MeditationInterface}
+					options={{ headerShown: true }}
+				/>
+				<Stack.Screen
+					name="ViewAll"
+					component={ViewAll}
 					options={{ headerShown: true }}
 				/>
 				<Stack.Screen

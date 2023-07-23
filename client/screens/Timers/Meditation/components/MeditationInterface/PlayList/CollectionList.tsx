@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
 	FlatList,
 	TouchableOpacity,
@@ -9,22 +9,12 @@ import {
 	StyleSheet,
 } from "react-native";
 import { collectionTracks } from "../../../../../../utils/playlists/collection-sounds";
+import ViewAll from "./components/ViewAll";
 
 const CollectionList = () => {
 	const navigation = useNavigation();
 
-	const DATA = [
-		{
-			id: "1",
-			title: collectionTracks[0].title,
-			img: collectionTracks[0].artwork,
-		},
-		{
-			id: "2",
-			title: collectionTracks[1].title,
-			img: collectionTracks[1].artwork,
-		},
-	];
+	const [showViewAll, setViewAll] = useState(false);
 
 	type ItemProps = { title: string; id: string; img: any };
 	const Item = ({ title, id, img }: ItemProps) => (
@@ -54,7 +44,14 @@ const CollectionList = () => {
 				<Text className="font-bold text-white" style={{ fontSize: 16 }}>
 					Collection
 				</Text>
-				<TouchableOpacity className="ml-auto mt-aut">
+				<TouchableOpacity
+					onPress={async () => {
+						navigation.navigate("ViewAll", {
+							track: collectionTracks,
+							headerTitle: "Collection",
+						});
+					}}
+					className="ml-auto mt-aut">
 					<Text className="text-white font-bold" style={{ fontSize: 14 }}>
 						View All
 					</Text>
@@ -63,7 +60,7 @@ const CollectionList = () => {
 
 			<FlatList
 				horizontal={true}
-				data={DATA}
+				data={collectionTracks}
 				renderItem={({ item }) => (
 					<Item title={item.title} id={item.id} img={item.img} />
 				)}
