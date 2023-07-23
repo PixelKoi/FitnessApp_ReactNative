@@ -13,7 +13,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 const MeditationPLayer = ({ route }) => {
 	//navigation
 	const navigation = useNavigation();
-	const { track } = route.params;
+	const { track, track_id } = route.params;
 
 	//import redux
 	const { colors } = useAppSelector((state) => state.theme);
@@ -23,39 +23,40 @@ const MeditationPLayer = ({ route }) => {
 
 	//Doesn't reload existing track
 	//Removes last track and plays next course
-	async function setup() {
-		const isSetup = await setupPlayer();
-
-		if (isSetup === true) {
-			const queue = await TrackPlayer.getQueue();
-			const isEmpty = queue.length === 0;
-
-			if (isEmpty) {
-				await addTrack(track);
-			} else {
-				const track2 = await TrackPlayer.getTrack(0);
-				if (track.title === track2.title) {
-					return;
-				} else {
-					await addTrack(track);
-					await TrackPlayer.skipToNext();
-					await TrackPlayer.remove(0);
-				}
-			}
-		}
-
-		setIsPlayerReady(isSetup);
-	}
-
 	// async function setup() {
 	// 	const isSetup = await setupPlayer();
 
-	// 	//if setup add track
-	// 	if (isSetup) {
-	// 		await addTrack(track);
+	// 	if (isSetup === true) {
+	// 		const queue = await TrackPlayer.getQueue();
+	// 		const isEmpty = queue.length === 0;
+
+	// 		if (isEmpty) {
+	// 			await addTrack(track);
+	// 		} else {
+	// 			const track2 = await TrackPlayer.getTrack(0);
+	// 			if (track.title === track2.title) {
+	// 				return;
+	// 			} else {
+	// 				await addTrack(track);
+	// 				await TrackPlayer.skipToNext();
+	// 				await TrackPlayer.remove(0);
+	// 			}
+	// 		}
 	// 	}
+
 	// 	setIsPlayerReady(isSetup);
 	// }
+
+	async function setup() {
+		const isSetup = await setupPlayer();
+
+		//if setup add track
+		if (isSetup) {
+			await addTrack(track);
+			await TrackPlayer.skip(track_id);
+		}
+		setIsPlayerReady(isSetup);
+	}
 
 	useEffect(() => {
 		console.log(track);

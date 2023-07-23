@@ -31,7 +31,8 @@ const CollectionList = () => {
 		<TouchableOpacity
 			onPress={async () => {
 				navigation.navigate("MeditationTimer", {
-					track: collectionTracks[id - 1],
+					track: collectionTracks,
+					track_id: id - 1,
 				});
 			}}>
 			<View
