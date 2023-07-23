@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, Text, TouchableOpacity, Dimensions } from "react-native";
 import { Button } from "react-native-paper";
 import Fasting from "./Fasting/Fasting";
-import Meditation from "./Meditation/MeditationTimer";
+import Meditation from "./Meditation/MeditationPLayer";
 import MeditationDash from "./Meditation/MeditationDash";
 import { useAppSelector } from "../../redux-manager/hooks";
 import { useNavigation } from "@react-navigation/native";

@@ -5,7 +5,7 @@ import Settings from "../../screens/Settings/Settings";
 import ThemeSelector from "../../screens/Settings/Theme/ThemeSelector";
 import Meal from "../../screens/Nutrition/Diary/Meal";
 import MeditationDash from "../../screens/Timers/Meditation/MeditationDash";
-import MeditationTimer from "../../screens/Timers/Meditation/MeditationTimer";
+import MeditationTimer from "../../screens/Timers/Meditation/MeditationPLayer";
 import MeditationInterface from "../../screens/Timers/Meditation/MeditationInterface";
 import FastingDash from "../../screens/Timers/Fasting/FastingDash";
 import DefaultSpinner from "../../components/Loaders/DefaultSpinner";

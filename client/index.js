@@ -1,6 +1,6 @@
 import { registerRootComponent } from "expo";
 import TrackPlayer from "react-native-track-player";
-import { playBackService } from "./musicPlayerServices";
+import { playbackService } from "./musicPlayerServices";
 import App from "./App";
 
 // registerRootComponent calls AppRegistry.registerComponent('main', () => App);
@@ -10,4 +10,4 @@ import App from "./App";
 // AppRegistry.registerComponent(...);
 
 registerRootComponent(App);
-TrackPlayer.registerPlaybackService(() => playBackService);
+TrackPlayer.registerPlaybackService(() => playbackService);

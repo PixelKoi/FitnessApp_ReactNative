@@ -1,25 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, Pressable } from "react-native";
+import { View, Pressable } from "react-native";
 import TrackPlayer, {
 	usePlaybackState,
 	State,
 	useProgress,
 } from "react-native-track-player";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import { playBackService } from "../../musicPlayerServices";
-import {
-	incrementTimeSpentMeditating,
-	setMeditationTimer,
-} from "../../redux-manager/redux-slice/meditation-slice";
-import { useAppSelector, useAppDispatch } from "../../redux-manager/hooks";
+import { setMeditationTimer } from "../../redux-manager/redux-slice/meditation-slice";
+import { useAppDispatch } from "../../redux-manager/hooks";
 
 const ControlCenter = () => {
 	const playBackState = usePlaybackState();
 	const [trackPosition, setTrackPosition] = useState<number>(0);
-	const { position, duration } = useProgress();
+	const { position } = useProgress();
 
 	//Initiate redux
-	const { timeSpentMeditating } = useAppSelector((state) => state.meditation);
 	const dispatch = useAppDispatch();
 
 	//go forward 15s
@@ -34,7 +29,18 @@ const ControlCenter = () => {
 		await TrackPlayer.seekTo(trackPosition - 15);
 	};
 
-	const togglePlayerback = async (playback: State) => {
+	//go to next track in playlist
+	const skipToNext = async () => {
+		await TrackPlayer.skipToNext();
+	};
+
+	//go to previous track in playlist
+	const skipToPrevious = async () => {
+		await TrackPlayer.skipToPrevious();
+	};
+
+	//if track is loaded and paused and ready - play else pause
+	const togglePlayback = async (playback: State) => {
 		const currentTrack = await TrackPlayer.getCurrentTrack();
 
 		if (currentTrack !== null) {
@@ -58,19 +64,19 @@ const ControlCenter = () => {
 
 	return (
 		<View className="flex-row justify-center items-center">
-			<Pressable onPress={skipBackwards}>
+			<Pressable onPress={skipToPrevious}>
 				<Icon style={{ color: "#fff" }} name="skip-previous" size={40} />
 			</Pressable>
 			<Pressable
 				style={{ marginHorizontal: 24 }}
-				onPress={() => togglePlayerback(playBackState)}>
+				onPress={() => togglePlayback(playBackState)}>
 				<Icon
 					style={{ color: "#fff" }}
 					name={playBackState === State.Playing ? "pause" : "play-arrow"}
 					size={75}
 				/>
 			</Pressable>
-			<Pressable onPress={skipForward}>
+			<Pressable onPress={skipToNext}>
 				<Icon style={{ color: "#fff" }} name="skip-next" size={40} />
 			</Pressable>
 		</View>

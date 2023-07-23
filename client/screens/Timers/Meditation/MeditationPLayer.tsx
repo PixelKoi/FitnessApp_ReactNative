@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, ActivityIndicator } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useAppSelector } from "../../../redux-manager/hooks";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
@@ -7,9 +7,10 @@ import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { setupPlayer, addTrack } from "../../../musicPlayerServices";
 import TrackPlayer from "react-native-track-player";
 import MusicPlayer from "./components/MusicPlayer";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 //Todo: Add lotus icon above start meditating button
-const MeditationTimer = ({ route }) => {
+const MeditationPLayer = ({ route }) => {
 	//navigation
 	const navigation = useNavigation();
 	const { track } = route.params;
@@ -46,10 +47,30 @@ const MeditationTimer = ({ route }) => {
 		setIsPlayerReady(isSetup);
 	}
 
+	// async function setup() {
+	// 	const isSetup = await setupPlayer();
+
+	// 	//if setup add track
+	// 	if (isSetup) {
+	// 		await addTrack(track);
+	// 	}
+	// 	setIsPlayerReady(isSetup);
+	// }
+
 	useEffect(() => {
 		console.log(track);
 		setup();
 	}, []);
+
+	//if player is not ready
+	// if (!isPlayerReady) {
+	// 	return (
+	// 		<SafeAreaView>
+	// 			<ActivityIndicator />
+	// 			<Text>Testing</Text>
+	// 		</SafeAreaView>
+	// 	);
+	// }
 
 	React.useLayoutEffect(() => {
 		navigation.setOptions({
@@ -95,4 +116,4 @@ const MeditationTimer = ({ route }) => {
 	);
 };
 
-export default MeditationTimer;
+export default MeditationPLayer;
