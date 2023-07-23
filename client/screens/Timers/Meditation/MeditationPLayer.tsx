@@ -21,32 +21,6 @@ const MeditationPLayer = ({ route }) => {
 	//Track states
 	const [isPlayerReady, setIsPlayerReady] = useState(false);
 
-	//Doesn't reload existing track
-	//Removes last track and plays next course
-	// async function setup() {
-	// 	const isSetup = await setupPlayer();
-
-	// 	if (isSetup === true) {
-	// 		const queue = await TrackPlayer.getQueue();
-	// 		const isEmpty = queue.length === 0;
-
-	// 		if (isEmpty) {
-	// 			await addTrack(track);
-	// 		} else {
-	// 			const track2 = await TrackPlayer.getTrack(0);
-	// 			if (track.title === track2.title) {
-	// 				return;
-	// 			} else {
-	// 				await addTrack(track);
-	// 				await TrackPlayer.skipToNext();
-	// 				await TrackPlayer.remove(0);
-	// 			}
-	// 		}
-	// 	}
-
-	// 	setIsPlayerReady(isSetup);
-	// }
-
 	async function setup() {
 		const isSetup = await setupPlayer();
 
