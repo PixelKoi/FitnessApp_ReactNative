@@ -1,4 +1,4 @@
-import { database } from "./../models/";
+import { useDatabase } from "@nozbe/watermelondb/hooks";
 
 // this is just an example, actual data will come from your application
 let exampleData = {
@@ -51,6 +51,8 @@ let exampleData = {
 };
 
 export const foodEntry = async (props) => {
+  const database = useDatabase();
+
   database.write(async () => {
     let foodEntry = await database.get("food_entries").create((foodEntry) => {
       foodEntry.journal_entry_id = exampleData.journalEntryID;

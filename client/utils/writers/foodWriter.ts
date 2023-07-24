@@ -1,90 +1,89 @@
 import { useDatabase } from "@nozbe/watermelondb/hooks";
+import React, { useEffect } from "react";
+import FoodEntry from "../../database/models/FoodEntry";
+import Meal from "../../database/models/Meal";
+import InventoryItem from "../../database/models/InventoryItem";
+import MealInventoryItem from "../../database/models/MealInventoryItem";
+import Food from "../../database/models/Food";
 
-// this is just an example, actual data will come from your application
+const FoodEntry = ({
+  journalEntryID,
+  breakfast,
+  lunch,
+  dinner,
+  snacks,
+  water,
+}) => {
+  useEffect(() => {
+    const foodEntry = async () => {
+      const database = useDatabase();
 
-// what is my exampleData object? I need to create a foodEntry with the following data:
+      return await database.write(async () => {
+        const foodEntry = await database
+          .get<FoodEntry>("foodEntrys")
+          .create((data) => {
+            data.createFoodEntry(
+              (data.journals_id = journalEntryID),
+              (data.water = water)
+            );
+          });
 
+        const createMeal = async (mealCategory, items) => {
+          const meal = await database.get<Meal>("meals").create((data) => {
+            data.Meal(
+              (data.food_entry_id = foodEntry.id),
+              (data.meal_category = mealCategory)
+            );
+          });
 
+          for (let itemData of items) {
+            await database
+              .get<InventoryItem>("inventory_items")
+              .create((item) => {
+                item.createInventoryItem(
+                  (item.carbs = itemData.Carbs),
+                  (item.protein = itemData.Protein),
+                  (item.fat = itemData.Fat),
+                  (item.calories = itemData.Calories),
+                  (item.description = itemData.description),
+                  (item.quantity = itemData.quantity)
+                );
+              });
 
-let exampleData = {
-  journalEntryID: "abc123",
-  meals: [
-    {
-      mealCategory: "Breakfast",
-      inventoryItems: [
-        {
-          carbs: "xyz",
-          fat: "xyz",
-          protein: "xyz",
-          calories: 500,
-          description: "Eggs",
-          quantity: 2,
-        },
-        {
-          carbs: "xyz",
-          fat: "xyz",
-          protein: "xyz",
-          calories: 300,
-          description: "Bacon",
-          quantity: 3,
-        },
-        // more items...
-      ],
-    },
-    {
-      mealCategory: "Lunch",
-      inventoryItems: [
-        {
-          carbs: "xyz",
-          fat: "xyz",
-          protein: "xyz",
-          calories: 700,
-          description: "Chicken",
-          quantity: 1,
-        },
-        {
-          carbs: "xyz",
-          fat: "xyz",
-          protein: "xyz",
-          calories: 200,
-          description: "Salad",
-          quantity: 1,
-        },
-      ],
-    },
-  ],
-};
+            await database
+              .get<MealInventoryItem>("meal_inventory_item")
+              .create((data) => {
+                data.createMealInventoryItem(
+                  (data.meal_id = meal.id),
+                  (data.inventory_item_id = item.id)
+                );
+              });
+          }
+        };
 
-export const foodEntry = async (props) => {
-  const database = useDatabase();
+        if (breakfast && breakfast.length > 0) {
+          await createMeal("BREAKFAST", breakfast);
+        }
 
-  database.write(async () => {
-    let foodEntry = await database.get("food_entries").create((foodEntry) => {
-      foodEntry.journal_entry_id = exampleData.journalEntryID;
-      foodEntry.water = props.water; // Set the water value from props
-    });
+        if (lunch && lunch.length > 0) {
+          await createMeal("lunch", lunch);
+        }
 
-    for (let mealData of exampleData.meals) {
-      let meal = await database.get("meals").create((meal) => {
-        meal.food_entry_id = foodEntry.id;
-        meal.meal_category = mealData.mealCategory;
+        if (dinner && dinner.length > 0) {
+          await createMeal("dinner", dinner);
+        }
+
+        if (snacks && snacks.length > 0) {
+          await createMeal("snacks", snacks);
+        }
+
+        return foodEntry;
       });
+    };
 
-      for (let itemData of mealData.inventoryItems) {
-        await database.get("inventory_items").create((item) => {
-          item.carbs = itemData.carbs;
-          item.protein = itemData.protein;
-          item.fat = itemData.fat;
-          item.calories = itemData.calories;
-          item.description = itemData.description;
-          item.quantity = itemData.quantity;
-        });
-
-        await database.get("meal_inventory_item").create((mii) => {
-          mii.meal_id = meal.id;
-          mii.inventory_item_id = item.id;
-        });
-      }
-    }
-  });
+    // Call the foodEntry function when the component mounts
+    foodEntry();
+  }, [journalEntryID, breakfast, lunch, dinner, snacks, water]);
 };
+
+export default FoodEntry;

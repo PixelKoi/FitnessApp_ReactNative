@@ -235,7 +235,6 @@ const Nutrition: React.FC = (props) => {
       food.forEach((item) => {
         const foodLog = {
           quantity: 0,
-          isSelected: false,
           id: item.fdcId,
           description: item.description,
           Protein: item.foodNutrients[0].value,

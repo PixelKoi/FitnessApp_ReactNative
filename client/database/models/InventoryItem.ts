@@ -12,6 +12,7 @@ export default class InventoryItem extends Model {
   @text("fat") fat;
   @text("protein") protein;
   @text("description") description;
+  @text("id") id;
   @text("quantity") quantity;
 
   @writer
@@ -30,6 +31,7 @@ export default class InventoryItem extends Model {
         item.fat = fat;
         item.protein = protein;
         item.description = description;
+        item.id = id;
         item.quantity = quantity;
       });
       console.log("Inventory Item WRITER:", newItem);

@@ -4,27 +4,25 @@ import { Text, Card, Button } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { useDatabase } from "@nozbe/watermelondb/hooks";
 import { Q } from "@nozbe/watermelondb";
-import completeDiary from "../../../database/models/Food";
-import { useAppSelector, useAppDispatch } from "../../../redux-manager/hooks";
+import FoodLog from "../../../database/models/FoodEntry";
+import { useAppSelector } from "../../../redux-manager/hooks";
 import Food from "../../../database/models/Food";
 import { getAllTables } from "../../../database/helpers/mainHelper";
+import { foodEntry } from "../../../utils/writers/foodWriter";
 
 import Icon from "react-native-vector-icons/FontAwesome";
 import DiaryBarChartVictory from "../../../utils/charts/diary/barChart/DiaryBarChartVictory";
 import CustomCalendar from "../../../utils/calendar/CustomCalendar";
 const Diary = () => {
   const tabNavigation = useNavigation();
-  const database = useDatabase();
   const profileInfo = useAppSelector((state) => state.user);
   console.log("PROFILE INFO: ", profileInfo);
   console.log("PROFILE CALS: ", profileInfo.dailyCal);
 
-  const dispatch = useAppDispatch();
-
   const { colors } = useAppSelector((state) => state.theme);
   const primary_color = colors.primary;
 
-  const { breakfast, lunch, dinner, snacks } = useAppSelector(
+  const { breakfast, lunch, dinner, snacks, water } = useAppSelector(
     (state) => state.inventory
   );
 
@@ -89,29 +87,55 @@ const Diary = () => {
     });
   });
 
-  const diaryButton = async () => {
-    const food_instance = database.get("foods");
-
-    // console.log("FOODS in 🍉🍉🍉", food_instance);
-    console.log("FOODS", typeof selectedFoods[0].food.Carbs);
-    //
-    // const data = await database.write(async () => {
-    //   await database.get<Food>("foods").create((data) => {
-    //     data.completeDiary(
-    //       (data.calories = selectedFoods[0].food.Calories),
-    //       (data.carbs = selectedFoods[0].food.Carbs),
-    //       (data.fat = selectedFoods[0].food.Fat),
-    //       (data.protein = selectedFoods[0].food.Protein),
-    //       (data.description = selectedFoods[0].food.description)
-    //     );
-    //   });
-    // });
-    // if (data) {
-    //   console.log("Successfully created food post");
-    //   const all_food = await database.get("foods").query().fetch();
-    //   console.log("food saved in DB!:", all_food);
-    // }
+  // GENERATE DATE FOR ENTRY
+  const generateJournalEntryID = () => {
+    const timestamp = Date.now(); // Get the current timestamp in milliseconds
+    const randomString = Math.random().toString(36).substr(2, 5); // Generate a random alphanumeric string
+    const journalEntryID = `JE_${timestamp}_${randomString}`; // Combine timestamp and random string
+    return journalEntryID;
   };
+
+  const diaryButton = async () => {
+    const database = useDatabase();
+    const journalEntryID = generateJournalEntryID();
+
+    const food_instance = database.get("foods");
+    console.log("DIARY BUTTON PRESSED");
+    console.log("BREAKFAST", breakfast);
+    console.log("lunch", lunch);
+    console.log("dinner", dinner);
+    console.log("snacks", snacks);
+    console.log("water", water);
+    const results = foodEntry(
+      journalEntryID,
+      breakfast,
+      lunch,
+      dinner,
+      snacks,
+      water
+    );
+  };
+  console.log("RESULTS: ", results);
+  console.log("FOODS in 🍉🍉🍉", food_instance);
+  console.log("FOODS", typeof selectedFoods[0].food.Carbs);
+  const mealData = {};
+  await foodEntry(10, mealData, 0);
+  const data = await database.write(async () => {
+    await database.get<Food>("foods").create((data) => {
+      data.completeDiary(
+        (data.calories = selectedFoods[0].food.Calories),
+        (data.carbs = selectedFoods[0].food.Carbs),
+        (data.fat = selectedFoods[0].food.Fat),
+        (data.protein = selectedFoods[0].food.Protein),
+        (data.description = selectedFoods[0].food.description)
+      );
+    });
+  });
+  if (data) {
+    console.log("Successfully created food post");
+    const all_food = await database.get("foods").query().fetch();
+    console.log("food saved in DB!:", all_food);
+  }
 
   useEffect(() => {
     //show all tables
@@ -145,7 +169,7 @@ const Diary = () => {
           style={{ backgroundColor: primary_color, borderRadius: 8 }}
           className=""
           mode="text"
-          onPress={() => console.log("log it ")}
+          onPress={() => diaryButton()}
         >
           <Text style={{ color: colors.background }}> Complete Diary</Text>
         </Button>

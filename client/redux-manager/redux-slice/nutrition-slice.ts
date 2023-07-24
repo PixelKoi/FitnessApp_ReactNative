@@ -19,6 +19,7 @@ interface InventoryState {
   lunch: Nutrition[];
   dinner: Nutrition[];
   snacks: Nutrition[];
+  water: number;
 }
 
 const initialState: InventoryState = {
@@ -27,6 +28,7 @@ const initialState: InventoryState = {
   lunch: [],
   dinner: [],
   snacks: [],
+  water: 0,
 };
 
 // REDUCERS
@@ -113,6 +115,9 @@ const nutritionSlice = createSlice({
       state[newCategory].push(...state.inventory);
       state.inventory = [];
     },
+    updateWater: (state, action: PayloadAction<number>) => {
+      state.water = action.payload;
+    },
   },
 });
 
@@ -124,5 +129,6 @@ export const {
   changeCategory,
   setCategory,
   deleteMealItem,
+  updateWater,
 } = nutritionSlice.actions;
 export default nutritionSlice.reducer;
