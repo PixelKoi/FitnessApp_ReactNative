@@ -6,7 +6,7 @@ import InventoryItem from "../../database/models/InventoryItem";
 import MealInventoryItem from "../../database/models/MealInventoryItem";
 import Food from "../../database/models/Food";
 
-const FoodEntry = ({
+const FoodWriter = ({
   journalEntryID,
   breakfast,
   lunch,
@@ -86,4 +86,4 @@ const FoodEntry = ({
   }, [journalEntryID, breakfast, lunch, dinner, snacks, water]);
 };
 
-export default FoodEntry;
+export default FoodWriter;

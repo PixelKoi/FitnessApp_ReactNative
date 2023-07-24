@@ -8,7 +8,7 @@ import FoodLog from "../../../database/models/FoodEntry";
 import { useAppSelector } from "../../../redux-manager/hooks";
 import Food from "../../../database/models/Food";
 import { getAllTables } from "../../../database/helpers/mainHelper";
-import { foodEntry } from "../../../utils/writers/foodWriter";
+import { FoodWriter } from "../../../utils/writers/foodWriter";
 
 import Icon from "react-native-vector-icons/FontAwesome";
 import DiaryBarChartVictory from "../../../utils/charts/diary/barChart/DiaryBarChartVictory";
@@ -106,7 +106,7 @@ const Diary = () => {
     console.log("dinner", dinner);
     console.log("snacks", snacks);
     console.log("water", water);
-    const results = foodEntry(
+    const results = FoodWriter(
       journalEntryID,
       breakfast,
       lunch,
@@ -115,27 +115,27 @@ const Diary = () => {
       water
     );
   };
-  console.log("RESULTS: ", results);
-  console.log("FOODS in 🍉🍉🍉", food_instance);
-  console.log("FOODS", typeof selectedFoods[0].food.Carbs);
-  const mealData = {};
-  await foodEntry(10, mealData, 0);
-  const data = await database.write(async () => {
-    await database.get<Food>("foods").create((data) => {
-      data.completeDiary(
-        (data.calories = selectedFoods[0].food.Calories),
-        (data.carbs = selectedFoods[0].food.Carbs),
-        (data.fat = selectedFoods[0].food.Fat),
-        (data.protein = selectedFoods[0].food.Protein),
-        (data.description = selectedFoods[0].food.description)
-      );
-    });
-  });
-  if (data) {
-    console.log("Successfully created food post");
-    const all_food = await database.get("foods").query().fetch();
-    console.log("food saved in DB!:", all_food);
-  }
+  // console.log("RESULTS: ", results);
+  // console.log("FOODS in 🍉🍉🍉", food_instance);
+  // console.log("FOODS", typeof selectedFoods[0].food.Carbs);
+  // const mealData = {};
+  // await foodEntry(10, mealData, 0);
+  // const data = await database.write(async () => {
+  //   await database.get<Food>("foods").create((data) => {
+  //     data.completeDiary(
+  //       (data.calories = selectedFoods[0].food.Calories),
+  //       (data.carbs = selectedFoods[0].food.Carbs),
+  //       (data.fat = selectedFoods[0].food.Fat),
+  //       (data.protein = selectedFoods[0].food.Protein),
+  //       (data.description = selectedFoods[0].food.description)
+  //     );
+  //   });
+  // });
+  // if (data) {
+  //   console.log("Successfully created food post");
+  //   const all_food = await database.get("foods").query().fetch();
+  //   console.log("food saved in DB!:", all_food);
+  // }
 
   useEffect(() => {
     //show all tables
