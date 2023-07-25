@@ -78,7 +78,7 @@ const QuickLog = (props: any) => {
 				{/* Snack */}
 				<TouchableOpacity
 					onPress={() => {
-						tabNavigation.navigate("Meal", { snack: snack });
+						tabNavigation.navigate("Meal", { snack: snacks });
 					}}
 					style={{ width: "48%", height: 140 }}
 					className="w-1/2 bg-white  justify-center items-center rounded-xl">
