@@ -3,6 +3,8 @@ import { TouchableOpacity, View, Text } from "react-native";
 import { Surface } from "react-native-paper";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+
 import { useAppSelector } from "../../../redux-manager/hooks";
 
 const ActivityBoard = () => {
@@ -79,6 +81,23 @@ const ActivityBoard = () => {
 					className="w-1/2 rounded-xl bg-white">
 					<View>
 						<Text className="p-2 ml-1 text-xs font-bold">Steps</Text>
+					</View>
+					<View className="flex-row ml-3 mt-1">
+						<View className="w-6 h-6">
+							<View className="self-center my-auto">
+								<MaterialCommunityIcons
+									name="foot-print"
+									color={"#FFA01C"}
+									size={20}
+								/>
+							</View>
+						</View>
+						<Text className="self-center text-xs ml-2 font-semibold">0</Text>
+					</View>
+					<View className="flex-row ml-3 mt-1">
+						<Text className="self-center text-xs ml-2 font-semibold">
+							Goal: 10,000 steps
+						</Text>
 					</View>
 				</Surface>
 			</View>
