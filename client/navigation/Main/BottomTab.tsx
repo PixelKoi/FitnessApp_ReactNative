@@ -43,7 +43,7 @@ const BottomTab = () => {
 
 	return (
 		<BottomTab.Navigator
-			initialRouteName="Nutrition"
+			initialRouteName="Dashboard"
 			screenOptions={{
 				tabBarIconStyle: {
 					top: 15,
@@ -51,7 +51,7 @@ const BottomTab = () => {
 				tabBarStyle: {
 					position: "absolute",
 					height: 60,
-					bottom: 40,
+					bottom: 25,
 					left: 30,
 					right: 30,
 					borderRadius: 30,
