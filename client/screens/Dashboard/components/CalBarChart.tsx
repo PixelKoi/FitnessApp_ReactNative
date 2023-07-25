@@ -37,15 +37,15 @@ function CalBarChart({ caloriesRemaining, protein, fats, carbs }) {
 				width={Dimensions.get("window").width / 2}
 				height={180}
 				domainPadding={{ x: 13 }}
-				padding={{ top: 50, bottom: 50, left: 40, right: 20 }}>
-				{/* {data.map((datum, index) => (
+				padding={{ top: 55, bottom: 40, left: 40, right: 20 }}>
+				{data.map((datum, index) => (
 					<VictoryLabel
 						key={index}
 						x={40}
-						y={35 + index * 33} // adjust as needed
+						y={54 + index * 30} // adjust as needed
 						text={datum.category}
 					/>
-				))} */}
+				))}
 
 				<VictoryAxis offsetX={200} tickFormat={() => ""} />
 				<VictoryBar
