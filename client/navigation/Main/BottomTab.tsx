@@ -4,6 +4,7 @@ import Nutrition from "../../screens/Nutrition/Nutrition/Nutrition";
 import Diary from "../../screens/Nutrition/Diary/Diary";
 import NewDashboard from "../../screens/Dashboard/NewDashboard";
 import Timer from "../../screens/Timers/Timer";
+import Mode from "../../screens/Timers/Mode";
 //redux imports
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -74,3 +75,22 @@ const BottomTab = () => {
 };
 
 export default BottomTab;
+
+{
+	/* <BottomTab.Navigator
+initialRouteName="Dashboard"
+screenOptions={{
+  tabBarIconStyle: {
+    top: 15,
+  },
+  tabBarStyle: {
+    position: "absolute",
+    height: 60,
+    bottom: 25,
+    left: 40,
+    right: 40,
+    borderRadius: 30,
+    backgroundColor: "#6F7CF2",
+  },
+}}> */
+}

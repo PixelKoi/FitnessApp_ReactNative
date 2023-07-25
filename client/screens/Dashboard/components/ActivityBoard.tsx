@@ -17,7 +17,7 @@ const ActivityBoard = () => {
 				{/* Meditation Card */}
 				<Surface
 					style={{ height: 112, width: "48%" }}
-					className="w-1/2 rounded-xl mb-3 bg-white">
+					className="w-1/2 rounded-xl mb-3.5 bg-white">
 					<TouchableOpacity style={{ height: 112, width: "100%" }}>
 						<View className="flex-row">
 							<Text className="p-2 ml-1 text-xs font-bold">Meditation</Text>

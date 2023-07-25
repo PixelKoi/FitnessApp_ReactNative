@@ -4,7 +4,7 @@ import Logo from "../../../assets/images/home/Logo.png";
 
 const OpeningAnimation = (props) => {
 	return (
-		<Modal visible={props.visible} animationType="slide" className="flex-1">
+		<Modal visible={props.visible} className="flex-1">
 			<View className="flex-1 bg-slate-500 items-center justify-center">
 				<Image source={Logo} />
 			</View>
