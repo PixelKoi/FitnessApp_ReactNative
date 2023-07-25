@@ -12,66 +12,67 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import Ant from "react-native-vector-icons/AntDesign";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useAppSelector } from "../../redux-manager/hooks";
+import { View, StyleSheet } from "react-native";
 
 const BottomTab = () => {
 	//Set navigation instace
 	const BottomTab = createBottomTabNavigator();
 
-	//Import redux states
-	const { colors } = useAppSelector((state) => state.theme);
+	const tabBar = [
+		{
+			route: "Dashboard",
+			component: NewDashboard,
+			iconName: "view-dashboard-outline",
+		},
+		{
+			route: "Nutrition",
+			component: Nutrition,
+			iconName: "food-apple-outline",
+		},
+		{
+			route: "Timer",
+			component: Timer,
+			iconName: "timer-outline",
+		},
+		{
+			route: "Diary",
+			component: Diary,
+			iconName: "book",
+		},
+	];
 
 	return (
 		<BottomTab.Navigator
 			initialRouteName="Nutrition"
 			screenOptions={{
-				tabBarActiveTintColor: "#E07594",
-				tabBarInactiveTintColor: "#E0759480",
+				tabBarIconStyle: {
+					top: 15,
+				},
 				tabBarStyle: {
-					backgroundColor: "white",
-					borderTopColor: "transparent",
-					paddingTop: 12,
+					position: "absolute",
+					height: 60,
+					bottom: 40,
+					left: 30,
+					right: 30,
+					borderRadius: 30,
+					backgroundColor: "teal",
 				},
 			}}>
-			<BottomTab.Screen
-				name="Dashboard"
-				component={NewDashboard}
-				options={{
-					tabBarIcon: ({ color, size }) => (
-						<Icon name="view-dashboard-outline" size={24} color={"black"} />
-					),
-					tabBarLabel: "",
-				}}
-			/>
-			<BottomTab.Screen
-				name="Nutrition"
-				component={Nutrition}
-				options={{
-					tabBarIcon: ({ color, size }) => (
-						<Icon name="food-apple-outline" size={24} color={"black"} />
-					),
-					tabBarLabel: "",
-				}}
-			/>
-			<BottomTab.Screen
-				name="Timer"
-				component={Timer}
-				options={{
-					tabBarIcon: ({ color, size }) => (
-						<Icon name="timer-outline" size={24} color={"black"} />
-					),
-					tabBarLabel: "",
-				}}
-			/>
-			<BottomTab.Screen
-				name="Diary"
-				component={Diary}
-				options={{
-					tabBarIcon: ({ color, size }) => (
-						<Ant name="book" size={24} color={"black"} />
-					),
-					tabBarLabel: "",
-				}}
-			/>
+			{tabBar.map((item, index) => {
+				return (
+					<BottomTab.Screen
+						key={index}
+						name={item.route}
+						component={item.component}
+						options={{
+							tabBarShowLabel: false,
+							tabBarIcon: ({ color, size }) => (
+								<Icon name={item.iconName} size={24} color={"black"} />
+							),
+						}}
+					/>
+				);
+			})}
 		</BottomTab.Navigator>
 	);
 };
