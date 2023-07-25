@@ -12,7 +12,7 @@ const ActivityBoard = () => {
 
 	return (
 		<View>
-			<Text className="text-lg font-bold mt-4">Activity</Text>
+			<Text className="text-lg font-bold mt-2">Activity</Text>
 			<View className="flex-row flex-wrap justify-between mt-4">
 				{/* Meditation Card */}
 				<Surface

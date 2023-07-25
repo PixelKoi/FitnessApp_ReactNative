@@ -30,7 +30,7 @@ function CalBarChart({ caloriesRemaining, protein, fats, carbs }) {
 
 	const total = 100;
 	const filledValue = 55; // Change this to your actual data value
-	const remainder = 30;
+
 	return (
 		<Surface className="flex flex-row justify-center items-center bg-white rounded-2xl">
 			<VictoryChart
@@ -42,7 +42,7 @@ function CalBarChart({ caloriesRemaining, protein, fats, carbs }) {
 					<VictoryLabel
 						key={index}
 						x={40}
-						y={54 + index * 30} // adjust as needed
+						y={53 + index * 30} // adjust as needed
 						text={datum.category}
 					/>
 				))}

@@ -62,6 +62,33 @@ const NewDashboard = () => {
 						fats={12}
 					/>
 				</View>
+
+				<View className="flex-row justify-center gap-1 mt-4">
+					<View
+						style={{
+							width: 10,
+							height: 10,
+							borderRadius: 5,
+							backgroundColor: "#FFA01C",
+						}}
+					/>
+					<View
+						style={{
+							width: 10,
+							height: 10,
+							borderRadius: 5,
+							backgroundColor: "#D9D9D9",
+						}}
+					/>
+					<View
+						style={{
+							width: 10,
+							height: 10,
+							borderRadius: 5,
+							backgroundColor: "#D9D9D9",
+						}}
+					/>
+				</View>
 				{/* Activity Section */}
 				<ActivityBoard />
 			</View>
