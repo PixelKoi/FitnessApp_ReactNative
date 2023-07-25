@@ -2,14 +2,10 @@ import React from "react";
 //Screen imports
 import Nutrition from "../../screens/Nutrition/Nutrition/Nutrition";
 import Diary from "../../screens/Nutrition/Diary/Diary";
-import Dashboard from "../../screens/Dashboard/Dashboard";
-import Dashboard2 from "../../screens/Dashboard/Dashboard2";
 import NewDashboard from "../../screens/Dashboard/NewDashboard";
-
 import Timer from "../../screens/Timers/Timer";
 //redux imports
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import Ant from "react-native-vector-icons/AntDesign";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useAppSelector } from "../../redux-manager/hooks";
 import { View, StyleSheet } from "react-native";
@@ -66,7 +62,7 @@ const BottomTab = () => {
 						component={item.component}
 						options={{
 							tabBarShowLabel: false,
-							tabBarIcon: ({ color, size }) => (
+							tabBarIcon: () => (
 								<Icon name={item.iconName} size={24} color={"black"} />
 							),
 						}}
