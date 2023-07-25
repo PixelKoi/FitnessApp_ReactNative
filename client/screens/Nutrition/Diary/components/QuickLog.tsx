@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
-import { Button, Surface } from "react-native-paper";
+import { Surface } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { useAppSelector } from "../../../../redux-manager/hooks";
 
@@ -13,15 +13,6 @@ const QuickLog = (props: any) => {
 
 	return (
 		<View>
-			{/* Header */}
-			<View className="flex-row">
-				<Text className="ml-2 text-2xl font-bold">Daily Intake</Text>
-				<Button
-					style={{ backgroundColor: "#6F7CF2" }}
-					className="ml-auto h-10 rounded">
-					<Text className="my-auto px-3 text-white">Complete Diary</Text>
-				</Button>
-			</View>
 			{/* grid */}
 			<View className="flex-row flex-wrap justify-between mt-4">
 				{/* Breakfast */}
@@ -41,7 +32,7 @@ const QuickLog = (props: any) => {
 							/>
 						</View>
 						<Text className="text-black mt-1 font-semibold">Breakfast</Text>
-						<Text>{props.breakfastCal} calories</Text>
+						<Text className="text-xs">{props.breakfastCal} calories</Text>
 					</Surface>
 				</TouchableOpacity>
 				{/* Lunch */}
@@ -61,7 +52,7 @@ const QuickLog = (props: any) => {
 							/>
 						</View>
 						<Text className="text-black mt-1 font-semibold">Lunch</Text>
-						<Text>{props.lunchCal} calories</Text>
+						<Text className="text-xs">{props.lunchCal} calories</Text>
 					</Surface>
 				</TouchableOpacity>
 				{/* Dinner */}
@@ -81,7 +72,7 @@ const QuickLog = (props: any) => {
 							/>
 						</View>
 						<Text className="text-black mt-1 font-semibold">Dinner</Text>
-						<Text>{props.dinnerCal} calories</Text>
+						<Text className="text-xs">{props.dinnerCal} calories</Text>
 					</Surface>
 				</TouchableOpacity>
 				{/* Snack */}
@@ -101,7 +92,7 @@ const QuickLog = (props: any) => {
 							/>
 						</View>
 						<Text className="text-black mt-1 font-semibold">Snack</Text>
-						<Text className="">{props.snackCal} calories</Text>
+						<Text className="text-xs">{props.snackCal} calories</Text>
 					</Surface>
 				</TouchableOpacity>
 			</View>

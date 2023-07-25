@@ -12,6 +12,7 @@ import QuickLog from "./components/QuickLog";
 import Icon from "react-native-vector-icons/FontAwesome";
 import DiaryBarChartVictory from "../../../utils/charts/diary/barChart/DiaryBarChartVictory";
 import CustomCalendar from "../../../utils/calendar/CustomCalendar";
+import CalBarChart from "../../Dashboard/components/CalBarChart";
 const Diary = () => {
 	const tabNavigation = useNavigation();
 	const database = useDatabase();
@@ -75,14 +76,14 @@ const Diary = () => {
 			headerStyle: {
 				shadowColor: "transparent",
 			},
-			headerTintColor: primary_color,
+			headerTintColor: "black",
 			headerLeft: () => (
 				<TouchableOpacity
 					className="ml-4"
 					onPress={() => {
 						tabNavigation.navigate("Nutrition");
 					}}>
-					<Icon name="angle-left" style={{ color: primary_color }} size={24} />
+					<Icon name="angle-left" size={24} />
 				</TouchableOpacity>
 			),
 		});
@@ -124,16 +125,27 @@ const Diary = () => {
 				<View className="flex-row">
 					<CustomCalendar />
 				</View>
-
-				<View style={{ flexDirection: "row" }} className="px-4 mt-4">
-					<DiaryBarChartVictory
+				{/* Cal Chart */}
+				<View className="my-6">
+					<CalBarChart
 						caloriesRemaining={remainder}
 						protein={totalProteins}
 						carbs={totalCarbs}
 						fats={totalFats}
 					/>
 				</View>
-				{/* other content */}
+
+				{/* Quick Log Food */}
+				<View className="flex-row">
+					<Text className="ml-2 text-2xl font-bold">Daily Intake</Text>
+					<Button
+						onPress={() => console.log("log it ")}
+						style={{ backgroundColor: "#6F7CF2" }}
+						className="ml-auto h-10 rounded">
+						<Text className="my-auto px-3 text-white">Complete Diary</Text>
+					</Button>
+				</View>
+
 				<QuickLog
 					breakfastCal={breakfast_calories}
 					lunchCal={lunch_calories}
