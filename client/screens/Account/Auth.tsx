@@ -1,25 +1,23 @@
-import React, { useState } from "react";
-import { View, Image, Text } from "react-native";
-import { Button } from "react-native-paper";
-//Images
-import Running from "../../assets/images/home/HomeScreen_Running.png";
-//Import Redux
-import { useAppSelector } from "../../redux-manager/hooks";
+import React, { useState, useEffect } from "react";
+import { View } from "react-native";
 //Import Modals
-import { useNavigation } from "@react-navigation/native";
 import OpeningAnimation from "./components/OpeningAnimation";
 import OpeningScreen from "./components/OpeningScreen";
 
 const Auth = () => {
-	// Import nav
-	const navigation = useNavigation();
+	const [showAnimation, setShowAnimation] = useState(true);
+	useEffect(() => {
+		const timer = setTimeout(() => {
+			setShowAnimation(false);
+		}, 2000);
 
-	//Redux theme
-	const { colors } = useAppSelector((state) => state.theme);
+		// Clean up the timer to avoid memory leaks
+		return () => clearTimeout(timer);
+	}, [showAnimation]);
 
 	return (
 		<View className="flex-1">
-			<OpeningAnimation />
+			<OpeningAnimation visible={showAnimation} />
 			<OpeningScreen />
 		</View>
 	);
