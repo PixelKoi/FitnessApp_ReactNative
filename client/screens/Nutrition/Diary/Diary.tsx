@@ -8,7 +8,7 @@ import completeDiary from "../../../database/models/Food";
 import { useAppSelector, useAppDispatch } from "../../../redux-manager/hooks";
 import Food from "../../../database/models/Food";
 import { getAllTables } from "../../../database/helpers/mainHelper";
-
+import QuickLog from "./components/QuickLog";
 import Icon from "react-native-vector-icons/FontAwesome";
 import DiaryBarChartVictory from "../../../utils/charts/diary/barChart/DiaryBarChartVictory";
 import CustomCalendar from "../../../utils/calendar/CustomCalendar";
@@ -119,21 +119,36 @@ const Diary = () => {
 	}, []);
 
 	return (
-		<View className="items-center bg-white pb-4">
-			<View className="flex-row">
-				<CustomCalendar />
-			</View>
+		<View className="flex-1 bg-white pb-4">
+			<View className="mx-4">
+				<View className="flex-row">
+					<CustomCalendar />
+				</View>
 
-			<View style={{ flexDirection: "row" }} className="px-4 mt-4">
-				<DiaryBarChartVictory
-					caloriesRemaining={remainder}
-					protein={totalProteins}
-					carbs={totalCarbs}
-					fats={totalFats}
+				<View style={{ flexDirection: "row" }} className="px-4 mt-4">
+					<DiaryBarChartVictory
+						caloriesRemaining={remainder}
+						protein={totalProteins}
+						carbs={totalCarbs}
+						fats={totalFats}
+					/>
+				</View>
+				{/* other content */}
+				<QuickLog
+					breakfastCal={breakfast_calories}
+					lunchCal={lunch_calories}
+					dinnerCal={dinner_calories}
+					snackCal={snacks_calories}
 				/>
 			</View>
-			{/* other content */}
-			<View className="flex flex-row justify-between pb-2">
+		</View>
+	);
+};
+
+export default Diary;
+
+{
+	/* <View className="flex flex-row justify-between pb-2">
 				<Text
 					className="mr-16 font-bold text-2xl"
 					style={{ color: colors.primary }}>
@@ -275,9 +290,5 @@ const Diary = () => {
 						</Card>
 					</TouchableOpacity>
 				</View>
-			</View>
-		</View>
-	);
-};
-
-export default Diary;
+			</View> */
+}
