@@ -6,6 +6,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import DiaryBarChartVictory from "../../utils/charts/diary/barChart/DiaryBarChartVictory";
 import { Surface } from "react-native-paper";
 import ActivityBoard from "./components/ActivityBoard";
+import CalGraph from "./components/CalGraph";
 
 const NewDashboard = () => {
 	const navigation = useNavigation();
@@ -63,6 +64,9 @@ const NewDashboard = () => {
 				</View> */}
 
 				{/* Activity Section */}
+				{/* <View className="mt-4">
+					<CalGraph />
+				</View> */}
 				<ActivityBoard />
 			</View>
 		</View>

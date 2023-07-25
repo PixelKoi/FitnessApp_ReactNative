@@ -1,25 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { View, Text, TouchableOpacity, Switch, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { useAppDispatch, useAppSelector } from "../../redux-manager/hooks";
-import { useDatabase } from "@nozbe/watermelondb/hooks";
+import { useAppSelector } from "../../redux-manager/hooks";
 import Icon from "react-native-vector-icons/FontAwesome";
-import Icon2 from "react-native-vector-icons/FontAwesome5";
 
 import { supabase } from "../../utils/supabase_authentication/supabase";
 
 const Settings = () => {
-	const database = useDatabase();
 	const navigation = useNavigation();
 
 	//Initiate user redux states
 	const { email, username } = useAppSelector((state) => state.user);
 	const { colors } = useAppSelector((state) => state.theme);
-	const dispatch = useAppDispatch();
 
 	//Edit Profile Hooks
 	const [showEditProfile, setEditProfile] = useState<boolean>(false);
-	const [showActivityModal, setShowActivityModal] = useState(false);
 
 	// Toggle switch push notifications
 	const [isPushEnabled, setIsPushEnabled] = useState(false);
@@ -51,7 +46,7 @@ const Settings = () => {
 			headerTintColor: "black",
 			headerLeft: () => (
 				<TouchableOpacity
-					className="ml-4"
+					className=""
 					onPress={() => {
 						navigation.navigate("Dashboard");
 					}}>
@@ -85,10 +80,7 @@ const Settings = () => {
 					</View>
 				</View>
 
-				{/* <View className="flex flex-row">
-					<Text className="text-gray-400">Settings</Text>
-				</View> */}
-				<View c>
+				<View>
 					<View
 						style={{ borderColor: colors.secondary }}
 						className="flex flex-row border-solid border-b-2 py-3 items-center">

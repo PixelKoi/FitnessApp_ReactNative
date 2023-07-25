@@ -29,7 +29,6 @@ const BottomTab = () => {
 				tabBarStyle: {
 					backgroundColor: "white",
 					borderTopColor: "transparent",
-					paddingHorizontal: 0,
 					paddingTop: 12,
 				},
 			}}>
@@ -38,11 +37,7 @@ const BottomTab = () => {
 				component={NewDashboard}
 				options={{
 					tabBarIcon: ({ color, size }) => (
-						<Icon
-							name="view-dashboard-outline"
-							size={24}
-							color={colors.primary}
-						/>
+						<Icon name="view-dashboard-outline" size={24} color={"black"} />
 					),
 					tabBarLabel: "",
 				}}
@@ -52,7 +47,7 @@ const BottomTab = () => {
 				component={Nutrition}
 				options={{
 					tabBarIcon: ({ color, size }) => (
-						<Icon name="food-apple-outline" size={24} color={colors.primary} />
+						<Icon name="food-apple-outline" size={24} color={"black"} />
 					),
 					tabBarLabel: "",
 				}}
@@ -62,7 +57,7 @@ const BottomTab = () => {
 				component={Timer}
 				options={{
 					tabBarIcon: ({ color, size }) => (
-						<Icon name="timer-outline" size={24} color={colors.primary} />
+						<Icon name="timer-outline" size={24} color={"black"} />
 					),
 					tabBarLabel: "",
 				}}
@@ -72,7 +67,7 @@ const BottomTab = () => {
 				component={Diary}
 				options={{
 					tabBarIcon: ({ color, size }) => (
-						<Ant name="book" size={24} color={colors.primary} />
+						<Ant name="book" size={24} color={"black"} />
 					),
 					tabBarLabel: "",
 				}}
