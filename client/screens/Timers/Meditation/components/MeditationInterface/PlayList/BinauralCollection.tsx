@@ -6,29 +6,6 @@ import { pureToneTracks } from "../../../../../../constants";
 const BinauralCollect = () => {
 	const navigation = useNavigation();
 
-	const DATA = [
-		{
-			id: "1",
-			title: "Delta Wave",
-		},
-		{
-			id: "2",
-			title: "Theta Wave",
-		},
-		{
-			id: "3",
-			title: "Alpha Wave",
-		},
-		{
-			id: "4",
-			title: "Beta Wave",
-		},
-		{
-			id: "5",
-			title: "Gamma Wave",
-		},
-	];
-
 	type ItemProps = { title: string; id: string };
 
 	const Item = ({ title, id }: ItemProps) => (
@@ -50,7 +27,15 @@ const BinauralCollect = () => {
 				<Text className="font-bold text-white" style={{ fontSize: 16 }}>
 					Binaural Collection
 				</Text>
-				<TouchableOpacity className="ml-auto mt-aut">
+
+				<TouchableOpacity
+					onPress={async () => {
+						navigation.navigate("ViewAll", {
+							track: pureToneTracks,
+							headerTitle: "Binaural Beats",
+						});
+					}}
+					className="ml-auto mt-aut">
 					<Text className="text-white font-bold" style={{ fontSize: 14 }}>
 						View All
 					</Text>
@@ -59,7 +44,7 @@ const BinauralCollect = () => {
 
 			<FlatList
 				horizontal={true}
-				data={DATA}
+				data={pureToneTracks}
 				renderItem={({ item }) => <Item title={item.title} id={item.id} />}
 				keyExtractor={(item) => item.id}
 			/>

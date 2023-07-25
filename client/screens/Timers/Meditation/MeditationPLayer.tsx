@@ -21,6 +21,8 @@ const MeditationPLayer = ({ route }) => {
 	//Track states
 	const [isPlayerReady, setIsPlayerReady] = useState(false);
 
+	//Todo: if current playlist skip to track id
+	//Todo: if not current playist remove queue and add playlist
 	async function setup() {
 		const isSetup = await setupPlayer();
 

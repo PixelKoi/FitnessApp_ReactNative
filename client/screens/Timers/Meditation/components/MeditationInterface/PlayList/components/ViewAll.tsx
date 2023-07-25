@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import {
 	View,
 	Text,
-	Modal,
 	FlatList,
 	TouchableOpacity,
 	Image,
@@ -11,6 +10,7 @@ import {
 import { collectionTracks } from "../../../../../../../utils/playlists/collection-sounds";
 import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
 
 const ViewAll = ({ route }) => {
 	const { track, headerTitle } = route.params;
@@ -42,6 +42,31 @@ const ViewAll = ({ route }) => {
 			<Text className="mt-3 ml-1 text-white">{title}</Text>
 		</View>
 	);
+
+	React.useLayoutEffect(() => {
+		navigation.setOptions({
+			title: "",
+			headerTransparent: true,
+			headerStyle: {
+				shadowColor: "transparent",
+			},
+			headerTitleStyle: {
+				fontWeight: "bold",
+			},
+			headerLeft: () => (
+				<View>
+					<TouchableOpacity
+						className="ml-2  rounded-full"
+						onPress={() => {
+							navigation.goBack();
+						}}>
+						<FontAwesome name="angle-left" size={30} color={"#ffff"} />
+					</TouchableOpacity>
+				</View>
+			),
+		});
+	}, []);
+
 	return (
 		<View className="flex-1">
 			<LinearGradient
@@ -54,7 +79,7 @@ const ViewAll = ({ route }) => {
 				locations={[0, 0.2315, 0.7707, 0.9771]}
 				style={styles.gradient}
 			/>
-			<View className="mx-4">
+			<View className="mx-4 mt-20">
 				<Text style={{ fontSize: 40 }} className="mt-4 font-bold text-white">
 					{headerTitle}
 				</Text>

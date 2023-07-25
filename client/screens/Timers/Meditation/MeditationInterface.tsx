@@ -10,6 +10,7 @@ import {
 import ChooseGoalMenu from "./components/MeditationInterface/Menus/ChooseGoalMenu";
 import { useNavigation } from "@react-navigation/native";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
+import AntDesign from "react-native-vector-icons/AntDesign";
 import BinauralBeatsMenu from "./components/MeditationInterface/Menus/BinauralBeatsMenu";
 import PureToneList from "./components/MeditationInterface/PlayList/PureToneList";
 import CollectionList from "./components/MeditationInterface/PlayList/CollectionList";
@@ -48,7 +49,7 @@ const MeditationInterface = () => {
 			),
 			headerRight: () => (
 				<View>
-					<Image source={emoji[0].img} style={{ width: 25, height: 25 }} />
+					<AntDesign name="smile-circle" size={26} color={"#ffff"} />
 				</View>
 			),
 		});
@@ -102,16 +103,16 @@ const MeditationInterface = () => {
 						</View>
 					)}
 
-					{!beatsToggle && (
+					{/* {!beatsToggle && (
 						<View className="py-4 pb-8">
 							<ChooseByGoal />
 						</View>
-					)}
+					)} */}
 
 					{beatsToggle && (
 						<View className="mt-4 ">
-							<BinauralCollection />
-							<Divider lineColor={"#fff"} />
+							{/* <BinauralCollection /> */}
+							{/* <Divider lineColor={"#fff"} /> */}
 							<View className="mt-4">
 								<PureToneList />
 							</View>

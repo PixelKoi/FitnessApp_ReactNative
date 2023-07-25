@@ -6,29 +6,6 @@ import { pureToneTracks } from "../../../../../../constants";
 const PureToneList = () => {
 	const navigation = useNavigation();
 
-	const DATA = [
-		{
-			id: "1",
-			title: "Delta Wave",
-		},
-		{
-			id: "2",
-			title: "Theta Wave",
-		},
-		{
-			id: "3",
-			title: "Alpha Wave",
-		},
-		{
-			id: "4",
-			title: "Beta Wave",
-		},
-		{
-			id: "5",
-			title: "Gamma Wave",
-		},
-	];
-
 	type ItemProps = { title: string; id: string };
 
 	const Item = ({ title, id }: ItemProps) => (
@@ -36,7 +13,9 @@ const PureToneList = () => {
 			<TouchableOpacity
 				onPress={async () => {
 					navigation.navigate("MeditationTimer", {
-						track: pureToneTracks[Number(id - 1)],
+						track: pureToneTracks,
+						track_id: id - 1,
+						title: pureToneTracks[id - 1].title,
 					});
 				}}
 				style={{ backgroundColor: "#E6E6E6", height: 150, width: 160 }}
@@ -51,7 +30,7 @@ const PureToneList = () => {
 			</Text>
 			<FlatList
 				horizontal={true}
-				data={DATA}
+				data={pureToneTracks}
 				renderItem={({ item }) => <Item title={item.title} id={item.id} />}
 				keyExtractor={(item) => item.id}
 			/>
