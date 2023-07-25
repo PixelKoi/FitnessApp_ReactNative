@@ -55,7 +55,7 @@ const BottomTab = () => {
 					left: 40,
 					right: 40,
 					borderRadius: 30,
-					backgroundColor: "teal",
+					backgroundColor: "#6F7CF2",
 				},
 			}}>
 			{tabBar.map((item, index) => {

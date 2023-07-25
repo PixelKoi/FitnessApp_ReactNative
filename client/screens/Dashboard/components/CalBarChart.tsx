@@ -9,6 +9,7 @@ import {
 } from "victory-native";
 import { Dimensions } from "react-native";
 import { useAppSelector } from "../../../redux-manager/hooks";
+import { Surface } from "react-native-paper";
 
 function CalBarChart({ caloriesRemaining, protein, fats, carbs }) {
 	const data = [
@@ -24,13 +25,6 @@ function CalBarChart({ caloriesRemaining, protein, fats, carbs }) {
 			color: "#95A8E6",
 		},
 	];
-	const styles = StyleSheet.create({
-		chartContainer: {
-			justifyContent: "center",
-			alignItems: "center",
-			backgroundColor: "#fff",
-		},
-	});
 
 	const { colors } = useAppSelector((state) => state.theme);
 
@@ -38,7 +32,7 @@ function CalBarChart({ caloriesRemaining, protein, fats, carbs }) {
 	const filledValue = 55; // Change this to your actual data value
 	const remainder = 30;
 	return (
-		<View style={styles.chartContainer} className="flex flex-row">
+		<Surface className="flex flex-row justify-center items-center bg-white rounded-2xl">
 			<VictoryChart
 				width={Dimensions.get("window").width / 2}
 				height={200}
@@ -83,7 +77,7 @@ function CalBarChart({ caloriesRemaining, protein, fats, carbs }) {
 			<VictoryChart
 				width={Dimensions.get("window").width / 2}
 				height={200}
-				padding={{ top: 20, bottom: 50, left: 50, right: 50 }}>
+				padding={{ top: 50, bottom: 50, left: 50, right: 50 }}>
 				<VictoryAxis
 					dependentAxis
 					crossAxis
@@ -103,7 +97,7 @@ function CalBarChart({ caloriesRemaining, protein, fats, carbs }) {
 				<VictoryLabel
 					textAnchor="middle" // This will center the text
 					x={Dimensions.get("window").width / 4} // Half of the half width of the screen
-					y={90} // Slightly more than half of the height of the VictoryChart
+					y={105} // Slightly more than half of the height of the VictoryChart
 					style={[
 						{
 							fontSize: 24,
@@ -116,7 +110,7 @@ function CalBarChart({ caloriesRemaining, protein, fats, carbs }) {
 					text={[`${caloriesRemaining}`, "remaining"]}
 				/>
 			</VictoryChart>
-		</View>
+		</Surface>
 	);
 }
 

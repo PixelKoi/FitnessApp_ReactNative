@@ -6,7 +6,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import DiaryBarChartVictory from "../../utils/charts/diary/barChart/DiaryBarChartVictory";
 import { Surface } from "react-native-paper";
 import ActivityBoard from "./components/ActivityBoard";
-import CalGraph from "./components/CalGraph";
+import CalBarChart from "./components/CalBarChart";
 
 const NewDashboard = () => {
 	const navigation = useNavigation();
@@ -54,19 +54,15 @@ const NewDashboard = () => {
 			<View className="mx-4">
 				<Text className="text-2xl font-bold mt-4">Today</Text>
 
-				{/* <View style={{ flexDirection: "row" }} className="px-4 mt-4">
-					<DiaryBarChartVictory
-						caloriesRemaining={remainder}
-						protein={totalProteins}
-						carbs={totalCarbs}
-						fats={totalFats}
+				<View className="mt-4">
+					<CalBarChart
+						caloriesRemaining={200}
+						protein={12}
+						carbs={14}
+						fats={12}
 					/>
-				</View> */}
-
+				</View>
 				{/* Activity Section */}
-				{/* <View className="mt-4">
-					<CalGraph />
-				</View> */}
 				<ActivityBoard />
 			</View>
 		</View>
