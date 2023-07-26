@@ -103,7 +103,7 @@ const ActivityBoard = () => {
 							<AntDesign name="plus" size={15} />
 						</View>
 					</View>
-					<View className="flex-row ml-2 mt-1">
+					<View className="flex-row ml-2 ">
 						<View className="w-6 h-6">
 							<View className="self-center my-auto">
 								<MaterialCommunityIcons
