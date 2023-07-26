@@ -26,8 +26,12 @@ const ActivityBoard = () => {
 								<AntDesign name="plus" size={15} />
 							</View>
 						</View>
-						<View className="flex-row ml-3 mt-4">
-							<AntDesign name="clockcircle" color={"#FFA01C"} size={18} />
+						<View className="flex-row ml-3 mt-3">
+							<View className="w-6 h-6">
+								<View className="self-center my-auto">
+									<AntDesign name="clockcircle" color={"#FFA01C"} size={15} />
+								</View>
+							</View>
 							<Text className="self-center text-sm ml-2">0 hours</Text>
 						</View>
 					</TouchableOpacity>
@@ -47,7 +51,7 @@ const ActivityBoard = () => {
 							<View className="flex-row ml-3 mt-3">
 								<View className="w-6 h-6">
 									<View className="self-center my-auto">
-										<AntDesign name="clockcircle" color={"#FFA01C"} size={18} />
+										<AntDesign name="clockcircle" color={"#FFA01C"} size={15} />
 									</View>
 								</View>
 								<Text className="self-center text-sm ml-2">{countdown} hr</Text>
@@ -58,7 +62,7 @@ const ActivityBoard = () => {
 										<MaterialIcons
 											name="local-fire-department"
 											color={"#FFA01C"}
-											size={23}
+											size={20}
 										/>
 									</View>
 								</View>
@@ -80,7 +84,7 @@ const ActivityBoard = () => {
 					<View className="flex-row ml-3">
 						<View className="w-6 h-6">
 							<View className="self-center my-auto">
-								<FontAwesome6 name="dumbbell" size={17} color={"#FFA01C"} />
+								<FontAwesome6 name="dumbbell" size={15} color={"#FFA01C"} />
 							</View>
 						</View>
 						<Text className="ml-2 text-sm self-center">{weight} kg</Text>
@@ -105,7 +109,7 @@ const ActivityBoard = () => {
 								<MaterialCommunityIcons
 									name="foot-print"
 									color={"#FFA01C"}
-									size={25}
+									size={20}
 								/>
 							</View>
 						</View>
