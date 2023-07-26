@@ -48,8 +48,35 @@ const Timer = () => {
 		<View style={{ backgroundColor: "#fff" }} className="flex-1">
 			<View className="flex-col mt-4 mx-4">
 				<TimerCandlestick />
+				<View className="flex-row justify-center gap-4 items-center">
+					<View className="flex-row">
+						<View
+							className="self-center"
+							style={{
+								width: 12,
+								height: 12,
+								borderRadius: 6,
+								backgroundColor: "#5C7FC7",
+							}}
+						/>
+						<Text className="self-center text-xs ml-2">Fasting</Text>
+					</View>
+
+					<View className="flex-row">
+						<View
+							className="self-center"
+							style={{
+								width: 12,
+								height: 12,
+								borderRadius: 6,
+								backgroundColor: "#C5C3E3",
+							}}
+						/>
+						<Text className="self-center text-xs ml-2">Meditation</Text>
+					</View>
+				</View>
 				{/* Fasting Button*/}
-				<View className="flex-row flex-wrap justify-between">
+				<View className="flex-row flex-wrap justify-between mt-8">
 					<View
 						style={{ height: 175, width: "48%" }}
 						className="w-1/2 rounded-xl mb-3.5 bg-white">
