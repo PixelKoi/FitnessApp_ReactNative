@@ -31,15 +31,23 @@ function CalBarChart({ caloriesRemaining, protein, fats, carbs }) {
 	const total = 100;
 	const filledValue = 55; // Change this to your actual data value
 
+	const customTheme = {
+		legend: {
+			style: {},
+		},
+	};
+
 	return (
 		<Surface className="flex flex-row justify-center items-center bg-white rounded-2xl">
 			<VictoryChart
+				style={{ fontFamily: "System" }}
 				width={Dimensions.get("window").width / 2}
 				height={180}
 				domainPadding={{ x: 13 }}
 				padding={{ top: 55, bottom: 40, left: 40, right: 20 }}>
 				{data.map((datum, index) => (
 					<VictoryLabel
+						style={{ fontFamily: "System" }}
 						key={index}
 						x={40}
 						y={53 + index * 30} // adjust as needed
@@ -103,6 +111,7 @@ function CalBarChart({ caloriesRemaining, protein, fats, carbs }) {
 							fontSize: 24,
 							color: "#28323B",
 							fontWeight: "bold",
+							fontFamily: "System",
 							lineHeight: 40,
 						},
 						{ fontWeight: "400", fontSize: 14 },
