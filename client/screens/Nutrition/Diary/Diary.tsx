@@ -141,7 +141,7 @@ const Diary = () => {
 					<Button
 						onPress={() => console.log("log it ")}
 						style={{ backgroundColor: "#6F7CF2" }}
-						className="ml-auto h-10 rounded">
+						className="ml-auto h-10 rounded-full">
 						<Text className="my-auto px-3 text-white">Complete Diary</Text>
 					</Button>
 				</View>

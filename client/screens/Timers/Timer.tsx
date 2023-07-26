@@ -46,7 +46,7 @@ const Timer = () => {
 
 	return (
 		<View style={{ backgroundColor: "#fff" }} className="flex-1">
-			<View className="flex-col mt-4 mx-4">
+			<View className="flex-col mx-4">
 				<TimerCandlestick />
 				<View className="flex-row justify-center gap-4 items-center">
 					<View className="flex-row">
