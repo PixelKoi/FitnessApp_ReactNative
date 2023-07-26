@@ -13,11 +13,13 @@ import { FoodWriter } from "../../../utils/writers/foodWriter";
 import Icon from "react-native-vector-icons/FontAwesome";
 import DiaryBarChartVictory from "../../../utils/charts/diary/barChart/DiaryBarChartVictory";
 import CustomCalendar from "../../../utils/calendar/CustomCalendar";
+import FoodEntry from "../../../database/models/FoodEntry";
 const Diary = () => {
   const tabNavigation = useNavigation();
   const profileInfo = useAppSelector((state) => state.user);
   console.log("PROFILE INFO: ", profileInfo);
   console.log("PROFILE CALS: ", profileInfo.dailyCal);
+  const database = useDatabase();
 
   const { colors } = useAppSelector((state) => state.theme);
   const primary_color = colors.primary;
@@ -96,25 +98,27 @@ const Diary = () => {
   };
 
   const diaryButton = async () => {
-    const database = useDatabase();
     const journalEntryID = generateJournalEntryID();
+    console.log("JOURNAL ID:", journalEntryID);
+    try {
+      await database.write(async () => {
+        const foodEntry = await database
+          .get<FoodEntry>("foodEntrys")
+          .create((data) => {
+            data.journals_id = 1;
+            data.water = water; // Replace this with the correct water value
+          });
+        await foodEntry.save();
+      });
 
-    const food_instance = database.get("foods");
-    console.log("DIARY BUTTON PRESSED");
-    console.log("BREAKFAST", breakfast);
-    console.log("lunch", lunch);
-    console.log("dinner", dinner);
-    console.log("snacks", snacks);
-    console.log("water", water);
-    const results = FoodWriter(
-      journalEntryID,
-      breakfast,
-      lunch,
-      dinner,
-      snacks,
-      water
-    );
+      console.log("Successfully created food post");
+      const all_food = await database.get("foodEntrys").query().fetch();
+      console.log("food saved in DB!:", all_food);
+    } catch (error) {
+      console.error("Error while creating food post:", error);
+    }
   };
+
   // console.log("RESULTS: ", results);
   // console.log("FOODS in 🍉🍉🍉", food_instance);
   // console.log("FOODS", typeof selectedFoods[0].food.Carbs);

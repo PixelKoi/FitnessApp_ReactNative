@@ -17,8 +17,7 @@ const FoodWriter = ({
   useEffect(() => {
     const foodEntry = async () => {
       const database = useDatabase();
-
-      return await database.write(async () => {
+      const FoodWriterData = await database.write(async () => {
         const foodEntry = await database
           .get<FoodEntry>("foodEntrys")
           .create((data) => {

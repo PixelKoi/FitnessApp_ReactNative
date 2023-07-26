@@ -1,5 +1,5 @@
 import { Model } from "@nozbe/watermelondb";
-import { text, relation, date } from "@nozbe/watermelondb/decorators";
+import { text, relation, date, writer } from "@nozbe/watermelondb/decorators";
 
 export default class FoodEntry extends Model {
   static table = "foodEntrys";
@@ -9,7 +9,7 @@ export default class FoodEntry extends Model {
   };
   @text("water") water;
 
-  static async createFoodEntry(water) {
+  @writer static async createFoodEntry(water) {
     try {
       const foodEntrys = await this.collections
         .get("foodEntrys")
