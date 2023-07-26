@@ -47,7 +47,7 @@ const BottomTab = () => {
 				},
 				tabBarStyle: {
 					position: "absolute",
-					height: 60,
+					height: 55,
 					bottom: 25,
 					left: 40,
 					right: 40,

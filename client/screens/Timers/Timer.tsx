@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, Dimensions } from "react-native";
-import { Button } from "react-native-paper";
+import { View, Text, TouchableOpacity, Dimensions, Image } from "react-native";
+import { Button, Surface } from "react-native-paper";
 import Fasting from "./Fasting/Fasting";
 import Meditation from "./Meditation/MeditationPLayer";
 import MeditationDash from "./Meditation/MeditationDash";
@@ -13,6 +13,9 @@ import FastingCard from "../../assets/images/timer-dash/FastingCard.png";
 import MeditationCard from "../../assets/images/timer-dash/MeditationCard.png";
 import EmojiDropDown from "./Meditation/components/EmojiDropDown";
 import TimerCandlestick from "../../utils/charts/timer/TimerCandlestick";
+import meditation from "../../assets/images/meditation/woman-meditating.png";
+import fasting from "../../assets/images/fasting-dash/FastingMain.png";
+
 const windowWidth = Dimensions.get("window").width;
 
 //Todo: get tailwind Theme primary and secondary colors set to states and put it inside the labelStyle prop
@@ -29,12 +32,12 @@ const Timer = () => {
 	// top Navigation
 	React.useLayoutEffect(() => {
 		navigation.setOptions({
-			title: "Timer",
+			title: "Health Mode",
 			headerStyle: {
 				shadowColor: "transparent",
 				borderBottomWidth: 0,
 			},
-			headerTintColor: colors.primary,
+			headerTintColor: "black",
 			headerTitleStyle: {
 				fontWeight: "bold",
 			},
@@ -43,20 +46,69 @@ const Timer = () => {
 
 	return (
 		<View style={{ backgroundColor: "#fff" }} className="flex-1">
-			<View className="flex-col items-center mt-4">
+			<View className="flex-col mt-4 mx-4">
 				<TimerCandlestick />
 				{/* Fasting Button*/}
-				<View className="flex-row">
-					<TouchableOpacity
-						onPress={() => {
-							navigation.navigate("FastingDash");
-						}}
-						style={{ height: 180, backgroundColor: "red" }}
-						className="flex-1 mx-2 rounded"></TouchableOpacity>
-					<TouchableOpacity
-						onPress={() => navigation.navigate("MeditationDash")}
-						style={{ height: 180, backgroundColor: "red" }}
-						className="flex-1 mr-2 rounded"></TouchableOpacity>
+				<View className="flex-row flex-wrap justify-between">
+					<View
+						style={{ height: 175, width: "48%" }}
+						className="w-1/2 rounded-xl mb-3.5 bg-white">
+						<TouchableOpacity
+							onPress={() => {
+								navigation.navigate("FastingDash");
+							}}
+							style={{ height: 175, width: "100%" }}>
+							<View style={{ height: 163, width: "100%" }}>
+								<Image
+									source={fasting}
+									className="flex-1 w-1/2 rounded-xl"
+									style={{ resizeMode: "cover", width: "100%" }}
+								/>
+							</View>
+							<View
+								className="self-center rounded-2xl justify-center items-center"
+								style={{
+									backgroundColor: "#5C7FC7",
+									height: 40,
+									bottom: 0,
+									width: "95%",
+									position: "absolute",
+									zIndex: 2,
+								}}>
+								<Text className="text-white">Meditation</Text>
+							</View>
+						</TouchableOpacity>
+					</View>
+
+					<View
+						style={{ height: 175, width: "48%" }}
+						className="w-1/2 rounded-xl mb-3.5 bg-white">
+						<TouchableOpacity
+							onPress={() => {
+								navigation.navigate("MeditationDash");
+							}}
+							style={{ height: 175, width: "100%" }}>
+							<View style={{ height: 163, width: "100%" }}>
+								<Image
+									source={meditation}
+									className="flex-1 w-1/2 rounded-xl"
+									style={{ resizeMode: "cover", width: "100%" }}
+								/>
+							</View>
+							<View
+								className="self-center rounded-2xl justify-center items-center"
+								style={{
+									backgroundColor: "#5C7FC7",
+									height: 40,
+									bottom: 0,
+									width: "95%",
+									position: "absolute",
+									zIndex: 2,
+								}}>
+								<Text className="text-white">Meditation</Text>
+							</View>
+						</TouchableOpacity>
+					</View>
 				</View>
 			</View>
 		</View>
@@ -64,38 +116,3 @@ const Timer = () => {
 };
 
 export default Timer;
-
-{
-	/* <View>
-					<TouchableOpacity
-						onPress={() => {
-							navigation.navigate("FastingDash");
-				
-						}}>
-						<TimerCard
-							img={FastingCard}
-							height={90}
-							width={107}
-							title={"Fasting"}
-							description={"Begin timer now!"}
-							textColor={colors.primary}
-							buttonBackgroundColor={colors.primary}
-							cardBackgroundColor={colors.secondary}
-						/>
-					</TouchableOpacity>
-			
-					<TouchableOpacity
-						onPress={() => navigation.navigate("MeditationDash")}>
-						<TimerCard
-							height={104}
-							width={107}
-							img={MeditationCard}
-							title={"Meditation"}
-							description={"Begin timer now!"}
-							textColor={colors.primary}
-							buttonBackgroundColor={colors.primary}
-							cardBackgroundColor={colors.secondary}
-						/>
-					</TouchableOpacity>
-				</View> */
-}
