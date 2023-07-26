@@ -122,9 +122,9 @@ const Diary = () => {
 	return (
 		<View className="flex-1 bg-white pb-4">
 			<View className="mx-4">
-				<View className="flex-row">
+				{/* <View className="flex-row">
 					<CustomCalendar />
-				</View>
+				</View> */}
 				{/* Cal Chart */}
 				<View className="my-6">
 					<CalBarChart

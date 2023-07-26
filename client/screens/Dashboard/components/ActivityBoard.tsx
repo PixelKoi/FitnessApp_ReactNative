@@ -26,8 +26,8 @@ const ActivityBoard = () => {
 							</View>
 						</View>
 						<View className="flex-row ml-3 mt-4">
-							<AntDesign name="clockcircle" color={"#FFA01C"} size={15} />
-							<Text className="self-center text-xs ml-2 font-semibold">
+							<AntDesign name="clockcircle" color={"#FFA01C"} size={18} />
+							<Text className="self-center text-sm ml-2 font-bold ">
 								0 hours
 							</Text>
 						</View>
@@ -48,24 +48,24 @@ const ActivityBoard = () => {
 							<View className="flex-row ml-3 mt-3">
 								<View className="w-6 h-6">
 									<View className="self-center my-auto">
-										<AntDesign name="clockcircle" color={"#FFA01C"} size={15} />
+										<AntDesign name="clockcircle" color={"#FFA01C"} size={18} />
 									</View>
 								</View>
-								<Text className="self-center text-xs ml-2 font-semibold">
+								<Text className="self-center text-sm ml-2 font-bold ">
 									{countdown}
 								</Text>
 							</View>
-							<View className="flex-row ml-3 mt-1">
+							<View className="flex-row ml-3 mt-2">
 								<View className="w-6 h-6">
 									<View className="self-center my-auto">
 										<MaterialIcons
 											name="local-fire-department"
 											color={"#FFA01C"}
-											size={20}
+											size={23}
 										/>
 									</View>
 								</View>
-								<Text className="self-center text-xs ml-2 font-semibold">
+								<Text className="self-center text-sm ml-2 font-bold">
 									0 days
 								</Text>
 							</View>
@@ -93,16 +93,14 @@ const ActivityBoard = () => {
 								<MaterialCommunityIcons
 									name="foot-print"
 									color={"#FFA01C"}
-									size={20}
+									size={25}
 								/>
 							</View>
 						</View>
-						<Text className="self-center text-xs ml-2 font-semibold">0</Text>
+						<Text className="self-center text-sm ml-2 font-bold">0</Text>
 					</View>
-					<View className="flex-row ml-3 mt-1">
-						<Text className="self-center text-xs ml-2 font-semibold">
-							Goal: 10,000 steps
-						</Text>
+					<View className="flex-row ml-2.5 mt-1">
+						<Text className="self-center text-xs ml-2">Goal: 10,000 steps</Text>
 					</View>
 				</Surface>
 			</View>
