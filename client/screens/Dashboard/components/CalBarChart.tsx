@@ -31,16 +31,9 @@ function CalBarChart({ caloriesRemaining, protein, fats, carbs }) {
 	const total = 100;
 	const filledValue = 55; // Change this to your actual data value
 
-	const customTheme = {
-		legend: {
-			style: {},
-		},
-	};
-
 	return (
 		<Surface className="flex flex-row justify-center items-center bg-white rounded-2xl">
 			<VictoryChart
-				style={{ fontFamily: "System" }}
 				width={Dimensions.get("window").width / 2}
 				height={180}
 				domainPadding={{ x: 13 }}
@@ -99,7 +92,7 @@ function CalBarChart({ caloriesRemaining, protein, fats, carbs }) {
 					cornerRadius={5}
 					radius={40}
 					labels={() => null}
-					colorScale={[colors.primary, colors.secondary]} // "tomato" for filled part, "lightgray" for unfilled part
+					colorScale={["#6F7CF2", "rgba(111, 124, 242, 0.2)"]} // "tomato" for filled part, "lightgray" for unfilled part
 					data={[{ y: filledValue }, { y: total - filledValue }]}
 				/>
 				<VictoryLabel
