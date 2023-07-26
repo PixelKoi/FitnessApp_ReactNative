@@ -5,7 +5,6 @@ import migrations from "./migrations";
 import schema from "./schema";
 import Food from "./models/Food";
 import Profile from "./models/Profile";
-import Water from "./models/Water";
 import Event from "./models/Event";
 import Meal from "./models/Meal";
 import MealInventoryItem from "./models/MealInventoryItem";

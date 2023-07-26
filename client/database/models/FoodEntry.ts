@@ -5,9 +5,12 @@ export default class FoodEntry extends Model {
   static table = "foodEntry";
   static associations = {
     journals: { type: "belongs_to", key: "journals_id" },
-    meals: { type: "has_many", key: "meal_id" },
+    meals: { type: "has_many", key: "meals_id" },
   };
-  @text("water") water;
+  @relation("journals", "journals_id")
+  @relation("meals", "meals_id")
+  @text("water")
+  water;
 
   @writer static async createFoodEntry(water) {
     try {

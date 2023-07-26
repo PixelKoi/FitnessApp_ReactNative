@@ -18,7 +18,6 @@ import {
   getWaterEntries,
   createWaterIntakeRecord,
 } from "../../database/helpers/waterHelper";
-import { setWaterIntake } from "../../database/models/Water";
 import { getAllTables } from "../../database/helpers/mainHelper";
 import { database } from "../../database";
 import WeightLineGraph from "../../utils/charts/dashboard/WeightLineGraph";

@@ -1,18 +1,21 @@
 import { Model } from "@nozbe/watermelondb";
-import { text, writer } from "@nozbe/watermelondb/decorators";
+import { text, writer, relation } from "@nozbe/watermelondb/decorators";
 
 export default class InventoryItem extends Model {
   static table = "inventoryItem";
   static associations = {
-    journals: { type: "belongs_to", key: "events_id" },
+    mealInventoryItem: { type: "belongs_to", key: "mealInventoryItem_id" },
   };
 
-  @text("calories") calories;
+  @relation("mealInventoryItem", "mealInventoryItem_id") mealInventoryItem;
+
+  @text("calories")
+  calories;
   @text("carbs") carbs;
   @text("fat") fat;
   @text("protein") protein;
   @text("description") description;
-  @text("id") id;
+  // @text("id") id;
   @text("quantity") quantity;
 
   @writer

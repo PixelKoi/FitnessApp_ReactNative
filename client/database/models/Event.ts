@@ -1,5 +1,5 @@
 import { Model } from "@nozbe/watermelondb";
-import { text, date } from "@nozbe/watermelondb/decorators";
+import { text, date, immutableRelation } from "@nozbe/watermelondb/decorators";
 
 // Event(ID, JournalEntryID, startTime, endTime, duration, notes, mood, type)
 
@@ -8,7 +8,9 @@ export default class Event extends Model {
   static associations = {
     journals: { type: "belongs_to", key: "journals_id" },
   };
-  @date("start_time") start_time;
+  @immutableRelation("journals", "journals_id")
+  @date("start_time")
+  start_time;
   @date("end_time") end_time;
   @date("duration") duration;
   @text("notes") notes;

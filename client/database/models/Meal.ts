@@ -1,14 +1,17 @@
 import { Model } from "@nozbe/watermelondb";
-import { text } from "@nozbe/watermelondb/decorators";
+import { text, immutableRelation } from "@nozbe/watermelondb/decorators";
 
 export default class Meal extends Model {
   static table = "meals";
   static associations = {
-    food: { type: "belongs_to", key: "foodEntry_id" },
+    foodEntry: { type: "belongs_to", key: "foodEntry_id" },
     mealInventoryItem: { type: "has_many", key: "mealInventoryItem_id" },
   };
 
-  @text("meal_category") meal_category;
+  @immutableRelation("foodEntry", "foodEntry_id")
+  @immutableRelation("mealInventoryItem", "mealInventoryItem_id")
+  @text("meal_category")
+  meal_category;
 
   static async Meal(meal_category) {
     try {

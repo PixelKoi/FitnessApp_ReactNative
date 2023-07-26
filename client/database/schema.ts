@@ -53,10 +53,6 @@ export default appSchema({
       columns: [],
     }),
     tableSchema({
-      name: "water",
-      columns: [{ name: "glasses", type: "number" }],
-    }),
-    tableSchema({
       name: "foods",
       columns: [
         { name: "calories", type: "number" },

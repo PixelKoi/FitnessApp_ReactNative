@@ -8,8 +8,8 @@ export default class MealInventoryItem extends Model {
     inventoryItem: { type: "has_many", foreignKey: "inventoryItem_id" },
   };
 
-  @relation("meals", "meals_id") meal;
-  @relation("inventoryItem", "inventoryItem_id") inventory;
+  @relation("meals", "meals_id") meals;
+  @relation("inventoryItem", "inventoryItem_id") inventoryItem;
 
   static async createMealInventoryItem(database, meals_id, inventoryItem_id) {
     try {
