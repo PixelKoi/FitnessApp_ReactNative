@@ -13,8 +13,8 @@ export default class FoodEntry extends Model {
     try {
       const foodEntry = await this.collections
         .get("foodEntry")
-        .create((foodEntries) => {
-          foodEntries.water = water;
+        .create((data) => {
+          data.water = water;
         });
       console.log("foodEntries WRITER:", foodEntry);
       return foodEntry;

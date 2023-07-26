@@ -103,16 +103,18 @@ const Diary = () => {
     try {
       await database.write(async () => {
         const foodEntry = await database
-          .get<FoodEntry>("foodEntries")
+          .get<FoodEntry>("foodEntry")
           .create((data) => {
-            data.journals_id = 1;
-            data.water = water; // Replace this with the correct water value
+            data.createFoodEntry(
+              (data.journals_id = 1),
+              (data.water = 0) // Replace this with the correct water value
+            );
           });
         await foodEntry.save();
       });
 
       console.log("Successfully created food post");
-      const all_food = await database.get("foodEntries").query().fetch();
+      const all_food = await database.get("foodEntry").query().fetch();
       console.log("food saved in DB!:", all_food);
     } catch (error) {
       console.error("Error while creating food post: \n", error);
