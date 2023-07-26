@@ -4,12 +4,13 @@ import { Surface } from "react-native-paper";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import FontAwesome6 from "react-native-vector-icons/FontAwesome5";
 
 import { useAppSelector } from "../../../redux-manager/hooks";
 
 const ActivityBoard = () => {
 	const { countdown } = useAppSelector((state) => state.fasting);
-
+	const { weight, goal } = useAppSelector((state) => state.user);
 	return (
 		<View>
 			<Text className="text-lg font-bold mt-2">Activity</Text>
@@ -27,9 +28,7 @@ const ActivityBoard = () => {
 						</View>
 						<View className="flex-row ml-3 mt-4">
 							<AntDesign name="clockcircle" color={"#FFA01C"} size={18} />
-							<Text className="self-center text-sm ml-2 font-semibold ">
-								0 hours
-							</Text>
+							<Text className="self-center text-sm ml-2">0 hours</Text>
 						</View>
 					</TouchableOpacity>
 				</Surface>
@@ -51,11 +50,9 @@ const ActivityBoard = () => {
 										<AntDesign name="clockcircle" color={"#FFA01C"} size={18} />
 									</View>
 								</View>
-								<Text className="self-center text-sm ml-2 font-semibold ">
-									{countdown}
-								</Text>
+								<Text className="self-center text-sm ml-2">{countdown} hr</Text>
 							</View>
-							<View className="flex-row ml-3 mt-2">
+							<View className="flex-row ml-3 mt-1">
 								<View className="w-6 h-6">
 									<View className="self-center my-auto">
 										<MaterialIcons
@@ -65,9 +62,7 @@ const ActivityBoard = () => {
 										/>
 									</View>
 								</View>
-								<Text className="self-center text-sm ml-2 font-semibold">
-									0 days
-								</Text>
+								<Text className="self-center text-sm ml-2 ">0 days</Text>
 							</View>
 						</View>
 					</TouchableOpacity>
@@ -76,18 +71,35 @@ const ActivityBoard = () => {
 				<Surface
 					style={{ height: 112, width: "48%" }}
 					className="w-1/2 rounded-xl bg-white">
-					<View>
-						<Text className="p-2 ml-1 text-xs font-bold">Weight Loss</Text>
+					<View className="flex-row">
+						<Text className="p-2 ml-1 text-xs font-bold">Current Weight</Text>
+						<View className="p-2 ml-auto">
+							<AntDesign name="plus" size={15} />
+						</View>
+					</View>
+					<View className="flex-row ml-3">
+						<View className="w-6 h-6">
+							<View className="self-center my-auto">
+								<FontAwesome6 name="dumbbell" size={17} color={"#FFA01C"} />
+							</View>
+						</View>
+						<Text className="ml-2 text-sm self-center">{weight} kg</Text>
+					</View>
+					<View className="flex-row ml-3 mt-1">
+						<Text className="self-center text-xs">Goal: {goal}lb/week</Text>
 					</View>
 				</Surface>
 				{/* Steps Card */}
 				<Surface
 					style={{ height: 112, width: "48%" }}
 					className="w-1/2 rounded-xl bg-white">
-					<View>
+					<View className="flex-row">
 						<Text className="p-2 ml-1 text-xs font-bold">Steps</Text>
+						<View className="p-2 ml-auto">
+							<AntDesign name="plus" size={15} />
+						</View>
 					</View>
-					<View className="flex-row ml-3 mt-1">
+					<View className="flex-row ml-2 mt-1">
 						<View className="w-6 h-6">
 							<View className="self-center my-auto">
 								<MaterialCommunityIcons
@@ -97,9 +109,9 @@ const ActivityBoard = () => {
 								/>
 							</View>
 						</View>
-						<Text className="self-center text-sm ml-2 font-semibold">0</Text>
+						<Text className="self-center text-sm ml-2">0</Text>
 					</View>
-					<View className="flex-row ml-2.5 mt-1">
+					<View className="flex-row ml-1 mt-1">
 						<Text className="self-center text-xs ml-2">Goal: 10,000 steps</Text>
 					</View>
 				</Surface>
