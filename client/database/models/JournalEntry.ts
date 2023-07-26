@@ -5,7 +5,7 @@ export default class JournalEntry extends Model {
   static table = "journals";
   static associations = {
     events: { type: "has_many", foreignKey: "journal_id" },
-    foodEntrys: { type: "has_many", foreignKey: "journal_id" },
+    foodEntry: { type: "has_many", foreignKey: "foodEntry_id" },
   };
   @text("user_id") user_id;
   @date("date") date;

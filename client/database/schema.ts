@@ -12,14 +12,6 @@ export default appSchema({
   version: 1,
   tables: [
     tableSchema({
-      name: "weights",
-      columns: [
-        { name: "weight", type: "number" },
-        { name: "created_at", type: "number" },
-        { name: "note", type: "string", isOptional: true },
-      ],
-    }),
-    tableSchema({
       name: "events",
       columns: [
         { name: "startTime", type: "number" },
@@ -53,7 +45,7 @@ export default appSchema({
       columns: [],
     }),
     tableSchema({
-      name: "foodEntrys",
+      name: "foodEntry",
       columns: [{ name: "water", type: "number" }],
     }),
     tableSchema({

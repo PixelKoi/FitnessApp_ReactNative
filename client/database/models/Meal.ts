@@ -4,7 +4,7 @@ import { text } from "@nozbe/watermelondb/decorators";
 export default class Meal extends Model {
   static table = "meals";
   static associations = {
-    foodEntrys: { type: "belongs_to", key: "foodEntrys_id" },
+    food: { type: "belongs_to", key: "foodEntry_id" },
     mealInventoryItem: { type: "has_many", key: "mealInventoryItem_id" },
   };
 
