@@ -7,7 +7,9 @@ export default class JournalEntry extends Model {
     events: { type: "has_many", foreignKey: "journal_id" },
     foodEntry: { type: "has_many", foreignKey: "foodEntry_id" },
   };
-  @relation("events", "events_id")
+  @relation("events", "events_id") events;
+  @relation("foodEntry", "foodEntry_id") foodEntry;
+
   @text("user_id")
   user_id;
   @date("date") date;

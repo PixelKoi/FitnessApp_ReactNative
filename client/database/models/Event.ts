@@ -8,7 +8,7 @@ export default class Event extends Model {
   static associations = {
     journals: { type: "belongs_to", key: "journals_id" },
   };
-  @immutableRelation("journals", "journals_id")
+  @immutableRelation("journals", "journals_id") journals;
   @date("start_time")
   start_time;
   @date("end_time") end_time;

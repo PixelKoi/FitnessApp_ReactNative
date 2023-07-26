@@ -8,8 +8,9 @@ export default class Meal extends Model {
     mealInventoryItem: { type: "has_many", key: "mealInventoryItem_id" },
   };
 
-  @immutableRelation("foodEntry", "foodEntry_id")
+  @immutableRelation("foodEntry", "foodEntry_id") foodEntry;
   @immutableRelation("mealInventoryItem", "mealInventoryItem_id")
+  mealInventoryItem;
   @text("meal_category")
   meal_category;
 

@@ -7,8 +7,8 @@ export default class FoodEntry extends Model {
     journals: { type: "belongs_to", key: "journals_id" },
     meals: { type: "has_many", key: "meals_id" },
   };
-  @relation("journals", "journals_id")
-  @relation("meals", "meals_id")
+  @relation("journals", "journals_id") journals;
+  @relation("meals", "meals_id") meals;
   @text("water")
   water;
 
