@@ -27,7 +27,7 @@ const ActivityBoard = () => {
 						</View>
 						<View className="flex-row ml-3 mt-4">
 							<AntDesign name="clockcircle" color={"#FFA01C"} size={18} />
-							<Text className="self-center text-sm ml-2 font-bold ">
+							<Text className="self-center text-sm ml-2 font-semibold ">
 								0 hours
 							</Text>
 						</View>
@@ -51,7 +51,7 @@ const ActivityBoard = () => {
 										<AntDesign name="clockcircle" color={"#FFA01C"} size={18} />
 									</View>
 								</View>
-								<Text className="self-center text-sm ml-2 font-bold ">
+								<Text className="self-center text-sm ml-2 font-semibold ">
 									{countdown}
 								</Text>
 							</View>
@@ -65,7 +65,7 @@ const ActivityBoard = () => {
 										/>
 									</View>
 								</View>
-								<Text className="self-center text-sm ml-2 font-bold">
+								<Text className="self-center text-sm ml-2 font-semibold">
 									0 days
 								</Text>
 							</View>
@@ -97,7 +97,7 @@ const ActivityBoard = () => {
 								/>
 							</View>
 						</View>
-						<Text className="self-center text-sm ml-2 font-bold">0</Text>
+						<Text className="self-center text-sm ml-2 font-semibold">0</Text>
 					</View>
 					<View className="flex-row ml-2.5 mt-1">
 						<Text className="self-center text-xs ml-2">Goal: 10,000 steps</Text>
