@@ -32,7 +32,6 @@ export const database = new Database({
   modelClasses: [
     Food,
     Profile,
-    Water,
     Event,
     Meal,
     MealInventoryItem,

@@ -6,7 +6,6 @@ export default class InventoryItem extends Model {
   static associations = {
     mealInventoryItem: { type: "belongs_to", key: "mealInventoryItem_id" },
   };
-
   @relation("mealInventoryItem", "mealInventoryItem_id") mealInventoryItem;
 
   @text("calories")
