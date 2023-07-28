@@ -25,7 +25,6 @@ export default appSchema({
     tableSchema({
       name: "inventoryItem",
       columns: [
-        { name: "id", type: "number" },
         { name: "calories", type: "number" },
         { name: "carbs", type: "number" },
         { name: "fat", type: "number" },
@@ -44,7 +43,6 @@ export default appSchema({
     tableSchema({
       name: "meals",
       columns: [
-        { name: "id", type: "number" },
         { name: "meal_category", type: "string" },
         { name: "foodEntry_id", type: "string" },
       ],
@@ -53,7 +51,6 @@ export default appSchema({
       name: "foodEntry",
       columns: [
         { name: "water", type: "number" },
-        { name: "id", type: "number" },
         { name: "user_id", type: "number" },
       ],
     }),
