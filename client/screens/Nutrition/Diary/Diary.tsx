@@ -100,25 +100,24 @@ const Diary = () => {
   const diaryButton = async () => {
     const journalEntryID = generateJournalEntryID();
     console.log("JOURNAL ID:", journalEntryID);
-    try {
-      await database.write(async () => {
-        const foodEntry = await database
-          .get<FoodEntry>("foodEntry")
-          .create((data) => {
-            data.createFoodEntry(
-              (data.journals_id = 1),
-              (data.water = 0) // Replace this with the correct water value
-            );
-          });
-        await foodEntry.save();
+    // try {
+    const foodEntry = await database.write(async () => {
+      await database.get<FoodEntry>("foodEntry").create((data) => {
+        data.createFoodEntry(
+          (data.journals_id = 1),
+          (data.water = 0) // Replace this with the correct water value
+        );
       });
-
+      // await foodEntry.save();
+    });
+    if (foodEntry) {
       console.log("Successfully created food post");
       const all_food = await database.get("foodEntry").query().fetch();
       console.log("food saved in DB!:", all_food);
-    } catch (error) {
-      console.error("Error while creating food post: \n", error);
     }
+    // } catch (error) {
+    //   console.error("Error while creating food post: \n", error);
+    // }
   };
 
   // console.log("RESULTS: ", results);
@@ -144,9 +143,9 @@ const Diary = () => {
   // }
 
   useEffect(() => {
-    //show all tables
-    const getTables = getAllTables();
-    console.log("Tables: ", getTables);
+    // //show all tables
+    // const getTables = getAllTables();
+    // console.log("Tables: ", getTables);
   }, []);
 
   return (

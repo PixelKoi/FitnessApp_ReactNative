@@ -25,6 +25,7 @@ export default appSchema({
     tableSchema({
       name: "inventoryItem",
       columns: [
+        { name: "id", type: "number" },
         { name: "calories", type: "number" },
         { name: "carbs", type: "number" },
         { name: "fat", type: "number" },
@@ -42,24 +43,25 @@ export default appSchema({
     }),
     tableSchema({
       name: "meals",
-      columns: [],
+      columns: [
+        { name: "id", type: "number" },
+        { name: "meal_category", type: "string" },
+        { name: "foodEntry_id", type: "string" },
+      ],
     }),
     tableSchema({
       name: "foodEntry",
-      columns: [{ name: "water", type: "number" }],
+      columns: [
+        { name: "water", type: "number" },
+        { name: "id", type: "number" },
+        { name: "user_id", type: "number" },
+      ],
     }),
     tableSchema({
       name: "mealInventoryItem",
-      columns: [],
-    }),
-    tableSchema({
-      name: "foods",
       columns: [
-        { name: "calories", type: "number" },
-        { name: "carbs", type: "number" },
-        { name: "fat", type: "number" },
-        { name: "protein", type: "number" },
-        { name: "description", type: "string" },
+        { name: "meal_id", type: "number" },
+        { name: "inventoryItem_id", type: "number" },
       ],
     }),
     tableSchema({
