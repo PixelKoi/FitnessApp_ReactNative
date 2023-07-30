@@ -4,7 +4,7 @@ import { text, relation, date } from "@nozbe/watermelondb/decorators";
 export default class JournalEntry extends Model {
   static table = "journals";
   static associations = {
-    events: { type: "has_many", foreignKey: "journal_id" },
+    events: { type: "has_many", foreignKey: "journals_id" },
     foodEntry: { type: "has_many", foreignKey: "foodEntry_id" },
   };
   @relation("events", "events_id") events;

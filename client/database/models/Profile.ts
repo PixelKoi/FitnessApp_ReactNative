@@ -1,6 +1,22 @@
 import { Model } from "@nozbe/watermelondb";
 import { field, text, relation, writer } from "@nozbe/watermelondb/decorators";
 
+// DATA MODEL
+// FoodEntry(ID, JournalEntryID)
+// User(ID, Email, name, membershipStatus, weight, height)
+// JournalEntry(ID, UserID, Date, FoodEntryID, EventID)
+// FoodEntry(ID, JournalEntryID)
+// Meal(ID, MealCategory, FoodID)
+// MealInventoryItem(MealID, InventoryItemID)
+// InventoryItem(ID, Macros, Calories, Description, Quantity, Water)
+// Event(ID, JournalEntryID, startTime, endTime, duration, notes, mood, type)
+
+// InventoryItem Table (JUNCTION TABLE (MealInventoryItem Table) MANY-TO-MANY relationship) hooks with Meal Table
+// FoodEntry holds many Meal, so FoodEntry-to-Meal One-to-Many, only one foodEntry a day
+// Event can hold both the meditation and fasting tables, can have multiple Event entries in our Journal Entry
+//JournalEntry (One a day)
+// User Table in Sum-app.pdf is an alias for the Profile table... (needs to be renamed in the documentation)
+
 export default class Profile extends Model {
   static table = "profiles";
 
