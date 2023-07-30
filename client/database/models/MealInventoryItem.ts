@@ -4,7 +4,7 @@ import { relation } from "@nozbe/watermelondb/decorators";
 export default class MealInventoryItem extends Model {
   static table = "mealInventoryItem";
   static associations = {
-    meals: { type: "belongs_to", foreignKey: "meals_id" },
+    meals: { type: "belongs_to", key: "meals_id" },
     inventoryItem: { type: "has_many", foreignKey: "inventoryItem_id" },
   };
 

@@ -5,7 +5,7 @@ export default class FoodEntry extends Model {
   static table = "foodEntry";
   static associations = {
     journals: { type: "belongs_to", key: "journals_id" },
-    meals: { type: "has_many", key: "meals_id" },
+    meals: { type: "has_many", foreignKey: "meals_id" },
   };
   @relation("journals", "journals_id") journals;
   @relation("meals", "meals_id") meals;

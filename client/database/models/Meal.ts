@@ -5,7 +5,7 @@ export default class Meal extends Model {
   static table = "meals";
   static associations = {
     foodEntry: { type: "belongs_to", key: "foodEntry_id" },
-    mealInventoryItem: { type: "has_many", key: "mealInventoryItem_id" },
+    mealInventoryItem: { type: "has_many", foreignKey: "mealInventoryItem_id" },
   };
 
   @immutableRelation("foodEntry", "foodEntry_id") foodEntry;
