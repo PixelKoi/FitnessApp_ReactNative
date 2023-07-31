@@ -7,13 +7,13 @@ import { Q } from "@nozbe/watermelondb";
 import FoodLog from "../../../database/models/FoodEntry";
 import { useAppSelector } from "../../../redux-manager/hooks";
 import Food from "../../../database/models/Food";
-import { getAllTables } from "../../../database/helpers/mainHelper";
-import { FoodWriter } from "../../../utils/writers/foodWriter";
-
+import withObservables from "@nozbe/with-observables";
 import Icon from "react-native-vector-icons/FontAwesome";
 import DiaryBarChartVictory from "../../../utils/charts/diary/barChart/DiaryBarChartVictory";
 import CustomCalendar from "../../../utils/calendar/CustomCalendar";
 import FoodEntry from "../../../database/models/FoodEntry";
+
+// useObservables for React Hooks: https://github.com/Nozbe/withObservables/issues/16
 const Diary = () => {
   const tabNavigation = useNavigation();
   const profileInfo = useAppSelector((state) => state.user);
@@ -98,26 +98,24 @@ const Diary = () => {
   };
 
   const diaryButton = async () => {
-    const journalEntryID = generateJournalEntryID();
-    console.log("JOURNAL ID:", journalEntryID);
-    // try {
-    const foodEntry = await database.write(async () => {
-      await database.get<FoodEntry>("foodEntry").create((data) => {
-        data.createFoodEntry(
-          (data.journals_id = 1),
-          (data.water = 0) // Replace this with the correct water value
-        );
-      });
-      // await foodEntry.save();
-    });
-    if (foodEntry) {
+    // const journalEntryID = generateJournalEntryID();
+    // console.log("JOURNAL ID:", journalEntryID);
+    const inventoryItem = database.collections.get("inventoryItem");
+    try {
+      await inventoryItem.addInventoryItem(
+        total_cals,
+        totalCarbs,
+        totalFats,
+        totalProteins,
+        "Hell there description",
+        1
+      ); // Replace 0 with the correct water value
       console.log("Successfully created food post");
-      const all_food = await database.get("foodEntry").query().fetch();
-      console.log("food saved in DB!:", all_food);
+      // const all_food = await database.get("inventoryItem").query().fetch();
+      // console.log("food saved in DB!:", all_food);
+    } catch (error) {
+      console.error("Error while creating food post: \n", error);
     }
-    // } catch (error) {
-    //   console.error("Error while creating food post: \n", error);
-    // }
   };
 
   // console.log("RESULTS: ", results);

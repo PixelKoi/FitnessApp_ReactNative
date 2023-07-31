@@ -51,7 +51,7 @@ export default appSchema({
       name: "foodEntry",
       columns: [
         { name: "water", type: "number" },
-        { name: "user_id", type: "number" },
+        // { name: "user_id", type: "number" },
       ],
     }),
     tableSchema({

@@ -15,7 +15,7 @@ const adapter = new SQLiteAdapter({
   schema,
   migrations,
   // (optional database name or file system path)
-  dbName: "myappss",
+  dbName: "wmdb",
   // (recommended option, should work flawlessly out of the box on iOS. On Android,
   // additional installation steps have to be taken - disable if you run into issues...)
   // jsi: true /* Platform.OS === 'ios' */,

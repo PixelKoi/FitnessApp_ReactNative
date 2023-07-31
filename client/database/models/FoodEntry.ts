@@ -3,20 +3,22 @@ import { text, relation, date, writer } from "@nozbe/watermelondb/decorators";
 
 export default class FoodEntry extends Model {
   static table = "foodEntry";
-  static associations = {
-    journals: { type: "belongs_to", key: "journals_id" },
-    meals: { type: "has_many", foreignKey: "meals_id" },
-  };
-  @relation("journals", "journals_id") journals;
-  @relation("meals", "meals_id") meals;
+  // static associations = {
+  //   journals: { type: "belongs_to", key: "journals_id" },
+  //   meals: { type: "has_many", foreignKey: "meals_id" },
+  // };
+  // @relation("journals", "journals_id") journals;
+  // @relation("meals", "meals_id") meals;
   @text("water")
   water;
 
-  @writer static async createFoodEntry(water) {
+  @writer
+  async createFoodEntry(water) {
     try {
       const foodEntry = await this.collections
         .get("foodEntry")
         .create((data) => {
+          // data.journals_id = journals_id;
           data.water = water;
         });
       console.log("foodEntries WRITER:", foodEntry);

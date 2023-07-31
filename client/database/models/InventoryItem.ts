@@ -17,8 +17,7 @@ export default class InventoryItem extends Model {
   // @text("id") id;
   @text("quantity") quantity;
 
-  @writer
-  async createInventoryItem(
+  @writer async addInventoryItem(
     calories,
     carbs,
     fat,
@@ -27,13 +26,14 @@ export default class InventoryItem extends Model {
     quantity
   ) {
     try {
-      const newItem = await this.collections.get("foods").create((item) => {
+      const foodItem = this.collections.get("inventoryItem");
+      const newItem = await foodItem.create((item) => {
         item.calories = calories;
         item.carbs = carbs;
         item.fat = fat;
         item.protein = protein;
         item.description = description;
-        item.id = id;
+        // item.id = id;
         item.quantity = quantity;
       });
       console.log("Inventory Item WRITER:", newItem);

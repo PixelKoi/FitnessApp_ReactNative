@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@nozbe/watermelondb": "^0.26.0",
+    "@nozbe/with-observables": "^1.6.0",
     "@react-native-async-storage/async-storage": "^1.18.2",
     "@react-native-community/datetimepicker": "^7.1.0",
     "@react-native-community/slider": "^4.4.2",
