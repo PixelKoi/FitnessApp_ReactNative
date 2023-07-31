@@ -1,6 +1,7 @@
 import { Model } from "@nozbe/watermelondb";
 import { relation } from "@nozbe/watermelondb/decorators";
 
+// DOCS MANY-TO-MANY REF: https://github.com/Nozbe/WatermelonDB/discussions/1149
 export default class MealInventoryItem extends Model {
   static table = "mealInventoryItem";
   static associations = {

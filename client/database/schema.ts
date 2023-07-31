@@ -41,6 +41,16 @@ export default appSchema({
       ],
     }),
     tableSchema({
+      name: "foods",
+      columns: [
+        { name: "calories", type: "number" },
+        { name: "carbs", type: "number" },
+        { name: "fat", type: "number" },
+        { name: "protein", type: "number" },
+        { name: "description", type: "string" },
+      ],
+    }),
+    tableSchema({
       name: "meals",
       columns: [
         { name: "meal_category", type: "string" },

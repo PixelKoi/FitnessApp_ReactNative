@@ -1,6 +1,8 @@
 import { Model } from "@nozbe/watermelondb";
 import { text, writer, relation } from "@nozbe/watermelondb/decorators";
 
+// Small Tutorial: https://www.youtube.com/watch?v=dXrJKc4sULs&ab_channel=reactify
+
 export default class InventoryItem extends Model {
   static table = "inventoryItem";
   static associations = {
@@ -9,13 +11,13 @@ export default class InventoryItem extends Model {
   @relation("mealInventoryItem", "mealInventoryItem_id") mealInventoryItem;
 
   @text("calories")
-  calories;
-  @text("carbs") carbs;
-  @text("fat") fat;
-  @text("protein") protein;
-  @text("description") description;
+  calories!: number;
+  @text("carbs") carbs!: number;
+  @text("fat") fat!: number;
+  @text("protein") protein!: number;
+  @text("description") description!: string;
   // @text("id") id;
-  @text("quantity") quantity;
+  @text("quantity") quantity!: string;
 
   @writer async addInventoryItem(
     calories,
@@ -28,6 +30,7 @@ export default class InventoryItem extends Model {
     try {
       const foodItem = this.collections.get("inventoryItem");
       const newItem = await foodItem.create((item) => {
+        item.inventoryItem.set(this);
         item.calories = calories;
         item.carbs = carbs;
         item.fat = fat;

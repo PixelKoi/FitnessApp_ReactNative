@@ -100,19 +100,18 @@ const Diary = () => {
   const diaryButton = async () => {
     // const journalEntryID = generateJournalEntryID();
     // console.log("JOURNAL ID:", journalEntryID);
-    const inventoryItem = database.collections.get("inventoryItem");
+    const foodItem = database.collections.get("foods");
     try {
-      await inventoryItem.addInventoryItem(
+      await foodItem.addFood(
         total_cals,
         totalCarbs,
         totalFats,
         totalProteins,
-        "Hell there description",
-        1
+        "This is my description"
       ); // Replace 0 with the correct water value
       console.log("Successfully created food post");
-      // const all_food = await database.get("inventoryItem").query().fetch();
-      // console.log("food saved in DB!:", all_food);
+      const all_food = await database.get("foods").query().fetch();
+      console.log("food saved in DB!:", all_food);
     } catch (error) {
       console.error("Error while creating food post: \n", error);
     }

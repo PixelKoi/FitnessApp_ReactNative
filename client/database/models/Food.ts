@@ -1,5 +1,5 @@
 import { Model } from "@nozbe/watermelondb";
-import { field, text, relation, writer } from "@nozbe/watermelondb/decorators";
+import { text, writer } from "@nozbe/watermelondb/decorators";
 
 export default class Food extends Model {
   static table = "foods";
@@ -10,18 +10,16 @@ export default class Food extends Model {
   @text("protein") protein;
   @text("description") description;
 
-  @writer
-  async completeDiary(calories, carbs, fat, protein, description) {
+  @writer async addFood(calories, carbs, fat, protein, description) {
     try {
-      const newDiary = await this.collections.get("foods").create((food) => {
+      // const foodItem = this.collections.get("foods");
+      await this.collections.get("foods").create((food) => {
         food.calories = calories;
         food.carbs = carbs;
         food.fat = fat;
         food.protein = protein;
         food.description = description;
       });
-      console.log("FOOD WRITER:", newDiary);
-      return newDiary;
     } catch (error) {
       console.error("Error creating Nutrition entry:", error);
       throw error; // Rethrow the error or handle it as per your application's requirements

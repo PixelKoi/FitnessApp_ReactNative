@@ -10,6 +10,7 @@ import MealInventoryItem from "./models/MealInventoryItem";
 import FoodEntry from "./models/FoodEntry";
 import JournalEntry from "./models/JournalEntry";
 import InventoryItem from "./models/InventoryItem";
+import Food from "./models/Food";
 
 const adapter = new SQLiteAdapter({
   schema,
@@ -36,5 +37,6 @@ export const database = new Database({
     FoodEntry,
     JournalEntry,
     InventoryItem,
+    Food,
   ],
 });
