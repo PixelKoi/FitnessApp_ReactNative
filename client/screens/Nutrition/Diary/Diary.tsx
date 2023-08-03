@@ -14,7 +14,8 @@ import CustomCalendar from "../../../utils/calendar/CustomCalendar";
 import FoodEntry from "../../../database/models/FoodEntry";
 
 // useObservables for React Hooks: https://github.com/Nozbe/withObservables/issues/16
-const Diary = () => {
+
+const Diary = ({ food }) => {
   const tabNavigation = useNavigation();
   const profileInfo = useAppSelector((state) => state.user);
   console.log("PROFILE INFO: ", profileInfo);
@@ -100,7 +101,7 @@ const Diary = () => {
   const diaryButton = async () => {
     // const journalEntryID = generateJournalEntryID();
     // console.log("JOURNAL ID:", journalEntryID);
-    const foodItem = database.collections.get("foods");
+    const foodItem = database.get<Food>("foods");
     try {
       await foodItem.addFood(
         total_cals,

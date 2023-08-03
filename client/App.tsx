@@ -18,13 +18,13 @@ import "react-native-gesture-handler";
 
 // Watermelon
 import DatabaseProvider from "@nozbe/watermelondb/DatabaseProvider";
+
 import { database } from "./database/index";
 
 import CongratulationsModal from "./components/Modals/CongratulationsModal";
 
 export default function App() {
   const [session, setSession] = useState<Session | null>(null);
-
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       console.log(session);
