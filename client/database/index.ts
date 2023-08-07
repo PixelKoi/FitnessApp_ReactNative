@@ -40,3 +40,8 @@ export const database = new Database({
     Food,
   ],
 });
+
+// Close active connections (important)
+// database.unsafeResetDatabase(); // Reset the database
+// DB LOCALTION:  Opened database at
+// /Users/garonazarian/Library/Developer/CoreSimulator/Devices/B6EE0E42-D359-4EA8-87F3-C2182ADB2848/data/Containers/Data/Application/B0260577-95D4-4BFB-A630-ABD92550090D/Documents/wmdb.db

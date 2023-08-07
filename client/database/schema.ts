@@ -41,7 +41,7 @@ export default appSchema({
       ],
     }),
     tableSchema({
-      name: "foods",
+      name: "food",
       columns: [
         { name: "calories", type: "number" },
         { name: "carbs", type: "number" },

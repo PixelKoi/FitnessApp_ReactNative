@@ -12,10 +12,12 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import DiaryBarChartVictory from "../../../utils/charts/diary/barChart/DiaryBarChartVictory";
 import CustomCalendar from "../../../utils/calendar/CustomCalendar";
 import FoodEntry from "../../../database/models/FoodEntry";
+import compose from "@shopify/react-compose";
+import { withDatabase } from "@nozbe/watermelondb/DatabaseProvider";
 
 // useObservables for React Hooks: https://github.com/Nozbe/withObservables/issues/16
 
-const Diary = ({ food }) => {
+const Diary = () => {
   const tabNavigation = useNavigation();
   const profileInfo = useAppSelector((state) => state.user);
   console.log("PROFILE INFO: ", profileInfo);
@@ -98,10 +100,13 @@ const Diary = ({ food }) => {
     return journalEntryID;
   };
 
+  // OBSERVE THIS
   const diaryButton = async () => {
+    const initialData = await database.get("food").query().fetch();
+    console.log(initialData);
     // const journalEntryID = generateJournalEntryID();
     // console.log("JOURNAL ID:", journalEntryID);
-    const foodItem = database.get<Food>("foods");
+    const foodItem = database.get<Food>("food");
     try {
       await foodItem.addFood(
         total_cals,
@@ -111,7 +116,7 @@ const Diary = ({ food }) => {
         "This is my description"
       ); // Replace 0 with the correct water value
       console.log("Successfully created food post");
-      const all_food = await database.get("foods").query().fetch();
+      const all_food = await database.get("food").query().fetch();
       console.log("food saved in DB!:", all_food);
     } catch (error) {
       console.error("Error while creating food post: \n", error);
