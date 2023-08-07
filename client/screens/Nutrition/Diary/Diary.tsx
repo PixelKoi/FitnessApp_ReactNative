@@ -102,25 +102,33 @@ const Diary = () => {
 
   // OBSERVE THIS
   const diaryButton = async () => {
-    const initialData = await database.get("food").query().fetch();
-    console.log(initialData);
+    // const initialData = await database.get("food").query().fetch();
+    // console.log(initialData);
+
+    try {
+      const tableNames = await database.collections.get("food").query().fetch();
+      console.log("What the fuck", tableNames);
+    } catch (e) {
+      console.log(e);
+    }
+
     // const journalEntryID = generateJournalEntryID();
     // console.log("JOURNAL ID:", journalEntryID);
     const foodItem = database.get<Food>("food");
-    try {
-      await foodItem.addFood(
-        total_cals,
-        totalCarbs,
-        totalFats,
-        totalProteins,
-        "This is my description"
-      ); // Replace 0 with the correct water value
-      console.log("Successfully created food post");
-      const all_food = await database.get("food").query().fetch();
-      console.log("food saved in DB!:", all_food);
-    } catch (error) {
-      console.error("Error while creating food post: \n", error);
-    }
+    // try {
+    //   await foodItem.addFood(
+    //     total_cals,
+    //     totalCarbs,
+    //     totalFats,
+    //     totalProteins,
+    //     "This is my description"
+    //   ); // Replace 0 with the correct water value
+    //   console.log("Successfully created food post");
+    //   const all_food = await database.get("food").query().fetch();
+    //   console.log("food saved in DB!:", all_food);
+    // } catch (error) {
+    //   console.error("Error while creating food post: \n", error);
+    // }
   };
 
   // console.log("RESULTS: ", results);
