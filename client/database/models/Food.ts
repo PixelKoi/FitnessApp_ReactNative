@@ -2,7 +2,7 @@ import { Model } from "@nozbe/watermelondb";
 import { text, writer } from "@nozbe/watermelondb/decorators";
 
 export default class Food extends Model {
-  static table = "food";
+  static table = "foods";
   // https://github.com/Nozbe/WatermelonDB/issues/1598
 
   @text("calories") calories;

@@ -9,7 +9,7 @@ import { appSchema, tableSchema } from "@nozbe/watermelondb";
 // InventoryItem(ID, Macros, Calories, Description, Quantity, Water)
 // Event(ID, JournalEntryID, startTime, endTime, duration, notes, mood, type)
 export default appSchema({
-  version: 2, // set to 3 to trigger migration on next reload
+  version: 3, // set to 3 to trigger migration on next reload
   tables: [
     tableSchema({
       name: "events",
@@ -41,13 +41,14 @@ export default appSchema({
       ],
     }),
     tableSchema({
-      name: "food",
+      name: "foods",
       columns: [
         { name: "calories", type: "number" },
         { name: "carbs", type: "number" },
         { name: "fat", type: "number" },
         { name: "protein", type: "number" },
         { name: "description", type: "string" },
+        { name: "testers", type: "string" },
       ],
     }),
     tableSchema({

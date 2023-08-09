@@ -106,7 +106,10 @@ const Diary = () => {
     // console.log(initialData);
 
     try {
-      const tableNames = await database.collections.get("food").query().fetch();
+      const tableNames = await database.collections
+        .get("foods")
+        .query()
+        .fetch();
       console.log("What the fuck", tableNames);
     } catch (e) {
       console.log(e);

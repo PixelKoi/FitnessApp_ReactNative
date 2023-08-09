@@ -13,7 +13,7 @@ import InventoryItem from "./models/InventoryItem";
 import Food from "./models/Food";
 
 const adapter = new SQLiteAdapter({
-  schema,
+  schema: schema,
   migrations,
   // (optional database name or file system path)
   dbName: "wmdb",
