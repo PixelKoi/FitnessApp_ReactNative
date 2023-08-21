@@ -2,13 +2,15 @@ import db from "./initialize-tables";
 import { getUserIDByEmail } from "./profiles-table";
 
 // Add a new profile into the profiles table
-const logFastingRecordSQLite = async (fastingData) => {
-	const user_id = await getUserIDByEmail(fastingData.email);
+const logFastingRecordSQLite = async (email) => {
+	const user_id = await getUserIDByEmail(email);
+	const start_time = new Date().toISOString().replace("T", " ").slice(0, 19);
+
 	db.transaction(
 		(tx) => {
 			tx.executeSql(
 				"INSERT INTO fasting (user_id, start_time) VALUES (?, ?);",
-				[user_id, fastingData.start_time],
+				[user_id, start_time],
 				(_, result) => {
 					if (result.rowsAffected > 0) {
 						console.log("Fasting record inserted successfully");

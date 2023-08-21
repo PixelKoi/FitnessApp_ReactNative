@@ -1,5 +1,5 @@
 import * as SQLite from "expo-sqlite";
-const db = SQLite.openDatabase("db4");
+const db = SQLite.openDatabase("db7");
 
 db.transaction((tx) => {
 	tx.executeSql(

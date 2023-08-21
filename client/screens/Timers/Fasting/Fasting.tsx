@@ -49,14 +49,7 @@ const Fasting = ({ route }) => {
 		setStartTime(currentDate);
 		setEndTime(endTime);
 
-		const fastingData = {
-			email: email,
-			start_time: currentDate,
-		};
-
-		console.log(currentDate);
-
-		logFastingRecordSQLite(fastingData);
+		logFastingRecordSQLite(email);
 
 		//Update redux startDade and endDate
 		dispatch(
