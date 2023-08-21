@@ -12,6 +12,8 @@ import { supabase } from "../../utils/supabase_authentication/supabase";
 import calAlgo from "../../utils/calAlgo/cal-algo";
 import DonutGraph from "./component/FastingDonutGraph";
 import Icons from "react-native-vector-icons/FontAwesome5";
+//SQLite
+import { createProfile } from "../../utils/SQLite/profiles-table";
 
 const FinishSetup = ({ session }: { session: Session }) => {
 	//Import nav
@@ -36,6 +38,17 @@ const FinishSetup = ({ session }: { session: Session }) => {
 		height: height,
 		activity: activity,
 		goal: goal,
+	};
+
+	const profileData = {
+		username,
+		email: session?.user.email,
+		age,
+		gender,
+		height,
+		weight,
+		activity,
+		goal,
 	};
 
 	useEffect(() => {
@@ -367,6 +380,7 @@ const FinishSetup = ({ session }: { session: Session }) => {
 								goal,
 								created,
 							});
+							await createProfile(profileData);
 							await navigation.navigate("NavGroup");
 						}}
 						style={{

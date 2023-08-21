@@ -4,7 +4,6 @@ import { Alert } from "react-native";
 import Settings from "../../screens/Settings/Settings";
 import ThemeSelector from "../../screens/Settings/Theme/ThemeSelector";
 import Meal from "../../screens/Nutrition/Diary/Meal";
-import MeditationDash from "../../screens/Timers/Meditation/MeditationDash";
 import MeditationTimer from "../../screens/Timers/Meditation/MeditationPLayer";
 import MeditationInterface from "../../screens/Timers/Meditation/MeditationInterface";
 import FastingDash from "../../screens/Timers/Fasting/FastingDash";
@@ -27,7 +26,6 @@ import UserBioInput from "../../screens/Settings/Profile/EditProfile";
 // Import nav
 import AccountSetupStack from "./AccountSetupStack";
 import BottomTab from "./BottomTab";
-import CongratulationsModal from "../../components/Modals/CongratulationsModal";
 import calAlgo from "../../utils/calAlgo/cal-algo";
 
 function Navigation({ session }: { session: Session }) {
@@ -37,7 +35,6 @@ function Navigation({ session }: { session: Session }) {
 	const [loading, setLoading] = useState(true);
 	const [userData, setUserData] = useState(false);
 	const dispatch = useAppDispatch();
-	const { colors } = useAppSelector((state) => state.theme);
 
 	//Get daily cal
 	const { gender, age, height, weight, activity, goal } = useAppSelector(
@@ -179,6 +176,7 @@ function Navigation({ session }: { session: Session }) {
 			</Stack.Navigator>
 		);
 	};
+
 	// Default Initial Setup
 	// If user exists go straight to NavGroup
 	return (

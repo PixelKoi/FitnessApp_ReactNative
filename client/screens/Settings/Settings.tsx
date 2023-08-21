@@ -3,14 +3,16 @@ import { View, Text, TouchableOpacity, Switch, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useAppSelector } from "../../redux-manager/hooks";
 import Icon from "react-native-vector-icons/FontAwesome";
-
 import { supabase } from "../../utils/supabase_authentication/supabase";
+//SQLite
+import { createProfileSQLite } from "../../utils/SQLite/profiles-table";
 
 const Settings = () => {
 	const navigation = useNavigation();
 
 	//Initiate user redux states
-	const { email, username } = useAppSelector((state) => state.user);
+	const { email, username, age, gender, height, weight, activity, goal } =
+		useAppSelector((state) => state.user);
 	const { colors } = useAppSelector((state) => state.theme);
 
 	//Edit Profile Hooks
@@ -37,6 +39,17 @@ const Settings = () => {
 		} catch (error) {
 			console.error("Error updating email:", error.message);
 		}
+	};
+
+	const profileData = {
+		username,
+		email,
+		age,
+		gender,
+		height,
+		weight,
+		activity,
+		goal,
 	};
 
 	//Top Nav on Edit Profile Screen
@@ -190,6 +203,20 @@ const Settings = () => {
 								style={{ color: "#F65050" }}
 								className="text-base  font-extrabold items-center justify-center ">
 								Logout
+							</Text>
+						</TouchableOpacity>
+					</View>
+
+					<View
+						style={{ borderColor: colors.secondary }}
+						className="flex flex-row border-solid py-4 items-center">
+						<TouchableOpacity
+							onPress={() => createProfileSQLite(profileData)}
+							className="flex flex-col">
+							<Text
+								style={{ color: "#F65050" }}
+								className="text-base  font-extrabold items-center justify-center ">
+								Update Profile Test
 							</Text>
 						</TouchableOpacity>
 					</View>

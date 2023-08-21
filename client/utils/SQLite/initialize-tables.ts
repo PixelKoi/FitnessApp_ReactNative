@@ -1,14 +1,14 @@
 import * as SQLite from "expo-sqlite";
-const db = SQLite.openDatabase("db");
+const db = SQLite.openDatabase("db2");
 
 db.transaction((tx) => {
 	tx.executeSql(
-		"CREATE TABLE IF NOT EXISTS profiles (user_id INTEGER NOT NULL, name TEXT NOT NULL, age INTEGER NOT NULL, gender TEXT NOT NULL, height INTEGER NOT NULL, weight INTEGER NOT NULL, activity TEXT NOT NULL, goal_weight INTEGER NOT NULL, PRIMARY KEY (user_id));",
+		"CREATE TABLE IF NOT EXISTS profiles (user_id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT NOT NULL, email TEXT NOT NULL, age INTEGER NOT NULL, gender TEXT NOT NULL, height INTEGER NOT NULL, weight INTEGER NOT NULL, activity TEXT NOT NULL, goal INTEGER NOT NULL);",
 		[],
-		() => console.log("create profiles table"),
+		() => console.log("Created profiles table"),
 		(_, error) => {
 			console.log(error.message);
-			return true;
+			return true; // Return true to roll back the transaction in case of an error
 		}
 	);
 
