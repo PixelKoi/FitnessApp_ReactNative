@@ -1,5 +1,5 @@
 import * as SQLite from "expo-sqlite";
-const db = SQLite.openDatabase("db2");
+const db = SQLite.openDatabase("db4");
 
 db.transaction((tx) => {
 	tx.executeSql(
@@ -13,7 +13,7 @@ db.transaction((tx) => {
 	);
 
 	tx.executeSql(
-		"CREATE TABLE IF NOT EXISTS fasting (id INTEGER NOT NULL, user_id INTEGER NOT NULL, start_time INTEGER NOT NULL, end_time INTEGER NOT NULL, FOREIGN KEY (user_id) REFERENCES profiles(user_id), PRIMARY KEY (id));",
+		"CREATE TABLE IF NOT EXISTS fasting (id INTEGER NOT NULL, user_id INTEGER NOT NULL, start_time DATETIME NOT NULL, end_time DATETIME, duration INTEGER, FOREIGN KEY (user_id) REFERENCES profiles(user_id), PRIMARY KEY (id));",
 		[],
 		() => console.log("create fasting table"),
 		(_, error) => {

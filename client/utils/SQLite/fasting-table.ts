@@ -1,12 +1,14 @@
 import db from "./initialize-tables";
+import { getUserIDByEmail } from "./profiles-table";
 
 // Add a new profile into the profiles table
-const logFastingRecordSQLite = (fastingData) => {
+const logFastingRecordSQLite = async (fastingData) => {
+	const user_id = await getUserIDByEmail(fastingData.email);
 	db.transaction(
 		(tx) => {
 			tx.executeSql(
-				"INSERT INTO fasting (user_id, start_time, end_time) VALUES (?, ?, ?);",
-				[fastingData.user_id, fastingData.start_time, fastingData.end_time],
+				"INSERT INTO fasting (user_id, start_time) VALUES (?, ?);",
+				[user_id, fastingData.start_time],
 				(_, result) => {
 					if (result.rowsAffected > 0) {
 						console.log("Fasting record inserted successfully");
@@ -27,4 +29,65 @@ const logFastingRecordSQLite = (fastingData) => {
 	);
 };
 
-export { logFastingRecordSQLite };
+const endCurrentFastingRecordSQLite = async (fastingData) => {
+	const user_id = await getUserIDByEmail(fastingData.email);
+	db.transaction(
+		(tx) => {
+			tx.executeSql(
+				"INSERT INTO fasting (user_id, start_time) VALUES (?, ?);",
+				[user_id, fastingData.start_time],
+				(_, result) => {
+					if (result.rowsAffected > 0) {
+						console.log("Fasting record inserted successfully");
+					} else {
+						console.log("Failed to insert fasting record");
+					}
+				},
+				(_, error) => {
+					console.log(error.message);
+					return true;
+				}
+			);
+		},
+		(error) => {
+			console.log(error.message);
+			return true;
+		}
+	);
+};
+
+const showAllFastingRecordsSQLite = () => {
+	try {
+		db.transaction(
+			(tx) => {
+				tx.executeSql(
+					"SELECT * FROM fasting;",
+					[],
+					(_, result) => {
+						const rows = result.rows;
+						for (let i = 0; i < rows.length; i++) {
+							const row = rows.item(i);
+							console.log("Fasting Record:", row);
+						}
+					},
+					(_, error) => {
+						console.log(error.message);
+						return true;
+					}
+				);
+			},
+			(error) => {
+				console.log(error.message);
+				return true;
+			}
+		);
+	} catch (error) {
+		console.error("Error retrieving fasting data:", error);
+	}
+};
+
+export {
+	logFastingRecordSQLite,
+	endCurrentFastingRecordSQLite,
+	showAllFastingRecordsSQLite,
+};

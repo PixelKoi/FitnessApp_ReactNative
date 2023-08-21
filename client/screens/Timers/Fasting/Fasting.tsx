@@ -4,7 +4,8 @@ import { useNavigation } from "@react-navigation/native";
 import { Button, Surface } from "react-native-paper";
 import { format, add, getDay } from "date-fns";
 import FastingTimer from "../components/FastingDonutGraph";
-
+//SQLite
+import { logFastingRecordSQLite } from "../../../utils/SQLite/fasting-table";
 //Redux imports
 import { useAppDispatch, useAppSelector } from "../../../redux-manager/hooks";
 import { setTimerStates } from "../../../redux-manager/redux-slice/fasting-slice";
@@ -21,6 +22,7 @@ const Fasting = ({ route }) => {
 	const { startDate, endDate, maxTime, elapsedPercentage } = useAppSelector(
 		(state) => state.fasting
 	);
+	const { email } = useAppSelector((state) => state.user);
 	const { colors } = useAppSelector((state) => state.theme);
 	const dispatch = useAppDispatch();
 
@@ -46,6 +48,15 @@ const Fasting = ({ route }) => {
 		const endTime = add(currentDate, { hours: duration });
 		setStartTime(currentDate);
 		setEndTime(endTime);
+
+		const fastingData = {
+			email: email,
+			start_time: currentDate,
+		};
+
+		console.log(currentDate);
+
+		logFastingRecordSQLite(fastingData);
 
 		//Update redux startDade and endDate
 		dispatch(

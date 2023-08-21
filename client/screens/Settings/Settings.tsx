@@ -6,7 +6,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import { supabase } from "../../utils/supabase_authentication/supabase";
 //SQLite
 import { createProfileSQLite } from "../../utils/SQLite/profiles-table";
-
+import { showAllFastingRecordsSQLite } from "../../utils/SQLite/fasting-table";
 const Settings = () => {
 	const navigation = useNavigation();
 
@@ -211,7 +211,9 @@ const Settings = () => {
 						style={{ borderColor: colors.secondary }}
 						className="flex flex-row border-solid py-4 items-center">
 						<TouchableOpacity
-							onPress={() => createProfileSQLite(profileData)}
+							onPress={() => {
+								createProfileSQLite(profileData), showAllFastingRecordsSQLite();
+							}}
 							className="flex flex-col">
 							<Text
 								style={{ color: "#F65050" }}
