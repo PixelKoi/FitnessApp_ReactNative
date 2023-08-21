@@ -5,8 +5,8 @@ import { useAppSelector } from "../../redux-manager/hooks";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { supabase } from "../../utils/supabase_authentication/supabase";
 //SQLite
-import { createProfileSQLite } from "../../utils/SQLite/profiles-table";
-import { showAllFastingRecordsSQLite } from "../../utils/SQLite/fasting-table";
+import { createProfileSQLite } from "../../utils/SQLite/tables/profiles-table";
+import { showAllFastingRecordsSQLite } from "../../utils/SQLite/tables/fasting-table";
 const Settings = () => {
 	const navigation = useNavigation();
 

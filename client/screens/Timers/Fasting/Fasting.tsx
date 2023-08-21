@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { Button, Surface } from "react-native-paper";
+import { Button } from "react-native-paper";
 import { format, add, getDay } from "date-fns";
 import FastingTimer from "../components/FastingDonutGraph";
 //SQLite
-import { logFastingRecordSQLite } from "../../../utils/SQLite/fasting-table";
+import {
+	logFastingRecordSQLite,
+	endCurrentFastingRecordSQLite,
+} from "../../../utils/SQLite/tables/fasting-table";
 //Redux imports
 import { useAppDispatch, useAppSelector } from "../../../redux-manager/hooks";
 import { setTimerStates } from "../../../redux-manager/redux-slice/fasting-slice";
@@ -30,7 +33,6 @@ const Fasting = ({ route }) => {
 	const [showCongratsModal, setShowCongratsModal] = useState(false);
 	const [startTime, setStartTime] = useState<Date | null>(null);
 	const [endTime, setEndTime] = useState<Date | null>(null);
-	const [clicked, setClicked] = useState(false);
 
 	//Check if fasting redux for startDate. If there is a startDate update local start and end states
 	//ToDo: Check if end date has passed and then reset start and end date to ""
@@ -48,9 +50,8 @@ const Fasting = ({ route }) => {
 		const endTime = add(currentDate, { hours: duration });
 		setStartTime(currentDate);
 		setEndTime(endTime);
-
+		//start sqlite table record
 		logFastingRecordSQLite(email);
-
 		//Update redux startDade and endDate
 		dispatch(
 			setTimerStates({
@@ -58,14 +59,15 @@ const Fasting = ({ route }) => {
 				endDate: endTime.toString(),
 			})
 		);
-		setClicked((prevClick) => !prevClick);
 	};
 
 	//End fast
 	const handleEndFast = () => {
-		setClicked((prevClick) => !prevClick);
 		setStartTime(null);
 		setEndTime(null);
+		//end sqlite table record
+		endCurrentFastingRecordSQLite(email);
+		//Reset timer states
 		dispatch(
 			setTimerStates({
 				startDate: null,
@@ -204,8 +206,8 @@ const Fasting = ({ route }) => {
 					className="my-4 w-60 mx-auto  "
 					icon="clock"
 					mode="contained"
-					onPress={clicked === false ? handleStartFast : handleEndFast}>
-					{clicked === false ? "Start Fast" : "End Fast Now"}
+					onPress={startTime === null ? handleStartFast : handleEndFast}>
+					{startTime === null ? "Start Fast" : "End Fast Now"}
 				</Button>
 			</View>
 			<CongratulationsModal

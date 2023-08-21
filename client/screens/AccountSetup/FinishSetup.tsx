@@ -13,7 +13,7 @@ import calAlgo from "../../utils/calAlgo/cal-algo";
 import DonutGraph from "./component/FastingDonutGraph";
 import Icons from "react-native-vector-icons/FontAwesome5";
 //SQLite
-import { createProfile } from "../../utils/SQLite/profiles-table";
+import { createProfile } from "../../utils/SQLite/tables/profiles-table";
 
 const FinishSetup = ({ session }: { session: Session }) => {
 	//Import nav

@@ -1,4 +1,4 @@
-import db from "./initialize-tables";
+import db from "../initialize-tables";
 
 // Add a new profile into the profiles table
 const createProfileSQLite = (profileData) => {
@@ -30,6 +30,7 @@ const createProfileSQLite = (profileData) => {
 	});
 };
 
+//Get user_id by email
 const getUserIDByEmail = (email) => {
 	return new Promise((resolve, reject) => {
 		db.transaction(
